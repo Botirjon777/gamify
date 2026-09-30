@@ -45,3 +45,4 @@ next-env.d.ts
 
 # deploy build output
 /.deploy
+/.deploy-src

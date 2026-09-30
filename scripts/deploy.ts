@@ -6,6 +6,7 @@
  *   pnpm deploy:prod --migrate    also apply pending Prisma migrations to the production DB
  *   pnpm deploy:prod --skip-build reuse the last build
  *   pnpm deploy:prod --dry-run    build + assemble only (test the bundle locally)
+ *   pnpm deploy:prod --from-working-tree   build the current folder instead of a clean checkout of HEAD
  *
  * SSH credentials come from .env.vps (VPS_IP, VPS_SSH_PORT, VPS_SSH_USER, VPS_SSH_PASSWORD) — never committed.
  * The production DATABASE_URL comes from .env (PRODUCTION_DATABASE_URL, 127.0.0.1 → used on the server).
@@ -38,20 +39,37 @@ function readEnv(file: string) {
 
 // ─── local build ────────────────────────────────────────────────────────────
 
+const CLEAN = join(ROOT, ".deploy-src");
+
+/**
+ * Where the release is built from. Default: a clean `git worktree` of HEAD, so production always
+ * matches what is committed — uncommitted work in progress is never shipped by accident.
+ * --from-working-tree builds the current folder instead (quick experiments).
+ */
+function prepareSource(): string {
+  if (args.has("--from-working-tree")) return ROOT;
+  step(`Clean checkout of HEAD (${execSync("git rev-parse --short HEAD", { cwd: ROOT }).toString().trim()})`);
+  if (existsSync(CLEAN)) execSync(`git worktree remove --force "${CLEAN}"`, { cwd: ROOT, stdio: "inherit" });
+  execSync(`git worktree add --detach "${CLEAN}" HEAD`, { cwd: ROOT, stdio: "inherit" });
+  execSync("pnpm install --frozen-lockfile", { cwd: CLEAN, stdio: "inherit" });
+  return CLEAN;
+}
+
 function build() {
+  const SRC = args.has("--skip-build") ? (existsSync(join(CLEAN, ".next/standalone")) ? CLEAN : ROOT) : prepareSource();
   if (!args.has("--skip-build")) {
     step("Building (next build, standalone)");
-    execSync("pnpm build", { stdio: "inherit", env: { ...process.env, NODE_ENV: "production" } });
+    execSync("pnpm build", { cwd: SRC, stdio: "inherit", env: { ...process.env, NODE_ENV: "production" } });
   }
   step("Assembling release");
   rmSync(OUT, { recursive: true, force: true });
   mkdirSync(OUT);
   // dereference: Turbopack links some packages from .next/node_modules — ship the real files.
-  cpSync(join(ROOT, ".next/standalone"), APP, { recursive: true, dereference: true });
+  cpSync(join(SRC, ".next/standalone"), APP, { recursive: true, dereference: true });
   // Next copies .env into standalone — secrets must never ship in the bundle.
   for (const f of [".env", ".env.local", ".env.production", ".env.vps"]) rmSync(join(APP, f), { force: true });
-  cpSync(join(ROOT, ".next/static"), join(APP, ".next/static"), { recursive: true });
-  cpSync(join(ROOT, "public"), join(APP, "public"), { recursive: true });
+  cpSync(join(SRC, ".next/static"), join(APP, ".next/static"), { recursive: true });
+  cpSync(join(SRC, "public"), join(APP, "public"), { recursive: true });
   // Relative paths: GNU tar (Git Bash) would read "D:\…" as a remote host.
   execSync("tar -czf release.tgz -C app .", { stdio: "inherit", cwd: OUT });
   console.log(`  ${(readFileSync(TARBALL).length / 1024 / 1024).toFixed(1)} MB`);
