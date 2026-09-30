@@ -15,6 +15,7 @@ import { SkillCard } from "@/features/learn/components/skill-card";
 import { iqFromRating } from "@/features/iq/rating";
 import { hideIqPrompt } from "@/features/iq/actions";
 import { effectivePlan } from "@/features/plans/plans";
+import { GenderSettings } from "@/features/profile/components/gender-settings";
 
 export default async function DashboardPage({ params }: PageProps<"/[locale]/dashboard">) {
   const { locale } = await params;
@@ -75,6 +76,13 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
           </div>
         </div>
       </section>
+
+      {/* Older accounts have no gender yet → their avatar may not fit them */}
+      {!user.gender && (
+        <section className="rounded-3xl border border-border bg-surface p-5 sm:p-6">
+          <GenderSettings seed={user.avatarSeed} style={user.avatarStyle} gender={null} />
+        </section>
+      )}
 
       {/* Optional IQ test invitation — hideable */}
       {!user.iqTestedAt && !user.iqPromptHiddenAt && (

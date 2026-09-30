@@ -10,7 +10,10 @@ export const usernameSchema = z
 
 export const passwordSchema = z.string().min(8, "passwordTooShort").max(128, "passwordTooLong");
 
+export const genderSchema = z.enum(["MALE", "FEMALE"], { error: "genderRequired" });
+
 export const registerSchema = z.object({
+  gender: genderSchema,
   phone: z.string().trim().min(1, "required"),
   username: usernameSchema,
   password: passwordSchema,

@@ -11,6 +11,7 @@ export interface LeaderboardEntry {
   username: string;
   avatarSeed: string;
   avatarStyle: string;
+  gender: "MALE" | "FEMALE" | null;
   value: number;
 }
 

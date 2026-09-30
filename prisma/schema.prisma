@@ -92,6 +92,9 @@ model User {
   plan          UserPlan  @default(FREE)
   planExpiresAt DateTime?
 
+  /// Used to generate a fitting avatar (hair, facial hair, earrings). null = not set yet (older accounts).
+  gender Gender?
+
   /// Avatar customization (unlocked at level 10); style = DiceBear style key.
   avatarStyle String @default("adventurer")
   bio         String?
@@ -344,6 +347,11 @@ enum XpReason {
   REFERRAL
   BADGE
   CLAN_REWARD
+}
+
+enum Gender {
+  MALE
+  FEMALE
 }
 
 enum UserPlan {

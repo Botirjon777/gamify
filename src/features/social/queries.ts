@@ -11,6 +11,7 @@ export const publicUserSelect = {
   username: true,
   avatarSeed: true,
   avatarStyle: true,
+  gender: true,
   level: true,
   xp: true,
   plan: true,
@@ -25,6 +26,7 @@ export function toPublicUser(u: {
   username: string;
   avatarSeed: string;
   avatarStyle: string;
+  gender: "MALE" | "FEMALE" | null;
   level: number;
   xp: number;
   plan: "FREE" | "PRO" | "DIAMOND";
@@ -38,6 +40,7 @@ export function toPublicUser(u: {
     username: u.username,
     avatarSeed: u.avatarSeed,
     avatarStyle: u.avatarStyle,
+    gender: u.gender,
     level: u.level,
     xp: u.xp,
     plan: effectivePlan(u),

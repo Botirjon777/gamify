@@ -10,6 +10,7 @@ import { effectivePlan } from "@/features/plans/plans";
 import { REFERRAL_INVITER_XP, REFERRAL_REWARD_LEVEL } from "@/features/gamification/xp";
 import { getOrCreateReferralCode, REFERRAL_NEW_USER_XP, referralStats } from "@/features/referrals/service";
 import { AvatarPicker } from "@/features/profile/components/avatar-picker";
+import { GenderSettings } from "@/features/profile/components/gender-settings";
 import { BioForm } from "@/features/profile/components/bio-form";
 import { InviteBox } from "@/features/referrals/components/invite-box";
 
@@ -42,7 +43,10 @@ export default async function SettingsPage({ params }: PageProps<"/[locale]/sett
               </p>
             )}
           </div>
-          <AvatarPicker seed={user.avatarSeed} style={user.avatarStyle} unlocked={unlocked} plan={plan} />
+          <AvatarPicker seed={user.avatarSeed} style={user.avatarStyle} gender={user.gender} unlocked={unlocked} plan={plan} />
+          <div className="mt-6 border-t border-border pt-5" id="gender">
+            <GenderSettings seed={user.avatarSeed} style={user.avatarStyle} gender={user.gender} />
+          </div>
         </Card>
 
         {/* Bio */}

@@ -58,7 +58,7 @@ export default async function LeaderboardPage({ params, searchParams }: PageProp
           {myRank && myValue !== null ? (
             <ol>
               <Row
-                entry={{ rank: myRank, userId: user.id, username: user.username, avatarSeed: user.avatarSeed, avatarStyle: user.avatarStyle, value: myValue }}
+                entry={{ rank: myRank, userId: user.id, username: user.username, avatarSeed: user.avatarSeed, avatarStyle: user.avatarStyle, gender: user.gender, value: myValue }}
                 board={board}
                 isMe
                 youLabel={t("you")}

@@ -1,10 +1,11 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
 import { useRedirectTo } from "@/components/use-redirect-to";
+import { GenderPicker } from "@/features/profile/components/gender-picker";
 import { register } from "../actions";
 import type { FormState } from "../schemas";
 
@@ -13,6 +14,8 @@ export function RegisterForm({ referralCode }: { referralCode?: string }) {
   const [state, action, pending] = useActionState<FormState, FormData>(register, {});
   useRedirectTo(state.redirectTo);
   const err = (key?: string) => (key ? t(`errors.${key}`) : undefined);
+  // Username drives the avatar preview in the gender cards.
+  const [username, setUsername] = useState(state.values?.username ?? "");
 
   return (
     <form action={action} className="flex flex-col gap-4">
@@ -21,6 +24,14 @@ export function RegisterForm({ referralCode }: { referralCode?: string }) {
           {err(state.error)}
         </p>
       )}
+      <GenderPicker
+        name="gender"
+        seed={username.trim().toLowerCase() || "zukkolar"}
+        defaultValue={state.values?.gender}
+        label={t("gender")}
+        hint={t("genderHint")}
+        error={err(state.fieldErrors?.gender)}
+      />
       <Field
         label={t("phone")}
         name="phone"
@@ -39,7 +50,8 @@ export function RegisterForm({ referralCode }: { referralCode?: string }) {
         autoCapitalize="none"
         spellCheck={false}
         hint={t("usernameHint")}
-        defaultValue={state.values?.username}
+        value={username}
+        onChange={(e) => setUsername(e.target.value)}
         error={err(state.fieldErrors?.username)}
         required
       />

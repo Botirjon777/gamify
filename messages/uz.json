@@ -100,10 +100,15 @@
       "tooManyAttempts": "Juda koʻp urinish. Birozdan soʻng qayta urinib koʻring.",
       "registrationClosed": "Bu platformada roʻyxatdan oʻtish yopiq. Akkauntni oʻquv markazingiz administratori yaratadi.",
       "notAMember": "Siz bu oʻquv markazining aʼzosi emassiz",
-      "invalidReferral": "Bunday taklif kodi topilmadi"
+      "invalidReferral": "Bunday taklif kodi topilmadi",
+      "genderRequired": "Jinsingizni tanlang"
     },
     "referral": "Taklif kodi (ixtiyoriy)",
-    "referralHint": "Doʻstingiz kodi bilan darhol +50 XP olasiz"
+    "referralHint": "Doʻstingiz kodi bilan darhol +50 XP olasiz",
+    "gender": "Jinsingiz",
+    "genderHint": "Profil rasmingiz shunga mos yaratiladi",
+    "male": "Oʻgʻil bola",
+    "female": "Qiz bola"
   },
   "dashboard": {
     "greeting": "Salom, {username}!",
@@ -386,7 +391,10 @@
       "locked": "Hali ochilmagan",
       "planRequired": "Bu uslub uchun yuqoriroq tarif kerak",
       "invalid": "Notoʻgʻri qiymat"
-    }
+    },
+    "gender": "Jins",
+    "genderText": "Profil rasmingiz jinsingizga mos yaratiladi. Istalgan vaqtda oʻzgartirishingiz mumkin.",
+    "genderNotSet": "Hali tanlanmagan — tanlang, shunda rasmingiz mos boʻladi."
   },
   "notifications": {
     "title": "Bildirishnomalar",

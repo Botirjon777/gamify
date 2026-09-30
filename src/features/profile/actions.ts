@@ -36,3 +36,12 @@ export async function updateAvatar(style: string, reroll: boolean): Promise<Prof
   revalidatePath("/", "layout");
   return { ok: true };
 }
+
+/** Gender drives which hairstyles / facial hair the avatar can have. Not locked — anyone can set it. */
+export async function updateGender(gender: string): Promise<ProfileResult> {
+  const { user } = await requireSession();
+  if (gender !== "MALE" && gender !== "FEMALE") return { ok: false, error: "invalid" };
+  await db.user.update({ where: { id: user.id }, data: { gender } });
+  revalidatePath("/", "layout");
+  return { ok: true };
+}

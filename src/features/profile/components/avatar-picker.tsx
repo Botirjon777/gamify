@@ -10,11 +10,12 @@ import { updateAvatar } from "../actions";
 interface Props {
   seed: string;
   style: string;
+  gender: "MALE" | "FEMALE" | null;
   unlocked: boolean;
   plan: "FREE" | "PRO" | "DIAMOND";
 }
 
-export function AvatarPicker({ seed, style, unlocked, plan }: Props) {
+export function AvatarPicker({ seed, style, gender, unlocked, plan }: Props) {
   const t = useTranslations("settings");
   const [pending, start] = useTransition();
   const [error, setError] = useState<string | null>(null);
@@ -43,7 +44,7 @@ export function AvatarPicker({ seed, style, unlocked, plan }: Props) {
               title={!allowed && needs !== "FREE" ? t("styleLocked", { plan: needs === "PRO" ? "Pro" : "Diamond" }) : key}
             >
               {/* eslint-disable-next-line @next/next/no-img-element -- inline SVG data URI */}
-              <img src={avatarDataUri(seed, key)} alt="" className="aspect-square w-full rounded-xl bg-background" />
+              <img src={avatarDataUri(seed, key, gender)} alt="" className="aspect-square w-full rounded-xl bg-background" />
               {needs !== "FREE" && (
                 <span className={`absolute right-0 top-0 rounded-md px-1 text-[9px] font-bold text-white ${needs === "PRO" ? "bg-grad-brand" : "bg-grad-iq"}`}>
                   {needs === "PRO" ? "PRO" : "DIA"}

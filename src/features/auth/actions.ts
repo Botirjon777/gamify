@@ -21,6 +21,7 @@ import { loginSchema, registerSchema, type FormState } from "./schemas";
 import { awardXp } from "@/features/gamification/xp";
 import { notify } from "@/features/notifications/service";
 import { normalizeReferralCode, REFERRAL_NEW_USER_XP } from "@/features/referrals/service";
+import { defaultStyleFor } from "@/lib/avatar";
 
 function fieldErrors(error: z.ZodError): FormState["fieldErrors"] {
   const out: Record<string, string> = {};
@@ -37,12 +38,13 @@ const getDummyHash = () => (dummyHash ??= hashPassword("dummy-password-for-timin
 
 export async function register(_prev: FormState, formData: FormData): Promise<FormState> {
   const raw = {
+    gender: String(formData.get("gender") ?? ""),
     phone: String(formData.get("phone") ?? ""),
     username: String(formData.get("username") ?? ""),
     password: String(formData.get("password") ?? ""),
   };
   const refRaw = String(formData.get("ref") ?? "");
-  const values = { phone: raw.phone, username: raw.username, ref: refRaw };
+  const values = { phone: raw.phone, username: raw.username, ref: refRaw, gender: raw.gender };
 
   const tenant = await getCurrentTenant();
   // Study center students are created by their admins; public sign-up only on the main site.
@@ -56,7 +58,7 @@ export async function register(_prev: FormState, formData: FormData): Promise<Fo
 
   const phone = normalizePhone(parsed.data.phone);
   if (!phone) return { fieldErrors: { phone: "invalidPhone" }, values };
-  const { username, password } = parsed.data;
+  const { username, password, gender } = parsed.data;
 
   // Optional invite code from a friend.
   const refCode = normalizeReferralCode(refRaw);
@@ -86,7 +88,10 @@ export async function register(_prev: FormState, formData: FormData): Promise<Fo
           phone,
           username,
           passwordHash,
+          gender,
           avatarSeed: username,
+          // Not everyone starts with the same look: base style picked from the username.
+          avatarStyle: defaultStyleFor(username),
           referredById: referrer?.id,
           memberships: { create: { tenantId: tenant.id, role: "STUDENT" } },
         },
