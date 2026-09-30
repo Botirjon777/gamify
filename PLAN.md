@@ -1,8 +1,8 @@
-# Gamify — Implementation Plan
+# Zukkolar — Implementation Plan
 
 > A gamified platform for practicing web development (HTML, CSS, JS, TS, React, …)
 > **one skill at a time**, e.g. "I want to drill `useState` until I really get it."
-> B2C at `gamify.uz`; B2B white-label for study centers at `<center>.gamify.uz`.
+> B2C at `zukkolar.uz`; B2B white-label for study centers at `<center>.zukkolar.uz`.
 
 ---
 
@@ -43,7 +43,7 @@ Most platforms teach **courses**. Gamify trains **skills**.
 | SMS / OTP | **Disabled for now** | Provider interface ready; Eskiz.uz / Play Mobile / Telegram Gateway later |
 | Payments (later) | Click, Payme, Uzum | |
 | Hosting | Docker on VPS **inside Uzbekistan** | ⚠️ UZ personal data law requires citizens' personal data to be stored on servers in Uzbekistan — check with a lawyer before launch |
-| Reverse proxy | Caddy or Nginx | Wildcard TLS `*.gamify.uz` via DNS challenge |
+| Reverse proxy | Caddy or Nginx | Wildcard TLS `*.zukkolar.uz` via DNS challenge |
 | Monitoring | Sentry + Uptime Kuma / Grafana | |
 | Tests | Vitest + Playwright | |
 
@@ -56,8 +56,8 @@ Most platforms teach **courses**. Gamify trains **skills**.
 - Single database, **shared schema, `tenantId` on every tenant-owned row**.
 - The public platform itself is just tenant `gamify` (the default).
 - `middleware.ts` reads the host:
-  - `gamify.uz` → default tenant
-  - `najot.gamify.uz` → tenant with `slug = "najot"`
+  - `zukkolar.uz` → default tenant
+  - `najot.zukkolar.uz` → tenant with `slug = "najot"`
   - later: custom domains (`learn.najot.uz`) via a `TenantDomain` table
 - Tenant is resolved once per request and injected into a Prisma client extension that
   **automatically adds `where: { tenantId }`** — so one forgotten filter can't leak data.
@@ -151,7 +151,7 @@ src/lib/cache/        Cache             → MemoryCache / Next cache  (now)  | R
 
 ## 4. Features breakdown
 
-### 4.1 Landing page (`gamify.uz`)
+### 4.1 Landing page (`zukkolar.uz`)
 - Hero: "Practice exactly the skill you're stuck on" + live mini-demo (interactive useState exercise right on the landing)
 - How it works (pick a skill → drill → earn XP → climb the leaderboard)
 - Tracks overview (HTML, CSS, JS, TS, React, Next.js, Git, SQL…)
@@ -198,7 +198,7 @@ Mastery model per `(user, skill)`: score 0–100, updated by correctness + speed
 ### 4.5 IQ / logic tests
 - Item bank: patterns, sequences, matrices, logic, spatial, verbal (uz/ru/en)
 - Rating via **Elo / Glicko-2** (question difficulty and user ability rated against each other)
-- Displayed as an "IQ score" mapped from rating. ⚠️ Label it honestly (e.g. "Gamify IQ" / "estimated") — it's not a clinical IQ test.
+- Displayed as an "IQ score" mapped from rating. ⚠️ Label it honestly (e.g. "Zukko IQ" / "estimated") — it's not a clinical IQ test.
 - Needs a large item bank so people can't memorize answers.
 
 ### 4.6 Profile
@@ -221,7 +221,7 @@ Mastery model per `(user, skill)`: score 0–100, updated by correctness + speed
 - Postgres now (`WeeklyScore` table + indexes), Redis sorted sets later via `LeaderboardStore`; weekly snapshot to `WeeklyLeaderboardSnapshot`
 - Show your own position even if you're #4 812
 
-### 4.9 Study center (tenant) admin panel — `center.gamify.uz/admin`
+### 4.9 Study center (tenant) admin panel — `center.zukkolar.uz/admin`
 Roles: `OWNER`, `ADMIN`, `TEACHER`, `STUDENT` (+ platform-level `SUPER_ADMIN`)
 - Branding: logo, colors, name
 - Staff management (invite teachers/admins)
@@ -299,7 +299,7 @@ Competitions:
 - **Clan score** = average weekly XP of active members (min. 10 active) — fair between big and small centers,
   not just "who has more students".
 - **Clan wars**: two clans, one weekend, members' duels and solved problems add points.
-- **Gamify Center Cup** (monthly): public ranking of study centers on `gamify.uz/centers`.
+- **Gamify Center Cup** (monthly): public ranking of study centers on `zukkolar.uz/centers`.
   This is also a **sales tool** — centers will push their students to practice to rank higher,
   and their ranking page is a public advertisement for them (and for us).
 - Privacy: cross-center competition is **opt-in** per tenant; other centers see only usernames and avatars.
@@ -314,7 +314,7 @@ Competitions:
 ```prisma
 model Tenant {
   id        String   @id @default(cuid())
-  slug      String   @unique          // "najot" → najot.gamify.uz
+  slug      String   @unique          // "najot" → najot.zukkolar.uz
   name      String
   logoUrl   String?
   theme     Json?                     // colors etc.
@@ -523,7 +523,7 @@ Estimates assume 1–2 full-time developers. Multi-tenancy is in the schema from
 - [ ] Tenant custom content
 - [ ] Tenant leaderboards, group vs group
 - [ ] Center-created tournaments (internal exams / contests), internal leagues option
-- [ ] **Center clans + Gamify Center Cup** (opt-in, public `gamify.uz/centers` ranking)
+- [ ] **Center clans + Gamify Center Cup** (opt-in, public `zukkolar.uz/centers` ranking)
 - [ ] Plans & limits, billing (Click / Payme)
 
 ### Phase 6 — Turn on deferred features (when needed)

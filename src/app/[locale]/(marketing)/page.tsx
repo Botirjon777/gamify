@@ -176,7 +176,7 @@ function handleClick() {
       </main>
 
       <footer className="border-t border-border py-8 text-center text-sm text-muted">
-        © {new Date().getFullYear()} <span className="font-display font-bold text-grad-brand">Gamify</span>
+        © {new Date().getFullYear()} <span className="font-display font-bold text-grad-brand">Zukkolar</span>
       </footer>
     </>
   );

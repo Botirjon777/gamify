@@ -1,7 +1,7 @@
-# gamify
+# Zukkolar
 
 Gamified platform for practicing web development (HTML, CSS, JS, TS, React…) one skill at a time.
-B2C at `gamify.uz`, white-label for study centers at `<center>.gamify.uz`. See [PLAN.md](PLAN.md).
+B2C at `zukkolar.uz`, white-label for study centers at `<center>.zukkolar.uz`. See [PLAN.md](PLAN.md).
 
 **Stack:** Next.js 16 (App Router) · TypeScript · PostgreSQL · Prisma 7 · Tailwind 4 · Zustand · next-intl
 

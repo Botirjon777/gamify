@@ -1,6 +1,6 @@
 /**
  * Elo-style rating for IQ questions: the user and each question have a rating; answering is a "match".
- * The user's rating is shown as "Gamify IQ" (mean 100, 15 points per 100 rating) — an estimate of
+ * The user's rating is shown as "Zukko IQ" (mean 100, 15 points per 100 rating) — an estimate of
  * logical reasoning, not a clinical IQ test.
  */
 

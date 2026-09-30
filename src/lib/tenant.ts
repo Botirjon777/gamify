@@ -9,8 +9,8 @@ export const DEFAULT_TENANT_SLUG = process.env.DEFAULT_TENANT_SLUG ?? "gamify";
 
 /**
  * Host → tenant lookup:
- *   gamify.uz / www.gamify.uz → default tenant
- *   najot.gamify.uz           → { slug: "najot" }
+ *   zukkolar.uz / www.zukkolar.uz → default tenant
+ *   najot.zukkolar.uz           → { slug: "najot" }
  *   anything else             → custom domain (TenantDomain)
  */
 export function parseHost(host: string): { slug: string } | { domain: string } {

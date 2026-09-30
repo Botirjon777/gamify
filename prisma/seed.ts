@@ -9,8 +9,8 @@ async function main() {
 
   await db.tenant.upsert({
     where: { slug: defaultSlug },
-    create: { slug: defaultSlug, name: "Gamify" },
-    update: {},
+    create: { slug: defaultSlug, name: "Zukkolar" },
+    update: { name: "Zukkolar" },
   });
 
   // Example study center → demo.<ROOT_DOMAIN>, with its own brand color.

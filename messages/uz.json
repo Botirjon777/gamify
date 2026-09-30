@@ -1,6 +1,6 @@
 {
   "meta": {
-    "title": "Gamify — dasturlashni oʻyin orqali oʻrganing",
+    "title": "Zukkolar — dasturlashni oʻyin orqali oʻrganing",
     "description": "HTML, CSS, JavaScript, TypeScript va React boʻyicha aynan kerakli mavzuni mashq qiling: XP, streak, reyting va musobaqalar."
   },
   "nav": {
@@ -46,13 +46,13 @@
     },
     "tracksTitle": "Yoʻnalishlar",
     "centersTitle": "Oʻquv markazlari uchun",
-    "centersText": "Oʻz subdomeningiz (markaz.gamify.uz), logotip va ranglar, oʻquvchilar statistikasi, uyga vazifalar, hisobotlar va markazlararo musobaqalar.",
+    "centersText": "Oʻz subdomeningiz (markaz.zukkolar.uz), logotip va ranglar, oʻquvchilar statistikasi, uyga vazifalar, hisobotlar va markazlararo musobaqalar.",
     "centersCta": "Bogʻlanish",
     "aimTitle": "Maqsadimiz",
     "aimText": "Oʻzbekistondagi har bir oʻquvchi dasturlashni zerikmasdan, har kuni ozgina va aniq maqsad bilan mashq qilsin.",
     "features": {
       "iq": {
-        "title": "Gamify IQ",
+        "title": "Zukko IQ",
         "text": "Mantiqiy fikrlash testlari, kunlik IQ savollar va IQ reytingi."
       },
       "friends": {
@@ -128,7 +128,7 @@
     "dailyProblem": "Kunlik masala",
     "iqTest": "IQ test",
     "weeklyXp": "Bu hafta: {xp} XP",
-    "iq": "Gamify IQ",
+    "iq": "Zukko IQ",
     "iqNotTested": "—",
     "dailyIq": {
       "title": "Kunlik IQ test",
@@ -238,13 +238,13 @@
     },
     "start": "Testni boshlash",
     "resume": "Davom ettirish",
-    "disclaimer": "Gamify IQ — mantiqiy fikrlash boʻyicha taxminiy baho. Bu klinik IQ test emas.",
+    "disclaimer": "Zukko IQ — mantiqiy fikrlash boʻyicha taxminiy baho. Bu klinik IQ test emas.",
     "question": "{number}-savol / {total}",
     "secondsLeft": "{seconds} s",
     "timeUp": "Vaqt tugadi",
     "submitting": "Yuborilmoqda…",
     "result": {
-      "title": "Sizning Gamify IQ",
+      "title": "Sizning Zukko IQ",
       "correct": "{correct}/{total} toʻgʻri javob",
       "percentile": "Natijangiz odamlarning taxminan {percentile} foizidan yuqori",
       "rank": "IQ reytingida #{rank}-oʻrin",
@@ -345,7 +345,7 @@
   "profile": {
     "level": "Daraja",
     "xp": "XP",
-    "iq": "Gamify IQ",
+    "iq": "Zukko IQ",
     "rank": "Reyting",
     "streak": "Eng uzun streak",
     "days": "{count} kun",
@@ -525,7 +525,7 @@
     },
     "iq_130": {
       "title": "Daho",
-      "text": "Gamify IQ 130 dan yuqori"
+      "text": "Zukko IQ 130 dan yuqori"
     },
     "first_friend": {
       "title": "Doʻstona",
