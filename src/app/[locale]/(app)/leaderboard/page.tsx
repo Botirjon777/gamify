@@ -66,9 +66,16 @@ export default async function LeaderboardPage({ params, searchParams }: PageProp
               />
             </ol>
           ) : (
-            <p className="px-4 pb-4 pt-1 text-sm text-muted">
-              {t("notRanked")} {board === "IQ" ? t("notRankedIq") : t("notRankedXp")}
-            </p>
+            <div className="flex flex-col gap-3 px-4 pb-4 pt-1 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm text-muted">
+                {t("notRanked")} {board === "IQ" ? t("notRankedIq") : t("notRankedXp")}
+              </p>
+              {board === "IQ" && !user.iqTestedAt && (
+                <Link href="/iq/placement" className="shrink-0 text-sm font-semibold text-brand hover:underline">
+                  {t("takeTest")} →
+                </Link>
+              )}
+            </div>
           )}
         </section>
       )}

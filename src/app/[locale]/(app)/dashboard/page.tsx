@@ -11,6 +11,7 @@ import { SkillCard } from "@/features/learn/components/skill-card";
 import { Link } from "@/i18n/navigation";
 import { buttonClass } from "@/components/ui/button";
 import { iqFromRating } from "@/features/iq/rating";
+import { hideIqPrompt } from "@/features/iq/actions";
 
 export default async function DashboardPage({ params }: PageProps<"/[locale]/dashboard">) {
   const { locale } = await params;
@@ -56,6 +57,32 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
         </div>
       </section>
 
+      {/* Optional IQ test invitation — hideable */}
+      {!user.iqTestedAt && !user.iqPromptHiddenAt && (
+        <section className="relative flex flex-col gap-4 rounded-3xl bg-brand p-5 text-brand-foreground sm:flex-row sm:items-center sm:justify-between sm:py-6 sm:pl-6 sm:pr-14">
+          <div className="pr-8">
+            <h2 className="text-lg font-extrabold">🧠 {t("iqPrompt.title")}</h2>
+            <p className="mt-1 text-sm text-brand-foreground/80">{t("iqPrompt.text")}</p>
+          </div>
+          <Link
+            href="/iq/placement"
+            className="inline-flex h-11 shrink-0 items-center justify-center rounded-xl bg-white px-5 text-sm font-bold text-brand transition hover:bg-white/90"
+          >
+            {t("iqPrompt.start")}
+          </Link>
+          <form action={hideIqPrompt} className="absolute right-3 top-3">
+            <button
+              type="submit"
+              aria-label={t("iqPrompt.hide")}
+              title={t("iqPrompt.hide")}
+              className="grid size-8 place-items-center rounded-lg text-lg text-brand-foreground/70 hover:bg-white/15 hover:text-brand-foreground"
+            >
+              ×
+            </button>
+          </form>
+        </section>
+      )}
+
       {/* Stats */}
       <section className="grid grid-cols-2 gap-3 lg:grid-cols-5">
         <Stat label="XP" value={user.xp.toLocaleString("uz-UZ")} accent="text-xp" sub={t("weeklyXp", { xp: weekly?.value ?? 0 })} />
@@ -71,12 +98,14 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
           accent="text-streak"
           sub={t("longestStreak", { count: user.longestStreak })}
         />
-        <Stat
-          label={t("iq")}
-          value={user.iqTestedAt ? String(iqFromRating(user.iqRating)) : t("iqNotTested")}
-          accent="text-brand"
-          sub={iqRank ? `${t("rank")}: ${t("rankValue", { rank: iqRank })}` : undefined}
-        />
+        <Link href={user.iqTestedAt ? "/leaderboard?board=IQ" : "/iq/placement"}>
+          <Stat
+            label={t("iq")}
+            value={user.iqTestedAt ? String(iqFromRating(user.iqRating)) : t("iqNotTested")}
+            accent="text-brand"
+            sub={user.iqTestedAt ? (iqRank ? `${t("rank")}: ${t("rankValue", { rank: iqRank })}` : undefined) : t("iqTake")}
+          />
+        </Link>
         <Link href="/leaderboard" className="col-span-2 lg:col-span-1">
           <Stat label={t("rank")} value={rank ? t("rankValue", { rank }) : t("noRank")} accent="text-foreground" sub="XP" />
         </Link>
@@ -111,7 +140,7 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
 
         <section className="grid gap-3">
           <Link
-            href="/iq/daily"
+            href={user.iqTestedAt ? "/iq/daily" : "/iq/placement"}
             className="flex items-center justify-between gap-3 rounded-2xl border border-border bg-surface px-5 py-4 transition hover:border-brand/40"
           >
             <span>

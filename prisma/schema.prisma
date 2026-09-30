@@ -83,8 +83,10 @@ model User {
   level         Int       @default(1)
   iqRating      Float     @default(1000)
   iqDeviation   Float     @default(350)
-  /// Set when the placement IQ test is finished; null → user is sent to the test first.
+  /// Set when the placement IQ test is finished (the test is optional).
   iqTestedAt    DateTime?
+  /// User hid the "take the IQ test" invitation on the dashboard.
+  iqPromptHiddenAt DateTime?
   currentStreak Int       @default(0)
   longestStreak Int       @default(0)
   lastActiveDay DateTime? @db.Date

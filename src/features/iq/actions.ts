@@ -151,6 +151,13 @@ export async function answerIq(sessionId: string, itemId: string, rawChoice: num
   return { status: "ACTIVE", sessionId, kind: session.kind, question: await toQuestion(db, session, locale) };
 }
 
+/** Hide the "take the IQ test" invitation on the dashboard (the test itself stays available). */
+export async function hideIqPrompt() {
+  const { user } = await requireSession();
+  await db.user.update({ where: { id: user.id }, data: { iqPromptHiddenAt: new Date() } });
+  revalidatePath("/dashboard");
+}
+
 /** UTC instant of today's 00:00 in Tashkent. */
 function dayStartUtc() {
   return new Date(tashkentToday().getTime() - 5 * 60 * 60 * 1000);

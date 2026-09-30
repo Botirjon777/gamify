@@ -2,12 +2,12 @@ import { getTranslations } from "next-intl/server";
 import { Logo } from "@/components/logo";
 import { Button } from "@/components/ui/button";
 import { logout } from "@/features/auth/actions";
-import { requireOnboardedSession } from "@/lib/auth/gates";
+import { requireSession } from "@/lib/auth/session";
 import { avatarDataUri } from "@/lib/avatar";
 import { NavLinks } from "./nav-links";
 
 export default async function AppLayout({ children }: LayoutProps<"/[locale]">) {
-  const { user, tenant } = await requireOnboardedSession();
+  const { user, tenant } = await requireSession();
   const t = await getTranslations("nav");
 
   return (

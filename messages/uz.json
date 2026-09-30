@@ -108,7 +108,14 @@
       "start": "Boshlash",
       "done": "Bajarildi ✓",
       "text": "5 ta savol · IQ bahoingizni yangilaydi"
-    }
+    },
+    "iqPrompt": {
+      "title": "IQ bahoingizni bilib oling",
+      "text": "12 ta savol, ~10 daqiqa. Natijangiz IQ reytingida koʻrinadi va +50 XP olasiz.",
+      "start": "Testni boshlash",
+      "hide": "Yashirish"
+    },
+    "iqTake": "Test topshirish →"
   },
   "devices": {
     "title": "Faol qurilmalar",
@@ -187,8 +194,8 @@
   },
   "iq": {
     "placement": {
-      "title": "Avval — qisqa IQ test",
-      "text": "Bu test mantiqiy fikrlash darajangizni aniqlaydi va sizni IQ reytingiga qoʻshadi. Test tugagach, platformaning barcha imkoniyatlari ochiladi."
+      "title": "Qisqa IQ test",
+      "text": "Bu test mantiqiy fikrlash darajangizni aniqlaydi va sizni IQ reytingiga qoʻshadi. Test ixtiyoriy — xohlasangiz, keyinroq topshirishingiz mumkin."
     },
     "daily": {
       "title": "Kunlik IQ test",
@@ -218,7 +225,9 @@
       "doneToday": "Bugungi IQ test bajarildi ✓",
       "comeBack": "Ertaga yangi savollar bilan qaytib keling!"
     },
-    "error": "Xatolik yuz berdi. Sahifani yangilab koʻring."
+    "error": "Xatolik yuz berdi. Sahifani yangilab koʻring.",
+    "later": "Keyinroq",
+    "toDashboard": "Bosh sahifa"
   },
   "leaderboard": {
     "title": "Reyting",
@@ -237,6 +246,7 @@
     "notRankedXp": "Mashq qiling — XP toʻplaganingizdan soʻng shu yerda paydo boʻlasiz.",
     "notRankedIq": "IQ test topshiring — natijangiz shu yerda paydo boʻladi.",
     "empty": "Hozircha bu reytingda hech kim yoʻq.",
-    "weeklyReset": "Haftalik reyting har dushanba 00:00 da (Toshkent vaqti) yangilanadi."
+    "weeklyReset": "Haftalik reyting har dushanba 00:00 da (Toshkent vaqti) yangilanadi.",
+    "takeTest": "IQ testni topshirish"
   }
 }

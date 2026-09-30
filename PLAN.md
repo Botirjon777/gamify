@@ -484,7 +484,7 @@ Estimates assume 1–2 full-time developers. Multi-tenancy is in the schema from
 
 ### Phase 2 — Daily loop & rankings (3–4 weeks)
 - [ ] Daily quiz, daily problem
-- [x] IQ: mandatory placement test (12 q) after sign-up + daily IQ test (5 q), adaptive, Elo rating, server-enforced 60s timer, 40 items v1 (grow to ≥300)
+- [x] IQ: optional placement test (12 q) offered after sign-up (skippable, hideable dashboard invite) + daily IQ test (5 q), adaptive, Elo rating, server-enforced 60s timer, 40 items v1 (grow to ≥300)
 - [x] Leaderboards page: XP / IQ × all-time / weekly (Postgres `WeeklyScore`, week-keyed rows → no reset job needed)
 - [ ] Weekly winners archive (snapshot job)
 - [ ] Achievements / badges

@@ -43,9 +43,15 @@ export function IqTest({ kind, initial }: { kind: IqKind; initial: IqState | nul
           <Rule icon="➡️">{t("rules.noBack")}</Rule>
         </ul>
         {error && <p className="mt-5 text-sm text-danger">{t("error")}</p>}
-        <Button onClick={() => run(() => startIq(kind))} disabled={busy} className="mt-8 h-12 w-full text-base sm:w-auto sm:px-10">
-          {t("start")}
-        </Button>
+        <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
+          <Button onClick={() => run(() => startIq(kind))} disabled={busy} className="h-12 text-base sm:px-10">
+            {t("start")}
+          </Button>
+          {/* The test is optional — users can skip it and take it any time later. */}
+          <Link href="/dashboard" className={buttonClass("secondary", "h-12 text-base sm:px-8")}>
+            {t("later")}
+          </Link>
+        </div>
         <p className="mt-6 text-xs text-muted">{t("disclaimer")}</p>
       </Card>
     );
