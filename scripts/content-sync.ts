@@ -1,5 +1,5 @@
 /**
- * Sync /content/<track>/track.yaml + /content/<track>/<skill>.yaml into the database.
+ * Sync /content/<track>/track.yaml + /content/<track>/<skill>.yaml and /content/iq/items.yaml into the database.
  *   pnpm content:sync            validate + write
  *   pnpm content:sync --check    validate only (CI)
  *
@@ -13,6 +13,7 @@ import { parse } from "yaml";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma/client";
 import { skillFile, toDbExercise, trackFile, type ExerciseDef, type TrackDef } from "../src/features/learn/content-schema";
+import { INITIAL_ITEM_RATING, iqFile, type IqItemDef, type IqPublicContent } from "../src/features/iq/content-schema";
 
 const CONTENT_DIR = join(process.cwd(), "content");
 const checkOnly = process.argv.includes("--check");
@@ -68,7 +69,44 @@ function load(): Loaded[] {
   return loaded;
 }
 
-async function sync(tracks: Loaded[]) {
+function loadIq(): IqItemDef[] {
+  const file = join(CONTENT_DIR, "iq", "items.yaml");
+  if (!existsSync(file)) return [];
+  const parsed = iqFile.safeParse(parse(readFileSync(file, "utf8")));
+  if (!parsed.success) {
+    console.error(`✘ ${file}:\n${parsed.error.issues.map((i) => `  ${i.path.join(".")}: ${i.message}`).join("\n")}`);
+    process.exit(1);
+  }
+  const ids = new Set<string>();
+  for (const item of parsed.data.items) {
+    if (ids.has(item.id)) {
+      console.error(`✘ duplicate IQ item id "${item.id}"`);
+      process.exit(1);
+    }
+    ids.add(item.id);
+  }
+  return parsed.data.items;
+}
+
+async function syncIq(db: PrismaClient, items: IqItemDef[]) {
+  for (const item of items) {
+    const content: IqPublicContent = { prompt: item.prompt, figure: item.figure, options: item.options };
+    const data = { category: item.category, difficulty: item.difficulty, content, answer: item.answer, status: "PUBLISHED" as const };
+    await db.iqItem.upsert({
+      where: { key: item.id },
+      // Rating is only set on create — afterwards it self-calibrates from real answers.
+      create: { key: item.id, rating: INITIAL_ITEM_RATING[item.difficulty], ...data },
+      update: data,
+    });
+  }
+  const archived = await db.iqItem.updateMany({
+    where: { key: { notIn: items.map((i) => i.id) }, status: { not: "ARCHIVED" } },
+    data: { status: "ARCHIVED" },
+  });
+  console.log(`✔ iq: ${items.length} items${archived.count ? `, archived ${archived.count}` : ""}`);
+}
+
+async function sync(tracks: Loaded[], iqItems: IqItemDef[]) {
   const db = new PrismaClient({ adapter: new PrismaPg({ connectionString: process.env.DATABASE_URL }) });
   const seenKeys: string[] = [];
 
@@ -115,6 +153,8 @@ async function sync(tracks: Loaded[]) {
       data: { status: "ARCHIVED" },
     });
     if (archived.count) console.log(`✔ archived ${archived.count} exercises no longer in /content`);
+
+    if (iqItems.length) await syncIq(db, iqItems);
   } finally {
     await db.$disconnect();
   }
@@ -122,9 +162,10 @@ async function sync(tracks: Loaded[]) {
 
 async function main() {
   const tracks = load();
+  const iqItems = loadIq();
   const total = tracks.reduce((n, t) => n + [...t.exercises.values()].reduce((m, l) => m + l.length, 0), 0);
-  console.log(`✔ content valid: ${tracks.length} tracks, ${total} exercises`);
-  if (!checkOnly) await sync(tracks);
+  console.log(`✔ content valid: ${tracks.length} tracks, ${total} exercises, ${iqItems.length} IQ items`);
+  if (!checkOnly) await sync(tracks, iqItems);
 }
 
 main().catch((e) => {

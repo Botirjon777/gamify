@@ -100,7 +100,15 @@
     "dailyQuiz": "Kunlik viktorina",
     "dailyProblem": "Kunlik masala",
     "iqTest": "IQ test",
-    "weeklyXp": "Bu hafta: {xp} XP"
+    "weeklyXp": "Bu hafta: {xp} XP",
+    "iq": "Gamify IQ",
+    "iqNotTested": "—",
+    "dailyIq": {
+      "title": "Kunlik IQ test",
+      "start": "Boshlash",
+      "done": "Bajarildi ✓",
+      "text": "5 ta savol · IQ bahoingizni yangilaydi"
+    }
   },
   "devices": {
     "title": "Faol qurilmalar",
@@ -176,5 +184,59 @@
     "orderHint": "Qatorlarni toʻgʻri tartibda bosing. Olib tashlash uchun yuqoridagi qatorni bosing.",
     "orderEmpty": "Qatorlarni shu yerga yigʻing",
     "keyboardHint": "Enter — tekshirish / davom etish"
+  },
+  "iq": {
+    "placement": {
+      "title": "Avval — qisqa IQ test",
+      "text": "Bu test mantiqiy fikrlash darajangizni aniqlaydi va sizni IQ reytingiga qoʻshadi. Test tugagach, platformaning barcha imkoniyatlari ochiladi."
+    },
+    "daily": {
+      "title": "Kunlik IQ test",
+      "text": "Har kuni 5 ta yangi savol. Natijangiz IQ bahoingizni yangilaydi va haftalik IQ reytingiga kiradi."
+    },
+    "rules": {
+      "questions": "{count} ta savol",
+      "time": "Har biriga {seconds} soniya",
+      "noBack": "Oldingi savolga qaytib boʻlmaydi"
+    },
+    "start": "Testni boshlash",
+    "resume": "Davom ettirish",
+    "disclaimer": "Gamify IQ — mantiqiy fikrlash boʻyicha taxminiy baho. Bu klinik IQ test emas.",
+    "question": "{number}-savol / {total}",
+    "secondsLeft": "{seconds} s",
+    "timeUp": "Vaqt tugadi",
+    "submitting": "Yuborilmoqda…",
+    "result": {
+      "title": "Sizning Gamify IQ",
+      "correct": "{correct}/{total} toʻgʻri javob",
+      "percentile": "Natijangiz odamlarning taxminan {percentile} foizidan yuqori",
+      "rank": "IQ reytingida #{rank}-oʻrin",
+      "change": "Oldingi: {before}",
+      "xp": "+{xp} XP",
+      "toDashboard": "Bosh sahifaga",
+      "toLeaderboard": "Reytingni koʻrish",
+      "doneToday": "Bugungi IQ test bajarildi ✓",
+      "comeBack": "Ertaga yangi savollar bilan qaytib keling!"
+    },
+    "error": "Xatolik yuz berdi. Sahifani yangilab koʻring."
+  },
+  "leaderboard": {
+    "title": "Reyting",
+    "subtitle": "Eng faol va eng aqlli oʻquvchilar.",
+    "boards": {
+      "XP": "XP",
+      "IQ": "IQ"
+    },
+    "periods": {
+      "all-time": "Umumiy",
+      "weekly": "Shu hafta"
+    },
+    "you": "Siz",
+    "yourRank": "Sizning oʻrningiz",
+    "notRanked": "Siz hali bu reytingda yoʻqsiz.",
+    "notRankedXp": "Mashq qiling — XP toʻplaganingizdan soʻng shu yerda paydo boʻlasiz.",
+    "notRankedIq": "IQ test topshiring — natijangiz shu yerda paydo boʻladi.",
+    "empty": "Hozircha bu reytingda hech kim yoʻq.",
+    "weeklyReset": "Haftalik reyting har dushanba 00:00 da (Toshkent vaqti) yangilanadi."
   }
 }

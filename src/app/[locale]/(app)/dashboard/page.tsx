@@ -10,6 +10,7 @@ import { getPracticeSuggestions } from "@/features/learn/queries";
 import { SkillCard } from "@/features/learn/components/skill-card";
 import { Link } from "@/i18n/navigation";
 import { buttonClass } from "@/components/ui/button";
+import { iqFromRating } from "@/features/iq/rating";
 
 export default async function DashboardPage({ params }: PageProps<"/[locale]/dashboard">) {
   const { locale } = await params;
@@ -19,12 +20,14 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
   const { user, tenant } = await requireSession();
 
   const today = tashkentToday();
-  const [claimedToday, weekly, rank, suggestions] = await Promise.all([
+  const [claimedToday, iqDoneToday, weekly, rank, iqRank, suggestions] = await Promise.all([
     db.dailyClaim.findUnique({ where: { userId_day_kind: { userId: user.id, day: today, kind: "LOGIN" } } }),
+    db.dailyClaim.findUnique({ where: { userId_day_kind: { userId: user.id, day: today, kind: "IQ" } } }),
     db.weeklyScore.findUnique({
       where: { userId_tenantId_week_board: { userId: user.id, tenantId: tenant.id, week: tashkentWeekStart(), board: "XP" } },
     }),
     getLeaderboardStore().rankOf(user.id, { board: "XP", period: "all-time", tenantId: tenant.id }),
+    getLeaderboardStore().rankOf(user.id, { board: "IQ", period: "all-time", tenantId: tenant.id }),
     getPracticeSuggestions(user.id, tenant.id, locale),
   ]);
 
@@ -54,7 +57,7 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
       </section>
 
       {/* Stats */}
-      <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <section className="grid grid-cols-2 gap-3 lg:grid-cols-5">
         <Stat label="XP" value={user.xp.toLocaleString("uz-UZ")} accent="text-xp" sub={t("weeklyXp", { xp: weekly?.value ?? 0 })} />
         <Stat label={t("level", { level: user.level })} value={`${Math.round(progress)}%`} accent="text-brand">
           <div className="mt-2 h-2 overflow-hidden rounded-full bg-background">
@@ -63,12 +66,20 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
           <p className="mt-1.5 text-xs text-muted">{t("xpToNext", { xp: levelEnd - user.xp })}</p>
         </Stat>
         <Stat
-          label="🔥 Streak"
+          label={t("streakLabel")}
           value={t("streak", { count: streak })}
           accent="text-streak"
           sub={t("longestStreak", { count: user.longestStreak })}
         />
-        <Stat label={t("rank")} value={rank ? t("rankValue", { rank }) : t("noRank")} accent="text-foreground" />
+        <Stat
+          label={t("iq")}
+          value={user.iqTestedAt ? String(iqFromRating(user.iqRating)) : t("iqNotTested")}
+          accent="text-brand"
+          sub={iqRank ? `${t("rank")}: ${t("rankValue", { rank: iqRank })}` : undefined}
+        />
+        <Link href="/leaderboard" className="col-span-2 lg:col-span-1">
+          <Stat label={t("rank")} value={rank ? t("rankValue", { rank }) : t("noRank")} accent="text-foreground" sub="XP" />
+        </Link>
       </section>
 
       {/* Continue practicing — skills due for review first */}
@@ -99,7 +110,23 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
         <DailyBonusCard claimed={!!claimedToday} cycle={DAILY_BONUS_XP} nextDay={cycleDay} />
 
         <section className="grid gap-3">
-          {(["dailyQuiz", "dailyProblem", "iqTest"] as const).map((key) => (
+          <Link
+            href="/iq/daily"
+            className="flex items-center justify-between gap-3 rounded-2xl border border-border bg-surface px-5 py-4 transition hover:border-brand/40"
+          >
+            <span>
+              <span className="block font-semibold">🧠 {t("dailyIq.title")}</span>
+              <span className="text-sm text-muted">{t("dailyIq.text")}</span>
+            </span>
+            <span
+              className={`shrink-0 rounded-full px-3 py-1 text-xs font-semibold ${
+                iqDoneToday ? "bg-success/10 text-success" : "bg-brand text-brand-foreground"
+              }`}
+            >
+              {iqDoneToday ? t("dailyIq.done") : t("dailyIq.start")}
+            </span>
+          </Link>
+          {(["dailyQuiz", "dailyProblem"] as const).map((key) => (
             <div
               key={key}
               className="flex items-center justify-between rounded-2xl border border-dashed border-border bg-surface px-5 py-4"

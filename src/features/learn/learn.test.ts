@@ -86,7 +86,7 @@ describe("pickNext", () => {
 describe("content answers are self-consistent", () => {
   const root = join(process.cwd(), "content");
   const files = readdirSync(root, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
+    .filter((d) => d.isDirectory() && existsSync(join(root, d.name, "track.yaml")))
     .flatMap((d) =>
       readdirSync(join(root, d.name))
         .filter((f) => f.endsWith(".yaml") && f !== "track.yaml")

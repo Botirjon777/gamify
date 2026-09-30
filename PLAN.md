@@ -471,20 +471,22 @@ Estimates assume 1–2 full-time developers. Multi-tenancy is in the schema from
 
 ### Phase 1 — MVP: learn & practice (4–6 weeks)
 - [ ] Landing page
-- [ ] Content model + first content: **JS basics, React state (useState, useEffect)**, HTML/CSS basics
-- [ ] Exercise player for all types; CodeMirror editor; in-browser runner (iframe/Sandpack)
-- [ ] Drill mode + mastery per skill
-- [ ] XP events, levels, daily login bonus, streaks
-- [ ] Dashboard with avatar (DiceBear)
+- [x] Content model + first content: React useState/useEffect, JS array methods (HTML/CSS next)
+- [x] Exercise player: choice, predict output, fill blanks, order lines (server-checked)
+- [ ] Code-writing exercises: CodeMirror editor + sandboxed runner
+- [x] Drill mode + mastery per skill + spaced-repetition review dates
+- [x] XP events, levels, daily login bonus, streaks
+- [x] Dashboard with avatar (DiceBear)
 - [ ] Profile page (XP, level, streak)
-- [ ] Active devices page (list / revoke)
-- [ ] Responsive pass on mobile/tablet
+- [x] Active devices page (list / revoke)
+- [x] Responsive pass on mobile/tablet
 - 🎯 **Goal: 20–50 beta users using Drill mode daily**
 
 ### Phase 2 — Daily loop & rankings (3–4 weeks)
 - [ ] Daily quiz, daily problem
-- [ ] IQ test module + Glicko rating + item bank v1 (≥300 items)
-- [ ] Leaderboards: global XP / IQ, weekly XP / IQ (Postgres `WeeklyScore`) + weekly reset job (pg-boss) + archive
+- [x] IQ: mandatory placement test (12 q) after sign-up + daily IQ test (5 q), adaptive, Elo rating, server-enforced 60s timer, 40 items v1 (grow to ≥300)
+- [x] Leaderboards page: XP / IQ × all-time / weekly (Postgres `WeeklyScore`, week-keyed rows → no reset job needed)
+- [ ] Weekly winners archive (snapshot job)
 - [ ] Achievements / badges
 - [ ] Server-side verification of submissions (anti-cheat) — foundation for duels & tournaments
 - [ ] **Weekly leagues** (7 tiers, cohorts of 30, promotion/demotion job) — reuses `WeeklyScore`

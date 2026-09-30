@@ -1,6 +1,7 @@
 import "server-only";
 import { db } from "@/lib/db";
 import { tashkentWeekStart } from "@/lib/time";
+import { iqFromRating } from "@/features/iq/rating";
 import type { LeaderboardEntry, LeaderboardQuery, LeaderboardStore } from "./index";
 
 const userSelect = { id: true, username: true, avatarSeed: true } as const;
@@ -29,7 +30,12 @@ export class PostgresLeaderboardStore implements LeaderboardStore {
 
     const column = board === "XP" ? "xp" : "iqRating";
     const users = await db.user.findMany({
-      where: { memberships: { some: { tenantId } } },
+      // Untested users (no placement test yet) don't appear on the IQ board.
+      // XP board: only people who earned something. IQ board: only people who took the placement test.
+      where: {
+        memberships: { some: { tenantId } },
+        ...(board === "IQ" ? { iqTestedAt: { not: null } } : { xp: { gt: 0 } }),
+      },
       orderBy: { [column]: "desc" },
       take: limit,
       select: { ...userSelect, xp: true, iqRating: true },
@@ -39,7 +45,7 @@ export class PostgresLeaderboardStore implements LeaderboardStore {
       userId: u.id,
       username: u.username,
       avatarSeed: u.avatarSeed,
-      value: board === "XP" ? u.xp : Math.round(u.iqRating),
+      value: board === "XP" ? u.xp : iqFromRating(u.iqRating),
     }));
   }
 
@@ -54,12 +60,12 @@ export class PostgresLeaderboardStore implements LeaderboardStore {
       return ahead + 1;
     }
 
-    const me = await db.user.findUnique({ where: { id: userId }, select: { xp: true, iqRating: true } });
-    if (!me) return null;
+    const me = await db.user.findUnique({ where: { id: userId }, select: { xp: true, iqRating: true, iqTestedAt: true } });
+    if (!me || (board === "IQ" ? !me.iqTestedAt : me.xp === 0)) return null;
     const ahead = await db.user.count({
       where: {
         memberships: { some: { tenantId } },
-        ...(board === "XP" ? { xp: { gt: me.xp } } : { iqRating: { gt: me.iqRating } }),
+        ...(board === "XP" ? { xp: { gt: me.xp } } : { iqTestedAt: { not: null }, iqRating: { gt: me.iqRating } }),
       },
     });
     return ahead + 1;

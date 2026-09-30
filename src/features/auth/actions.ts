@@ -91,7 +91,8 @@ export async function register(_prev: FormState, formData: FormData): Promise<Fo
   }
 
   await createSession(userId, tenant.id);
-  redirect({ href: "/dashboard", locale: await getLocale() });
+  // New users take the placement IQ test first.
+  redirect({ href: "/iq/placement", locale: await getLocale() });
   return {};
 }
 

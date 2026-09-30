@@ -83,6 +83,8 @@ model User {
   level         Int       @default(1)
   iqRating      Float     @default(1000)
   iqDeviation   Float     @default(350)
+  /// Set when the placement IQ test is finished; null → user is sent to the test first.
+  iqTestedAt    DateTime?
   currentStreak Int       @default(0)
   longestStreak Int       @default(0)
   lastActiveDay DateTime? @db.Date
@@ -98,6 +100,7 @@ model User {
   weeklyScores WeeklyScore[]
   attempts     Attempt[]
   masteries    SkillMastery[]
+  iqSessions   IqSession[]
 
   @@index([xp(sort: Desc)])
   @@index([iqRating(sort: Desc)])
@@ -232,6 +235,75 @@ model SkillMastery {
 
   @@id([userId, skillId])
   @@index([userId, nextReviewAt])
+}
+
+// ─── IQ tests (items synced from /content/iq) ───────────────────────────────
+
+/// One IQ question. `rating` starts from difficulty and self-calibrates (Elo) as people answer.
+model IqItem {
+  id            String        @id @default(cuid())
+  key           String        @unique
+  category      String /// sequence, letters, shapes, analogy, odd, logic, math
+  difficulty    Int /// 1–5 (initial rating only)
+  rating        Float
+  content       Json /// public: { prompt, figure?, options }
+  answer        Int /// private: index of the correct option
+  status        ContentStatus @default(PUBLISHED)
+  timesAnswered Int           @default(0)
+  timesCorrect  Int           @default(0)
+  attempts      IqAttempt[]
+}
+
+enum IqSessionKind {
+  PLACEMENT /// first test after registration
+  DAILY
+}
+
+enum IqSessionStatus {
+  ACTIVE
+  FINISHED
+}
+
+model IqSession {
+  id             String          @id @default(cuid())
+  userId         String
+  tenantId       String
+  kind           IqSessionKind
+  status         IqSessionStatus @default(ACTIVE)
+  total          Int
+  answered       Int             @default(0)
+  correct        Int             @default(0)
+  /// The question on screen right now; its deadline is enforced on the server.
+  currentItemId  String?
+  currentShownAt DateTime?
+  ratingBefore   Float
+  ratingAfter    Float?
+  xpAwarded      Int             @default(0)
+  startedAt      DateTime        @default(now())
+  finishedAt     DateTime?
+
+  user     User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attempts IqAttempt[]
+
+  @@index([userId, kind, status])
+}
+
+model IqAttempt {
+  id           String   @id @default(cuid())
+  sessionId    String
+  userId       String
+  itemId       String
+  choice       Int? /// null = time ran out
+  correct      Boolean
+  timeMs       Int
+  ratingBefore Float
+  ratingAfter  Float
+  createdAt    DateTime @default(now())
+
+  session IqSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
+  item    IqItem    @relation(fields: [itemId], references: [id], onDelete: Cascade)
+
+  @@index([userId, itemId])
 }
 
 // ─── Gamification ───────────────────────────────────────────────────────────
