@@ -1,0 +1,219 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ─── Tenancy ────────────────────────────────────────────────────────────────
+
+enum TenantPlan {
+  FREE
+  STANDARD
+  PRO
+}
+
+/// A study center (or the public platform itself, slug = "gamify").
+model Tenant {
+  id        String     @id @default(cuid())
+  slug      String     @unique /// najot → najot.gamify.uz
+  name      String
+  logoUrl   String?
+  theme     Json? /// { primary: "#…", … }
+  plan      TenantPlan @default(FREE)
+  isActive  Boolean    @default(true)
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+
+  domains     TenantDomain[]
+  memberships Membership[]
+  sessions    Session[]
+  xpEvents    XpEvent[]
+  weeklyScores WeeklyScore[]
+}
+
+/// Custom domains, e.g. learn.najot.uz (later).
+model TenantDomain {
+  id       String @id @default(cuid())
+  domain   String @unique
+  tenantId String
+  tenant   Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+}
+
+enum Role {
+  OWNER
+  ADMIN
+  TEACHER
+  STUDENT
+}
+
+model Membership {
+  id        String   @id @default(cuid())
+  userId    String
+  tenantId  String
+  role      Role     @default(STUDENT)
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, tenantId])
+  @@index([tenantId, role])
+}
+
+// ─── Users & auth ───────────────────────────────────────────────────────────
+
+/// Users are global; they join tenants through Membership.
+model User {
+  id                 String    @id @default(cuid())
+  phone              String    @unique /// E.164, +998XXXXXXXXX
+  phoneVerified      Boolean   @default(false) /// stays false until SMS OTP is enabled
+  username           String    @unique /// stored lowercase
+  passwordHash       String
+  mustChangePassword Boolean   @default(false) /// set after an admin password reset
+  isSuperAdmin       Boolean   @default(false)
+  avatarSeed         String
+  avatarConfig       Json?
+  locale             String    @default("uz")
+  timezone           String    @default("Asia/Tashkent")
+
+  xp            Int       @default(0)
+  level         Int       @default(1)
+  iqRating      Float     @default(1000)
+  iqDeviation   Float     @default(350)
+  currentStreak Int       @default(0)
+  longestStreak Int       @default(0)
+  lastActiveDay DateTime? @db.Date
+  streakFreezes Int       @default(0)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  memberships  Membership[]
+  sessions     Session[]
+  xpEvents     XpEvent[]
+  dailyClaims  DailyClaim[]
+  weeklyScores WeeklyScore[]
+
+  @@index([xp(sort: Desc)])
+  @@index([iqRating(sort: Desc)])
+}
+
+/// DB-backed session = one logged-in device. Only the SHA-256 of the token is stored.
+model Session {
+  id           String    @id @default(cuid())
+  tokenHash    String    @unique
+  userId       String
+  tenantId     String
+  userAgent    String?
+  deviceName   String? /// "Chrome · Windows"
+  ip           String?
+  createdAt    DateTime  @default(now())
+  lastActiveAt DateTime  @default(now())
+  expiresAt    DateTime
+  revokedAt    DateTime?
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([userId, revokedAt])
+}
+
+// ─── Gamification ───────────────────────────────────────────────────────────
+
+enum XpReason {
+  LOGIN_BONUS
+  STREAK_BONUS
+  EXERCISE
+  DAILY_QUIZ
+  DAILY_PROBLEM
+  IQ_TEST
+  ADMIN_ADJUST
+}
+
+/// The only way XP changes. User.xp is a cached sum, updated in the same transaction.
+model XpEvent {
+  id        String   @id @default(cuid())
+  userId    String
+  tenantId  String
+  amount    Int
+  reason    XpReason
+  refId     String?
+  createdAt DateTime @default(now())
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([tenantId, createdAt])
+}
+
+enum DailyKind {
+  LOGIN
+  QUIZ
+  PROBLEM
+  IQ
+}
+
+model DailyClaim {
+  userId    String
+  day       DateTime  @db.Date /// Asia/Tashkent calendar day
+  kind      DailyKind
+  createdAt DateTime  @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, day, kind])
+}
+
+enum Board {
+  XP
+  IQ
+}
+
+/// Weekly leaderboard rows; `week` is the Monday (Asia/Tashkent) the week starts on.
+model WeeklyScore {
+  userId   String
+  tenantId String
+  week     DateTime @db.Date
+  board    Board
+  value    Float    @default(0)
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+
+  @@id([userId, tenantId, week, board])
+  @@index([tenantId, week, board, value(sort: Desc)])
+}
+
+// ─── Deferred infrastructure (tables exist, features switched off) ─────────
+
+enum OtpPurpose {
+  VERIFY_PHONE
+  RESET_PASSWORD
+}
+
+model OtpCode {
+  id        String     @id @default(cuid())
+  phone     String
+  codeHash  String
+  purpose   OtpPurpose
+  attempts  Int        @default(0)
+  expiresAt DateTime
+  usedAt    DateTime?
+  createdAt DateTime   @default(now())
+
+  @@index([phone, purpose, createdAt])
+}
+
+/// Fixed-window rate limiting (Postgres implementation; Redis later).
+model RateLimitHit {
+  key         String
+  windowStart DateTime
+  count       Int      @default(1)
+
+  @@id([key, windowStart])
+  @@index([windowStart])
+}

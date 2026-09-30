@@ -1,0 +1,107 @@
+{
+  "meta": {
+    "title": "Gamify — dasturlashni oʻyin orqali oʻrganing",
+    "description": "HTML, CSS, JavaScript, TypeScript va React boʻyicha aynan kerakli mavzuni mashq qiling: XP, streak, reyting va musobaqalar."
+  },
+  "nav": {
+    "login": "Kirish",
+    "register": "Roʻyxatdan oʻtish",
+    "dashboard": "Bosh sahifa",
+    "leaderboard": "Reyting",
+    "profile": "Profil",
+    "devices": "Qurilmalar",
+    "logout": "Chiqish"
+  },
+  "landing": {
+    "badge": "Dasturlash mashgʻulotlari — oʻyin shaklida",
+    "title": "Aynan qiynalayotgan mavzuingizni mashq qiling",
+    "subtitle": "useState tushunarsizmi? Faqat shu mavzuni tanlang va toʻliq oʻzlashtirguningizcha mashq qiling. Har bir toʻgʻri javob — XP, har kungi mashq — streak.",
+    "cta": "Bepul boshlash",
+    "ctaSecondary": "Menda akkaunt bor",
+    "howTitle": "Qanday ishlaydi",
+    "steps": {
+      "pick": { "title": "Mavzuni tanlang", "text": "HTML, CSS, JS, TS, React — kerakli mavzuni bitta bosishda oching." },
+      "drill": { "title": "Mashq qiling", "text": "Qisqa topshiriqlar, kod yozish, xatoni topish. Daraja sizga moslashadi." },
+      "earn": { "title": "XP toʻplang", "text": "Kunlik bonus, streak, kunlik viktorina va IQ testlar." },
+      "climb": { "title": "Reytingda koʻtariling", "text": "Haftalik ligalar, duellar va doʻstlar bilan musobaqa." }
+    },
+    "tracksTitle": "Yoʻnalishlar",
+    "centersTitle": "Oʻquv markazlari uchun",
+    "centersText": "Oʻz subdomeningiz (markaz.gamify.uz), logotip va ranglar, oʻquvchilar statistikasi, uyga vazifalar, hisobotlar va markazlararo musobaqalar.",
+    "centersCta": "Bogʻlanish",
+    "aimTitle": "Maqsadimiz",
+    "aimText": "Oʻzbekistondagi har bir oʻquvchi dasturlashni zerikmasdan, har kuni ozgina va aniq maqsad bilan mashq qilsin."
+  },
+  "auth": {
+    "loginTitle": "Xush kelibsiz!",
+    "loginSubtitle": "Telefon raqamingiz yoki foydalanuvchi nomingiz bilan kiring",
+    "registerTitle": "Akkaunt yarating",
+    "registerSubtitle": "Bir daqiqada roʻyxatdan oʻting va mashqni boshlang",
+    "phone": "Telefon raqami",
+    "phonePlaceholder": "+998 90 123 45 67",
+    "username": "Foydalanuvchi nomi",
+    "usernameHint": "3–20 ta belgi: lotin harflari, raqamlar va _",
+    "password": "Parol",
+    "passwordHint": "Kamida 8 ta belgi",
+    "identifier": "Telefon yoki foydalanuvchi nomi",
+    "submitLogin": "Kirish",
+    "submitRegister": "Roʻyxatdan oʻtish",
+    "pending": "Kuting…",
+    "noAccount": "Akkauntingiz yoʻqmi?",
+    "haveAccount": "Akkauntingiz bormi?",
+    "forgotPassword": "Parolni unutdingizmi? Oʻquv markazingiz administratori yoki qoʻllab-quvvatlash xizmatiga murojaat qiling.",
+    "errors": {
+      "required": "Bu maydon toʻldirilishi shart",
+      "usernameFormat": "3–20 ta belgi: lotin harflari, raqamlar va _",
+      "passwordTooShort": "Parol kamida 8 ta belgidan iborat boʻlishi kerak",
+      "passwordTooLong": "Parol juda uzun",
+      "invalidPhone": "Telefon raqami notoʻgʻri. Masalan: +998 90 123 45 67",
+      "phoneTaken": "Bu telefon raqami allaqachon roʻyxatdan oʻtgan",
+      "usernameTaken": "Bu foydalanuvchi nomi band",
+      "alreadyTaken": "Telefon raqami yoki foydalanuvchi nomi band",
+      "invalidCredentials": "Login yoki parol notoʻgʻri",
+      "tooManyAttempts": "Juda koʻp urinish. Birozdan soʻng qayta urinib koʻring.",
+      "registrationClosed": "Bu platformada roʻyxatdan oʻtish yopiq. Akkauntni oʻquv markazingiz administratori yaratadi.",
+      "notAMember": "Siz bu oʻquv markazining aʼzosi emassiz"
+    }
+  },
+  "dashboard": {
+    "greeting": "Salom, {username}!",
+    "subtitle": "Bugun ham ozgina mashq — katta natija.",
+    "level": "{level}-daraja",
+    "xpToNext": "Keyingi darajagacha {xp} XP",
+    "streakLabel": "🔥 Streak",
+    "streak": "{count} kun",
+    "longestStreak": "Eng uzun: {count} kun",
+    "rank": "Reyting",
+    "rankValue": "#{rank}",
+    "noRank": "—",
+    "dailyBonus": {
+      "title": "Kunlik bonus",
+      "text": "Har kuni kiring — bonus 7 kun davomida oʻsib boradi.",
+      "claim": "+{xp} XP olish",
+      "claimed": "Bugungi bonus olindi ✓",
+      "day": "{day}-kun"
+    },
+    "comingSoon": "Tez orada",
+    "dailyQuiz": "Kunlik viktorina",
+    "dailyProblem": "Kunlik masala",
+    "iqTest": "IQ test",
+    "weeklyXp": "Bu hafta: {xp} XP"
+  },
+  "devices": {
+    "title": "Faol qurilmalar",
+    "subtitle": "Akkauntingizga kirilgan barcha qurilmalar. Tanimagan qurilmangizdan darhol chiqing.",
+    "thisDevice": "Shu qurilma",
+    "unknownDevice": "Nomaʼlum qurilma",
+    "lastActive": "Oxirgi faollik: {time}",
+    "signedIn": "Kirilgan: {time}",
+    "revoke": "Chiqarish",
+    "revokeAll": "Boshqa barcha qurilmalardan chiqish",
+    "onlyThis": "Faqat shu qurilmada kirilgan."
+  },
+  "notFound": {
+    "title": "Sahifa topilmadi",
+    "back": "Bosh sahifaga qaytish"
+  }
+}

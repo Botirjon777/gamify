@@ -1,36 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# gamify
 
-## Getting Started
+Gamified platform for practicing web development (HTML, CSS, JS, TS, React…) one skill at a time.
+B2C at `gamify.uz`, white-label for study centers at `<center>.gamify.uz`. See [PLAN.md](PLAN.md).
 
-First, run the development server:
+**Stack:** Next.js 16 (App Router) · TypeScript · PostgreSQL · Prisma 7 · Tailwind 4 · Zustand · next-intl
+
+## Getting started
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
+pnpm install
+cp .env.example .env          # set DATABASE_URL
+pnpm prisma dev --name gamify --detach   # optional: local Postgres, put its URL in .env
+pnpm db:migrate               # apply migrations (dev)
+pnpm db:seed                  # default tenant "gamify" + example tenant "demo"
 pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Main site: http://localhost:3000
+- Study center example: http://demo.localhost:3000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script | What it does |
+|---|---|
+| `pnpm dev` | Dev server |
+| `pnpm typecheck` / `pnpm lint` | Checks |
+| `pnpm db:migrate` | Create/apply migrations (**dev databases only**) |
+| `pnpm db:deploy` | Apply existing migrations (production) |
+| `pnpm db:seed` | Seed tenants |
 
-## Learn More
+## Project layout
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```
+src/app/[locale]/   routes: (marketing) landing, (auth) login/register, (app) dashboard & settings
+src/features/       feature modules (auth, gamification, …)
+src/lib/            db (tenant-scoped Prisma), auth/sessions, tenant, leaderboard, rate-limit, cache, sms
+src/config/features.ts   feature flags (SMS OTP, Redis, locales)
+messages/uz.json    all UI text (Uzbek)
+prisma/             schema, migrations, seed
+```
