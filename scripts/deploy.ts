@@ -1,0 +1,213 @@
+/**
+ * Deploy Zukkolar to the VPS.
+ *
+ *   pnpm deploy:prod              build → upload → switch release → health check (auto-rollback on failure)
+ *   pnpm deploy:prod --setup      first time: server user/folders/cert/systemd/nginx + write shared/.env
+ *   pnpm deploy:prod --migrate    also apply pending Prisma migrations to the production DB
+ *   pnpm deploy:prod --skip-build reuse the last build
+ *   pnpm deploy:prod --dry-run    build + assemble only (test the bundle locally)
+ *
+ * SSH credentials come from .env.vps (VPS_IP, VPS_SSH_PORT, VPS_SSH_USER, VPS_SSH_PASSWORD) — never committed.
+ * The production DATABASE_URL comes from .env (PRODUCTION_DATABASE_URL, 127.0.0.1 → used on the server).
+ *
+ * Layout on the server (mirrors the hotel sites):
+ *   /srv/zukkolar/releases/<id>/   one folder per deploy (last 3 kept)
+ *   /srv/zukkolar/current          → symlink to the live release
+ *   /srv/zukkolar/shared/.env      secrets, never overwritten by a deploy
+ */
+import { execSync } from "node:child_process";
+import { cpSync, existsSync, mkdirSync, readFileSync, rmSync } from "node:fs";
+import { join } from "node:path";
+import { parse } from "dotenv";
+import { Client, type SFTPWrapper } from "ssh2";
+
+const ROOT = process.cwd();
+const OUT = join(ROOT, ".deploy");
+const APP = join(OUT, "app");
+const TARBALL = join(OUT, "release.tgz");
+const REMOTE = "/srv/zukkolar";
+const PORT = 3010;
+
+const args = new Set(process.argv.slice(2));
+const step = (msg: string) => console.log(`\n▶ ${msg}`);
+
+function readEnv(file: string) {
+  if (!existsSync(file)) throw new Error(`${file} not found`);
+  return parse(readFileSync(file));
+}
+
+// ─── local build ────────────────────────────────────────────────────────────
+
+function build() {
+  if (!args.has("--skip-build")) {
+    step("Building (next build, standalone)");
+    execSync("pnpm build", { stdio: "inherit", env: { ...process.env, NODE_ENV: "production" } });
+  }
+  step("Assembling release");
+  rmSync(OUT, { recursive: true, force: true });
+  mkdirSync(OUT);
+  // dereference: Turbopack links some packages from .next/node_modules — ship the real files.
+  cpSync(join(ROOT, ".next/standalone"), APP, { recursive: true, dereference: true });
+  // Next copies .env into standalone — secrets must never ship in the bundle.
+  for (const f of [".env", ".env.local", ".env.production", ".env.vps"]) rmSync(join(APP, f), { force: true });
+  cpSync(join(ROOT, ".next/static"), join(APP, ".next/static"), { recursive: true });
+  cpSync(join(ROOT, "public"), join(APP, "public"), { recursive: true });
+  // Relative paths: GNU tar (Git Bash) would read "D:\…" as a remote host.
+  execSync("tar -czf release.tgz -C app .", { stdio: "inherit", cwd: OUT });
+  console.log(`  ${(readFileSync(TARBALL).length / 1024 / 1024).toFixed(1)} MB`);
+}
+
+// ─── ssh helpers ────────────────────────────────────────────────────────────
+
+function connect(vps: Record<string, string>): Promise<Client> {
+  return new Promise((resolve, reject) => {
+    const c = new Client();
+    c.on("ready", () => resolve(c))
+      .on("error", reject)
+      .connect({
+        host: vps.VPS_IP,
+        port: Number(vps.VPS_SSH_PORT ?? 22),
+        username: vps.VPS_SSH_USER,
+        password: vps.VPS_SSH_PASSWORD,
+        readyTimeout: 20_000,
+      });
+  });
+}
+
+function exec(c: Client, cmd: string, { quiet = false } = {}): Promise<string> {
+  return new Promise((resolve, reject) => {
+    c.exec(cmd, (err, stream) => {
+      if (err) return reject(err);
+      let out = "";
+      stream
+        .on("close", (code: number) => (code === 0 ? resolve(out) : reject(new Error(`remote command failed (${code})\n${out}`))))
+        .on("data", (d: Buffer) => {
+          out += d;
+          if (!quiet) process.stdout.write(d);
+        })
+        .stderr.on("data", (d: Buffer) => {
+          out += d;
+          if (!quiet) process.stderr.write(d);
+        });
+    });
+  });
+}
+
+const sftp = (c: Client) => new Promise<SFTPWrapper>((res, rej) => c.sftp((e, s) => (e ? rej(e) : res(s))));
+
+function upload(s: SFTPWrapper, local: string, remote: string) {
+  return new Promise<void>((res, rej) => s.fastPut(local, remote, (e) => (e ? rej(e) : res())));
+}
+
+function writeRemote(s: SFTPWrapper, remote: string, content: string, mode: number) {
+  return new Promise<void>((res, rej) => s.writeFile(remote, content, { mode }, (e) => (e ? rej(e) : res())));
+}
+
+// ─── steps ──────────────────────────────────────────────────────────────────
+
+async function setup(c: Client, s: SFTPWrapper) {
+  step("Server setup (user, folders, certificate, systemd, nginx)");
+  await exec(c, "mkdir -p /tmp/zukkolar-setup", { quiet: true });
+  for (const f of ["setup-server.sh", "zukkolar.service", "nginx-zukkolar.conf"]) {
+    await upload(s, join(ROOT, "deploy", f), `/tmp/zukkolar-setup/${f}`);
+  }
+  await exec(c, "bash /tmp/zukkolar-setup/setup-server.sh && rm -rf /tmp/zukkolar-setup");
+
+  // shared/.env — written once; later edits on the server are kept.
+  const exists = await exec(c, `test -f ${REMOTE}/shared/.env && echo yes || echo no`, { quiet: true });
+  if (exists.trim() === "yes" && !args.has("--force-env")) {
+    console.log("  shared/.env exists — kept (use --force-env to overwrite)");
+    return;
+  }
+  const local = readEnv(join(ROOT, ".env"));
+  if (!local.PRODUCTION_DATABASE_URL) throw new Error("PRODUCTION_DATABASE_URL missing in .env");
+  const env = [
+    "NODE_ENV=production",
+    `PORT=${PORT}`,
+    // Must be "localhost" (not 127.0.0.1) — see src/proxy.ts. On this VPS localhost resolves to 127.0.0.1 only.
+    "HOSTNAME=localhost",
+    `DATABASE_URL="${local.PRODUCTION_DATABASE_URL}"`,
+    "DATABASE_POOL_MAX=5",
+    "ROOT_DOMAIN=zukkolar.uz",
+    "DEFAULT_TENANT_SLUG=gamify",
+    "FEATURE_SMS_OTP=false",
+    "FEATURE_REDIS=false",
+    "",
+  ].join("\n");
+  await writeRemote(s, `${REMOTE}/shared/.env`, env, 0o600);
+  await exec(c, `chown zukkolar:zukkolar ${REMOTE}/shared/.env && chmod 600 ${REMOTE}/shared/.env`, { quiet: true });
+  console.log("  shared/.env written (600, owner zukkolar)");
+}
+
+function migrate(vps: Record<string, string>) {
+  step("Applying Prisma migrations to production");
+  const local = readEnv(join(ROOT, ".env"));
+  const url = new URL(local.PRODUCTION_DATABASE_URL);
+  url.hostname = vps.PG_HOST ?? vps.VPS_IP; // remote access from this machine (pg_hba allows it over SSL)
+  url.searchParams.set("sslmode", "require");
+  execSync("pnpm prisma migrate deploy", { stdio: "inherit", env: { ...process.env, DATABASE_URL: url.toString() } });
+}
+
+async function release(c: Client, s: SFTPWrapper) {
+  const id = new Date().toISOString().replace(/[-:T]/g, "").slice(0, 14);
+  step(`Uploading release ${id}`);
+  await upload(s, TARBALL, `${REMOTE}/releases/${id}.tgz`);
+
+  step("Switching release + health check");
+  await exec(
+    c,
+    `set -e
+cd ${REMOTE}
+mkdir releases/${id}
+tar -xzf releases/${id}.tgz -C releases/${id} && rm releases/${id}.tgz
+chown -R zukkolar:zukkolar releases/${id}
+# Previous release (only if "current" is a real symlink to an existing directory)
+PREV=""
+if [ -L current ] && [ -d "$(readlink current)" ]; then PREV=$(readlink current); fi
+ln -sfn ${REMOTE}/releases/${id} current
+systemctl restart zukkolar
+ok=0
+for i in $(seq 1 30); do
+  if curl -fsS -o /dev/null -H "Host: zukkolar.uz" -H "X-Forwarded-Proto: https" http://127.0.0.1:${PORT}/login; then ok=1; break; fi
+  sleep 1
+done
+if [ "$ok" != 1 ]; then
+  echo "✘ health check failed — rolling back"
+  journalctl -u zukkolar -n 30 --no-pager || true
+  if [ -n "$PREV" ] && [ "$PREV" != "${REMOTE}/releases/${id}" ]; then
+    ln -sfn "$PREV" current; systemctl restart zukkolar; echo "rolled back to $PREV"
+  else
+    echo "no previous release to roll back to"
+  fi
+  exit 1
+fi
+echo "✔ healthy: $(curl -s -o /dev/null -w '%{http_code}' -H 'Host: zukkolar.uz' http://127.0.0.1:${PORT}/) on :${PORT}"
+# keep the 3 newest releases
+ls -1dt releases/*/ | tail -n +4 | xargs -r rm -rf
+echo "releases: $(ls releases | tr '\\n' ' ')"`,
+  );
+}
+
+async function main() {
+  const vps = readEnv(join(ROOT, ".env.vps"));
+  build();
+  if (args.has("--dry-run")) return console.log(`
+✔ Dry run: release assembled in ${APP}`);
+  if (args.has("--migrate")) migrate(vps);
+
+  step(`Connecting to ${vps.VPS_IP}`);
+  const c = await connect(vps);
+  try {
+    const s = await sftp(c);
+    if (args.has("--setup")) await setup(c, s);
+    await release(c, s);
+  } finally {
+    c.end();
+  }
+  console.log("\n✔ Deployed");
+}
+
+main().catch((e) => {
+  console.error(`\n✘ ${e.message}`);
+  process.exit(1);
+});

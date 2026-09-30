@@ -1,0 +1,22 @@
+[Unit]
+Description=Zukkolar (Next.js)
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=zukkolar
+Group=zukkolar
+WorkingDirectory=/srv/zukkolar/current
+EnvironmentFile=/srv/zukkolar/shared/.env
+ExecStart=/usr/bin/node server.js
+Restart=always
+RestartSec=3
+# Same limits as the hotel sites on this VPS — keep the neighbours safe.
+MemoryMax=600M
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=full
+ProtectHome=true
+
+[Install]
+WantedBy=multi-user.target

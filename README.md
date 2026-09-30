@@ -39,3 +39,18 @@ src/config/features.ts   feature flags (SMS OTP, Redis, locales)
 messages/uz.json    all UI text (Uzbek)
 prisma/             schema, migrations, seed
 ```
+
+## Deploying (VPS)
+
+Production runs on the VPS next to the hotel sites: `zukkolar.service` (systemd, user `zukkolar`, port 3010) behind nginx
+(`zukkolar.uz` + `*.zukkolar.uz` for study centers), traffic via Cloudflare. Config lives in [deploy/](deploy/).
+
+```bash
+pnpm deploy:prod                # build locally → upload → switch release → health check (auto-rollback)
+pnpm deploy:prod --migrate      # + apply new Prisma migrations to the production DB
+pnpm deploy:prod --setup        # first time only: user, folders, certificate, systemd unit, nginx site, shared/.env
+pnpm deploy:prod --dry-run      # build + assemble only, to test the bundle locally
+```
+
+Needs `.env.vps` (SSH credentials) and `PRODUCTION_DATABASE_URL` in `.env` — both git-ignored.
+The server's `/srv/zukkolar/shared/.env` must keep `HOSTNAME=localhost` (see `src/proxy.ts`).
