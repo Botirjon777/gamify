@@ -74,6 +74,8 @@ export const getCurrentSession = cache(async () => {
 
   const now = Date.now();
   if (!session || session.revokedAt || session.expiresAt.getTime() < now) return null;
+  // Blocked by an admin → treated as logged out everywhere.
+  if (session.user.blockedAt) return null;
   // A session only works on the tenant (subdomain) it was created on.
   if (session.tenantId !== tenant.id) return null;
 

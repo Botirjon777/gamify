@@ -68,12 +68,17 @@ model Membership {
 /// Users are global; they join tenants through Membership.
 model User {
   id                 String    @id @default(cuid())
-  phone              String    @unique /// E.164, +998XXXXXXXXX
+  /// E.164, +998XXXXXXXXX. Optional so staff accounts (admin) can exist without one.
+  phone              String?   @unique
+  /// Optional login e-mail (admin / staff accounts), stored lowercase.
+  email              String?   @unique
   phoneVerified      Boolean   @default(false) /// stays false until SMS OTP is enabled
   username           String    @unique /// stored lowercase
   passwordHash       String
   mustChangePassword Boolean   @default(false) /// set after an admin password reset
   isSuperAdmin       Boolean   @default(false)
+  /// Blocked by an admin: cannot log in, all sessions revoked.
+  blockedAt          DateTime?
   avatarSeed         String
   avatarConfig       Json?
   locale             String    @default("uz")
@@ -129,6 +134,7 @@ model User {
   badges                 UserBadge[]
   clanMembership         ClanMember?
   clanJoinRequests       ClanJoinRequest[]
+  payments               Payment[]
 
   @@index([xp(sort: Desc)])
   @@index([iqRating(sort: Desc)])
@@ -394,6 +400,59 @@ enum NotificationType {
   LEVEL_UP
   REFERRAL_JOINED
   REFERRAL_REWARD
+  PAYMENT_SUBMITTED /// to admins
+  PAYMENT_APPROVED
+  PAYMENT_REJECTED
+}
+
+// ─── Payments & admin ───────────────────────────────────────────────────────
+
+enum PaymentStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+enum PaymentMethod {
+  CARD_TRANSFER
+  CLICK
+  PAYME
+  CASH
+}
+
+/// A subscription purchase. Card transfers are checked and approved by an admin; approval activates the plan.
+model Payment {
+  id           String        @id @default(cuid())
+  userId       String
+  plan         UserPlan
+  months       Int
+  amountUzs    Int
+  method       PaymentMethod @default(CARD_TRANSFER)
+  /// What the user entered to identify the transfer (payer card last digits, time, transaction id…)
+  reference    String?
+  status       PaymentStatus @default(PENDING)
+  adminNote    String?
+  createdAt    DateTime      @default(now())
+  reviewedAt   DateTime?
+  reviewedById String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([status, createdAt])
+  @@index([userId, createdAt])
+}
+
+/// Every admin action, for accountability.
+model AdminAction {
+  id           String   @id @default(cuid())
+  adminId      String
+  action       String /// e.g. "user.block", "payment.approve"
+  targetUserId String?
+  data         Json?
+  createdAt    DateTime @default(now())
+
+  @@index([createdAt])
+  @@index([targetUserId])
 }
 
 model Notification {

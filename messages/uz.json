@@ -17,7 +17,8 @@
     "notifications": "Bildirishnomalar",
     "settings": "Sozlamalar",
     "plans": "Tariflar",
-    "more": "Yana"
+    "more": "Yana",
+    "admin": "Admin panel"
   },
   "landing": {
     "badge": "Dasturlash mashgʻulotlari — oʻyin shaklida",
@@ -80,7 +81,7 @@
     "usernameHint": "3–20 ta belgi: lotin harflari, raqamlar va _",
     "password": "Parol",
     "passwordHint": "Kamida 8 ta belgi",
-    "identifier": "Telefon yoki foydalanuvchi nomi",
+    "identifier": "Telefon, foydalanuvchi nomi yoki e-pochta",
     "submitLogin": "Kirish",
     "submitRegister": "Roʻyxatdan oʻtish",
     "pending": "Kuting…",
@@ -101,7 +102,8 @@
       "registrationClosed": "Bu platformada roʻyxatdan oʻtish yopiq. Akkauntni oʻquv markazingiz administratori yaratadi.",
       "notAMember": "Siz bu oʻquv markazining aʼzosi emassiz",
       "invalidReferral": "Bunday taklif kodi topilmadi",
-      "genderRequired": "Jinsingizni tanlang"
+      "genderRequired": "Jinsingizni tanlang",
+      "blocked": "Akkauntingiz bloklangan. Savollar boʻlsa, administratorga murojaat qiling."
     },
     "referral": "Taklif kodi (ixtiyoriy)",
     "referralHint": "Doʻstingiz kodi bilan darhol +50 XP olasiz",
@@ -316,7 +318,33 @@
       "badge": "Profilda {plan} belgisi"
     },
     "paymentSoon": "Toʻlov (Click, Payme) tez orada ulanadi. Hozircha tarifni administrator orqali faollashtirish mumkin.",
-    "contact": "Administratorga yozish"
+    "contact": "Administratorga yozish",
+    "pending": "Toʻlovingiz tekshirilmoqda",
+    "pendingText": "{plan} · {months} oy · {amount} soʻm. Administrator tasdiqlagach, tarif avtomatik faollashadi.",
+    "cancelRequest": "Soʻrovni bekor qilish",
+    "checkout": {
+      "title": "{plan} tarifiga oʻtish",
+      "period": "Muddat",
+      "months": "{count} oy",
+      "discount": "−{percent}%",
+      "total": "Jami",
+      "step1": "1. Quyidagi kartaga {amount} soʻm oʻtkazing",
+      "step2": "2. Toʻlovni aniqlash uchun maʼlumot kiriting",
+      "cardMissing": "Karta raqami hali sozlanmagan. Toʻlov uchun administratorga yozing:",
+      "reference": "Toʻlov maʼlumoti",
+      "referencePlaceholder": "Masalan: 8600 **** 1234 kartadan, 14:32 da",
+      "referenceHint": "Qaysi kartadan va qachon oʻtkazganingiz — admin shu boʻyicha tekshiradi",
+      "submit": "Toʻlovni yubordim",
+      "submitted": "Rahmat! Soʻrovingiz yuborildi. Tasdiqlangach, bildirishnoma olasiz.",
+      "copy": "Nusxa olish",
+      "copied": "Nusxa olindi",
+      "contact": "Savollar uchun: {contact}",
+      "errors": {
+        "invalid": "Maʼlumotlarni tekshiring (kamida 3 ta belgi)",
+        "pendingExists": "Sizda tekshirilayotgan toʻlov bor. Avval u koʻrib chiqiladi.",
+        "tooMany": "Juda koʻp urinish. Keyinroq qayta urining."
+      }
+    }
   },
   "friends": {
     "title": "Doʻstlar",
@@ -390,11 +418,23 @@
     "errors": {
       "locked": "Hali ochilmagan",
       "planRequired": "Bu uslub uchun yuqoriroq tarif kerak",
-      "invalid": "Notoʻgʻri qiymat"
+      "invalid": "Notoʻgʻri qiymat",
+      "wrongPassword": "Joriy parol notoʻgʻri",
+      "passwordTooShort": "Yangi parol kamida 8 ta belgidan iborat boʻlsin",
+      "passwordTooLong": "Parol juda uzun",
+      "samePassword": "Yangi parol eskisidan farq qilishi kerak",
+      "tooMany": "Juda koʻp urinish. Keyinroq qayta urining."
     },
     "gender": "Jins",
     "genderText": "Profil rasmingiz jinsingizga mos yaratiladi. Istalgan vaqtda oʻzgartirishingiz mumkin.",
-    "genderNotSet": "Hali tanlanmagan — tanlang, shunda rasmingiz mos boʻladi."
+    "genderNotSet": "Hali tanlanmagan — tanlang, shunda rasmingiz mos boʻladi.",
+    "password": "Parolni oʻzgartirish",
+    "currentPassword": "Joriy parol",
+    "newPassword": "Yangi parol",
+    "changePassword": "Parolni oʻzgartirish",
+    "passwordChanged": "Parol oʻzgartirildi. Boshqa qurilmalardagi sessiyalar yopildi.",
+    "mustChange": "Xavfsizlik uchun parolingizni oʻzgartiring.",
+    "mustChangeCta": "Hozir oʻzgartirish"
   },
   "notifications": {
     "title": "Bildirishnomalar",
@@ -410,7 +450,10 @@
       "BADGE_EARNED": "Yangi nishon: <b>{badge}</b>",
       "LEVEL_UP": "Tabriklaymiz! Siz {level}-darajaga chiqdingiz",
       "REFERRAL_JOINED": "<b>{username}</b> taklif kodingiz bilan roʻyxatdan oʻtdi",
-      "REFERRAL_REWARD": "<b>{username}</b> 3-darajaga yetdi — sizga +{xp} XP"
+      "REFERRAL_REWARD": "<b>{username}</b> 3-darajaga yetdi — sizga +{xp} XP",
+      "PAYMENT_SUBMITTED": "<b>{username}</b> {plan} tarifi uchun {amount} soʻm toʻlov yubordi",
+      "PAYMENT_APPROVED": "Toʻlovingiz tasdiqlandi — {plan} tarifi faollashtirildi",
+      "PAYMENT_REJECTED": "{plan} uchun toʻlovingiz rad etildi: {reason}"
     }
   },
   "clans": {
@@ -572,6 +615,141 @@
     "clan_champion": {
       "title": "Chempion",
       "text": "Klaningiz haftalik musobaqada 1-oʻrinni egallasin"
+    }
+  },
+  "admin": {
+    "title": "Admin panel",
+    "backToSite": "Saytga qaytish",
+    "nav": {
+      "dashboard": "Statistika",
+      "users": "Foydalanuvchilar",
+      "payments": "Toʻlovlar",
+      "audit": "Amallar tarixi"
+    },
+    "stats": {
+      "totalUsers": "Jami foydalanuvchilar",
+      "newToday": "Bugun roʻyxatdan oʻtdi",
+      "new7d": "Soʻnggi 7 kun",
+      "new30d": "Soʻnggi 30 kun",
+      "activeToday": "Bugun faol",
+      "active7d": "7 kunda faol",
+      "paidUsers": "Pullik tarifda",
+      "paidSplit": "Pro: {pro} · Diamond: {diamond}",
+      "pendingPayments": "Kutilayotgan toʻlovlar",
+      "revenueMonth": "Shu oy tushum",
+      "revenueTotal": "Jami: {amount} soʻm",
+      "attemptsToday": "Bugungi mashqlar",
+      "iqTested": "IQ test topshirgan",
+      "clans": "Klanlar",
+      "blocked": "Bloklangan"
+    },
+    "chart": {
+      "title": "Roʻyxatdan oʻtishlar",
+      "subtitle": "Soʻnggi 30 kun, kunlik",
+      "tooltip": "{date}: {count} ta",
+      "table": "Jadval koʻrinishi"
+    },
+    "som": "{amount} soʻm",
+    "users": {
+      "searchPlaceholder": "Ism, telefon yoki e-pochta…",
+      "filters": {
+        "all": "Hammasi",
+        "paid": "Pullik",
+        "blocked": "Bloklangan",
+        "admins": "Adminlar"
+      },
+      "columns": {
+        "user": "Foydalanuvchi",
+        "contact": "Aloqa",
+        "plan": "Tarif",
+        "level": "Daraja",
+        "joined": "Qoʻshilgan",
+        "active": "Oxirgi faollik"
+      },
+      "total": "{count} ta foydalanuvchi",
+      "empty": "Hech kim topilmadi",
+      "prev": "Oldingi",
+      "next": "Keyingi",
+      "page": "{page} / {pages}",
+      "blockedBadge": "Bloklangan",
+      "adminBadge": "Admin",
+      "never": "—"
+    },
+    "user": {
+      "back": "Foydalanuvchilar",
+      "info": "Maʼlumotlar",
+      "phone": "Telefon",
+      "email": "E-pochta",
+      "gender": "Jins",
+      "joined": "Roʻyxatdan oʻtgan",
+      "lastActive": "Oxirgi faollik",
+      "stats": "XP: {xp} · daraja {level} · mashqlar: {attempts} · IQ testlar: {iq} · nishonlar: {badges}",
+      "clan": "Klan",
+      "plan": "Tarif",
+      "planUntil": "{date} gacha",
+      "setPlan": "Tarifni oʻrnatish",
+      "days": "kun",
+      "apply": "Saqlash",
+      "block": "Bloklash",
+      "unblock": "Blokdan chiqarish",
+      "blockConfirm": "Foydalanuvchi bloklansinmi? Barcha qurilmalardan chiqariladi.",
+      "resetPassword": "Parolni tiklash",
+      "resetConfirm": "Yangi vaqtinchalik parol yaratilsinmi? Foydalanuvchi barcha qurilmalardan chiqariladi.",
+      "tempPassword": "Vaqtinchalik parol (faqat bir marta koʻrsatiladi):",
+      "revokeSessions": "Barcha sessiyalarni yopish",
+      "sessions": "Faol sessiyalar: {count}",
+      "xp": "XP qoʻshish / ayirish",
+      "xpAmount": "Miqdor (masalan 100 yoki -50)",
+      "xpReason": "Sabab",
+      "payments": "Toʻlovlar",
+      "noPayments": "Toʻlovlar yoʻq",
+      "xpEvents": "Soʻnggi XP",
+      "history": "Admin amallari",
+      "noHistory": "Hali amallar yoʻq",
+      "done": "Bajarildi"
+    },
+    "payments": {
+      "tabs": {
+        "PENDING": "Kutilmoqda",
+        "APPROVED": "Tasdiqlangan",
+        "REJECTED": "Rad etilgan"
+      },
+      "empty": "Toʻlovlar yoʻq",
+      "reference": "Maʼlumot",
+      "approve": "Tasdiqlash",
+      "reject": "Rad etish",
+      "rejectReason": "Rad etish sababi",
+      "rejectPlaceholder": "Masalan: toʻlov topilmadi",
+      "note": "Izoh",
+      "current": "Hozirgi tarif: {plan}",
+      "reviewed": "{date} · {note}"
+    },
+    "errors": {
+      "notPending": "Bu toʻlov allaqachon koʻrib chiqilgan",
+      "reasonRequired": "Sababni yozing",
+      "invalid": "Notoʻgʻri qiymat",
+      "self": "Oʻzingizga bu amalni qila olmaysiz",
+      "adminTarget": "Boshqa adminga bu amalni qila olmaysiz",
+      "notFound": "Topilmadi"
+    },
+    "audit": {
+      "empty": "Hali amallar yoʻq",
+      "by": "{admin}",
+      "target": "→ {user}"
+    },
+    "actions": {
+      "payment": {
+        "approve": "Toʻlovni tasdiqladi",
+        "reject": "Toʻlovni rad etdi"
+      },
+      "user": {
+        "setPlan": "Tarifni oʻzgartirdi",
+        "block": "Blokladi",
+        "unblock": "Blokdan chiqardi",
+        "resetPassword": "Parolni tikladi",
+        "adjustXp": "XP ni oʻzgartirdi",
+        "revokeSessions": "Sessiyalarni yopdi"
+      }
     }
   }
 }

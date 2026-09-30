@@ -15,6 +15,9 @@ export interface NotificationData {
   LEVEL_UP: { level: number };
   REFERRAL_JOINED: { username: string };
   REFERRAL_REWARD: { username: string; xp: number };
+  PAYMENT_SUBMITTED: { username: string; plan: string; amount: number };
+  PAYMENT_APPROVED: { plan: string; until: string };
+  PAYMENT_REJECTED: { plan: string; reason: string };
 }
 
 export async function notify<T extends NotificationType>(db: Db, userId: string, type: T, data: NotificationData[T]) {

@@ -1,4 +1,7 @@
-import { Check, Gem, Rocket, Sparkles, Zap } from "lucide-react";
+import { Check, Clock, Gem, Rocket, Sparkles, Zap } from "lucide-react";
+import { Link } from "@/i18n/navigation";
+import { db } from "@/lib/db";
+import { cancelPaymentRequest } from "@/features/payments/actions";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { requireSession } from "@/lib/auth/session";
 import { PageHeader } from "@/components/page-header";
@@ -17,10 +20,30 @@ export default async function PlansPage({ params }: PageProps<"/[locale]/plans">
   const format = await getFormatter();
   const { user } = await requireSession();
   const current = effectivePlan(user);
+  const pendingPayment = await db.payment.findFirst({ where: { userId: user.id, status: "PENDING" } });
 
   return (
     <div className="flex flex-col gap-8">
       <PageHeader title={t("title")} subtitle={t("subtitle")} />
+
+      {pendingPayment && (
+        <section className="flex flex-col gap-3 rounded-2xl border border-xp/40 bg-xp/10 p-4 sm:flex-row sm:items-center">
+          <Clock className="size-6 shrink-0 text-xp" />
+          <div className="flex-1">
+            <p className="font-semibold">{t("pending")}</p>
+            <p className="text-sm text-muted">
+              {t("pendingText", {
+                plan: t(`names.${pendingPayment.plan}`),
+                months: pendingPayment.months,
+                amount: pendingPayment.amountUzs.toLocaleString("uz-UZ"),
+              })}
+            </p>
+          </div>
+          <form action={cancelPaymentRequest.bind(null, pendingPayment.id)}>
+            <button className="text-sm font-semibold text-muted hover:text-danger">{t("cancelRequest")}</button>
+          </form>
+        </section>
+      )}
 
       <div className="grid gap-5 pt-3 lg:grid-cols-3">
         {PLAN_ORDER.map((plan) => {
@@ -74,14 +97,14 @@ export default async function PlansPage({ params }: PageProps<"/[locale]/plans">
                     )}
                   </p>
                 ) : plan !== "FREE" ? (
-                  <a
-                    href="https://t.me/"
+                  <Link
+                    href={`/plans/checkout?plan=${plan}`}
                     className={`block rounded-xl px-4 py-3 text-center text-sm font-bold transition ${
                       plan === "PRO" ? "bg-white text-brand hover:bg-white/90" : "bg-grad-iq text-white hover:brightness-110"
                     }`}
                   >
                     {t("choose")}
-                  </a>
+                  </Link>
                 ) : null}
               </div>
             </section>
@@ -89,7 +112,7 @@ export default async function PlansPage({ params }: PageProps<"/[locale]/plans">
         })}
       </div>
 
-      <p className="rounded-2xl border border-dashed border-border bg-surface p-4 text-center text-sm text-muted">{t("paymentSoon")}</p>
+
     </div>
   );
 }

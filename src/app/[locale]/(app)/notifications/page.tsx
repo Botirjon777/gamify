@@ -1,4 +1,4 @@
-import { Award, Bell, Check, PartyPopper, Shield, ShieldCheck, ShieldX, Trophy, UserCheck, UserPlus, Gift, type LucideIcon } from "lucide-react";
+import { Award, BadgeCheck, Ban, Bell, Wallet, Check, PartyPopper, Shield, ShieldCheck, ShieldX, Trophy, UserCheck, UserPlus, Gift, type LucideIcon } from "lucide-react";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import type { NotificationType } from "@/generated/prisma/enums";
 import { Link } from "@/i18n/navigation";
@@ -19,6 +19,9 @@ const STYLE: Record<NotificationType, { icon: LucideIcon; gradient: string; href
   LEVEL_UP: { icon: PartyPopper, gradient: "bg-grad-brand", href: () => "/dashboard" },
   REFERRAL_JOINED: { icon: Gift, gradient: "bg-grad-success", href: (d) => `/u/${d.username}` },
   REFERRAL_REWARD: { icon: Gift, gradient: "bg-grad-gold", href: (d) => `/u/${d.username}` },
+  PAYMENT_SUBMITTED: { icon: Wallet, gradient: "bg-grad-xp", href: () => "/admin/payments" },
+  PAYMENT_APPROVED: { icon: BadgeCheck, gradient: "bg-grad-success", href: () => "/plans" },
+  PAYMENT_REJECTED: { icon: Ban, gradient: "bg-grad-streak", href: () => "/plans" },
 };
 
 export default async function NotificationsPage({ params }: PageProps<"/[locale]/notifications">) {

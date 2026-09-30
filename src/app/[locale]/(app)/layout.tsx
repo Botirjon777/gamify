@@ -1,4 +1,4 @@
-import { Bell, Crown, LogOut, Settings } from "lucide-react";
+import { Bell, Crown, KeyRound, LogOut, Settings, ShieldCheck } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/logo";
@@ -16,6 +16,7 @@ import { RightRail } from "./right-rail";
 export default async function AppLayout({ children }: LayoutProps<"/[locale]">) {
   const { user, tenant } = await requireSession();
   const t = await getTranslations("nav");
+  const tSettings = await getTranslations("settings");
   const [unread, friendRequests, clanRequests] = await Promise.all([
     unreadCount(user.id),
     countIncomingRequests(user.id),
@@ -36,6 +37,12 @@ export default async function AppLayout({ children }: LayoutProps<"/[locale]">) 
         </nav>
 
         <div className="mt-auto flex flex-col gap-1">
+          {user.isSuperAdmin && (
+            <Link href="/admin" className="flex items-center gap-3 rounded-xl bg-grad-dark px-3 py-2.5 font-semibold text-white hover:brightness-110">
+              <ShieldCheck className="size-5" />
+              {t("admin")}
+            </Link>
+          )}
           <Link href="/plans" className="flex items-center gap-3 rounded-xl px-3 py-2.5 font-semibold text-muted hover:bg-background hover:text-foreground">
             <Crown className="size-5 text-xp" />
             {t("plans")}
@@ -94,7 +101,19 @@ export default async function AppLayout({ children }: LayoutProps<"/[locale]">) 
           </div>
         </header>
 
-        <main className="w-full flex-1 px-4 pb-28 pt-6 sm:px-6 md:pb-10 lg:px-8 lg:pt-8">{children}</main>
+        <main className="w-full flex-1 px-4 pb-28 pt-6 sm:px-6 md:pb-10 lg:px-8 lg:pt-8">
+          {/* After an admin password reset (or the seeded admin's default password) */}
+          {user.mustChangePassword && (
+            <div className="mb-6 flex flex-col gap-3 rounded-2xl border border-danger/30 bg-danger/5 p-4 sm:flex-row sm:items-center">
+              <KeyRound className="size-5 shrink-0 text-danger" />
+              <p className="flex-1 text-sm font-semibold">{tSettings("mustChange")}</p>
+              <Link href="/settings#password" className="text-sm font-bold text-danger hover:underline">
+                {tSettings("mustChangeCta")} →
+              </Link>
+            </div>
+          )}
+          {children}
+        </main>
 
         {/* Mobile bottom tab bar */}
         <nav className="fixed inset-x-0 bottom-0 z-20 flex border-t border-border bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden">

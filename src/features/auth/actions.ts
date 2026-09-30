@@ -134,13 +134,18 @@ export async function login(_prev: FormState, formData: FormData): Promise<FormS
   ]);
   if (!byIp.ok || !byId.ok) return { error: "tooManyAttempts", values };
 
+  // Log in with a phone number, an e-mail (staff / admin accounts) or a username.
   const phone = looksLikePhone(identifier) ? normalizePhone(identifier) : null;
-  const user = await db.user.findUnique({
-    where: phone ? { phone } : { username: identifier.toLowerCase() },
-  });
+  const where = phone
+    ? { phone }
+    : identifier.includes("@")
+      ? { email: identifier.trim().toLowerCase() }
+      : { username: identifier.toLowerCase() };
+  const user = await db.user.findUnique({ where });
 
   const passwordOk = await verifyPassword(user?.passwordHash ?? (await getDummyHash()), password);
   if (!user || !passwordOk) return { error: "invalidCredentials", values };
+  if (user.blockedAt) return { error: "blocked", values };
 
   const tenant = await getCurrentTenant();
   if (isDefaultTenant(tenant)) {
