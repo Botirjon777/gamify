@@ -96,6 +96,8 @@ model User {
   xpEvents     XpEvent[]
   dailyClaims  DailyClaim[]
   weeklyScores WeeklyScore[]
+  attempts     Attempt[]
+  masteries    SkillMastery[]
 
   @@index([xp(sort: Desc)])
   @@index([iqRating(sort: Desc)])
@@ -119,6 +121,117 @@ model Session {
   tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
 
   @@index([userId, revokedAt])
+}
+
+// ─── Learning content (synced from /content by `pnpm content:sync`) ────────
+
+enum ContentStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+/// e.g. React. `tenantId = null` → global content made by us.
+model Track {
+  id          String        @id @default(cuid())
+  slug        String        @unique
+  tenantId    String?
+  title       Json /// { "uz": "..." }
+  description Json?
+  icon        String?
+  order       Int           @default(0)
+  status      ContentStatus @default(PUBLISHED)
+  modules     Module[]
+}
+
+/// e.g. React → "State"
+model Module {
+  id      String  @id @default(cuid())
+  trackId String
+  slug    String
+  title   Json
+  order   Int     @default(0)
+  track   Track   @relation(fields: [trackId], references: [id], onDelete: Cascade)
+  skills  Skill[]
+
+  @@unique([trackId, slug])
+}
+
+/// The unit you drill, e.g. "useState". Slugs are globally unique → /learn/react/use-state
+model Skill {
+  id          String         @id @default(cuid())
+  moduleId    String
+  slug        String         @unique
+  title       Json
+  description Json?
+  order       Int            @default(0)
+  module      Module         @relation(fields: [moduleId], references: [id], onDelete: Cascade)
+  exercises   Exercise[]
+  masteries   SkillMastery[]
+}
+
+enum ExerciseType {
+  CHOICE /// pick one option
+  OUTPUT /// predict what the code prints / renders
+  FILL /// fill the ___ blanks in code
+  ORDER /// put code lines in the right order
+}
+
+model Exercise {
+  id          String        @id @default(cuid())
+  key         String        @unique /// stable id from the content file, e.g. "use-state-001"
+  skillId     String
+  tenantId    String?
+  type        ExerciseType
+  difficulty  Int           @default(1) /// 1 easy · 2 medium · 3 hard
+  xp          Int
+  content     Json /// public part, safe to send to the browser
+  answer      Json /// private — never sent before the user answers
+  explanation Json?
+  order       Int           @default(0)
+  status      ContentStatus @default(PUBLISHED)
+  updatedAt   DateTime      @updatedAt
+
+  skill    Skill     @relation(fields: [skillId], references: [id], onDelete: Cascade)
+  attempts Attempt[]
+
+  @@index([skillId, status])
+}
+
+model Attempt {
+  id         String   @id @default(cuid())
+  userId     String
+  tenantId   String
+  exerciseId String
+  correct    Boolean
+  answer     Json
+  timeMs     Int?
+  xpAwarded  Int      @default(0)
+  createdAt  DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  exercise Exercise @relation(fields: [exerciseId], references: [id], onDelete: Cascade)
+
+  @@index([userId, exerciseId])
+  @@index([userId, createdAt])
+  @@index([tenantId, createdAt])
+}
+
+/// Per user per skill, 0–100. Global (a skill mastered is mastered on every tenant).
+model SkillMastery {
+  userId          String
+  skillId         String
+  score           Float    @default(0)
+  attempts        Int      @default(0)
+  correct         Int      @default(0)
+  lastPracticedAt DateTime @default(now())
+  nextReviewAt    DateTime @default(now())
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  skill Skill @relation(fields: [skillId], references: [id], onDelete: Cascade)
+
+  @@id([userId, skillId])
+  @@index([userId, nextReviewAt])
 }
 
 // ─── Gamification ───────────────────────────────────────────────────────────

@@ -1,0 +1,12 @@
+slug: javascript
+title: JavaScript
+description: Tilning oʻzi — oʻzgaruvchilar, funksiyalar, massivlar va obyektlar.
+icon: 🟨
+order: 1
+modules:
+  - slug: arrays
+    title: Massivlar
+    skills:
+      - slug: array-methods
+        title: map, filter, reduce
+        description: Massivlarni sikllarsiz qayta ishlash — zamonaviy JavaScript va React'da har kuni kerak boʻladi.

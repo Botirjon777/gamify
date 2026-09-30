@@ -10,7 +10,8 @@
     "leaderboard": "Reyting",
     "profile": "Profil",
     "devices": "Qurilmalar",
-    "logout": "Chiqish"
+    "logout": "Chiqish",
+    "learn": "Oʻrganish"
   },
   "landing": {
     "badge": "Dasturlash mashgʻulotlari — oʻyin shaklida",
@@ -20,10 +21,22 @@
     "ctaSecondary": "Menda akkaunt bor",
     "howTitle": "Qanday ishlaydi",
     "steps": {
-      "pick": { "title": "Mavzuni tanlang", "text": "HTML, CSS, JS, TS, React — kerakli mavzuni bitta bosishda oching." },
-      "drill": { "title": "Mashq qiling", "text": "Qisqa topshiriqlar, kod yozish, xatoni topish. Daraja sizga moslashadi." },
-      "earn": { "title": "XP toʻplang", "text": "Kunlik bonus, streak, kunlik viktorina va IQ testlar." },
-      "climb": { "title": "Reytingda koʻtariling", "text": "Haftalik ligalar, duellar va doʻstlar bilan musobaqa." }
+      "pick": {
+        "title": "Mavzuni tanlang",
+        "text": "HTML, CSS, JS, TS, React — kerakli mavzuni bitta bosishda oching."
+      },
+      "drill": {
+        "title": "Mashq qiling",
+        "text": "Qisqa topshiriqlar, kod yozish, xatoni topish. Daraja sizga moslashadi."
+      },
+      "earn": {
+        "title": "XP toʻplang",
+        "text": "Kunlik bonus, streak, kunlik viktorina va IQ testlar."
+      },
+      "climb": {
+        "title": "Reytingda koʻtariling",
+        "text": "Haftalik ligalar, duellar va doʻstlar bilan musobaqa."
+      }
     },
     "tracksTitle": "Yoʻnalishlar",
     "centersTitle": "Oʻquv markazlari uchun",
@@ -103,5 +116,65 @@
   "notFound": {
     "title": "Sahifa topilmadi",
     "back": "Bosh sahifaga qaytish"
+  },
+  "learn": {
+    "title": "Oʻrganish",
+    "subtitle": "Mavzuni tanlang va uni toʻliq oʻzlashtirguningizcha mashq qiling.",
+    "exercises": "{count} ta mashq",
+    "mastery": "Oʻzlashtirish",
+    "start": "Mashqni boshlash",
+    "continue": "Davom ettirish",
+    "review": "Takrorlash",
+    "due": "Takrorlash vaqti",
+    "levels": {
+      "new": "Yangi",
+      "learning": "Oʻrganilmoqda",
+      "good": "Yaxshi",
+      "mastered": "Oʻzlashtirildi"
+    },
+    "backToCatalog": "Barcha mavzular",
+    "stats": {
+      "solved": "Yechilgan",
+      "accuracy": "Aniqlik",
+      "lastPracticed": "Oxirgi mashq"
+    },
+    "never": "Hali mashq qilinmagan",
+    "howTitle": "Drill rejimi qanday ishlaydi",
+    "how": "Topshiriqlar cheksiz davom etadi va darajangizga moslashadi: yangi va xato qilgan mashqlaringiz koʻproq chiqadi. Har toʻgʻri javob oʻzlashtirishni oshiradi, xato — biroz kamaytiradi. Birinchi marta yechilgan mashq toʻliq XP beradi, qayta yechilgani — 20%.",
+    "suggestionsTitle": "Mashqni davom ettiring",
+    "suggestionsEmpty": "Hali birorta mavzuni boshlamadingiz. useState bilan boshlab koʻring!",
+    "browse": "Barcha mavzular"
+  },
+  "drill": {
+    "close": "Yopish",
+    "check": "Tekshirish",
+    "continue": "Davom etish",
+    "correct": "Toʻgʻri!",
+    "wrong": "Notoʻgʻri",
+    "correctAnswer": "Toʻgʻri javob:",
+    "xp": "+{xp} XP",
+    "firstSolve": "Birinchi yechim",
+    "levelUp": "Yangi daraja: {level}! 🎉",
+    "combo": "{count} ketma-ket",
+    "session": "{correct}/{total} toʻgʻri",
+    "loading": "Yuklanmoqda…",
+    "empty": "Bu mavzuda hozircha mashqlar yoʻq.",
+    "error": "Xatolik yuz berdi. Qayta urinib koʻring.",
+    "retry": "Qayta urinish",
+    "difficulty": {
+      "1": "Oson",
+      "2": "Oʻrtacha",
+      "3": "Qiyin"
+    },
+    "types": {
+      "CHOICE": "Toʻgʻri javobni tanlang",
+      "OUTPUT": "Natijani toping",
+      "FILL": "Boʻsh joylarni toʻldiring",
+      "ORDER": "Tartibga keltiring"
+    },
+    "outputPlaceholder": "Javobingizni yozing",
+    "orderHint": "Qatorlarni toʻgʻri tartibda bosing. Olib tashlash uchun yuqoridagi qatorni bosing.",
+    "orderEmpty": "Qatorlarni shu yerga yigʻing",
+    "keyboardHint": "Enter — tekshirish / davom etish"
   }
 }

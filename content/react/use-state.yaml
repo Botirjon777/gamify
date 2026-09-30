@@ -1,0 +1,264 @@
+exercises:
+  - id: use-state-001
+    type: choice
+    difficulty: 1
+    prompt: useState nimani qaytaradi?
+    options:
+      - Faqat holatning joriy qiymatini
+      - "Ikki elementli massiv: [joriy qiymat, uni oʻzgartiruvchi funksiya]"
+      - "Obyekt: { value, setValue }"
+      - Promise
+    answer: 1
+    explanation: >-
+      useState massiv qaytaradi: birinchi element — joriy qiymat, ikkinchisi — uni yangilovchi funksiya (setter).
+      Shuning uchun odatda destrukturizatsiya qilinadi: const [count, setCount] = useState(0).
+
+  - id: use-state-002
+    type: fill
+    difficulty: 1
+    prompt: Boʻsh joylarni toʻldiring — hisoblagich ishlashi kerak.
+    code: |-
+      import { ___ } from "react";
+
+      function Counter() {
+        const [count, ___] = useState(0);
+        return <button onClick={() => setCount(count + 1)}>{count}</button>;
+      }
+    answer:
+      - useState
+      - setCount
+    explanation: >-
+      Hook "react" paketidan import qilinadi. Setter nomi JSX ichida ishlatilgan nom bilan bir xil boʻlishi kerak — setCount.
+
+  - id: use-state-003
+    type: output
+    difficulty: 1
+    prompt: Ekranda qanday matn chiqadi?
+    code: |-
+      function Greeting() {
+        const [name, setName] = useState("Ali");
+        return <h1>Salom, {name}!</h1>;
+      }
+    answer: Salom, Ali!
+    explanation: useState ga berilgan qiymat ("Ali") birinchi renderdagi boshlangʻich holat boʻladi.
+
+  - id: use-state-004
+    type: choice
+    difficulty: 1
+    prompt: Holat (state) oʻzgarganda nima boʻladi?
+    options:
+      - Komponent qayta render qilinadi — funksiya yangi qiymat bilan qaytadan chaqiriladi
+      - Faqat oʻzgargan DOM elementi yangilanadi, komponent funksiyasi chaqirilmaydi
+      - Butun sahifa qayta yuklanadi
+      - Hech narsa — sahifani qoʻlda yangilash kerak
+    answer: 0
+    explanation: >-
+      Setter chaqirilganda React komponentni qayta render qiladi: funksiya yana chaqiriladi va useState endi yangi qiymatni qaytaradi.
+      Keyin React DOMda faqat farq qilgan joylarni yangilaydi.
+
+  - id: use-state-005
+    type: choice
+    difficulty: 1
+    prompt: useState qayerda chaqirilishi mumkin?
+    options:
+      - Faqat komponent (yoki custom hook) ning yuqori darajasida
+      - if ichida ham, sikl ichida ham — farqi yoʻq
+      - Faqat useEffect ichida
+      - Istalgan oddiy JavaScript funksiyasida
+    answer: 0
+    explanation: >-
+      Hook qoidasi: hooklar har renderda bir xil tartibda chaqirilishi kerak. Shuning uchun ularni if, sikl yoki
+      ichki funksiyalar ichida chaqirib boʻlmaydi — faqat komponent yoki custom hook ning yuqori darajasida.
+
+  - id: use-state-006
+    type: output
+    difficulty: 2
+    prompt: Tugma bir marta bosilgandan keyin ekranda qanday son chiqadi?
+    code: |-
+      function Counter() {
+        const [count, setCount] = useState(0);
+
+        function handleClick() {
+          setCount(count + 1);
+          setCount(count + 1);
+        }
+
+        return <button onClick={handleClick}>{count}</button>;
+      }
+    answer: "1"
+    explanation: >-
+      Bitta render ichida count — oʻzgarmas "surat" (snapshot), u 0 ga teng. Ikkala chaqiruv ham setCount(0 + 1) boʻladi,
+      shuning uchun natija 1. Ikki marta oshirish uchun funksional yangilash kerak: setCount(c => c + 1).
+
+  - id: use-state-007
+    type: output
+    difficulty: 2
+    prompt: Tugma bir marta bosilgandan keyin ekranda qanday son chiqadi?
+    code: |-
+      function Counter() {
+        const [count, setCount] = useState(0);
+
+        function handleClick() {
+          setCount(c => c + 1);
+          setCount(c => c + 1);
+        }
+
+        return <button onClick={handleClick}>{count}</button>;
+      }
+    answer: "2"
+    explanation: >-
+      Funksional yangilash (c => c + 1) navbatdagi eng soʻnggi qiymatni oladi: 0 → 1 → 2.
+      Oldingi qiymatga tayanib yangilaganda doim shu shakldan foydalaning.
+
+  - id: use-state-008
+    type: output
+    difficulty: 2
+    prompt: Tugma birinchi marta bosilganda konsolga nima chiqadi?
+    code: |-
+      function Counter() {
+        const [count, setCount] = useState(0);
+
+        function handleClick() {
+          setCount(count + 1);
+          console.log(count);
+        }
+
+        return <button onClick={handleClick}>{count}</button>;
+      }
+    answer: "0"
+    explanation: >-
+      Setter holatni darhol oʻzgartirmaydi — u keyingi renderni rejalashtiradi. Joriy funksiya ichida count hali ham 0.
+      Yangi qiymat faqat keyingi renderda koʻrinadi.
+
+  - id: use-state-009
+    type: choice
+    difficulty: 2
+    prompt: birthday() chaqirilgandan keyin nima boʻladi?
+    code: |-
+      const [user, setUser] = useState({ name: "Ali", age: 20 });
+
+      function birthday() {
+        user.age = user.age + 1;
+        setUser(user);
+      }
+    options:
+      - Komponent qayta render boʻladi va yangi yosh koʻrinadi
+      - Komponent qayta render boʻlmaydi — obyekt havolasi (reference) oʻzgarmagan
+      - "Xato chiqadi: user faqat oʻqish uchun"
+      - age ikki marta oshadi
+    answer: 1
+    explanation: >-
+      React eski va yangi qiymatni Object.is bilan solishtiradi. Siz oʻsha obyektning oʻzini oʻzgartirib qayta berdingiz —
+      havola bir xil, shuning uchun React render qilmaydi. Holatni hech qachon toʻgʻridan-toʻgʻri oʻzgartirmang:
+      setUser({ ...user, age: user.age + 1 }).
+
+  - id: use-state-010
+    type: fill
+    difficulty: 2
+    prompt: Foydalanuvchi yoshini obyektni oʻzgartirmasdan (immutable) yangilang.
+    code: |-
+      const [user, setUser] = useState({ name: "Ali", age: 20 });
+
+      function birthday() {
+        setUser({ ___, age: user.age + 1 });
+      }
+    answer:
+      - - ...user
+    explanation: >-
+      Spread (...user) eski obyektning barcha maydonlarini yangi obyektga koʻchiradi, keyin age ustidan yoziladi.
+      Natijada yangi havola hosil boʻladi va React qayta render qiladi.
+
+  - id: use-state-011
+    type: choice
+    difficulty: 2
+    prompt: Roʻyxatga yangi vazifa qoʻshishning toʻgʻri usuli qaysi?
+    code: |-
+      const [todos, setTodos] = useState([]);
+    lang: jsx
+    options:
+      - "todos.push(newTodo); setTodos(todos);"
+      - "setTodos([...todos, newTodo]);"
+      - "setTodos(todos.push(newTodo));"
+      - "todos = [...todos, newTodo];"
+    answer: 1
+    explanation: >-
+      push asl massivni oʻzgartiradi (havola oʻsha-oʻsha qoladi) va yangi uzunlikni qaytaradi. Toʻgʻri yoʻl — yangi massiv yaratish:
+      [...todos, newTodo]. const oʻzgaruvchiga qayta qiymat berib ham boʻlmaydi.
+
+  - id: use-state-012
+    type: fill
+    difficulty: 2
+    prompt: Tugma har bosilganda menyu ochilib-yopilsin (toggle).
+    code: |-
+      const [isOpen, setIsOpen] = useState(false);
+
+      <button onClick={() => setIsOpen(___)}>Menyu</button>
+    answer:
+      - - "!isOpen"
+        - "prev => !prev"
+        - "(prev) => !prev"
+        - "open => !open"
+        - "(open) => !open"
+        - "o => !o"
+        - "v => !v"
+        - "p => !p"
+    explanation: "!isOpen joriy qiymatning teskarisini beradi. Funksional variant — prev => !prev — ham toʻgʻri va ketma-ket chaqiruvlarda xavfsizroq."
+
+  - id: use-state-013
+    type: order
+    difficulty: 2
+    prompt: Qatorlarni toʻgʻri tartibda joylashtiring — ishlaydigan hisoblagich komponenti hosil boʻlsin.
+    lines:
+      - "function Counter() {"
+      - "  const [count, setCount] = useState(0);"
+      - "  return ("
+      - "    <button onClick={() => setCount(count + 1)}>"
+      - "      {count}"
+      - "    </button>"
+      - "  );"
+      - "}"
+    explanation: Avval holat eʼlon qilinadi, keyin JSX qaytariladi. Hooklar har doim return dan oldin, komponentning yuqori qismida chaqiriladi.
+
+  - id: use-state-014
+    type: choice
+    difficulty: 3
+    prompt: Bu ikki qatorning farqi nimada?
+    code: |-
+      const [items, setItems] = useState(loadItems());
+      const [items, setItems] = useState(() => loadItems());
+    options:
+      - Farqi yoʻq
+      - Ikkinchisida loadItems() faqat birinchi renderda chaqiriladi, birinchisida esa har renderda
+      - Birinchisi xato beradi
+      - Ikkinchisida holat funksiya boʻlib qoladi
+    answer: 1
+    explanation: >-
+      useState(loadItems()) — loadItems har renderda chaqiriladi (natijasi faqat birinchi marta ishlatilsa ham).
+      Funksiya berilsa (lazy initializer), React uni faqat bir marta — boshlangʻich holat uchun chaqiradi. Ogʻir hisob-kitoblarda foydali.
+
+  - id: use-state-015
+    type: output
+    difficulty: 3
+    prompt: count dastlab 0. Tugma bir marta bosilgandan keyin count nechaga teng boʻladi?
+    code: |-
+      function handleClick() {
+        setCount(count + 5);
+        setCount(c => c + 1);
+      }
+    answer: "6"
+    explanation: >-
+      Navbat: birinchisi qiymatni 0 + 5 = 5 ga almashtiradi, ikkinchisi navbatdagi qiymatni oladi: 5 + 1 = 6.
+
+  - id: use-state-016
+    type: output
+    difficulty: 3
+    prompt: count dastlab 0. Tugma bir marta bosilgandan keyin count nechaga teng boʻladi?
+    code: |-
+      function handleClick() {
+        setCount(c => c + 1);
+        setCount(count + 5);
+      }
+    answer: "5"
+    explanation: >-
+      Birinchisi 0 → 1 qiladi, lekin ikkinchisi oddiy qiymat: count (bu renderda 0) + 5 = 5. Oddiy qiymat navbatdagini
+      almashtirib yuboradi, shuning uchun natija 5.

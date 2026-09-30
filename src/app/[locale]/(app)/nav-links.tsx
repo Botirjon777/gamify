@@ -5,6 +5,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 
 const LINKS = [
   { href: "/dashboard", key: "dashboard", icon: "🏠" },
+  { href: "/learn", key: "learn", icon: "📚" },
   { href: "/settings/devices", key: "devices", icon: "💻" },
 ] as const;
 

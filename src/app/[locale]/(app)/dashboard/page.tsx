@@ -6,26 +6,33 @@ import { getLeaderboardStore } from "@/lib/leaderboard";
 import { addDays, sameDay, tashkentToday, tashkentWeekStart } from "@/lib/time";
 import { DAILY_BONUS_XP, xpForLevel } from "@/features/gamification/xp";
 import { DailyBonusCard } from "@/features/gamification/components/daily-bonus-card";
+import { getPracticeSuggestions } from "@/features/learn/queries";
+import { SkillCard } from "@/features/learn/components/skill-card";
+import { Link } from "@/i18n/navigation";
+import { buttonClass } from "@/components/ui/button";
 
 export default async function DashboardPage({ params }: PageProps<"/[locale]/dashboard">) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("dashboard");
+  const tLearn = await getTranslations("learn");
   const { user, tenant } = await requireSession();
 
   const today = tashkentToday();
-  const [claimedToday, weekly, rank] = await Promise.all([
+  const [claimedToday, weekly, rank, suggestions] = await Promise.all([
     db.dailyClaim.findUnique({ where: { userId_day_kind: { userId: user.id, day: today, kind: "LOGIN" } } }),
     db.weeklyScore.findUnique({
       where: { userId_tenantId_week_board: { userId: user.id, tenantId: tenant.id, week: tashkentWeekStart(), board: "XP" } },
     }),
     getLeaderboardStore().rankOf(user.id, { board: "XP", period: "all-time", tenantId: tenant.id }),
+    getPracticeSuggestions(user.id, tenant.id, locale),
   ]);
 
   // A streak is alive only if the last active day is today or yesterday.
   const alive = sameDay(user.lastActiveDay, today) || sameDay(user.lastActiveDay, addDays(today, -1));
   const streak = alive ? user.currentStreak : 0;
-  const nextStreak = claimedToday ? streak : streak + 1;
+  // Practicing already counts as today's activity, so the bonus day is only +1 if today isn't counted yet.
+  const nextStreak = sameDay(user.lastActiveDay, today) ? streak : streak + 1;
   const cycleDay = ((Math.max(nextStreak, 1) - 1) % 7) + 1;
 
   const levelStart = xpForLevel(user.level);
@@ -62,6 +69,30 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
           sub={t("longestStreak", { count: user.longestStreak })}
         />
         <Stat label={t("rank")} value={rank ? t("rankValue", { rank }) : t("noRank")} accent="text-foreground" />
+      </section>
+
+      {/* Continue practicing — skills due for review first */}
+      <section>
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="text-lg font-bold">{tLearn("suggestionsTitle")}</h2>
+          <Link href="/learn" className="text-sm font-semibold text-brand hover:underline">
+            {tLearn("browse")} →
+          </Link>
+        </div>
+        {suggestions.length ? (
+          <div className="mt-3 grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {suggestions.map((skill) => (
+              <SkillCard key={skill.id} skill={skill} />
+            ))}
+          </div>
+        ) : (
+          <div className="mt-3 flex flex-col items-start gap-4 rounded-2xl border border-dashed border-border bg-surface p-5 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-muted">{tLearn("suggestionsEmpty")}</p>
+            <Link href="/learn/react/use-state" className={buttonClass("primary", "shrink-0")}>
+              {tLearn("start")}
+            </Link>
+          </div>
+        )}
       </section>
 
       <div className="grid gap-6 lg:grid-cols-[1.2fr_1fr]">

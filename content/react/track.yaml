@@ -1,0 +1,15 @@
+slug: react
+title: React
+description: Komponentlar, holat (state) va effektlar — zamonaviy interfeyslarning asosi.
+icon: ⚛️
+order: 3
+modules:
+  - slug: state
+    title: Holat va effektlar
+    skills:
+      - slug: use-state
+        title: useState
+        description: Komponent holatini saqlash va yangilash — eng koʻp ishlatiladigan hook.
+      - slug: use-effect
+        title: useEffect
+        description: Renderdan keyin ishlaydigan kod — maʼlumot yuklash, taymerlar va tozalash.
