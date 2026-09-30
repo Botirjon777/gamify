@@ -751,5 +751,11 @@
         "revokeSessions": "Sessiyalarni yopdi"
       }
     }
+  },
+  "common": {
+    "retry": "Qayta urinish",
+    "endOfList": "Roʻyxat oxiri",
+    "loading": "Yuklanmoqda…",
+    "loadMore": "Yana yuklash"
   }
 }

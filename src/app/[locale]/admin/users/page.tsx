@@ -70,7 +70,7 @@ export default async function AdminUsers({ params, searchParams }: PageProps<"/[
                 ))}
               </tr>
             </thead>
-            <tbody>
+            <tbody className="stagger">
               {users.map((u) => (
                 <tr key={u.id} className="border-b border-border last:border-0 hover:bg-background/60">
                   <td className="px-4 py-2.5">

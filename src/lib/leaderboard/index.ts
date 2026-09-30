@@ -20,12 +20,14 @@ export interface LeaderboardQuery {
   period: Period;
   tenantId: string;
   limit?: number;
+  /** Rows to skip (infinite scroll). */
+  offset?: number;
 }
 
 export interface LeaderboardStore {
   top(query: LeaderboardQuery): Promise<LeaderboardEntry[]>;
   /** 1-based rank, or null if the user has no score for this board/period. */
-  rankOf(userId: string, query: Omit<LeaderboardQuery, "limit">): Promise<number | null>;
+  rankOf(userId: string, query: Omit<LeaderboardQuery, "limit" | "offset">): Promise<number | null>;
 }
 
 let instance: LeaderboardStore | undefined;

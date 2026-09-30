@@ -3,6 +3,7 @@
 import { BarChart3, History, Users, Wallet, type LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
+import { NavPending } from "@/components/nav-pending";
 
 const LINKS: { href: string; key: string; icon: LucideIcon; exact?: boolean }[] = [
   { href: "/admin", key: "dashboard", icon: BarChart3, exact: true },
@@ -32,6 +33,7 @@ export function AdminNav({ pendingPayments }: { pendingPayments: number }) {
             {pendingPayments}
           </span>
         )}
+        <NavPending />
       </Link>
     );
   });

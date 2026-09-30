@@ -67,7 +67,7 @@ export default async function ClanPage({ params }: PageProps<"/[locale]/clans/[s
         {/* Members */}
         <section>
           <h2 className="mb-3 font-display text-sm font-bold">{t("membersTitle")}</h2>
-          <ol className="overflow-hidden rounded-2xl border border-border bg-surface">
+          <ol className="stagger overflow-hidden rounded-2xl border border-border bg-surface">
             {clan.members.map((m) => (
               <li key={m.id} className={`flex items-center gap-3 border-b border-border px-4 py-3 last:border-b-0 ${m.id === user.id ? "bg-brand/5" : ""}`}>
                 <Link href={`/u/${m.username}`}>

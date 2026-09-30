@@ -119,7 +119,7 @@ function List({ title, empty, children }: { title?: string; empty: string; child
       {children.length === 0 ? (
         <p className="rounded-2xl border border-dashed border-border bg-surface p-6 text-center text-sm text-muted">{empty}</p>
       ) : (
-        <ul className="overflow-hidden rounded-2xl border border-border bg-surface">{children}</ul>
+        <ul className="stagger overflow-hidden rounded-2xl border border-border bg-surface">{children}</ul>
       )}
     </section>
   );

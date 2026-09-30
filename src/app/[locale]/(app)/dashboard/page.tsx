@@ -113,7 +113,7 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
       )}
 
       {/* Stats */}
-      <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <section className="stagger grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Stat icon={<Zap className="size-5" />} gradient="bg-grad-xp" label="XP" value={user.xp.toLocaleString("uz-UZ")} sub={t("weeklyXp", { xp: weekly?.value ?? 0 })} />
         <Stat icon={<Flame className="size-5" />} gradient="bg-grad-streak" label={t("streakLabel")} value={t("streak", { count: streak })} sub={t("longestStreak", { count: user.longestStreak })} />
         <Stat
@@ -137,7 +137,7 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
             </Link>
           </div>
           {suggestions.length ? (
-            <div className="mt-3 grid gap-3 sm:grid-cols-2 2xl:grid-cols-3">
+            <div className="stagger mt-3 grid gap-3 sm:grid-cols-2 2xl:grid-cols-3">
               {suggestions.map((skill) => (
                 <SkillCard key={skill.id} skill={skill} />
               ))}

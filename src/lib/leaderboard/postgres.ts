@@ -11,16 +11,17 @@ const userSelect = { id: true, username: true, avatarSeed: true, avatarStyle: tr
  * Both are scoped to members of the tenant.
  */
 export class PostgresLeaderboardStore implements LeaderboardStore {
-  async top({ board, period, tenantId, limit = 50 }: LeaderboardQuery): Promise<LeaderboardEntry[]> {
+  async top({ board, period, tenantId, limit = 50, offset = 0 }: LeaderboardQuery): Promise<LeaderboardEntry[]> {
     if (period === "weekly") {
       const rows = await db.weeklyScore.findMany({
         where: { tenantId, board, week: tashkentWeekStart() },
-        orderBy: { value: "desc" },
+        orderBy: [{ value: "desc" }, { userId: "asc" }],
+        skip: offset,
         take: limit,
         include: { user: { select: userSelect } },
       });
       return rows.map((r, i) => ({
-        rank: i + 1,
+        rank: offset + i + 1,
         userId: r.user.id,
         username: r.user.username,
         avatarSeed: r.user.avatarSeed,
@@ -38,12 +39,14 @@ export class PostgresLeaderboardStore implements LeaderboardStore {
         memberships: { some: { tenantId } },
         ...(board === "IQ" ? { iqTestedAt: { not: null } } : { xp: { gt: 0 } }),
       },
-      orderBy: { [column]: "desc" },
+      // Stable tie-break so pages never repeat or skip a user.
+      orderBy: [{ [column]: "desc" }, { id: "asc" }],
+      skip: offset,
       take: limit,
       select: { ...userSelect, xp: true, iqRating: true },
     });
     return users.map((u, i) => ({
-      rank: i + 1,
+      rank: offset + i + 1,
       userId: u.id,
       username: u.username,
       avatarSeed: u.avatarSeed,
@@ -53,7 +56,7 @@ export class PostgresLeaderboardStore implements LeaderboardStore {
     }));
   }
 
-  async rankOf(userId: string, { board, period, tenantId }: Omit<LeaderboardQuery, "limit">) {
+  async rankOf(userId: string, { board, period, tenantId }: Omit<LeaderboardQuery, "limit" | "offset">) {
     if (period === "weekly") {
       const week = tashkentWeekStart();
       const mine = await db.weeklyScore.findUnique({

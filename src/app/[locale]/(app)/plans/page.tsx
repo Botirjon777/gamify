@@ -45,7 +45,7 @@ export default async function PlansPage({ params }: PageProps<"/[locale]/plans">
         </section>
       )}
 
-      <div className="grid gap-5 pt-3 lg:grid-cols-3">
+      <div className="stagger grid gap-5 pt-3 lg:grid-cols-3">
         {PLAN_ORDER.map((plan) => {
           const limits = PLANS[plan];
           const look = LOOK[plan];

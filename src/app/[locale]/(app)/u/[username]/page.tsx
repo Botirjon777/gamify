@@ -79,7 +79,7 @@ export default async function ProfilePage({ params }: PageProps<"/[locale]/u/[us
       </section>
 
       {/* Stats */}
-      <section className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <section className="stagger grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Stat icon={<Zap className="size-5" />} gradient="bg-grad-xp" label={t("level")} value={`${user.level}`} sub={`${user.xp.toLocaleString("uz-UZ")} XP`} />
         <Stat icon={<Brain className="size-5" />} gradient="bg-grad-iq" label={t("iq")} value={user.iq === null ? "—" : String(user.iq)} />
         <Stat icon={<Trophy className="size-5" />} gradient="bg-grad-gold" label={t("rank")} value={rank ? `#${rank}` : "—"} />
@@ -91,7 +91,7 @@ export default async function ProfilePage({ params }: PageProps<"/[locale]/u/[us
         <h2 className="font-display text-lg font-bold">
           {t("badges")} <span className="text-muted">· {earned.size}/{BADGES.length}</span>
         </h2>
-        <ul className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
+        <ul className="stagger mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
           {BADGES.map((b) => {
             const has = earned.has(b.key);
             const def = BADGE_BY_KEY.get(b.key)!;

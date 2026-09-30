@@ -38,7 +38,7 @@ export default async function AdminPayments({ params, searchParams }: PageProps<
       {payments.length === 0 ? (
         <p className="rounded-2xl border border-dashed border-border bg-surface p-8 text-center text-muted">{t("payments.empty")}</p>
       ) : (
-        <ul className="flex flex-col gap-3">
+        <ul className="stagger flex flex-col gap-3">
           {payments.map((p) => (
             <li key={p.id} className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-4 sm:p-5">
               <div className="flex flex-wrap items-center gap-3">

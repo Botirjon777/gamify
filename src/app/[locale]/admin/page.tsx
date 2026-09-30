@@ -19,7 +19,7 @@ export default async function AdminDashboard({ params }: PageProps<"/[locale]/ad
       <PageHeader title={t("nav.dashboard")} />
 
       {/* Headline numbers */}
-      <section className="grid grid-cols-2 gap-3 xl:grid-cols-4">
+      <section className="stagger grid grid-cols-2 gap-3 xl:grid-cols-4">
         <Tile icon={<Users className="size-5" />} gradient="bg-grad-brand" label={t("stats.totalUsers")} value={s.totalUsers} href="/admin/users" />
         <Tile icon={<UserPlus className="size-5" />} gradient="bg-grad-success" label={t("stats.newToday")} value={s.newToday} sub={`${t("stats.new7d")}: ${s.new7d} · ${t("stats.new30d")}: ${s.new30d}`} />
         <Tile icon={<Activity className="size-5" />} gradient="bg-grad-iq" label={t("stats.activeToday")} value={s.activeToday} sub={`${t("stats.active7d")}: ${s.active7d}`} />
@@ -35,7 +35,7 @@ export default async function AdminDashboard({ params }: PageProps<"/[locale]/ad
           tableLabel={t("chart.table")}
         />
 
-        <section className="flex flex-col gap-3">
+        <section className="stagger flex flex-col gap-3">
           <Link
             href="/admin/payments"
             className={`flex items-center gap-4 rounded-2xl p-4 transition ${

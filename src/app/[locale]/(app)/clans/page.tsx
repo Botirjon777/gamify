@@ -38,7 +38,7 @@ export default async function ClansPage({ params }: PageProps<"/[locale]/clans">
       {lastWeek.length > 0 && (
         <section>
           <h2 className="mb-3 font-display text-sm font-bold">{t("lastWeek")}</h2>
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="stagger grid gap-3 sm:grid-cols-3">
             {lastWeek.map((r) => (
               <Link
                 key={r.id}
@@ -67,7 +67,7 @@ export default async function ClansPage({ params }: PageProps<"/[locale]/clans">
         {current.length === 0 ? (
           <p className="rounded-2xl border border-dashed border-border bg-surface p-8 text-center text-muted">{t("noClans")}</p>
         ) : (
-          <ol className="overflow-hidden rounded-2xl border border-border bg-surface">
+          <ol className="stagger overflow-hidden rounded-2xl border border-border bg-surface">
             {current.map((c) => {
               const mine = myClan?.id === c.id;
               return (

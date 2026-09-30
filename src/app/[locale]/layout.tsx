@@ -37,6 +37,10 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
   return (
     <html lang={locale} className={`${onest.variable} ${unbounded.variable} ${jetbrains.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col font-sans" style={style}>
+        {/* Scroll-reveal content waits for JavaScript; without it, show everything. */}
+        <noscript>
+          <style>{"[data-reveal]{opacity:1!important;transform:none!important}"}</style>
+        </noscript>
         <NextIntlClientProvider>{children}</NextIntlClientProvider>
       </body>
     </html>

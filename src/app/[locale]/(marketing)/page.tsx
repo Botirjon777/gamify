@@ -4,6 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/logo";
 import { buttonClass } from "@/components/ui/button";
 import { getCurrentSession } from "@/lib/auth/session";
+import { Reveal } from "@/components/reveal";
 
 const STEPS = [
   { key: "pick", icon: Crosshair, gradient: "bg-grad-brand" },
@@ -52,7 +53,7 @@ export default async function LandingPage({ params }: PageProps<"/[locale]">) {
 
       <main className="flex-1">
         {/* Hero */}
-        <section className="mx-auto grid w-full max-w-7xl items-center gap-12 px-5 pb-20 pt-12 lg:grid-cols-[1.1fr_1fr] lg:pt-24">
+        <section className="animate-page mx-auto grid w-full max-w-7xl items-center gap-12 px-5 pb-20 pt-12 lg:grid-cols-[1.1fr_1fr] lg:pt-24">
           <div>
             <span className="inline-flex items-center gap-2 rounded-full border border-brand/20 bg-surface px-3 py-1 text-sm font-semibold text-brand shadow-sm">
               <Sparkles className="size-4" /> {t("badge")}
@@ -115,14 +116,14 @@ function handleClick() {
             <h2 className="font-display text-3xl font-bold">{t("howTitle")}</h2>
             <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
               {STEPS.map(({ key, icon: Icon, gradient }, i) => (
-                <li key={key} className="rounded-3xl border border-border bg-surface p-6">
+                <Reveal as="li" key={key} delay={i * 90} className="rounded-3xl border border-border bg-surface p-6">
                   <span className={`grid size-12 place-items-center rounded-2xl text-white shadow-lg ${gradient}`}>
                     <Icon className="size-6" />
                   </span>
                   <p className="mt-4 text-xs font-bold uppercase tracking-wider text-muted">0{i + 1}</p>
                   <h3 className="mt-1 text-lg font-bold">{t(`steps.${key}.title`)}</h3>
                   <p className="mt-2 leading-relaxed text-muted">{t(`steps.${key}.text`)}</p>
-                </li>
+                </Reveal>
               ))}
             </ol>
           </div>
@@ -131,20 +132,20 @@ function handleClick() {
         {/* Features */}
         <section className="mx-auto w-full max-w-7xl px-5 py-16">
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {FEATURES.map(({ key, icon: Icon, gradient }) => (
-              <div key={key} className="rounded-3xl border border-border bg-surface p-6">
+            {FEATURES.map(({ key, icon: Icon, gradient }, i) => (
+              <Reveal key={key} delay={i * 90} className="rounded-3xl border border-border bg-surface p-6">
                 <span className={`grid size-12 place-items-center rounded-2xl text-white ${gradient}`}>
                   <Icon className="size-6" />
                 </span>
                 <h3 className="mt-4 text-lg font-bold">{t(`features.${key}.title`)}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted">{t(`features.${key}.text`)}</p>
-              </div>
+              </Reveal>
             ))}
           </div>
         </section>
 
         {/* Tracks + aim */}
-        <section className="mx-auto grid w-full max-w-7xl gap-12 px-5 pb-16 lg:grid-cols-2">
+        <Reveal className="mx-auto grid w-full max-w-7xl gap-12 px-5 pb-16 lg:grid-cols-2">
           <div>
             <h2 className="font-display text-3xl font-bold">{t("tracksTitle")}</h2>
             <ul className="mt-6 flex flex-wrap gap-2">
@@ -159,10 +160,10 @@ function handleClick() {
             <h2 className="font-display text-3xl font-bold">{t("aimTitle")}</h2>
             <p className="mt-6 text-lg leading-relaxed text-muted">{t("aimText")}</p>
           </div>
-        </section>
+        </Reveal>
 
         {/* For study centers */}
-        <section className="mx-auto w-full max-w-7xl px-5 pb-20">
+        <Reveal className="mx-auto w-full max-w-7xl px-5 pb-20">
           <div className="relative overflow-hidden rounded-4xl bg-grad-dark p-8 text-white sm:p-12">
             <div className="absolute -right-24 -top-24 size-80 rounded-full bg-grad-brand opacity-40 blur-3xl" />
             <Building2 className="relative size-10 text-white/80" />
@@ -172,7 +173,7 @@ function handleClick() {
               {t("centersCta")} <ArrowRight className="size-4" />
             </a>
           </div>
-        </section>
+        </Reveal>
       </main>
 
       <footer className="border-t border-border py-8 text-center text-sm text-muted">

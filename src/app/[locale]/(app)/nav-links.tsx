@@ -3,6 +3,7 @@
 import { BookOpen, Home, Shield, Trophy, Users, type LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
+import { NavPending } from "@/components/nav-pending";
 
 const LINKS: { href: string; key: string; icon: LucideIcon; badgeKey?: "friends" | "clans" }[] = [
   { href: "/dashboard", key: "dashboard", icon: Home },
@@ -36,6 +37,7 @@ export function NavLinks({ variant, badges }: { variant: "sidebar" | "bottom"; b
           <Icon className="size-5" strokeWidth={active ? 2.5 : 2} />
           {t(key)}
           {count > 0 && <span className="absolute right-[calc(50%-18px)] top-1.5">{dot}</span>}
+          <NavPending />
         </Link>
       );
     }
@@ -54,6 +56,7 @@ export function NavLinks({ variant, badges }: { variant: "sidebar" | "bottom"; b
         <Icon className="size-5" strokeWidth={active ? 2.4 : 2} />
         <span className="flex-1">{t(key)}</span>
         {dot}
+        <NavPending />
       </Link>
     );
   });

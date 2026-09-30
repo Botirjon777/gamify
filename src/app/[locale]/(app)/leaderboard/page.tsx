@@ -1,18 +1,18 @@
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { requireSession } from "@/lib/auth/session";
-import { Medal } from "lucide-react";
-import { Avatar } from "@/components/avatar";
 import { PageHeader } from "@/components/page-header";
-import { getLeaderboardStore, type LeaderboardEntry, type Period } from "@/lib/leaderboard";
+import { LeaderboardList } from "@/features/leaderboard/components/leaderboard-list";
+import { LeaderboardRow } from "@/features/leaderboard/components/leaderboard-row";
+import { LEADERBOARD_PAGE } from "@/features/leaderboard/constants";
+import { getLeaderboardStore, type Period } from "@/lib/leaderboard";
 import { iqFromRating } from "@/features/iq/rating";
 import { db } from "@/lib/db";
 import { tashkentWeekStart } from "@/lib/time";
 
 const BOARDS = ["XP", "IQ"] as const;
 const PERIODS = ["all-time", "weekly"] as const;
-const LIMIT = 50;
-const MEDALS = ["bg-grad-gold", "bg-grad-silver", "bg-grad-bronze"];
+
 
 export default async function LeaderboardPage({ params, searchParams }: PageProps<"/[locale]/leaderboard">) {
   const { locale } = await params;
@@ -26,7 +26,7 @@ export default async function LeaderboardPage({ params, searchParams }: PageProp
   const store = getLeaderboardStore();
   const query = { board, period, tenantId: tenant.id };
 
-  const [entries, myRank] = await Promise.all([store.top({ ...query, limit: LIMIT }), store.rankOf(user.id, query)]);
+  const [entries, myRank] = await Promise.all([store.top({ ...query, limit: LEADERBOARD_PAGE }), store.rankOf(user.id, query)]);
   const meInList = entries.some((e) => e.userId === user.id);
   const myValue = myRank && !meInList ? await myScore(user.id, tenant.id, board, period) : null;
 
@@ -41,23 +41,13 @@ export default async function LeaderboardPage({ params, searchParams }: PageProp
         <Tabs items={PERIODS.map((p) => ({ href: href(board, p), label: t(`periods.${p}`), active: p === period }))} />
       </div>
 
-      {entries.length === 0 ? (
-        <p className="rounded-2xl border border-dashed border-border bg-surface p-8 text-center text-muted">{t("empty")}</p>
-      ) : (
-        <ol className="overflow-hidden rounded-2xl border border-border bg-surface">
-          {entries.map((e) => (
-            <Row key={e.userId} entry={e} board={board} isMe={e.userId === user.id} youLabel={t("you")} />
-          ))}
-        </ol>
-      )}
-
       {/* Your position when you're not in the top list */}
       {!meInList && (
         <section className="rounded-2xl border-2 border-brand/30 bg-brand/5">
           <p className="px-4 pt-3 text-xs font-bold uppercase tracking-wider text-brand">{t("yourRank")}</p>
           {myRank && myValue !== null ? (
             <ol>
-              <Row
+              <LeaderboardRow
                 entry={{ rank: myRank, userId: user.id, username: user.username, avatarSeed: user.avatarSeed, avatarStyle: user.avatarStyle, gender: user.gender, value: myValue }}
                 board={board}
                 isMe
@@ -77,6 +67,13 @@ export default async function LeaderboardPage({ params, searchParams }: PageProp
             </div>
           )}
         </section>
+      )}
+
+      {entries.length === 0 ? (
+        <p className="rounded-2xl border border-dashed border-border bg-surface p-8 text-center text-muted">{t("empty")}</p>
+      ) : (
+        // key: switching tabs starts a fresh list
+        <LeaderboardList key={`${board}-${period}`} initial={entries} board={board} period={period} meId={user.id} />
       )}
 
       {period === "weekly" && <p className="text-xs text-muted">{t("weeklyReset")}</p>}
@@ -111,32 +108,5 @@ function Tabs({ items }: { items: { href: string; label: string; active: boolean
         </Link>
       ))}
     </div>
-  );
-}
-
-function Row({ entry, board, isMe, youLabel }: { entry: LeaderboardEntry; board: "XP" | "IQ"; isMe: boolean; youLabel: string }) {
-  const top = entry.rank <= 3;
-  return (
-    <li
-      className={`flex items-center gap-3 border-b border-border px-4 py-3 last:border-b-0 sm:gap-4 ${
-        isMe ? "bg-brand/5" : top ? "bg-xp/5" : ""
-      }`}
-    >
-      {top ? (
-        <span className={`grid size-9 shrink-0 place-items-center rounded-full text-foreground shadow-md ${MEDALS[entry.rank - 1]}`}>
-          <Medal className="size-5" />
-        </span>
-      ) : (
-        <span className="w-9 shrink-0 text-center font-display font-bold text-muted">{entry.rank}</span>
-      )}
-      <Avatar user={entry} className="size-10" />
-      <span className="min-w-0 flex-1 truncate font-semibold">
-        {entry.username}
-        {isMe && <span className="ml-2 rounded-full bg-brand px-2 py-0.5 text-xs text-brand-foreground">{youLabel}</span>}
-      </span>
-      <span className={`shrink-0 font-bold ${board === "XP" ? "text-xp" : "text-brand"}`}>
-        {Math.round(entry.value).toLocaleString("uz-UZ")} {board === "XP" ? "XP" : "IQ"}
-      </span>
-    </li>
   );
 }
