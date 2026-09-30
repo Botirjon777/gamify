@@ -9,6 +9,7 @@ import { getRateLimiter } from "@/lib/rate-limit";
 import { localized, type LocalizedText } from "@/i18n/content";
 import { awardXp } from "@/features/gamification/xp";
 import { touchStreak } from "@/features/gamification/streak";
+import { evaluateBadges } from "@/features/badges/service";
 import { BLANK, submissionSchema, type PrivateAnswer, type PublicContent, type Submission } from "./content-schema";
 import { checkAnswer } from "./check";
 import { highlight } from "./highlight";
@@ -100,18 +101,6 @@ export async function submitAnswer(exerciseId: string, rawSubmission: Submission
       : false;
     const xp = correct ? (solvedBefore ? Math.max(1, Math.round(exercise.xp * REPEAT_XP_SHARE)) : exercise.xp) : 0;
 
-    await tx.attempt.create({
-      data: {
-        userId: user.id,
-        tenantId: tenant.id,
-        exerciseId,
-        correct,
-        answer: submission,
-        timeMs: Math.max(0, Math.min(Math.round(timeMs), 3_600_000)),
-        xpAwarded: xp,
-      },
-    });
-
     const prev = await tx.skillMastery.findUnique({
       where: { userId_skillId: { userId: user.id, skillId: exercise.skillId } },
     });
@@ -140,15 +129,30 @@ export async function submitAnswer(exerciseId: string, rawSubmission: Submission
     });
 
     await touchStreak(tx, user.id);
+    // Award first: the plan multiplier / daily cap decide the real amount stored on the attempt.
     const award = xp > 0
       ? await awardXp(tx, { userId: user.id, tenantId: tenant.id, amount: xp, reason: "EXERCISE", refId: exerciseId })
       : null;
+    await tx.attempt.create({
+      data: {
+        userId: user.id,
+        tenantId: tenant.id,
+        exerciseId,
+        correct,
+        answer: submission,
+        timeMs: Math.max(0, Math.min(Math.round(timeMs), 3_600_000)),
+        xpAwarded: award?.awarded ?? 0,
+      },
+    });
+    const badges = await evaluateBadges(tx, user.id, tenant.id);
 
     return {
       correct,
       reveal,
       explanation: exercise.explanation ? localized(exercise.explanation as LocalizedText, locale) : null,
-      xp,
+      xp: award?.awarded ?? 0,
+      capped: award?.capped ?? false,
+      badges,
       firstSolve: correct && !solvedBefore,
       mastery: score,
       masteryBefore: before,

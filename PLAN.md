@@ -492,6 +492,14 @@ Estimates assume 1–2 full-time developers. Multi-tenancy is in the schema from
 - [ ] **Weekly leagues** (7 tiers, cohorts of 30, promotion/demotion job) — reuses `WeeklyScore`
 - [ ] Notifications (in-app + Telegram bot reminders "your streak is at risk")
 
+### Done in the "social + design" batch
+- [x] Design: gradient wordmark (no logo mark), Unbounded/Onest/JetBrains Mono fonts, lucide SVG icons, gradients, full-width pages + right rail
+- [x] Friends: search, requests that must be accepted, profiles (/u/username), notifications with bell + unread count
+- [x] Referrals: invite code / link, +50 XP for the new user, +150 XP for the inviter when the invitee reaches level 3
+- [x] Badges (21), level-up notifications, avatar change unlocked at level 10 (premium styles for Pro/Diamond)
+- [x] Plans Free / Pro / Diamond: XP ×1 / ×1.5 / ×2, daily exercise XP cap 150 / 600 / none, clan + friend limits; `pnpm plan:set` until Click/Payme
+- [x] Clans: create, join only with leader/officer approval, officers, kick, leave (leadership passes on), weekly clan competition with top-3 rewards + Champion badge
+
 ### Phase 3 — Social (3–4 weeks)
 - [ ] Friends (requests, list, block)
 - [ ] Recommend problems to friends

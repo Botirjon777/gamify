@@ -5,6 +5,7 @@ import { db } from "@/lib/db";
 import { requireSession } from "@/lib/auth/session";
 import { tashkentToday } from "@/lib/time";
 import { touchStreak } from "./streak";
+import { evaluateBadges } from "@/features/badges/service";
 import { awardXp, bonusForStreak } from "./xp";
 
 export type ClaimResult = { ok: true; xp: number; streak: number } | { ok: false; error: "alreadyClaimed" };
@@ -22,9 +23,9 @@ export async function claimDailyBonus(): Promise<ClaimResult> {
     if (inserted.count === 0) return { ok: false as const, error: "alreadyClaimed" as const };
 
     const streak = await touchStreak(tx, user.id);
-    const xp = bonusForStreak(streak);
-    await awardXp(tx, { userId: user.id, tenantId: tenant.id, amount: xp, reason: "LOGIN_BONUS" });
-    return { ok: true as const, xp, streak };
+    const award = await awardXp(tx, { userId: user.id, tenantId: tenant.id, amount: bonusForStreak(streak), reason: "LOGIN_BONUS" });
+    await evaluateBadges(tx, user.id, tenant.id);
+    return { ok: true as const, xp: award.awarded, streak };
   });
 
   revalidatePath("/", "layout");

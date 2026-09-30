@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowRight, Brain, CircleCheck, HelpCircle, Timer } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Button, buttonClass } from "@/components/ui/button";
@@ -32,15 +33,15 @@ export function IqTest({ kind, initial }: { kind: IqKind; initial: IqState | nul
     const intro = kind === "PLACEMENT" ? "placement" : "daily";
     return (
       <Card>
-        <p className="text-5xl" aria-hidden>
-          🧠
-        </p>
-        <h1 className="mt-4 text-2xl font-extrabold tracking-tight sm:text-3xl">{t(`${intro}.title`)}</h1>
+        <span className="mx-auto grid size-16 place-items-center rounded-3xl bg-grad-iq text-white shadow-xl shadow-brand/20">
+          <Brain className="size-8" />
+        </span>
+        <h1 className="mt-4 text-2xl font-bold tracking-tight sm:text-3xl">{t(`${intro}.title`)}</h1>
         <p className="mt-3 leading-relaxed text-muted">{t(`${intro}.text`)}</p>
         <ul className="mt-6 grid gap-2 text-sm font-semibold sm:grid-cols-3">
-          <Rule icon="❓">{t("rules.questions", { count: IQ_QUESTIONS[kind] })}</Rule>
-          <Rule icon="⏱️">{t("rules.time", { seconds: IQ_SECONDS_PER_QUESTION })}</Rule>
-          <Rule icon="➡️">{t("rules.noBack")}</Rule>
+          <Rule icon={<HelpCircle className="size-4 text-brand" />}>{t("rules.questions", { count: IQ_QUESTIONS[kind] })}</Rule>
+          <Rule icon={<Timer className="size-4 text-brand" />}>{t("rules.time", { seconds: IQ_SECONDS_PER_QUESTION })}</Rule>
+          <Rule icon={<ArrowRight className="size-4 text-brand" />}>{t("rules.noBack")}</Rule>
         </ul>
         {error && <p className="mt-5 text-sm text-danger">{t("error")}</p>}
         <div className="mt-8 flex flex-col justify-center gap-3 sm:flex-row">
@@ -129,7 +130,9 @@ function Question({
     <div className="mx-auto w-full max-w-2xl">
       <div className="flex items-center justify-between text-sm font-semibold">
         <span className="text-muted">{t("question", { number: q.number, total: q.total })}</span>
-        <span className={left <= 10 ? "text-danger" : "text-foreground"}>⏱️ {t("secondsLeft", { seconds: left })}</span>
+        <span className={`inline-flex items-center gap-1 ${left <= 10 ? "text-danger" : "text-foreground"}`}>
+          <Timer className="size-4" /> {t("secondsLeft", { seconds: left })}
+        </span>
       </div>
       <div className="mt-2 flex gap-1">
         {Array.from({ length: q.total }, (_, i) => (
@@ -143,7 +146,7 @@ function Question({
         />
       </div>
 
-      <h1 className="mt-8 text-xl font-extrabold leading-snug sm:text-2xl">{q.prompt}</h1>
+      <h1 className="mt-8 font-sans text-xl font-bold leading-snug sm:text-2xl">{q.prompt}</h1>
       {q.figure && (
         <p className="mt-5 rounded-2xl border border-border bg-surface px-4 py-6 text-center font-mono text-2xl font-bold tracking-wider sm:text-3xl">
           {q.figure}
@@ -181,9 +184,15 @@ function Result({ result }: { result: IqResult }) {
   const t = useTranslations("iq.result");
   return (
     <Card>
-      {result.kind === "DAILY" && <p className="text-sm font-semibold text-success">{t("doneToday")}</p>}
+      {result.kind === "DAILY" && (
+        <p className="inline-flex items-center gap-1 text-sm font-semibold text-success">
+          <CircleCheck className="size-4" /> {t("doneToday")}
+        </p>
+      )}
       <p className="mt-2 text-sm font-bold uppercase tracking-wider text-muted">{t("title")}</p>
-      <p className="mt-2 text-7xl font-extrabold tracking-tight text-brand sm:text-8xl">{result.iq}</p>
+      <p className="mt-2 font-display text-7xl font-bold tracking-tight sm:text-8xl">
+        <span className="text-grad-brand">{result.iq}</span>
+      </p>
       {result.iqBefore !== null && result.iqBefore !== result.iq && (
         <p className="mt-1 text-sm text-muted">
           {t("change", { before: result.iqBefore })}{" "}
@@ -221,10 +230,10 @@ function Card({ children }: { children: React.ReactNode }) {
   );
 }
 
-function Rule({ icon, children }: { icon: string; children: React.ReactNode }) {
+function Rule({ icon, children }: { icon: React.ReactNode; children: React.ReactNode }) {
   return (
     <li className="flex items-center justify-center gap-2 rounded-xl bg-background px-3 py-2.5">
-      <span aria-hidden>{icon}</span>
+      {icon}
       {children}
     </li>
   );

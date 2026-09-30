@@ -10,6 +10,7 @@ export interface LeaderboardEntry {
   userId: string;
   username: string;
   avatarSeed: string;
+  avatarStyle: string;
   value: number;
 }
 

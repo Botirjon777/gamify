@@ -7,7 +7,7 @@ import { Field } from "@/components/ui/field";
 import { register } from "../actions";
 import type { FormState } from "../schemas";
 
-export function RegisterForm() {
+export function RegisterForm({ referralCode }: { referralCode?: string }) {
   const t = useTranslations("auth");
   const [state, action, pending] = useActionState<FormState, FormData>(register, {});
   const err = (key?: string) => (key ? t(`errors.${key}`) : undefined);
@@ -50,6 +50,16 @@ export function RegisterForm() {
         error={err(state.fieldErrors?.password)}
         minLength={8}
         required
+      />
+      <Field
+        label={t("referral")}
+        name="ref"
+        autoCapitalize="characters"
+        autoComplete="off"
+        spellCheck={false}
+        hint={t("referralHint")}
+        defaultValue={state.values?.ref ?? referralCode}
+        error={err(state.fieldErrors?.ref)}
       />
       <Button type="submit" disabled={pending} className="mt-2">
         {pending ? t("pending") : t("submitRegister")}

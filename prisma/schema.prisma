@@ -87,6 +87,22 @@ model User {
   iqTestedAt    DateTime?
   /// User hid the "take the IQ test" invitation on the dashboard.
   iqPromptHiddenAt DateTime?
+
+  /// Personal subscription (FREE grows slower: daily XP cap, no multiplier).
+  plan          UserPlan  @default(FREE)
+  planExpiresAt DateTime?
+
+  /// Avatar customization (unlocked at level 10); style = DiceBear style key.
+  avatarStyle String @default("adventurer")
+  bio         String?
+
+  /// Invite code others can register with, e.g. "K7M2QX". Created on first use.
+  referralCode       String?   @unique
+  referredById       String?
+  /// When the inviter got their reward (invitee reached the required level).
+  referralRewardedAt DateTime?
+  referredBy         User?     @relation("Referrals", fields: [referredById], references: [id], onDelete: SetNull)
+  referrals          User[]    @relation("Referrals")
   currentStreak Int       @default(0)
   longestStreak Int       @default(0)
   lastActiveDay DateTime? @db.Date
@@ -103,6 +119,13 @@ model User {
   attempts     Attempt[]
   masteries    SkillMastery[]
   iqSessions   IqSession[]
+
+  sentFriendRequests     Friendship[]      @relation("FriendRequester")
+  receivedFriendRequests Friendship[]      @relation("FriendAddressee")
+  notifications          Notification[]
+  badges                 UserBadge[]
+  clanMembership         ClanMember?
+  clanJoinRequests       ClanJoinRequest[]
 
   @@index([xp(sort: Desc)])
   @@index([iqRating(sort: Desc)])
@@ -318,6 +341,157 @@ enum XpReason {
   DAILY_PROBLEM
   IQ_TEST
   ADMIN_ADJUST
+  REFERRAL
+  BADGE
+  CLAN_REWARD
+}
+
+enum UserPlan {
+  FREE
+  PRO
+  DIAMOND
+}
+
+// ─── Social ─────────────────────────────────────────────────────────────────
+
+enum FriendshipStatus {
+  PENDING
+  ACCEPTED
+}
+
+/// One row per pair. requester → addressee; becomes ACCEPTED when the addressee accepts.
+model Friendship {
+  id          String           @id @default(cuid())
+  requesterId String
+  addresseeId String
+  status      FriendshipStatus @default(PENDING)
+  createdAt   DateTime         @default(now())
+  respondedAt DateTime?
+
+  requester User @relation("FriendRequester", fields: [requesterId], references: [id], onDelete: Cascade)
+  addressee User @relation("FriendAddressee", fields: [addresseeId], references: [id], onDelete: Cascade)
+
+  @@unique([requesterId, addresseeId])
+  @@index([addresseeId, status])
+}
+
+enum NotificationType {
+  FRIEND_REQUEST
+  FRIEND_ACCEPTED
+  CLAN_JOIN_REQUEST
+  CLAN_JOIN_APPROVED
+  CLAN_JOIN_REJECTED
+  CLAN_WEEKLY_RESULT
+  BADGE_EARNED
+  LEVEL_UP
+  REFERRAL_JOINED
+  REFERRAL_REWARD
+}
+
+model Notification {
+  id        String           @id @default(cuid())
+  userId    String
+  type      NotificationType
+  /// Type-specific payload, e.g. { username, clanName, badge, level, xp }
+  data      Json
+  readAt    DateTime?
+  createdAt DateTime         @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId, readAt, createdAt])
+}
+
+/// Badge definitions live in code (features/badges/catalog.ts); this records who earned what.
+model UserBadge {
+  userId   String
+  badge    String
+  earnedAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([userId, badge])
+}
+
+// ─── Clans ──────────────────────────────────────────────────────────────────
+
+enum ClanRole {
+  LEADER
+  OFFICER
+  MEMBER
+}
+
+enum JoinRequestStatus {
+  PENDING
+  APPROVED
+  REJECTED
+}
+
+model Clan {
+  id          String   @id @default(cuid())
+  tenantId    String
+  slug        String   @unique
+  name        String
+  /// 2–5 uppercase letters shown next to members' names, e.g. [REACT]
+  tag         String   @unique
+  description String?
+  /// Icon key (lucide) and gradient key chosen by the leader.
+  emblem      String   @default("shield")
+  color       String   @default("brand")
+  createdAt   DateTime @default(now())
+
+  members  ClanMember[]
+  requests ClanJoinRequest[]
+  results  ClanWeeklyResult[]
+
+  @@index([tenantId])
+}
+
+model ClanMember {
+  clanId   String
+  /// A user can be in one clan at a time.
+  userId   String   @unique
+  role     ClanRole @default(MEMBER)
+  joinedAt DateTime @default(now())
+
+  clan Clan @relation(fields: [clanId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([clanId, userId])
+}
+
+/// Joining always needs approval from the clan leader or an officer.
+model ClanJoinRequest {
+  id          String            @id @default(cuid())
+  clanId      String
+  userId      String
+  message     String?
+  status      JoinRequestStatus @default(PENDING)
+  createdAt   DateTime          @default(now())
+  decidedAt   DateTime?
+  decidedById String?
+
+  clan Clan @relation(fields: [clanId], references: [id], onDelete: Cascade)
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([clanId, userId])
+  @@index([clanId, status])
+}
+
+/// Final standings of a finished week (written once, the first time anyone looks after the week ends).
+model ClanWeeklyResult {
+  id       String   @id @default(cuid())
+  tenantId String
+  week     DateTime @db.Date
+  clanId   String
+  rank     Int
+  score    Float
+  members  Int
+
+  clan Clan @relation(fields: [clanId], references: [id], onDelete: Cascade)
+
+  @@unique([week, clanId])
+  @@index([tenantId, week, rank])
 }
 
 /// The only way XP changes. User.xp is a cached sum, updated in the same transaction.

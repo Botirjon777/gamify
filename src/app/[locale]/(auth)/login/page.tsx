@@ -11,7 +11,7 @@ export default async function LoginPage({ params }: PageProps<"/[locale]/login">
 
   return (
     <>
-      <h1 className="text-2xl font-extrabold tracking-tight">{t("loginTitle")}</h1>
+      <h1 className="text-2xl font-bold tracking-tight">{t("loginTitle")}</h1>
       <p className="mb-6 mt-1.5 text-sm text-muted">{t("loginSubtitle")}</p>
       <LoginForm />
       <p className="mt-5 text-xs leading-relaxed text-muted">{t("forgotPassword")}</p>

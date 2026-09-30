@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { ArrowLeft, Play } from "lucide-react";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { buttonClass } from "@/components/ui/button";
@@ -23,15 +24,15 @@ export default async function SkillPage({ params }: PageProps<"/[locale]/learn/[
 
   return (
     <div className="flex flex-col gap-6">
-      <Link href="/learn" className="text-sm font-semibold text-muted hover:text-foreground">
-        ← {t("backToCatalog")}
+      <Link href="/learn" className="inline-flex items-center gap-1 text-sm font-semibold text-muted hover:text-foreground">
+        <ArrowLeft className="size-4" /> {t("backToCatalog")}
       </Link>
 
       <section className="rounded-3xl border border-border bg-surface p-6 sm:p-8">
         <p className="text-sm font-semibold text-muted">
           {skill.trackTitle} · {skill.moduleTitle}
         </p>
-        <h1 className="mt-2 font-mono text-3xl font-extrabold tracking-tight sm:text-4xl">{skill.title}</h1>
+        <h1 className="mt-2 font-mono text-3xl font-bold tracking-tight sm:text-4xl">{skill.title}</h1>
         <p className="mt-3 max-w-2xl leading-relaxed text-muted">{skill.description}</p>
 
         <div className="mt-6 max-w-md">
@@ -48,7 +49,7 @@ export default async function SkillPage({ params }: PageProps<"/[locale]/learn/[
           href={`/learn/${skill.trackSlug}/${skill.slug}/drill`}
           className={buttonClass("primary", "mt-8 h-12 w-full px-8 text-base sm:w-auto")}
         >
-          {cta}
+          <Play className="size-5" /> {cta}
         </Link>
       </section>
 
@@ -73,7 +74,7 @@ function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="rounded-2xl border border-border bg-surface p-4">
       <p className="text-xs font-medium text-muted sm:text-sm">{label}</p>
-      <p className="mt-1 truncate text-lg font-extrabold sm:text-xl">{value}</p>
+      <p className="mt-1 truncate text-lg font-bold sm:text-xl">{value}</p>
     </div>
   );
 }

@@ -1,7 +1,7 @@
 slug: react
 title: React
 description: Komponentlar, holat (state) va effektlar — zamonaviy interfeyslarning asosi.
-icon: ⚛️
+icon: atom
 order: 3
 modules:
   - slug: state

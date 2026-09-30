@@ -1,6 +1,7 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { Award, CircleCheck, CircleX, Flame, Gauge, PartyPopper, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
@@ -85,7 +86,7 @@ export function DrillSession({ skillId, skillHref, skillTitle, initialMastery }:
             aria-label={t("close")}
             className="grid size-9 shrink-0 place-items-center rounded-xl text-xl text-muted hover:bg-surface hover:text-foreground"
           >
-            ×
+            <X className="size-5" />
           </Link>
           <div className="min-w-0 flex-1">
             <div className="flex items-baseline justify-between gap-2 text-xs font-semibold">
@@ -94,17 +95,18 @@ export function DrillSession({ skillId, skillHref, skillTitle, initialMastery }:
             </div>
             <div className="mt-1 h-2.5 overflow-hidden rounded-full bg-border">
               <div
-                className="h-full rounded-full bg-brand transition-[width] duration-700 ease-out"
+                className="h-full rounded-full bg-grad-brand transition-[width] duration-700 ease-out"
                 style={{ width: `${s.mastery}%` }}
               />
             </div>
           </div>
           {s.combo >= 2 && (
             <span className="shrink-0 rounded-full bg-streak/10 px-2.5 py-1 text-xs font-bold text-streak">
-              🔥 {t("combo", { count: s.combo })}
+              <Flame className="mr-1 inline size-3.5" />
+              {t("combo", { count: s.combo })}
             </span>
           )}
-          <span className="shrink-0 text-sm font-extrabold text-xp">+{s.sessionXp} XP</span>
+          <span className="shrink-0 text-sm font-bold text-xp">+{s.sessionXp} XP</span>
         </div>
       </header>
 
@@ -178,7 +180,7 @@ function ExerciseBody({ exercise, locked, reveal }: { exercise: ClientExercise; 
         <p className="text-xs font-bold uppercase tracking-wider text-muted">
           {t(`types.${exercise.type}`)} · {t(`difficulty.${exercise.difficulty}`)}
         </p>
-        <h1 className="mt-2 text-xl font-extrabold leading-snug tracking-tight sm:text-2xl">{exercise.prompt}</h1>
+        <h1 className="mt-2 font-sans text-xl font-bold leading-snug tracking-tight sm:text-2xl">{exercise.prompt}</h1>
       </div>
       {exercise.type === "CHOICE" && <ChoiceView exercise={exercise} {...props} />}
       {exercise.type === "OUTPUT" && <OutputView exercise={exercise} {...props} />}
@@ -190,15 +192,21 @@ function ExerciseBody({ exercise, locked, reveal }: { exercise: ClientExercise; 
 
 function Feedback({ exercise }: { exercise: ClientExercise }) {
   const t = useTranslations("drill");
+  const tb = useTranslations("badges");
   const result = useDrill((s) => s.result)!;
   const answer = revealText(exercise, result.reveal);
 
   return (
     <div className={`min-w-0 flex-1 ${result.correct ? "text-[#0b7a47]" : "text-[#b42318]"}`}>
-      <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-lg font-extrabold">
-        {result.correct ? `✓ ${t("correct")}` : `✗ ${t("wrong")}`}
+      <p className="flex flex-wrap items-center gap-x-3 gap-y-1 text-lg font-bold">
+        {result.correct ? <CircleCheck className="size-6" /> : <CircleX className="size-6" />}
+        {result.correct ? t("correct") : t("wrong")}
         {result.xp > 0 && <span className="text-base text-xp">{t("xp", { xp: result.xp })}</span>}
-        {result.leveledUp && <span className="text-base text-brand">{t("levelUp", { level: result.level })}</span>}
+        {result.leveledUp && (
+          <span className="inline-flex items-center gap-1 text-base text-brand">
+            <PartyPopper className="size-4" /> {t("levelUp", { level: result.level })}
+          </span>
+        )}
       </p>
       {!result.correct && answer && (
         <div className="mt-1.5 text-sm">
@@ -211,6 +219,23 @@ function Feedback({ exercise }: { exercise: ClientExercise }) {
         </div>
       )}
       {result.explanation && <p className="mt-1.5 max-h-32 overflow-auto text-sm leading-relaxed">{result.explanation}</p>}
+      {result.capped && (
+        <p className="mt-2 flex flex-wrap items-center gap-2 rounded-lg bg-white/70 px-2.5 py-1.5 text-xs font-semibold text-foreground">
+          <Gauge className="size-4 text-xp" /> {t("capped")}
+          <Link href="/plans" className="text-brand underline">
+            {t("upgrade")}
+          </Link>
+        </p>
+      )}
+      {result.badges.length > 0 && (
+        <p className="mt-2 flex flex-wrap gap-2">
+          {result.badges.map((b) => (
+            <span key={b} className="inline-flex items-center gap-1 rounded-full bg-grad-xp px-2.5 py-1 text-xs font-bold text-white">
+              <Award className="size-3.5" /> {t("badgeEarned", { badge: tb(`${b}.title`) })}
+            </span>
+          ))}
+        </p>
+      )}
     </div>
   );
 }

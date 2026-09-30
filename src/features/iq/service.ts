@@ -4,6 +4,7 @@ import { localized, type LocalizedText } from "@/i18n/content";
 import { tashkentWeekStart } from "@/lib/time";
 import { getLeaderboardStore } from "@/lib/leaderboard";
 import { awardXp } from "@/features/gamification/xp";
+import { evaluateBadges } from "@/features/badges/service";
 import type { IqPublicContent } from "./content-schema";
 import { iqFromRating, iqPercentile, pickIqItem } from "./rating";
 import { IQ_SECONDS_PER_QUESTION, type IqKind, type IqQuestion, type IqResult } from "./types";
@@ -48,11 +49,11 @@ export async function toQuestion(tx: Tx, session: IqSession, locale: string): Pr
 export async function finishSession(tx: Tx, session: IqSession, user: User, rating: number): Promise<Omit<IqResult, "rank">> {
   const kind = session.kind as IqKind;
   const iq = iqFromRating(rating);
-  const xp = kind === "PLACEMENT" ? PLACEMENT_XP : session.correct * DAILY_XP_PER_CORRECT;
+  const baseXp = kind === "PLACEMENT" ? PLACEMENT_XP : session.correct * DAILY_XP_PER_CORRECT;
 
   await tx.iqSession.update({
     where: { id: session.id },
-    data: { status: "FINISHED", finishedAt: new Date(), ratingAfter: rating, currentItemId: null, xpAwarded: xp },
+    data: { status: "FINISHED", finishedAt: new Date(), ratingAfter: rating, currentItemId: null },
   });
   await tx.user.update({
     where: { id: user.id },
@@ -67,9 +68,11 @@ export async function finishSession(tx: Tx, session: IqSession, user: User, rati
     update: { value: iq },
   });
 
-  if (xp > 0) {
-    await awardXp(tx, { userId: user.id, tenantId: session.tenantId, amount: xp, reason: "IQ_TEST", refId: session.id });
-  }
+  const xp = baseXp > 0
+    ? (await awardXp(tx, { userId: user.id, tenantId: session.tenantId, amount: baseXp, reason: "IQ_TEST", refId: session.id })).awarded
+    : 0;
+  await tx.iqSession.update({ where: { id: session.id }, data: { xpAwarded: xp } });
+  await evaluateBadges(tx, user.id, session.tenantId);
 
   return {
     kind,

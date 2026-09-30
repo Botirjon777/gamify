@@ -4,7 +4,7 @@ import { tashkentWeekStart } from "@/lib/time";
 import { iqFromRating } from "@/features/iq/rating";
 import type { LeaderboardEntry, LeaderboardQuery, LeaderboardStore } from "./index";
 
-const userSelect = { id: true, username: true, avatarSeed: true } as const;
+const userSelect = { id: true, username: true, avatarSeed: true, avatarStyle: true } as const;
 
 /**
  * All-time boards read the cached columns on User (indexed); weekly boards read WeeklyScore.
@@ -24,6 +24,7 @@ export class PostgresLeaderboardStore implements LeaderboardStore {
         userId: r.user.id,
         username: r.user.username,
         avatarSeed: r.user.avatarSeed,
+        avatarStyle: r.user.avatarStyle,
         value: r.value,
       }));
     }
@@ -45,6 +46,7 @@ export class PostgresLeaderboardStore implements LeaderboardStore {
       userId: u.id,
       username: u.username,
       avatarSeed: u.avatarSeed,
+      avatarStyle: u.avatarStyle,
       value: board === "XP" ? u.xp : iqFromRating(u.iqRating),
     }));
   }

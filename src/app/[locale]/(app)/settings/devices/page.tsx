@@ -2,6 +2,8 @@ import { getFormatter, getTranslations, setRequestLocale } from "next-intl/serve
 import { db } from "@/lib/db";
 import { requireSession } from "@/lib/auth/session";
 import { Button } from "@/components/ui/button";
+import { PageHeader } from "@/components/page-header";
+import { Monitor, Smartphone } from "lucide-react";
 import { revokeAllOtherDevices, revokeDevice } from "@/features/auth/actions";
 
 export default async function DevicesPage({ params }: PageProps<"/[locale]/settings/devices">) {
@@ -21,10 +23,7 @@ export default async function DevicesPage({ params }: PageProps<"/[locale]/setti
 
   return (
     <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="text-2xl font-extrabold tracking-tight sm:text-3xl">{t("title")}</h1>
-        <p className="mt-1.5 max-w-xl text-muted">{t("subtitle")}</p>
-      </div>
+      <PageHeader title={t("title")} subtitle={t("subtitle")} />
 
       <ul className="flex flex-col gap-3">
         {sessions.map((s) => {
@@ -34,7 +33,11 @@ export default async function DevicesPage({ params }: PageProps<"/[locale]/setti
               key={s.id}
               className="flex flex-col gap-3 rounded-2xl border border-border bg-surface p-4 sm:flex-row sm:items-center sm:justify-between"
             >
-              <div className="min-w-0">
+              <div className="flex min-w-0 items-start gap-3">
+                <span className={`grid size-11 shrink-0 place-items-center rounded-xl text-white ${isCurrent ? "bg-grad-success" : "bg-grad-iq"}`}>
+                  {/iPhone|iOS|Android|Mobile/i.test(s.deviceName ?? "") ? <Smartphone className="size-5" /> : <Monitor className="size-5" />}
+                </span>
+                <div className="min-w-0">
                 <p className="flex flex-wrap items-center gap-2 font-semibold">
                   {s.deviceName ?? t("unknownDevice")}
                   {isCurrent && (
@@ -50,6 +53,7 @@ export default async function DevicesPage({ params }: PageProps<"/[locale]/setti
                   {t("lastActive", { time: format.relativeTime(s.lastActiveAt) })} ·{" "}
                   {t("signedIn", { time: format.dateTime(s.createdAt, { dateStyle: "medium" }) })}
                 </p>
+                </div>
               </div>
               {!isCurrent && (
                 <form action={revokeDevice.bind(null, s.id)}>

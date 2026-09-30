@@ -16,7 +16,7 @@ async function main() {
   // Example study center → demo.<ROOT_DOMAIN>, with its own brand color.
   await db.tenant.upsert({
     where: { slug: "demo" },
-    create: { slug: "demo", name: "Demo Academy", theme: { brand: "#0f9d76" } },
+    create: { slug: "demo", name: "Demo Academy", theme: { brand: "#0f9d76", brand2: "#22c55e" } },
     update: {},
   });
 

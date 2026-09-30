@@ -1,7 +1,7 @@
 slug: javascript
 title: JavaScript
 description: Tilning oʻzi — oʻzgaruvchilar, funksiyalar, massivlar va obyektlar.
-icon: 🟨
+icon: braces
 order: 1
 modules:
   - slug: arrays

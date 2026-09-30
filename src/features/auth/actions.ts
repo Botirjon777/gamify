@@ -20,6 +20,9 @@ import {
 import { redirect } from "@/i18n/navigation";
 import { Prisma } from "@/generated/prisma/client";
 import { loginSchema, registerSchema, type FormState } from "./schemas";
+import { awardXp } from "@/features/gamification/xp";
+import { notify } from "@/features/notifications/service";
+import { normalizeReferralCode, REFERRAL_NEW_USER_XP } from "@/features/referrals/service";
 
 function fieldErrors(error: z.ZodError): FormState["fieldErrors"] {
   const out: Record<string, string> = {};
@@ -40,7 +43,8 @@ export async function register(_prev: FormState, formData: FormData): Promise<Fo
     username: String(formData.get("username") ?? ""),
     password: String(formData.get("password") ?? ""),
   };
-  const values = { phone: raw.phone, username: raw.username };
+  const refRaw = String(formData.get("ref") ?? "");
+  const values = { phone: raw.phone, username: raw.username, ref: refRaw };
 
   const tenant = await getCurrentTenant();
   // Study center students are created by their admins; public sign-up only on the main site.
@@ -55,6 +59,11 @@ export async function register(_prev: FormState, formData: FormData): Promise<Fo
   const phone = normalizePhone(parsed.data.phone);
   if (!phone) return { fieldErrors: { phone: "invalidPhone" }, values };
   const { username, password } = parsed.data;
+
+  // Optional invite code from a friend.
+  const refCode = normalizeReferralCode(refRaw);
+  const referrer = refCode ? await db.user.findUnique({ where: { referralCode: refCode }, select: { id: true } }) : null;
+  if (refCode && !referrer) return { fieldErrors: { ref: "invalidReferral" }, values };
 
   const [phoneTaken, usernameTaken] = await Promise.all([
     db.user.findUnique({ where: { phone }, select: { id: true } }),
@@ -71,17 +80,26 @@ export async function register(_prev: FormState, formData: FormData): Promise<Fo
   }
 
   let userId: string;
+  const passwordHash = await hashPassword(password);
   try {
-    const user = await db.user.create({
-      data: {
-        phone,
-        username,
-        passwordHash: await hashPassword(password),
-        avatarSeed: username,
-        memberships: { create: { tenantId: tenant.id, role: "STUDENT" } },
-      },
+    userId = await db.$transaction(async (tx) => {
+      const user = await tx.user.create({
+        data: {
+          phone,
+          username,
+          passwordHash,
+          avatarSeed: username,
+          referredById: referrer?.id,
+          memberships: { create: { tenantId: tenant.id, role: "STUDENT" } },
+        },
+      });
+      if (referrer) {
+        // New user gets a welcome bonus now; the inviter is rewarded once this user reaches level 3 (see awardXp).
+        await awardXp(tx, { userId: user.id, tenantId: tenant.id, amount: REFERRAL_NEW_USER_XP, reason: "REFERRAL", refId: referrer.id });
+        await notify(tx, referrer.id, "REFERRAL_JOINED", { username });
+      }
+      return user.id;
     });
-    userId = user.id;
   } catch (e) {
     // Lost a race against another sign-up with the same phone/username.
     if (e instanceof Prisma.PrismaClientKnownRequestError && e.code === "P2002") {

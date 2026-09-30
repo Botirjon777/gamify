@@ -1,12 +1,14 @@
 import type { ButtonHTMLAttributes } from "react";
 
-type Variant = "primary" | "secondary" | "ghost" | "danger";
+type Variant = "primary" | "secondary" | "ghost" | "danger" | "success";
 
 const variants: Record<Variant, string> = {
-  primary: "bg-brand text-brand-foreground shadow-[0_4px_0_0_rgb(0_0_0/0.18)] hover:brightness-110 active:translate-y-0.5 active:shadow-none",
-  secondary: "border border-border bg-surface text-foreground hover:bg-background",
+  primary:
+    "bg-grad-brand text-brand-foreground shadow-lg shadow-brand/25 hover:shadow-xl hover:shadow-brand/30 hover:brightness-110 active:translate-y-px",
+  secondary: "border border-border bg-surface text-foreground hover:border-brand/40 hover:bg-background",
   ghost: "text-muted hover:bg-surface hover:text-foreground",
   danger: "border border-danger/30 text-danger hover:bg-danger/10",
+  success: "bg-grad-success text-white shadow-lg shadow-success/25 hover:brightness-110 active:translate-y-px",
 };
 
 export function buttonClass(variant: Variant = "primary", extra = "") {

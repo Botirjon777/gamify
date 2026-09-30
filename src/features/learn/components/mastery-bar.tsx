@@ -2,9 +2,9 @@ import { masteryLevel, type MasteryLevel } from "../mastery";
 
 const colors: Record<MasteryLevel, string> = {
   new: "bg-border",
-  learning: "bg-xp",
-  good: "bg-brand",
-  mastered: "bg-success",
+  learning: "bg-grad-xp",
+  good: "bg-grad-brand",
+  mastered: "bg-grad-success",
 };
 
 export function MasteryBar({ score, attempts, className = "" }: { score: number; attempts: number; className?: string }) {

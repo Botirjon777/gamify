@@ -21,7 +21,12 @@ export type SubmitResult = {
   correct: boolean;
   reveal: Reveal;
   explanation: string | null;
+  /** XP actually added (after plan multiplier and daily cap). */
   xp: number;
+  /** The plan's daily exercise XP cap was reached. */
+  capped: boolean;
+  /** Badges earned by this answer. */
+  badges: string[];
   firstSolve: boolean;
   mastery: number;
   masteryBefore: number;

@@ -15,7 +15,8 @@
     "postinstall": "prisma generate",
     "content:sync": "tsx scripts/content-sync.ts",
     "content:check": "tsx scripts/content-sync.ts --check",
-    "test": "vitest run"
+    "test": "vitest run",
+    "plan:set": "tsx scripts/set-plan.ts"
   },
   "dependencies": {
     "@dicebear/collection": "^9.4.2",
@@ -24,6 +25,7 @@
     "@prisma/adapter-pg": "^7.10.0",
     "@prisma/client": "^7.10.0",
     "libphonenumber-js": "^1.13.14",
+    "lucide-react": "^1.49.0",
     "next": "16.3.7",
     "next-intl": "^4.14.8",
     "pg": "^8.23.0",

@@ -11,7 +11,13 @@
     "profile": "Profil",
     "devices": "Qurilmalar",
     "logout": "Chiqish",
-    "learn": "Oʻrganish"
+    "learn": "Oʻrganish",
+    "friends": "Doʻstlar",
+    "clans": "Klanlar",
+    "notifications": "Bildirishnomalar",
+    "settings": "Sozlamalar",
+    "plans": "Tariflar",
+    "more": "Yana"
   },
   "landing": {
     "badge": "Dasturlash mashgʻulotlari — oʻyin shaklida",
@@ -43,7 +49,25 @@
     "centersText": "Oʻz subdomeningiz (markaz.gamify.uz), logotip va ranglar, oʻquvchilar statistikasi, uyga vazifalar, hisobotlar va markazlararo musobaqalar.",
     "centersCta": "Bogʻlanish",
     "aimTitle": "Maqsadimiz",
-    "aimText": "Oʻzbekistondagi har bir oʻquvchi dasturlashni zerikmasdan, har kuni ozgina va aniq maqsad bilan mashq qilsin."
+    "aimText": "Oʻzbekistondagi har bir oʻquvchi dasturlashni zerikmasdan, har kuni ozgina va aniq maqsad bilan mashq qilsin.",
+    "features": {
+      "iq": {
+        "title": "Gamify IQ",
+        "text": "Mantiqiy fikrlash testlari, kunlik IQ savollar va IQ reytingi."
+      },
+      "friends": {
+        "title": "Doʻstlar",
+        "text": "Doʻstlaringizni qoʻshing, taklif qiling va haftalik XP boʻyicha bellashing."
+      },
+      "clans": {
+        "title": "Klanlar",
+        "text": "Jamoa tuzing, har hafta boshqa klanlar bilan musobaqalashing va mukofot oling."
+      },
+      "badges": {
+        "title": "Nishonlar va darajalar",
+        "text": "Streak, daraja va yutuqlar uchun nishonlar. 10-darajada profil rasmi ochiladi."
+      }
+    }
   },
   "auth": {
     "loginTitle": "Xush kelibsiz!",
@@ -75,15 +99,18 @@
       "invalidCredentials": "Login yoki parol notoʻgʻri",
       "tooManyAttempts": "Juda koʻp urinish. Birozdan soʻng qayta urinib koʻring.",
       "registrationClosed": "Bu platformada roʻyxatdan oʻtish yopiq. Akkauntni oʻquv markazingiz administratori yaratadi.",
-      "notAMember": "Siz bu oʻquv markazining aʼzosi emassiz"
-    }
+      "notAMember": "Siz bu oʻquv markazining aʼzosi emassiz",
+      "invalidReferral": "Bunday taklif kodi topilmadi"
+    },
+    "referral": "Taklif kodi (ixtiyoriy)",
+    "referralHint": "Doʻstingiz kodi bilan darhol +50 XP olasiz"
   },
   "dashboard": {
     "greeting": "Salom, {username}!",
     "subtitle": "Bugun ham ozgina mashq — katta natija.",
     "level": "{level}-daraja",
     "xpToNext": "Keyingi darajagacha {xp} XP",
-    "streakLabel": "🔥 Streak",
+    "streakLabel": "Streak",
     "streak": "{count} kun",
     "longestStreak": "Eng uzun: {count} kun",
     "rank": "Reyting",
@@ -93,7 +120,7 @@
       "title": "Kunlik bonus",
       "text": "Har kuni kiring — bonus 7 kun davomida oʻsib boradi.",
       "claim": "+{xp} XP olish",
-      "claimed": "Bugungi bonus olindi ✓",
+      "claimed": "Bugungi bonus olindi",
       "day": "{day}-kun"
     },
     "comingSoon": "Tez orada",
@@ -106,7 +133,7 @@
     "dailyIq": {
       "title": "Kunlik IQ test",
       "start": "Boshlash",
-      "done": "Bajarildi ✓",
+      "done": "Bajarildi",
       "text": "5 ta savol · IQ bahoingizni yangilaydi"
     },
     "iqPrompt": {
@@ -169,7 +196,7 @@
     "correctAnswer": "Toʻgʻri javob:",
     "xp": "+{xp} XP",
     "firstSolve": "Birinchi yechim",
-    "levelUp": "Yangi daraja: {level}! 🎉",
+    "levelUp": "Yangi daraja: {level}!",
     "combo": "{count} ketma-ket",
     "session": "{correct}/{total} toʻgʻri",
     "loading": "Yuklanmoqda…",
@@ -190,7 +217,10 @@
     "outputPlaceholder": "Javobingizni yozing",
     "orderHint": "Qatorlarni toʻgʻri tartibda bosing. Olib tashlash uchun yuqoridagi qatorni bosing.",
     "orderEmpty": "Qatorlarni shu yerga yigʻing",
-    "keyboardHint": "Enter — tekshirish / davom etish"
+    "keyboardHint": "Enter — tekshirish / davom etish",
+    "capped": "Bugungi XP limiti tugadi (Free: kuniga 150 XP). Pro tarifda tezroq oʻsasiz!",
+    "upgrade": "Tariflar",
+    "badgeEarned": "Yangi nishon: {badge}"
   },
   "iq": {
     "placement": {
@@ -222,7 +252,7 @@
       "xp": "+{xp} XP",
       "toDashboard": "Bosh sahifaga",
       "toLeaderboard": "Reytingni koʻrish",
-      "doneToday": "Bugungi IQ test bajarildi ✓",
+      "doneToday": "Bugungi IQ test bajarildi",
       "comeBack": "Ertaga yangi savollar bilan qaytib keling!"
     },
     "error": "Xatolik yuz berdi. Sahifani yangilab koʻring.",
@@ -248,5 +278,290 @@
     "empty": "Hozircha bu reytingda hech kim yoʻq.",
     "weeklyReset": "Haftalik reyting har dushanba 00:00 da (Toshkent vaqti) yangilanadi.",
     "takeTest": "IQ testni topshirish"
+  },
+  "plans": {
+    "title": "Tariflar",
+    "subtitle": "Tezroq oʻsing, koʻproq imkoniyat oching.",
+    "names": {
+      "FREE": "Free",
+      "PRO": "Pro",
+      "DIAMOND": "Diamond"
+    },
+    "taglines": {
+      "FREE": "Boshlash uchun",
+      "PRO": "Jiddiy oʻrganuvchilar uchun",
+      "DIAMOND": "Eng tez oʻsish"
+    },
+    "free": "Bepul",
+    "perMonth": "soʻm / oy",
+    "current": "Joriy tarif",
+    "until": "{date} gacha",
+    "choose": "Tanlash",
+    "popular": "Ommabop",
+    "features": {
+      "multiplier": "XP ×{x}",
+      "cap": "Mashqlardan kuniga {xp} XP gacha",
+      "noCap": "Cheksiz XP",
+      "clan": "Klanda {n} tagacha aʼzo",
+      "friends": "{n} tagacha doʻst",
+      "avatarsPro": "Pro avatar uslublari",
+      "avatarsDiamond": "Barcha avatar uslublari",
+      "badge": "Profilda {plan} belgisi"
+    },
+    "paymentSoon": "Toʻlov (Click, Payme) tez orada ulanadi. Hozircha tarifni administrator orqali faollashtirish mumkin.",
+    "contact": "Administratorga yozish"
+  },
+  "friends": {
+    "title": "Doʻstlar",
+    "subtitle": "Doʻstlaringiz bilan birga oʻrganing va musobaqalashing.",
+    "tabs": {
+      "friends": "Doʻstlarim",
+      "requests": "Soʻrovlar",
+      "search": "Qidirish"
+    },
+    "searchPlaceholder": "Foydalanuvchi nomini yozing…",
+    "searchHint": "Kamida 2 ta belgi",
+    "noResults": "Hech kim topilmadi",
+    "noFriends": "Hali doʻstlaringiz yoʻq. Qidiruv orqali doʻst toping!",
+    "incoming": "Kiruvchi soʻrovlar",
+    "outgoing": "Yuborilgan soʻrovlar",
+    "noRequests": "Yangi soʻrovlar yoʻq",
+    "add": "Doʻst qoʻshish",
+    "sent": "Soʻrov yuborildi",
+    "cancel": "Bekor qilish",
+    "accept": "Qabul qilish",
+    "decline": "Rad etish",
+    "remove": "Oʻchirish",
+    "isFriend": "Doʻstingiz",
+    "weeklyXp": "Bu hafta {xp} XP",
+    "level": "{level}-daraja",
+    "errors": {
+      "limit": "Doʻstlar limiti tugadi — yuqoriroq tarifga oʻting",
+      "notFound": "Topilmadi",
+      "tooMany": "Juda koʻp soʻrov. Keyinroq urinib koʻring.",
+      "self": "Oʻzingizni qoʻsha olmaysiz"
+    }
+  },
+  "profile": {
+    "level": "Daraja",
+    "xp": "XP",
+    "iq": "Gamify IQ",
+    "rank": "Reyting",
+    "streak": "Eng uzun streak",
+    "days": "{count} kun",
+    "badges": "Nishonlar",
+    "noBadges": "Hali nishonlar yoʻq",
+    "clan": "Klan",
+    "noClan": "Klanda emas",
+    "memberSince": "{date} dan beri",
+    "edit": "Profilni tahrirlash",
+    "notFound": "Foydalanuvchi topilmadi",
+    "lockedBadges": "Qolgan nishonlar"
+  },
+  "settings": {
+    "title": "Sozlamalar",
+    "subtitle": "Profil, taklif havolasi va qurilmalar.",
+    "avatar": "Profil rasmi",
+    "avatarLocked": "Profil rasmini oʻzgartirish {level}-darajada ochiladi. Hozir siz {current}-darajadasiz.",
+    "reroll": "Yangi koʻrinish",
+    "styleLocked": "{plan} kerak",
+    "saved": "Saqlandi",
+    "bio": "Men haqimda",
+    "bioPlaceholder": "Masalan: React oʻrganyapman, tez orada junior boʻlaman!",
+    "save": "Saqlash",
+    "inviteTitle": "Doʻstlarni taklif qiling",
+    "inviteText": "Doʻstingiz kodingiz bilan roʻyxatdan oʻtsa, darhol +{bonus} XP oladi. U {level}-darajaga yetganda sizga +{xp} XP beriladi.",
+    "code": "Taklif kodingiz",
+    "link": "Taklif havolasi",
+    "copy": "Nusxa olish",
+    "copied": "Nusxa olindi!",
+    "inviteStats": "Taklif qilinganlar: {joined} · mukofotlanganlar: {rewarded}",
+    "devices": "Faol qurilmalar",
+    "devicesText": "Akkauntingizga kirilgan qurilmalarni boshqaring.",
+    "plan": "Tarif",
+    "planText": "Joriy tarif: {plan}",
+    "errors": {
+      "locked": "Hali ochilmagan",
+      "planRequired": "Bu uslub uchun yuqoriroq tarif kerak",
+      "invalid": "Notoʻgʻri qiymat"
+    }
+  },
+  "notifications": {
+    "title": "Bildirishnomalar",
+    "empty": "Hozircha bildirishnomalar yoʻq",
+    "markAll": "Hammasini oʻqilgan qilish",
+    "types": {
+      "FRIEND_REQUEST": "<b>{username}</b> sizga doʻstlik soʻrovini yubordi",
+      "FRIEND_ACCEPTED": "<b>{username}</b> doʻstlik soʻrovingizni qabul qildi",
+      "CLAN_JOIN_REQUEST": "<b>{username}</b> «{clanName}» klaniga qoʻshilmoqchi",
+      "CLAN_JOIN_APPROVED": "Siz «{clanName}» klaniga qabul qilindingiz",
+      "CLAN_JOIN_REJECTED": "«{clanName}» klaniga soʻrovingiz rad etildi",
+      "CLAN_WEEKLY_RESULT": "«{clanName}» haftalik musobaqada {rank}-oʻrinni egalladi! +{xp} XP",
+      "BADGE_EARNED": "Yangi nishon: <b>{badge}</b>",
+      "LEVEL_UP": "Tabriklaymiz! Siz {level}-darajaga chiqdingiz",
+      "REFERRAL_JOINED": "<b>{username}</b> taklif kodingiz bilan roʻyxatdan oʻtdi",
+      "REFERRAL_REWARD": "<b>{username}</b> 3-darajaga yetdi — sizga +{xp} XP"
+    }
+  },
+  "clans": {
+    "title": "Klanlar",
+    "subtitle": "Jamoa boʻlib oʻrganing va har hafta boshqa klanlar bilan bellashing.",
+    "create": "Klan yaratish",
+    "myClan": "Mening klanim",
+    "open": "Ochish",
+    "weeklyTitle": "Shu haftalik musobaqa",
+    "howScore": "Klan bali — aʼzolarning shu haftada toʻplagan XP yigʻindisi. Hafta yakunida top-3 klan aʼzolari +{first} / +{second} / +{third} XP oladi, gʻoliblar — «Chempion» nishonini.",
+    "lastWeek": "Oʻtgan hafta gʻoliblari",
+    "noClans": "Hali klanlar yoʻq. Birinchi boʻlib yarating!",
+    "members": "{count} aʼzo",
+    "memberLimit": "{count}/{limit} aʼzo",
+    "score": "{xp} XP",
+    "weeklyRank": "Haftalik oʻrin",
+    "form": {
+      "title": "Yangi klan",
+      "name": "Klan nomi",
+      "namePlaceholder": "Masalan: React Ninjalari",
+      "tag": "Teg",
+      "tagHint": "2–5 ta lotin harfi yoki raqam, masalan RN",
+      "description": "Tavsif (ixtiyoriy)",
+      "descriptionPlaceholder": "Klaningiz haqida bir-ikki gap",
+      "emblem": "Emblema",
+      "color": "Rang",
+      "submit": "Yaratish"
+    },
+    "errors": {
+      "nameLength": "Nomi 3–30 ta belgi boʻlishi kerak",
+      "tagFormat": "2–5 ta lotin harfi yoki raqam",
+      "tagTaken": "Bu teg band",
+      "descriptionLength": "200 ta belgidan oshmasin",
+      "inClan": "Siz allaqachon klan aʼzosisiz",
+      "tooMany": "Juda koʻp urinish. Keyinroq qayta urining.",
+      "full": "Klan toʻla",
+      "forbidden": "Ruxsat yoʻq",
+      "notFound": "Topilmadi"
+    },
+    "join": "Qoʻshilish soʻrovi",
+    "joinMessage": "Xabar (ixtiyoriy)",
+    "joinMessagePlaceholder": "Nega qoʻshilmoqchisiz?",
+    "requestSent": "Soʻrov yuborildi — klan admini tasdiqlashini kuting",
+    "cancelRequest": "Soʻrovni bekor qilish",
+    "approvalNote": "Klanga faqat admin tasdiqlagandan soʻng qoʻshilasiz",
+    "leave": "Klandan chiqish",
+    "requests": "Qoʻshilish soʻrovlari",
+    "noRequests": "Yangi soʻrovlar yoʻq",
+    "approve": "Qabul qilish",
+    "reject": "Rad etish",
+    "kick": "Chiqarish",
+    "makeOfficer": "Ofitser qilish",
+    "removeOfficer": "Oddiy aʼzo qilish",
+    "roles": {
+      "LEADER": "Lider",
+      "OFFICER": "Ofitser",
+      "MEMBER": "Aʼzo"
+    },
+    "full": "Klan toʻla",
+    "inOtherClan": "Siz boshqa klan aʼzosisiz",
+    "membersTitle": "Aʼzolar",
+    "founded": "Tashkil etilgan: {date}"
+  },
+  "rail": {
+    "friendsTitle": "Doʻstlar bu hafta",
+    "noFriends": "Doʻstlaringizni qoʻshing va birga musobaqalashing",
+    "findFriends": "Doʻst topish",
+    "clansTitle": "Klanlar reytingi",
+    "seeAll": "Barchasi",
+    "inviteTitle": "Doʻstni taklif qiling",
+    "inviteText": "Har bir faol doʻst uchun +150 XP",
+    "inviteCta": "Taklif qilish",
+    "upgradeTitle": "Tezroq oʻsing",
+    "upgradeText": "Pro bilan XP ×1.5 va kuniga 600 XP gacha",
+    "upgradeCta": "Tariflar",
+    "level": "{level}-daraja"
+  },
+  "badges": {
+    "first_step": {
+      "title": "Birinchi qadam",
+      "text": "Birinchi mashqni yeching"
+    },
+    "solver_50": {
+      "title": "Masala yechuvchi",
+      "text": "50 ta mashqni toʻgʻri yeching"
+    },
+    "solver_200": {
+      "title": "Jangchi",
+      "text": "200 ta mashqni toʻgʻri yeching"
+    },
+    "streak_3": {
+      "title": "Uchqun",
+      "text": "3 kunlik streak"
+    },
+    "streak_7": {
+      "title": "Olov",
+      "text": "7 kunlik streak"
+    },
+    "streak_30": {
+      "title": "Toʻxtovsiz",
+      "text": "30 kunlik streak"
+    },
+    "level_5": {
+      "title": "Yulduzcha",
+      "text": "5-darajaga chiqing"
+    },
+    "level_10": {
+      "title": "Tajribali",
+      "text": "10-darajaga chiqing — profil rasmini oʻzgartirish ochiladi"
+    },
+    "level_20": {
+      "title": "Afsona",
+      "text": "20-darajaga chiqing"
+    },
+    "skill_master": {
+      "title": "Usta",
+      "text": "Bitta mavzuni 85% dan yuqori oʻzlashtiring"
+    },
+    "iq_tested": {
+      "title": "Aql sinovi",
+      "text": "IQ testni topshiring"
+    },
+    "iq_130": {
+      "title": "Daho",
+      "text": "Gamify IQ 130 dan yuqori"
+    },
+    "first_friend": {
+      "title": "Doʻstona",
+      "text": "Birinchi doʻstingizni qoʻshing"
+    },
+    "friends_10": {
+      "title": "Jamoa ruhi",
+      "text": "10 ta doʻst"
+    },
+    "clan_member": {
+      "title": "Klan aʼzosi",
+      "text": "Klanga qoʻshiling"
+    },
+    "clan_founder": {
+      "title": "Asoschi",
+      "text": "Klan yarating"
+    },
+    "recruiter": {
+      "title": "Yollovchi",
+      "text": "Taklif qilgan doʻstingiz 3-darajaga yetsin"
+    },
+    "ambassador": {
+      "title": "Elchi",
+      "text": "5 ta faol doʻst taklif qiling"
+    },
+    "pro": {
+      "title": "Pro",
+      "text": "Pro tarifga oʻting"
+    },
+    "diamond": {
+      "title": "Olmos",
+      "text": "Diamond tarifga oʻting"
+    },
+    "clan_champion": {
+      "title": "Chempion",
+      "text": "Klaningiz haftalik musobaqada 1-oʻrinni egallasin"
+    }
   }
 }

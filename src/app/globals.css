@@ -1,21 +1,32 @@
 @import "tailwindcss";
 
 /*
- * Brand tokens. Study centers override --brand / --brand-foreground via their tenant theme
- * (set inline on <body> in app/[locale]/layout.tsx).
+ * Brand tokens. Study centers override --brand / --brand-2 / --brand-foreground via their tenant theme
+ * (set inline on <body> in app/[locale]/layout.tsx); every gradient is derived from them.
  */
 :root {
-  --background: #f7f7fb;
-  --foreground: #16142b;
+  --background: #f6f5fb;
+  --foreground: #14122b;
   --surface: #ffffff;
   --muted: #6b6883;
-  --border: #e6e4f0;
+  --border: #e7e4f2;
   --brand: #6d4aff;
+  --brand-2: #d946ef;
   --brand-foreground: #ffffff;
-  --xp: #f5a524;
+  --xp: #f59e0b;
   --streak: #ff6a2b;
-  --success: #17b26a;
+  --success: #12b76a;
   --danger: #e5484d;
+
+  --grad-brand: linear-gradient(135deg, var(--brand) 0%, var(--brand-2) 100%);
+  --grad-xp: linear-gradient(135deg, #fbbf24 0%, #f97316 100%);
+  --grad-streak: linear-gradient(135deg, #fb923c 0%, #ef4444 100%);
+  --grad-iq: linear-gradient(135deg, #22d3ee 0%, #6366f1 100%);
+  --grad-success: linear-gradient(135deg, #34d399 0%, #059669 100%);
+  --grad-gold: linear-gradient(135deg, #fde68a 0%, #f59e0b 100%);
+  --grad-silver: linear-gradient(135deg, #f1f5f9 0%, #94a3b8 100%);
+  --grad-bronze: linear-gradient(135deg, #fed7aa 0%, #c2410c 100%);
+  --grad-dark: linear-gradient(135deg, #1e1b4b 0%, #3b0764 100%);
 }
 
 @theme inline {
@@ -25,16 +36,66 @@
   --color-muted: var(--muted);
   --color-border: var(--border);
   --color-brand: var(--brand);
+  --color-brand-2: var(--brand-2);
   --color-brand-foreground: var(--brand-foreground);
   --color-xp: var(--xp);
   --color-streak: var(--streak);
   --color-success: var(--success);
   --color-danger: var(--danger);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-onest);
+  --font-display: var(--font-unbounded);
+  --font-mono: var(--font-jetbrains);
 }
 
 body {
-  background: var(--background);
+  background:
+    radial-gradient(900px 500px at 100% -10%, color-mix(in oklab, var(--brand-2) 10%, transparent), transparent 70%),
+    radial-gradient(800px 500px at -10% 0%, color-mix(in oklab, var(--brand) 10%, transparent), transparent 70%),
+    var(--background);
+  background-attachment: fixed;
   color: var(--foreground);
+}
+
+/* Gradient utilities: bg-grad-brand, bg-grad-xp, … and text-grad-brand for gradient text. */
+@utility bg-grad-brand {
+  background-image: var(--grad-brand);
+}
+@utility bg-grad-xp {
+  background-image: var(--grad-xp);
+}
+@utility bg-grad-streak {
+  background-image: var(--grad-streak);
+}
+@utility bg-grad-iq {
+  background-image: var(--grad-iq);
+}
+@utility bg-grad-success {
+  background-image: var(--grad-success);
+}
+@utility bg-grad-gold {
+  background-image: var(--grad-gold);
+}
+@utility bg-grad-silver {
+  background-image: var(--grad-silver);
+}
+@utility bg-grad-bronze {
+  background-image: var(--grad-bronze);
+}
+@utility bg-grad-dark {
+  background-image: var(--grad-dark);
+}
+@utility text-grad-brand {
+  background-image: var(--grad-brand);
+  background-clip: text;
+  color: transparent;
+}
+
+/* In the base layer so a utility (e.g. font-sans on long question prompts) can still override it. */
+@layer base {
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    letter-spacing: -0.01em;
+  }
 }
