@@ -1,0 +1,15 @@
+slug: csharp
+title: C#
+description: .NET ekotizimi — kuchli tiplash, LINQ soʻrovlari, OOP va zamonaviy C# imkoniyatlari.
+icon: cpu
+order: 8
+modules:
+  - slug: csharp-core
+    title: C# asoslari va LINQ
+    skills:
+      - slug: linq-basics
+        title: LINQ soʻrovlari
+        description: Where, Select, OrderBy, FirstOrDefault va Any metodlari bilan toʻplamlarni qayta ishlash.
+      - slug: classes-records
+        title: Sinflar, Record va Nullable
+        description: Auto-properties { get; set; }, record tiplari, pattern matching va Nullable reference tiplari.

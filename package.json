@@ -17,7 +17,8 @@
     "content:check": "tsx scripts/content-sync.ts --check",
     "test": "vitest run",
     "plan:set": "tsx scripts/set-plan.ts",
-    "deploy:prod": "tsx scripts/deploy.ts"
+    "deploy:prod": "tsx scripts/deploy.ts",
+    "content:lint": "tsx scripts/content-lint.ts"
   },
   "dependencies": {
     "@dicebear/collection": "^9.4.2",

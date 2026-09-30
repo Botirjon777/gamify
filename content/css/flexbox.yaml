@@ -1,0 +1,137 @@
+exercises:
+  - id: css-flex-001
+    type: choice
+    difficulty: 1
+    lang: css
+    prompt: Elementni Flexbox konteyneriga aylantirish uchun qaysi CSS xossasi beriladi?
+    options:
+      - "display: flex;"
+      - "flex: 1;"
+      - "position: flex;"
+      - "layout: flexbox;"
+    answer: 0
+    explanation: "display: flex xossasi konteynerni flex kontekstiga oʻtkazadi va uning barcha bevosita bola elementlarini flex-itemlarga aylantiradi."
+
+  - id: css-flex-002
+    type: fill
+    difficulty: 1
+    lang: css
+    prompt: Elementlarni asosiy oʻq (main axis) boʻyicha oʻrtaga joylashtirish uchun xossani toʻldiring.
+    code: |-
+      .container {
+        display: flex;
+        ___: center;
+      }
+    answer:
+      - [justify-content, place-content]
+    explanation: justify-content xossasi asosiy oʻq boʻyicha elementlarni tekislash (center, flex-start, flex-end, space-between) uchun xizmat qiladi.
+
+  - id: css-flex-003
+    type: fill
+    difficulty: 1
+    lang: css
+    prompt: Elementlarni koʻndalang oʻq (cross axis) boʻylab vertikal markazlashtirish uchun xossani yozing.
+    code: |-
+      .container {
+        display: flex;
+        ___: center;
+      }
+    answer:
+      - [align-items, place-items]
+    explanation: align-items koʻndalang oʻq (standart holatda vertikal) boʻyicha elementlarni tekislaydi.
+
+  - id: css-flex-004
+    type: choice
+    difficulty: 1
+    lang: css
+    prompt: Flex elementlar orasidagi masofani (oraligʻini) belgilovchi zamonaviy xossa qaysi?
+    options:
+      - gap
+      - space
+      - margin-between
+      - spacing
+    answer: 0
+    explanation: gap (yoki row-gap / column-gap) flex elementlari orasida margin ishlatmasdan toza va qulay oraliq qoldirish imkonini beradi.
+
+  - id: css-flex-005
+    type: choice
+    difficulty: 2
+    lang: css
+    prompt: Flex elementlarni gorizontal emas, vertikal (ustun koʻrinishida) joylashtirish uchun nima yoziladi?
+    options:
+      - "flex-direction: column;"
+      - "flex-flow: vertical;"
+      - "flex-orientation: column;"
+      - "align-content: column;"
+    answer: 0
+    explanation: flex-direction asosiy oʻq yoʻnalishini belgilaydi. row (standart gorizontal) yoki column (vertikal).
+
+  - id: css-flex-006
+    type: fill
+    difficulty: 2
+    lang: css
+    prompt: Elementlar konteyner kengligiga sigʻmay qolganda yangi qatorga oʻtishi uchun xossani toʻldiring.
+    code: |-
+      .container {
+        display: flex;
+        flex-wrap: ___;
+      }
+    answer:
+      - wrap
+    explanation: "flex-wrap: wrap berilganda flex itemlar bir qatorga siqilmay, yangi qatorga oʻtadi."
+
+  - id: css-flex-007
+    type: choice
+    difficulty: 2
+    lang: css
+    prompt: Qaysi xossa flex-itemga konteynerdagi boʻsh joyni toʻliq egallash uchun kengayish imkonini beradi?
+    options:
+      - "flex-grow: 1;"
+      - "flex-shrink: 0;"
+      - "flex-basis: 100%;"
+      - "flex-width: auto;"
+    answer: 0
+    explanation: flex-grow mavjud boʻsh joy qanday nisbatda taqsimlanishini bildiradi. 1 berilsa, qolgan boʻsh joyni egallaydi (boshqa elementlarda flex-grow boʻlmasa; aks holda boʻsh joy nisbat boʻyicha boʻlinadi).
+
+  - id: css-flex-008
+    type: fill
+    difficulty: 2
+    lang: css
+    prompt: Kontentni ekranning qoq oʻrtasiga toʻliq markazlashtirish uchun yetishmayotgan xossalarni toʻldiring (avval asosiy oʻq, soʻng koʻndalang oʻq).
+    code: |-
+      .wrapper {
+        display: flex;
+        ___: center; /* asosiy oʻq */
+        ___: center; /* koʻndalang oʻq */
+        min-height: 100vh;
+      }
+    answer:
+      - [justify-content, place-content]
+      - [align-items, place-items]
+    explanation: display flex, justify-content center va align-items center kombinatsiyasi bilan balandlik berilganda toʻliq markazlashadi.
+
+  - id: css-flex-009
+    type: choice
+    difficulty: 3
+    lang: css
+    prompt: "flex: 1 0 auto; qisqartmasi (shorthand) qaysi xossalarni bildiradi?"
+    options:
+      - "flex-grow: 1; flex-shrink: 0; flex-basis: auto;"
+      - "flex-shrink: 1; flex-grow: 0; flex-basis: auto;"
+      - "flex-basis: 1; flex-grow: 0; flex-shrink: auto;"
+      - "flex-order: 1; flex-wrap: 0; flex-align: auto;"
+    answer: 0
+    explanation: "flex shorthand tartibi: flex-grow, flex-shrink va flex-basis ketma-ketligidadir."
+
+  - id: css-flex-010
+    type: choice
+    difficulty: 3
+    lang: css
+    prompt: justify-content xossasining qaysi qiymati birinchi elementni chap chetga, oxirgisini oʻng chetga, qolganlarini oraliqni teng boʻlib joylashtiradi?
+    options:
+      - space-between
+      - space-around
+      - space-evenly
+      - stretch
+    answer: 0
+    explanation: space-between chetlarda boʻsh joy qoldirmaydi, elementlarning oʻzaro oraligʻini teng taqsimlaydi.

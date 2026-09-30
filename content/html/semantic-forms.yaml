@@ -1,0 +1,128 @@
+exercises:
+  - id: html-form-001
+    type: choice
+    difficulty: 1
+    lang: html
+    prompt: Sahifaning asosiy navigatsiya havolalari blokini qaysi semantik teg ichiga olish toʻgʻri?
+    options:
+      - <nav>
+      - <menu>
+      - <section>
+      - <aside>
+    answer: 0
+    explanation: <nav> tegi asosiy navigatsiya blokini bildiradi va qidiruv botlari hamda screen readerlar uchun moʻljallangan.
+
+  - id: html-form-002
+    type: fill
+    difficulty: 1
+    lang: html
+    prompt: Matnli kiritish maydoni (input) va uning tavsifini (label) bir-biriga bogʻlovchi atributni toʻldiring.
+    code: |-
+      <label ___="email-input">Elektron pochta:</label>
+      <input type="email" id="email-input" />
+    answer:
+      - "for"
+    explanation: label elementining for atributi tegishli input elementining id qiymatiga mos kelishi kerak. Shunda yozuv bosilganda ham input faollashadi.
+
+  - id: html-form-003
+    type: choice
+    difficulty: 1
+    lang: html
+    prompt: Formani yuborishda maydon toʻldirilishi shart ekanligini qaysi atribut belgilaydi?
+    options:
+      - required
+      - mandatory
+      - validate
+      - need
+    answer: 0
+    explanation: required atributi brauzer darajasida tekshiruv qoʻshib, foydalanuvchi maydonni boʻsh qoldirishiga yoʻl qoʻymaydi.
+
+  - id: html-form-004
+    type: fill
+    difficulty: 1
+    lang: html
+    prompt: Parol kiritish uchun moʻljallangan input turini (type) yozing.
+    code: |-
+      <input type="___" name="password" placeholder="Parolingizni kiriting" />
+    answer:
+      - password
+    explanation: type="password" kiritilgan belgilarni yashirib, ularni nuqta yoki yulduzcha shaklida koʻrsatadi.
+
+  - id: html-form-005
+    type: choice
+    difficulty: 2
+    lang: html
+    prompt: Sahifaning mustaqil, qayta ishlatilishi mumkin boʻlgan boʻlagi (masalan, blog posti, sharh yoki xabar kartochkasi) uchun qaysi semantik teg eng mos keladi?
+    options:
+      - <article>
+      - <section>
+      - <div>
+      - <aside>
+    answer: 0
+    explanation: <article> mustaqil va oʻz-oʻzidan toʻliq maʼnoga ega boʻlgan kontent boʻlagi (blog post, yangilik, karta) uchun ishlatiladi.
+
+  - id: html-form-006
+    type: choice
+    difficulty: 2
+    lang: html
+    prompt: Foydalanuvchi bir nechta variantdan birontasini yoki bir nechtasini tanlashi uchun qaysi input turi ishlatiladi?
+    options:
+      - checkbox
+      - radio
+      - select
+      - toggle
+    answer: 0
+    explanation: checkbox birdan ortiq variantni mustaqil tanlash imkonini beradi. radio esa faqat bitta variant tanlash uchun moʻljallangan.
+
+  - id: html-form-007
+    type: order
+    difficulty: 2
+    lang: html
+    prompt: Standart foydalanuvchi formasining tartibini toʻgʻrilang (avval login, soʻng parol).
+    lines:
+      - "<form action=\"/api/login\" method=\"POST\">"
+      - "  <label for=\"username\">Login:</label>"
+      - "  <input type=\"text\" id=\"username\" name=\"username\" required />"
+      - "  <label for=\"pwd\">Parol:</label>"
+      - "  <input type=\"password\" id=\"pwd\" name=\"password\" required />"
+      - "  <button type=\"submit\">Kirish</button>"
+      - "</form>"
+    explanation: Forma ochiladi, login uchun label va input, parol uchun label va input joylashtiriladi va submit tugmasi bilan yopiladi.
+
+  - id: html-form-008
+    type: fill
+    difficulty: 2
+    lang: html
+    prompt: Koʻp qatorli matn (izoh, xabar) kiritish uchun qaysi HTML teg ishlatiladi?
+    code: |-
+      <___ rows="4" cols="50" placeholder="Fikringizni qoldiring..."></___>
+    answer:
+      - textarea
+      - textarea
+    explanation: <textarea> bir nechta qatorli matn yozish uchun maxsus teggadir.
+
+  - id: html-form-009
+    type: choice
+    difficulty: 2
+    lang: html
+    prompt: Sahifadagi asosiy kontentdan chetda joylashgan qoʻshimcha maʼlumotlar (sidebar, reklamalar, havolalar bloki) qaysi tegda boʻladi?
+    options:
+      - <aside>
+      - <sidebar>
+      - <extra>
+      - <submain>
+    answer: 0
+    explanation: <aside> asosiy mavzuga bevosita kirmaydigan qoʻshimcha yon panel (sidebar) yoki maʼlumotlar uchun ishlatiladi.
+
+  - id: html-form-010
+    type: choice
+    difficulty: 3
+    lang: html
+    prompt: Qaysi semantik element tasvir va unga tegishli izohni (caption) birga guruhlash uchun ishlatiladi?
+    options:
+      - <figure> va <figcaption>
+      - <picture> va <desc>
+      - <image> va <summary>
+      - <media> va <caption>
+    answer: 0
+    explanation: <figure> mustaqil vizual blokni yaratadi, <figcaption> esa uning tagidagi izoh sarlavhasini belgilaydi.

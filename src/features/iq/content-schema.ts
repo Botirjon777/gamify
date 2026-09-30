@@ -3,7 +3,8 @@ import { z } from "zod";
 import type { LocalizedText } from "@/i18n/content";
 
 const localized = z
-  .union([z.string().min(1), z.record(z.string(), z.string().min(1))])
+  // Only known language codes as keys: an unquoted "a: b" in YAML becomes {a: "b"} and must fail, not lose text.
+  .union([z.string().min(1), z.partialRecord(z.enum(["uz", "ru", "en"]), z.string().min(1))])
   .transform((v): LocalizedText => (typeof v === "string" ? { uz: v } : v));
 
 export const IQ_CATEGORIES = ["sequence", "letters", "shapes", "analogy", "odd", "logic", "math"] as const;

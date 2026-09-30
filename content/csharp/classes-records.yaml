@@ -1,0 +1,129 @@
+exercises:
+  - id: cs-cls-001
+    type: fill
+    difficulty: 1
+    lang: csharp
+    prompt: C# da avtomatik property (auto-property) sintaksisini toʻldiring.
+    code: |-
+      public class User {
+        public string Name { ___; set; }
+      }
+    answer:
+      - "get"
+    explanation: "{ get; set; } qisqartmasi orqali C# kompilyatori avtomatik ravishda yashirin private backing field yaratadi."
+
+  - id: cs-cls-002
+    type: choice
+    difficulty: 1
+    lang: csharp
+    prompt: C# da oʻzgarmas maʼlumotlar modeli (immutable data model) va qiymat boʻyicha tenglik (value equality) uchun qaysi tur eng qulay?
+    options:
+      - record
+      - class
+      - interface
+      - enum
+    answer: 0
+    explanation: record kalit soʻzi oʻzgarmas (immutable) obyektlar, init-only xususiyatlar va avtomatik qiymat boʻyicha tenglikni taʼminlaydi.
+
+  - id: cs-cls-003
+    type: fill
+    difficulty: 1
+    lang: csharp
+    prompt: Oʻzgaruvchi null qiymat qabul qilishi mumkinligini (Nullable type) bildiruvchi belgini toʻldiring.
+    code: |-
+      int___ age = null;
+    answer:
+      - "?"
+    explanation: int? (yoki Nullable<int>) qiymat turiga null qabul qilish imkonini beradi.
+
+  - id: cs-cls-004
+    type: choice
+    difficulty: 2
+    lang: csharp
+    prompt: Property faqat obyekt yaratilayotganda (initialization) qiymat olib, keyin oʻzgarmas boʻlishi uchun set oʻrniga nima yoziladi?
+    options:
+      - init
+      - readonly
+      - const
+      - static
+    answer: 0
+    explanation: "{ get; init; } sintaksisi qiymatni faqat konstruktor yoki obyekt initsializatorida belgilashga ruxsat beradi."
+
+  - id: cs-cls-005
+    type: output
+    difficulty: 2
+    lang: csharp
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      using System;
+
+      var p1 = new Point(1, 2);
+      var p2 = new Point(1, 2);
+      Console.Write(p1 == p2);
+
+      public record Point(int X, int Y);
+    answer: "True"
+    explanation: Record obyektlar xotira manziliga emas, oʻzlarining ichki qiymatlariga (value equality) qarab tenglashtiriladi.
+
+  - id: cs-cls-006
+    type: fill
+    difficulty: 2
+    lang: csharp
+    prompt: Record nusxasini bitta xususiyatini oʻzgartirgan holda yaratish (non-destructive mutation) operatorini toʻldiring.
+    code: |-
+      var p1 = new Point(10, 20);
+      var p2 = p1 ___ { X = 30 };
+    answer:
+      - "with"
+    explanation: with ifodasi record obyektidan xususiyatlarni nusxalab, faqat koʻrsatilganlarini oʻzgartirib yangi obyekt qaytaradi.
+
+  - id: cs-cls-007
+    type: choice
+    difficulty: 2
+    lang: csharp
+    prompt: Null-coalescing operatori qaysi? Agar chap tomon null boʻlsa oʻng tomondagi qiymatni oladi.
+    options:
+      - "??"
+      - "?."
+      - "?:"
+      - "||"
+    answer: 0
+    explanation: "?? operatori null-coalescing operatori boʻlib, chap tomon null boʻlsa oʻng tarafdagi standart qiymatni qaytaradi."
+
+  - id: cs-cls-008
+    type: order
+    difficulty: 2
+    lang: csharp
+    prompt: Sonni tavsiflovchi pattern matching switch ifodasining toʻgʻri tartibini tiklang.
+    lines:
+      - "string Describe(int n) => n switch {"
+      - "    int x when x > 0 => \"Musbat son\","
+      - "    int => \"Musbat emas\""
+      - "};"
+    explanation: "Switch ifodasi shablonlarni yuqoridan pastga tekshiradi, shuning uchun aniqroq shablon (int x when x > 0) umumiy shablondan (int) oldin turishi shart. Aks holda kompilyator CS8510 xatosini beradi: keyingi shablon oldingisi tomonidan allaqachon qamrab olingan."
+
+  - id: cs-cls-009
+    type: choice
+    difficulty: 3
+    lang: csharp
+    prompt: C# da struct va class oʻrtasidagi asosiy xotira farqi nima?
+    options:
+      - struct qiymat turi (Value Type) — oʻzlashtirishda butun maʼlumot nusxalanadi; class havola turi (Reference Type) — faqat havola nusxalanadi, obyekt heapda boʻladi
+      - class qiymat turi, struct esa havola turi
+      - struct da metodlar yozib boʻlmaydi
+      - Ikkalasi ham aynan bir xil joyda saqlanadi
+    answer: 0
+    explanation: "struct qiymat turi: oʻzlashtirish yoki argument sifatida berishda qiymatning oʻzi nusxalanadi (lokal oʻzgaruvchi boʻlsa odatda stackda, lekin class maydoni yoki massiv elementi boʻlsa heapda joylashadi). class havola turi: obyekt heapda, oʻzgaruvchilar esa unga havolani saqlaydi."
+
+  - id: cs-cls-010
+    type: output
+    difficulty: 3
+    lang: csharp
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      using System;
+
+      string? name = null;
+      Console.Write(name?.Length ?? -1);
+    answer: "-1"
+    explanation: name null boʻlgani sababli name?.Length null qaytaradi. ?? -1 operatori esa null oʻrniga -1 ni tanlaydi.

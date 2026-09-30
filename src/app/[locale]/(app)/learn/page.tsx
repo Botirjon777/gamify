@@ -2,8 +2,20 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { requireSession } from "@/lib/auth/session";
 import { getCatalog } from "@/features/learn/queries";
 import { SkillCard } from "@/features/learn/components/skill-card";
-import { IconTile } from "@/components/icon";
+import { IconTile, type GradientKey } from "@/components/icon";
 import { PageHeader } from "@/components/page-header";
+
+const TRACK_GRADIENTS: Record<string, GradientKey> = {
+  html: "streak",
+  css: "iq",
+  javascript: "gold",
+  typescript: "brand",
+  react: "iq",
+  cpp: "dark",
+  python: "success",
+  csharp: "xp",
+  cybersecurity: "dark",
+};
 
 export default async function LearnPage({ params }: PageProps<"/[locale]/learn">) {
   const { locale } = await params;
@@ -19,7 +31,11 @@ export default async function LearnPage({ params }: PageProps<"/[locale]/learn">
       {catalog.map((track) => (
         <section key={track.slug}>
           <div className="flex items-center gap-3">
-            <IconTile name={track.icon ?? "braces"} gradient={track.slug === "react" ? "iq" : "xp"} size="lg" />
+            <IconTile
+              name={track.icon ?? "braces"}
+              gradient={TRACK_GRADIENTS[track.slug] ?? "brand"}
+              size="lg"
+            />
             <div>
               <h2 className="font-display text-xl font-bold">{track.title}</h2>
               {track.description && <p className="text-sm text-muted">{track.description}</p>}

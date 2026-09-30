@@ -1,0 +1,129 @@
+exercises:
+  - id: tc-easy-001
+    type: fill
+    difficulty: 1
+    lang: ts
+    prompt: "TypeScript standart Pick<T, K> utility tipini noldan qayta yarating (MyPick)."
+    code: |-
+      type MyPick<T, K ___ keyof T> = {
+        [P in ___]: T[P];
+      };
+    answer:
+      - extends
+      - K
+    explanation: "K extends keyof T sharti K faqat T ning kalitlari boʻlishini kafolatlaydi, [P in K] esa faqat tanlangan kalitlarni aylanib chiqadi."
+
+  - id: tc-easy-002
+    type: fill
+    difficulty: 1
+    lang: ts
+    prompt: "Obyektning barcha xususiyatlarini faqat oʻqish uchun (MyReadonly<T>) qiluvchi modifikatorni toʻldiring."
+    code: |-
+      type MyReadonly<T> = {
+        ___ [P in keyof T]: T[P];
+      };
+    answer:
+      - readonly
+    explanation: "readonly modifikatori barcha xususiyatlarga biriktirilib, obyekt aʼzolarini oʻzgarmas qiladi."
+
+  - id: tc-easy-003
+    type: fill
+    difficulty: 1
+    lang: ts
+    prompt: "Berilgan massiv (tuple) elementlarini yangi obyektning kaliti va qiymatiga aylantiruvchi (TupleToObject) indeksatsiyani toʻldiring."
+    code: |-
+      type TupleToObject<T extends readonly (keyof any)[]> = {
+        [P in T[___]]: P;
+      };
+    answer:
+      - number
+    explanation: "T[number] massiv (tuple) ichidagi barcha elementlar qiymatlaridan iborat union tip yasaydi."
+
+  - id: tc-easy-004
+    type: choice
+    difficulty: 1
+    lang: ts
+    prompt: "Massivning birinchi elementini oluvchi First<T> tipi boʻsh massiv berilganda nima qaytarishi kerak?"
+    code: |-
+      type First<T extends any[]> = T extends [infer Head, ...any[]] ? Head : never;
+    options:
+      - "never"
+      - "undefined"
+      - "null"
+      - "any"
+    answer: 0
+    explanation: "T boʻsh massiv [] boʻlsa, u [infer Head, ...any[]] shartiga mos kelmaydi va never qaytadi."
+
+  - id: tc-easy-005
+    type: fill
+    difficulty: 1
+    lang: ts
+    prompt: "Tuple (massiv) uzunligini tip darajasida oluvchi Length<T> tipini toʻldiring."
+    code: |-
+      type Length<T extends readonly any[]> = T["___"];
+    answer:
+      - length
+    explanation: "TypeScript tuple tiplarida T['length'] uning aniq sonli uzunligini (masalan 3) literal tip sifatida qaytaradi."
+
+  - id: tc-easy-006
+    type: choice
+    difficulty: 1
+    lang: ts
+    prompt: "TypeScript standart Exclude<T, U> utility tipi qanday amalga oshiriladi?"
+    options:
+      - "type MyExclude<T, U> = T extends U ? never : T;"
+      - "type MyExclude<T, U> = T extends U ? T : never;"
+      - "type MyExclude<T, U> = T & U;"
+      - "type MyExclude<T, U> = T | U;"
+    answer: 0
+    explanation: "Distributive Conditional Types tufayli union har bir aʼzosi U bilan solishtiriladi va agar U ga kirsa never (olib tashlanadi), kirmasa T oʻzi qoldiriladi."
+
+  - id: tc-easy-007
+    type: fill
+    difficulty: 2
+    lang: ts
+    prompt: "Shartga qarab biror tipni tanlovchi If<C, T, F> shartli tipini toʻldiring."
+    code: |-
+      type If<C extends boolean, T, F> = C extends ___ ? T : F;
+    answer:
+      - "true"
+    explanation: "C boolean boʻlib, agar u true ga mos kelsa T, aks holda F tipi tanlanadi."
+
+  - id: tc-easy-008
+    type: order
+    difficulty: 2
+    lang: ts
+    prompt: "Ikki massivni birlashtiruvchi Concat<T, U> tipining toʻgʻri tuzilishini tiklang."
+    lines:
+      - "type Concat<"
+      - "  T extends readonly any[],"
+      - "  U extends readonly any[]"
+      - "> = [...T, ...U];"
+    explanation: "Tuple tiplari spread operatori (...T, ...U) orqali bitta yangi tuple ga birlashtiriladi."
+
+  - id: tc-easy-009
+    type: fill
+    difficulty: 2
+    lang: ts
+    prompt: "Massiv oxiriga yangi tip qoʻshuvchi Push<T, U> tipini toʻldiring."
+    code: |-
+      type Push<T extends any[], U> = [___T, U];
+    answer:
+      - "..."
+    explanation: "[...T, U] mavjud massiv T elementlarini yoyib, uning oxiriga yangi U elementini qoʻshadi."
+
+  - id: tc-easy-010
+    type: choice
+    difficulty: 2
+    lang: ts
+    prompt: "Funksiya parametrlarini tuple sifatida ajratib oluvchi MyParameters<T> da qaysi kalit soʻz ishlatiladi?"
+    code: |-
+      type MyParameters<T extends (...args: any[]) => any> =
+        T extends (...args: infer P) => any ? P : never;
+    options:
+      - "infer"
+      - "keyof"
+      - "typeof"
+      - "in"
+    answer: 0
+    explanation: "infer kalit soʻzi conditional type ichida nomaʼlum parametr yoki qaytarilayotgan qiymat tipini avtomatik ajratib olish imkonini beradi."

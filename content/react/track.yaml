@@ -2,7 +2,7 @@ slug: react
 title: React
 description: Komponentlar, holat (state) va effektlar — zamonaviy interfeyslarning asosi.
 icon: atom
-order: 3
+order: 5
 modules:
   - slug: state
     title: Holat va effektlar
@@ -13,3 +13,9 @@ modules:
       - slug: use-effect
         title: useEffect
         description: Renderdan keyin ishlaydigan kod — maʼlumot yuklash, taymerlar va tozalash.
+  - slug: components
+    title: Komponentlar va props
+    skills:
+      - slug: props-conditional
+        title: Props va shartli render
+        description: Komponentlar oʻrtasida maʼlumot uzatish, children prop, shartli render va roʻyxatlarda key.

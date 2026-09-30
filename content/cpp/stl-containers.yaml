@@ -1,0 +1,148 @@
+exercises:
+  - id: cpp-stl-001
+    type: output
+    difficulty: 1
+    lang: cpp
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      #include <iostream>
+      #include <vector>
+      int main() {
+        std::vector<int> v = {1, 2, 3};
+        v.push_back(4);
+        std::cout << v.size();
+        return 0;
+      }
+    answer: "4"
+    explanation: std::vector dinamik massiv boʻlib, push_back oxiriga element qoʻshadi va size() umumiy elementlar sonini (4) qaytaradi.
+
+  - id: cpp-stl-002
+    type: fill
+    difficulty: 1
+    lang: cpp
+    prompt: std::vector oxiriga yangi element qoʻshish metodini toʻldiring.
+    code: |-
+      std::vector<std::string> names;
+      names.___("Ali");
+    answer:
+      - [push_back, emplace_back]
+    explanation: push_back vektor oxiriga yangi qiymat kiritadi.
+
+  - id: cpp-stl-003
+    type: choice
+    difficulty: 1
+    lang: cpp
+    prompt: Kalit-qiymat (key-value) juftliklarini avtomatik saralangan holda saqlaydigan STL konteyneri qaysi?
+    options:
+      - std::map
+      - std::vector
+      - std::list
+      - std::queue
+    answer: 0
+    explanation: std::map qizil-qora daraxt (Red-Black tree) asosida tuzilgan boʻlib, elementlarni kalit boʻyicha avtomatik oʻsish tartibida saralab saqlaydi.
+
+  - id: cpp-stl-004
+    type: output
+    difficulty: 2
+    lang: cpp
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      #include <iostream>
+      #include <map>
+      #include <string>
+      int main() {
+        std::map<std::string, int> ages;
+        ages["Ali"] = 20;
+        ages["Vali"] = 25;
+        std::cout << ages["Ali"];
+        return 0;
+      }
+    answer: "20"
+    explanation: std::map kalit orqali indekslash operatorini ([]) qoʻllab-quvvatlaydi va "Ali" kalitidagi qiymat 20 ni qaytaradi.
+
+  - id: cpp-stl-005
+    type: fill
+    difficulty: 2
+    lang: cpp
+    prompt: Vektorning boshlangʻich va oxirgi iteratorlarini standart sort algoritmi uchun toʻldiring.
+    code: |-
+      std::vector<int> v = {3, 1, 2};
+      std::sort(v.___(), v.___());
+    answer:
+      - begin
+      - end
+    explanation: std::sort amali v.begin() va v.end() iteratorlari orasidagi oraliqni oʻsish tartibida saralaydi.
+
+  - id: cpp-stl-006
+    type: output
+    difficulty: 2
+    lang: cpp
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      #include <iostream>
+      #include <vector>
+      int main() {
+        std::vector<int> nums = {10, 20, 30};
+        nums.pop_back();
+        std::cout << nums.back();
+        return 0;
+      }
+    answer: "20"
+    explanation: pop_back() vektorning eng oxirgi elementi (30) ni oʻchiradi. back() esa joriy oxirgi elementni (20) qaytaradi.
+
+  - id: cpp-stl-007
+    type: choice
+    difficulty: 2
+    lang: cpp
+    prompt: Faqat noyob (takrorlanmas) qiymatlarni saqlaydigan STL konteyneri qaysi?
+    options:
+      - std::set
+      - std::vector
+      - std::deque
+      - std::pair
+    answer: 0
+    explanation: std::set konteynerida har bir qiymat faqat bir marta saqlanadi, dublikat elementlar avtomatik eʼtiborsiz qoldiriladi.
+
+  - id: cpp-stl-008
+    type: order
+    difficulty: 2
+    lang: cpp
+    prompt: Vektor yaratish, toʻldirish va sikl orqali chop etish tartibini tiklang (<iostream> va <vector> sarlavhalari ulangan deb hisoblang).
+    lines:
+      - "int main() {"
+      - "    std::vector<int> data;"
+      - "    data.push_back(100); data.push_back(200);"
+      - "    for (int x : data) std::cout << x << ' ';"
+      - "}"
+    explanation: main funksiyasi ochiladi, vektor eʼlon qilinadi, qiymatlar kiritiladi, range-based for sikli bilan chiqariladi va funksiya yopiladi.
+
+  - id: cpp-stl-009
+    type: choice
+    difficulty: 3
+    lang: cpp
+    prompt: std::unordered_map ning std::map dan asosiy farqi va qidirish tezligi (oʻrtacha) nima?
+    options:
+      - unordered_map xesh-jadval (Hash Table) ga asoslangan boʻlib, oʻrtacha O(1) vaqt oladi
+      - unordered_map daraxtga asoslangan va O(N) vaqt oladi
+      - unordered_map faqat satrlarni saqlay oladi
+      - unordered_map elementlarni doim saralab boradi
+    answer: 0
+    explanation: std::unordered_map xesh-jadval orqali ishlaydi, shuning uchun elementlarni saralamaydi, lekin qidirish, qoʻshish va oʻchirish oʻrtacha O(1) vaqt oladi.
+
+  - id: cpp-stl-010
+    type: output
+    difficulty: 3
+    lang: cpp
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      #include <iostream>
+      #include <vector>
+      int main() {
+        std::vector<int> v;
+        v.reserve(10);
+        v.push_back(5);
+        std::cout << v.size() << " " << v.capacity();
+        return 0;
+      }
+    answer: "1 10"
+    explanation: reserve(10) oldindan 10 ta element uchun xotira ajratadi (capacity kamida 10; amalda odatda aynan 10), lekin elementlarning haqiqiy soni bitta boʻlgani uchun size() 1 boʻladi.

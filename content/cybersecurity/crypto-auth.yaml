@@ -1,0 +1,124 @@
+exercises:
+  - id: sec-auth-001
+    type: choice
+    difficulty: 1
+    lang: js
+    prompt: Foydalanuvchi parollarini maʼlumotlar bazasida qanday saqlash shart?
+    options:
+      - Xavfsiz hashlash algoritmi (masalan, bcrypt yoki argon2) va tuz (salt) bilan
+      - Ochiq matn (plain text) koʻrinishida
+      - Oddiy Base64 kodlash bilan
+      - Shunchaki MD5 yoki SHA1 bilan tuzsiz
+    answer: 0
+    explanation: Parollar hech qachon ochiq saqlanmaydi va qayta tiklanmaydigan sekin kriptografik xeshlar (bcrypt, argon2) orqali tuz (salt) bilan birga saqlanadi.
+
+  - id: sec-auth-002
+    type: choice
+    difficulty: 1
+    lang: js
+    prompt: Shifrlash (Encryption) va Xeshlash (Hashing) oʻrtasidagi asosiy farq nima?
+    options:
+      - Shifrlash ikki tomonlama (kalit bilan qayta ochish mumkin), xeshlash esa bir tomonlama (qaytarib boʻlmaydi)
+      - Xeshlash faqat rasmlar uchun ishlatiladi
+      - Shifrlashni kalitsiz ochish oson
+      - Ikkalasi ham aynan bir xil tushuncha
+    answer: 0
+    explanation: Hashing bir tomonlama matematik funksiya boʻlib, uning natijasidan asl matnni qaytarib boʻlmaydi. Shifrlash esa maxfiy kalit yordamida qayta ochilishi mumkin.
+
+  - id: sec-auth-003
+    type: fill
+    difficulty: 1
+    lang: js
+    prompt: "JSON Web Token (JWT) nuqta bilan ajratilgan 3 qismdan iborat: Header, Payload va ___."
+    code: |-
+      const jwt = "header.payload.___";
+    answer:
+      - [signature, Signature]
+    explanation: JWT tuzilishi Header (algoritm), Payload (maʼlumotlar) va Signature (server maxfiy kaliti bilan tasdiqlangan imzo) dan iborat.
+
+  - id: sec-auth-004
+    type: choice
+    difficulty: 2
+    lang: js
+    prompt: Parol xeshlashda "Salt" (tuz) nima maqsadda qoʻshiladi?
+    options:
+      - Bir xil parollarning xeshlari har xil boʻlishi va Rainbow Table hujumlarini yoʻqqa chiqarish uchun
+      - Parol hajmini qisqartirish uchun
+      - Parolni tezroq tekshirish uchun
+      - Parolni avtomatik eslab qolish uchun
+    answer: 0
+    explanation: Har bir foydalanuvchiga tasodifiy salt berilsa, hatto ikkita odam '123456' parolini qoʻysa ham, ularning xeshlari butunlay boshqacha boʻladi va oldindan hisoblangan jadvallar (rainbow tables) ish bermaydi.
+
+  - id: sec-auth-005
+    type: fill
+    difficulty: 2
+    lang: bash
+    prompt: Brauzer va server oʻrtasidagi aloqani toʻliq shifrlab uzatuvchi xavfsiz protokol prefiksini toʻldiring.
+    code: |-
+      curl ___://example.com/api/login
+    answer:
+      - https
+    explanation: HTTPS protokoli TLS (1.2/1.3) orqali tarmoqdagi barcha trafikni shifrlaydi, bu esa oraliqdagi odam (MITM) hujumlaridan himoya qiladi.
+
+  - id: sec-auth-006
+    type: choice
+    difficulty: 2
+    lang: js
+    prompt: JWT tokenining Payload qismi haqida qaysi gap toʻgʻri?
+    options:
+      - U shunchaki Base64url bilan kodlangan, shifrlanmagan — maxfiy maʼlumotlarni (masalan parollarni) Payload ichiga qoʻyish mumkin emas
+      - U toʻliq shifrlangan, hech kim uning ichini koʻra olmaydi
+      - U faqat raqamlardan iborat boʻlishi kerak
+      - Unga faqat adminlar kirishi mumkin
+    answer: 0
+    explanation: Standart JWT (JWS) faqat imzolangan, lekin shifrlanmagan. Istalgan odam payloadni base64 decode qilib oʻqiy oladi, faqat server kalitisiz uni soxtalashtira olmaydi.
+
+  - id: sec-auth-007
+    type: choice
+    difficulty: 2
+    lang: js
+    prompt: Parollarni ketma-ket taxmin qilib koʻrish (Brute Force hujumi) dan himoyalanishning eng keng tarqalgan choralari qaysi?
+    options:
+      - Rate Limiting (urinishlar sonini cheklash), Account Lockout va Captcha
+      - Server protsessorini tezlashtirish
+      - Parol uzunligini 4 ta belgiga cheklash
+      - Barcha soʻrovlarni bekor qilish
+    answer: 0
+    explanation: Rate Limiting maʼlum IP yoki hisobdan qisqa vaqt ichida juda koʻp xato parollar kiritilishini bloklaydi yoki kechiktiradi.
+
+  - id: sec-auth-008
+    type: order
+    difficulty: 2
+    lang: js
+    prompt: Xavfsiz foydalanuvchi roʻyxatdan oʻtish tartibini tiklang.
+    lines:
+      - "const { email, password } = req.body;"
+      - "const hash = await bcrypt.hash(password, 12);"
+      - "await db.user.create({ data: { email, passwordHash: hash } });"
+    explanation: Email va parol soʻrovdan olinadi, parol bcrypt bilan (12 cost factor) xeshlanadi va bazaga faqat xesh yoziladi.
+
+  - id: sec-auth-009
+    type: choice
+    difficulty: 3
+    lang: js
+    prompt: Asimmetrik shifrlashda (masalan, RSA yoki ECC) qanday kalitlar juftligi ishlatiladi?
+    options:
+      - Ommaviy kalit (Public key) va Maxfiy kalit (Private key)
+      - Faqat bitta umumiy maxfiy kalit (Shared secret)
+      - Faqat server IP manzili
+      - Dinamik parol
+    answer: 0
+    explanation: Asimmetrik shifrlashda ommaviy kalit (public key) hamma uchun ochiq boʻladi va maʼlumotni shifrlashda ishlatiladi, faqat maxfiy kalit (private key) egasigina uni ochishi mumkin.
+
+  - id: sec-auth-010
+    type: choice
+    difficulty: 3
+    lang: js
+    prompt: Qaysi xesh algoritmi hozirda parollar uchun eng xavfsiz va xotiraga qiyin (memory-hard) standart hisoblanadi?
+    options:
+      - Argon2id
+      - MD5
+      - SHA-256
+      - CRC32
+    answer: 0
+    explanation: Argon2 2015-yilda Password Hashing Competition gʻolibi boʻlgan; uning Argon2id varianti RFC 9106 va OWASP tomonidan tavsiya etiladi. U GPU va maxsus ASIC chiplar yordamida parollarni buzishga qarshi xotira va vaqt boʻyicha yuqori qarshilikka ega.

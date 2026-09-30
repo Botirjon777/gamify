@@ -1,0 +1,15 @@
+slug: html
+title: HTML
+description: Veb sahifalarning poydevori — semantik teglar, matn, havolalar, jadvallar va formalar.
+icon: globe
+order: 1
+modules:
+  - slug: basics
+    title: HTML asoslari
+    skills:
+      - slug: elements
+        title: Elementlar va atributlar
+        description: Asosiy HTML teglar, matn formatlash, havolalar (a) va rasmlar (img).
+      - slug: semantic-forms
+        title: Semantik teglar va formalar
+        description: Qidiruv tizimlari va qulaylik uchun semantika (header, main, section) hamda foydalanuvchi formalari.

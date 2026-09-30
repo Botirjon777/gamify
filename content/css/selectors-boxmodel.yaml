@@ -1,0 +1,129 @@
+exercises:
+  - id: css-box-001
+    type: choice
+    difficulty: 1
+    lang: css
+    prompt: CSS Box Model ichki tuzilishining markazdan tashqariga qarab toʻgʻri tartibi qaysi?
+    options:
+      - Content → Padding → Border → Margin
+      - Content → Margin → Border → Padding
+      - Margin → Border → Padding → Content
+      - Content → Border → Padding → Margin
+    answer: 0
+    explanation: Box model markazida kontent (Content), uning atrofida ichki masofa (Padding), ramka (Border) va tashqi masofa (Margin) joylashadi.
+
+  - id: css-box-002
+    type: fill
+    difficulty: 1
+    lang: css
+    prompt: Elementning padding va border qiymatlari uning belgilangan kengligini (width) oshirib yubormasligi uchun box-sizing xossasiga qaysi qiymat beriladi?
+    code: |-
+      * {
+        box-sizing: ___;
+      }
+    answer:
+      - border-box
+    explanation: "box-sizing: border-box element kengligi (width) ichiga padding va borderlarni ham hisoblab kiritadi, bu tartibni buzilishdan saqlaydi."
+
+  - id: css-box-003
+    type: choice
+    difficulty: 1
+    lang: css
+    prompt: ID atributiga ega boʻlgan elementni tanlash uchun qaysi belgidan foydalaniladi?
+    options:
+      - "#"
+      - "."
+      - "@"
+      - ":"
+    answer: 0
+    explanation: "ID selektor # bilan boshlanadi (masalan, #main-header), sinf (class) esa nuqta . bilan boshlanadi."
+
+  - id: css-box-004
+    type: fill
+    difficulty: 1
+    lang: css
+    prompt: Kursorni element ustiga olib borgandagi holatni (hover pseudo-class) belgilovchi qismni toʻldiring.
+    code: |-
+      button:___ {
+        background-color: blue;
+      }
+    answer:
+      - hover
+    explanation: ":hover psevdo-sinfi foydalanuvchi sichqoncha kursorini element ustiga eltgan paytdagi stillarni belgilaydi."
+
+  - id: css-box-005
+    type: choice
+    difficulty: 2
+    lang: css
+    prompt: "margin: 10px 20px; shorthand xossasi qaysi tomonlarga taʼsir qiladi?"
+    options:
+      - Yuqori/pastga 10px, oʻng/chapga 20px
+      - Yuqori/chapga 10px, past/oʻngga 20px
+      - Faqat yuqori va pastga 10px
+      - Barcha 4 tomonga 20px
+    answer: 0
+    explanation: 2 ta qiymat berilganda birinchisi vertikal (top va bottom), ikkinchisi gorizontal (left va right) tomonlar uchun boʻladi.
+
+  - id: css-box-006
+    type: choice
+    difficulty: 2
+    lang: css
+    prompt: Blok elementni (width berilgan holda) gorizontal markazga joylashtirish uchun eng keng tarqalgan margin qoidasi qaysi?
+    options:
+      - "margin: 0 auto;"
+      - "margin: auto 0;"
+      - "margin: center;"
+      - "margin-align: center;"
+    answer: 0
+    explanation: "margin: 0 auto berilganda brauzer chap va oʻng tomon marginlarini teng ravishda taqsimlab elementni markazga keltiradi."
+
+  - id: css-box-007
+    type: fill
+    difficulty: 2
+    lang: css
+    prompt: Roʻyxatdagi faqat birinchi elementni tanlab olish uchun pseudo-sinfni toʻldiring.
+    code: |-
+      li:___-child {
+        font-weight: bold;
+      }
+    answer:
+      - first
+    explanation: :first-child ota elementining birinchi farzandi boʻlgan elementni tanlaydi.
+
+  - id: css-box-008
+    type: order
+    difficulty: 2
+    lang: css
+    prompt: CSS spesifikligi (selektor kuchi / specificity) eng pastdan eng balandgacha qanday tartiblanadi?
+    lines:
+      - "Element selektor (p, div, a)"
+      - "Class selektor (.card, .btn)"
+      - "ID selektor (#hero, #login)"
+      - "Inline stillar (style=\"...\")"
+    explanation: "Spesifiklik (a,b,c) koʻrinishida ustunma-ustun solishtiriladi: ID (1,0,0) > class/atribut/psevdo-sinf (0,1,0) > element (0,0,1). Nechta class boʻlmasin, bitta ID ni yenga olmaydi. Inline style esa selektorlardan ham ustun turadi."
+
+  - id: css-box-009
+    type: choice
+    difficulty: 3
+    lang: css
+    prompt: ".parent > .child selektori nimani bildiradi?"
+    options:
+      - Faqat bevosita (toʻgʻridan-toʻgʻri birinchi avlod) bola elementni
+      - Istalgan chuqurlikdagi barcha avlod elementlarini
+      - .parent dan keyingi qoʻshni elementni
+      - .child ichidagi .parent ni
+    answer: 0
+    explanation: "> (child combinator) faqat toʻgʻridan-toʻgʻri ota-bola boʻlgan elementlarni tanlaydi, boʻshliq esa barcha ichki avlodlarni tanlaydi."
+
+  - id: css-box-010
+    type: choice
+    difficulty: 3
+    lang: css
+    prompt: Elementning vizual koʻrinmasligi, lekin sahifada oʻz oʻrnini (boʻsh joyini) saqlab qolishi uchun qaysi xossa beriladi?
+    options:
+      - "visibility: hidden;"
+      - "display: none;"
+      - "opacity: 1;"
+      - "position: static;"
+    answer: 0
+    explanation: "visibility: hidden elementni koʻrinmas qiladi, ammo oʻrni saqlanib qoladi. display: none esa elementni sahifa oqimidan butunlay olib tashlaydi."

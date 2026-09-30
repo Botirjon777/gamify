@@ -1,0 +1,143 @@
+exercises:
+  - id: html-elem-001
+    type: choice
+    difficulty: 1
+    lang: html
+    prompt: Boshqa veb-sahifaga havola (link) yaratish uchun qaysi teg ishlatiladi?
+    options:
+      - <a>
+      - <link>
+      - <href>
+      - <url>
+    answer: 0
+    explanation: <a> (anchor) tegi boshqa sahifa yoki resursga giperhavola yaratish uchun ishlatiladi. <link> esa koʻpincha tashqi CSS fayllarni ulashda <head> ichida qoʻllaniladi.
+
+  - id: html-elem-002
+    type: fill
+    difficulty: 1
+    lang: html
+    prompt: Rasmni koʻrsatish va muqobil matn berish uchun toʻgʻri atributlarni toʻldiring.
+    code: |-
+      <img ___="logo.png" ___="Kompaniya logotipi" />
+    answer:
+      - src
+      - alt
+    explanation: img tegida rasm manzilini belgilash uchun src, rasm yuklanmaganda yoki ekran oʻqigichlar uchun alt atributi ishlatiladi.
+
+  - id: html-elem-003
+    type: choice
+    difficulty: 1
+    lang: html
+    prompt: Qaysi teg eng yuqori darajadagi sarlavhani (heading) bildiradi?
+    options:
+      - <h6>
+      - <heading>
+      - <h1>
+      - <head>
+    answer: 2
+    explanation: <h1> eng yuqori darajadagi asosiy sarlavha hisoblanadi. Sahifada odatda faqat bitta <h1> boʻlishi tavsiya etiladi.
+
+  - id: html-elem-004
+    type: choice
+    difficulty: 1
+    lang: html
+    prompt: Havolani yangi tabda ochish uchun qaysi atribut qoʻshiladi?
+    code: |-
+      <a href="https://google.com" ___="_blank">Google</a>
+    options:
+      - target
+      - rel
+      - window
+      - open
+    answer: 0
+    explanation: target="_blank" havolani yangi brauzer yorligʻida (tab) ochishni bildiradi. Zamonaviy brauzerlarda target="_blank" avtomatik noopener sifatida ishlaydi; referer yubormaslik kerak boʻlsa rel="noreferrer" qoʻshiladi.
+
+  - id: html-elem-005
+    type: fill
+    difficulty: 1
+    lang: html
+    prompt: Raqamlangan (tartiblangan) roʻyxat yaratish uchun teg nomini toʻldiring.
+    code: |-
+      <___>
+        <li>Birinchi qadam</li>
+        <li>Ikkinchi qadam</li>
+      </___>
+    answer:
+      - ol
+      - ol
+    explanation: <ol> (ordered list) raqamlangan roʻyxat, <ul> (unordered list) esa markerli (nuqtali) roʻyxat yaratadi.
+
+  - id: html-elem-006
+    type: choice
+    difficulty: 2
+    lang: html
+    prompt: Qaysi elementlar oʻz-oʻzidan yopiluvchi (void / self-closing) teglar hisoblanadi?
+    options:
+      - <img>, <br>, <input>
+      - <p>, <span>, <div>
+      - <h1>, <header>, <footer>
+      - <ul>, <li>, <ol>
+    answer: 0
+    explanation: <img>, <br>, <hr>, <input>, <meta> kabi elementlar ichida boshqa kontent saqlamaydi va alohida yopiluvchi teg talab qilmaydi.
+
+  - id: html-elem-007
+    type: order
+    difficulty: 2
+    lang: html
+    prompt: Oddiy HTML sahifaning toʻgʻri tuzilish tartibini tiklang.
+    lines:
+      - "<!DOCTYPE html>"
+      - "<html lang=\"uz\">"
+      - "<head>"
+      - "<title>Mening sahifam</title>"
+      - "</head>"
+      - "<body>"
+      - "<h1>Salom Dunyo</h1>"
+      - "</body>"
+      - "</html>"
+    explanation: Har qanday standart HTML hujjati doctype deklaratsiyasi bilan boshlanadi, soʻng html, head va body teglari keladi.
+
+  - id: html-elem-008
+    type: fill
+    difficulty: 2
+    lang: html
+    prompt: Matnning muhim qismini taʼkidlash (semantik jihatdan kuchli ahamiyat) uchun qaysi teg ishlatiladi?
+    code: |-
+      <p>Bu juda <___>muhim</___> ogohlantirish!</p>
+    answer:
+      - strong
+      - strong
+    explanation: <strong> tegi matnning muhim ahamiyatga ega ekanligini bildiradi (brauzerda qalin koʻrinadi). <b> esa qoʻshimcha ahamiyat bermasdan matnga eʼtiborni jalb qiladi (kalit soʻzlar, mahsulot nomlari). Faqat vizual qalinlik kerak boʻlsa, CSS font-weight xossasi ishlatiladi.
+
+  - id: html-elem-009
+    type: choice
+    difficulty: 2
+    lang: html
+    prompt: Jadvalda ustun sarlavhasini belgilash uchun qaysi teg ishlatiladi?
+    code: |-
+      <table>
+        <tr>
+          <th>Ism</th>
+          <th>Ball</th>
+        </tr>
+      </table>
+    options:
+      - <td>
+      - <th>
+      - <tr>
+      - <thead>
+    answer: 1
+    explanation: <th> (table header) jadval ustunlari sarlavhalari uchun ishlatiladi, oddiy kataklar esa <td> (table data) bilan beriladi.
+
+  - id: html-elem-010
+    type: choice
+    difficulty: 2
+    lang: html
+    prompt: HTML5 da qaysi atribut yordamida tegga ixtiyoriy foydalanuvchi maʼlumotlarini (custom data) biriktirish mumkin?
+    options:
+      - data-*
+      - custom-*
+      - attr-*
+      - meta-*
+    answer: 0
+    explanation: data-* atributlari (masalan, data-user-id="123") HTML elementlarida maxsus maʼlumotlarni saqlash va JavaScript orqali dataset bilan oʻqish imkonini beradi.

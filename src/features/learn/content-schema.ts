@@ -7,13 +7,26 @@ import type { LocalizedText } from "@/i18n/content";
 
 /** Plain strings are Uzbek: `title: useState` → { uz: "useState" }. */
 const localized = z
-  .union([z.string().min(1), z.record(z.string(), z.string().min(1))])
+  // Only known language codes as keys: an unquoted "a: b" in YAML becomes {a: "b"} and must fail, not lose text.
+  .union([z.string().min(1), z.partialRecord(z.enum(["uz", "ru", "en"]), z.string().min(1))])
   .transform((v): LocalizedText => (typeof v === "string" ? { uz: v } : v));
 
 const toArray = (v: string | string[]) => (Array.isArray(v) ? v : [v]);
 const accepted = z.union([z.string(), z.array(z.string()).min(1)]).transform(toArray);
 
-export const LANGS = ["js", "jsx", "ts", "tsx", "html", "css"] as const;
+export const LANGS = [
+  "js",
+  "jsx",
+  "ts",
+  "tsx",
+  "html",
+  "css",
+  "cpp",
+  "python",
+  "csharp",
+  "bash",
+  "sql",
+] as const;
 export type CodeLang = (typeof LANGS)[number];
 
 /** Marker for a blank in FILL exercises. */

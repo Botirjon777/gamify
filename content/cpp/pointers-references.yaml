@@ -1,0 +1,148 @@
+exercises:
+  - id: cpp-ptr-001
+    type: output
+    difficulty: 1
+    lang: cpp
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      #include <iostream>
+      int main() {
+        int x = 10;
+        int* ptr = &x;
+        *ptr = 25;
+        std::cout << x;
+        return 0;
+      }
+    answer: "25"
+    explanation: ptr koʻrsatkichi x ning xotiradagi manziliga ishora qiladi. *ptr orqali xotiraga 25 yozilganda, x ning qiymati ham 25 ga oʻzgaradi.
+
+  - id: cpp-ptr-002
+    type: fill
+    difficulty: 1
+    lang: cpp
+    prompt: Oʻzgaruvchining xotiradagi manzilini (address-of) olish operatorini toʻldiring.
+    code: |-
+      int a = 50;
+      int* p = ___a;
+    answer:
+      - "&"
+    explanation: "& operatori oʻzgaruvchining xotiradagi manzilini oladi (address-of operator)."
+
+  - id: cpp-ptr-003
+    type: choice
+    difficulty: 1
+    lang: cpp
+    prompt: Koʻrsatkich koʻrsatayotgan qiymatni oʻqish yoki oʻzgartirish (dereference) uchun qaysi operator ishlatiladi?
+    options:
+      - "*"
+      - "&"
+      - "->"
+      - "::"
+    answer: 0
+    explanation: "* (dereference) operatori koʻrsatkich manzilidagi haqiqiy qiymatga kirish imkonini beradi."
+
+  - id: cpp-ptr-004
+    type: output
+    difficulty: 2
+    lang: cpp
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      #include <iostream>
+      void increment(int& n) {
+        n += 5;
+      }
+      int main() {
+        int val = 10;
+        increment(val);
+        std::cout << val;
+        return 0;
+      }
+    answer: "15"
+    explanation: int& n havola (reference) sifatida argument qabul qildi, shuning uchun funksiya ichidagi oʻzgarish toʻgʻridan-toʻgʻri val oʻzgaruvchisiga taʼsir qildi.
+
+  - id: cpp-ptr-005
+    type: fill
+    difficulty: 2
+    lang: cpp
+    prompt: Dinamik xotiradan (heap) ajratilgan bitta int xotirasini tozalash kalit soʻzini toʻldiring.
+    code: |-
+      int* ptr = new int(100);
+      // ... ishlatildi
+      ___ ptr;
+    answer:
+      - delete
+    explanation: new orqali ajratilgan xotira delete bilan, new[] orqali ajratilgan massiv esa delete[] bilan tozalanadi.
+
+  - id: cpp-ptr-006
+    type: choice
+    difficulty: 2
+    lang: cpp
+    prompt: C++11 standartidan boshlab boʻsh koʻrsatkichni (null pointer) ifodalash uchun eng xavfsiz kalit soʻz qaysi?
+    options:
+      - nullptr
+      - "NULL"
+      - "0"
+      - void
+    answer: 0
+    explanation: nullptr maxsus std::nullptr_t tipiga ega boʻlib, 0 yoki NULL kabi int ga noaniq konvertatsiya qilinmaydi va xavfsiz hisoblanadi.
+
+  - id: cpp-ptr-007
+    type: output
+    difficulty: 2
+    lang: cpp
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      #include <iostream>
+      int main() {
+        int arr[3] = {10, 20, 30};
+        int* p = arr;
+        p++;
+        std::cout << *p;
+        return 0;
+      }
+    answer: "20"
+    explanation: Massiv nomi ifodada birinchi elementiga koʻrsatkichga aylanadi (array-to-pointer decay). p++ koʻrsatkich arifmetikasi orqali keyingi elementga (20) oʻtadi.
+
+  - id: cpp-ptr-008
+    type: order
+    difficulty: 2
+    lang: cpp
+    prompt: Dinamik massiv yaratish va uni tozalashning toʻgʻri tartibini tiklang.
+    lines:
+      - "int size = 5;"
+      - "int* arr = new int[size];"
+      - "for (int i = 0; i < size; i++) arr[i] = i * 2;"
+      - "delete[] arr;"
+      - "arr = nullptr;"
+    explanation: Hajm aniqlanadi, new[] bilan xotira olinadi, toʻldiriladi, delete[] bilan tozalanadi va nullptr qilinadi.
+
+  - id: cpp-ptr-009
+    type: choice
+    difficulty: 3
+    lang: cpp
+    prompt: "Oʻz-oʻzidan xotirani tozalovchi va faqat bitta egasi boʻlishi mumkin boʻlgan zamonaviy aqlli koʻrsatkich (smart pointer) qaysi?"
+    options:
+      - std::unique_ptr
+      - std::shared_ptr
+      - std::weak_ptr
+      - std::auto_ptr
+    answer: 0
+    explanation: std::unique_ptr resursga yagona egalikni taʼminlaydi va nusxalanmaydi (faqat std::move orqali koʻchiriladi), obyekti yoʻqolganda xotirani avtomatik ozod qiladi.
+
+  - id: cpp-ptr-010
+    type: output
+    difficulty: 3
+    lang: cpp
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      #include <iostream>
+      int main() {
+        int a = 5;
+        int b = 10;
+        const int* ptr = &a;
+        ptr = &b;
+        std::cout << *ptr;
+        return 0;
+      }
+    answer: "10"
+    explanation: const int* koʻrsatkich koʻrsatayotgan qiymatni oʻzgartirishga yoʻl qoʻymaydi (*ptr = 20 mumkin emas), lekin koʻrsatkichning oʻzini boshqa manzilga yoʻnaltirishga ruxsat beradi.

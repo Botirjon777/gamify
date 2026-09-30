@@ -1,0 +1,15 @@
+slug: cpp
+title: C++
+description: Yuqori unumdorlikka ega tizimli dasturlash — koʻrsatkichlar, xotira boshqaruvi va STL konteynerlari.
+icon: binary
+order: 6
+modules:
+  - slug: memory
+    title: Koʻrsatkichlar va xotira
+    skills:
+      - slug: pointers-references
+        title: Koʻrsatkichlar va havolalar
+        description: Koʻrsatkichlar (*), manzil olish (&), dinamik xotira (new/delete) va havolalar (references).
+      - slug: stl-containers
+        title: STL konteynerlari
+        description: std::vector, std::map, iteratorlar va standart algoritmlar bilan ishlash.

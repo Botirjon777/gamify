@@ -1,12 +1,24 @@
 slug: javascript
 title: JavaScript
-description: Tilning oʻzi — oʻzgaruvchilar, funksiyalar, massivlar va obyektlar.
+description: Massivlar, obyektlar, asinxronlik va zamonaviy sintaksis.
 icon: braces
-order: 1
+order: 3
 modules:
+  - slug: fundamentals
+    title: Obyektlar va zamonaviy sintaksis
+    skills:
+      - slug: objects-destructuring
+        title: Destructuring va obyektlar
+        description: Spread/rest operatorlari, obyektlarni parchalash, optional chaining (?.) va nullish coalescing (??).
   - slug: arrays
     title: Massivlar
     skills:
       - slug: array-methods
         title: map, filter, reduce
-        description: Massivlarni sikllarsiz qayta ishlash — zamonaviy JavaScript va React'da har kuni kerak boʻladi.
+        description: Massivlarni sikllarsiz qayta ishlash — zamonaviy JavaScript va Reactʼda har kuni kerak boʻladi.
+  - slug: async-js
+    title: Asinxron JavaScript
+    skills:
+      - slug: promises-async
+        title: Promise va async/await
+        description: Asinxron amallar, Promise zanjiri, async/await va xatolarni ushlash (try/catch).

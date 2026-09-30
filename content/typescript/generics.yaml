@@ -1,0 +1,127 @@
+exercises:
+  - id: ts-gen-001
+    type: fill
+    difficulty: 1
+    lang: ts
+    prompt: Har qanday tipni qabul qilib, oʻsha tipni qaytaruvchi identity Generic funksiyasini toʻldiring.
+    code: |-
+      function identity<___>(arg: T): T {
+        return arg;
+      }
+    answer:
+      - T
+    explanation: <T> generic tip parametri boʻlib, funksiya chaqirilganda berilgan argument tipini eslab qoladi va qaytaradi.
+
+  - id: ts-gen-002
+    type: choice
+    difficulty: 1
+    lang: ts
+    prompt: Obyektning barcha xususiyatlarini ixtiyoriy (optional) qilib beruvchi Utility Type qaysi?
+    options:
+      - Partial<T>
+      - Required<T>
+      - Readonly<T>
+      - Pick<T>
+    answer: 0
+    explanation: Partial<T> barcha maydonlarga ? (optional) belgisini qoʻshadi, yaʼni obyektdan faqat kerakli qismlarni uzatish imkonini beradi.
+
+  - id: ts-gen-003
+    type: fill
+    difficulty: 1
+    lang: ts
+    prompt: Obyektning barcha xususiyatlarini oʻzgartirib boʻlmaydigan (faqat oʻqish uchun) qiluvchi Utility Type nomini yozing.
+    code: |-
+      type ReadonlyUser = ___<User>;
+    answer:
+      - Readonly
+    explanation: Readonly<T> tipi obyektning barcha xususiyatlariga readonly cheklovini qoʻyadi.
+
+  - id: ts-gen-004
+    type: choice
+    difficulty: 2
+    lang: ts
+    prompt: Lugʻat (kalit-qiymat juftligi) tipini belgilash uchun qaysi Utility Type ishlatiladi? Masalan, kalitlari string, qiymatlari son boʻlgan obyekt.
+    options:
+      - Record<string, number>
+      - Map<string, number>
+      - Dictionary<string, number>
+      - KeyValue<string, number>
+    answer: 0
+    explanation: Record<K, V> Utility tipi kalitlari K tipida va qiymatlari V tipida boʻlgan obyekt shaklini eʼlon qiladi.
+
+  - id: ts-gen-005
+    type: fill
+    difficulty: 2
+    lang: ts
+    prompt: Mavjud tipdan faqat kerakli maydonlarni ajratib oluvchi Utility Type nomini yozing.
+    code: |-
+      interface User { id: number; name: string; email: string; }
+      type UserPreview = ___<User, "id" | "name">;
+    answer:
+      - Pick
+    explanation: Pick<T, K> berilgan tipdan faqat tanlangan K xususiyatlaridan iborat yangi tip yasaydi.
+
+  - id: ts-gen-006
+    type: choice
+    difficulty: 2
+    lang: ts
+    prompt: Mavjud tipdan maʼlum maydonlarni olib tashlash (istisno qilish) uchun qaysi Utility Type ishlatiladi?
+    options:
+      - Omit<T, K>
+      - Exclude<T, K>
+      - Remove<T, K>
+      - Drop<T, K>
+    answer: 0
+    explanation: Omit<T, K> berilgan K kalitlarini T obyekt tipidan olib tashlaydi. Exclude esa union tiplardan aʼzolarni chiqarib tashlaydi.
+
+  - id: ts-gen-007
+    type: fill
+    difficulty: 2
+    lang: ts
+    prompt: Generic parametr faqat obyekt boʻlishi yoki maʼlum interfeysga mos kelishini cheklash uchun qaysi kalit soʻz ishlatiladi?
+    code: |-
+      function getLength<T ___ { length: number }>(item: T): number {
+        return item.length;
+      }
+    answer:
+      - extends
+    explanation: T extends Shart sintaksisi generic parametriga cheklov (constraint) qoʻyadi.
+
+  - id: ts-gen-008
+    type: order
+    difficulty: 2
+    lang: ts
+    prompt: Generic interfeys va uning ishlatilish tartibini tiklang.
+    lines:
+      - "interface ApiResponse<T> {"
+      - "  data: T;"
+      - "  status: number;"
+      - "}"
+      - "type UserResponse = ApiResponse<{ id: string; name: string }>;"
+    explanation: Dastlab generic interfeys ApiResponse<T> eʼlon qilinadi, keyin esa unga aniq tip uzatib ixtisoslashtirilgan tip yasaladi.
+
+  - id: ts-gen-009
+    type: choice
+    difficulty: 3
+    lang: ts
+    prompt: "keyof operatori nimani qaytaradi? Masalan, keyof { id: number; title: string }."
+    options:
+      - Obyekt kalitlarining String Literal Union tipini ("id" | "title")
+      - Kalitlar qiymatlarining massivini
+      - boolean
+      - Kalitlar sonini
+    answer: 0
+    explanation: keyof T obyekt tipining barcha ommaviy kalitlari nomlaridan iborat union tip yasaydi ("id" | "title").
+
+  - id: ts-gen-010
+    type: choice
+    difficulty: 3
+    lang: ts
+    prompt: ReturnType<typeof myFunction> utility tipi nima vazifani bajaradi?
+    options:
+      - Berilgan funksiya qaytaradigan qiymatning tipini avtomatik ajratib oladi
+      - Funksiyaning argumentlar roʻyxatini qaytaradi
+      - Funksiyaning nomini satr koʻrinishida oladi
+      - Funksiyani ishga tushirib natijasini tekshiradi
+    answer: 0
+    explanation: ReturnType<T> funksiya tipi T ning return qiladigan maʼlumot tipini olib beradi.

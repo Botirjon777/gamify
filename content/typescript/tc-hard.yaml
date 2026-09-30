@@ -1,0 +1,147 @@
+exercises:
+  - id: tc-hrd-001
+    type: choice
+    difficulty: 3
+    lang: ts
+    prompt: "Union tipni Intersection tipga aylantiruvchi UnionToIntersection qaysi TypeScript xususiyatiga tayanadi?"
+    code: |-
+      type UnionToIntersection<U> =
+        (U extends any ? (k: U) => void : never) extends (k: infer I) => void ? I : never;
+    options:
+      - "Funksiya parametrlari kontravariant (contravariant) boʻlib, bir nechta nomzodlar kesishmasi (intersection) olinadi"
+      - "Obyektlarning oʻzaro kovariantligi"
+      - "Massivlarning binar daraxtga aylanishi"
+      - "String templatelarning birlashishi"
+    answer: 0
+    explanation: "TypeScriptʼda funksiya argumenti pozitsiyasidagi bir xil nomli infer parametrlari kontravariant boʻlgani sababli, union avtomatik ravishda intersection (&) ga aylanadi."
+
+  - id: tc-hrd-002
+    type: fill
+    difficulty: 3
+    lang: ts
+    prompt: "Obyektdan faqat majburiy (required, optional boʻlmagan) kalitlarni ajratib oluvchi shartni toʻldiring."
+    code: |-
+      type GetRequired<T> = {
+        [K in keyof T as {} extends Pick<T, K> ? ___ : K]: T[K];
+      };
+    answer:
+      - never
+    explanation: "Agar {} boʻsh obyekt Pick<T, K> ga kelsa, demak u ixtiyoriy (optional) xususiyatdir. Uni never bilan tashlab yuboramiz."
+
+  - id: tc-hrd-003
+    type: fill
+    difficulty: 3
+    lang: ts
+    prompt: "Obyektdan faqat ixtiyoriy (optional) kalitlar nomlarini oluvchi OptionalKeys tipini toʻldiring."
+    code: |-
+      type OptionalKeys<T> = keyof {
+        [K in keyof T as {} extends Pick<T, K> ? K : ___]: T[K];
+      };
+    answer:
+      - never
+    explanation: "{} extends Pick<T, K> rost boʻlsa, demak bu kalit majburiy emas, shuning uchun u K sifatida saqlanadi."
+
+  - id: tc-hrd-004
+    type: choice
+    difficulty: 3
+    lang: ts
+    prompt: "Berilgan tipning Union ekanligini aniqlovchi IsUnion<T> tipi qanday mantiqqa asoslanadi?"
+    code: |-
+      type IsUnion<T, B = T> = [T] extends [never]
+        ? false
+        : T extends B
+          ? [B] extends [T]
+            ? false
+            : true
+          : never;
+    options:
+      - "Naked T har bir union aʼzosiga tarqaladi (distribute), natijada [B] extends [T] tekshiruvi bajarilmaydi (false) va IsUnion true qaytaradi"
+      - "T ning uzunligini tekshiradi"
+      - "T ni satrga oʻgirib '|' belgisini qidiradi"
+      - "Obyekt kalitlarini sanaydi"
+    answer: 0
+    explanation: "T extends B da T alohida aʼzo boʻladi, B esa toʻliq union saqlanib turadi. Agar T union boʻlsa, [B] (toʻliq union) bitta [T] ga sigʻmaydi, demak u union!"
+
+  - id: tc-hrd-005
+    type: fill
+    difficulty: 3
+    lang: ts
+    prompt: "Tuple kalitlaridan ichma-ich obyekt hosil qiluvchi (TupleToNestedObject) rekursiv tipni toʻldiring."
+    code: |-
+      type TupleToNestedObject<T extends string[], V> =
+        T extends [infer F extends string, ...infer R extends string[]]
+          ? { [K in F]: ___<R, V> }
+          : V;
+    answer:
+      - TupleToNestedObject
+    explanation: "Har bir qadamda F kaliti bilan obyekt ochiladi va uning ichiga R qoldigʻi bilan TupleToNestedObject rekursiv joylashtiriladi."
+
+  - id: tc-hrd-006
+    type: order
+    difficulty: 3
+    lang: ts
+    prompt: "Kebab-case satrini camelCase ga oʻtkazuvchi CamelCase tipining toʻgʻri tuzilishini tiklang."
+    lines:
+      - "type CamelCase<S extends string> ="
+      - "  S extends `${infer L}-${infer R}`"
+      - "    ? R extends `${infer F}${infer Rest}`"
+      - "      ? `${L}${Capitalize<F>}${CamelCase<Rest>}`"
+      - "      : `${L}-`"
+      - "    : S;"
+    explanation: "Defis (-) qidiriladi, defisdan keyingi birinchi harf Capitalize qilinadi va qolgan qismga rekursiya qoʻllanadi."
+
+  - id: tc-hrd-007
+    type: choice
+    difficulty: 3
+    lang: ts
+    prompt: "Bir nechta argumentli funksiyani zanjirli (curried) funksiyaga oʻgiruvchi Currying tipi nima qaytaradi?"
+    options:
+      - "Har bir chaqiriqda bitta argument qabul qilib, keyingi funksiyani qaytaruvchi funksiyalar zanjiri"
+      - "Oddiy massiv"
+      - "Promise obyekti"
+      - "Faqat birinchi argument qiymati"
+    answer: 0
+    explanation: "Currying (a, b, c) => d koʻrinishidagi funksiyani (a) => (b) => (c) => d zanjiriga aylantiradi."
+
+  - id: tc-hrd-008
+    type: fill
+    difficulty: 3
+    lang: ts
+    prompt: "Satrdagi barcha mos kelgan qismlarni almashtiruvchi ReplaceAll tipini toʻldiring."
+    code: |-
+      type ReplaceAll<S extends string, From extends string, To extends string> =
+        From extends ""
+          ? S
+          : S extends `${infer L}${From}${infer R}`
+            ? `${L}${To}${___<R, From, To>}`
+            : S;
+    answer:
+      - ReplaceAll
+    explanation: "From topilgach, uning oʻrniga To qoʻyiladi va qolgan R oʻng qismiga ReplaceAll rekursiv chaqiriladi."
+
+  - id: tc-hrd-009
+    type: choice
+    difficulty: 3
+    lang: ts
+    prompt: "TypeScript da ikkita obyektni birlashtirganda ikkinchisining xususiyatlarini ustun qiluvchi Merge<F, S> qanday yoziladi?"
+    options:
+      - "type Merge<F, S> = { [K in keyof F | keyof S]: K extends keyof S ? S[K] : K extends keyof F ? F[K] : never };"
+      - "type Merge<F, S> = F & S;"
+      - "type Merge<F, S> = F | S;"
+      - "type Merge<F, S> = keyof (F & S);"
+    answer: 0
+    explanation: "Barcha kalitlar birlashmasi olinadi, agar kalit S da boʻlsa S[K], aks holda F[K] olinadi."
+
+  - id: tc-hrd-010
+    type: fill
+    difficulty: 3
+    lang: ts
+    prompt: "Satr uzunligini massiv akkumulyatori yordamida hisoblovchi LengthOfString tipini toʻldiring."
+    code: |-
+      type LengthOfString<S extends string, Acc extends any[] = []> =
+        S extends `${string}${infer Rest}`
+          ? LengthOfString<Rest, [...Acc, any]>
+          : Acc["___"];
+    answer:
+      - length
+    explanation: "Satr literal tipida S['length'] aniq uzunlikni emas, balki umumiy number tipini qaytaradi. Shuning uchun har bir harf massivga solinib, oxirida Acc['length'] olinadi."

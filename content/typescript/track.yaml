@@ -1,0 +1,36 @@
+slug: typescript
+title: TypeScript
+description: Statik tiplar bilan xavfsiz JavaScript kod yozish — interfeyslar, generiklar va Type Challenges.
+icon: file-code
+order: 4
+modules:
+  - slug: basic
+    title: Boshlangʻich (Basic & Easy)
+    skills:
+      - slug: type-basics
+        title: Asosiy tiplar va interfeyslar
+        description: type va interface, union (|) va intersection (&) tiplari, optional xususiyatlar.
+      - slug: tc-easy
+        title: Easy Type Challenges
+        description: "Boshlangʻich darajadagi amaliy topshiriqlar: MyPick, MyReadonly, TupleToObject, First, Length, MyExclude."
+  - slug: normal
+    title: Oʻrtacha (Normal / Medium)
+    skills:
+      - slug: generics
+        title: Generiklar va utility tiplar
+        description: Generic funksiyalar va sinflar, Partial, Pick, Omit va Record yordamchi tiplari.
+      - slug: tc-medium
+        title: Medium Type Challenges
+        description: "Oʻrtacha darajadagi qiziqarli tiplar: MyReturnType, MyOmit, DeepReadonly, TupleToUnion, Trim, Flatten, Absolute."
+  - slug: hard
+    title: Qiyin (Hard)
+    skills:
+      - slug: tc-hard
+        title: Hard Type Challenges
+        description: "Murakkab tiplar gimnastikasi: UnionToIntersection, GetRequired, RequiredKeys, IsUnion, CamelCase, Currying."
+  - slug: super-hard
+    title: Juda qiyin (Super Hard / Extreme)
+    skills:
+      - slug: tc-super-hard
+        title: Super Hard Type Challenges
+        description: "Ekstremal darajadagi kompilyator sirlari: Slice, QueryStringParser, IsGreater, Tag, StringToUnion."

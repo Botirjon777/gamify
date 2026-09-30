@@ -1,0 +1,15 @@
+slug: python
+title: Python
+description: Sodda, tushunarli va qudratli dasturlash tili — maʼlumot tuzilmalari, comprehension va funksiyalar.
+icon: terminal
+order: 7
+modules:
+  - slug: data-structures
+    title: Maʼlumot tuzilmalari
+    skills:
+      - slug: lists-dicts
+        title: List, Dict va Comprehension
+        description: Roʻyxatlar (list), lugʻatlar (dict), toʻplamlar (set), slicing va list comprehension imkoniyatlari.
+      - slug: functions-args
+        title: Funksiyalar va argumentlar
+        description: Standart va lambda funksiyalar, *args, **kwargs, decorator asoslari va scope.

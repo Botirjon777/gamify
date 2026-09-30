@@ -1,0 +1,15 @@
+slug: cybersecurity
+title: Kiberxavfsizlik
+description: Veb va tizim xavfsizligi asoslari — OWASP Top 10 (SQLi, XSS, CSRF), kriptografiya va tarmoq himoyasi.
+icon: shield
+order: 9
+modules:
+  - slug: web-security
+    title: Veb xavfsizligi va zaifliklar
+    skills:
+      - slug: owasp-top10
+        title: "Veb zaifliklari: Injection (SQLi, XSS) va CSRF"
+        description: SQL Injection, Cross-Site Scripting (XSS), CSRF tokenlar va ulardan himoyalanish usullari.
+      - slug: crypto-auth
+        title: Autentifikatsiya va shifrlash
+        description: Parollarni hashlash (bcrypt/argon2), JWT tokenlar, HTTPS/TLS va xavfsiz seanslar.

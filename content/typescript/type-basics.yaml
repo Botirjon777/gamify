@@ -1,0 +1,134 @@
+exercises:
+  - id: ts-basic-001
+    type: choice
+    difficulty: 1
+    lang: ts
+    prompt: TypeScriptda qiymat yoki satr, yoki son boʻlishi mumkinligini (Union type) qaysi belgi bilan yozamiz?
+    options:
+      - "|"
+      - "&"
+      - "||"
+      - "?"
+    answer: 0
+    explanation: Union tipi | (vertikal chiziq) orqali yoziladi, masalan string | number.
+
+  - id: ts-basic-002
+    type: fill
+    difficulty: 1
+    lang: ts
+    prompt: Obyekt strukturasini belgilash uchun interfeys eʼlon qilish kalit soʻzini toʻldiring.
+    code: |-
+      ___ User {
+        id: number;
+        name: string;
+      }
+    answer:
+      - interface
+    explanation: interface kalit soʻzi obyektlar shaklini (shartnomasini) eʼlon qilish uchun asosiy vositadir.
+
+  - id: ts-basic-003
+    type: fill
+    difficulty: 1
+    lang: ts
+    prompt: Xususiyat ixtiyoriy (majburiy emas, optional) ekanligini bildiruvchi belgini toʻldiring.
+    code: |-
+      type Post = {
+        title: string;
+        description___: string;
+      };
+    answer:
+      - "?"
+    explanation: Xususiyat nomidan keyin ? qoʻyilsa, bu xususiyat ixtiyoriy boʻladi (string | undefined).
+
+  - id: ts-basic-004
+    type: choice
+    difficulty: 1
+    lang: ts
+    prompt: Hech qanday qiymat qaytarmaydigan funksiyaning qaytarish tipi odatda qanday yoziladi?
+    options:
+      - void
+      - never
+      - "null"
+      - any
+    answer: 0
+    explanation: void tipi funksiya hech qanday qiymat qaytarmasligini (yoki return siz ishlashini) bildiradi.
+
+  - id: ts-basic-005
+    type: choice
+    difficulty: 2
+    lang: ts
+    prompt: type va interface oʻrtasidagi kengayish (inheritance) boʻyicha qaysi gap toʻgʻri?
+    options:
+      - interface boshqa interfeysni extends orqali kengaytiradi, type esa intersection (&) bilan birlashadi
+      - type faqat extends bilan ishlaydi
+      - interface ni kengaytirib boʻlmaydi
+      - Ular orasida sintaktik jihatdan hech qanday farq yoʻq
+    answer: 0
+    explanation: interface B extends A { ... } koʻrinishida kengayadi. type esa type C = A & B orqali birlashtiriladi.
+
+  - id: ts-basic-006
+    type: fill
+    difficulty: 2
+    lang: ts
+    prompt: Oʻzgaruvchi qiymati hech qachon mavjud boʻlmasligini yoki funksiya hech qachon tugamasligini bildiruvchi tipni toʻldiring.
+    code: |-
+      function throwError(msg: string): ___ {
+        throw new Error(msg);
+      }
+    answer:
+      - never
+    explanation: never tipi funksiya hech qachon normal tugamasligini (xato tashlashini yoki cheksiz siklga kirishini) bildiradi.
+
+  - id: ts-basic-007
+    type: choice
+    difficulty: 2
+    lang: ts
+    prompt: "type Status = 'pending' | 'success' | 'failed'; bu qanday tipga misol boʻladi?"
+    options:
+      - String Literal Union type
+      - Enum type
+      - Generic type
+      - Dynamic Any type
+    answer: 0
+    explanation: Bu satr literal tiplarining union kombinatsiyasi boʻlib, qiymat faqat sanab oʻtilgan aniq satrlardan biri boʻlishini kafolatlaydi.
+
+  - id: ts-basic-008
+    type: order
+    difficulty: 2
+    lang: ts
+    prompt: TypeScript interfeysi va undan foydalanuvchi funksiyaning toʻgʻri ketma-ketligini tiklang.
+    lines:
+      - "interface Product {"
+      - "  title: string;"
+      - "  price: number;"
+      - "}"
+      - "function getFormattedPrice(p: Product): string {"
+      - "  return `$${p.price.toFixed(2)}`;"
+      - "}"
+    explanation: Avval Product interfeysi eʼlon qilinadi, soʻngra funksiya argumentida uning tipi koʻrsatiladi.
+
+  - id: ts-basic-009
+    type: choice
+    difficulty: 3
+    lang: ts
+    prompt: unknown va any tiplari orasidagi asosiy xavfsizlik farqi nima?
+    options:
+      - "unknown xavfsiz: uning ustida amal bajarishdan oldin tipni tekshirish (narrowing) talab qilinadi, any esa tekshiruvni butunlay oʻchiradi"
+      - any xavfsizroq, chunki u barcha tiplarni qabul qiladi
+      - unknown faqat sonlarni qabul qiladi
+      - Ikkalasi ham mutlaqo bir xil
+    answer: 0
+    explanation: unknown har qanday qiymatni qabul qila oladi, biroq typeof yoki instanceof bilan aniqlashtirmasdan uni ishlatishga TypeScript ruxsat bermaydi.
+
+  - id: ts-basic-010
+    type: fill
+    difficulty: 3
+    lang: ts
+    prompt: Type Guard funksiyasining qaytarish qiymatida tipni aniqlashtirish (is operatori) uchun toʻldiring.
+    code: |-
+      function isString(val: unknown): val ___ string {
+        return typeof val === "string";
+      }
+    answer:
+      - is
+    explanation: val is string sintaksisi Type Predicate deyiladi va funksiya true qaytarganda TypeScript oʻzgaruvchini string deb taniydi.

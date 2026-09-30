@@ -1,0 +1,15 @@
+slug: css
+title: CSS
+description: Veb sahifalarni bezash va joylashtirish — selektorlar, box model, Flexbox va zamonaviy stillar.
+icon: palette
+order: 2
+modules:
+  - slug: layout
+    title: Joylashuv va stillar
+    skills:
+      - slug: flexbox
+        title: Flexbox asoslari
+        description: 1 oʻlchamli moslashuvchan joylashuv — justify-content, align-items, flex-direction va gap.
+      - slug: selectors-boxmodel
+        title: Selektorlar va box model
+        description: Elementlarni tanlash, margin, padding, border va box-sizing xususiyatlari.

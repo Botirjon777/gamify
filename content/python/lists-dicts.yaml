@@ -1,0 +1,122 @@
+exercises:
+  - id: py-ds-001
+    type: output
+    difficulty: 1
+    lang: python
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      nums = [1, 2, 3, 4]
+      doubled = [x * 2 for x in nums]
+      print(doubled)
+    answer: "[2, 4, 6, 8]"
+    explanation: List comprehension har bir elementni olib uni 2 ga koʻpaytiradi va yangi roʻyxat hosil qiladi.
+
+  - id: py-ds-002
+    type: output
+    difficulty: 1
+    lang: python
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      user = {"name": "Akmal", "age": 22}
+      print(user.get("role", "guest"))
+    answer: guest
+    explanation: "dict.get() metodi agar kalit topilmasa xatolik bermasdan, koʻrsatilgan ikkinchi default qiymatni ('guest') qaytaradi."
+
+  - id: py-ds-003
+    type: fill
+    difficulty: 1
+    lang: python
+    prompt: Roʻyxat oxiriga yangi element qoʻshish metodini toʻldiring.
+    code: |-
+      fruits = ["olma", "banan"]
+      fruits.___("anor")
+    answer:
+      - append
+    explanation: append() roʻyxatning oxiriga bitta yangi element qoʻshadi.
+
+  - id: py-ds-004
+    type: output
+    difficulty: 2
+    lang: python
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      text = "Python"
+      print(text[::-1])
+    answer: nohtyP
+    explanation: "[::-1] slicing sintaksisi satr yoki roʻyxatni teskari tartibda oʻgirib beradi."
+
+  - id: py-ds-005
+    type: fill
+    difficulty: 2
+    lang: python
+    prompt: Faqat juft sonlarni tanlab oluvchi list comprehension shartini toʻldiring.
+    code: |-
+      numbers = [1, 2, 3, 4, 5, 6]
+      evens = [n for n in numbers ___ n % 2 == 0]
+    answer:
+      - "if"
+    explanation: List comprehensionda filterlash sharti if orqali qoʻshiladi.
+
+  - id: py-ds-006
+    type: output
+    difficulty: 2
+    lang: python
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      items = [1, 2, 2, 3, 3, 3]
+      unique = set(items)
+      print(len(unique))
+    answer: "3"
+    explanation: set toʻplami barcha takrorlanuvchi elementlarni avtomatik olib tashlaydi, natijada faqat {1, 2, 3} qoladi (uzunligi 3).
+
+  - id: py-ds-007
+    type: choice
+    difficulty: 2
+    lang: python
+    prompt: Lugʻatning kalit va qiymat juftliklarini bir vaqtda aylanib chiqish (iterate) uchun qaysi metod ishlatiladi?
+    options:
+      - d.items()
+      - d.entries()
+      - d.values()
+      - d.pairs()
+    answer: 0
+    explanation: d.items() har bir sikl qadamida (kalit, qiymat) juftligini tuple koʻrinishida qaytaradi.
+
+  - id: py-ds-008
+    type: order
+    difficulty: 2
+    lang: python
+    prompt: Lugʻat yaratish, qiymat qoʻshish va chiqarish tartibini tiklang.
+    lines:
+      - "scores = {}"
+      - "scores['math'] = 90"
+      - "scores['english'] = scores['math'] - 5"
+      - "total = sum(scores.values())"
+      - "print(total)"
+    explanation: Boʻsh lugʻat yaratiladi, fanlar ballari kiritiladi, values() yigʻindisi olinadi va chop etiladi.
+
+  - id: py-ds-009
+    type: output
+    difficulty: 3
+    lang: python
+    prompt: Konsolga nima chiqadi?
+    code: |-
+      a = [1, 2]
+      b = a
+      b.append(3)
+      print(len(a))
+    answer: "3"
+    explanation: Python'da roʻyxatlar havolaga (reference) asoslanadi. b = a nusxa koʻchirmaydi, bir xil obyektga havola beradi, shuning uchun a ham oʻzgaradi.
+
+  - id: py-ds-010
+    type: choice
+    difficulty: 3
+    lang: python
+    prompt: "(x * 2 for x in range(1000000)) ifodasi nima hosil qiladi?"
+    options:
+      - Generator ifodasi (xotirada barcha elementlarni birdan saqlamaydi, navbati bilan hisoblaydi)
+      - Tuple roʻyxati
+      - List comprehension
+      - Sintaktik xatolik beradi
+    answer: 0
+    explanation: Qavs ichidagi comprehension generator obyektini yaratadi (lazy evaluation), bu katta hajmdagi maʼlumotlarda xotirani tejash imkonini beradi.
