@@ -4,12 +4,14 @@ import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
+import { useRedirectTo } from "@/components/use-redirect-to";
 import { register } from "../actions";
 import type { FormState } from "../schemas";
 
 export function RegisterForm({ referralCode }: { referralCode?: string }) {
   const t = useTranslations("auth");
   const [state, action, pending] = useActionState<FormState, FormData>(register, {});
+  useRedirectTo(state.redirectTo);
   const err = (key?: string) => (key ? t(`errors.${key}`) : undefined);
 
   return (
@@ -61,7 +63,7 @@ export function RegisterForm({ referralCode }: { referralCode?: string }) {
         defaultValue={state.values?.ref ?? referralCode}
         error={err(state.fieldErrors?.ref)}
       />
-      <Button type="submit" disabled={pending} className="mt-2">
+      <Button type="submit" disabled={pending || !!state.redirectTo} className="mt-2">
         {pending ? t("pending") : t("submitRegister")}
       </Button>
     </form>

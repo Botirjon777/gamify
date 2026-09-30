@@ -4,12 +4,14 @@ import { useActionState, useState } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
+import { useRedirectTo } from "@/components/use-redirect-to";
 import { CLAN_COLORS, CLAN_EMBLEMS, GRADIENTS, IconTile, type GradientKey } from "@/components/icon";
 import { createClan, type ClanFormState } from "../actions";
 
 export function CreateClanForm() {
   const t = useTranslations("clans");
   const [state, action, pending] = useActionState<ClanFormState, FormData>(createClan, {});
+  useRedirectTo(state.redirectTo);
   const [emblem, setEmblem] = useState<string>(state.values?.emblem ?? "shield");
   const [color, setColor] = useState<GradientKey>((state.values?.color as GradientKey) ?? "brand");
   const [name, setName] = useState(state.values?.name ?? "");
@@ -78,7 +80,7 @@ export function CreateClanForm() {
           </div>
         </fieldset>
 
-        <Button type="submit" disabled={pending} className="h-12 w-full sm:w-fit sm:px-10">
+        <Button type="submit" disabled={pending || !!state.redirectTo} className="h-12 w-full sm:w-fit sm:px-10">
           {t("form.submit")}
         </Button>
       </div>

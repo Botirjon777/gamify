@@ -4,7 +4,7 @@ import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/logo";
 import { Avatar } from "@/components/avatar";
 import { PlanBadge } from "@/components/plan-badge";
-import { logout } from "@/features/auth/actions";
+import { LogoutButton } from "@/features/auth/components/logout-button";
 import { requireSession } from "@/lib/auth/session";
 import { effectivePlan } from "@/features/plans/plans";
 import { unreadCount } from "@/features/notifications/queries";
@@ -52,16 +52,12 @@ export default async function AppLayout({ children }: LayoutProps<"/[locale]">) 
                 <PlanBadge plan={plan} />
               </span>
             </Link>
-            <form action={logout}>
-              <button
-                type="submit"
-                title={t("logout")}
-                aria-label={t("logout")}
-                className="grid size-9 place-items-center rounded-lg text-muted hover:bg-surface hover:text-danger"
-              >
-                <LogOut className="size-4" />
-              </button>
-            </form>
+            <LogoutButton
+              title={t("logout")}
+              className="grid size-9 place-items-center rounded-lg text-muted hover:bg-surface hover:text-danger"
+            >
+              <LogOut className="size-4" />
+            </LogoutButton>
           </div>
         </div>
       </aside>

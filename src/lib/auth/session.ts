@@ -47,10 +47,14 @@ export async function createSession(userId: string, tenantId: string) {
     },
   });
 
+  // Secure whenever the visitor is on HTTPS (nginx sets X-Forwarded-Proto) — always true in production,
+  // while a local production build over plain http://localhost still works.
+  const https = (await headers()).get("x-forwarded-proto") === "https";
+
   // The DB row is the source of truth for expiry; the cookie just lives long enough.
   (await cookies()).set(SESSION_COOKIE, token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === "production",
+    secure: https,
     sameSite: "lax",
     path: "/",
     maxAge: 400 * 24 * 60 * 60,
@@ -109,4 +113,10 @@ export async function revokeOtherSessions(userId: string, keepSessionId: string)
 
 export async function clearSessionCookie() {
   (await cookies()).delete(SESSION_COOKIE);
+}
+
+/** "Just signed up": account from the last few minutes that has only ever had this one session. */
+export async function isJustSignedUp(user: { id: string; createdAt: Date }) {
+  if (Date.now() - user.createdAt.getTime() > 10 * 60 * 1000) return false;
+  return (await db.session.count({ where: { userId: user.id } })) === 1;
 }

@@ -22,6 +22,8 @@ export const loginSchema = z.object({
 });
 
 export type FormState = {
+  /** Where the client should navigate after success (see note in actions.ts). */
+  redirectTo?: string;
   error?: string;
   fieldErrors?: Partial<Record<string, string>>;
   values?: Record<string, string>;

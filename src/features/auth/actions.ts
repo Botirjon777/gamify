@@ -1,7 +1,6 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { getLocale } from "next-intl/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { getCurrentTenant, isDefaultTenant } from "@/lib/tenant";
@@ -17,7 +16,6 @@ import {
   revokeOtherSessions,
   revokeSession,
 } from "@/lib/auth/session";
-import { redirect } from "@/i18n/navigation";
 import { Prisma } from "@/generated/prisma/client";
 import { loginSchema, registerSchema, type FormState } from "./schemas";
 import { awardXp } from "@/features/gamification/xp";
@@ -109,9 +107,8 @@ export async function register(_prev: FormState, formData: FormData): Promise<Fo
   }
 
   await createSession(userId, tenant.id);
-  // New users take the placement IQ test first.
-  redirect({ href: "/iq/placement", locale: await getLocale() });
-  return {};
+  // New users are offered the (optional) placement IQ test first.
+  return { redirectTo: "/iq/placement" };
 }
 
 export async function login(_prev: FormState, formData: FormData): Promise<FormState> {
@@ -156,15 +153,18 @@ export async function login(_prev: FormState, formData: FormData): Promise<FormS
   }
 
   await createSession(user.id, tenant.id);
-  redirect({ href: "/dashboard", locale: await getLocale() });
-  return {};
+  return { redirectTo: "/dashboard" };
 }
 
+/**
+ * Server actions here return where to go instead of calling redirect(): in production Next.js renders a
+ * redirect target inside the action response without running the locale proxy, so "/dashboard" would be
+ * read as locale "dashboard" → 404. Navigating on the client goes through the proxy normally.
+ */
 export async function logout() {
   const current = await getCurrentSession();
   if (current) await revokeSession(current.session.id);
   await clearSessionCookie();
-  redirect({ href: "/", locale: await getLocale() });
 }
 
 export async function revokeDevice(sessionId: string) {

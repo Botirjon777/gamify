@@ -157,7 +157,9 @@
   },
   "notFound": {
     "title": "Sahifa topilmadi",
-    "back": "Bosh sahifaga qaytish"
+    "text": "Siz qidirgan sahifa mavjud emas yoki koʻchirilgan. Havolani tekshiring yoki bosh sahifaga qayting.",
+    "back": "Bosh sahifaga qaytish",
+    "learn": "Mashq qilishni davom ettirish"
   },
   "learn": {
     "title": "Oʻrganish",

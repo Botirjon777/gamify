@@ -4,12 +4,14 @@ import { useActionState } from "react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
+import { useRedirectTo } from "@/components/use-redirect-to";
 import { login } from "../actions";
 import type { FormState } from "../schemas";
 
 export function LoginForm() {
   const t = useTranslations("auth");
   const [state, action, pending] = useActionState<FormState, FormData>(login, {});
+  useRedirectTo(state.redirectTo);
   const err = (key?: string) => (key ? t(`errors.${key}`) : undefined);
 
   return (
@@ -35,7 +37,7 @@ export function LoginForm() {
         error={err(state.fieldErrors?.password)}
         required
       />
-      <Button type="submit" disabled={pending} className="mt-2">
+      <Button type="submit" disabled={pending || !!state.redirectTo} className="mt-2">
         {pending ? t("pending") : t("submitLogin")}
       </Button>
     </form>

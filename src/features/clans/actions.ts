@@ -1,18 +1,16 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
-import { getLocale } from "next-intl/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
 import { requireSession } from "@/lib/auth/session";
 import { getRateLimiter } from "@/lib/rate-limit";
-import { redirect } from "@/i18n/navigation";
 import { CLAN_COLORS, CLAN_EMBLEMS } from "@/components/icon";
 import { notify, notifyMany } from "@/features/notifications/service";
 import { evaluateBadges } from "@/features/badges/service";
 import { memberLimit } from "./queries";
 
-export type ClanFormState = { error?: string; fieldErrors?: Partial<Record<string, string>>; values?: Record<string, string> };
+export type ClanFormState = { redirectTo?: string; error?: string; fieldErrors?: Partial<Record<string, string>>; values?: Record<string, string> };
 export type ClanActionResult = { ok: true } | { ok: false; error: "notFound" | "forbidden" | "inClan" | "full" | "tooMany" };
 
 const clanSchema = z.object({
@@ -68,8 +66,8 @@ export async function createClan(_prev: ClanFormState, formData: FormData): Prom
   }
 
   refresh();
-  redirect({ href: `/clans/${slug}`, locale: await getLocale() });
-  return {};
+  // Client navigates (see note on logout in features/auth/actions.ts).
+  return { redirectTo: `/clans/${slug}` };
 }
 
 /** Joining always needs approval from the leader or an officer. */

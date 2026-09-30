@@ -1,11 +1,18 @@
 import { redirect } from "@/i18n/navigation";
 import { Logo } from "@/components/logo";
-import { getCurrentSession } from "@/lib/auth/session";
+import { getCurrentSession, isJustSignedUp } from "@/lib/auth/session";
 import { getCurrentTenant } from "@/lib/tenant";
 
 export default async function AuthLayout({ children, params }: LayoutProps<"/[locale]">) {
   const { locale } = await params;
-  if (await getCurrentSession()) redirect({ href: "/dashboard", locale });
+  const current = await getCurrentSession();
+  if (current) {
+    // Signing up sets the cookie and Next.js re-renders this layout — so this is also where a brand-new
+    // account gets its (optional) IQ test offer. Everyone else who is logged in goes to the dashboard.
+    const { user } = current;
+    const offerIq = !user.iqTestedAt && !user.iqPromptHiddenAt && (await isJustSignedUp(user));
+    redirect({ href: offerIq ? "/iq/placement" : "/dashboard", locale });
+  }
   const tenant = await getCurrentTenant();
 
   return (
