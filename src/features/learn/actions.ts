@@ -1,6 +1,5 @@
 "use server";
 
-import { randomUUID } from "node:crypto";
 import { revalidatePath } from "next/cache";
 import { getLocale } from "next-intl/server";
 import { z } from "zod";
@@ -13,11 +12,11 @@ import { touchStreak } from "@/features/gamification/streak";
 import { evaluateBadges } from "@/features/badges/service";
 import { WEEKLY_BONUS_SHARE, weeklyTopic } from "@/features/events/service";
 import { completeTrackIfDone } from "./completion";
-import { BLANK, submissionSchema, type PrivateAnswer, type PublicContent, type Submission } from "./content-schema";
+import { submissionSchema, type PrivateAnswer, type Submission } from "./content-schema";
 import { checkAnswer } from "./check";
-import { highlight } from "./highlight";
 import { nextMastery, reviewIntervalDays } from "./mastery";
 import { pickNext } from "./picker";
+import { toClientExercise } from "./client-exercise";
 import type { ClientExercise, SubmitResult } from "./types";
 
 const DAY_MS = 24 * 60 * 60 * 1000;
@@ -54,35 +53,7 @@ export async function getNextExercise(skillId: string, recentIds: string[]): Pro
   if (!picked) return null;
 
   const exercise = await db.exercise.findUniqueOrThrow({ where: { id: picked.id } });
-  const content = exercise.content as PublicContent;
-  const base = {
-    id: exercise.id,
-    difficulty: exercise.difficulty,
-    xp: exercise.xp,
-    prompt: localized(content.prompt, locale),
-    lang: content.lang,
-  };
-
-  switch (content.type) {
-    case "CHOICE":
-      return {
-        ...base,
-        type: "CHOICE",
-        codeHtml: content.code ? await highlight(content.code, content.lang) : undefined,
-        options: content.options.map((o: LocalizedText) => localized(o, locale)),
-      };
-    case "OUTPUT":
-      return { ...base, type: "OUTPUT", codeHtml: await highlight(content.code, content.lang) };
-    case "FILL":
-      return { ...base, type: "FILL", parts: content.code.split(BLANK) };
-    case "ORDER": {
-      // Never show the lines already in the correct order.
-      const correctOrder = (exercise.answer as Extract<PrivateAnswer, { type: "ORDER" }>).lines.join("\n");
-      let lines = shuffle(content.lines);
-      for (let i = 0; i < 10 && lines.join("\n") === correctOrder; i++) lines = shuffle(content.lines);
-      return { ...base, type: "ORDER", lines: lines.map((text) => ({ key: randomUUID(), text })) };
-    }
-  }
+  return toClientExercise(exercise, locale);
 }
 
 export async function submitAnswer(exerciseId: string, rawSubmission: Submission, timeMs: number): Promise<SubmitResult> {
@@ -197,13 +168,4 @@ export async function submitAnswer(exerciseId: string, rawSubmission: Submission
 export async function leaveDrill() {
   await requireSession();
   revalidatePath("/", "layout");
-}
-
-function shuffle<T>(items: T[]): T[] {
-  const a = [...items];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
-  }
-  return a;
 }

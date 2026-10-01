@@ -20,6 +20,9 @@ export interface NotificationData {
   PAYMENT_REJECTED: { plan: string; reason: string };
   TRACK_COMPLETED: { track: string; trackSlug: string; xp: number };
   SEASON_RESULT: { season: number; rank: number; xp: number };
+  DUEL_INVITE: { username: string; track: string; stake: number; duelId: string };
+  DUEL_DECLINED: { username: string; duelId: string };
+  DUEL_RESULT: { username: string; result: "win" | "lose" | "draw"; xp: number; duelId: string };
 }
 
 export async function notify<T extends NotificationType>(db: Db, userId: string, type: T, data: NotificationData[T]) {

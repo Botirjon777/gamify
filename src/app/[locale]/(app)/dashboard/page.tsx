@@ -51,7 +51,7 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
 
   const levelStart = xpForLevel(user.level);
   const levelEnd = xpForLevel(user.level + 1);
-  const progress = Math.min(100, ((user.xp - levelStart) / (levelEnd - levelStart)) * 100);
+  const progress = Math.max(0, Math.min(100, ((user.xp - levelStart) / (levelEnd - levelStart)) * 100));
 
   return (
     <div className="flex flex-col gap-6">

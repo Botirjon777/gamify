@@ -9,6 +9,7 @@ import { requireSession } from "@/lib/auth/session";
 import { effectivePlan } from "@/features/plans/plans";
 import { unreadCount } from "@/features/notifications/queries";
 import { unreadChats } from "@/features/chat/service";
+import { duelsNeedingMe } from "@/features/duels/queries";
 import { countIncomingRequests } from "@/features/social/queries";
 import { pendingClanRequestsFor } from "@/features/clans/queries";
 import { NavLinks } from "./nav-links";
@@ -19,13 +20,14 @@ export default async function AppLayout({ children }: LayoutProps<"/[locale]">) 
   const { user, tenant } = await requireSession();
   const t = await getTranslations("nav");
   const tSettings = await getTranslations("settings");
-  const [unread, friendRequests, clanRequests, unreadChat] = await Promise.all([
+  const [unread, friendRequests, clanRequests, unreadChat, duels] = await Promise.all([
     unreadCount(user.id),
     countIncomingRequests(user.id),
     pendingClanRequestsFor(user.id),
     unreadChats(user.id),
+    duelsNeedingMe(user.id),
   ]);
-  const badges = { friends: friendRequests, clans: clanRequests, chat: unreadChat };
+  const badges = { friends: friendRequests, clans: clanRequests, chat: unreadChat, duels };
   const plan = effectivePlan(user);
   const format = await getFormatter();
   const planLabel =
@@ -124,6 +126,7 @@ export default async function AppLayout({ children }: LayoutProps<"/[locale]">) 
                 level={user.level}
                 xp={user.xp}
                 isAdmin={user.isSuperAdmin}
+                duels={duels}
               />
             </div>
           </div>

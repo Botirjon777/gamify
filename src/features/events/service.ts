@@ -49,6 +49,13 @@ async function rollOver(last: SeasonInfo, now: Date) {
 export async function addSeasonXp(tx: Db, userId: string, tenantId: string, amount: number) {
   const season = await currentSeason();
   if (!season) return;
+  if (amount < 0) {
+    // Duel losses: shrink, but never below 0.
+    await tx.$executeRaw`
+      UPDATE "SeasonScore" SET value = GREATEST(0, value + ${amount})
+      WHERE "userId" = ${userId} AND "tenantId" = ${tenantId} AND "seasonId" = ${season.id}`;
+    return;
+  }
   await tx.seasonScore.upsert({
     where: { userId_tenantId_seasonId: { userId, tenantId, seasonId: season.id } },
     create: { userId, tenantId, seasonId: season.id, value: amount },

@@ -1,11 +1,11 @@
 "use client";
 
-import { BookOpen, Home, MessageCircle, Shield, Trophy, Users, type LucideIcon } from "lucide-react";
+import { BookOpen, Home, MessageCircle, Shield, Swords, Trophy, Users, type LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { NavPending } from "@/components/nav-pending";
 
-type BadgeKey = "friends" | "clans" | "chat";
+type BadgeKey = "friends" | "clans" | "chat" | "duels";
 
 /** `bottom: false` → sidebar only (the mobile top bar has its own chat icon). */
 const LINKS: { href: string; key: string; icon: LucideIcon; badgeKey?: BadgeKey; bottom?: false }[] = [
@@ -14,6 +14,7 @@ const LINKS: { href: string; key: string; icon: LucideIcon; badgeKey?: BadgeKey;
   { href: "/leaderboard", key: "leaderboard", icon: Trophy },
   { href: "/friends", key: "friends", icon: Users, badgeKey: "friends" },
   { href: "/clans", key: "clans", icon: Shield, badgeKey: "clans" },
+  { href: "/duels", key: "duels", icon: Swords, badgeKey: "duels", bottom: false },
   { href: "/chat", key: "chat", icon: MessageCircle, badgeKey: "chat", bottom: false },
 ];
 
