@@ -1,10 +1,9 @@
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { db } from "@/lib/db";
 import { requireSession } from "@/lib/auth/session";
-import { Button } from "@/components/ui/button";
 import { PageHeader } from "@/components/page-header";
 import { Monitor, Smartphone } from "lucide-react";
-import { revokeAllOtherDevices, revokeDevice } from "@/features/auth/actions";
+import { RevokeDeviceButton } from "@/features/auth/components/revoke-device-button";
 
 export default async function DevicesPage({ params }: PageProps<"/[locale]/settings/devices">) {
   const { locale } = await params;
@@ -56,11 +55,7 @@ export default async function DevicesPage({ params }: PageProps<"/[locale]/setti
                 </div>
               </div>
               {!isCurrent && (
-                <form action={revokeDevice.bind(null, s.id)}>
-                  <Button variant="danger" className="h-9 w-full sm:w-auto">
-                    {t("revoke")}
-                  </Button>
-                </form>
+                <RevokeDeviceButton sessionId={s.id} className="h-9 w-full sm:w-auto" />
               )}
             </li>
           );
@@ -68,9 +63,7 @@ export default async function DevicesPage({ params }: PageProps<"/[locale]/setti
       </ul>
 
       {sessions.length > 1 ? (
-        <form action={revokeAllOtherDevices}>
-          <Button variant="danger">{t("revokeAll")}</Button>
-        </form>
+        <RevokeDeviceButton className="w-fit" />
       ) : (
         <p className="text-sm text-muted">{t("onlyThis")}</p>
       )}

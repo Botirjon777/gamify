@@ -41,7 +41,7 @@ export default async function ClanPage({ params }: PageProps<"/[locale]/clans/[s
           </div>
           <div className="relative">
             {clan.myRole ? (
-              <LeaveClan />
+              <LeaveClan isLeader={clan.myRole === "LEADER"} />
             ) : clan.inOtherClan ? (
               <span className="rounded-xl bg-white/20 px-3 py-2 text-sm font-semibold">{t("inOtherClan")}</span>
             ) : (
@@ -87,6 +87,7 @@ export default async function ClanPage({ params }: PageProps<"/[locale]/clans/[s
                 {isAdmin && m.id !== user.id && m.role !== "LEADER" && (
                   <MemberControls
                     userId={m.id}
+                    username={m.username}
                     canKick={clan.myRole === "LEADER" || m.role === "MEMBER"}
                     canPromote={clan.myRole === "LEADER"}
                     isOfficer={m.role === "OFFICER"}
