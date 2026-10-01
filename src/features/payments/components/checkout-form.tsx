@@ -7,25 +7,26 @@ import { copyText } from "@/lib/clipboard";
 import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { requestPayment } from "../actions";
-import { PERIODS, priceFor, type PaidPlan } from "../pricing";
+import { BILLING, BILLINGS, perMonth, priceFor, yearlySaving, type Billing, type PaidPlan } from "../pricing";
 
 interface Props {
   plan: PaidPlan;
+  initialBilling: Billing;
   cardNumber: string | null;
   cardHolder: string | null;
   contact: string | null;
 }
 
-export function CheckoutForm({ plan, cardNumber, cardHolder, contact }: Props) {
+export function CheckoutForm({ plan, initialBilling, cardNumber, cardHolder, contact }: Props) {
   const t = useTranslations("plans.checkout");
   const router = useRouter();
-  const [months, setMonths] = useState<number>(1);
+  const [billing, setBilling] = useState<Billing>(initialBilling);
   const [reference, setReference] = useState("");
   const [copied, setCopied] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [done, setDone] = useState(false);
   const [pending, start] = useTransition();
-  const amount = priceFor(plan, months);
+  const amount = priceFor(plan, billing);
   const som = (n: number) => n.toLocaleString("uz-UZ");
 
   if (done) {
@@ -42,16 +43,17 @@ export function CheckoutForm({ plan, cardNumber, cardHolder, contact }: Props) {
       {/* Period */}
       <section className="rounded-3xl border border-border bg-surface p-5 sm:p-6">
         <h2 className="mb-3 font-display text-base font-bold">{t("period")}</h2>
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-4" role="radiogroup" aria-label={t("period")}>
-          {PERIODS.map((p) => {
-            const active = p.months === months;
+        <div className="grid grid-cols-2 gap-3" role="radiogroup" aria-label={t("period")}>
+          {BILLINGS.map((b) => {
+            const p = BILLING[b];
+            const active = b === billing;
             return (
               <button
-                key={p.months}
+                key={b}
                 type="button"
                 role="radio"
                 aria-checked={active}
-                onClick={() => setMonths(p.months)}
+                onClick={() => setBilling(b)}
                 className={`relative flex flex-col items-center gap-1 rounded-2xl border-2 p-4 transition ${
                   active ? "border-brand bg-brand/5" : "border-border hover:border-brand/40"
                 }`}
@@ -61,8 +63,9 @@ export function CheckoutForm({ plan, cardNumber, cardHolder, contact }: Props) {
                     {t("discount", { percent: p.discount })}
                   </span>
                 )}
-                <span className="font-display text-lg font-bold">{t("months", { count: p.months })}</span>
-                <span className="text-sm text-muted">{som(priceFor(plan, p.months))} soʻm</span>
+                <span className="font-display text-lg font-bold">{t(`billing.${b}`)}</span>
+                <span className="text-sm text-muted">{t("perMonthPrice", { price: som(perMonth(plan, b)) })}</span>
+                {b === "annual" && <span className="text-xs font-semibold text-success">{t("saving", { saving: som(yearlySaving(plan)) })}</span>}
               </button>
             );
           })}
@@ -117,7 +120,7 @@ export function CheckoutForm({ plan, cardNumber, cardHolder, contact }: Props) {
           disabled={pending || reference.trim().length < 3}
           onClick={() =>
             start(async () => {
-              const r = await requestPayment({ plan, months, reference });
+              const r = await requestPayment({ plan, billing, reference });
               if (r.ok) {
                 setDone(true);
                 router.refresh();

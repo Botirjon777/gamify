@@ -376,12 +376,11 @@
     "paymentSoon": "Toʻlov (Click, Payme) tez orada ulanadi. Hozircha tarifni administrator orqali faollashtirish mumkin.",
     "contact": "Administratorga yozish",
     "pending": "Toʻlovingiz tekshirilmoqda",
-    "pendingText": "{plan} · {months} oy · {amount} soʻm. Administrator tasdiqlagach, tarif avtomatik faollashadi.",
+    "pendingText": "{plan} · {period} · {amount} soʻm. Administrator tasdiqlagach, tarif avtomatik faollashadi.",
     "cancelRequest": "Soʻrovni bekor qilish",
     "checkout": {
       "title": "{plan} tarifiga oʻtish",
       "period": "Muddat",
-      "months": "{count} oy",
       "discount": "−{percent}%",
       "total": "Jami",
       "step1": "1. Quyidagi kartaga {amount} soʻm oʻtkazing",
@@ -399,8 +398,19 @@
         "invalid": "Maʼlumotlarni tekshiring (kamida 3 ta belgi)",
         "pendingExists": "Sizda tekshirilayotgan toʻlov bor. Avval u koʻrib chiqiladi.",
         "tooMany": "Juda koʻp urinish. Keyinroq qayta urining."
-      }
-    }
+      },
+      "billing": {
+        "monthly": "Oylik",
+        "annual": "Yillik"
+      },
+      "perMonthPrice": "{price} soʻm / oy",
+      "saving": "Yiliga {saving} soʻm tejaysiz"
+    },
+    "billing": {
+      "monthly": "Oylik",
+      "annual": "Yillik"
+    },
+    "annualTotal": "Yiliga {total} soʻm — {saving} soʻm tejaysiz"
   },
   "friends": {
     "title": "Doʻstlar",

@@ -6,6 +6,9 @@ import { getFormatter, getTranslations, setRequestLocale } from "next-intl/serve
 import { requireSession } from "@/lib/auth/session";
 import { PageHeader } from "@/components/page-header";
 import { effectivePlan, PLAN_ORDER, PLANS } from "@/features/plans/plans";
+import { BILLING, BILLINGS, isBilling, perMonth, priceFor, yearlySaving, type Billing } from "@/features/payments/pricing";
+
+const som = (n: number) => n.toLocaleString("uz-UZ");
 
 const LOOK = {
   FREE: { icon: Rocket, card: "border-border bg-surface", tile: "bg-grad-success", text: "" },
@@ -13,9 +16,11 @@ const LOOK = {
   DIAMOND: { icon: Gem, card: "border-transparent bg-grad-dark text-white shadow-2xl shadow-black/20", tile: "bg-grad-iq", text: "text-white/75" },
 } as const;
 
-export default async function PlansPage({ params }: PageProps<"/[locale]/plans">) {
+export default async function PlansPage({ params, searchParams }: PageProps<"/[locale]/plans">) {
   const { locale } = await params;
   setRequestLocale(locale);
+  const sp = await searchParams;
+  const billing: Billing = isBilling(sp.billing) ? sp.billing : "monthly";
   const t = await getTranslations("plans");
   const format = await getFormatter();
   const { user } = await requireSession();
@@ -34,7 +39,7 @@ export default async function PlansPage({ params }: PageProps<"/[locale]/plans">
             <p className="text-sm text-muted">
               {t("pendingText", {
                 plan: t(`names.${pendingPayment.plan}`),
-                months: pendingPayment.months,
+                period: t(pendingPayment.months === 12 ? "billing.annual" : "billing.monthly"),
                 amount: pendingPayment.amountUzs.toLocaleString("uz-UZ"),
               })}
             </p>
@@ -44,6 +49,30 @@ export default async function PlansPage({ params }: PageProps<"/[locale]/plans">
           </form>
         </section>
       )}
+
+      {/* Monthly / annual */}
+      <div className="flex justify-center">
+        <div className="inline-flex rounded-2xl border border-border bg-surface p-1">
+          {BILLINGS.map((b) => (
+            <Link
+              key={b}
+              href={`/plans?billing=${b}`}
+              scroll={false}
+              aria-current={b === billing ? "page" : undefined}
+              className={`inline-flex items-center gap-2 rounded-xl px-5 py-2 text-sm font-bold transition ${
+                b === billing ? "bg-grad-brand text-white shadow-md shadow-brand/20" : "text-muted hover:text-foreground"
+              }`}
+            >
+              {t(`billing.${b}`)}
+              {BILLING[b].discount > 0 && (
+                <span className={`rounded-full px-2 py-0.5 text-[11px] ${b === billing ? "bg-white/25" : "bg-success/15 text-success"}`}>
+                  −{BILLING[b].discount}%
+                </span>
+              )}
+            </Link>
+          ))}
+        </div>
+      </div>
 
       <div className="stagger grid gap-5 pt-3 lg:grid-cols-3">
         {PLAN_ORDER.map((plan) => {
@@ -72,10 +101,26 @@ export default async function PlansPage({ params }: PageProps<"/[locale]/plans">
               </span>
               <h2 className="mt-4 font-display text-2xl font-bold">{t(`names.${plan}`)}</h2>
               <p className={`text-sm ${look.text || "text-muted"}`}>{t(`taglines.${plan}`)}</p>
-              <p className="mt-5 font-display text-3xl font-bold">
-                {limits.priceUzs === 0 ? t("free") : limits.priceUzs.toLocaleString("uz-UZ")}
-                {limits.priceUzs > 0 && <span className={`ml-1 font-sans text-sm font-medium ${look.text}`}>{t("perMonth")}</span>}
-              </p>
+              {plan === "FREE" ? (
+                <p className="mt-5 font-display text-3xl font-bold">{t("free")}</p>
+              ) : (
+                <div className="mt-5">
+                  {billing === "annual" && (
+                    <p className={`text-sm font-medium line-through ${look.text}`}>
+                      {som(perMonth(plan, "monthly"))} {t("perMonth")}
+                    </p>
+                  )}
+                  <p className="flex flex-wrap items-baseline gap-x-1.5 font-display text-3xl font-bold">
+                    {som(perMonth(plan, billing))}
+                    <span className={`font-sans text-sm font-medium ${look.text}`}>{t("perMonth")}</span>
+                  </p>
+                  {billing === "annual" && (
+                    <p className={`mt-1 text-sm ${look.text}`}>
+                      {t("annualTotal", { total: som(priceFor(plan, "annual")), saving: som(yearlySaving(plan)) })}
+                    </p>
+                  )}
+                </div>
+              )}
 
               <ul className="mt-6 flex flex-1 flex-col gap-2.5 text-sm">
                 {features.map((f) => (
@@ -98,7 +143,7 @@ export default async function PlansPage({ params }: PageProps<"/[locale]/plans">
                   </p>
                 ) : plan !== "FREE" ? (
                   <Link
-                    href={`/plans/checkout?plan=${plan}`}
+                    href={`/plans/checkout?plan=${plan}&billing=${billing}`}
                     className={`block rounded-xl px-4 py-3 text-center text-sm font-bold transition ${
                       plan === "PRO" ? "bg-white text-brand hover:bg-white/90" : "bg-grad-iq text-white hover:brightness-110"
                     }`}
