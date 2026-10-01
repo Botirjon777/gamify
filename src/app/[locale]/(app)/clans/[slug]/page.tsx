@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Crown, Shield, Trophy, Users, Zap } from "lucide-react";
+import { Crown, Settings, Shield, Trophy, Users, Zap } from "lucide-react";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { requireSession } from "@/lib/auth/session";
@@ -41,7 +41,17 @@ export default async function ClanPage({ params }: PageProps<"/[locale]/clans/[s
           </div>
           <div className="relative">
             {clan.myRole ? (
-              <LeaveClan isLeader={clan.myRole === "LEADER"} />
+              <div className="flex flex-wrap items-center gap-2">
+                {clan.myRole === "LEADER" && (
+                  <Link
+                    href={`/clans/${clan.slug}/settings`}
+                    className="inline-flex h-10 items-center gap-1.5 rounded-xl bg-white px-4 text-sm font-semibold text-foreground hover:bg-white/90"
+                  >
+                    <Settings className="size-4" /> {t("settings.title")}
+                  </Link>
+                )}
+                <LeaveClan isLeader={clan.myRole === "LEADER"} />
+              </div>
             ) : clan.inOtherClan ? (
               <span className="rounded-xl bg-white/20 px-3 py-2 text-sm font-semibold">{t("inOtherClan")}</span>
             ) : (

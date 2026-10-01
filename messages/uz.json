@@ -574,7 +574,8 @@
       "descriptionPlaceholder": "Klaningiz haqida bir-ikki gap",
       "emblem": "Emblema",
       "color": "Rang",
-      "submit": "Yaratish"
+      "submit": "Yaratish",
+      "save": "Saqlash"
     },
     "errors": {
       "nameLength": "Nomi 3–30 ta belgi boʻlishi kerak",
@@ -616,7 +617,23 @@
     "cancelRequestConfirm": "Qoʻshilish soʻrovini bekor qilasizmi?",
     "removeOfficerConfirm": "{username} ofitserlikdan olinsinmi?",
     "kickConfirmTitle": "{username} klandan chiqarilsinmi?",
-    "kickConfirmText": "Qayta qoʻshilish uchun u yangi soʻrov yuborishi kerak boʻladi."
+    "kickConfirmText": "Qayta qoʻshilish uchun u yangi soʻrov yuborishi kerak boʻladi.",
+    "settings": {
+      "title": "Klan sozlamalari",
+      "subtitle": "Nom, teg, tavsif va koʻrinish. Teg oʻzgarsa, klan havolasi ham oʻzgaradi.",
+      "transfer": "Rahbarlikni topshirish",
+      "transferHint": "Tanlangan aʼzo klan rahbari boʻladi, siz ofitser boʻlib qolasiz.",
+      "transferConfirm": "Rahbarlik {username}ga topshirilsinmi?",
+      "transferText": "Klan sozlamalarini endi faqat yangi rahbar oʻzgartira oladi. Buni ortga qaytarish uchun u sizga qaytarib topshirishi kerak.",
+      "newLeader": "Yangi rahbar",
+      "noMembers": "Klanda boshqa aʼzo yoʻq.",
+      "danger": "Xavfli hudud",
+      "deleteHint": "Klan, uning aʼzoliklari va haftalik natijalari butunlay oʻchiriladi.",
+      "delete": "Klanni oʻchirish",
+      "deleteConfirm": "«{name}» butunlay oʻchirilsinmi?",
+      "deleteText": "Bu amalni ortga qaytarib boʻlmaydi. Barcha aʼzolar klansiz qoladi.",
+      "typeName": "Tasdiqlash uchun klan nomini yozing: {name}"
+    }
   },
   "rail": {
     "friendsTitle": "Doʻstlar bu hafta",
