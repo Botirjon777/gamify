@@ -1,7 +1,12 @@
 {
   "meta": {
     "title": "Zukkolar — dasturlashni oʻyin orqali oʻrganing",
-    "description": "HTML, CSS, JavaScript, TypeScript va React boʻyicha aynan kerakli mavzuni mashq qiling: XP, streak, reyting va musobaqalar."
+    "description": "Dasturlashni oʻyin orqali oʻrganing: HTML, CSS, JavaScript, React va Python boʻyicha qisqa mashqlar, XP, streak, duellar va reyting. Bepul boshlang.",
+    "keywords": "dasturlashni oʻrganish, dasturlash kurslari, HTML, CSS, JavaScript, TypeScript, React, Python, oʻzbek tilida dasturlash, onlayn mashqlar, IQ test, Zukkolar",
+    "loginTitle": "Kirish",
+    "loginDescription": "Zukkolar hisobingizga kiring va mashqlarni davom ettiring.",
+    "registerTitle": "Roʻyxatdan oʻtish",
+    "registerDescription": "Zukkolar'da bepul hisob oching: dasturlashni qisqa mashqlar, XP va duellar bilan oʻrganing."
   },
   "nav": {
     "login": "Kirish",
@@ -48,20 +53,20 @@
       },
       "drill": {
         "title": "Mashq qiling",
-        "text": "Qisqa topshiriqlar, kod yozish, xatoni topish. Daraja sizga moslashadi."
+        "text": "Test, natijani topish, kodni toʻldirish va tartiblash. Qiyinlik darajangizga moslashadi."
       },
       "earn": {
         "title": "XP toʻplang",
-        "text": "Kunlik bonus, streak, kunlik viktorina va IQ testlar."
+        "text": "Har bir toʻgʻri javob, kunlik bonus, streak va IQ testlar uchun XP."
       },
       "climb": {
         "title": "Reytingda koʻtariling",
-        "text": "Haftalik ligalar, duellar va doʻstlar bilan musobaqa."
+        "text": "Haftalik va mavsumiy reyting, duellar va doʻstlar bilan musobaqa."
       }
     },
-    "tracksTitle": "Yoʻnalishlar",
+    "tracksTitle": "Yoʻnalishlar va kurslar",
     "centersTitle": "Oʻquv markazlari uchun",
-    "centersText": "Oʻz subdomeningiz (markaz.zukkolar.uz), logotip va ranglar, oʻquvchilar statistikasi, uyga vazifalar, hisobotlar va markazlararo musobaqalar.",
+    "centersText": "Markazingiz uchun alohida manzil (markaz.zukkolar.uz), oʻz nomingiz va ranglaringiz, oʻquvchilaringiz reytingi hamda klanlararo musobaqalar.",
     "centersCta": "Bogʻlanish",
     "aimTitle": "Maqsadimiz",
     "aimText": "Oʻzbekistondagi har bir oʻquvchi dasturlashni zerikmasdan, har kuni ozgina va aniq maqsad bilan mashq qilsin.",
@@ -82,6 +87,102 @@
         "title": "Nishonlar va darajalar",
         "text": "Streak, daraja va yutuqlar uchun nishonlar. 10-darajada profil rasmi ochiladi."
       }
+    },
+    "nav": {
+      "how": "Qanday ishlaydi",
+      "directions": "Yoʻnalishlar",
+      "game": "Musobaqa",
+      "plans": "Tariflar",
+      "faq": "Savollar"
+    },
+    "trust": [
+      "Boshlash bepul",
+      "Karta kerak emas",
+      "Telefonda ham ishlaydi"
+    ],
+    "stats": {
+      "exercises": "mashq",
+      "courses": "kurs",
+      "skills": "mavzu",
+      "types": "xil mashq turi",
+      "typesHint": "test, natijani topish, kodni toʻldirish, tartiblash"
+    },
+    "tracksText": "Yoʻnalishni tanlang, kursni oching va faqat oʻzingizga kerakli mavzuni mashq qiling.",
+    "courseStats": "{skills} ta mavzu · {exercises} ta mashq",
+    "comingSoon": "Tez orada",
+    "gameTitle": "Oʻrganish — oʻyin kabi",
+    "gameText": "Yolgʻiz oʻqish zerikarli. Bu yerda har bir mashq — ochko, har hafta — yangi musobaqa.",
+    "game": {
+      "duel": {
+        "title": "1 ga 1 duellar",
+        "text": "Doʻstingizni chaqiring: ikkalangizga bir xil 5 ta savol. Koʻp va tez topgan yutadi — XP gʻolibga oʻtadi.",
+        "win": "Gʻalaba",
+        "lose": "Magʻlubiyat",
+        "you": "Siz",
+        "rival": "Raqib"
+      },
+      "season": {
+        "title": "Mavsumlar",
+        "text": "Har 1–3 oyda yangi mavsum: reyting noldan boshlanadi, hamma uchun imkoniyat teng.",
+        "label": "{number}-mavsum",
+        "left": "{days} kun qoldi"
+      },
+      "weekly": {
+        "title": "Haftalik ikki baravar XP",
+        "text": "Har hafta bitta kurs bonusli: mashqlari uchun XP ikki baravar, kursni tugatsangiz 100 oʻrniga 200 XP.",
+        "badge": "Shu hafta: {track}"
+      },
+      "streak": {
+        "title": "Kunlik bonus va streak",
+        "text": "Har kuni kirganingiz uchun XP. Ketma-ket 7 kun — eng katta bonus.",
+        "day": "{n}-kun"
+      }
+    },
+    "plansTitle": "Tariflar",
+    "plansText": "Barcha kurslar bepul. Pro va Diamond tezroq oʻsish uchun.",
+    "plansFrom": "oyiga",
+    "plansAnnual": "Yillik toʻlovda −{percent}%",
+    "plansCta": "Bepul boshlash",
+    "faqTitle": "Koʻp beriladigan savollar",
+    "faq": [
+      {
+        "q": "Zukkolar bepulmi?",
+        "a": "Ha. Barcha kurslar va mashqlar bepul. Pro va Diamond tariflari faqat XP ni tezroq toʻplash, kunlik limitni oshirish va qoʻshimcha avatar uslublari uchun."
+      },
+      {
+        "q": "Dasturlashni umuman bilmasam ham boʻladimi?",
+        "a": "Boʻladi. HTML asoslaridan boshlang: mashqlar osondan qiyinga qarab boradi va darajangizga moslashadi. Har bir javobdan soʻng qisqa tushuntirish beriladi."
+      },
+      {
+        "q": "Qaysi yoʻnalishlar bor?",
+        "a": "Frontend (HTML, CSS, JavaScript, TypeScript, React), Backend (Python, C#, C++) va kiberxavfsizlik. Linux va tarmoqlar boʻyicha kurslar tayyorlanmoqda."
+      },
+      {
+        "q": "XP, daraja va streak nima?",
+        "a": "Har bir toʻgʻri javob XP beradi, XP toʻplangan sari darajangiz oshadi. Streak — ketma-ket mashq qilgan kunlaringiz soni: u uzilmasa, kunlik bonus kattalashadi."
+      },
+      {
+        "q": "Duel qanday ishlaydi?",
+        "a": "Raqib va mavzuni tanlaysiz, XP tikasiz. Ikkalangiz ham bir xil 5 ta savolga javob berasiz — istalgan vaqtda, 48 soat ichida. Koʻproq toʻgʻri javob bergan (teng boʻlsa — tezroq javob bergan) tikilgan XP ni oladi."
+      },
+      {
+        "q": "Telefonda ishlaydimi?",
+        "a": "Ha. Sayt telefon, planshet va kompyuter brauzerida ishlaydi — ilova oʻrnatish shart emas."
+      },
+      {
+        "q": "Oʻquv markazim uchun ishlatsam boʻladimi?",
+        "a": "Ha. Markazingiz uchun alohida manzil (markaz.zukkolar.uz), oʻz nomingiz va ranglaringiz, oʻquvchilaringiz reytingi va klanlararo musobaqalar ochib beramiz. Biz bilan bogʻlaning."
+      }
+    ],
+    "finalTitle": "Bugun birinchi mashqni yeching",
+    "finalText": "Roʻyxatdan oʻtish bir daqiqa. Birinchi toʻgʻri javobingiz uchun XP va birinchi nishon kutmoqda.",
+    "footer": {
+      "about": "Dasturlashni har kuni ozgina, aniq maqsad bilan va zerikmasdan oʻrganish uchun.",
+      "platform": "Platforma",
+      "account": "Hisob",
+      "contact": "Aloqa",
+      "telegram": "Telegram",
+      "rights": "Barcha huquqlar himoyalangan."
     }
   },
   "auth": {

@@ -6,6 +6,7 @@ import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { getCurrentTenant } from "@/lib/tenant";
+import { siteOrigin } from "@/lib/site-url";
 import "../globals.css";
 
 // All three cover Uzbek Latin (oʻ gʻ) and Cyrillic (for Russian later).
@@ -16,7 +17,18 @@ const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["lati
 export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "meta" });
-  return { title: t("title"), description: t("description") };
+  const origin = await siteOrigin();
+  const image = { url: "/brand/og.jpg", width: 1200, height: 630, alt: t("title") };
+  return {
+    metadataBase: new URL(origin),
+    // Pages set their own title; this is the default and what the landing page uses.
+    title: { default: t("title"), template: "%s · Zukkolar" },
+    description: t("description"),
+    applicationName: "Zukkolar",
+    keywords: t("keywords").split(", "),
+    openGraph: { type: "website", siteName: "Zukkolar", locale: "uz_UZ", title: t("title"), description: t("description"), url: origin, images: [image] },
+    twitter: { card: "summary_large_image", title: t("title"), description: t("description"), images: [image.url] },
+  };
 }
 
 type TenantTheme = { brand?: string; brand2?: string; brandForeground?: string };

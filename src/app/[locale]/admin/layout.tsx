@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { ArrowLeft, ShieldCheck } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -7,6 +8,9 @@ import { db } from "@/lib/db";
 import { AdminNav } from "@/features/admin/components/admin-nav";
 
 /** Admin panel shell — super admins only (everyone else gets a 404 from requireAdmin). */
+/** Behind the login: keep it out of search results. */
+export const metadata: Metadata = { robots: { index: false, follow: false } };
+
 export default async function AdminLayout({ children }: LayoutProps<"/[locale]">) {
   const { user } = await requireAdmin();
   const t = await getTranslations("admin");
