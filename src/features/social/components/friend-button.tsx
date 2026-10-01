@@ -5,6 +5,7 @@ import { Check, Clock, UserCheck, UserMinus, UserPlus, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { acceptFriendRequest, removeFriendship, sendFriendRequest, type FriendActionResult } from "../actions";
 import type { Relation } from "../queries";
+import { ConfirmButton } from "@/components/ui/confirm-button";
 
 const small = "inline-flex h-9 items-center gap-1.5 rounded-xl px-3 text-sm font-semibold transition disabled:opacity-60";
 
@@ -49,15 +50,21 @@ export function FriendButton({ userId, relation, requestId }: { userId: string; 
             <span className={`${small} bg-success/10 text-success`}>
               <UserCheck className="size-4" /> {t("isFriend")}
             </span>
-            <button
+            <ConfirmButton
               className={`${small} border border-border bg-surface text-muted hover:text-danger`}
-              title={t("remove")}
-              aria-label={t("remove")}
+              label={t("remove")}
               disabled={pending}
-              onClick={() => run(() => removeFriendship(requestId))}
+              title={t("removeConfirmTitle")}
+              text={t("removeConfirmText")}
+              confirmLabel={t("remove")}
+              icon={<UserMinus className="size-6" />}
+              onConfirm={async () => {
+                const result = await removeFriendship(requestId);
+                return result.ok ? null : t(`errors.${result.error}`);
+              }}
             >
               <UserMinus className="size-4" />
-            </button>
+            </ConfirmButton>
           </>
         )}
       </div>

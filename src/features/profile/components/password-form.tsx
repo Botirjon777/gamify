@@ -8,7 +8,8 @@ import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
 import { changePassword } from "../actions";
 
-export function PasswordForm() {
+/** Current + new password. `onDone` runs after a successful change (the dialog closes). */
+export function PasswordForm({ onDone }: { onDone?: () => void }) {
   const t = useTranslations("settings");
   const router = useRouter();
   const [current, setCurrent] = useState("");
@@ -18,7 +19,7 @@ export function PasswordForm() {
 
   return (
     <form
-      className="flex flex-col gap-4 sm:max-w-sm"
+      className="flex flex-col gap-4"
       onSubmit={(e) => {
         e.preventDefault();
         start(async () => {
@@ -28,13 +29,14 @@ export function PasswordForm() {
             setCurrent("");
             setNext("");
             router.refresh();
+            onDone?.();
           } else setResult({ ok: false, text: t(`errors.${r.error}`) });
         });
       }}
     >
       <Field label={t("currentPassword")} name="current" type="password" autoComplete="current-password" value={current} onChange={(e) => setCurrent(e.target.value)} required />
       <Field label={t("newPassword")} name="new" type="password" autoComplete="new-password" minLength={8} value={next} onChange={(e) => setNext(e.target.value)} required />
-      <Button type="submit" disabled={pending} className="h-10 w-fit">
+      <Button type="submit" disabled={pending} className="h-11 w-full">
         {t("changePassword")}
       </Button>
       {result && (

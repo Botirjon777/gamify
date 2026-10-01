@@ -170,7 +170,10 @@
     "signedIn": "Kirilgan: {time}",
     "revoke": "Chiqarish",
     "revokeAll": "Boshqa barcha qurilmalardan chiqish",
-    "onlyThis": "Faqat shu qurilmada kirilgan."
+    "onlyThis": "Faqat shu qurilmada kirilgan.",
+    "revokeConfirm": "Bu qurilmadan chiqarilsinmi?",
+    "revokeAllConfirm": "Boshqa barcha qurilmalardan chiqarilsinmi?",
+    "revokeConfirmText": "U yerda qayta kirish uchun parol kerak boʻladi."
   },
   "notFound": {
     "title": "Sahifa topilmadi",
@@ -426,7 +429,9 @@
       "notFound": "Topilmadi",
       "tooMany": "Juda koʻp soʻrov. Keyinroq urinib koʻring.",
       "self": "Oʻzingizni qoʻsha olmaysiz"
-    }
+    },
+    "removeConfirmTitle": "Doʻstlikdan olib tashlaysizmi?",
+    "removeConfirmText": "U doʻstlar roʻyxatingizdan chiqadi. Qayta doʻst boʻlish uchun yangi soʻrov yuborish kerak boʻladi."
   },
   "profile": {
     "level": "Daraja",
@@ -485,7 +490,10 @@
     "changePassword": "Parolni oʻzgartirish",
     "passwordChanged": "Parol oʻzgartirildi. Boshqa qurilmalardagi sessiyalar yopildi.",
     "mustChange": "Xavfsizlik uchun parolingizni oʻzgartiring.",
-    "mustChangeCta": "Hozir oʻzgartirish"
+    "mustChangeCta": "Hozir oʻzgartirish",
+    "genderConfirmTitle": "Jinsni oʻzgartirasizmi?",
+    "genderConfirmText": "Avataringiz yangi jinsga mos ravishda qayta chiziladi.",
+    "passwordHint": "Yangi parol kamida 8 ta belgidan iborat boʻlsin. Oʻzgartirgach, boshqa qurilmalardagi sessiyalar yopiladi."
   },
   "notifications": {
     "title": "Bildirishnomalar",
@@ -588,7 +596,14 @@
     "full": "Klan toʻla",
     "inOtherClan": "Siz boshqa klan aʼzosisiz",
     "membersTitle": "Aʼzolar",
-    "founded": "Tashkil etilgan: {date}"
+    "founded": "Tashkil etilgan: {date}",
+    "leaveConfirmTitle": "Klandan chiqasizmi?",
+    "leaveConfirmText": "Qayta qoʻshilish uchun yana soʻrov yuborishingiz va tasdiqlanishini kutishingiz kerak boʻladi.",
+    "leaveConfirmLeader": "Siz klan rahbarisiz: rahbarlik ofitserga (boʻlmasa eng eski aʼzoga) oʻtadi. Klanda yolgʻiz boʻlsangiz, klan oʻchiriladi.",
+    "cancelRequestConfirm": "Qoʻshilish soʻrovini bekor qilasizmi?",
+    "removeOfficerConfirm": "{username} ofitserlikdan olinsinmi?",
+    "kickConfirmTitle": "{username} klandan chiqarilsinmi?",
+    "kickConfirmText": "Qayta qoʻshilish uchun u yangi soʻrov yuborishi kerak boʻladi."
   },
   "rail": {
     "friendsTitle": "Doʻstlar bu hafta",
@@ -859,7 +874,9 @@
     "retry": "Qayta urinish",
     "endOfList": "Roʻyxat oxiri",
     "loading": "Yuklanmoqda…",
-    "loadMore": "Yana yuklash"
+    "loadMore": "Yana yuklash",
+    "cancel": "Bekor qilish",
+    "wait": "Kuting…"
   },
   "weekly": {
     "label": "Haftaning bonus mavzusi",

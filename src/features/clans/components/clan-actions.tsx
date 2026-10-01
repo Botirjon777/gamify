@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { Check, Clock, LogOut, ShieldMinus, ShieldPlus, UserX, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
+import { ConfirmButton } from "@/components/ui/confirm-button";
 import { cancelJoinRequest, decideJoinRequest, kickMember, leaveClan, requestToJoin, setOfficer, type ClanActionResult } from "../actions";
 
 const btn = "inline-flex h-10 items-center justify-center gap-1.5 rounded-xl px-4 text-sm font-semibold transition disabled:opacity-60";
@@ -36,9 +37,18 @@ export function JoinClan({ clanId, pending: requestPending, full }: { clanId: st
         <span className="inline-flex items-center gap-2 rounded-xl bg-white/20 px-3 py-2 text-sm font-semibold">
           <Clock className="size-4" /> {t("requestSent")}
         </span>
-        <button className={`${btn} bg-white/15 hover:bg-white/25`} disabled={pending} onClick={() => run(() => cancelJoinRequest(clanId))}>
+        <ConfirmButton
+          className={`${btn} bg-white/15 hover:bg-white/25`}
+          disabled={pending}
+          title={t("cancelRequestConfirm")}
+          confirmLabel={t("cancelRequest")}
+          onConfirm={async () => {
+            const result = await cancelJoinRequest(clanId);
+            return result.ok ? null : t(`errors.${result.error}`);
+          }}
+        >
           <X className="size-4" /> {t("cancelRequest")}
-        </button>
+        </ConfirmButton>
         {error && <p className="text-xs">{error}</p>}
       </div>
     );
@@ -65,17 +75,24 @@ export function JoinClan({ clanId, pending: requestPending, full }: { clanId: st
   );
 }
 
-export function LeaveClan() {
+export function LeaveClan({ isLeader }: { isLeader: boolean }) {
   const t = useTranslations("clans");
   const router = useRouter();
-  const { pending, error, run } = useAction();
   return (
-    <div className="flex flex-col items-end gap-1">
-      <button className={`${btn} bg-white/15 hover:bg-white/25`} disabled={pending} onClick={() => run(() => leaveClan(), () => router.push("/clans"))}>
-        <LogOut className="size-4" /> {t("leave")}
-      </button>
-      {error && <p className="text-xs">{error}</p>}
-    </div>
+    <ConfirmButton
+      className={`${btn} bg-white/15 hover:bg-white/25`}
+      title={t("leaveConfirmTitle")}
+      text={isLeader ? t("leaveConfirmLeader") : t("leaveConfirmText")}
+      confirmLabel={t("leave")}
+      icon={<LogOut className="size-6" />}
+      onConfirm={async () => {
+        const result = await leaveClan();
+        if (!result.ok) return t(`errors.${result.error}`);
+        router.push("/clans");
+      }}
+    >
+      <LogOut className="size-4" /> {t("leave")}
+    </ConfirmButton>
   );
 }
 
@@ -97,32 +114,59 @@ export function RequestDecision({ requestId }: { requestId: string }) {
   );
 }
 
-export function MemberControls({ userId, canKick, canPromote, isOfficer }: { userId: string; canKick: boolean; canPromote: boolean; isOfficer: boolean }) {
+export function MemberControls({
+  userId,
+  username,
+  canKick,
+  canPromote,
+  isOfficer,
+}: {
+  userId: string;
+  username: string;
+  canKick: boolean;
+  canPromote: boolean;
+  isOfficer: boolean;
+}) {
   const t = useTranslations("clans");
   const { pending, run } = useAction();
+  const fail = (r: ClanActionResult) => (r.ok ? null : t(`errors.${r.error}`));
   return (
     <div className="flex gap-1">
-      {canPromote && (
+      {canPromote && !isOfficer && (
         <button
           className={`${small} text-muted hover:bg-background hover:text-foreground`}
-          title={isOfficer ? t("removeOfficer") : t("makeOfficer")}
-          aria-label={isOfficer ? t("removeOfficer") : t("makeOfficer")}
+          title={t("makeOfficer")}
+          aria-label={t("makeOfficer")}
           disabled={pending}
-          onClick={() => run(() => setOfficer(userId, !isOfficer))}
+          onClick={() => run(() => setOfficer(userId, true))}
         >
-          {isOfficer ? <ShieldMinus className="size-4" /> : <ShieldPlus className="size-4" />}
+          <ShieldPlus className="size-4" />
         </button>
       )}
+      {canPromote && isOfficer && (
+        <ConfirmButton
+          className={`${small} text-muted hover:bg-background hover:text-foreground`}
+          label={t("removeOfficer")}
+          title={t("removeOfficerConfirm", { username })}
+          confirmLabel={t("removeOfficer")}
+          icon={<ShieldMinus className="size-6" />}
+          onConfirm={async () => fail(await setOfficer(userId, false))}
+        >
+          <ShieldMinus className="size-4" />
+        </ConfirmButton>
+      )}
       {canKick && (
-        <button
+        <ConfirmButton
           className={`${small} text-muted hover:bg-danger/10 hover:text-danger`}
-          title={t("kick")}
-          aria-label={t("kick")}
-          disabled={pending}
-          onClick={() => run(() => kickMember(userId))}
+          label={t("kick")}
+          title={t("kickConfirmTitle", { username })}
+          text={t("kickConfirmText")}
+          confirmLabel={t("kick")}
+          icon={<UserX className="size-6" />}
+          onConfirm={async () => fail(await kickMember(userId))}
         >
           <UserX className="size-4" />
-        </button>
+        </ConfirmButton>
       )}
     </div>
   );

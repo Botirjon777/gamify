@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { Ban, Check, KeyRound, LogOut, ShieldCheck } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { ConfirmButton } from "@/components/ui/confirm-button";
 import { adjustXp, resetPassword, revokeUserSessions, setBlocked, setUserPlan, type AdminResult } from "../actions";
 
 const btn = "inline-flex h-10 items-center justify-center gap-2 rounded-xl px-4 text-sm font-semibold transition disabled:opacity-60";
@@ -62,29 +63,33 @@ export function AccountControls({ userId, blocked, canModerate }: { userId: stri
   return (
     <div className="flex flex-col gap-3">
       <div className="flex flex-wrap gap-2">
-        {canModerate && (
-          <button
-            className={`${btn} ${blocked ? "border border-border bg-surface" : "border border-danger/30 text-danger hover:bg-danger/10"}`}
-            disabled={pending}
-            onClick={() => {
-              if (!blocked && !confirm(t("blockConfirm"))) return;
-              run(() => setBlocked(userId, !blocked));
-            }}
-          >
-            {blocked ? <ShieldCheck className="size-4" /> : <Ban className="size-4" />}
-            {blocked ? t("unblock") : t("block")}
+        {canModerate && blocked && (
+          <button className={`${btn} border border-border bg-surface`} disabled={pending} onClick={() => run(() => setBlocked(userId, false))}>
+            <ShieldCheck className="size-4" /> {t("unblock")}
           </button>
         )}
-        <button
+        {canModerate && !blocked && (
+          <ConfirmButton
+            className={`${btn} border border-danger/30 text-danger hover:bg-danger/10`}
+            disabled={pending}
+            title={t("blockConfirm")}
+            confirmLabel={t("block")}
+            icon={<Ban className="size-6" />}
+            onConfirm={async () => run(() => setBlocked(userId, true))}
+          >
+            <Ban className="size-4" /> {t("block")}
+          </ConfirmButton>
+        )}
+        <ConfirmButton
           className={`${btn} border border-border bg-surface`}
           disabled={pending}
-          onClick={() => {
-            if (!confirm(t("resetConfirm"))) return;
-            run(() => resetPassword(userId), (r) => setTemp(r.tempPassword));
-          }}
+          title={t("resetConfirm")}
+          confirmLabel={t("resetPassword")}
+          icon={<KeyRound className="size-6" />}
+          onConfirm={async () => run(() => resetPassword(userId), (r) => setTemp(r.tempPassword))}
         >
           <KeyRound className="size-4" /> {t("resetPassword")}
-        </button>
+        </ConfirmButton>
         <button className={`${btn} border border-border bg-surface`} disabled={pending} onClick={() => run(() => revokeUserSessions(userId))}>
           <LogOut className="size-4" /> {t("revokeSessions")}
         </button>

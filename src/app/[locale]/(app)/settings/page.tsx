@@ -11,7 +11,7 @@ import { REFERRAL_INVITER_XP, REFERRAL_REWARD_LEVEL } from "@/features/gamificat
 import { getOrCreateReferralCode, REFERRAL_NEW_USER_XP, referralStats } from "@/features/referrals/service";
 import { AvatarPicker } from "@/features/profile/components/avatar-picker";
 import { GenderSettings } from "@/features/profile/components/gender-settings";
-import { PasswordForm } from "@/features/profile/components/password-form";
+import { PasswordDialog } from "@/features/profile/components/password-dialog";
 import { BioForm } from "@/features/profile/components/bio-form";
 import { InviteBox } from "@/features/referrals/components/invite-box";
 
@@ -66,7 +66,8 @@ export default async function SettingsPage({ params }: PageProps<"/[locale]/sett
 
         {/* Password */}
         <Card title={t("password")} id="password">
-          <PasswordForm />
+          <p className="mb-4 text-sm leading-relaxed text-muted">{t("passwordHint")}</p>
+          <PasswordDialog />
         </Card>
 
         {/* Links */}
