@@ -31,7 +31,8 @@
     "loggingOut": "Chiqilmoqda…",
     "badges": "Nishonlar",
     "invite": "Doʻstni taklif qilish",
-    "chat": "Xabarlar"
+    "chat": "Xabarlar",
+    "duels": "Duellar"
   },
   "landing": {
     "badge": "Dasturlash mashgʻulotlari — oʻyin shaklida",
@@ -461,7 +462,8 @@
     "edit": "Profilni tahrirlash",
     "notFound": "Foydalanuvchi topilmadi",
     "lockedBadges": "Qolgan nishonlar",
-    "allBadges": "Barcha nishonlar"
+    "allBadges": "Barcha nishonlar",
+    "duel": "Duelga chaqirish"
   },
   "settings": {
     "title": "Sozlamalar",
@@ -528,7 +530,10 @@
       "PAYMENT_APPROVED": "Toʻlovingiz tasdiqlandi — {plan} tarifi faollashtirildi",
       "PAYMENT_REJECTED": "{plan} uchun toʻlovingiz rad etildi: {reason}",
       "TRACK_COMPLETED": "<b>{track}</b> kursini toʻliq tugatdingiz! +{xp} XP",
-      "SEASON_RESULT": "{season}-mavsum yakunlandi: siz <b>{rank}-oʻrinni</b> egalladingiz ({xp} XP)"
+      "SEASON_RESULT": "{season}-mavsum yakunlandi: siz <b>{rank}-oʻrinni</b> egalladingiz ({xp} XP)",
+      "DUEL_INVITE": "<b>{username}</b> sizni «{track}» boʻyicha duelga chaqirdi — {stake} XP tikilgan",
+      "DUEL_DECLINED": "<b>{username}</b> duelni rad etdi",
+      "DUEL_RESULT": "{result, select, win {<b>{username}</b> bilan duelda gʻalaba! +{xp} XP} lose {<b>{username}</b> bilan duelda yutqazdingiz: {xp} XP} other {<b>{username}</b> bilan duel durrang}}"
     },
     "unread": "{count} ta oʻqilmagan",
     "back": "Barcha bildirishnomalar",
@@ -548,7 +553,10 @@
       "PAYMENT_APPROVED": "Toʻlov tasdiqlandi",
       "PAYMENT_REJECTED": "Toʻlov rad etildi",
       "TRACK_COMPLETED": "Kurs tugatildi",
-      "SEASON_RESULT": "Mavsum natijasi"
+      "SEASON_RESULT": "Mavsum natijasi",
+      "DUEL_INVITE": "Duelga taklif",
+      "DUEL_DECLINED": "Duel rad etildi",
+      "DUEL_RESULT": "Duel natijasi"
     }
   },
   "clans": {
@@ -958,6 +966,83 @@
       "forbidden": "Bu suhbatga yozib boʻlmaydi",
       "tooMany": "Juda tez yozyapsiz — biroz kuting",
       "network": "Xabar yuborilmadi — internetni tekshirib, qayta urining"
+    }
+  },
+  "duels": {
+    "title": "Duellar",
+    "subtitle": "1 ga 1: bir xil savollar, kim koʻp va tez topsa — XP oʻshaniki.",
+    "new": "Yangi duel",
+    "newSubtitle": "Raqib va mavzuni tanlang. Ikkingiz ham bir xil {questions} ta savolga javob berasiz.",
+    "empty": "Hali duel yoʻq. Doʻstingizni chaqiring!",
+    "all": "Barcha duellar",
+    "you": "Siz",
+    "level": "{level}-daraja",
+    "winXp": "Gʻalaba: +{xp} XP",
+    "loseXp": "Magʻlubiyat: −{xp} XP",
+    "stakeShort": "{xp} XP",
+    "opponent": "Raqib",
+    "noOpponents": "Avval doʻst qoʻshing yoki biror profildagi «Duelga chaqirish» tugmasini bosing.",
+    "topic": "Mavzu",
+    "stake": "Tikiladigan XP",
+    "stakeHint": "Sizda {xp} XP bor — undan koʻp tikib boʻlmaydi.",
+    "challenge": "Duelga chaqirish",
+    "rules": "{questions} ta savol, har biriga {seconds} soniya. Koʻproq toʻgʻri javob bergan yutadi; teng boʻlsa — tezroq javob bergan. Boshlagach, toʻxtatib boʻlmaydi.",
+    "start": "Duelni boshlash",
+    "go": "Ketdik!",
+    "question": "Savol {n} / {total}",
+    "answer": "Javob berish",
+    "next": "Keyingi savol",
+    "finish": "Yakunlash",
+    "correct": "Toʻgʻri!",
+    "wrong": "Notoʻgʻri",
+    "late": "Vaqt tugadi",
+    "score": "{correct} / {answered} toʻgʻri",
+    "inviteText": "{username} sizni duelga chaqirdi. Taklif {deadline} tugaydi.",
+    "accept": "Qabul qilish",
+    "decline": "Rad etish",
+    "declineConfirm": "{username}ning duelini rad etasizmi?",
+    "yourScore": "Natijangiz: {correct} / {total}",
+    "waitingAccept": "{username} taklifni qabul qilishini kutyapmiz ({deadline} tugaydi).",
+    "waitingPlay": "{username} oʻynashini kutyapmiz. Muddat {deadline} tugaydi — oʻynamasa, siz yutasiz.",
+    "results": {
+      "win": "Gʻalaba!",
+      "lose": "Magʻlubiyat",
+      "draw": "Durrang"
+    },
+    "xpChange": "XP oʻzgarishi: {xp}",
+    "drawText": "Natijalar teng — hech kim XP yoʻqotmadi.",
+    "time": "{seconds} soniya",
+    "rematch": "Revansh",
+    "declinedTitle": "Duel rad etildi",
+    "expiredTitle": "Duel muddati tugadi",
+    "noXp": "XP oʻzgarmadi.",
+    "groups": {
+      "invites": "Sizga takliflar",
+      "yourTurn": "Sizning navbatingiz",
+      "waiting": "Raqib kutilmoqda",
+      "history": "Tarix"
+    },
+    "badges": {
+      "invites": "Taklif",
+      "yourTurn": "Oʻynash",
+      "waiting": "Kutilmoqda"
+    },
+    "statuses": {
+      "DECLINED": "Rad etilgan",
+      "EXPIRED": "Muddati tugagan",
+      "DONE": "Tugagan"
+    },
+    "errors": {
+      "notFound": "Topilmadi",
+      "self": "Oʻzingizni chaqirib boʻlmaydi",
+      "notEnoughXp": "Bu duel uchun XP yetarli emas",
+      "opponentNotEnoughXp": "Raqibda bu miqdorda XP yoʻq — kamroq tiking",
+      "alreadyOpen": "Bu raqib bilan ochiq duel bor",
+      "noQuestions": "Bu mavzuda savollar yetarli emas",
+      "tooMany": "Bugun juda koʻp duel yaratdingiz",
+      "forbidden": "Bu amalni bajarib boʻlmaydi",
+      "expired": "Duel muddati tugagan",
+      "late": "Vaqt tugadi"
     }
   }
 }

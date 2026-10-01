@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { Award, ChevronRight, Crown, Gift, LogOut, Settings, ShieldCheck, User, X } from "lucide-react";
+import { Award, ChevronRight, Crown, Gift, Swords, LogOut, Settings, ShieldCheck, User, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { LogoutButton } from "@/features/auth/components/logout-button";
@@ -17,10 +17,12 @@ interface Props {
   level: number;
   xp: number;
   isAdmin: boolean;
+  /** Duel invites / turns waiting for you. */
+  duels: number;
 }
 
 /** Mobile: the avatar in the top bar opens this panel from the right. */
-export function ProfileMenu({ username, avatar, avatarLarge, planBadge, planLabel, level, xp, isAdmin }: Props) {
+export function ProfileMenu({ username, avatar, avatarLarge, planBadge, planLabel, level, xp, isAdmin, duels }: Props) {
   const t = useTranslations("nav");
   const dialog = useRef<HTMLDialogElement>(null);
   const pathname = usePathname();
@@ -67,6 +69,14 @@ export function ProfileMenu({ username, avatar, avatarLarge, planBadge, planLabe
             <Link href={`/u/${username}`} className={item}>
               <User className="size-5 text-muted" />
               <span className="flex-1">{t("profile")}</span>
+              <ChevronRight className="size-4 text-muted" />
+            </Link>
+            <Link href="/duels" className={item}>
+              <Swords className="size-5 text-streak" />
+              <span className="flex-1">{t("duels")}</span>
+              {duels > 0 && (
+                <span className="grid min-w-5 place-items-center rounded-full bg-grad-streak px-1 text-[10px] font-bold text-white">{duels}</span>
+              )}
               <ChevronRight className="size-4 text-muted" />
             </Link>
             <Link href="/badges" className={item}>

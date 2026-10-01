@@ -49,6 +49,7 @@ export async function awardXp(
   { userId, tenantId, amount, reason, refId }: AwardXp,
 ): Promise<AwardResult> {
   const before = await tx.user.findUniqueOrThrow({ where: { id: userId } });
+  if (amount < 0) return takeXp(tx, before, { userId, tenantId, amount, reason, refId });
   const limits = PLANS[effectivePlan(before)];
 
   let awarded = MULTIPLIED.includes(reason) ? Math.round(amount * limits.xpMultiplier) : amount;
@@ -72,7 +73,8 @@ export async function awardXp(
 
   await tx.xpEvent.create({ data: { userId, tenantId, amount: awarded, reason, refId } });
   const user = await tx.user.update({ where: { id: userId }, data: { xp: { increment: awarded } } });
-  const level = levelForXp(user.xp);
+  // Levels only go up (after a duel loss XP can sit below the level's threshold).
+  const level = Math.max(levelForXp(user.xp), user.level);
   const leveledUp = level > before.level;
   if (level !== user.level) await tx.user.update({ where: { id: userId }, data: { level } });
 
@@ -96,4 +98,26 @@ export async function awardXp(
   }
 
   return { awarded, xp: user.xp, level, leveledUp, capped };
+}
+
+/**
+ * Losing XP (only duels do this): never below 0, the level never goes down (levels are milestones),
+ * and the weekly / season scores shrink too but not below 0.
+ */
+async function takeXp(
+  tx: Prisma.TransactionClient,
+  before: { xp: number; level: number },
+  { userId, tenantId, amount, reason, refId }: AwardXp,
+): Promise<AwardResult> {
+  const taken = Math.min(-amount, before.xp);
+  if (taken <= 0) return { awarded: 0, xp: before.xp, level: before.level, leveledUp: false, capped: false };
+
+  await tx.xpEvent.create({ data: { userId, tenantId, amount: -taken, reason, refId } });
+  const user = await tx.user.update({ where: { id: userId }, data: { xp: { decrement: taken } } });
+  const week = tashkentWeekStart();
+  await tx.$executeRaw`
+    UPDATE "WeeklyScore" SET value = GREATEST(0, value - ${taken})
+    WHERE "userId" = ${userId} AND "tenantId" = ${tenantId} AND week = ${week} AND board = 'XP'`;
+  await addSeasonXp(tx, userId, tenantId, -taken);
+  return { awarded: -taken, xp: user.xp, level: before.level, leveledUp: false, capped: false };
 }

@@ -9,6 +9,7 @@ import {
   Shield,
   ShieldCheck,
   ShieldX,
+  Swords,
   Trophy,
   UserCheck,
   UserPlus,
@@ -35,4 +36,7 @@ export const NOTIFICATION_STYLE: Record<string, { icon: LucideIcon; gradient: st
   PAYMENT_REJECTED: { icon: Ban, gradient: "bg-grad-streak", href: () => "/plans" },
   TRACK_COMPLETED: { icon: GraduationCap, gradient: "bg-grad-success", href: (d) => `/learn/${d.trackSlug}` },
   SEASON_RESULT: { icon: Medal, gradient: "bg-grad-gold", href: () => "/leaderboard?board=XP&period=season" },
+  DUEL_INVITE: { icon: Swords, gradient: "bg-grad-streak", href: (d) => `/duels/${d.duelId}` },
+  DUEL_DECLINED: { icon: Swords, gradient: "bg-grad-dark", href: (d) => `/duels/${d.duelId}` },
+  DUEL_RESULT: { icon: Trophy, gradient: "bg-grad-gold", href: (d) => `/duels/${d.duelId}` },
 };

@@ -28,7 +28,7 @@ export async function RightRail({ user, tenantId }: { user: User; tenantId: stri
   const link = await inviteLink(code);
 
   const start = xpForLevel(user.level);
-  const progress = Math.min(100, ((user.xp - start) / (xpForLevel(user.level + 1) - start)) * 100);
+  const progress = Math.max(0, Math.min(100, ((user.xp - start) / (xpForLevel(user.level + 1) - start)) * 100));
 
   return (
     <aside className="sticky top-0 hidden h-dvh w-80 shrink-0 flex-col gap-4 overflow-y-auto border-l border-border/70 bg-surface/60 p-5 backdrop-blur xl:flex">

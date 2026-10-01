@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Brain, Flame, Pencil, Trophy, Zap } from "lucide-react";
+import { Brain, Flame, Pencil, Swords, Trophy, Zap } from "lucide-react";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { db } from "@/lib/db";
@@ -74,6 +74,12 @@ export default async function ProfilePage({ params }: PageProps<"/[locale]/u/[us
               </Link>
             ) : (
               <div className="flex flex-wrap items-start gap-2">
+                <Link
+                  href={`/duels/new?opponent=${user.username}`}
+                  className="inline-flex h-9 items-center gap-1.5 rounded-xl bg-grad-streak px-3 text-sm font-semibold text-white shadow-md transition hover:brightness-110"
+                >
+                  <Swords className="size-4" /> {t("duel")}
+                </Link>
                 {rel.relation === "friends" && (
                   <MessageButton
                     userId={user.id}
