@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Brain, Flame, Lock, Pencil, Trophy, Zap } from "lucide-react";
+import { Brain, Flame, Pencil, Trophy, Zap } from "lucide-react";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { db } from "@/lib/db";
@@ -86,37 +86,34 @@ export default async function ProfilePage({ params }: PageProps<"/[locale]/u/[us
         <Stat icon={<Flame className="size-5" />} gradient="bg-grad-streak" label={t("streak")} value={t("days", { count: row.longestStreak })} />
       </section>
 
-      {/* Badges */}
+      {/* Badges — earned only; the full list with progress lives on /badges */}
       <section className="rounded-3xl border border-border bg-surface p-5 sm:p-6">
-        <h2 className="font-display text-lg font-bold">
-          {t("badges")} <span className="text-muted">· {earned.size}/{BADGES.length}</span>
-        </h2>
-        <ul className="stagger mt-4 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4 2xl:grid-cols-6">
-          {BADGES.map((b) => {
-            const has = earned.has(b.key);
-            const def = BADGE_BY_KEY.get(b.key)!;
-            return (
-              <li
-                key={b.key}
-                title={tb(`${b.key}.text`)}
-                className={`flex flex-col items-center gap-2 rounded-2xl border p-4 text-center ${
-                  has ? "border-border bg-background/60" : "border-dashed border-border opacity-50 grayscale"
-                }`}
-              >
-                <span className="relative">
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="font-display text-lg font-bold">
+            {t("badges")} <span className="text-muted">· {earned.size}/{BADGES.length}</span>
+          </h2>
+          {isMe && (
+            <Link href="/badges" className="text-sm font-semibold text-brand hover:underline">
+              {t("allBadges")} →
+            </Link>
+          )}
+        </div>
+        {row.badges.length === 0 ? (
+          <p className="mt-3 text-sm text-muted">{t("noBadges")}</p>
+        ) : (
+          <ul className="stagger mt-4 grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6 2xl:grid-cols-8">
+            {row.badges.map(({ badge }) => {
+              const def = BADGE_BY_KEY.get(badge);
+              if (!def) return null;
+              return (
+                <li key={badge} title={tb(`${badge}.text`)} className="flex flex-col items-center gap-1.5 text-center">
                   <IconTile name={def.icon} gradient={def.gradient as GradientKey} size="lg" />
-                  {!has && (
-                    <span className="absolute -bottom-1 -right-1 grid size-6 place-items-center rounded-full bg-surface text-muted shadow">
-                      <Lock className="size-3.5" />
-                    </span>
-                  )}
-                </span>
-                <span className="text-sm font-bold">{tb(`${b.key}.title`)}</span>
-                <span className="text-xs text-muted">{tb(`${b.key}.text`)}</span>
-              </li>
-            );
-          })}
-        </ul>
+                  <span className="text-xs font-bold leading-tight">{tb(`${badge}.title`)}</span>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </section>
 
       {/* Clan */}

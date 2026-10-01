@@ -1,4 +1,4 @@
-import { Bell, Crown, KeyRound, LogOut, Settings, ShieldCheck } from "lucide-react";
+import { Award, Bell, Crown, KeyRound, LogOut, Settings, ShieldCheck } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/logo";
@@ -51,6 +51,10 @@ export default async function AppLayout({ children }: LayoutProps<"/[locale]">) 
               {t("admin")}
             </Link>
           )}
+          <Link href="/badges" className="flex items-center gap-3 rounded-xl px-3 py-2.5 font-semibold text-muted hover:bg-background hover:text-foreground">
+            <Award className="size-5 text-brand" />
+            {t("badges")}
+          </Link>
           <Link href="/plans" className="flex items-center gap-3 rounded-xl px-3 py-2.5 font-semibold text-muted hover:bg-background hover:text-foreground">
             <Crown className="size-5 text-xp" />
             {t("plans")}

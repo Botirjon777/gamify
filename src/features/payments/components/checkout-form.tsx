@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react";
 import { Check, CircleCheck, Copy } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { copyText } from "@/lib/clipboard";
 import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { requestPayment } from "../actions";
@@ -82,7 +83,7 @@ export function CheckoutForm({ plan, cardNumber, cardHolder, contact }: Props) {
             <button
               type="button"
               onClick={async () => {
-                await navigator.clipboard.writeText(cardNumber.replace(/\s/g, ""));
+                if (!(await copyText(cardNumber.replace(/\s/g, "")))) return;
                 setCopied(true);
                 setTimeout(() => setCopied(false), 1500);
               }}
