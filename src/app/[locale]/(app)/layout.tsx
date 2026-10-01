@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import { Award, Bell, Crown, MessageCircle, KeyRound, LogOut, Settings, ShieldCheck } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -15,6 +16,9 @@ import { pendingClanRequestsFor } from "@/features/clans/queries";
 import { NavLinks } from "./nav-links";
 import { RightRail } from "./right-rail";
 import { ProfileMenu } from "./profile-menu";
+
+/** Behind the login: keep it out of search results. */
+export const metadata: Metadata = { robots: { index: false, follow: false } };
 
 export default async function AppLayout({ children }: LayoutProps<"/[locale]">) {
   const { user, tenant } = await requireSession();

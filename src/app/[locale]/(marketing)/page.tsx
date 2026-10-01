@@ -1,10 +1,40 @@
-import { ArrowRight, Brain, Building2, Crosshair, Dumbbell, Shield, Sparkles, Trophy, Users, Zap } from "lucide-react";
-import { getTranslations, setRequestLocale } from "next-intl/server";
+import type { Metadata } from "next";
+import {
+  ArrowRight,
+  Brain,
+  Building2,
+  CalendarClock,
+  Check,
+  ChevronDown,
+  Crosshair,
+  Dumbbell,
+  Flame,
+  Lock,
+  Send,
+  Shield,
+  Sparkles,
+  Swords,
+  Trophy,
+  Users,
+  Zap,
+} from "lucide-react";
+import { getLocale, getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
+import { IconTile } from "@/components/icon";
 import { Logo, LogoFull } from "@/components/logo";
+import { Reveal } from "@/components/reveal";
 import { buttonClass } from "@/components/ui/button";
 import { getCurrentSession } from "@/lib/auth/session";
-import { Reveal } from "@/components/reveal";
+import { siteOrigin } from "@/lib/site-url";
+import { getCurrentTenant } from "@/lib/tenant";
+import { currentSeason, weeklyTopic } from "@/features/events/service";
+import { daysLeft, seasonProgress } from "@/features/events/season";
+import { DAILY_BONUS_XP } from "@/features/gamification/xp";
+import { CATEGORIES, CATEGORY_STYLE } from "@/features/learn/categories";
+import { getCatalogStructure } from "@/features/learn/queries";
+import { paymentDetails } from "@/features/payments/config";
+import { ANNUAL_DISCOUNT, perMonth } from "@/features/payments/pricing";
+import { PLAN_ORDER, PLANS } from "@/features/plans/plans";
 
 const STEPS = [
   { key: "pick", icon: Crosshair, gradient: "bg-grad-brand" },
@@ -12,27 +42,103 @@ const STEPS = [
   { key: "earn", icon: Zap, gradient: "bg-grad-xp" },
   { key: "climb", icon: Trophy, gradient: "bg-grad-streak" },
 ] as const;
-const TRACKS = ["HTML", "CSS", "JavaScript", "TypeScript", "React", "Next.js", "Git", "SQL"];
 const FEATURES = [
   { key: "iq", icon: Brain, gradient: "bg-grad-iq" },
   { key: "friends", icon: Users, gradient: "bg-grad-brand" },
   { key: "clans", icon: Shield, gradient: "bg-grad-dark" },
   { key: "badges", icon: Sparkles, gradient: "bg-grad-gold" },
 ] as const;
+const SECTIONS = ["how", "directions", "game", "plans", "faq"] as const;
+
+type Faq = { q: string; a: string };
+
+/** The landing page is the canonical home; title / description come from the locale layout. */
+export const metadata: Metadata = { alternates: { canonical: "/" } };
+
+/** "@handle" or a t.me link → a Telegram URL; anything else (a phone, empty) → no link. */
+function telegramUrl(contact: string | null): string | null {
+  if (!contact) return null;
+  if (contact.startsWith("https://t.me/")) return contact;
+  return /^@[\w]{4,}$/.test(contact) ? `https://t.me/${contact.slice(1)}` : null;
+}
 
 export default async function LandingPage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("landing");
   const tNav = await getTranslations("nav");
-  const current = await getCurrentSession();
+  const tLearn = await getTranslations("learn");
+  const tPlans = await getTranslations("plans");
+  const tMeta = await getTranslations("meta");
+
+  const tenant = await getCurrentTenant();
+  const [current, catalog, season, topic, origin] = await Promise.all([
+    getCurrentSession(),
+    getCatalogStructure(tenant.id, locale),
+    currentSeason(),
+    weeklyTopic(undefined, await getLocale()),
+    siteOrigin(),
+  ]);
+
+  // Real numbers from the catalog — nothing invented.
+  const skills = catalog.flatMap((tr) => tr.modules.flatMap((m) => m.skills));
+  const stats = [
+    { value: skills.reduce((n, s) => n + s.exerciseCount, 0), label: t("stats.exercises") },
+    { value: catalog.length, label: t("stats.courses") },
+    { value: skills.length, label: t("stats.skills") },
+    { value: 4, label: t("stats.types"), hint: t("stats.typesHint") },
+  ];
+  const directions = CATEGORIES.map((category) => ({
+    category,
+    tracks: catalog
+      .filter((tr) => tr.category === category)
+      .map((tr) => {
+        const s = tr.modules.flatMap((m) => m.skills);
+        return { slug: tr.slug, title: tr.title, skills: s.length, exercises: s.reduce((n, x) => n + x.exerciseCount, 0) };
+      }),
+  }));
+  const ready = directions.filter((d) => d.tracks.length > 0);
+  const soon = directions.filter((d) => d.tracks.length === 0);
+
+  const faq = t.raw("faq") as Faq[];
+  const trust = t.raw("trust") as string[];
+  const telegram = telegramUrl(paymentDetails().contact);
+  const som = (n: number) => n.toLocaleString("uz-UZ");
+
+  // Structured data: who we are, the site, and the FAQ (eligible for rich results).
+  const jsonLd = [
+    {
+      "@context": "https://schema.org",
+      "@type": "EducationalOrganization",
+      name: "Zukkolar",
+      url: origin,
+      logo: `${origin}/icon.png`,
+      description: tMeta("description"),
+      ...(telegram && { sameAs: [telegram] }),
+    },
+    { "@context": "https://schema.org", "@type": "WebSite", name: "Zukkolar", url: origin, inLanguage: "uz" },
+    {
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: faq.map((f) => ({ "@type": "Question", name: f.q, acceptedAnswer: { "@type": "Answer", text: f.a } })),
+    },
+  ];
 
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }} />
+
       <header className="sticky top-0 z-20 border-b border-border/60 bg-background/70 backdrop-blur">
-        <div className="mx-auto flex w-full max-w-7xl items-center justify-between px-5 py-4">
+        <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 py-4">
           <Logo name={current?.tenant.name} />
-          <nav className="flex items-center gap-2">
+          <nav aria-label={t("footer.platform")} className="hidden items-center gap-1 lg:flex">
+            {SECTIONS.map((id) => (
+              <a key={id} href={`#${id}`} className="rounded-lg px-3 py-2 text-sm font-semibold text-muted transition hover:bg-surface hover:text-foreground">
+                {t(`nav.${id}`)}
+              </a>
+            ))}
+          </nav>
+          <div className="flex items-center gap-2">
             {current ? (
               <Link href="/dashboard" className={buttonClass("primary")}>
                 {tNav("dashboard")} <ArrowRight className="size-4" />
@@ -42,19 +148,20 @@ export default async function LandingPage({ params }: PageProps<"/[locale]">) {
                 <Link href="/login" className={buttonClass("ghost")}>
                   {tNav("login")}
                 </Link>
-                <Link href="/register" className={buttonClass("primary", "hidden sm:inline-flex")}>
+                <Link href="/register" className={buttonClass("primary", "max-sm:hidden")}>
                   {tNav("register")}
                 </Link>
               </>
             )}
-          </nav>
+          </div>
         </div>
       </header>
 
-      <main className="flex-1">
+      <main className="flex-1 overflow-x-clip">
         {/* Hero */}
-        <section className="animate-page mx-auto grid w-full max-w-7xl items-center gap-12 px-5 pb-20 pt-12 lg:grid-cols-[1.1fr_1fr] lg:pt-24">
-          <div>
+        {/* min-w-0: a grid column otherwise grows to fit the long code line and pushes the page wider */}
+        <section className="animate-page mx-auto grid w-full max-w-7xl items-center gap-12 px-5 pb-16 pt-12 lg:grid-cols-[1.1fr_1fr] lg:pt-24">
+          <div className="min-w-0">
             <span className="inline-flex items-center gap-2 rounded-full border border-brand/20 bg-surface px-3 py-1 text-sm font-semibold text-brand shadow-sm">
               <Sparkles className="size-4" /> {t("badge")}
             </span>
@@ -70,10 +177,17 @@ export default async function LandingPage({ params }: PageProps<"/[locale]">) {
                 {t("ctaSecondary")}
               </Link>
             </div>
+            <ul className="mt-6 flex flex-wrap gap-x-5 gap-y-2 text-sm font-medium text-muted">
+              {trust.map((item) => (
+                <li key={item} className="inline-flex items-center gap-1.5">
+                  <Check className="size-4 text-success" /> {item}
+                </li>
+              ))}
+            </ul>
           </div>
 
           {/* A taste of an exercise */}
-          <div className="relative">
+          <div className="relative min-w-0">
             <div className="absolute -inset-6 -z-10 rounded-[2.5rem] bg-grad-brand opacity-20 blur-3xl" />
             <div className="rounded-3xl border border-border bg-surface p-5 shadow-2xl shadow-brand/10 sm:p-6">
               <div className="flex items-center justify-between text-sm">
@@ -110,8 +224,21 @@ function handleClick() {
           </div>
         </section>
 
+        {/* Numbers */}
+        <section aria-label={t("stats.exercises")} className="mx-auto w-full max-w-7xl px-5 pb-16">
+          <dl className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+            {stats.map((s, i) => (
+              <Reveal key={s.label} delay={i * 70} className="rounded-3xl border border-border bg-surface p-5 text-center sm:p-6">
+                <dd className="font-display text-4xl font-bold text-grad-brand sm:text-5xl">{s.value}</dd>
+                <dt className="mt-1 font-semibold">{s.label}</dt>
+                {s.hint && <p className="mt-1 text-xs text-muted">{s.hint}</p>}
+              </Reveal>
+            ))}
+          </dl>
+        </section>
+
         {/* How it works */}
-        <section className="border-y border-border/70 bg-surface/70">
+        <section id="how" className="scroll-mt-20 border-y border-border/70 bg-surface/70">
           <div className="mx-auto w-full max-w-7xl px-5 py-16">
             <h2 className="font-display text-3xl font-bold">{t("howTitle")}</h2>
             <ol className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -129,58 +256,299 @@ function handleClick() {
           </div>
         </section>
 
-        {/* Features */}
-        <section className="mx-auto w-full max-w-7xl px-5 py-16">
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-            {FEATURES.map(({ key, icon: Icon, gradient }, i) => (
-              <Reveal key={key} delay={i * 90} className="rounded-3xl border border-border bg-surface p-6">
-                <span className={`grid size-12 place-items-center rounded-2xl text-white ${gradient}`}>
-                  <Icon className="size-6" />
-                </span>
-                <h3 className="mt-4 text-lg font-bold">{t(`features.${key}.title`)}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">{t(`features.${key}.text`)}</p>
+        {/* Directions and courses — straight from the catalog */}
+        <section id="directions" className="mx-auto w-full max-w-7xl scroll-mt-20 px-5 py-16">
+          <h2 className="font-display text-3xl font-bold">{t("tracksTitle")}</h2>
+          <p className="mt-3 max-w-2xl text-lg text-muted">{t("tracksText")}</p>
+          <div className="mt-10 grid items-start gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {ready.map(({ category, tracks }, i) => {
+              const style = CATEGORY_STYLE[category];
+              return (
+                <Reveal key={category} delay={i * 60} className="rounded-3xl border border-border bg-surface p-6">
+                  <div className="flex items-center gap-3">
+                    <IconTile name={style.icon} gradient={style.gradient} size="md" />
+                    <h3 className="font-display text-lg font-bold uppercase tracking-wide">{tLearn(`categories.${category}.title`)}</h3>
+                  </div>
+                  <p className="mt-3 text-sm leading-relaxed text-muted">{tLearn(`categories.${category}.text`)}</p>
+                  <ul className="mt-4 flex flex-col gap-2">
+                    {tracks.map((tr) => (
+                      <li key={tr.slug} className="flex flex-wrap items-baseline justify-between gap-x-3 rounded-xl bg-background/70 px-3 py-2">
+                        <span className="font-mono font-semibold">{tr.title}</span>
+                        <span className="text-xs text-muted">{t("courseStats", { skills: tr.skills, exercises: tr.exercises })}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              );
+            })}
+          </div>
+
+          {soon.length > 0 && (
+            <ul className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+              {soon.map(({ category }, i) => {
+                const style = CATEGORY_STYLE[category];
+                return (
+                  <Reveal as="li" key={category} delay={i * 50} className="flex items-center gap-3 rounded-2xl border border-dashed border-border bg-surface/50 p-4">
+                    <IconTile name={style.icon} gradient={style.gradient} size="sm" className="opacity-60 grayscale" />
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-display text-sm font-bold uppercase tracking-wide">{tLearn(`categories.${category}.title`)}</h3>
+                      <p className="truncate text-xs text-muted">{tLearn(`categories.${category}.text`)}</p>
+                    </div>
+                    <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-background px-2 py-1 text-[11px] font-semibold text-muted">
+                      <Lock className="size-3" /> {t("comingSoon")}
+                    </span>
+                  </Reveal>
+                );
+              })}
+            </ul>
+          )}
+        </section>
+
+        {/* Competition */}
+        <section id="game" className="scroll-mt-20 border-y border-border/70 bg-surface/70">
+          <div className="mx-auto w-full max-w-7xl px-5 py-16">
+            <h2 className="font-display text-3xl font-bold">{t("gameTitle")}</h2>
+            <p className="mt-3 max-w-2xl text-lg text-muted">{t("gameText")}</p>
+
+            <div className="mt-10 grid gap-4 lg:grid-cols-2">
+              {/* Duels */}
+              <Reveal className="relative overflow-hidden rounded-3xl bg-grad-dark p-6 text-white sm:p-8">
+                <div className="absolute -left-16 -top-16 size-56 rounded-full bg-brand/30 blur-3xl" />
+                <div className="absolute -bottom-16 -right-16 size-56 rounded-full bg-streak/30 blur-3xl" />
+                <div className="relative grid grid-cols-[1fr_auto_1fr] items-center gap-3 text-center">
+                  <div>
+                    <span className="mx-auto grid size-16 place-items-center rounded-full bg-grad-brand font-display text-xl font-bold ring-4 ring-white/15">S</span>
+                    <p className="mt-2 text-sm font-semibold">{t("game.duel.you")}</p>
+                    <p className="font-display text-2xl font-bold">4/5</p>
+                  </div>
+                  <span className="bg-grad-gold bg-clip-text font-display text-4xl font-black italic text-transparent">VS</span>
+                  <div>
+                    <span className="mx-auto grid size-16 place-items-center rounded-full bg-grad-streak font-display text-xl font-bold ring-4 ring-white/15">R</span>
+                    <p className="mt-2 text-sm font-semibold">{t("game.duel.rival")}</p>
+                    <p className="font-display text-2xl font-bold">3/5</p>
+                  </div>
+                </div>
+                <div className="relative mt-5 grid grid-cols-2 gap-3 text-sm font-bold">
+                  <p className="rounded-2xl bg-success/20 py-2 text-center text-[#7ff0b6]">{t("game.duel.win")}: +50 XP</p>
+                  <p className="rounded-2xl bg-danger/20 py-2 text-center text-[#ff9ea1]">{t("game.duel.lose")}: −50 XP</p>
+                </div>
+                <h3 className="relative mt-6 flex items-center gap-2 text-xl font-bold">
+                  <Swords className="size-5" /> {t("game.duel.title")}
+                </h3>
+                <p className="relative mt-2 leading-relaxed text-white/75">{t("game.duel.text")}</p>
               </Reveal>
-            ))}
+
+              <div className="grid gap-4 sm:grid-cols-2">
+                {/* Season */}
+                <Reveal delay={80} className="rounded-3xl border border-border bg-surface p-6">
+                  <span className="grid size-12 place-items-center rounded-2xl bg-grad-gold text-white">
+                    <Trophy className="size-6" />
+                  </span>
+                  <h3 className="mt-4 text-lg font-bold">{t("game.season.title")}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{t("game.season.text")}</p>
+                  {season && (
+                    <div className="mt-4">
+                      <p className="flex items-center justify-between text-xs font-bold">
+                        <span>{t("game.season.label", { number: season.number })}</span>
+                        <span className="inline-flex items-center gap-1 text-muted">
+                          <CalendarClock className="size-3.5" /> {t("game.season.left", { days: daysLeft(season.endsAt) })}
+                        </span>
+                      </p>
+                      <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-border">
+                        <div className="h-full rounded-full bg-grad-gold" style={{ width: `${Math.max(4, Math.round(seasonProgress(season) * 100))}%` }} />
+                      </div>
+                    </div>
+                  )}
+                </Reveal>
+
+                {/* Weekly bonus */}
+                <Reveal delay={140} className="rounded-3xl bg-grad-gold p-6 text-white">
+                  <span className="grid size-12 place-items-center rounded-2xl bg-white/20">
+                    <Sparkles className="size-6" />
+                  </span>
+                  <h3 className="mt-4 text-lg font-bold">{t("game.weekly.title")}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/90">{t("game.weekly.text")}</p>
+                  {topic && <p className="mt-4 inline-flex rounded-full bg-white/20 px-3 py-1 text-xs font-bold">{t("game.weekly.badge", { track: topic.title })}</p>}
+                </Reveal>
+
+                {/* Streak */}
+                <Reveal delay={200} className="rounded-3xl border border-border bg-surface p-6 sm:col-span-2">
+                  <div className="flex items-center gap-3">
+                    <span className="grid size-12 shrink-0 place-items-center rounded-2xl bg-grad-streak text-white">
+                      <Flame className="size-6" />
+                    </span>
+                    <div>
+                      <h3 className="text-lg font-bold">{t("game.streak.title")}</h3>
+                      <p className="text-sm leading-relaxed text-muted">{t("game.streak.text")}</p>
+                    </div>
+                  </div>
+                  <ol className="mt-4 grid grid-cols-7 gap-1.5 text-center">
+                    {DAILY_BONUS_XP.map((xp, i) => (
+                      <li key={i} className={`rounded-xl py-2 ${i === 6 ? "bg-grad-streak text-white" : i < 3 ? "bg-streak/10" : "bg-background"}`}>
+                        <span className="block text-[10px] font-semibold opacity-70">{t("game.streak.day", { n: i + 1 })}</span>
+                        <span className="block text-sm font-bold">+{xp}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </Reveal>
+              </div>
+            </div>
+
+            {/* More: IQ, friends, clans, badges */}
+            <div className="mt-4 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+              {FEATURES.map(({ key, icon: Icon, gradient }, i) => (
+                <Reveal key={key} delay={i * 70} className="rounded-3xl border border-border bg-surface p-6">
+                  <span className={`grid size-12 place-items-center rounded-2xl text-white ${gradient}`}>
+                    <Icon className="size-6" />
+                  </span>
+                  <h3 className="mt-4 text-lg font-bold">{t(`features.${key}.title`)}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted">{t(`features.${key}.text`)}</p>
+                </Reveal>
+              ))}
+            </div>
           </div>
         </section>
 
-        {/* Tracks + aim */}
-        <Reveal className="mx-auto grid w-full max-w-7xl gap-12 px-5 pb-16 lg:grid-cols-2">
-          <div>
-            <h2 className="font-display text-3xl font-bold">{t("tracksTitle")}</h2>
-            <ul className="mt-6 flex flex-wrap gap-2">
-              {TRACKS.map((track) => (
-                <li key={track} className="rounded-xl border border-border bg-surface px-4 py-2 font-mono font-semibold shadow-sm">
-                  {track}
-                </li>
-              ))}
-            </ul>
+        {/* Plans */}
+        <section id="plans" className="mx-auto w-full max-w-7xl scroll-mt-20 px-5 py-16">
+          <h2 className="font-display text-3xl font-bold">{t("plansTitle")}</h2>
+          <p className="mt-3 max-w-2xl text-lg text-muted">{t("plansText")}</p>
+          <div className="mt-10 grid gap-4 lg:grid-cols-3">
+            {PLAN_ORDER.map((plan, i) => {
+              const limits = PLANS[plan];
+              const paid = plan !== "FREE";
+              const highlight = plan === "PRO";
+              const features = [
+                tPlans("features.multiplier", { x: limits.xpMultiplier }),
+                limits.dailyExerciseXpCap === null ? tPlans("features.noCap") : tPlans("features.cap", { xp: limits.dailyExerciseXpCap }),
+                tPlans("features.clan", { n: limits.clanMemberLimit }),
+                ...(plan === "PRO" ? [tPlans("features.avatarsPro")] : plan === "DIAMOND" ? [tPlans("features.avatarsDiamond")] : []),
+              ];
+              return (
+                <Reveal
+                  key={plan}
+                  delay={i * 80}
+                  className={`flex flex-col rounded-3xl border p-6 sm:p-7 ${
+                    highlight ? "border-transparent bg-grad-brand text-white shadow-2xl shadow-brand/25" : "border-border bg-surface"
+                  }`}
+                >
+                  <h3 className="font-display text-2xl font-bold">{tPlans(`names.${plan}`)}</h3>
+                  <p className={`text-sm ${highlight ? "text-white/80" : "text-muted"}`}>{tPlans(`taglines.${plan}`)}</p>
+                  <p className="mt-5 flex flex-wrap items-baseline gap-x-1.5 font-display text-3xl font-bold">
+                    {paid ? som(perMonth(plan, "monthly")) : tPlans("free")}
+                    {paid && <span className={`font-sans text-sm font-medium ${highlight ? "text-white/80" : "text-muted"}`}>{tPlans("perMonth")}</span>}
+                  </p>
+                  <p className={`mt-1 min-h-5 text-sm ${highlight ? "text-white/80" : "text-success"}`}>{paid && t("plansAnnual", { percent: ANNUAL_DISCOUNT })}</p>
+                  <ul className="mt-5 flex flex-1 flex-col gap-2.5 text-sm">
+                    {features.map((f) => (
+                      <li key={f} className="flex items-start gap-2">
+                        <Check className={`mt-0.5 size-4 shrink-0 ${highlight ? "text-white" : "text-success"}`} /> {f}
+                      </li>
+                    ))}
+                  </ul>
+                </Reveal>
+              );
+            })}
           </div>
-          <div>
-            <h2 className="font-display text-3xl font-bold">{t("aimTitle")}</h2>
-            <p className="mt-6 text-lg leading-relaxed text-muted">{t("aimText")}</p>
+          <div className="mt-8 flex justify-center">
+            <Link href="/register" className={buttonClass("primary", "h-12 px-7 text-base")}>
+              {t("plansCta")} <ArrowRight className="size-5" />
+            </Link>
           </div>
-        </Reveal>
+        </section>
 
         {/* For study centers */}
-        <Reveal className="mx-auto w-full max-w-7xl px-5 pb-20">
+        <Reveal className="mx-auto w-full max-w-7xl px-5 pb-16">
           <div className="relative overflow-hidden rounded-4xl bg-grad-dark p-8 text-white sm:p-12">
             <div className="absolute -right-24 -top-24 size-80 rounded-full bg-grad-brand opacity-40 blur-3xl" />
             <Building2 className="relative size-10 text-white/80" />
             <h2 className="relative mt-4 font-display text-3xl font-bold">{t("centersTitle")}</h2>
             <p className="relative mt-4 max-w-2xl text-lg leading-relaxed text-white/75">{t("centersText")}</p>
-            <a href="https://t.me/" className="relative mt-8 inline-flex h-11 items-center gap-2 rounded-xl bg-white px-5 text-sm font-bold text-foreground hover:bg-white/90">
-              {t("centersCta")} <ArrowRight className="size-4" />
-            </a>
+            {telegram && (
+              <a href={telegram} rel="noopener" className="relative mt-8 inline-flex h-11 items-center gap-2 rounded-xl bg-white px-5 text-sm font-bold text-foreground hover:bg-white/90">
+                <Send className="size-4" /> {t("centersCta")}
+              </a>
+            )}
           </div>
+        </Reveal>
+
+        {/* FAQ — plain <details>, readable without JavaScript */}
+        <section id="faq" className="scroll-mt-20 border-y border-border/70 bg-surface/70">
+          <div className="mx-auto w-full max-w-3xl px-5 py-16">
+            <h2 className="font-display text-3xl font-bold">{t("faqTitle")}</h2>
+            <div className="mt-8 flex flex-col gap-3">
+              {faq.map((item) => (
+                <details key={item.q} className="group rounded-2xl border border-border bg-surface px-5 open:shadow-lg open:shadow-brand/5">
+                  <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 font-semibold [&::-webkit-details-marker]:hidden">
+                    {item.q}
+                    <ChevronDown className="size-5 shrink-0 text-muted transition-transform group-open:rotate-180" />
+                  </summary>
+                  <p className="pb-5 leading-relaxed text-muted">{item.a}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* Aim + final call */}
+        <Reveal className="mx-auto w-full max-w-4xl px-5 py-20 text-center">
+          <p className="text-xs font-bold uppercase tracking-[0.25em] text-brand">{t("aimTitle")}</p>
+          <p className="mt-4 font-display text-xl font-bold leading-relaxed sm:text-2xl">{t("aimText")}</p>
+          <h2 className="mt-12 font-display text-3xl font-bold sm:text-4xl">
+            <span className="text-grad-brand">{t("finalTitle")}</span>
+          </h2>
+          <p className="mx-auto mt-4 max-w-xl text-lg text-muted">{t("finalText")}</p>
+          <Link href="/register" className={buttonClass("primary", "mt-8 h-13 px-8 text-base")}>
+            {t("cta")} <ArrowRight className="size-5" />
+          </Link>
         </Reveal>
       </main>
 
-      <footer className="border-t border-border py-10">
-        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-4 px-5 text-center text-sm text-muted">
-          <LogoFull className="w-32" />
-          <p>© {new Date().getFullYear()} Zukkolar</p>
+      <footer className="border-t border-border bg-surface/60">
+        <div className="mx-auto grid w-full max-w-7xl gap-10 px-5 py-12 sm:grid-cols-2 lg:grid-cols-[1.4fr_1fr_1fr_1fr]">
+          <div>
+            <LogoFull className="w-28" />
+            <p className="mt-4 max-w-xs text-sm leading-relaxed text-muted">{t("footer.about")}</p>
+          </div>
+          <nav aria-label={t("footer.platform")}>
+            <h2 className="text-sm font-bold">{t("footer.platform")}</h2>
+            <ul className="mt-3 flex flex-col gap-2 text-sm text-muted">
+              {SECTIONS.map((id) => (
+                <li key={id}>
+                  <a href={`#${id}`} className="hover:text-foreground">
+                    {t(`nav.${id}`)}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          <nav aria-label={t("footer.account")}>
+            <h2 className="text-sm font-bold">{t("footer.account")}</h2>
+            <ul className="mt-3 flex flex-col gap-2 text-sm text-muted">
+              <li>
+                <Link href="/register" className="hover:text-foreground">
+                  {tNav("register")}
+                </Link>
+              </li>
+              <li>
+                <Link href="/login" className="hover:text-foreground">
+                  {tNav("login")}
+                </Link>
+              </li>
+            </ul>
+          </nav>
+          {telegram && (
+            <div>
+              <h2 className="text-sm font-bold">{t("footer.contact")}</h2>
+              <a href={telegram} rel="noopener" className="mt-3 inline-flex items-center gap-2 text-sm text-muted hover:text-foreground">
+                <Send className="size-4" /> {t("footer.telegram")}
+              </a>
+            </div>
+          )}
         </div>
+        <p className="border-t border-border py-5 text-center text-xs text-muted">
+          © {new Date().getFullYear()} Zukkolar. {t("footer.rights")}
+        </p>
       </footer>
     </>
   );

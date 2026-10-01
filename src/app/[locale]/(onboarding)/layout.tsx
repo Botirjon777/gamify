@@ -1,9 +1,13 @@
+import type { Metadata } from "next";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/logo";
 import { requireSession } from "@/lib/auth/session";
 
 /** Minimal, distraction-free layout for IQ tests. The user can leave any time via the header link. */
+/** Behind the login: keep it out of search results. */
+export const metadata: Metadata = { robots: { index: false, follow: false } };
+
 export default async function OnboardingLayout({ children }: LayoutProps<"/[locale]">) {
   const { tenant } = await requireSession();
   const t = await getTranslations("iq");

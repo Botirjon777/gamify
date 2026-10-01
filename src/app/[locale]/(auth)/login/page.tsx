@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { LoginForm } from "@/features/auth/components/login-form";
 import { getCurrentTenant, isDefaultTenant } from "@/lib/tenant";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTranslations("meta");
+  return { title: t("loginTitle"), description: t("loginDescription"), alternates: { canonical: "/login" } };
+}
 
 export default async function LoginPage({ params }: PageProps<"/[locale]/login">) {
   const { locale } = await params;

@@ -4,6 +4,7 @@
  *
  *   public/brand/logo-mark-{96,192}.webp   emblem only (headers, sidebar) — square, transparent
  *   public/brand/logo-full-320.webp       emblem + wordmark (footer) — the source is only 319 px wide
+ *   public/brand/og.jpg                    1200×630 link-preview image
  *   src/app/favicon.ico                    16 / 32 px: brain + book on a white tile; 48 px: full emblem
  *   src/app/icon.png                       192 px, emblem (Android, PWA)
  *   src/app/apple-icon.png                 180 px, emblem on white (iOS shows transparency as black)
@@ -94,6 +95,30 @@ async function main() {
   await (await emblemSquare(192, 0.04)).png({ compressionLevel: 9, palette: true }).toFile(join(APP, "icon.png"));
   await (await emblemSquare(180, 0.1, { r: 255, g: 255, b: 255, alpha: 1 })).flatten({ background: "#ffffff" }).png({ compressionLevel: 9, palette: true }).toFile(join(APP, "apple-icon.png"));
   for (const f of ["favicon.ico", "icon.png", "apple-icon.png"]) report.push(`./src/app/${f}  ${kb(join(APP, f))}`);
+
+  // Link preview (Telegram, Facebook, X…): 1200×630, logo on the left, what the site is on the right.
+  const og = join(OUT, "og.jpg");
+  const logo = await sharp(full).resize({ width: 400 }).toBuffer();
+  const card = Buffer.from(`<svg width="1200" height="630" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff"/><stop offset="1" stop-color="#e6f6f5"/></linearGradient>
+      <linearGradient id="bar" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#0b868d"/><stop offset="1" stop-color="#f5a623"/></linearGradient>
+    </defs>
+    <rect width="1200" height="630" fill="url(#bg)"/>
+    <rect x="0" y="618" width="1200" height="12" fill="url(#bar)"/>
+    <g font-family="Segoe UI, Arial, Helvetica, sans-serif" fill="#12324a">
+      <text x="560" y="230" font-size="62" font-weight="800">Dasturlashni</text>
+      <text x="560" y="308" font-size="62" font-weight="800">o‘yin orqali</text>
+      <text x="560" y="386" font-size="62" font-weight="800" fill="#0b868d">o‘rganing</text>
+      <text x="560" y="462" font-size="30" font-weight="600" fill="#4b647a">HTML · CSS · JavaScript · React · Python</text>
+      <text x="560" y="510" font-size="26" font-weight="500" fill="#4b647a">XP, streak, duellar va reyting — zukkolar.uz</text>
+    </g>
+  </svg>`);
+  await sharp(card)
+    .composite([{ input: logo, left: 90, top: 125 }])
+    .jpeg({ quality: 84, mozjpeg: true })
+    .toFile(og);
+  report.push(`${og.replace(process.cwd(), ".")}  ${kb(og)}`);
 
   console.log(`source  ${kb(SRC)}\n` + report.join("\n"));
 }
