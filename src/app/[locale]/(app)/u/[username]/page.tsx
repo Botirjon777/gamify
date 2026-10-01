@@ -12,6 +12,7 @@ import { buttonClass } from "@/components/ui/button";
 import { BADGES, BADGE_BY_KEY } from "@/features/badges/catalog";
 import { publicUserSelect, relationsTo, toPublicUser } from "@/features/social/queries";
 import { FriendButton } from "@/features/social/components/friend-button";
+import { MessageButton } from "@/features/chat/components/message-button";
 
 export default async function ProfilePage({ params }: PageProps<"/[locale]/u/[username]">) {
   const { locale, username } = await params;
@@ -72,7 +73,15 @@ export default async function ProfilePage({ params }: PageProps<"/[locale]/u/[us
                 <Pencil className="size-4" /> {t("edit")}
               </Link>
             ) : (
-              <FriendButton userId={user.id} relation={rel.relation} requestId={rel.requestId} />
+              <div className="flex flex-wrap items-start gap-2">
+                {rel.relation === "friends" && (
+                  <MessageButton
+                    userId={user.id}
+                    className="inline-flex h-9 items-center gap-1.5 rounded-xl bg-white px-3 text-sm font-semibold text-brand shadow-md transition hover:bg-white/90 disabled:opacity-60"
+                  />
+                )}
+                <FriendButton userId={user.id} relation={rel.relation} requestId={rel.requestId} />
+              </div>
             )}
           </div>
         </div>

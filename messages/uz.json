@@ -30,7 +30,8 @@
     "cancel": "Bekor qilish",
     "loggingOut": "Chiqilmoqda…",
     "badges": "Nishonlar",
-    "invite": "Doʻstni taklif qilish"
+    "invite": "Doʻstni taklif qilish",
+    "chat": "Xabarlar"
   },
   "landing": {
     "badge": "Dasturlash mashgʻulotlari — oʻyin shaklida",
@@ -633,7 +634,8 @@
       "deleteConfirm": "«{name}» butunlay oʻchirilsinmi?",
       "deleteText": "Bu amalni ortga qaytarib boʻlmaydi. Barcha aʼzolar klansiz qoladi.",
       "typeName": "Tasdiqlash uchun klan nomini yozing: {name}"
-    }
+    },
+    "chat": "Klan chati"
   },
   "rail": {
     "friendsTitle": "Doʻstlar bu hafta",
@@ -933,5 +935,29 @@
     "earned": "Olingan nishonlar",
     "locked": "Hali olinmagan",
     "none": "Hali nishon yoʻq — birinchi mashqni yechib, birinchisini oling!"
+  },
+  "chat": {
+    "title": "Xabarlar",
+    "subtitle": "Doʻstlaringiz va klaningiz bilan yozishmalar.",
+    "empty": "Hali yozishmalar yoʻq. Doʻstingiz profilida «Xabar yozish» tugmasini bosing.",
+    "toFriends": "Doʻstlarga oʻtish",
+    "you": "Siz",
+    "clanBadge": "Klan",
+    "clanEmpty": "Klan chati — birinchi boʻlib yozing",
+    "write": "Xabar yozish",
+    "back": "Orqaga",
+    "members": "{count} ta aʼzo",
+    "older": "Avvalgi xabarlar",
+    "emptyConversation": "Hali xabar yoʻq — salom deb yozing 👋",
+    "placeholder": "Xabar yozing…",
+    "send": "Yuborish",
+    "cannotSend": "Siz endi doʻst emassiz — yangi xabar yozib boʻlmaydi.",
+    "errors": {
+      "empty": "Boʻsh xabar yuborib boʻlmaydi",
+      "tooLong": "Xabar juda uzun (koʻpi bilan 1000 ta belgi)",
+      "forbidden": "Bu suhbatga yozib boʻlmaydi",
+      "tooMany": "Juda tez yozyapsiz — biroz kuting",
+      "network": "Xabar yuborilmadi — internetni tekshirib, qayta urining"
+    }
   }
 }

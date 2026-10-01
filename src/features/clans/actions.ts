@@ -9,6 +9,7 @@ import { CLAN_COLORS, CLAN_EMBLEMS } from "@/components/icon";
 import { notify, notifyMany } from "@/features/notifications/service";
 import { evaluateBadges } from "@/features/badges/service";
 import { memberLimit } from "./queries";
+import { leaveClanChat } from "@/features/chat/service";
 
 export type ClanFormState = { redirectTo?: string; error?: string; fieldErrors?: Partial<Record<string, string>>; values?: Record<string, string> };
 export type ClanActionResult = { ok: true } | { ok: false; error: "notFound" | "forbidden" | "inClan" | "full" | "tooMany" };
@@ -154,6 +155,7 @@ export async function leaveClan(): Promise<ClanActionResult> {
 
   await db.$transaction(async (tx) => {
     await tx.clanMember.delete({ where: { userId: user.id } });
+    await tx.conversationMember.deleteMany({ where: { userId: user.id, conversation: { clanId: me.clanId } } });
     if (me.role !== "LEADER") return;
     const successor =
       (await tx.clanMember.findFirst({ where: { clanId: me.clanId, role: "OFFICER" }, orderBy: { joinedAt: "asc" } })) ??
@@ -176,6 +178,7 @@ export async function kickMember(userId: string): Promise<ClanActionResult> {
   const allowed = me.role === "LEADER" || (me.role === "OFFICER" && target.role === "MEMBER");
   if (!allowed) return { ok: false, error: "forbidden" };
   await db.clanMember.delete({ where: { userId } });
+  await leaveClanChat(target.clanId, userId);
   refresh();
   return { ok: true };
 }

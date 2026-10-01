@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Crown, Settings, Shield, Trophy, Users, Zap } from "lucide-react";
+import { Crown, MessageCircle, Settings, Shield, Trophy, Users, Zap } from "lucide-react";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { requireSession } from "@/lib/auth/session";
@@ -7,6 +7,7 @@ import { Avatar } from "@/components/avatar";
 import { GRADIENTS, IconTile, type GradientKey } from "@/components/icon";
 import { PlanBadge } from "@/components/plan-badge";
 import { getClan } from "@/features/clans/queries";
+import { ensureClanConversation } from "@/features/chat/service";
 import { JoinClan, LeaveClan, MemberControls, RequestDecision } from "@/features/clans/components/clan-actions";
 
 export default async function ClanPage({ params }: PageProps<"/[locale]/clans/[slug]">) {
@@ -20,6 +21,7 @@ export default async function ClanPage({ params }: PageProps<"/[locale]/clans/[s
 
   const color = (clan.color in GRADIENTS ? clan.color : "brand") as GradientKey;
   const isAdmin = clan.myRole === "LEADER" || clan.myRole === "OFFICER";
+  const chat = clan.myRole ? await ensureClanConversation(clan.id, user.id) : null;
 
   return (
     <div className="flex flex-col gap-6">
@@ -42,6 +44,14 @@ export default async function ClanPage({ params }: PageProps<"/[locale]/clans/[s
           <div className="relative">
             {clan.myRole ? (
               <div className="flex flex-wrap items-center gap-2">
+                {chat && (
+                  <Link
+                    href={`/chat/${chat.id}`}
+                    className="inline-flex h-10 items-center gap-1.5 rounded-xl bg-white px-4 text-sm font-semibold text-foreground hover:bg-white/90"
+                  >
+                    <MessageCircle className="size-4" /> {t("chat")}
+                  </Link>
+                )}
                 {clan.myRole === "LEADER" && (
                   <Link
                     href={`/clans/${clan.slug}/settings`}

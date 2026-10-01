@@ -1,23 +1,27 @@
 "use client";
 
-import { BookOpen, Home, Shield, Trophy, Users, type LucideIcon } from "lucide-react";
+import { BookOpen, Home, MessageCircle, Shield, Trophy, Users, type LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { NavPending } from "@/components/nav-pending";
 
-const LINKS: { href: string; key: string; icon: LucideIcon; badgeKey?: "friends" | "clans" }[] = [
+type BadgeKey = "friends" | "clans" | "chat";
+
+/** `bottom: false` → sidebar only (the mobile top bar has its own chat icon). */
+const LINKS: { href: string; key: string; icon: LucideIcon; badgeKey?: BadgeKey; bottom?: false }[] = [
   { href: "/dashboard", key: "dashboard", icon: Home },
   { href: "/learn", key: "learn", icon: BookOpen },
   { href: "/leaderboard", key: "leaderboard", icon: Trophy },
   { href: "/friends", key: "friends", icon: Users, badgeKey: "friends" },
   { href: "/clans", key: "clans", icon: Shield, badgeKey: "clans" },
+  { href: "/chat", key: "chat", icon: MessageCircle, badgeKey: "chat", bottom: false },
 ];
 
-export function NavLinks({ variant, badges }: { variant: "sidebar" | "bottom"; badges: { friends: number; clans: number } }) {
+export function NavLinks({ variant, badges }: { variant: "sidebar" | "bottom"; badges: Record<BadgeKey, number> }) {
   const t = useTranslations("nav");
   const pathname = usePathname();
 
-  return LINKS.map(({ href, key, icon: Icon, badgeKey }) => {
+  return LINKS.filter((l) => variant === "sidebar" || l.bottom !== false).map(({ href, key, icon: Icon, badgeKey }) => {
     const active = pathname === href || pathname.startsWith(`${href}/`);
     const count = badgeKey ? badges[badgeKey] : 0;
     const dot = count > 0 && (
