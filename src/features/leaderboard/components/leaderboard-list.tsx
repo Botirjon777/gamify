@@ -12,7 +12,7 @@ import { LeaderboardRow } from "./leaderboard-row";
 interface Props {
   initial: LeaderboardEntry[];
   board: "XP" | "IQ";
-  period: "all-time" | "weekly";
+  period: "all-time" | "weekly" | "season";
   meId: string;
 }
 

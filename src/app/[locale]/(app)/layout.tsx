@@ -1,5 +1,5 @@
 import { Bell, Crown, KeyRound, LogOut, Settings, ShieldCheck } from "lucide-react";
-import { getTranslations } from "next-intl/server";
+import { getFormatter, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/logo";
 import { Avatar } from "@/components/avatar";
@@ -12,6 +12,7 @@ import { countIncomingRequests } from "@/features/social/queries";
 import { pendingClanRequestsFor } from "@/features/clans/queries";
 import { NavLinks } from "./nav-links";
 import { RightRail } from "./right-rail";
+import { ProfileMenu } from "./profile-menu";
 
 export default async function AppLayout({ children }: LayoutProps<"/[locale]">) {
   const { user, tenant } = await requireSession();
@@ -24,6 +25,13 @@ export default async function AppLayout({ children }: LayoutProps<"/[locale]">) 
   ]);
   const badges = { friends: friendRequests, clans: clanRequests };
   const plan = effectivePlan(user);
+  const format = await getFormatter();
+  const planLabel =
+    plan === "FREE"
+      ? t("freePlan")
+      : user.planExpiresAt
+        ? t("planUntil", { date: format.dateTime(user.planExpiresAt, { day: "numeric", month: "long", timeZone: "Asia/Tashkent" }) })
+        : t("planActive");
 
   return (
     <div className="flex flex-1">
@@ -88,16 +96,18 @@ export default async function AppLayout({ children }: LayoutProps<"/[locale]">) 
                 </span>
               )}
             </Link>
-            <Link href={`/u/${user.username}`} className="md:hidden" aria-label={t("profile")}>
-              <Avatar user={user} className="size-10" />
-            </Link>
-            <Link
-              href="/settings"
-              className="grid size-10 place-items-center rounded-xl border border-border bg-surface text-muted md:hidden"
-              aria-label={t("settings")}
-            >
-              <Settings className="size-5" />
-            </Link>
+            <div className="md:hidden">
+              <ProfileMenu
+                username={user.username}
+                avatar={<Avatar user={user} className="size-10 ring-2 ring-border" />}
+                avatarLarge={<Avatar user={user} className="size-20 ring-4 ring-brand/15" />}
+                planBadge={<PlanBadge plan={plan} />}
+                planLabel={planLabel}
+                level={user.level}
+                xp={user.xp}
+                isAdmin={user.isSuperAdmin}
+              />
+            </div>
           </div>
         </header>
 

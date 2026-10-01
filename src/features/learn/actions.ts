@@ -1,6 +1,7 @@
 "use server";
 
 import { randomUUID } from "node:crypto";
+import { revalidatePath } from "next/cache";
 import { getLocale } from "next-intl/server";
 import { z } from "zod";
 import { db } from "@/lib/db";
@@ -10,6 +11,8 @@ import { localized, type LocalizedText } from "@/i18n/content";
 import { awardXp } from "@/features/gamification/xp";
 import { touchStreak } from "@/features/gamification/streak";
 import { evaluateBadges } from "@/features/badges/service";
+import { WEEKLY_BONUS_SHARE, weeklyTopic } from "@/features/events/service";
+import { completeTrackIfDone } from "./completion";
 import { BLANK, submissionSchema, type PrivateAnswer, type PublicContent, type Submission } from "./content-schema";
 import { checkAnswer } from "./check";
 import { highlight } from "./highlight";
@@ -92,8 +95,11 @@ export async function submitAnswer(exerciseId: string, rawSubmission: Submission
 
   const exercise = await db.exercise.findFirstOrThrow({
     where: { id: exerciseId, status: "PUBLISHED", ...visibleTo(tenant.id) },
+    include: { skill: { select: { module: { select: { track: { select: { id: true, slug: true, title: true } } } } } } },
   });
+  const track = exercise.skill.module.track;
   const { correct, reveal } = checkAnswer(exercise.answer as PrivateAnswer, submission);
+  const weekly = correct ? (await weeklyTopic(undefined, locale))?.trackId === track.id : false;
 
   return db.$transaction(async (tx) => {
     const solvedBefore = correct
@@ -144,22 +150,53 @@ export async function submitAnswer(exerciseId: string, rawSubmission: Submission
         xpAwarded: award?.awarded ?? 0,
       },
     });
+    // Weekly bonus topic: the same XP again (after plan multiplier and daily cap — capped answers get no bonus).
+    const bonus =
+      award && award.awarded > 0 && weekly
+        ? await awardXp(tx, {
+            userId: user.id,
+            tenantId: tenant.id,
+            amount: Math.round(award.awarded * WEEKLY_BONUS_SHARE),
+            reason: "WEEKLY_BONUS",
+            refId: exerciseId,
+          })
+        : null;
+    const completed =
+      correct && !solvedBefore
+        ? await completeTrackIfDone(tx, {
+            userId: user.id,
+            tenantId: tenant.id,
+            trackId: track.id,
+            trackSlug: track.slug,
+            trackTitle: localized(track.title as LocalizedText, locale),
+            weekly,
+          })
+        : null;
     const badges = await evaluateBadges(tx, user.id, tenant.id);
+    const last = completed ?? bonus ?? award;
 
     return {
       correct,
       reveal,
       explanation: exercise.explanation ? localized(exercise.explanation as LocalizedText, locale) : null,
       xp: award?.awarded ?? 0,
+      bonusXp: bonus?.awarded ?? 0,
+      trackCompleted: completed && { title: completed.title, xp: completed.xp + completed.bonus },
       capped: award?.capped ?? false,
       badges,
       firstSolve: correct && !solvedBefore,
       mastery: score,
       masteryBefore: before,
-      level: award?.level ?? user.level,
-      leveledUp: award?.leveledUp ?? false,
+      level: last?.level ?? user.level,
+      leveledUp: !!(award?.leveledUp || bonus?.leveledUp || completed?.leveledUp),
     };
   });
+}
+
+/** Leaving a drill: the answers changed mastery / XP, so cached pages must be re-rendered. */
+export async function leaveDrill() {
+  await requireSession();
+  revalidatePath("/", "layout");
 }
 
 function shuffle<T>(items: T[]): T[] {

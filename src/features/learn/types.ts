@@ -23,6 +23,10 @@ export type SubmitResult = {
   explanation: string | null;
   /** XP actually added (after plan multiplier and daily cap). */
   xp: number;
+  /** Extra XP because the skill's track is this week's bonus topic. */
+  bonusXp: number;
+  /** This answer finished the whole track (one-time reward, incl. weekly bonus). */
+  trackCompleted: { title: string; xp: number } | null;
   /** The plan's daily exercise XP cap was reached. */
   capped: boolean;
   /** Badges earned by this answer. */

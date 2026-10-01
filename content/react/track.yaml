@@ -3,6 +3,7 @@ title: React
 description: Komponentlar, holat (state) va effektlar — zamonaviy interfeyslarning asosi.
 icon: atom
 order: 5
+category: FRONTEND
 modules:
   - slug: state
     title: Holat va effektlar

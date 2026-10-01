@@ -116,8 +116,8 @@ async function sync(tracks: Loaded[], iqItems: IqItemDef[]) {
         async (tx) => {
           const t = await tx.track.upsert({
             where: { slug: track.slug },
-            create: { slug: track.slug, title: track.title, description: track.description, icon: track.icon, order: track.order },
-            update: { title: track.title, description: track.description, icon: track.icon, order: track.order, status: "PUBLISHED" },
+            create: { slug: track.slug, title: track.title, description: track.description, icon: track.icon, order: track.order, category: track.category },
+            update: { title: track.title, description: track.description, icon: track.icon, order: track.order, category: track.category, status: "PUBLISHED" },
           });
 
           for (const [mi, mod] of track.modules.entries()) {

@@ -3,6 +3,7 @@ import type { Prisma } from "@/generated/prisma/client";
 import type { XpReason } from "@/generated/prisma/enums";
 import { tashkentToday, tashkentWeekStart } from "@/lib/time";
 import { notify } from "@/features/notifications/service";
+import { addSeasonXp } from "@/features/events/service";
 import { effectivePlan, PLANS } from "@/features/plans/plans";
 
 /** Level curve: level n needs 50·(n-1)² XP → 1:0, 2:50, 3:200, 4:450, 5:800 … 10:4050 */
@@ -81,6 +82,7 @@ export async function awardXp(
     create: { userId, tenantId, week, board: "XP", value: awarded },
     update: { value: { increment: awarded } },
   });
+  await addSeasonXp(tx, userId, tenantId, awarded);
 
   if (leveledUp) {
     await notify(tx, userId, "LEVEL_UP", { level });

@@ -7,6 +7,7 @@ import { PlanBadge } from "@/components/plan-badge";
 import type { User } from "@/generated/prisma/client";
 import { tashkentWeekStart } from "@/lib/time";
 import { db } from "@/lib/db";
+import { cached } from "@/lib/cache";
 import { xpForLevel } from "@/features/gamification/xp";
 import { effectivePlan } from "@/features/plans/plans";
 import { getFriends } from "@/features/social/queries";
@@ -16,7 +17,11 @@ import { standings } from "@/features/clans/queries";
 export async function RightRail({ user, tenantId }: { user: User; tenantId: string }) {
   const t = await getTranslations("rail");
   const plan = effectivePlan(user);
-  const [friends, clans] = await Promise.all([getFriends(user.id, tenantId), standings(db, tenantId, tashkentWeekStart())]);
+  const [friends, clans] = await Promise.all([
+    getFriends(user.id, tenantId),
+    // Same for the whole tenant, shown on every page → short cache
+    cached(`rail:clans:${tenantId}`, 30, () => standings(db, tenantId, tashkentWeekStart())),
+  ]);
 
   const start = xpForLevel(user.level);
   const progress = Math.min(100, ((user.xp - start) / (xpForLevel(user.level + 1) - start)) * 100);

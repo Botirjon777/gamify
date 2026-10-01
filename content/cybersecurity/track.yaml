@@ -3,6 +3,7 @@ title: Kiberxavfsizlik
 description: Veb va tizim xavfsizligi asoslari — OWASP Top 10 (SQLi, XSS, CSRF), kriptografiya va tarmoq himoyasi.
 icon: shield
 order: 9
+category: CYBERSECURITY
 modules:
   - slug: web-security
     title: Veb xavfsizligi va zaifliklar

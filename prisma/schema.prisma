@@ -27,11 +27,12 @@ model Tenant {
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
 
-  domains     TenantDomain[]
-  memberships Membership[]
-  sessions    Session[]
-  xpEvents    XpEvent[]
+  domains      TenantDomain[]
+  memberships  Membership[]
+  sessions     Session[]
+  xpEvents     XpEvent[]
   weeklyScores WeeklyScore[]
+  seasonScores SeasonScore[]
 }
 
 /// Custom domains, e.g. learn.najot.uz (later).
@@ -84,12 +85,12 @@ model User {
   locale             String    @default("uz")
   timezone           String    @default("Asia/Tashkent")
 
-  xp            Int       @default(0)
-  level         Int       @default(1)
-  iqRating      Float     @default(1000)
-  iqDeviation   Float     @default(350)
+  xp               Int       @default(0)
+  level            Int       @default(1)
+  iqRating         Float     @default(1000)
+  iqDeviation      Float     @default(350)
   /// Set when the placement IQ test is finished (the test is optional).
-  iqTestedAt    DateTime?
+  iqTestedAt       DateTime?
   /// User hid the "take the IQ test" invitation on the dashboard.
   iqPromptHiddenAt DateTime?
 
@@ -101,7 +102,7 @@ model User {
   gender Gender?
 
   /// Avatar customization (unlocked at level 10); style = DiceBear style key.
-  avatarStyle String @default("adventurer")
+  avatarStyle String  @default("adventurer")
   bio         String?
 
   /// Invite code others can register with, e.g. "K7M2QX". Created on first use.
@@ -111,10 +112,10 @@ model User {
   referralRewardedAt DateTime?
   referredBy         User?     @relation("Referrals", fields: [referredById], references: [id], onDelete: SetNull)
   referrals          User[]    @relation("Referrals")
-  currentStreak Int       @default(0)
-  longestStreak Int       @default(0)
-  lastActiveDay DateTime? @db.Date
-  streakFreezes Int       @default(0)
+  currentStreak      Int       @default(0)
+  longestStreak      Int       @default(0)
+  lastActiveDay      DateTime? @db.Date
+  streakFreezes      Int       @default(0)
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
@@ -124,6 +125,7 @@ model User {
   xpEvents     XpEvent[]
   dailyClaims  DailyClaim[]
   weeklyScores WeeklyScore[]
+  seasonScores SeasonScore[]
   attempts     Attempt[]
   masteries    SkillMastery[]
   iqSessions   IqSession[]
@@ -170,15 +172,68 @@ enum ContentStatus {
 
 /// e.g. React. `tenantId = null` → global content made by us.
 model Track {
-  id          String        @id @default(cuid())
-  slug        String        @unique
-  tenantId    String?
-  title       Json /// { "uz": "..." }
-  description Json?
-  icon        String?
-  order       Int           @default(0)
-  status      ContentStatus @default(PUBLISHED)
-  modules     Module[]
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  tenantId     String?
+  title        Json /// { "uz": "..." }
+  description  Json?
+  icon         String?
+  order        Int           @default(0)
+  status       ContentStatus @default(PUBLISHED)
+  category     TrackCategory @default(BASIC)
+  modules      Module[]
+  weeklyTopics WeeklyTopic[]
+
+  @@index([category, order])
+}
+
+/// Learn page groups tracks by category. Empty categories are shown as "coming soon".
+enum TrackCategory {
+  FRONTEND
+  BACKEND
+  CYBERSECURITY
+  LINUX
+  NETWORKING
+  BASIC
+  MIX
+}
+
+/// The week's bonus topic: exercise XP in this track is doubled (WEEKLY_BONUS events).
+/// Weeks without a row fall back to an automatic rotation over the published tracks.
+model WeeklyTopic {
+  week      DateTime @id @db.Date /// Monday (Tashkent)
+  trackId   String
+  setById   String?
+  createdAt DateTime @default(now())
+
+  track Track @relation(fields: [trackId], references: [id], onDelete: Cascade)
+}
+
+/// Seasons run 1–3 months; XP earned inside one is summed into SeasonScore for the season leaderboard.
+model Season {
+  id          String    @id @default(cuid())
+  number      Int       @unique
+  startsAt    DateTime
+  endsAt      DateTime
+  /// Set once final ranks were announced (lazy, first request after endsAt).
+  finalizedAt DateTime?
+  createdAt   DateTime  @default(now())
+
+  scores SeasonScore[]
+}
+
+model SeasonScore {
+  userId   String
+  tenantId String
+  seasonId String
+  value    Float  @default(0)
+
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tenant Tenant @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  season Season @relation(fields: [seasonId], references: [id], onDelete: Cascade)
+
+  @@id([userId, tenantId, seasonId])
+  @@index([tenantId, seasonId, value(sort: Desc)])
 }
 
 /// e.g. React → "State"
@@ -353,6 +408,8 @@ enum XpReason {
   REFERRAL
   BADGE
   CLAN_REWARD
+  WEEKLY_BONUS
+  TRACK_COMPLETE
 }
 
 enum Gender {
@@ -403,6 +460,8 @@ enum NotificationType {
   PAYMENT_SUBMITTED /// to admins
   PAYMENT_APPROVED
   PAYMENT_REJECTED
+  TRACK_COMPLETED
+  SEASON_RESULT
 }
 
 // ─── Payments & admin ───────────────────────────────────────────────────────

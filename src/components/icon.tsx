@@ -1,5 +1,10 @@
 import {
   Atom,
+  Blocks,
+  LayoutTemplate,
+  Network,
+  Server,
+  Shuffle,
   Binary,
   Braces,
   Brain,
@@ -42,6 +47,11 @@ import {
  */
 const ICONS: Record<string, LucideIcon> = {
   atom: Atom,
+  blocks: Blocks,
+  layout: LayoutTemplate,
+  network: Network,
+  server: Server,
+  shuffle: Shuffle,
   binary: Binary,
   braces: Braces,
   brain: Brain,

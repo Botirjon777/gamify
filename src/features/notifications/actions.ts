@@ -13,6 +13,16 @@ export async function markAllNotificationsRead() {
   revalidatePath("/", "layout");
 }
 
+/** Opening a notification marks just that one read. */
+export async function markNotificationRead(id: string) {
+  const { user } = await requireSession();
+  const { count } = await db.notification.updateMany({
+    where: { id: z.string().min(1).max(40).parse(id), userId: user.id, readAt: null },
+    data: { readAt: new Date() },
+  });
+  if (count) revalidatePath("/", "layout");
+}
+
 /** Older notifications for infinite scroll. */
 export async function loadMoreNotifications(before: { createdAt: string; id: string }) {
   const { user } = await requireSession();

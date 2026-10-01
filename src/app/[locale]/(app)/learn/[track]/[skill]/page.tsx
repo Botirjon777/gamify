@@ -24,8 +24,8 @@ export default async function SkillPage({ params }: PageProps<"/[locale]/learn/[
 
   return (
     <div className="flex flex-col gap-6">
-      <Link href="/learn" className="inline-flex items-center gap-1 text-sm font-semibold text-muted hover:text-foreground">
-        <ArrowLeft className="size-4" /> {t("backToCatalog")}
+      <Link href={`/learn/${skill.trackSlug}`} className="inline-flex w-fit items-center gap-1 text-sm font-semibold text-muted hover:text-foreground">
+        <ArrowLeft className="size-4" /> {skill.trackTitle}
       </Link>
 
       <section className="rounded-3xl border border-border bg-surface p-6 sm:p-8">

@@ -129,13 +129,24 @@ export function genderOptions(style: string, gender?: Gender | null): Options {
   return gender && def?.gender ? def.gender[gender] : {};
 }
 
+/** Rendering an SVG avatar is the slowest part of a leaderboard page — the same people show up everywhere. */
+const memo = new Map<string, string>();
+const MEMO_MAX = 3000;
+
 /** Generated avatar (Reddit-style) from a seed, style and — when known — gender. */
 export function avatarDataUri(seed: string, style: string = "adventurer", gender?: Gender | null) {
+  const key = `${style}|${gender ?? ""}|${seed}`;
+  const hit = memo.get(key);
+  if (hit) return hit;
+
   const def = AVATAR_STYLES[style as AvatarStyle] ?? AVATAR_STYLES.adventurer;
-  return createAvatar(def.style as Style<object>, {
+  const uri = createAvatar(def.style as Style<object>, {
     seed,
     backgroundColor: BACKGROUNDS,
     backgroundType: ["solid", "gradientLinear"],
     ...genderOptions(style, gender),
   }).toDataUri();
+  if (memo.size >= MEMO_MAX) memo.delete(memo.keys().next().value!);
+  memo.set(key, uri);
+  return uri;
 }

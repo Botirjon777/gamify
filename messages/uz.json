@@ -18,7 +18,17 @@
     "settings": "Sozlamalar",
     "plans": "Tariflar",
     "more": "Yana",
-    "admin": "Admin panel"
+    "admin": "Admin panel",
+    "profileMenu": "Profil menyusi",
+    "close": "Yopish",
+    "levelXp": "{level}-daraja · {xp} XP",
+    "freePlan": "Free — bepul tarif",
+    "planUntil": "{date}gacha",
+    "planActive": "Faol",
+    "logoutConfirmTitle": "Hisobdan chiqasizmi?",
+    "logoutConfirmText": "Qayta kirish uchun telefon raqamingiz (yoki foydalanuvchi nomingiz) va parolingiz kerak boʻladi.",
+    "cancel": "Bekor qilish",
+    "loggingOut": "Chiqilmoqda…"
   },
   "landing": {
     "badge": "Dasturlash mashgʻulotlari — oʻyin shaklida",
@@ -170,7 +180,7 @@
   },
   "learn": {
     "title": "Oʻrganish",
-    "subtitle": "Mavzuni tanlang va uni toʻliq oʻzlashtirguningizcha mashq qiling.",
+    "subtitle": "Yoʻnalishni tanlang — keyin kurs va mavzuni.",
     "exercises": "{count} ta mashq",
     "mastery": "Oʻzlashtirish",
     "start": "Mashqni boshlash",
@@ -194,7 +204,45 @@
     "how": "Topshiriqlar cheksiz davom etadi va darajangizga moslashadi: yangi va xato qilgan mashqlaringiz koʻproq chiqadi. Har toʻgʻri javob oʻzlashtirishni oshiradi, xato — biroz kamaytiradi. Birinchi marta yechilgan mashq toʻliq XP beradi, qayta yechilgani — 20%.",
     "suggestionsTitle": "Mashqni davom ettiring",
     "suggestionsEmpty": "Hali birorta mavzuni boshlamadingiz. useState bilan boshlab koʻring!",
-    "browse": "Barcha mavzular"
+    "browse": "Barcha mavzular",
+    "comingSoon": "Tez orada",
+    "tracksCount": "{count} ta kurs",
+    "skillsCount": "{count} ta mavzu",
+    "backToCategories": "Barcha yoʻnalishlar",
+    "weeklyBadge": "x2 XP",
+    "trackProgress": "oʻzlashtirildi",
+    "completeReward": "Kursdagi barcha mashqlarni yeching — bir martalik +{xp} XP mukofot.",
+    "completeRewardWeekly": "Bu hafta bonus mavzusi! Har bir mashq uchun XP ikki baravar, kursni tugatsangiz {xp} oʻrniga {double} XP.",
+    "categories": {
+      "FRONTEND": {
+        "title": "Frontend",
+        "text": "Veb sahifalar va interfeyslar: HTML, CSS, JavaScript, TypeScript, React."
+      },
+      "BACKEND": {
+        "title": "Backend",
+        "text": "Server tomoni va dasturlash tillari: Python, C#, C++."
+      },
+      "CYBERSECURITY": {
+        "title": "Cybersecurity",
+        "text": "Veb zaifliklar, kriptografiya va autentifikatsiya."
+      },
+      "LINUX": {
+        "title": "Linux",
+        "text": "Terminal, fayl tizimi, huquqlar va bash skriptlar."
+      },
+      "NETWORKING": {
+        "title": "Networking",
+        "text": "TCP/IP, DNS, HTTP va tarmoq asoslari."
+      },
+      "BASIC": {
+        "title": "Basic",
+        "text": "Dasturlashga ilk qadam: mantiq, algoritmlar va oʻzgaruvchilar."
+      },
+      "MIX": {
+        "title": "Mix",
+        "text": "Turli yoʻnalishlardan aralash savollar."
+      }
+    }
   },
   "drill": {
     "close": "Yopish",
@@ -229,7 +277,9 @@
     "keyboardHint": "Enter — tekshirish / davom etish",
     "capped": "Bugungi XP limiti tugadi (Free: kuniga 150 XP). Pro tarifda tezroq oʻsasiz!",
     "upgrade": "Tariflar",
-    "badgeEarned": "Yangi nishon: {badge}"
+    "badgeEarned": "Yangi nishon: {badge}",
+    "weeklyBonus": "+{xp} bonus",
+    "trackCompleted": "Kurs tugatildi: {track}! +{xp} XP"
   },
   "iq": {
     "placement": {
@@ -276,8 +326,9 @@
       "IQ": "IQ"
     },
     "periods": {
-      "all-time": "Umumiy",
-      "weekly": "Shu hafta"
+      "season": "Mavsum",
+      "weekly": "Shu hafta",
+      "all-time": "Umumiy"
     },
     "you": "Siz",
     "yourRank": "Sizning oʻrningiz",
@@ -439,7 +490,7 @@
   "notifications": {
     "title": "Bildirishnomalar",
     "empty": "Hozircha bildirishnomalar yoʻq",
-    "markAll": "Hammasini oʻqilgan qilish",
+    "markAll": "Hammasini oʻqish",
     "types": {
       "FRIEND_REQUEST": "<b>{username}</b> sizga doʻstlik soʻrovini yubordi",
       "FRIEND_ACCEPTED": "<b>{username}</b> doʻstlik soʻrovingizni qabul qildi",
@@ -453,7 +504,29 @@
       "REFERRAL_REWARD": "<b>{username}</b> 3-darajaga yetdi — sizga +{xp} XP",
       "PAYMENT_SUBMITTED": "<b>{username}</b> {plan} tarifi uchun {amount} soʻm toʻlov yubordi",
       "PAYMENT_APPROVED": "Toʻlovingiz tasdiqlandi — {plan} tarifi faollashtirildi",
-      "PAYMENT_REJECTED": "{plan} uchun toʻlovingiz rad etildi: {reason}"
+      "PAYMENT_REJECTED": "{plan} uchun toʻlovingiz rad etildi: {reason}",
+      "TRACK_COMPLETED": "<b>{track}</b> kursini toʻliq tugatdingiz! +{xp} XP",
+      "SEASON_RESULT": "{season}-mavsum yakunlandi: siz <b>{rank}-oʻrinni</b> egalladingiz ({xp} XP)"
+    },
+    "unread": "{count} ta oʻqilmagan",
+    "back": "Barcha bildirishnomalar",
+    "open": "Ochish",
+    "titles": {
+      "FRIEND_REQUEST": "Doʻstlik soʻrovi",
+      "FRIEND_ACCEPTED": "Yangi doʻst",
+      "CLAN_JOIN_REQUEST": "Klanga qoʻshilish soʻrovi",
+      "CLAN_JOIN_APPROVED": "Klanga qabul qilindingiz",
+      "CLAN_JOIN_REJECTED": "Klan soʻrovi rad etildi",
+      "CLAN_WEEKLY_RESULT": "Klanning haftalik natijasi",
+      "BADGE_EARNED": "Yangi nishon",
+      "LEVEL_UP": "Yangi daraja",
+      "REFERRAL_JOINED": "Taklif qilingan doʻst",
+      "REFERRAL_REWARD": "Taklif mukofoti",
+      "PAYMENT_SUBMITTED": "Yangi toʻlov",
+      "PAYMENT_APPROVED": "Toʻlov tasdiqlandi",
+      "PAYMENT_REJECTED": "Toʻlov rad etildi",
+      "TRACK_COMPLETED": "Kurs tugatildi",
+      "SEASON_RESULT": "Mavsum natijasi"
     }
   },
   "clans": {
@@ -624,7 +697,8 @@
       "dashboard": "Statistika",
       "users": "Foydalanuvchilar",
       "payments": "Toʻlovlar",
-      "audit": "Amallar tarixi"
+      "audit": "Amallar tarixi",
+      "events": "Mavsum va bonuslar"
     },
     "stats": {
       "totalUsers": "Jami foydalanuvchilar",
@@ -730,7 +804,9 @@
       "invalid": "Notoʻgʻri qiymat",
       "self": "Oʻzingizga bu amalni qila olmaysiz",
       "adminTarget": "Boshqa adminga bu amalni qila olmaysiz",
-      "notFound": "Topilmadi"
+      "notFound": "Topilmadi",
+      "seasonPast": "Bu muddat allaqachon oʻtib ketgan",
+      "alreadyPlanned": "Keyingi mavsum allaqachon rejalashtirilgan"
     },
     "audit": {
       "empty": "Hali amallar yoʻq",
@@ -749,7 +825,34 @@
         "resetPassword": "Parolni tikladi",
         "adjustXp": "XP ni oʻzgartirdi",
         "revokeSessions": "Sessiyalarni yopdi"
+      },
+      "events": {
+        "weeklyTopic": "Haftalik bonus mavzusini tanladi",
+        "seasonLength": "Mavsum davomiyligini oʻzgartirdi",
+        "planSeason": "Yangi mavsumni rejalashtirdi"
       }
+    },
+    "events": {
+      "subtitle": "Mavsumlar (1–3 oy) va haftalik ikki baravar XP mavzusi.",
+      "seasons": "Mavsumlar",
+      "seasonName": "{number}-mavsum",
+      "daysLeft": "{count} kun qoldi",
+      "participants": "{count} ta ishtirokchi",
+      "noSeason": "Hozir faol mavsum yoʻq.",
+      "nextPlanned": "{number}-mavsum rejalashtirilgan:",
+      "planHint": "Keyingi mavsum joriy mavsum tugashi bilan boshlanadi. Rejalashtirilmasa, xuddi shu davomiylik bilan avtomatik boshlanadi.",
+      "planNext": "Keyingi mavsumni rejalashtirish",
+      "saveLength": "Saqlash",
+      "length": "Davomiyligi",
+      "months": "{count} oy",
+      "saved": "Saqlandi",
+      "finished": "Yakunlangan",
+      "weekly": "Haftalik bonus mavzusi",
+      "weeklyHint": "Tanlangan kurs mashqlari uchun XP shu hafta ikki baravar beriladi. Tanlanmagan haftalarda kurslar navbat bilan avtomatik tanlanadi.",
+      "pickTopic": "Mavzuni tanlash",
+      "auto": "Avtomatik (navbat bilan)",
+      "autoShort": "avtomatik",
+      "thisWeek": "shu hafta"
     }
   },
   "common": {
@@ -757,5 +860,19 @@
     "endOfList": "Roʻyxat oxiri",
     "loading": "Yuklanmoqda…",
     "loadMore": "Yana yuklash"
+  },
+  "weekly": {
+    "label": "Haftaning bonus mavzusi",
+    "endsIn": "{count} kun qoldi",
+    "title": "{track} — ikki baravar XP",
+    "text": "Shu hafta bu kurs mashqlari uchun XP ikki baravar. Kursni toʻliq tugatsangiz {xp} oʻrniga {double} XP.",
+    "cta": "Boshlash"
+  },
+  "season": {
+    "label": "Mavsum",
+    "name": "{number}-mavsum",
+    "daysLeft": "{count} kun qoldi",
+    "progress": "Mavsum jarayoni",
+    "hint": "Mavsum davomida toʻplagan har bir XP shu reytingda hisoblanadi. Mavsum oxirida yakuniy oʻrningiz eʼlon qilinadi, keyingi mavsum noldan boshlanadi."
   }
 }

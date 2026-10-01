@@ -34,11 +34,19 @@ export async function listNotifications(
     orderBy: [{ createdAt: "desc" }, { id: "desc" }],
     take: limit,
   });
-  return rows.map((n) => ({
-    id: n.id,
-    type: n.type,
-    data: n.data as Record<string, string | number>,
-    read: !!n.readAt,
-    createdAt: n.createdAt.toISOString(),
-  }));
+  return rows.map(toItem);
 }
+
+/** One of the user's own notifications (null for someone else's id). */
+export async function getNotification(userId: string, id: string): Promise<NotificationItem | null> {
+  const n = await db.notification.findFirst({ where: { id, userId } });
+  return n && toItem(n);
+}
+
+const toItem = (n: { id: string; type: string; data: unknown; readAt: Date | null; createdAt: Date }): NotificationItem => ({
+  id: n.id,
+  type: n.type,
+  data: n.data as Record<string, string | number>,
+  read: !!n.readAt,
+  createdAt: n.createdAt.toISOString(),
+});

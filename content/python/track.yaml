@@ -3,6 +3,7 @@ title: Python
 description: Sodda, tushunarli va qudratli dasturlash tili — maʼlumot tuzilmalari, comprehension va funksiyalar.
 icon: terminal
 order: 7
+category: BACKEND
 modules:
   - slug: data-structures
     title: Maʼlumot tuzilmalari

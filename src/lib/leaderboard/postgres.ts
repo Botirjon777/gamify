@@ -11,7 +11,27 @@ const userSelect = { id: true, username: true, avatarSeed: true, avatarStyle: tr
  * Both are scoped to members of the tenant.
  */
 export class PostgresLeaderboardStore implements LeaderboardStore {
-  async top({ board, period, tenantId, limit = 50, offset = 0 }: LeaderboardQuery): Promise<LeaderboardEntry[]> {
+  async top({ board, period, tenantId, limit = 50, offset = 0, seasonId }: LeaderboardQuery): Promise<LeaderboardEntry[]> {
+    if (period === "season") {
+      if (!seasonId || board !== "XP") return [];
+      const rows = await db.seasonScore.findMany({
+        where: { tenantId, seasonId, value: { gt: 0 } },
+        orderBy: [{ value: "desc" }, { userId: "asc" }],
+        skip: offset,
+        take: limit,
+        include: { user: { select: userSelect } },
+      });
+      return rows.map((r, i) => ({
+        rank: offset + i + 1,
+        userId: r.user.id,
+        username: r.user.username,
+        avatarSeed: r.user.avatarSeed,
+        avatarStyle: r.user.avatarStyle,
+        gender: r.user.gender,
+        value: r.value,
+      }));
+    }
+
     if (period === "weekly") {
       const rows = await db.weeklyScore.findMany({
         where: { tenantId, board, week: tashkentWeekStart() },
@@ -56,7 +76,15 @@ export class PostgresLeaderboardStore implements LeaderboardStore {
     }));
   }
 
-  async rankOf(userId: string, { board, period, tenantId }: Omit<LeaderboardQuery, "limit" | "offset">) {
+  async rankOf(userId: string, { board, period, tenantId, seasonId }: Omit<LeaderboardQuery, "limit" | "offset">) {
+    if (period === "season") {
+      if (!seasonId || board !== "XP") return null;
+      const mine = await db.seasonScore.findUnique({ where: { userId_tenantId_seasonId: { userId, tenantId, seasonId } } });
+      if (!mine || mine.value <= 0) return null;
+      const ahead = await db.seasonScore.count({ where: { tenantId, seasonId, value: { gt: mine.value } } });
+      return ahead + 1;
+    }
+
     if (period === "weekly") {
       const week = tashkentWeekStart();
       const mine = await db.weeklyScore.findUnique({

@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart3, History, Users, Wallet, type LucideIcon } from "lucide-react";
+import { BarChart3, CalendarRange, History, Users, Wallet, type LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { NavPending } from "@/components/nav-pending";
@@ -9,6 +9,7 @@ const LINKS: { href: string; key: string; icon: LucideIcon; exact?: boolean }[] 
   { href: "/admin", key: "dashboard", icon: BarChart3, exact: true },
   { href: "/admin/users", key: "users", icon: Users },
   { href: "/admin/payments", key: "payments", icon: Wallet },
+  { href: "/admin/events", key: "events", icon: CalendarRange },
   { href: "/admin/audit", key: "audit", icon: History },
 ];
 

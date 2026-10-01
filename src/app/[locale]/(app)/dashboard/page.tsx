@@ -16,6 +16,9 @@ import { iqFromRating } from "@/features/iq/rating";
 import { hideIqPrompt } from "@/features/iq/actions";
 import { effectivePlan } from "@/features/plans/plans";
 import { GenderSettings } from "@/features/profile/components/gender-settings";
+import { currentSeason, finalizeEndedSeasons } from "@/features/events/service";
+import { SeasonCard } from "@/features/events/components/season-card";
+import { WeeklyTopicCard } from "@/features/events/components/weekly-topic-card";
 
 export default async function DashboardPage({ params }: PageProps<"/[locale]/dashboard">) {
   const { locale } = await params;
@@ -25,6 +28,8 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
   const { user, tenant } = await requireSession();
 
   const today = tashkentToday();
+  await finalizeEndedSeasons();
+  const season = await currentSeason();
   const store = getLeaderboardStore();
   const [claimedToday, iqDoneToday, weekly, rank, iqRank, suggestions] = await Promise.all([
     db.dailyClaim.findUnique({ where: { userId_day_kind: { userId: user.id, day: today, kind: "LOGIN" } } }),
@@ -111,6 +116,12 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
           </form>
         </section>
       )}
+
+      {/* Season + weekly bonus topic */}
+      <div className="grid gap-4 xl:grid-cols-2">
+        {season && <SeasonCard season={season} compact />}
+        <WeeklyTopicCard />
+      </div>
 
       {/* Stats */}
       <section className="stagger grid grid-cols-2 gap-3 lg:grid-cols-4">

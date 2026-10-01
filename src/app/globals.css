@@ -179,6 +179,60 @@ html {
   transform-origin: left;
 }
 
+/* ─── Dialogs (native <dialog> + showModal: focus trap, Esc, top layer for free) ─── */
+@keyframes drawer-in {
+  from { transform: translateX(100%); }
+  to { transform: none; }
+}
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.97); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Right-side panel (mobile profile menu). */
+dialog.drawer {
+  margin: 0 0 0 auto;
+  height: 100dvh;
+  max-height: none;
+  width: min(20rem, 86vw);
+  border: 0;
+  border-left: 1px solid var(--border);
+  padding: 0;
+  background: var(--surface);
+  color: var(--foreground);
+  box-shadow: -24px 0 48px -12px rgb(0 0 0 / 0.18);
+}
+dialog.drawer[open] {
+  animation: drawer-in 0.28s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* Small centred confirm box. */
+dialog.modal {
+  margin: auto;
+  width: min(22rem, calc(100vw - 2rem));
+  border: 1px solid var(--border);
+  border-radius: 1.5rem;
+  padding: 0;
+  background: var(--surface);
+  color: var(--foreground);
+  box-shadow: 0 24px 64px -16px rgb(0 0 0 / 0.3);
+}
+dialog.modal[open] {
+  animation: modal-in 0.22s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+/* The page behind an open dialog doesn't scroll. */
+html:has(dialog[open]) {
+  overflow: hidden;
+}
+
+dialog.drawer::backdrop,
+dialog.modal::backdrop {
+  background: rgb(15 10 40 / 0.45);
+  backdrop-filter: blur(3px);
+  animation: fade-in 0.2s ease-out;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {

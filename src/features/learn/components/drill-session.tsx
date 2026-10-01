@@ -1,11 +1,11 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { Award, CircleCheck, CircleX, Flame, Gauge, PartyPopper, X } from "lucide-react";
+import { Award, CircleCheck, CircleX, Flame, Gauge, PartyPopper, Sparkles, Trophy, X } from "lucide-react";
 import { useTranslations } from "next-intl";
-import { Link } from "@/i18n/navigation";
+import { Link, useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
-import { getNextExercise, submitAnswer } from "../actions";
+import { getNextExercise, leaveDrill, submitAnswer } from "../actions";
 import { useDrill } from "../store";
 import type { Reveal } from "../check";
 import type { ClientExercise } from "../types";
@@ -20,6 +20,7 @@ interface Props {
 
 export function DrillSession({ skillId, skillHref, skillTitle, initialMastery }: Props) {
   const t = useTranslations("drill");
+  const router = useRouter();
   const s = useDrill();
   const [checkError, setCheckError] = useState(false);
 
@@ -84,6 +85,13 @@ export function DrillSession({ skillId, skillHref, skillTitle, initialMastery }:
           <Link
             href={skillHref}
             aria-label={t("close")}
+            onClick={async (e) => {
+              // Answers don't revalidate (too costly per answer) — drop cached pages once on the way out,
+              // so mastery / XP on the pages we go back to are fresh.
+              e.preventDefault();
+              await leaveDrill();
+              router.push(skillHref);
+            }}
             className="grid size-9 shrink-0 place-items-center rounded-xl text-xl text-muted hover:bg-surface hover:text-foreground"
           >
             <X className="size-5" />
@@ -202,6 +210,11 @@ function Feedback({ exercise }: { exercise: ClientExercise }) {
         {result.correct ? <CircleCheck className="size-6" /> : <CircleX className="size-6" />}
         {result.correct ? t("correct") : t("wrong")}
         {result.xp > 0 && <span className="text-base text-xp">{t("xp", { xp: result.xp })}</span>}
+        {result.bonusXp > 0 && (
+          <span className="inline-flex items-center gap-1 rounded-full bg-grad-gold px-2 py-0.5 text-xs text-white">
+            <Sparkles className="size-3.5" /> {t("weeklyBonus", { xp: result.bonusXp })}
+          </span>
+        )}
         {result.leveledUp && (
           <span className="inline-flex items-center gap-1 text-base text-brand">
             <PartyPopper className="size-4" /> {t("levelUp", { level: result.level })}
@@ -225,6 +238,11 @@ function Feedback({ exercise }: { exercise: ClientExercise }) {
           <Link href="/plans" className="text-brand underline">
             {t("upgrade")}
           </Link>
+        </p>
+      )}
+      {result.trackCompleted && (
+        <p className="mt-2 inline-flex flex-wrap items-center gap-1.5 rounded-lg bg-grad-success px-2.5 py-1.5 text-xs font-bold text-white">
+          <Trophy className="size-4" /> {t("trackCompleted", { track: result.trackCompleted.title, xp: result.trackCompleted.xp })}
         </p>
       )}
       {result.badges.length > 0 && (

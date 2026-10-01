@@ -18,6 +18,8 @@ export interface NotificationData {
   PAYMENT_SUBMITTED: { username: string; plan: string; amount: number };
   PAYMENT_APPROVED: { plan: string; until: string };
   PAYMENT_REJECTED: { plan: string; reason: string };
+  TRACK_COMPLETED: { track: string; trackSlug: string; xp: number };
+  SEASON_RESULT: { season: number; rank: number; xp: number };
 }
 
 export async function notify<T extends NotificationType>(db: Db, userId: string, type: T, data: NotificationData[T]) {

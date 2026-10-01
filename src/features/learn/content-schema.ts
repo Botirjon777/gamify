@@ -2,6 +2,7 @@
  * Format of the files in /content, validated by `pnpm content:sync`.
  * Shared by the sync script and the app, so no server-only imports here.
  */
+import { CATEGORIES } from "./categories";
 import { z } from "zod";
 import type { LocalizedText } from "@/i18n/content";
 
@@ -89,6 +90,7 @@ export const trackFile = z.object({
   description: localized.optional(),
   icon: z.string().optional(),
   order: z.number().int().default(0),
+  category: z.enum(CATEGORIES),
   modules: z
     .array(
       z.object({

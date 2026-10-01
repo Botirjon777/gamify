@@ -3,6 +3,7 @@ title: C#
 description: .NET ekotizimi — kuchli tiplash, LINQ soʻrovlari, OOP va zamonaviy C# imkoniyatlari.
 icon: cpu
 order: 8
+category: BACKEND
 modules:
   - slug: csharp-core
     title: C# asoslari va LINQ

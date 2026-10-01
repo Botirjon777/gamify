@@ -9,9 +9,12 @@ import { getLeaderboardStore, type Period } from "@/lib/leaderboard";
 import { iqFromRating } from "@/features/iq/rating";
 import { db } from "@/lib/db";
 import { tashkentWeekStart } from "@/lib/time";
+import { currentSeason, finalizeEndedSeasons } from "@/features/events/service";
+import { SeasonCard } from "@/features/events/components/season-card";
 
 const BOARDS = ["XP", "IQ"] as const;
-const PERIODS = ["all-time", "weekly"] as const;
+/** Seasons are XP only; the season is the default XP view. */
+const PERIODS = { XP: ["season", "weekly", "all-time"], IQ: ["weekly", "all-time"] } as const satisfies Record<string, Period[]>;
 
 
 export default async function LeaderboardPage({ params, searchParams }: PageProps<"/[locale]/leaderboard">) {
@@ -19,16 +22,19 @@ export default async function LeaderboardPage({ params, searchParams }: PageProp
   setRequestLocale(locale);
   const sp = await searchParams;
   const board = BOARDS.find((b) => b === sp.board) ?? "XP";
-  const period: Period = PERIODS.find((p) => p === sp.period) ?? "all-time";
+  const periods: readonly Period[] = PERIODS[board];
+  const period: Period = periods.find((p) => p === sp.period) ?? periods[0];
 
   const t = await getTranslations("leaderboard");
   const { user, tenant } = await requireSession();
   const store = getLeaderboardStore();
-  const query = { board, period, tenantId: tenant.id };
+  await finalizeEndedSeasons();
+  const season = period === "season" ? await currentSeason() : null;
+  const query = { board, period, tenantId: tenant.id, seasonId: season?.id };
 
   const [entries, myRank] = await Promise.all([store.top({ ...query, limit: LEADERBOARD_PAGE }), store.rankOf(user.id, query)]);
   const meInList = entries.some((e) => e.userId === user.id);
-  const myValue = myRank && !meInList ? await myScore(user.id, tenant.id, board, period) : null;
+  const myValue = myRank && !meInList ? await myScore(user.id, tenant.id, board, period, season?.id) : null;
 
   const href = (b: string, p: string) => `/leaderboard?board=${b}&period=${p}`;
 
@@ -38,8 +44,10 @@ export default async function LeaderboardPage({ params, searchParams }: PageProp
 
       <div className="flex flex-wrap items-center gap-3">
         <Tabs items={BOARDS.map((b) => ({ href: href(b, period), label: t(`boards.${b}`), active: b === board }))} />
-        <Tabs items={PERIODS.map((p) => ({ href: href(board, p), label: t(`periods.${p}`), active: p === period }))} />
+        <Tabs items={periods.map((p) => ({ href: href(board, p), label: t(`periods.${p}`), active: p === period }))} />
       </div>
+
+      {season && <SeasonCard season={season} />}
 
       {/* Your position when you're not in the top list */}
       {!meInList && (
@@ -81,7 +89,12 @@ export default async function LeaderboardPage({ params, searchParams }: PageProp
   );
 }
 
-async function myScore(userId: string, tenantId: string, board: "XP" | "IQ", period: Period) {
+async function myScore(userId: string, tenantId: string, board: "XP" | "IQ", period: Period, seasonId?: string) {
+  if (period === "season") {
+    if (!seasonId) return null;
+    const row = await db.seasonScore.findUnique({ where: { userId_tenantId_seasonId: { userId, tenantId, seasonId } } });
+    return row?.value ?? null;
+  }
   if (period === "weekly") {
     const row = await db.weeklyScore.findUnique({
       where: { userId_tenantId_week_board: { userId, tenantId, week: tashkentWeekStart(), board } },

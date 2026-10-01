@@ -3,6 +3,7 @@ title: TypeScript
 description: Statik tiplar bilan xavfsiz JavaScript kod yozish — interfeyslar, generiklar va Type Challenges.
 icon: file-code
 order: 4
+category: FRONTEND
 modules:
   - slug: basic
     title: Boshlangʻich (Basic & Easy)

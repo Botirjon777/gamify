@@ -3,6 +3,7 @@ title: C++
 description: Yuqori unumdorlikka ega tizimli dasturlash — koʻrsatkichlar, xotira boshqaruvi va STL konteynerlari.
 icon: binary
 order: 6
+category: BACKEND
 modules:
   - slug: memory
     title: Koʻrsatkichlar va xotira

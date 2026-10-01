@@ -3,6 +3,7 @@ import { cache } from "react";
 import { headers } from "next/headers";
 import { notFound } from "next/navigation";
 import { db } from "@/lib/db";
+import { cached } from "@/lib/cache";
 
 const ROOT_DOMAIN = (process.env.ROOT_DOMAIN ?? "localhost:3000").toLowerCase();
 export const DEFAULT_TENANT_SLUG = process.env.DEFAULT_TENANT_SLUG ?? "gamify";
@@ -25,11 +26,12 @@ export const getCurrentTenant = cache(async () => {
   const host = (await headers()).get("host") ?? ROOT_DOMAIN;
   const parsed = parseHost(host);
 
-  const tenant =
+  // Every request needs this; tenants change rarely (admin edits call invalidateCache("tenant:")).
+  const tenant = await cached(`tenant:${host.toLowerCase()}`, 60, async () =>
     "slug" in parsed
-      ? await db.tenant.findUnique({ where: { slug: parsed.slug } })
-      : (await db.tenantDomain.findUnique({ where: { domain: parsed.domain }, include: { tenant: true } }))
-          ?.tenant;
+      ? db.tenant.findUnique({ where: { slug: parsed.slug } })
+      : (await db.tenantDomain.findUnique({ where: { domain: parsed.domain }, include: { tenant: true } }))?.tenant ?? null,
+  );
 
   if (!tenant || !tenant.isActive) notFound();
   return tenant;

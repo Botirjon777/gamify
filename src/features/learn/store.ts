@@ -85,7 +85,7 @@ export const useDrill = create<DrillState>()((set) => ({
       result,
       phase: "feedback",
       mastery: result.mastery,
-      sessionXp: s.sessionXp + result.xp,
+      sessionXp: s.sessionXp + result.xp + result.bonusXp + (result.trackCompleted?.xp ?? 0),
       answered: s.answered + 1,
       correct: s.correct + (result.correct ? 1 : 0),
       combo: result.correct ? s.combo + 1 : 0,
