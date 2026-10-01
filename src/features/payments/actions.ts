@@ -6,7 +6,7 @@ import { db } from "@/lib/db";
 import { requireSession } from "@/lib/auth/session";
 import { getRateLimiter } from "@/lib/rate-limit";
 import { notifyMany } from "@/features/notifications/service";
-import { isPeriod, priceFor, type PaidPlan } from "./pricing";
+import { BILLING, BILLINGS, priceFor, type PaidPlan } from "./pricing";
 
 export type PaymentRequestResult =
   | { ok: true }
@@ -14,12 +14,12 @@ export type PaymentRequestResult =
 
 const requestSchema = z.object({
   plan: z.enum(["PRO", "DIAMOND"]),
-  months: z.number().int().refine(isPeriod),
+  billing: z.enum(BILLINGS),
   reference: z.string().trim().min(3).max(120),
 });
 
 /** User reports a card transfer; an admin checks it and approves → the plan is activated. */
-export async function requestPayment(input: { plan: string; months: number; reference: string }): Promise<PaymentRequestResult> {
+export async function requestPayment(input: { plan: string; billing: string; reference: string }): Promise<PaymentRequestResult> {
   const { user } = await requireSession();
   const parsed = requestSchema.safeParse(input);
   if (!parsed.success) return { ok: false, error: "invalid" };
@@ -32,8 +32,9 @@ export async function requestPayment(input: { plan: string; months: number; refe
     return { ok: false, error: "pendingExists" };
   }
 
-  const { plan, months, reference } = parsed.data;
-  const amountUzs = priceFor(plan as PaidPlan, months);
+  const { plan, billing, reference } = parsed.data;
+  const { months } = BILLING[billing];
+  const amountUzs = priceFor(plan as PaidPlan, billing);
   const admins = await db.user.findMany({ where: { isSuperAdmin: true, blockedAt: null }, select: { id: true } });
 
   await db.$transaction(async (tx) => {
