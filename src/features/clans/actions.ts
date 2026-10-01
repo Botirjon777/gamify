@@ -32,23 +32,27 @@ async function officersOf(clanId: string) {
   return rows.map((r) => r.userId);
 }
 
-export async function createClan(_prev: ClanFormState, formData: FormData): Promise<ClanFormState> {
-  const { user, tenant } = await requireSession();
+function parseClanForm(formData: FormData) {
   const raw = Object.fromEntries(["name", "tag", "description", "emblem", "color"].map((k) => [k, String(formData.get(k) ?? "")]));
   const values = raw as Record<string, string>;
-
   const parsed = clanSchema.safeParse({ ...raw, description: raw.description || undefined });
-  if (!parsed.success) {
-    const fieldErrors: Record<string, string> = {};
-    for (const issue of parsed.error.issues) fieldErrors[String(issue.path[0])] ??= issue.message;
-    return { fieldErrors, values };
-  }
+  if (parsed.success) return { values, data: parsed.data };
+  const fieldErrors: Record<string, string> = {};
+  for (const issue of parsed.error.issues) fieldErrors[String(issue.path[0])] ??= issue.message;
+  return { values, fieldErrors };
+}
+
+export async function createClan(_prev: ClanFormState, formData: FormData): Promise<ClanFormState> {
+  const { user, tenant } = await requireSession();
+  const form = parseClanForm(formData);
+  const values = form.values;
+  if (!form.data) return { fieldErrors: form.fieldErrors, values };
   if (await db.clanMember.findUnique({ where: { userId: user.id } })) return { error: "inClan", values };
 
   const limit = await getRateLimiter().hit(`clan-create:${user.id}`, 3, 24 * 60 * 60);
   if (!limit.ok) return { error: "tooMany", values };
 
-  const { name, tag, description, emblem, color } = parsed.data;
+  const { name, tag, description, emblem, color } = form.data;
   const slug = tag.toLowerCase();
   if (await db.clan.findFirst({ where: { OR: [{ tag }, { slug }] } })) return { fieldErrors: { tag: "tagTaken" }, values };
 
@@ -65,8 +69,8 @@ export async function createClan(_prev: ClanFormState, formData: FormData): Prom
     return { fieldErrors: { tag: "tagTaken" }, values };
   }
 
-  refresh();
-  // Client navigates (see note on logout in features/auth/actions.ts).
+  // No revalidatePath here: it re-renders the current page inside this response, and /clans/new now
+  // redirects (you have a clan), so the client would never see redirectTo. useRedirectTo navigates + refreshes.
   return { redirectTo: `/clans/${slug}` };
 }
 
@@ -187,6 +191,64 @@ export async function setOfficer(userId: string, officer: boolean): Promise<Clan
     return { ok: false, error: "forbidden" };
   }
   await db.clanMember.update({ where: { userId }, data: { role: officer ? "OFFICER" : "MEMBER" } });
+  refresh();
+  return { ok: true };
+}
+
+// ─── Leader: settings ────────────────────────────────────────────────────────
+
+async function leaderOf(clanId: string, userId: string) {
+  const me = await db.clanMember.findUnique({ where: { userId } });
+  return me?.clanId === clanId && me.role === "LEADER" ? me : null;
+}
+
+/** Edit name / tag / description / emblem / colour. The URL follows the tag. */
+export async function updateClan(clanId: string, _prev: ClanFormState, formData: FormData): Promise<ClanFormState> {
+  const { user } = await requireSession();
+  const form = parseClanForm(formData);
+  if (!form.data) return { fieldErrors: form.fieldErrors, values: form.values };
+  if (!(await leaderOf(clanId, user.id))) return { error: "forbidden", values: form.values };
+
+  const { name, tag, description, emblem, color } = form.data;
+  const slug = tag.toLowerCase();
+  if (await db.clan.findFirst({ where: { id: { not: clanId }, OR: [{ tag }, { slug }] } })) {
+    return { fieldErrors: { tag: "tagTaken" }, values: form.values };
+  }
+  const before = await db.clan.findUniqueOrThrow({ where: { id: clanId }, select: { slug: true } });
+  try {
+    await db.clan.update({ where: { id: clanId }, data: { name, tag, slug, description: description ?? null, emblem, color } });
+  } catch {
+    return { fieldErrors: { tag: "tagTaken" }, values: form.values };
+  }
+  // A new tag moves the clan to a new URL. revalidatePath would re-render the current (old-URL) page inside
+  // this response — a 404 — and the client would never get redirectTo; useRedirectTo navigates + refreshes.
+  if (before.slug === slug) refresh();
+  return { redirectTo: `/clans/${slug}` };
+}
+
+/** Hand the clan to another member; the old leader stays as an officer. */
+export async function transferLeadership(clanId: string, userId: string): Promise<ClanActionResult> {
+  const { user } = await requireSession();
+  if (!(await leaderOf(clanId, user.id)) || userId === user.id) return { ok: false, error: "forbidden" };
+  const target = await db.clanMember.findUnique({ where: { userId } });
+  if (target?.clanId !== clanId) return { ok: false, error: "notFound" };
+
+  await db.$transaction([
+    db.clanMember.update({ where: { userId: user.id }, data: { role: "OFFICER" } }),
+    db.clanMember.update({ where: { userId }, data: { role: "LEADER" } }),
+  ]);
+  refresh();
+  return { ok: true };
+}
+
+/** Delete the clan for good — the leader has to type its name. */
+export async function deleteClan(clanId: string, confirmName: string): Promise<ClanActionResult> {
+  const { user } = await requireSession();
+  const clan = await db.clan.findUnique({ where: { id: clanId } });
+  if (!clan) return { ok: false, error: "notFound" };
+  if (!(await leaderOf(clanId, user.id)) || confirmName.trim() !== clan.name) return { ok: false, error: "forbidden" };
+
+  await db.clan.delete({ where: { id: clanId } });
   refresh();
   return { ok: true };
 }

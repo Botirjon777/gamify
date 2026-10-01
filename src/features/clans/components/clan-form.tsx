@@ -6,16 +6,26 @@ import { Button } from "@/components/ui/button";
 import { Field } from "@/components/ui/field";
 import { useRedirectTo } from "@/components/use-redirect-to";
 import { CLAN_COLORS, CLAN_EMBLEMS, GRADIENTS, IconTile, type GradientKey } from "@/components/icon";
-import { createClan, type ClanFormState } from "../actions";
+import { createClan, updateClan, type ClanFormState } from "../actions";
 
-export function CreateClanForm() {
+interface EditableClan {
+  id: string;
+  name: string;
+  tag: string;
+  description: string | null;
+  emblem: string;
+  color: string;
+}
+
+/** Create a clan, or (with `clan`) edit one — same fields, live preview. */
+export function ClanForm({ clan }: { clan?: EditableClan }) {
   const t = useTranslations("clans");
-  const [state, action, pending] = useActionState<ClanFormState, FormData>(createClan, {});
+  const [state, action, pending] = useActionState<ClanFormState, FormData>(clan ? updateClan.bind(null, clan.id) : createClan, {});
   useRedirectTo(state.redirectTo);
-  const [emblem, setEmblem] = useState<string>(state.values?.emblem ?? "shield");
-  const [color, setColor] = useState<GradientKey>((state.values?.color as GradientKey) ?? "brand");
-  const [name, setName] = useState(state.values?.name ?? "");
-  const [tag, setTag] = useState(state.values?.tag ?? "");
+  const [emblem, setEmblem] = useState<string>(state.values?.emblem ?? clan?.emblem ?? "shield");
+  const [color, setColor] = useState<GradientKey>((state.values?.color ?? clan?.color ?? "brand") as GradientKey);
+  const [name, setName] = useState(state.values?.name ?? clan?.name ?? "");
+  const [tag, setTag] = useState(state.values?.tag ?? clan?.tag ?? "");
   const err = (key?: string) => (key ? t(`errors.${key}`) : undefined);
 
   return (
@@ -39,7 +49,7 @@ export function CreateClanForm() {
             name="description"
             maxLength={200}
             rows={3}
-            defaultValue={state.values?.description}
+            defaultValue={state.values?.description ?? clan?.description ?? ""}
             placeholder={t("form.descriptionPlaceholder")}
             className="rounded-xl border border-border bg-surface px-3.5 py-2.5 text-base outline-none transition focus:border-brand focus:ring-4 focus:ring-brand/15"
           />
@@ -81,7 +91,7 @@ export function CreateClanForm() {
         </fieldset>
 
         <Button type="submit" disabled={pending || !!state.redirectTo} className="h-12 w-full sm:w-fit sm:px-10">
-          {t("form.submit")}
+          {clan ? t("form.save") : t("form.submit")}
         </Button>
       </div>
 
