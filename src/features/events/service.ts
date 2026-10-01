@@ -19,35 +19,39 @@ export interface SeasonInfo {
   finalizedAt: Date | null;
 }
 
-/** All seasons, oldest first. Tiny table; cached and invalidated by the admin actions. */
-export const listSeasons = () =>
-  cached<SeasonInfo[]>("season:list", 300, () => db.season.findMany({ orderBy: { number: "asc" } }));
+/**
+ * All seasons, oldest first. Tiny table; cached and invalidated by the admin actions.
+ * `client`: pass the transaction when called inside one — a cold cache must not grab a second
+ * connection while the transaction holds one (that blocks when the pool is small).
+ */
+export const listSeasons = (client: Db = db) =>
+  cached<SeasonInfo[]>("season:list", 300, () => client.season.findMany({ orderBy: { number: "asc" } }));
 
 /**
  * The running season. When the last one has ended and nobody planned the next, the next one starts
  * automatically with the same length — leaderboards never sit without a season.
  */
-export async function currentSeason(now = new Date()): Promise<SeasonInfo | null> {
-  const seasons = await listSeasons();
+export async function currentSeason(now = new Date(), client: Db = db): Promise<SeasonInfo | null> {
+  const seasons = await listSeasons(client);
   const active = activeSeason(seasons, now);
   if (active || !seasons.length) return active;
 
   const last = seasons[seasons.length - 1];
   if (last.endsAt > now) return null; // planned for later
-  await rollOver(last, now);
-  return activeSeason(await listSeasons(), now);
+  await rollOver(last, now, client);
+  return activeSeason(await listSeasons(client), now);
 }
 
-async function rollOver(last: SeasonInfo, now: Date) {
+async function rollOver(last: SeasonInfo, now: Date, client: Db) {
   const { startsAt, endsAt } = nextSeasonDates(last, now);
   // Unique `number` makes concurrent roll-overs safe: only one insert wins.
-  await db.season.createMany({ data: [{ number: last.number + 1, startsAt, endsAt }], skipDuplicates: true });
+  await client.season.createMany({ data: [{ number: last.number + 1, startsAt, endsAt }], skipDuplicates: true });
   await invalidateCache("season:");
 }
 
 /** Add XP to the running season's leaderboard (called from awardXp, inside its transaction). */
 export async function addSeasonXp(tx: Db, userId: string, tenantId: string, amount: number) {
-  const season = await currentSeason();
+  const season = await currentSeason(new Date(), tx);
   if (!season) return;
   if (amount < 0) {
     // Duel losses: shrink, but never below 0.

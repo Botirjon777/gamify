@@ -94,6 +94,8 @@ export function OutputView({ exercise, locked, onDraft }: ViewProps<"OUTPUT">) {
         placeholder={t("outputPlaceholder")}
         autoComplete="off"
         autoCapitalize="none"
+        autoCorrect="off"
+        enterKeyHint="send"
         spellCheck={false}
         onChange={(e) => onDraft(e.target.value.trim() ? { type: "OUTPUT", text: e.target.value } : null)}
         className="h-12 rounded-2xl border-2 border-border bg-surface px-4 font-mono text-base outline-none transition focus:border-brand disabled:opacity-80"
@@ -129,6 +131,8 @@ export function FillView({ exercise, locked, reveal, onDraft }: ViewProps<"FILL"
               onChange={(e) => update(i, e.target.value)}
               autoComplete="off"
               autoCapitalize="none"
+              autoCorrect="off"
+              enterKeyHint={i === blanks - 1 ? "send" : "next"}
               spellCheck={false}
               style={{ width: `${Math.max(6, values[i].length + 2)}ch` }}
               className="mx-0.5 rounded-md border border-white/20 bg-white/10 px-1.5 py-0.5 text-white outline-none focus:border-[var(--brand)] focus:bg-white/15 disabled:opacity-90"

@@ -100,6 +100,18 @@ body {
   }
 }
 
+/* ─── Form fields on phones ──────────────────────────────────────────────────
+ * iOS Safari zooms the whole page when a focused field's text is smaller than 16px (and doesn't zoom
+ * back). Unlayered on purpose: it must win over Tailwind's text-sm / text-[13px] utilities.
+ */
+@media (pointer: coarse), (max-width: 767px) {
+  input:not([type="checkbox"], [type="radio"], [type="range"]),
+  select,
+  textarea {
+    font-size: 16px;
+  }
+}
+
 /* ─── Motion ─────────────────────────────────────────────────────────────────
  * Skeleton shimmer, page fade-in, staggered lists, scroll reveal, navigation bar.
  * Everything is disabled for people who ask their OS for reduced motion.

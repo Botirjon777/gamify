@@ -98,6 +98,22 @@ export function DuelArena({ duelId, me, them, stake, track, questions, resume }:
     return () => clearTimeout(id);
   }, [phase, q, left, submit]);
 
+  // Enter (the phone keyboard's "send" too) = answer / next question.
+  useEffect(() => {
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Enter" || e.shiftKey || busy) return;
+      if (phase === "question" && draft) {
+        e.preventDefault();
+        void submit(draft);
+      } else if (phase === "feedback") {
+        e.preventDefault();
+        void load();
+      }
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [phase, draft, busy, submit, load]);
+
   if (phase === "intro") {
     return (
       <div className="flex flex-col gap-6">
@@ -113,7 +129,13 @@ export function DuelArena({ duelId, me, them, stake, track, questions, resume }:
   if (phase === "countdown") {
     return (
       <div className="grid h-[60vh] place-items-center">
-        <span key={count} className="animate-count bg-grad-brand bg-clip-text font-display text-[9rem] font-black leading-none text-transparent">
+        <span
+          key={count}
+          className={`animate-count bg-grad-brand bg-clip-text font-display font-black leading-none text-transparent ${
+            // A digit can be huge; the word has to fit a phone screen.
+            count > 0 ? "text-[8rem] sm:text-[9rem]" : "text-5xl sm:text-7xl"
+          }`}
+        >
           {count > 0 ? count : t("go")}
         </span>
       </div>
@@ -133,7 +155,8 @@ export function DuelArena({ duelId, me, them, stake, track, questions, resume }:
   const danger = left <= 10;
 
   return (
-    <div className="flex flex-col gap-5">
+    // pb: room for the fixed answer bar, so it never covers the last option.
+    <div className="flex flex-col gap-4 pb-36 sm:gap-5">
       {/* Progress + clock */}
       <div className="flex items-center gap-3">
         <div className="flex flex-1 gap-1.5">
@@ -157,10 +180,11 @@ export function DuelArena({ duelId, me, them, stake, track, questions, resume }:
         />
       </div>
 
-      <div key={q.index} className="animate-page flex flex-col gap-5">
+      <div key={q.index} className="animate-page flex flex-col gap-4 sm:gap-5">
         <div>
           <p className="text-xs font-bold uppercase tracking-wider text-muted">{t("question", { n: q.index + 1, total: q.total })}</p>
-          <h1 className="mt-2 text-xl font-bold leading-snug tracking-tight sm:text-2xl">{ex.prompt}</h1>
+          {/* Body font (not the wide display face): long questions stay readable on a phone. */}
+          <h1 className="mt-1.5 font-sans text-lg font-bold leading-snug tracking-tight sm:text-2xl">{ex.prompt}</h1>
         </div>
         {ex.type === "CHOICE" && <ChoiceView exercise={ex} {...view} />}
         {ex.type === "OUTPUT" && <OutputView exercise={ex} {...view} />}
@@ -168,25 +192,28 @@ export function DuelArena({ duelId, me, them, stake, track, questions, resume }:
         {ex.type === "ORDER" && <OrderView exercise={ex} {...view} />}
       </div>
 
-      <div className="sticky bottom-24 flex flex-col gap-3 rounded-2xl border border-border bg-surface/95 p-3 shadow-lg backdrop-blur sm:flex-row sm:items-center md:bottom-4">
-        {phase === "feedback" && result ? (
-          <>
-            <p className={`flex flex-1 items-center gap-2 font-bold ${result.correct ? "text-success" : "text-danger"}`}>
-              {result.correct ? <CircleCheck className="size-5" /> : <CircleX className="size-5" />}
-              {result.correct ? t("correct") : result.late ? t("late") : t("wrong")}
-            </p>
-            <Button autoFocus className="h-12 sm:w-44" onClick={() => void load()} disabled={busy}>
-              {q.index + 1 >= q.total ? t("finish") : t("next")}
-            </Button>
-          </>
-        ) : (
-          <>
-            <p className="flex-1 text-sm text-muted">{t("score", { correct: marks.filter(Boolean).length, answered: marks.length })}</p>
-            <Button className="h-12 sm:w-44" disabled={!draft || busy} onClick={() => void submit(draft)}>
-              {t("answer")}
-            </Button>
-          </>
-        )}
+      {/* Answer bar: pinned to the bottom of the screen, like the drill. */}
+      <div className="fixed inset-x-0 bottom-0 z-10 border-t border-border bg-surface/95 pb-[env(safe-area-inset-bottom)] backdrop-blur">
+        <div className="mx-auto flex w-full max-w-3xl items-center gap-3 px-4 py-3">
+          {phase === "feedback" && result ? (
+            <>
+              <p className={`flex flex-1 items-center gap-2 font-bold ${result.correct ? "text-success" : "text-danger"}`}>
+                {result.correct ? <CircleCheck className="size-5" /> : <CircleX className="size-5" />}
+                {result.correct ? t("correct") : result.late ? t("late") : t("wrong")}
+              </p>
+              <Button autoFocus className="h-12 shrink-0 px-6 sm:w-44" onClick={() => void load()} disabled={busy}>
+                {q.index + 1 >= q.total ? t("finish") : t("next")}
+              </Button>
+            </>
+          ) : (
+            <>
+              <p className="flex-1 text-sm text-muted">{t("score", { correct: marks.filter(Boolean).length, answered: marks.length })}</p>
+              <Button className="h-12 shrink-0 px-6 sm:w-44" disabled={!draft || busy} onClick={() => void submit(draft)}>
+                {t("answer")}
+              </Button>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );

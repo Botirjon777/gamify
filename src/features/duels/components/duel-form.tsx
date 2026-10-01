@@ -81,7 +81,7 @@ export function DuelForm({
               aria-checked={stake === s}
               disabled={s > myXp}
               onClick={() => setStake(s)}
-              className={`h-12 rounded-xl border-2 font-display font-bold transition disabled:cursor-not-allowed disabled:opacity-40 ${
+              className={`h-12 whitespace-nowrap rounded-xl border-2 font-display text-xs font-bold transition disabled:cursor-not-allowed disabled:opacity-40 sm:text-base ${
                 stake === s ? "border-brand bg-brand/5 text-brand" : "border-border hover:border-brand/40"
               }`}
             >
@@ -92,12 +92,12 @@ export function DuelForm({
         <p className="mt-2 text-xs text-muted">{t("stakeHint", { xp: myXp })}</p>
       </fieldset>
 
-      <div className="grid grid-cols-2 gap-3 text-sm font-bold">
-        <p className="flex items-center justify-center gap-1.5 rounded-xl bg-success/10 py-2.5 text-success">
-          <TrendingUp className="size-4" /> {t("winXp", { xp: stake })}
+      <div className="grid grid-cols-2 gap-2 text-xs font-bold sm:gap-3 sm:text-sm">
+        <p className="flex items-center justify-center gap-1.5 rounded-xl bg-success/10 px-2 py-2.5 text-center text-success">
+          <TrendingUp className="size-4 shrink-0" /> {t("winXp", { xp: stake })}
         </p>
-        <p className="flex items-center justify-center gap-1.5 rounded-xl bg-danger/10 py-2.5 text-danger">
-          <TrendingDown className="size-4" /> {t("loseXp", { xp: stake })}
+        <p className="flex items-center justify-center gap-1.5 rounded-xl bg-danger/10 px-2 py-2.5 text-center text-danger">
+          <TrendingDown className="size-4 shrink-0" /> {t("loseXp", { xp: stake })}
         </p>
       </div>
 
