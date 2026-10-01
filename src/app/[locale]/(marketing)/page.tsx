@@ -1,7 +1,7 @@
 import { ArrowRight, Brain, Building2, Crosshair, Dumbbell, Shield, Sparkles, Trophy, Users, Zap } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
-import { Logo } from "@/components/logo";
+import { Logo, LogoFull } from "@/components/logo";
 import { buttonClass } from "@/components/ui/button";
 import { getCurrentSession } from "@/lib/auth/session";
 import { Reveal } from "@/components/reveal";
@@ -176,8 +176,11 @@ function handleClick() {
         </Reveal>
       </main>
 
-      <footer className="border-t border-border py-8 text-center text-sm text-muted">
-        © {new Date().getFullYear()} <span className="font-display font-bold text-grad-brand">Zukkolar</span>
+      <footer className="border-t border-border py-10">
+        <div className="mx-auto flex w-full max-w-7xl flex-col items-center gap-4 px-5 text-center text-sm text-muted">
+          <LogoFull className="w-32" />
+          <p>© {new Date().getFullYear()} Zukkolar</p>
+        </div>
       </footer>
     </>
   );
