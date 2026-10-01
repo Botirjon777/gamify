@@ -8,6 +8,11 @@ const nextConfig: NextConfig = {
   output: "standalone",
   // Loaded lazily at runtime (languages/themes) — keep as a real node_modules package so nothing is missed.
   serverExternalPackages: ["shiki"],
+  // Logo files in /public/brand: cache for a week (files in /public get no browser caching by default).
+  // Not "immutable" — the names stay the same when the logo is regenerated.
+  async headers() {
+    return [{ source: "/brand/:file*", headers: [{ key: "Cache-Control", value: "public, max-age=604800, stale-while-revalidate=86400" }] }];
+  },
   experimental: {
     // Client router cache: going back to a page seen in the last 30 s is instant (no server round trip).
     // Every server action that changes data calls revalidatePath, which clears this cache.
