@@ -29,7 +29,8 @@ export default async function DuelPage({ params }: PageProps<"/[locale]/duels/[i
   const deadline = format.relativeTime(new Date(duel.expiresAt), now);
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col gap-6">
+    // Focus layout (no app chrome): on a phone the whole screen belongs to the duel.
+    <main className="mx-auto flex w-full max-w-3xl flex-col gap-5 px-4 py-5 sm:gap-6 sm:py-8">
       {back}
 
       {duel.phase === "invite" && (
@@ -97,6 +98,6 @@ export default async function DuelPage({ params }: PageProps<"/[locale]/duels/[i
           </section>
         </>
       )}
-    </div>
+    </main>
   );
 }
