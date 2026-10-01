@@ -1,4 +1,4 @@
-import { ChevronRight, Gift, Rocket, Users } from "lucide-react";
+import { Rocket, Users } from "lucide-react";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Avatar } from "@/components/avatar";
@@ -12,16 +12,20 @@ import { xpForLevel } from "@/features/gamification/xp";
 import { effectivePlan } from "@/features/plans/plans";
 import { getFriends } from "@/features/social/queries";
 import { standings } from "@/features/clans/queries";
+import { getOrCreateReferralCode, inviteLink } from "@/features/referrals/service";
+import { InviteCard } from "@/features/referrals/components/invite-card";
 
 /** Right column on wide screens: profile card, friends this week, top clans, invite / upgrade. */
 export async function RightRail({ user, tenantId }: { user: User; tenantId: string }) {
   const t = await getTranslations("rail");
   const plan = effectivePlan(user);
-  const [friends, clans] = await Promise.all([
+  const [friends, clans, code] = await Promise.all([
     getFriends(user.id, tenantId),
     // Same for the whole tenant, shown on every page → short cache
     cached(`rail:clans:${tenantId}`, 30, () => standings(db, tenantId, tashkentWeekStart())),
+    getOrCreateReferralCode(user.id),
   ]);
+  const link = await inviteLink(code);
 
   const start = xpForLevel(user.level);
   const progress = Math.min(100, ((user.xp - start) / (xpForLevel(user.level + 1) - start)) * 100);
@@ -92,16 +96,7 @@ export async function RightRail({ user, tenantId }: { user: User; tenantId: stri
       )}
 
       {/* Invite */}
-      <Link href="/settings#invite" className="flex items-center gap-3 rounded-2xl border border-border bg-surface p-4 transition hover:border-brand/40">
-        <span className="grid size-10 place-items-center rounded-xl bg-grad-success text-white">
-          <Gift className="size-5" />
-        </span>
-        <span className="min-w-0 flex-1">
-          <span className="block text-sm font-bold">{t("inviteTitle")}</span>
-          <span className="block text-xs text-muted">{t("inviteText")}</span>
-        </span>
-        <ChevronRight className="size-4 text-muted" />
-      </Link>
+      <InviteCard code={code} link={link} />
 
       {/* Upgrade (Free only) */}
       {plan === "FREE" && (

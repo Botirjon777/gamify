@@ -1,4 +1,5 @@
 import "server-only";
+import { headers } from "next/headers";
 import { randomInt } from "node:crypto";
 import { db } from "@/lib/db";
 
@@ -31,6 +32,13 @@ export async function getOrCreateReferralCode(userId: string): Promise<string> {
     if (again.referralCode) return again.referralCode;
   }
   throw new Error("Could not create a referral code");
+}
+
+/** Sign-up link with the code, on the host the user is on (study-center subdomains keep their own host). */
+export async function inviteLink(code: string): Promise<string> {
+  const h = await headers();
+  const proto = h.get("x-forwarded-proto") ?? (process.env.NODE_ENV === "production" ? "https" : "http");
+  return `${proto}://${h.get("host")}/register?ref=${code}`;
 }
 
 export async function referralStats(userId: string) {

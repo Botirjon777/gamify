@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef } from "react";
-import { ChevronRight, Crown, LogOut, Settings, ShieldCheck, User, X } from "lucide-react";
+import { Award, ChevronRight, Crown, Gift, LogOut, Settings, ShieldCheck, User, X } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { LogoutButton } from "@/features/auth/components/logout-button";
@@ -67,6 +67,16 @@ export function ProfileMenu({ username, avatar, avatarLarge, planBadge, planLabe
             <Link href={`/u/${username}`} className={item}>
               <User className="size-5 text-muted" />
               <span className="flex-1">{t("profile")}</span>
+              <ChevronRight className="size-4 text-muted" />
+            </Link>
+            <Link href="/badges" className={item}>
+              <Award className="size-5 text-brand" />
+              <span className="flex-1">{t("badges")}</span>
+              <ChevronRight className="size-4 text-muted" />
+            </Link>
+            <Link href="/settings#invite" className={item}>
+              <Gift className="size-5 text-success" />
+              <span className="flex-1">{t("invite")}</span>
               <ChevronRight className="size-4 text-muted" />
             </Link>
             <Link href="/settings" className={item}>

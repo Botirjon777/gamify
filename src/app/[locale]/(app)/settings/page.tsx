@@ -1,4 +1,3 @@
-import { headers } from "next/headers";
 import { ChevronRight, Crown, Gift, Lock, Monitor } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
@@ -8,7 +7,7 @@ import { PageHeader } from "@/components/page-header";
 import { AVATAR_UNLOCK_LEVEL } from "@/features/badges/catalog";
 import { effectivePlan } from "@/features/plans/plans";
 import { REFERRAL_INVITER_XP, REFERRAL_REWARD_LEVEL } from "@/features/gamification/xp";
-import { getOrCreateReferralCode, REFERRAL_NEW_USER_XP, referralStats } from "@/features/referrals/service";
+import { getOrCreateReferralCode, inviteLink, REFERRAL_NEW_USER_XP, referralStats } from "@/features/referrals/service";
 import { AvatarPicker } from "@/features/profile/components/avatar-picker";
 import { GenderSettings } from "@/features/profile/components/gender-settings";
 import { PasswordDialog } from "@/features/profile/components/password-dialog";
@@ -24,9 +23,8 @@ export default async function SettingsPage({ params }: PageProps<"/[locale]/sett
   const plan = effectivePlan(user);
   const unlocked = user.level >= AVATAR_UNLOCK_LEVEL;
 
-  const [code, stats, h] = await Promise.all([getOrCreateReferralCode(user.id), referralStats(user.id), headers()]);
-  const proto = h.get("x-forwarded-proto") ?? (process.env.NODE_ENV === "production" ? "https" : "http");
-  const link = `${proto}://${h.get("host")}/register?ref=${code}`;
+  const [code, stats] = await Promise.all([getOrCreateReferralCode(user.id), referralStats(user.id)]);
+  const link = await inviteLink(code);
 
   return (
     <div className="flex flex-col gap-6">

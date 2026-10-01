@@ -8,7 +8,8 @@ import { BADGE_BY_KEY, BADGES, type BadgeStats } from "./catalog";
 
 type Tx = Prisma.TransactionClient;
 
-async function statsFor(tx: Tx, userId: string): Promise<BadgeStats> {
+/** Progress numbers behind the badges (also used by the badges page with the plain client). */
+export async function statsFor(tx: Tx, userId: string): Promise<BadgeStats> {
   const [user, solved, mastered, friends, membership, referrals] = await Promise.all([
     tx.user.findUniqueOrThrow({ where: { id: userId } }),
     tx.attempt.count({ where: { userId, correct: true } }),

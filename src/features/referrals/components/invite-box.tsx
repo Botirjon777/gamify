@@ -3,13 +3,14 @@
 import { useState } from "react";
 import { Check, Copy } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { copyText } from "@/lib/clipboard";
 
 export function InviteBox({ code, link }: { code: string; link: string }) {
   const t = useTranslations("settings");
   const [copied, setCopied] = useState<string | null>(null);
 
   const copy = async (value: string) => {
-    await navigator.clipboard.writeText(value);
+    if (!(await copyText(value))) return;
     setCopied(value);
     setTimeout(() => setCopied(null), 1500);
   };

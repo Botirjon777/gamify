@@ -28,7 +28,9 @@
     "logoutConfirmTitle": "Hisobdan chiqasizmi?",
     "logoutConfirmText": "Qayta kirish uchun telefon raqamingiz (yoki foydalanuvchi nomingiz) va parolingiz kerak boʻladi.",
     "cancel": "Bekor qilish",
-    "loggingOut": "Chiqilmoqda…"
+    "loggingOut": "Chiqilmoqda…",
+    "badges": "Nishonlar",
+    "invite": "Doʻstni taklif qilish"
   },
   "landing": {
     "badge": "Dasturlash mashgʻulotlari — oʻyin shaklida",
@@ -447,7 +449,8 @@
     "memberSince": "{date} dan beri",
     "edit": "Profilni tahrirlash",
     "notFound": "Foydalanuvchi topilmadi",
-    "lockedBadges": "Qolgan nishonlar"
+    "lockedBadges": "Qolgan nishonlar",
+    "allBadges": "Barcha nishonlar"
   },
   "settings": {
     "title": "Sozlamalar",
@@ -617,7 +620,12 @@
     "upgradeTitle": "Tezroq oʻsing",
     "upgradeText": "Pro bilan XP ×1.5 va kuniga 600 XP gacha",
     "upgradeCta": "Tariflar",
-    "level": "{level}-daraja"
+    "level": "{level}-daraja",
+    "code": "Taklif kodi",
+    "copyLink": "Nusxalash",
+    "copied": "Nusxalandi",
+    "share": "Ulashish",
+    "shareText": "Zukkolar'da men bilan birga dasturlashni oʻrgan! Taklif kodim: {code}"
   },
   "badges": {
     "first_step": {
@@ -891,5 +899,12 @@
     "daysLeft": "{count} kun qoldi",
     "progress": "Mavsum jarayoni",
     "hint": "Mavsum davomida toʻplagan har bir XP shu reytingda hisoblanadi. Mavsum oxirida yakuniy oʻrningiz eʼlon qilinadi, keyingi mavsum noldan boshlanadi."
+  },
+  "badgesPage": {
+    "title": "Nishonlar",
+    "subtitle": "{earned} / {total} ta nishon olingan",
+    "earned": "Olingan nishonlar",
+    "locked": "Hali olinmagan",
+    "none": "Hali nishon yoʻq — birinchi mashqni yechib, birinchisini oling!"
   }
 }
