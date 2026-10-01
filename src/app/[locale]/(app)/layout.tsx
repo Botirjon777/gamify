@@ -1,4 +1,4 @@
-import { Award, Bell, Crown, KeyRound, LogOut, Settings, ShieldCheck } from "lucide-react";
+import { Award, Bell, Crown, MessageCircle, KeyRound, LogOut, Settings, ShieldCheck } from "lucide-react";
 import { getFormatter, getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { Logo } from "@/components/logo";
@@ -8,6 +8,7 @@ import { LogoutButton } from "@/features/auth/components/logout-button";
 import { requireSession } from "@/lib/auth/session";
 import { effectivePlan } from "@/features/plans/plans";
 import { unreadCount } from "@/features/notifications/queries";
+import { unreadChats } from "@/features/chat/service";
 import { countIncomingRequests } from "@/features/social/queries";
 import { pendingClanRequestsFor } from "@/features/clans/queries";
 import { NavLinks } from "./nav-links";
@@ -18,12 +19,13 @@ export default async function AppLayout({ children }: LayoutProps<"/[locale]">) 
   const { user, tenant } = await requireSession();
   const t = await getTranslations("nav");
   const tSettings = await getTranslations("settings");
-  const [unread, friendRequests, clanRequests] = await Promise.all([
+  const [unread, friendRequests, clanRequests, unreadChat] = await Promise.all([
     unreadCount(user.id),
     countIncomingRequests(user.id),
     pendingClanRequestsFor(user.id),
+    unreadChats(user.id),
   ]);
-  const badges = { friends: friendRequests, clans: clanRequests };
+  const badges = { friends: friendRequests, clans: clanRequests, chat: unreadChat };
   const plan = effectivePlan(user);
   const format = await getFormatter();
   const planLabel =
@@ -88,6 +90,18 @@ export default async function AppLayout({ children }: LayoutProps<"/[locale]">) 
             <Logo name={tenant.name} href="/dashboard" />
           </div>
           <div className="flex items-center gap-2">
+            <Link
+              href="/chat"
+              aria-label={t("chat")}
+              className="relative grid size-10 place-items-center rounded-xl border border-border bg-surface text-muted transition hover:border-brand/40 hover:text-foreground md:hidden"
+            >
+              <MessageCircle className="size-5" />
+              {unreadChat > 0 && (
+                <span className="absolute -right-1.5 -top-1.5 grid min-w-5 place-items-center rounded-full bg-grad-streak px-1 text-[10px] font-bold text-white ring-2 ring-background">
+                  {unreadChat > 9 ? "9+" : unreadChat}
+                </span>
+              )}
+            </Link>
             <Link
               href="/notifications"
               aria-label={t("notifications")}

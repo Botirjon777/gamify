@@ -120,15 +120,17 @@ model User {
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 
-  memberships  Membership[]
-  sessions     Session[]
-  xpEvents     XpEvent[]
-  dailyClaims  DailyClaim[]
-  weeklyScores WeeklyScore[]
-  seasonScores SeasonScore[]
-  attempts     Attempt[]
-  masteries    SkillMastery[]
-  iqSessions   IqSession[]
+  memberships   Membership[]
+  sessions      Session[]
+  xpEvents      XpEvent[]
+  dailyClaims   DailyClaim[]
+  weeklyScores  WeeklyScore[]
+  seasonScores  SeasonScore[]
+  conversations ConversationMember[]
+  messages      Message[]
+  attempts      Attempt[]
+  masteries     SkillMastery[]
+  iqSessions    IqSession[]
 
   sentFriendRequests     Friendship[]      @relation("FriendRequester")
   receivedFriendRequests Friendship[]      @relation("FriendAddressee")
@@ -569,6 +571,7 @@ model Clan {
   members  ClanMember[]
   requests ClanJoinRequest[]
   results  ClanWeeklyResult[]
+  chat     Conversation?
 
   @@index([tenantId])
 }
@@ -703,4 +706,51 @@ model RateLimitHit {
 
   @@id([key, windowStart])
   @@index([windowStart])
+}
+
+// ─── Chat (not real-time: the open conversation polls) ─────────────────────
+
+enum ConversationKind {
+  DIRECT
+  CLAN
+}
+
+/// DIRECT: two friends (pairKey = "<smaller id>:<larger id>"). CLAN: one per clan; who may read/write
+/// is decided by ClanMember, ConversationMember only keeps the read position.
+model Conversation {
+  id            String           @id @default(cuid())
+  kind          ConversationKind
+  pairKey       String?          @unique
+  clanId        String?          @unique
+  lastMessageAt DateTime         @default(now())
+  createdAt     DateTime         @default(now())
+
+  clan     Clan?                @relation(fields: [clanId], references: [id], onDelete: Cascade)
+  members  ConversationMember[]
+  messages Message[]
+}
+
+model ConversationMember {
+  conversationId String
+  userId         String
+  lastReadAt     DateTime @default(now())
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  user         User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@id([conversationId, userId])
+  @@index([userId])
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  conversationId String
+  senderId       String
+  body           String
+  createdAt      DateTime @default(now())
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender       User         @relation(fields: [senderId], references: [id], onDelete: Cascade)
+
+  @@index([conversationId, createdAt])
 }
