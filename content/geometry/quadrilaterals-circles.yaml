@@ -1,0 +1,234 @@
+exercises:
+  - id: quadrilaterals-circles-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Toʻrtburchakning ichki burchaklari yigʻindisi necha gradus?
+    options:
+      - "180"
+      - "270"
+      - "360"
+      - "540"
+    answer: 2
+    explanation: Diagonal toʻrtburchakni ikkita uchburchakka boʻladi, shuning uchun burchaklar yigʻindisi 2 · 180° = 360°.
+  - id: quadrilaterals-circles-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Faqat ikki tomoni parallel, qolgan ikki tomoni parallel boʻlmagan toʻrtburchak qanday ataladi?
+    options:
+      - Romb
+      - Parallelogramm
+      - Kvadrat
+      - Trapetsiya
+    answer: 3
+    explanation: Trapetsiyaning ikki tomoni (asoslari) parallel, qolgan ikki tomoni (yon tomonlari) esa parallel emas.
+  - id: quadrilaterals-circles-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Aylananing markazidan oʻtuvchi vatar qanday ataladi?
+    options:
+      - Radius
+      - Diametr
+      - Urinma
+      - Yoy
+    answer: 1
+    explanation: Markazdan oʻtuvchi vatar diametr deyiladi. U aylananing eng uzun vatari boʻlib, ikki radiusga teng.
+  - id: quadrilaterals-circles-004
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: Aylananing radiusi 9 sm. Diametri necha sm?
+    code: d = 2 · 9 = ?
+    answer:
+      - "18"
+      - 18 sm
+    explanation: Diametr radiusdan ikki marta uzun. d = 2 · 9 = 18 sm.
+  - id: quadrilaterals-circles-005
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Aylana markazini aylanadagi nuqta bilan tutashtiruvchi kesma qanday ataladi?
+    options:
+      - Radius
+      - Vatar
+      - Diametr
+      - Urinma
+    answer: 0
+    explanation: Radius markazni aylananing istalgan nuqtasi bilan tutashtiradi. Vatar esa aylananing ikki nuqtasini tutashtiradi.
+  - id: quadrilaterals-circles-006
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Parallelogramm haqidagi gaplarni toʻldiring:"
+    code: Parallelogrammning qarama-qarshi tomonlari parallel va oʻzaro ___ boʻladi. Barcha tomonlari teng boʻlgan parallelogramm esa ___ deyiladi.
+    answer:
+      - teng
+      - romb
+    bank:
+      - perpendikulyar
+      - trapetsiya
+    explanation: Parallelogrammda qarama-qarshi tomonlar parallel va teng. Toʻrtala tomoni teng boʻlgan parallelogramm romb deyiladi.
+  - id: quadrilaterals-circles-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Toʻgʻri toʻrtburchakning diagonallari haqida qaysi tasdiq har doim toʻgʻri?
+    options:
+      - Ular oʻzaro perpendikulyar
+      - Ular burchaklarni teng ikkiga boʻladi
+      - Ular oʻzaro teng
+      - Ular kesishmaydi
+    answer: 2
+    explanation: Toʻgʻri toʻrtburchakning diagonallari har doim teng. Perpendikulyar boʻlishi va burchaklarni teng ikkiga boʻlishi faqat kvadratda uchraydi.
+  - id: quadrilaterals-circles-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Toʻrtburchakning uchta burchagi 70°, 95° va 105°. Toʻrtinchi burchagi necha gradus?
+    options:
+      - "80"
+      - "100"
+      - "110"
+      - "90"
+    answer: 3
+    explanation: Toʻrtburchak burchaklari yigʻindisi 360°. 360° − (70° + 95° + 105°) = 360° − 270° = 90°.
+  - id: quadrilaterals-circles-009
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Parallelogrammning bir burchagi 70°. Unga qoʻshni (shu burchak bilan bir tomonga yopishgan) burchagi necha gradus?
+    options:
+      - "110"
+      - "70"
+      - "20"
+      - "290"
+    answer: 0
+    explanation: Parallelogrammning bir tomoniga yopishgan burchaklari yigʻindisi 180°, shuning uchun 180° − 70° = 110°.
+  - id: quadrilaterals-circles-010
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Rombning tomoni 12 sm. Uning perimetri necha sm?
+    code: P = 4 · 12 = ?
+    answer:
+      - "48"
+      - 48 sm
+    explanation: Rombning toʻrtala tomoni teng, shuning uchun P = 4 · 12 = 48 sm.
+  - id: quadrilaterals-circles-011
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Aylana tashqarisidagi A nuqtadan aylanaga AB va AC urinmalar oʻtkazilgan (B va C — urinish nuqtalari). AB = 7 sm boʻlsa, AC necha sm?
+    options:
+      - "14"
+      - "7"
+      - 3,5
+      - "49"
+    answer: 1
+    explanation: Bir nuqtadan aylanaga oʻtkazilgan urinma kesmalari oʻzaro teng, shuning uchun AC = AB = 7 sm.
+  - id: quadrilaterals-circles-012
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Aylanaga oʻtkazilgan urinma bilan urinish nuqtasiga oʻtkazilgan radius orasidagi burchak necha gradus?
+    options:
+      - "45"
+      - "60"
+      - "90"
+      - "180"
+    answer: 2
+    explanation: Urinma urinish nuqtasiga oʻtkazilgan radiusga perpendikulyar, yaʼni ular orasidagi burchak 90°.
+  - id: quadrilaterals-circles-013
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Trapetsiyaning asoslari 8 sm va 14 sm. Uning oʻrta chizigʻi necha sm?
+    code: (8 + 14) / 2 = ?
+    answer:
+      - "11"
+      - 11 sm
+    explanation: Trapetsiyaning oʻrta chizigʻi asoslar yigʻindisining yarmiga teng. (8 + 14) / 2 = 11 sm.
+  - id: quadrilaterals-circles-014
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Aylananing diametriga tiralgan ichki chizilgan burchak necha gradus?
+    options:
+      - "90"
+      - "180"
+      - "45"
+      - "60"
+    answer: 0
+    explanation: Diametr 180° li yoyni (yarim aylanani) tortib turadi, ichki chizilgan burchak esa yoyning yarmiga teng. 180° / 2 = 90°.
+  - id: quadrilaterals-circles-015
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Diagonallari 6 sm va 8 sm boʻlgan rombning tomonini topish bosqichlarini tartiblang:"
+    lines:
+      - Romb diagonallari perpendikulyar va kesishish nuqtasida teng ikkiga boʻlinadi
+      - "Diagonallarning yarimlari: 3 sm va 4 sm"
+      - "Pifagor teoremasini qoʻllaymiz: a² = 3² + 4²"
+      - "Hisoblaymiz: a² = 25"
+      - "Rombning tomoni: a = 5 sm"
+    explanation: Diagonallar rombni katetlari 3 sm va 4 sm boʻlgan toʻrtta toʻgʻri burchakli uchburchakka boʻladi. Gipotenuza, yaʼni romb tomoni 5 sm.
+  - id: quadrilaterals-circles-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Toʻgʻri toʻrtburchakning tomonlari 9 sm va 12 sm. Diagonali necha sm?
+    options:
+      - "21"
+      - "15"
+      - "13"
+      - "18"
+    answer: 1
+    explanation: Diagonal toʻgʻri burchakli uchburchakning gipotenuzasi boʻladi. d² = 9² + 12² = 81 + 144 = 225, d = 15 sm.
+  - id: quadrilaterals-circles-017
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Radiusi 5 sm boʻlgan aylanada markazdan 3 sm uzoqlikda vatar oʻtkazilgan. Vatarning uzunligini toping (sm da).
+    code: Vatarning yarmi = √(5² − 3²), vatar = ?
+    answer: "8"
+    explanation: Markazdan vatarga tushirilgan perpendikulyar uni teng ikkiga boʻladi. Vatarning yarmi √(25 − 9) = 4 sm, butun vatar 2 · 4 = 8 sm.
+  - id: quadrilaterals-circles-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Aylanaga ichki chizilgan toʻrtburchakning bir burchagi 75°. Unga qarama-qarshi burchagi necha gradus?
+    options:
+      - "75"
+      - "15"
+      - "285"
+      - "105"
+    answer: 3
+    explanation: Aylanaga ichki chizilgan toʻrtburchakning qarama-qarshi burchaklari yigʻindisi 180°. 180° − 75° = 105°.
+  - id: quadrilaterals-circles-019
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Ichki chizilgan burchak xossasini toʻldiring:"
+    code: Aylanaga ichki chizilgan burchak oʻzi tiralgan yoyning ___ teng. Yoy 100° boʻlsa, burchak ___ gradus boʻladi.
+    answer:
+      - yarmiga
+      - "50"
+    bank:
+      - "200"
+      - "25"
+      - choragiga
+    explanation: Ichki chizilgan burchak oʻzi tiralgan yoyning gradus oʻlchovining yarmiga teng. 100° / 2 = 50°.
+  - id: quadrilaterals-circles-020
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Teng yonli trapetsiyaning asoslari 6 sm va 14 sm, yon tomoni 5 sm. Balandligi necha sm?
+    options:
+      - "3"
+      - "4"
+      - "5"
+      - "8"
+    answer: 0
+    explanation: Kichik asos uchidan tushirilgan balandlik katta asosdan (14 − 6) / 2 = 4 sm li kesma ajratadi. h² = 5² − 4² = 9, h = 3 sm.

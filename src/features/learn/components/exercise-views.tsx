@@ -1,11 +1,13 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import dynamic from "next/dynamic";
 import { useTranslations } from "next-intl";
 import type { Submission } from "../content-schema";
 import type { Reveal } from "../check";
 import type { ClientExercise } from "../types";
 import { playSound } from "@/lib/sound";
+import { BoardDiagram } from "@/features/chess/components/board-diagram";
 
 type Of<T extends ClientExercise["type"]> = Extract<ClientExercise, { type: T }>;
 
@@ -15,6 +17,31 @@ interface ViewProps<T extends ClientExercise["type"]> {
   locked: boolean;
   reveal: Reveal | null;
   onDraft: (draft: Submission | null) => void;
+}
+
+/** The playable board brings the rules of chess with it (chess.js) — loaded only when a chess exercise comes up. */
+const MoveBoard = dynamic(() => import("@/features/chess/components/move-view"), {
+  ssr: false,
+  loading: () => <div className="skeleton mx-auto aspect-square w-full max-w-md rounded-xl" />,
+});
+
+/** Chess: make the move on the board. */
+export function MoveView({ exercise, locked, reveal, onDraft }: ViewProps<"MOVE">) {
+  return <MoveBoard board={exercise.board} locked={locked} reveal={reveal} onDraft={onDraft} />;
+}
+
+/** The body of any exercise: a chess diagram when it has one, then the inputs for its type. */
+export function ExerciseView({ exercise, ...props }: { exercise: ClientExercise; locked: boolean; reveal: Reveal | null; onDraft: (draft: Submission | null) => void }) {
+  return (
+    <>
+      {exercise.board && exercise.type !== "MOVE" && <BoardDiagram board={exercise.board} />}
+      {exercise.type === "CHOICE" && <ChoiceView exercise={exercise} {...props} />}
+      {exercise.type === "OUTPUT" && <OutputView exercise={exercise} {...props} />}
+      {exercise.type === "FILL" && <FillView exercise={exercise} {...props} />}
+      {exercise.type === "ORDER" && <OrderView exercise={exercise} {...props} />}
+      {exercise.type === "MOVE" && <MoveView exercise={exercise} {...props} />}
+    </>
+  );
 }
 
 /** Plain-text exercises (`lang: text`) read like a card with wrapping text, not like a code editor. */

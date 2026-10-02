@@ -25,7 +25,9 @@ export type Reveal =
   | { type: "CHOICE"; index: number }
   | { type: "OUTPUT"; answer: string }
   | { type: "FILL"; blanks: string[] }
-  | { type: "ORDER"; lines: string[] };
+  | { type: "ORDER"; lines: string[] }
+  /** `move`: from-to squares of the move to show; `san`: the author's move as written in books ("Qh7#"). */
+  | { type: "MOVE"; move: string; san: string };
 
 /**
  * Check a submission against the private answer. Returns the correct answer to reveal afterwards.
@@ -62,6 +64,12 @@ export function checkAnswer(answer: PrivateAnswer, submission: Submission, prose
       const correct =
         lines.length === answer.lines.length && answer.lines.every((l, i) => norm(l) === norm(lines[i]));
       return { correct, reveal: { type: "ORDER", lines: answer.lines } };
+    }
+
+    case "MOVE": {
+      const correct = submission.type === "MOVE" && answer.moves.includes(submission.move);
+      // A right move is shown as played: it may be another mate than the author's.
+      return { correct, reveal: { type: "MOVE", move: correct ? submission.move : answer.moves[0], san: answer.san[0] } };
     }
   }
 }

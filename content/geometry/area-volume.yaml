@@ -1,0 +1,230 @@
+exercises:
+  - id: area-volume-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Toʻgʻri toʻrtburchakning yuzi qanday topiladi (tomonlari a va b)?
+    options:
+      - S = a + b
+      - S = 2(a + b)
+      - S = a · b
+      - S = a² + b²
+    answer: 2
+    explanation: Toʻgʻri toʻrtburchakning yuzi qoʻshni tomonlari koʻpaytmasiga teng. 2(a + b) esa uning perimetri.
+  - id: area-volume-002
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: Tomonlari 9 sm va 6 sm boʻlgan toʻgʻri toʻrtburchakning yuzini toping (sm² da).
+    code: S = 9 · 6 = ?
+    answer: "54"
+    explanation: S = a · b = 9 · 6 = 54 sm².
+  - id: area-volume-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Kubning qirrasi 3 sm. Uning hajmi necha sm³?
+    options:
+      - "9"
+      - "27"
+      - "18"
+      - "54"
+    answer: 1
+    explanation: Kubning hajmi V = a³ = 3 · 3 · 3 = 27 sm³.
+  - id: area-volume-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Uchburchakning yuzi qanday topiladi (asosi a, shu asosga tushirilgan balandligi h)?
+    options:
+      - S = (a · h) / 2
+      - S = a · h
+      - S = a + h
+      - S = 2 · a · h
+    answer: 0
+    explanation: Uchburchakning yuzi asos bilan balandlik koʻpaytmasining yarmiga teng.
+  - id: area-volume-005
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Kubning nechta yogʻi bor?
+    options:
+      - "4"
+      - "8"
+      - "12"
+      - "6"
+    answer: 3
+    explanation: Kubning 6 ta yogʻi, 8 ta uchi va 12 ta qirrasi bor. Har bir yogʻi kvadratdan iborat.
+  - id: area-volume-006
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Oʻlchov birliklari haqidagi gapni toʻldiring:"
+    code: Yuza ___ birliklarda (masalan, sm²), hajm esa ___ birliklarda (masalan, sm³) oʻlchanadi.
+    answer:
+      - kvadrat
+      - kub
+    bank:
+      - chiziqli
+      - gradus
+    explanation: Yuza kvadrat birliklarda (sm², m²), hajm kub birliklarda (sm³, m³), uzunlik esa chiziqli birliklarda (sm, m) oʻlchanadi.
+  - id: area-volume-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Toʻgʻri burchakli parallelepipedning hajmi qanday topiladi (oʻlchamlari a, b va c)?
+    options:
+      - V = a + b + c
+      - V = 2(ab + bc + ac)
+      - V = a · b · c
+      - V = a · b + c
+    answer: 2
+    explanation: Toʻgʻri burchakli parallelepipedning hajmi uchta oʻlchami koʻpaytmasiga teng. 2(ab + bc + ac) esa uning toʻla sirti yuzi.
+  - id: area-volume-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Asosi 12 sm, shu asosga tushirilgan balandligi 5 sm boʻlgan parallelogrammning yuzi necha sm²?
+    options:
+      - "60"
+      - "30"
+      - "34"
+      - "17"
+    answer: 0
+    explanation: Parallelogrammning yuzi asos bilan balandlik koʻpaytmasiga teng. S = 12 · 5 = 60 sm².
+  - id: area-volume-009
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Oʻlchamlari 2 sm, 3 sm va 5 sm boʻlgan toʻgʻri burchakli parallelepipedning hajmini toping (sm³ da).
+    code: V = 2 · 3 · 5 = ?
+    answer: "30"
+    explanation: V = a · b · c = 2 · 3 · 5 = 30 sm³.
+  - id: area-volume-010
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Trapetsiyaning asoslari 6 sm va 10 sm, balandligi 4 sm. Uning yuzi necha sm²?
+    options:
+      - "64"
+      - "240"
+      - "20"
+      - "32"
+    answer: 3
+    explanation: Trapetsiyaning yuzi asoslar yigʻindisining yarmi bilan balandlik koʻpaytmasiga teng. S = (6 + 10) / 2 · 4 = 8 · 4 = 32 sm².
+  - id: area-volume-011
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Doiraning radiusi 10 sm. π = 3,14 deb olinsa, uning yuzi necha sm² boʻladi?
+    options:
+      - 62,8
+      - "314"
+      - 31,4
+      - "628"
+    answer: 1
+    explanation: S = π · r² = 3,14 · 10² = 3,14 · 100 = 314 sm².
+  - id: area-volume-012
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Rombning diagonallari 10 sm va 8 sm. Uning yuzi necha sm²?
+    options:
+      - "80"
+      - "18"
+      - "40"
+      - "36"
+    answer: 2
+    explanation: Rombning yuzi diagonallari koʻpaytmasining yarmiga teng. S = (10 · 8) / 2 = 40 sm².
+  - id: area-volume-013
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Kubning qirrasi 4 sm. Uning toʻla sirti yuzini toping (sm² da).
+    code: S = 6 · 4² = ?
+    answer: "96"
+    explanation: Kubning 6 ta teng yogʻi bor, har birining yuzi 4² = 16 sm². S = 6 · 16 = 96 sm².
+  - id: area-volume-014
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Asosining radiusi 2 sm, balandligi 5 sm boʻlgan silindrning hajmini topish bosqichlarini tartiblang (π = 3,14 deb oling):"
+    lines:
+      - "Formulani yozamiz: V = π · r² · h"
+      - "Qiymatlarni qoʻyamiz: V = 3,14 · 2² · 5"
+      - "Darajani hisoblaymiz: V = 3,14 · 4 · 5"
+      - "Koʻpaytiramiz: V = 3,14 · 20"
+      - "Javob: V = 62,8 sm³"
+    explanation: Silindrning hajmi asos yuzi (π · r²) bilan balandlik koʻpaytmasiga teng. V = 3,14 · 4 · 5 = 62,8 sm³.
+  - id: area-volume-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Kvadratning yuzi 64 sm². Uning perimetri necha sm?
+    options:
+      - "32"
+      - "16"
+      - "256"
+      - "24"
+    answer: 0
+    explanation: Kvadratning tomoni √64 = 8 sm, perimetri esa P = 4 · 8 = 32 sm.
+  - id: area-volume-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Kvadratning tomoni 2 marta uzaytirilsa, uning yuzi necha marta ortadi?
+    options:
+      - 2 marta
+      - 8 marta
+      - 6 marta
+      - 4 marta
+    answer: 3
+    explanation: Tomoni a boʻlgan kvadratning yuzi a², tomoni 2a boʻlganiniki esa (2a)² = 4a². Demak yuza 4 marta ortadi.
+  - id: area-volume-017
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Asosining radiusi 3 sm, balandligi 10 sm boʻlgan silindrning yon sirti yuzini toping (sm² da). π = 3,14 deb oling.
+    code: S = 2 · 3,14 · 3 · 10 = ?
+    answer:
+      - 188,4
+      - "188.4"
+    explanation: Silindrning yon sirti yuzi asos aylanasi uzunligi bilan balandlik koʻpaytmasiga teng. S = 2 · π · r · h = 2 · 3,14 · 3 · 10 = 188,4 sm².
+  - id: area-volume-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Piramidaning asosi tomoni 6 sm boʻlgan kvadrat, balandligi 5 sm. Uning hajmi necha sm³?
+    options:
+      - "180"
+      - "60"
+      - "90"
+      - "30"
+    answer: 1
+    explanation: Piramidaning hajmi asos yuzi bilan balandlik koʻpaytmasining uchdan biriga teng. V = (6 · 6 · 5) / 3 = 180 / 3 = 60 sm³.
+  - id: area-volume-019
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Konus hajmi haqidagi gapni toʻldiring:"
+    code: Konusning hajmi asosi va balandligi xuddi shunday boʻlgan silindr hajmining ___ qismiga teng. Silindrning hajmi 90 sm³ boʻlsa, konusning hajmi ___ sm³ boʻladi.
+    answer:
+      - uchdan bir
+      - "30"
+    bank:
+      - "45"
+      - "60"
+      - ikkidan bir
+    explanation: Konusning hajmi V = (π · r² · h) / 3, yaʼni xuddi shunday silindr hajmining uchdan bir qismi. 90 / 3 = 30 sm³.
+  - id: area-volume-020
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Kubning toʻla sirti yuzi 150 sm². Uning hajmi necha sm³?
+    options:
+      - "25"
+      - "225"
+      - "750"
+      - "125"
+    answer: 3
+    explanation: Bir yogʻining yuzi 150 / 6 = 25 sm², demak qirrasi 5 sm. Hajmi V = 5³ = 125 sm³.

@@ -3,95 +3,230 @@ exercises:
     type: choice
     difficulty: 1
     lang: text
-    prompt: 5 ga 7 ni qoʻshganda natija necha boʻladi?
+    prompt: 5 bilan 7 ning yigʻindisi nechaga teng?
     options:
-      - "10"
       - "11"
       - "12"
       - "13"
-    answer: 2
-    explanation: 5 + 7 = 12.
+      - "35"
+    answer: 1
+    explanation: 5 + 7 = 12. 35 esa bu sonlarning koʻpaytmasi.
   - id: basic-arithmetic-002
     type: choice
     difficulty: 1
     lang: text
-    prompt: 15 dan 6 ni ayirganda qancha qoladi?
+    prompt: 15 dan 6 ni ayirsak, necha qoladi?
     options:
-      - "7"
       - "8"
+      - "11"
       - "9"
-      - "10"
+      - "21"
     answer: 2
-    explanation: 15 - 6 = 9.
+    explanation: 15 - 6 = 9. Tekshirish, 9 + 6 = 15.
   - id: basic-arithmetic-003
     type: choice
     difficulty: 2
     lang: text
-    prompt: 8 ni 9 ga koʻpaytiring.
+    prompt: 14 ni 6 ga koʻpaytirganda necha chiqadi?
     options:
       - "64"
-      - "72"
-      - "81"
-      - "88"
-    answer: 1
-    explanation: 8 * 9 = 72.
+      - "74"
+      - "84"
+      - "80"
+    answer: 2
+    explanation: 14 * 6 = 10 * 6 + 4 * 6 = 60 + 24 = 84.
   - id: basic-arithmetic-004
     type: choice
     difficulty: 2
     lang: text
-    prompt: 48 ni 6 ga boʻlganda necha chiqadi?
+    prompt: 96 ni 4 ga boʻlganda necha chiqadi?
     options:
-      - "6"
-      - "8"
-      - "10"
-      - "13"
+      - "26"
+      - "24"
+      - "32"
+      - "14"
     answer: 1
-    explanation: 48 / 6 = 8.
+    explanation: 96 / 4 = 80 / 4 + 16 / 4 = 20 + 4 = 24. Tekshirish, 24 * 4 = 96.
   - id: basic-arithmetic-005
     type: choice
     difficulty: 1
     lang: text
     prompt: Qaysi son eng katta?
     options:
-      - "14"
-      - "25"
-      - "19"
-      - "8"
-    answer: 1
-    explanation: 25 qolganlardan katta.
+      - "389"
+      - "839"
+      - "398"
+      - "893"
+    answer: 3
+    explanation: Avval yuzliklar taqqoslanadi, 839 va 893 da 8 tadan yuzlik bor. Soʻng oʻnliklar taqqoslanadi, 9 > 3, demak 893 eng katta.
   - id: basic-arithmetic-006
     type: choice
     difficulty: 2
     lang: text
-    prompt: 100 dan 45 ayiring.
+    prompt: 100 dan 45 ni ayiring.
     options:
-      - "53"
+      - "65"
+      - "45"
       - "55"
-      - "57"
-      - "60"
-    answer: 1
-    explanation: 100 - 45 = 55.
+      - "145"
+    answer: 2
+    explanation: 100 - 45 = 55. Tekshirish, 55 + 45 = 100.
   - id: basic-arithmetic-007
     type: choice
     difficulty: 3
     lang: text
-    prompt: 12 * 12 natijasi qancha?
+    prompt: 12 * 12 koʻpaytmasi nechaga teng?
     options:
       - "124"
       - "144"
-      - "164"
-      - "142"
+      - "24"
+      - "122"
     answer: 1
-    explanation: 12 * 12 = 144.
+    explanation: 12 * 12 = 12 * 10 + 12 * 2 = 120 + 24 = 144.
   - id: basic-arithmetic-008
     type: choice
     difficulty: 3
     lang: text
-    prompt: 144 ni 12 ga boʻling.
+    prompt: "Qulay usulda hisoblang: 25 * 37 * 4"
     options:
-      - "10"
-      - "12"
+      - "3700"
+      - "3500"
+      - "370"
+      - "4700"
+    answer: 0
+    explanation: Koʻpaytuvchilarning oʻrnini almashtirish mumkin, 25 * 4 = 100, 100 * 37 = 3700.
+  - id: basic-arithmetic-009
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: 9 ni 6 ga koʻpaytirganda necha chiqadi?
+    options:
+      - "54"
+      - "56"
+      - "45"
+      - "63"
+    answer: 0
+    explanation: 9 * 6 = 54.
+  - id: basic-arithmetic-010
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: Ifodaning qiymatini hisoblang.
+    code: 36 + 47
+    answer: "83"
+    explanation: 36 + 47 = 83, chunki 30 + 40 = 70 va 6 + 7 = 13, 70 + 13 = 83.
+  - id: basic-arithmetic-011
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: 63 ni 7 ga boʻlganda necha chiqadi?
+    options:
+      - "7"
+      - "8"
+      - "6"
+      - "9"
+    answer: 3
+    explanation: 63 / 7 = 9, chunki 7 * 9 = 63.
+  - id: basic-arithmetic-012
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Boʻsh joylarni toʻldiring:"
+    code: Qoʻshish natijasi ___ deb, koʻpaytirish natijasi esa ___ deb ataladi.
+    answer:
+      - yigʻindi
+      - koʻpaytma
+    bank:
+      - ayirma
+      - boʻlinma
+    explanation: Qoʻshish natijasi — yigʻindi, koʻpaytirish natijasi — koʻpaytma. Ayirma ayirishning, boʻlinma esa boʻlishning natijasidir.
+  - id: basic-arithmetic-013
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Ifodaning qiymatini toping: 2 + 3 * 4"
+    options:
       - "14"
-      - "17"
-    answer: 1
-    explanation: 144 / 12 = 12.
+      - "20"
+      - "24"
+      - "9"
+    answer: 0
+    explanation: Avval koʻpaytirish bajariladi, 3 * 4 = 12, soʻng qoʻshiladi, 2 + 12 = 14.
+  - id: basic-arithmetic-014
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Ifodaning qiymatini hisoblang.
+    code: 125 * 8
+    answer:
+      - "1000"
+      - 1 000
+    explanation: 125 * 8 = 1000, chunki 125 * 2 = 250, 250 * 4 = 1000.
+  - id: basic-arithmetic-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: 17 ni 5 ga boʻlganda qoldiq nechaga teng?
+    options:
+      - "3"
+      - "1"
+      - "5"
+      - "2"
+    answer: 3
+    explanation: 17 = 5 * 3 + 2, demak boʻlinma 3, qoldiq esa 2.
+  - id: basic-arithmetic-016
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "20 - 2 * (3 + 4) ifodasini hisoblash amallarini toʻgʻri tartibda joylashtiring:"
+    lines:
+      - 3 + 4 = 7
+      - 2 * 7 = 14
+      - 20 - 14 = 6
+    explanation: Avval qavs ichidagi amal, keyin koʻpaytirish, oxirida ayirish bajariladi. Javob 6.
+  - id: basic-arithmetic-017
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: "Ifodaning qiymatini toping: (18 - 6) / 3 + 5"
+    options:
+      - "9"
+      - "21"
+      - "7"
+      - "11"
+    answer: 0
+    explanation: Avval qavs, 18 - 6 = 12, keyin boʻlish, 12 / 3 = 4, oxirida qoʻshish, 4 + 5 = 9.
+  - id: basic-arithmetic-018
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Tengliklarni toʻldiring:"
+    code: 56 / 7 = ___, 7 * 9 = ___.
+    answer:
+      - "8"
+      - "63"
+    bank:
+      - "49"
+      - "54"
+      - "9"
+    explanation: 56 / 7 = 8, chunki 7 * 8 = 56. 7 * 9 = 63.
+  - id: basic-arithmetic-019
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Ifodaning qiymatini hisoblang.
+    code: 15 * 15 - 25
+    answer: "200"
+    explanation: Avval koʻpaytirish, 15 * 15 = 225, soʻng ayirish, 225 - 25 = 200.
+  - id: basic-arithmetic-020
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: "Ifodaning qiymatini toping: 100 - 4 * (12 + 8) / 5"
+    options:
+      - "384"
+      - "96"
+      - "80"
+      - "84"
+    answer: 3
+    explanation: 12 + 8 = 20, 4 * 20 = 80, 80 / 5 = 16, 100 - 16 = 84.

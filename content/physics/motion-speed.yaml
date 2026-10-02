@@ -1,0 +1,229 @@
+exercises:
+  - id: motion-speed-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Xalqaro birliklar tizimida (SI) tezlik qaysi birlikda oʻlchanadi?
+    options:
+      - m/s
+      - km/soat
+      - m/s²
+      - m·s
+    answer: 0
+    explanation: SI tizimida yoʻl metrda, vaqt sekundda oʻlchanadi, shuning uchun tezlik birligi m/s. km/soat ham ishlatiladi, lekin u SI birligi emas.
+  - id: motion-speed-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Avtomobil 2 soatda 120 km yoʻl bosdi. Uning oʻrtacha tezligi qancha?
+    options:
+      - 240 km/soat
+      - 60 km/soat
+      - 118 km/soat
+      - 40 km/soat
+    answer: 1
+    explanation: v = s / t = 120 km / 2 soat = 60 km/soat.
+  - id: motion-speed-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Tekis harakat deb qanday harakatga aytiladi?
+    options:
+      - Jism tezligi bir tekis ortib boradigan harakatga
+      - Jism tezligi bir tekis kamayib boradigan harakatga
+      - Jism istalgan teng vaqt oraliqlarida bir xil yoʻl bosadigan harakatga
+      - Jism har sekundda oldingisidan koʻproq yoʻl bosadigan harakatga
+    answer: 2
+    explanation: Tekis harakatda tezlik oʻzgarmaydi, shuning uchun jism istalgan teng vaqt oraliqlarida bir xil yoʻl bosadi.
+  - id: motion-speed-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Jism harakatlanayotganda fazoda qoldiradigan (chizadigan) chiziq nima deb ataladi?
+    options:
+      - Koʻchish
+      - Tezlik
+      - Sanoq jismi
+      - Trayektoriya
+    answer: 3
+    explanation: Jismning harakat davomida chizgan chizigʻi trayektoriya deyiladi. Trayektoriyaning uzunligi esa bosib oʻtilgan yoʻlga teng.
+  - id: motion-speed-005
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: Masalani yeching. Javobni metrda, faqat son bilan yozing.
+    code: Velosipedchi 5 m/s tezlik bilan 20 s davomida tekis harakatlandi. U qancha yoʻl bosdi?
+    answer: "100"
+    explanation: s = v · t = 5 m/s · 20 s = 100 m.
+  - id: motion-speed-006
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: 72 km/soat tezlik necha m/s ga teng?
+    options:
+      - 20 m/s
+      - 7,2 m/s
+      - 36 m/s
+      - 12 m/s
+    answer: 0
+    explanation: 1 km/soat = 1000 m / 3600 s, yaʼni km/soat ni m/s ga oʻtkazish uchun 3,6 ga boʻlamiz. 72 / 3,6 = 20 m/s.
+  - id: motion-speed-007
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Tekis harakat formulalari haqidagi gapni toʻldiring:"
+    code: Tekis harakatda bosib oʻtilgan yoʻl tezlik va ___ koʻpaytmasiga teng (s = v · t). Tezlikni topish uchun esa yoʻlni vaqtga ___ kerak.
+    answer:
+      - vaqt
+      - boʻlish
+    bank:
+      - koʻpaytirish
+      - massa
+      - qoʻshish
+    explanation: s = v · t, bundan v = s / t. Yaʼni yoʻl tezlik va vaqt koʻpaytmasiga, tezlik esa yoʻlning vaqtga nisbatiga teng.
+  - id: motion-speed-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Piyoda 1,5 m/s tezlik bilan tekis yurib, 900 m yoʻl bosdi. U bu yoʻlga qancha vaqt sarfladi?
+    options:
+      - 1350 s
+      - 600 s
+      - 60 s
+      - 150 s
+    answer: 1
+    explanation: s = v · t dan t = s / v = 900 m / 1,5 m/s = 600 s, yaʼni 10 minut.
+  - id: motion-speed-009
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Tezlanishning SI tizimidagi birligi qaysi?
+    options:
+      - m/s
+      - m·s
+      - m/s²
+      - N/m
+    answer: 2
+    explanation: Tezlanish a = Δv / t, yaʼni tezlik oʻzgarishining (m/s) vaqtga (s) nisbati, shuning uchun birligi m/s².
+  - id: motion-speed-010
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Avtomobil tinch holatdan qoʻzgʻalib, tekis tezlanuvchan harakat qildi va 5 s da tezligini 20 m/s ga yetkazdi. Uning tezlanishi qancha?
+    options:
+      - 100 m/s²
+      - 15 m/s²
+      - 0,25 m/s²
+      - 4 m/s²
+    answer: 3
+    explanation: a = (v − v₀) / t = (20 − 0) / 5 = 4 m/s².
+  - id: motion-speed-011
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Masalani yeching. Javobni metrda, faqat son bilan yozing.
+    code: Poyezd 54 km/soat tezlik bilan tekis harakatlanmoqda. U 2 minutda qancha yoʻl bosadi?
+    answer: "1800"
+    explanation: 54 km/soat = 54 / 3,6 = 15 m/s; 2 min = 120 s. s = v · t = 15 · 120 = 1800 m.
+  - id: motion-speed-012
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Sportchi stadiondagi uzunligi 400 m boʻlgan aylana yoʻlakni bir marta toʻliq aylanib, boshlangʻich nuqtaga qaytib keldi. Uning bosib oʻtgan yoʻli va koʻchishining moduli qancha?
+    options:
+      - Yoʻl 400 m, koʻchish 0 m
+      - Yoʻl 0 m, koʻchish 400 m
+      - Yoʻl 400 m, koʻchish 400 m
+      - Yoʻl 800 m, koʻchish 0 m
+    answer: 0
+    explanation: Yoʻl — trayektoriya uzunligi, yaʼni 400 m. Koʻchish — boshlangʻich va oxirgi nuqtalarni tutashtiruvchi vektor; sportchi boshlangan joyiga qaytgani uchun koʻchish 0 ga teng.
+  - id: motion-speed-013
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Masalani yeching. Javobni m/s da, faqat son bilan yozing.
+    code: Jism tinch holatdan 2 m/s² tezlanish bilan harakat boshladi. 6 s oxirida uning tezligi qancha boʻladi?
+    answer: "12"
+    explanation: v = v₀ + a · t = 0 + 2 · 6 = 12 m/s.
+  - id: motion-speed-014
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Masala: avtobus 108 km yoʻlni 1,5 soatda tekis bosib oʻtdi. Uning tezligini m/s da toping. Yechish bosqichlarini toʻgʻri tartibda joylashtiring:"
+    lines:
+      - "Berilganlarni yozamiz: s = 108 km, t = 1,5 soat"
+      - "Berilgan yoʻl va vaqt orqali tezlikni topish formulasini yozamiz: v = s / t"
+      - "Formulaga son qiymatlarni qoʻyib hisoblaymiz: v = 108 / 1,5 = 72 km/soat"
+      - "Topilgan tezlikni m/s ga oʻtkazamiz: 72 / 3,6 = 20 m/s"
+      - "Javobni yozamiz: avtobusning tezligi 20 m/s"
+    explanation: "v = s / t = 108 km / 1,5 soat = 72 km/soat. m/s ga oʻtkazish uchun 3,6 ga boʻlamiz: 72 / 3,6 = 20 m/s."
+  - id: motion-speed-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Qaysi holda jismni moddiy nuqta deb hisoblash mumkin?
+    options:
+      - Yerning oʻz oʻqi atrofida aylanishi oʻrganilayotganda Yerni
+      - Poyezdning koʻprikdan toʻliq oʻtib boʻlish vaqti hisoblanayotganda poyezdni
+      - Toshkentdan Samarqandga borayotgan poyezdning yoʻlga sarflagan vaqti hisoblanayotganda poyezdni
+      - Gimnastikachining mashqni qanday bajarayotgani baholanayotganda gimnastikachini
+    answer: 2
+    explanation: Agar jismning oʻlchamlari qaralayotgan masofaga nisbatan juda kichik boʻlib, ularni hisobga olmaslik mumkin boʻlsa, jism moddiy nuqta deb olinadi. Poyezdning uzunligi shaharlar orasidagi masofaga nisbatan juda kichik.
+  - id: motion-speed-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Avtomobil yoʻlning dastlabki 60 km qismini 1 soatda, keyingi 120 km qismini 3 soatda bosib oʻtdi. Uning butun yoʻldagi oʻrtacha tezligi qancha?
+    options:
+      - 50 km/soat
+      - 60 km/soat
+      - 40 km/soat
+      - 45 km/soat
+    answer: 3
+    explanation: "Oʻrtacha tezlik — butun yoʻlning butun vaqtga nisbati: v = (60 + 120) / (1 + 3) = 180 / 4 = 45 km/soat. Tezliklarning oddiy oʻrtachasini (50 km/soat) olish xato."
+  - id: motion-speed-017
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Masalani yeching. Javobni metrda, faqat son bilan yozing.
+    code: Jism tinch holatdan 4 m/s² tezlanish bilan tekis tezlanuvchan harakat qildi. U dastlabki 5 s da qancha yoʻl bosadi?
+    answer: "50"
+    explanation: Boshlangʻich tezlik nolga teng boʻlganda s = a · t² / 2 = 4 · 25 / 2 = 50 m.
+  - id: motion-speed-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: "Ikki velosipedchi toʻgʻri yoʻlda bir-biriga qarab harakatlanmoqda: birinchisining tezligi 6 m/s, ikkinchisiniki 4 m/s. Ular orasidagi dastlabki masofa 500 m. Ular qancha vaqtdan keyin uchrashadi?"
+    options:
+      - 50 s
+      - 250 s
+      - 125 s
+      - 83 s
+    answer: 0
+    explanation: "Bir-biriga qarab harakatda yaqinlashish tezligi tezliklar yigʻindisiga teng: 6 + 4 = 10 m/s. t = s / v = 500 / 10 = 50 s."
+  - id: motion-speed-019
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: 20 m/s tezlik bilan ketayotgan avtomobil tormoz berib, tekis sekinlanib 4 s da toʻxtadi. Tezlanishning moduli va tormozlanish yoʻli qancha?
+    options:
+      - 5 m/s² va 80 m
+      - 5 m/s² va 40 m
+      - 80 m/s² va 40 m
+      - 4 m/s² va 20 m
+    answer: 1
+    explanation: a = (v₀ − v) / t = 20 / 4 = 5 m/s². Tormozlanish yoʻli s = v₀ · t / 2 = 20 · 4 / 2 = 40 m (oʻrtacha tezlik 10 m/s).
+  - id: motion-speed-020
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Jism tinch holatdan tekis tezlanuvchan harakat qilmoqda (v = a · t, s = a · t² / 2). Boʻsh joylarga mos sonlarni qoʻying:"
+    code: Harakat vaqti 2 marta ortsa, jismning tezligi ___ marta, bosib oʻtgan yoʻli esa ___ marta ortadi.
+    answer:
+      - "2"
+      - "4"
+    bank:
+      - "3"
+      - "6"
+      - "8"
+    explanation: Tezlik vaqtga toʻgʻri proporsional (v = a · t), shuning uchun 2 marta ortadi. Yoʻl vaqtning kvadratiga proporsional (s = a · t² / 2), shuning uchun 2² = 4 marta ortadi.

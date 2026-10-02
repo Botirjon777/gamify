@@ -1,0 +1,243 @@
+exercises:
+  - id: atom-structure-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Atom yadrosi qanday zarrachalardan tashkil topgan?
+    options:
+      - Proton va elektronlardan
+      - Proton va neytronlardan
+      - Neytron va elektronlardan
+      - Faqat elektronlardan
+    answer: 1
+    explanation: Yadro proton va neytronlardan iborat; elektronlar yadro atrofida harakatlanadi.
+  - id: atom-structure-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Elektronning zaryadi qanday?
+    options:
+      - Manfiy
+      - Musbat
+      - Neytral (zaryadsiz)
+      - Baʼzan musbat, baʼzan manfiy
+    answer: 0
+    explanation: Elektron manfiy zaryadlangan zarracha, uning nisbiy zaryadi −1 ga teng.
+  - id: atom-structure-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Qaysi zarracha elektr zaryadiga ega emas?
+    options:
+      - Proton
+      - Elektron
+      - Neytron
+      - Kation
+    answer: 2
+    explanation: Neytron zaryadsiz zarracha; proton musbat, elektron manfiy, kation esa musbat zaryadlangan.
+  - id: atom-structure-004
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Gapni toʻldiring:"
+    code: Atom markazida musbat zaryadlangan ___ joylashgan, uning atrofida esa manfiy zaryadlangan ___ harakatlanadi.
+    answer:
+      - yadro
+      - elektronlar
+    bank:
+      - ionlar
+      - molekulalar
+      - neytronlar
+    explanation: Atom musbat zaryadli yadro va uning atrofida harakatlanadigan manfiy zaryadli elektronlardan tuzilgan.
+  - id: atom-structure-005
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Neytral atomda elektronlar soni nimaga teng?
+    options:
+      - Neytronlar soniga
+      - Massa soniga
+      - Elektron qavatlar soniga
+      - Protonlar soniga
+    answer: 3
+    explanation: Atom elektr jihatdan neytral, chunki protonlarning musbat zaryadi shuncha elektronning manfiy zaryadi bilan muvozanatlanadi.
+  - id: atom-structure-006
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: "Javobni son bilan yozing:"
+    code: Natriyning atom raqami 11 ga teng. Neytral natriy atomida nechta elektron bor?
+    answer:
+      - "11"
+      - 11 ta
+    explanation: Neytral atomda elektronlar soni protonlar soniga, yaʼni atom raqamiga teng.
+  - id: atom-structure-007
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Atomning massa soni nimani bildiradi?
+    options:
+      - Yadrodagi protonlar va neytronlar sonining yigʻindisini
+      - Faqat protonlar sonini
+      - Protonlar va elektronlar sonining yigʻindisini
+      - Faqat neytronlar sonini
+    answer: 0
+    explanation: Massa soni yadrodagi barcha zarrachalar — protonlar va neytronlar sonining yigʻindisiga teng.
+  - id: atom-structure-008
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: "Hisoblang va javobni son bilan yozing:"
+    code: Alyuminiy atomining atom raqami 13, massa soni 27 ga teng. Uning yadrosida nechta neytron bor?
+    answer:
+      - "14"
+      - 14 ta
+    explanation: "Neytronlar soni massa sonidan protonlar sonini ayirib topiladi: 27 − 13 = 14."
+  - id: atom-structure-009
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Izotoplar nima?
+    options:
+      - Neytronlar soni bir xil, protonlar soni har xil boʻlgan atomlar
+      - Protonlar soni bir xil, neytronlar soni har xil boʻlgan bir element atomlari
+      - Massa soni bir xil boʻlgan turli element atomlari
+      - Elektron bergan yoki qabul qilgan atomlar
+    answer: 1
+    explanation: Izotoplar bitta elementga tegishli, chunki protonlar soni bir xil; ular faqat neytronlar soni va massasi bilan farq qiladi.
+  - id: atom-structure-010
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Kaliy atomining yadrosida 19 ta proton va 20 ta neytron bor. Bu atomning massa soni nechaga teng?
+    options:
+      - "19"
+      - "20"
+      - "39"
+      - "58"
+    answer: 2
+    explanation: "Massa soni protonlar va neytronlar sonining yigʻindisiga teng: 19 + 20 = 39. Elektronlar massa soniga qoʻshilmaydi."
+  - id: atom-structure-011
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Atom massasining deyarli hammasi qayerda toʻplangan?
+    options:
+      - Elektron qavatlarda
+      - Yadroda
+      - Faqat tashqi elektron qavatda
+      - Atom boʻylab bir tekis taqsimlangan
+    answer: 1
+    explanation: Proton va neytron elektrondan taxminan 1800 marta ogʻir, shuning uchun atom massasi deyarli toʻliq yadroda toʻplangan.
+  - id: atom-structure-012
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Birinchi elektron qavatga koʻpi bilan nechta elektron sigʻadi?
+    options:
+      - "2"
+      - "8"
+      - "18"
+      - "32"
+    answer: 0
+    explanation: Qavatdagi elektronlarning eng koʻp soni 2n² formulasi bilan topiladi; birinchi qavat uchun 2·1² = 2.
+  - id: atom-structure-013
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Zarrachalarni massasi ortib borish tartibida joylashtiring:"
+    lines:
+      - Elektron
+      - Proton
+      - Geliy-4 atomi yadrosi
+      - Uglerod-12 atomi
+      - Temir-56 atomi
+    explanation: Elektron eng yengil zarracha; proton undan taxminan 1800 marta ogʻir, yadro va atomlarning massasi esa ulardagi proton va neytronlar soni (4, 12, 56) bilan ortib boradi.
+  - id: atom-structure-014
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Kislorod atomida (atom raqami 8) elektronlar qavatlar boʻyicha qanday taqsimlangan?
+    options:
+      - 4, 4
+      - 6, 2
+      - 2, 4, 2
+      - 2, 6
+    answer: 3
+    explanation: Birinchi qavatga 2 ta elektron sigʻadi, qolgan 6 tasi ikkinchi qavatga joylashadi.
+  - id: atom-structure-015
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Zarrachalarning nisbiy zaryadlarini qoʻying:"
+    code: Protonning nisbiy zaryadi ___ ga, elektronniki ___ ga, neytronniki esa ___ ga teng.
+    answer:
+      - - "+1"
+        - "1"
+      - - "-1"
+        - −1
+        - –1
+      - "0"
+    bank:
+      - "+2"
+      - "-2"
+    explanation: Proton va elektronning zaryadlari kattaligi jihatdan teng, ishorasi qarama-qarshi; neytron zaryadsiz.
+  - id: atom-structure-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Zarrachada 17 ta proton, 18 ta neytron va 18 ta elektron bor. Bu qaysi zarracha?
+    options:
+      - Argon atomi (Ar)
+      - Xlor atomi (Cl)
+      - Kaliy ioni (K⁺)
+      - Xlorid ioni (Cl⁻)
+    answer: 3
+    explanation: 17 ta proton — bu xlor; elektronlar protonlardan bitta koʻp boʻlgani uchun zarracha −1 zaryadli Cl⁻ ionidir.
+  - id: atom-structure-017
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Mg²⁺ ionida nechta elektron bor? (Magniyning atom raqami 12.)
+    options:
+      - "12"
+      - "14"
+      - "10"
+      - "24"
+    answer: 2
+    explanation: "Neytral magniy atomida 12 ta elektron bor; ikkitasini berib, Mg²⁺ ioniga aylanadi: 12 − 2 = 10."
+  - id: atom-structure-018
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: "Xlorning oʻrtacha nisbiy atom massasini hisoblang (javobni son bilan yozing):"
+    code: Tabiiy xlorning 75% i ³⁵Cl, 25% i ³⁷Cl izotopidan iborat.
+    answer:
+      - 35,5
+      - "35.5"
+    explanation: "Oʻrtacha atom massa izotoplarning ulushlari bilan hisoblanadi: 35 · 0,75 + 37 · 0,25 = 26,25 + 9,25 = 35,5."
+  - id: atom-structure-019
+    type: order
+    difficulty: 3
+    lang: text
+    prompt: "Elementlarni tashqi elektron qavatidagi elektronlar soni ortib borish tartibida joylashtiring:"
+    lines:
+      - Litiy
+      - Kalsiy
+      - Alyuminiy
+      - Uglerod
+      - Azot
+      - Xlor
+    explanation: "Tashqi qavatdagi elektronlar soni bosh guruhcha raqamiga teng: litiy — 1, kalsiy — 2, alyuminiy — 3, uglerod — 4, azot — 5, xlor — 7."
+  - id: atom-structure-020
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Vodorodning qaysi izotopi yadrosida neytron yoʻq?
+    options:
+      - Protiy
+      - Deyteriy
+      - Tritiy
+      - Uchala izotopda ham neytron bor
+    answer: 0
+    explanation: Protiy (¹H) yadrosi bitta protondan iborat; deyteriyda 1 ta, tritiyda 2 ta neytron bor.

@@ -96,3 +96,19 @@ exercises:
       - Fil umuman harakatlana olmaydi
     answer: 2
     explanation: Fil yoʻlida dona chiqquncha boʻlgan boʻsh kataklarga yura oladi. Agar yoʻl toʻsilgan boʻlsa, undan nariga oʻta olmaydi.
+  - id: rook-bishop-009
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Diagrammadagi fil oʻyin davomida qaysi kataklarda yura oladi?
+    board:
+      fen: 8/8/8/8/8/8/8/2B5
+      marks:
+        - c1
+    options:
+      - Faqat qora (toʻq) kataklarda
+      - Faqat oq (och) kataklarda
+      - Istalgan katakda
+      - Faqat chetdagi kataklarda
+    answer: 0
+    explanation: Fil faqat diagonal boʻylab yuradi, shuning uchun u boshlagan rangdagi kataklardan hech qachon chiqmaydi. c1 — qora katak.

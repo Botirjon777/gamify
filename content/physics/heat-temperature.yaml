@@ -1,0 +1,228 @@
+exercises:
+  - id: heat-temperature-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Harorat qaysi asbob bilan oʻlchanadi?
+    options:
+      - Termometr
+      - Barometr
+      - Dinamometr
+      - Voltmetr
+    answer: 0
+    explanation: Harorat termometr bilan oʻlchanadi. Barometr atmosfera bosimini, dinamometr kuchni, voltmetr kuchlanishni oʻlchaydi.
+  - id: heat-temperature-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Normal atmosfera bosimida toza suv qanday haroratda qaynaydi?
+    options:
+      - 0 °C
+      - 100 °C
+      - 50 °C
+      - 273 °C
+    answer: 1
+    explanation: Normal atmosfera bosimida suv 100 °C da qaynaydi, 0 °C da esa muzlaydi.
+  - id: heat-temperature-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Issiqlik miqdorining SI tizimidagi birligi qaysi?
+    options:
+      - Vatt
+      - Kelvin
+      - Joul
+      - Nyuton
+    answer: 2
+    explanation: Issiqlik miqdori — issiqlik uzatishda berilgan yoki olingan energiya, shuning uchun u ham joullarda (J) oʻlchanadi.
+  - id: heat-temperature-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Quyosh energiyasi Yerga issiqlik uzatishning qaysi usuli orqali yetib keladi?
+    options:
+      - Issiqlik oʻtkazuvchanlik
+      - Konveksiya
+      - Diffuziya
+      - Nurlanish
+    answer: 3
+    explanation: Quyosh bilan Yer orasida deyarli modda yoʻq (vakuum), issiqlik oʻtkazuvchanlik va konveksiya uchun esa modda kerak. Vakuum orqali energiya faqat nurlanish bilan uzatiladi.
+  - id: heat-temperature-005
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: Masalani yeching. Javobni kelvinda, faqat son bilan yozing.
+    code: Havo harorati 27 °C. Bu harorat Kelvin shkalasida qancha boʻladi? (T = t + 273)
+    answer: "300"
+    explanation: T = t + 273 = 27 + 273 = 300 K.
+  - id: heat-temperature-006
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Moddaning agregat holatlari oʻzgarishi haqidagi gapni toʻldiring:"
+    code: Moddaning qattiq holatdan suyuq holatga oʻtishi ___ deyiladi. Suyuqlikning bugʻga aylanishi esa ___ deb ataladi.
+    answer:
+      - erish
+      - bugʻlanish
+    bank:
+      - diffuziya
+      - kondensatsiya
+      - qotish
+    explanation: Erish — qattiq → suyuq, bugʻlanish — suyuq → gaz. Teskari jarayonlar qotish (kristallanish) va kondensatsiya deyiladi.
+  - id: heat-temperature-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Issiq choyga solingan metall qoshiqning dastasi ham tez orada qizib qoladi. Bunda issiqlik qaysi usulda uzatiladi?
+    options:
+      - Issiqlik oʻtkazuvchanlik
+      - Konveksiya
+      - Nurlanish
+      - Bugʻlanish
+    answer: 0
+    explanation: Issiqlik oʻtkazuvchanlikda energiya jismning issiq qismidan sovuq qismiga zarralarning oʻzaro taʼsiri orqali uzatiladi, modda esa koʻchmaydi. Metallar issiqlikni yaxshi oʻtkazadi.
+  - id: heat-temperature-008
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Masalani yeching. Javobni kilojoulda (kJ), faqat son bilan yozing.
+    code: Massasi 2 kg boʻlgan suvni 20 °C dan 70 °C gacha isitish uchun qancha issiqlik kerak? Suvning solishtirma issiqlik sigʻimi 4200 J/(kg·°C).
+    answer: "420"
+    explanation: Q = c · m · (t₂ − t₁) = 4200 · 2 · (70 − 20) = 420 000 J = 420 kJ.
+  - id: heat-temperature-009
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Moddaning solishtirma issiqlik sigʻimi nimani koʻrsatadi?
+    options:
+      - 1 kg moddani erish haroratida toʻliq eritish uchun kerak boʻlgan issiqlik miqdorini
+      - 1 kg yoqilgʻi toʻliq yonganda ajraladigan issiqlik miqdorini
+      - 1 kg moddaning haroratini 1 °C ga oshirish uchun kerak boʻlgan issiqlik miqdorini
+      - 1 kg suyuqlikni qaynash haroratida bugʻga aylantirish uchun kerak boʻlgan issiqlik miqdorini
+    answer: 2
+    explanation: Solishtirma issiqlik sigʻimi c = Q / (m · Δt), birligi J/(kg·°C). Qolgan variantlar — solishtirma erish issiqligi, solishtirma yonish issiqligi va solishtirma bugʻ hosil boʻlish issiqligining taʼriflari.
+  - id: heat-temperature-010
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Isitish batareyalari nima uchun xonaning pastki qismiga (odatda deraza ostiga) oʻrnatiladi?
+    options:
+      - Xonaning pastida havo bosimi ancha kichik boʻlgani uchun
+      - Isigan havo ogʻirlashib, pastda toʻplanib qolgani uchun
+      - Batareya xonani faqat issiqlik oʻtkazuvchanlik orqali isitgani uchun
+      - Isigan havo yengillashib yuqoriga koʻtariladi va konveksiya tufayli butun xona isiydi
+    answer: 3
+    explanation: Isigan havo kengayadi, zichligi kamayadi va yuqoriga koʻtariladi, oʻrniga sovuq havo keladi. Shu tarzda konveksiya oqimlari butun xona havosini isitadi.
+  - id: heat-temperature-011
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Masalani yeching. Javobni kilojoulda (kJ), faqat son bilan yozing.
+    code: Massasi 3 kg boʻlgan muz erish haroratida (0 °C) turibdi. Uni toʻliq eritish uchun qancha issiqlik kerak? Muzning solishtirma erish issiqligi 330 kJ/kg.
+    answer: "990"
+    explanation: Q = λ · m = 330 kJ/kg · 3 kg = 990 kJ.
+  - id: heat-temperature-012
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Normal atmosfera bosimida muz eriyapti va unga issiqlik berish davom etmoqda. Erish tugaguncha muz bilan suv aralashmasining harorati qanday oʻzgaradi?
+    options:
+      - Oʻzgarmaydi, 0 °C boʻlib qoladi
+      - Bir tekis ortib boradi
+      - Bir tekis kamayib boradi
+      - Avval kamayadi, keyin ortadi
+    answer: 0
+    explanation: Erish paytida berilayotgan issiqlik haroratni oshirishga emas, kristall panjarani buzishga sarflanadi. Shuning uchun muz toʻliq erib boʻlguncha harorat 0 °C da qoladi.
+  - id: heat-temperature-013
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Quyidagi moddalarning qaysi biri issiqlikni eng yaxshi oʻtkazadi?
+    options:
+      - Yogʻoch
+      - Mis
+      - Havo
+      - Shisha
+    answer: 1
+    explanation: Metallar issiqlikni yaxshi oʻtkazadi, mis esa eng yaxshi oʻtkazgichlardan biri. Yogʻoch, shisha va ayniqsa havo issiqlikni yomon oʻtkazadi.
+  - id: heat-temperature-014
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Harorati −10 °C boʻlgan muz normal atmosfera bosimida uzluksiz isitilmoqda. Sodir boʻladigan jarayonlarni toʻgʻri ketma-ketlikda joylashtiring:"
+    lines:
+      - Muz −10 °C dan 0 °C gacha isiydi
+      - Muz 0 °C da erib, suvga aylanadi
+      - Suv 0 °C dan 100 °C gacha isiydi
+      - Suv 100 °C da qaynab, bugʻga aylanadi
+    explanation: Avval muz erish haroratigacha isiydi, soʻng oʻzgarmas 0 °C da eriydi. Hosil boʻlgan suv 100 °C gacha isiydi va shu haroratda qaynab bugʻga aylanadi.
+  - id: heat-temperature-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Qishda sovuq koʻchadan issiq xonaga kirgan odamning koʻzoynagi xiralashib, mayda suv tomchilari bilan qoplanadi. Bu qaysi hodisa natijasi?
+    options:
+      - Erish
+      - Bugʻlanish
+      - Kondensatsiya
+      - Kristallanish
+    answer: 2
+    explanation: Xonadagi iliq havo tarkibidagi suv bugʻi sovuq shishaga tegib soviydi va suyuqlikka — mayda suv tomchilariga aylanadi. Bugʻning suyuqlikka aylanishi kondensatsiya deyiladi; bunda issiqlik ajralib chiqadi.
+  - id: heat-temperature-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Massasi 0,5 kg boʻlgan mis detalga 3800 J issiqlik berildi. Detalning harorati necha gradusga koʻtarildi? Misning solishtirma issiqlik sigʻimi 380 J/(kg·°C).
+    options:
+      - 10 °C
+      - 5 °C
+      - 40 °C
+      - 20 °C
+    answer: 3
+    explanation: Q = c · m · Δt dan Δt = Q / (c · m) = 3800 / (380 · 0,5) = 3800 / 190 = 20 °C.
+  - id: heat-temperature-017
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Masalani yeching. Javobni °C da, faqat son bilan yozing.
+    code: Harorati 20 °C boʻlgan 3 kg suvga harorati 80 °C boʻlgan 1 kg suv qoʻshildi. Issiqlik yoʻqotishlari hisobga olinmasa, aralashmaning harorati qancha boʻladi?
+    answer: "35"
+    explanation: "Issiqlik balansi: c · 3 · (t − 20) = c · 1 · (80 − t), bundan 3t − 60 = 80 − t, 4t = 140, t = 35 °C."
+  - id: heat-temperature-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: 10 kg suvni 20 °C dan 70 °C gacha isitish uchun qancha quruq oʻtin yoqish kerak? Yonishda ajralgan issiqlikning hammasi suvga beriladi deb hisoblang. Suvning solishtirma issiqlik sigʻimi 4200 J/(kg·°C), oʻtinning solishtirma yonish issiqligi 10 MJ/kg.
+    options:
+      - 0,21 kg
+      - 2,1 kg
+      - 0,021 kg
+      - 0,42 kg
+    answer: 0
+    explanation: Suvga kerak issiqlik Q = c · m · Δt = 4200 · 10 · 50 = 2 100 000 J = 2,1 MJ. Oʻtin massasi m = Q / q = 2,1 MJ / 10 MJ/kg = 0,21 kg.
+  - id: heat-temperature-019
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Issiqlik dvigateli isitkichdan 1000 J issiqlik olib, sovitkichga 700 J issiqlik berdi. Dvigatelning FIK qancha?
+    options:
+      - 70 %
+      - 30 %
+      - 43 %
+      - 17 %
+    answer: 1
+    explanation: Foydali ish A = Q₁ − Q₂ = 1000 − 700 = 300 J. η = A / Q₁ · 100 % = 300 / 1000 · 100 % = 30 %.
+  - id: heat-temperature-020
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Bugʻlanish haqidagi gapni toʻldiring:"
+    code: Bugʻlanish suyuqlikning ___ sodir boʻladi va istalgan haroratda kechadi. Suyuqlikni eng tez molekulalar tark etgani uchun, tashqaridan issiqlik berilmasa, bugʻlanayotgan suyuqlik ___.
+    answer:
+      - sirtida
+      - soviydi
+    bank:
+      - isiydi
+      - muzlaydi
+      - tubida
+    explanation: Bugʻlanishda suyuqlik sirtidan kinetik energiyasi eng katta molekulalar uchib chiqadi. Qolgan molekulalarning oʻrtacha energiyasi kamayadi, yaʼni suyuqlik soviydi.

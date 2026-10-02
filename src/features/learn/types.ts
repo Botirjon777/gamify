@@ -1,3 +1,4 @@
+import type { BoardSpec } from "@/features/chess/board";
 import type { CodeLang } from "./content-schema";
 import type { Reveal } from "./check";
 
@@ -8,6 +9,8 @@ export type ClientExercise = {
   xp: number;
   prompt: string;
   lang: CodeLang;
+  /** A chess diagram above the question. */
+  board?: BoardSpec;
 } & (
   /** Options are shuffled per request; `index` is the option's position in the content (what is submitted and revealed). */
   | { type: "CHOICE"; codeHtml?: string; options: { index: number; text: string }[] }
@@ -16,6 +19,8 @@ export type ClientExercise = {
   | { type: "FILL"; parts: string[]; /** Words to fill the blanks with (shuffled); absent = the answers are typed. */ bank?: string[] }
   /** Shuffled lines; `key` is only for React lists. */
   | { type: "ORDER"; lines: { key: string; text: string }[] }
+  /** Chess: make the move on `board` (a full FEN; the side to move is the learner's). */
+  | { type: "MOVE"; board: BoardSpec }
 );
 
 export type SubmitResult = {

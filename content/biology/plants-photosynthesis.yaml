@@ -1,0 +1,245 @@
+exercises:
+  - id: plants-photosynthesis-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Oʻsimliklar yorugʻlik energiyasidan foydalanib organik modda hosil qiladigan jarayon nima deb ataladi?
+    options:
+      - Fotosintez
+      - Nafas olish
+      - Transpiratsiya
+      - Changlanish
+    answer: 0
+    explanation: Fotosintezda oʻsimlik yorugʻlik energiyasi yordamida suv va karbonat angidriddan organik modda hosil qiladi.
+  - id: plants-photosynthesis-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Fotosintez asosan oʻsimlikning qaysi organida kechadi?
+    options:
+      - Ildiz
+      - Barg
+      - Gul
+      - Urugʻ
+    answer: 1
+    explanation: Barg hujayralarida xloroplastlar koʻp boʻlgani uchun fotosintezning asosiy qismi bargda kechadi.
+  - id: plants-photosynthesis-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Fotosintez uchun oʻsimlik havodan qaysi gazni yutadi?
+    options:
+      - Kislorod
+      - Azot
+      - Karbonat angidrid
+      - Vodorod
+    answer: 2
+    explanation: Oʻsimlik karbonat angidriddagi ugleroddan organik moddalar tuzishda foydalanadi.
+  - id: plants-photosynthesis-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Fotosintez natijasida havoga qaysi gaz ajralib chiqadi?
+    options:
+      - Karbonat angidrid
+      - Azot
+      - Metan
+      - Kislorod
+    answer: 3
+    explanation: Fotosintezda organik modda bilan birga kislorod hosil boʻladi va u havoga ajraladi.
+  - id: plants-photosynthesis-005
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Oʻsimlik suv va mineral tuzlarni tuproqdan qaysi organi orqali oladi?
+    options:
+      - Ildiz
+      - Barg
+      - Gul
+      - Meva
+    answer: 0
+    explanation: Ildiz oʻsimlikni tuproqqa mahkamlaydi hamda undan suv va unda erigan mineral tuzlarni soʻradi.
+  - id: plants-photosynthesis-006
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Barg haqidagi gaplarni toʻldiring:"
+    code: Barglarga yashil rang beruvchi pigment — ___. U ___ energiyasini yutadi.
+    answer:
+      - xlorofill
+      - yorugʻlik
+    bank:
+      - gemoglobin
+      - kraxmal
+      - tovush
+    explanation: Xlorofill xloroplastlarda joylashgan yashil pigment boʻlib, fotosintez uchun zarur yorugʻlik energiyasini yutadi.
+  - id: plants-photosynthesis-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Gulli oʻsimliklarning jinsiy koʻpayish organi qaysi?
+    options:
+      - Ildiz
+      - Gul
+      - Poya
+      - Barg
+    answer: 1
+    explanation: Gulda changchi va urugʻchi joylashgan, changlanish va urugʻlanishdan soʻng undan meva va urugʻ hosil boʻladi.
+  - id: plants-photosynthesis-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Barg ogʻizchalarining (ustitsalarning) asosiy vazifasi nima?
+    options:
+      - Tuproqdan suv soʻrish
+      - Urugʻ hosil qilish
+      - Gaz almashinuvi va suvni bugʻlatish
+      - Oʻsimlikni tuproqqa mahkamlash
+    answer: 2
+    explanation: Ogʻizchalar orqali bargga karbonat angidrid kiradi, kislorod va suv bugʻi esa tashqariga chiqadi.
+  - id: plants-photosynthesis-009
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Oʻsimlik barglaridan suvning bugʻlanishi nima deb ataladi?
+    options:
+      - Fotosintez
+      - Changlanish
+      - Urugʻlanish
+      - Transpiratsiya
+    answer: 3
+    explanation: Transpiratsiya oʻsimlikni qizib ketishdan saqlaydi va suvning ildizdan barglarga koʻtarilishiga yordam beradi.
+  - id: plants-photosynthesis-010
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Suv va mineral tuzlar ildizdan barglarga qaysi toʻqima orqali koʻtariladi?
+    options:
+      - Ksilema (yogʻochlik)
+      - Floema (lub)
+      - Qoplovchi toʻqima
+      - Hosil qiluvchi toʻqima
+    answer: 0
+    explanation: Ksilema naylari suv va unda erigan mineral tuzlarni ildizdan yuqoriga, poya va barglarga oʻtkazadi.
+  - id: plants-photosynthesis-011
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Gul changining changdondan urugʻchi tumshuqchasiga tushishi nima deb ataladi?
+    options:
+      - Urugʻlanish
+      - Changlanish
+      - Unish
+      - Transpiratsiya
+    answer: 1
+    explanation: Changlanish — changning urugʻchi tumshuqchasiga tushishi. Urugʻlanish esa undan keyin, jinsiy hujayralar qoʻshilganda sodir boʻladi.
+  - id: plants-photosynthesis-012
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Fotosintez jarayonini toʻldiring:"
+    code: Fotosintezda oʻsimlik ___ va karbonat angidriddan yorugʻlik taʼsirida ___ va kislorod hosil qiladi.
+    answer:
+      - suv
+      - glyukoza
+    bank:
+      - azot
+      - oqsil
+    explanation: Fotosintezning boshlangʻich moddalari — suv va karbonat angidrid, mahsulotlari esa glyukoza va kislorod.
+  - id: plants-photosynthesis-013
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Gulli oʻsimlikning rivojlanish bosqichlarini toʻgʻri ketma-ketlikda joylashtiring:"
+    lines:
+      - Urugʻ unadi
+      - Maysa oʻsib chiqadi
+      - Oʻsimlik gullaydi
+      - Gul changlanadi
+      - Meva va urugʻ hosil boʻladi
+    explanation: Urugʻdan maysa unib chiqadi, oʻsimlik voyaga yetib gullaydi, changlanish va urugʻlanishdan soʻng meva hamda yangi urugʻlar yetiladi.
+  - id: plants-photosynthesis-014
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Bargda hosil boʻlgan organik moddalar oʻsimlikning boshqa organlariga qaysi toʻqima orqali tashiladi?
+    options:
+      - Ksilema (yogʻochlik)
+      - Qoplovchi toʻqima
+      - Floema (lub)
+      - Mexanik toʻqima
+    answer: 2
+    explanation: Floemaning elaksimon naylari organik moddalarni bargdan ildiz, meva va boshqa organlarga oʻtkazadi.
+  - id: plants-photosynthesis-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Oʻsimliklar zaxira uglevod sifatida asosan qaysi moddani toʻplaydi?
+    options:
+      - Glikogen
+      - Xitin
+      - Gemoglobin
+      - Kraxmal
+    answer: 3
+    explanation: Fotosintezda hosil boʻlgan glyukozaning ortiqchasi kraxmalga aylanib, tugunak, urugʻ va ildizlarda zaxira holida saqlanadi.
+  - id: plants-photosynthesis-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Qaysi oʻsimlik urugʻ hosil qilmaydi va spora bilan koʻpayadi?
+    options:
+      - Qirqquloq
+      - Qaragʻay
+      - Bugʻdoy
+      - Olma
+    answer: 0
+    explanation: Qirqquloqlar sporali oʻsimliklar, ularda gul va urugʻ boʻlmaydi. Qaragʻay, bugʻdoy va olma esa urugʻli oʻsimliklardir.
+  - id: plants-photosynthesis-017
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Fotosintezda ajralib chiqadigan kislorod qaysi moddaning parchalanishidan hosil boʻladi?
+    options:
+      - Karbonat angidrid
+      - Suv
+      - Glyukoza
+      - Xlorofill
+    answer: 1
+    explanation: Yorugʻlik taʼsirida suv molekulalari parchalanadi (suv fotolizi) va shunda erkin kislorod ajraladi.
+  - id: plants-photosynthesis-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Qaysi oʻsimlik ochiq urugʻlilarga mansub?
+    options:
+      - Olma
+      - Bugʻdoy
+      - Qaragʻay
+      - Gʻoʻza
+    answer: 2
+    explanation: Qaragʻayning urugʻlari meva ichida emas, qubba tangachalarida ochiq yetiladi. Olma, bugʻdoy va gʻoʻza yopiq urugʻli (gulli) oʻsimliklardir.
+  - id: plants-photosynthesis-019
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Ildiz tizimlari haqidagi gapni toʻldiring:"
+    code: Bir urugʻpallali oʻsimliklarning koʻpchiligida (masalan, bugʻdoyda) ___ ildiz tizimi, ikki urugʻpallalilarning koʻpchiligida (masalan, loviyada) esa ___ ildiz tizimi boʻladi.
+    answer:
+      - popuk
+      - oʻq
+    bank:
+      - havo
+      - tayanch
+    explanation: Popuk ildiz tizimida asosiy ildiz ajralib turmaydi, oʻq ildiz tizimida esa yaxshi rivojlangan asosiy ildiz boʻladi. Bu belgi koʻpchilik turlarga xos, lekin istisnolar ham uchraydi.
+  - id: plants-photosynthesis-020
+    type: order
+    difficulty: 3
+    lang: text
+    prompt: "Suvning oʻsimlik boʻylab harakatini toʻgʻri ketma-ketlikda joylashtiring:"
+    lines:
+      - Tuproqdagi suv
+      - Ildiz tukchalari
+      - Poyaning oʻtkazuvchi naylari
+      - Barg tomirlari
+      - Barg ogʻizchalari orqali havoga bugʻlanish
+    explanation: Suvni ildiz tukchalari soʻradi, u poya naylari orqali barglarga koʻtariladi va ogʻizchalar orqali bugʻlanib chiqadi.

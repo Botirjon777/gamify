@@ -1,8 +1,18 @@
 /** Site settings: keys, validation and formatting — pure, shared by the service, the admin form, the CLI and tests. */
 import { z } from "zod";
+import { DEFAULT_PRICING } from "@/features/payments/pricing";
 
 /** Rows of the Setting table. Values are stored as text. */
-export const SETTING_KEYS = ["payment.cardNumber", "payment.cardHolder", "payment.contact", "iq.priceUzs", "iq.oldPriceUzs"] as const;
+export const SETTING_KEYS = [
+  "payment.cardNumber",
+  "payment.cardHolder",
+  "payment.contact",
+  "iq.priceUzs",
+  "iq.oldPriceUzs",
+  "plan.proPriceUzs",
+  "plan.diamondPriceUzs",
+  "plan.annualDiscount",
+] as const;
 export type SettingKey = (typeof SETTING_KEYS)[number];
 
 /** Used until a price is saved in the database. */
@@ -33,6 +43,10 @@ export const settingsInput = z
     iqPriceUzs: money,
     /** The crossed-out "before" price; null = no discount shown. */
     iqOldPriceUzs: money.nullable(),
+    /** Paid plans: the price of one month, and how much cheaper a year paid at once is (%). */
+    proPriceUzs: money.default(DEFAULT_PRICING.monthly.PRO),
+    diamondPriceUzs: money.default(DEFAULT_PRICING.monthly.DIAMOND),
+    annualDiscount: z.number().int().min(0).max(90).default(DEFAULT_PRICING.annualDiscount),
   })
   .refine((s) => s.iqOldPriceUzs === null || s.iqOldPriceUzs > s.iqPriceUzs, { message: "oldPrice", path: ["iqOldPriceUzs"] });
 export type SettingsInput = z.input<typeof settingsInput>;
@@ -45,5 +59,8 @@ export function toRows(s: z.output<typeof settingsInput>): Record<SettingKey, st
     "payment.contact": s.contact,
     "iq.priceUzs": String(s.iqPriceUzs),
     "iq.oldPriceUzs": s.iqOldPriceUzs === null ? "" : String(s.iqOldPriceUzs),
+    "plan.proPriceUzs": String(s.proPriceUzs),
+    "plan.diamondPriceUzs": String(s.diamondPriceUzs),
+    "plan.annualDiscount": String(s.annualDiscount),
   };
 }

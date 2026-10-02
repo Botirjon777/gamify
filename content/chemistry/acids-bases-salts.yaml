@@ -1,0 +1,241 @@
+exercises:
+  - id: acids-bases-salts-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Xlorid kislotaning formulasi qaysi?
+    options:
+      - HCl
+      - H₂SO₄
+      - HNO₃
+      - NaCl
+    answer: 0
+    explanation: Xlorid kislota — vodorod xloridning suvdagi eritmasi, formulasi HCl.
+  - id: acids-bases-salts-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Har qanday kislota tarkibida albatta qaysi element atomlari boʻladi?
+    options:
+      - Kislorod
+      - Natriy
+      - Vodorod
+      - Xlor
+    answer: 2
+    explanation: Kislotalar vodorod atomlari va kislota qoldigʻidan tuzilgan; kislorod esa, masalan, HCl tarkibida yoʻq.
+  - id: acids-bases-salts-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Quyidagi moddalardan qaysi biri asos?
+    options:
+      - HCl
+      - NaOH
+      - NaCl
+      - CO₂
+    answer: 1
+    explanation: Asoslar metall atomi va gidroksid guruhidan (OH) tuzilgan; NaOH — natriy gidroksid.
+  - id: acids-bases-salts-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Toza suvning pH qiymati (25 °C da) nechaga teng?
+    options:
+      - "0"
+      - "1"
+      - "14"
+      - "7"
+    answer: 3
+    explanation: Toza suv neytral muhitga ega, neytral muhitda esa pH = 7.
+  - id: acids-bases-salts-005
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Osh tuzining kimyoviy formulasi qaysi?
+    options:
+      - KCl
+      - Na₂CO₃
+      - NaCl
+      - NaOH
+    answer: 2
+    explanation: Osh tuzi — natriy xlorid, formulasi NaCl.
+  - id: acids-bases-salts-006
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Gapni toʻldiring:"
+    code: Kislota va asos oʻzaro taʼsirlashganda ___ va suv hosil boʻladi; bu reaksiya ___ reaksiyasi deyiladi.
+    answer:
+      - tuz
+      - neytrallanish
+    bank:
+      - metall
+      - oksid
+      - yonish
+    explanation: Kislota + asos → tuz + suv; bunda kislota va asosning xossalari bir-birini neytrallaydi.
+  - id: acids-bases-salts-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Lakmus kislotali muhitda qanday rangga kiradi?
+    options:
+      - Qizil
+      - Koʻk
+      - Sariq
+      - Rangsiz
+    answer: 0
+    explanation: Lakmus kislotali muhitda qizil, ishqoriy muhitda koʻk, neytral muhitda binafsha rangda boʻladi.
+  - id: acids-bases-salts-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Fenolftalein ishqoriy muhitda qanday rangga kiradi?
+    options:
+      - Koʻk
+      - Sariq
+      - Rangsiz qoladi
+      - Pushti (malina rang)
+    answer: 3
+    explanation: Fenolftalein kislotali va neytral muhitda rangsiz, ishqoriy muhitda esa pushti (malina) rangga kiradi.
+  - id: acids-bases-salts-009
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: pH = 2 boʻlgan eritmaning muhiti qanday?
+    options:
+      - Neytral
+      - Kuchli kislotali
+      - Kuchsiz ishqoriy
+      - Kuchli ishqoriy
+    answer: 1
+    explanation: pH 7 dan qancha kichik boʻlsa, muhit shuncha kuchli kislotali boʻladi.
+  - id: acids-bases-salts-010
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Sulfat kislotaning formulasi qaysi?
+    options:
+      - H₂SO₃
+      - H₂S
+      - H₂SO₄
+      - HNO₃
+    answer: 2
+    explanation: Sulfat kislota — H₂SO₄; H₂SO₃ — sulfit kislota, H₂S — sulfid kislota, HNO₃ — nitrat kislota.
+  - id: acids-bases-salts-011
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Suvda eriydigan asoslar qanday ataladi?
+    options:
+      - Ishqorlar
+      - Oksidlar
+      - Tuzlar
+      - Indikatorlar
+    answer: 0
+    explanation: NaOH, KOH kabi suvda eriydigan asoslar ishqorlar deyiladi.
+  - id: acids-bases-salts-012
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: "Tenglamani tenglashtiring va NaOH oldidagi koeffitsiyentni yozing:"
+    code: H₂SO₄ + NaOH → Na₂SO₄ + H₂O
+    answer: "2"
+    explanation: "Tenglashtirilgan tenglama: H₂SO₄ + 2NaOH → Na₂SO₄ + 2H₂O. Kislotadagi ikkita vodorod atomini almashtirish uchun 2 ta NaOH kerak."
+  - id: acids-bases-salts-013
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Kalsiy karbonat (CaCO₃) qaysi sinfga mansub?
+    options:
+      - Kislota
+      - Asos
+      - Oksid
+      - Tuz
+    answer: 3
+    explanation: CaCO₃ metall atomi (Ca) va kislota qoldigʻidan (CO₃) tuzilgan, demak u tuz.
+  - id: acids-bases-salts-014
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Suyuqliklarni pH qiymati ortib borish tartibida (eng kislotalisidan eng ishqoriysiga) joylashtiring; eritmalarning konsentratsiyasi bir xil:"
+    lines:
+      - Xlorid kislota eritmasi
+      - Sirka kislota eritmasi
+      - Toza suv
+      - Ichimlik sodasi eritmasi
+      - Natriy gidroksid eritmasi
+    explanation: Kuchli kislotaning pH qiymati eng kichik, kuchsiz kislotaniki undan kattaroq; suv neytral (pH = 7), soda eritmasi kuchsiz ishqoriy, ishqor eritmasi esa kuchli ishqoriy.
+  - id: acids-bases-salts-015
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Gapni toʻldiring:"
+    code: Har qanday kislota suvda eriganda ___ kationlarini, har qanday ishqor esa ___ anionlarini hosil qiladi.
+    answer:
+      - vodorod
+      - gidroksid
+    bank:
+      - natriy
+      - sulfat
+      - xlorid
+    explanation: Kislotali muhitni vodorod kationlari (H⁺), ishqoriy muhitni gidroksid anionlari (OH⁻) belgilaydi; natriy, xlorid yoki sulfat ionlari esa faqat ayrim moddalar eritmasida boʻladi.
+  - id: acids-bases-salts-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Qaysi metall suyultirilgan xlorid kislota bilan reaksiyaga kirishmaydi?
+    options:
+      - Rux
+      - Mis
+      - Temir
+      - Magniy
+    answer: 1
+    explanation: Mis metallarning faollik qatorida vodoroddan keyin turadi, shuning uchun u kislotadan vodorodni siqib chiqara olmaydi.
+  - id: acids-bases-salts-017
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Qaysi juft modda oʻzaro reaksiyaga kirishib, tuz va suv hosil qiladi?
+    options:
+      - KOH va HNO₃
+      - NaCl va KNO₃
+      - Zn va HCl
+      - CaO va CO₂
+    answer: 0
+    explanation: KOH + HNO₃ → KNO₃ + H₂O — neytrallanish reaksiyasi. Zn va HCl dan tuz va vodorod, CaO va CO₂ dan faqat tuz hosil boʻladi, NaCl va KNO₃ esa reaksiyaga kirishmaydi.
+  - id: acids-bases-salts-018
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: "Hisoblang va javobni grammda, faqat son bilan yozing (H = 1, O = 16, Na = 23, Cl = 35,5):"
+    code: 4 g NaOH ni toʻliq neytrallash uchun necha gramm HCl kerak? NaOH + HCl → NaCl + H₂O
+    answer:
+      - 3,65
+      - "3.65"
+      - 3,65 g
+      - 3.65 g
+    explanation: "M(NaOH) = 40 g/mol, demak 4 g — 0,1 mol. Tenglamaga koʻra shuncha mol HCl kerak: 0,1 · 36,5 = 3,65 g."
+  - id: acids-bases-salts-019
+    type: order
+    difficulty: 3
+    lang: text
+    prompt: "Neytrallanish reaksiyasi yordamida tuz olish tajribasi bosqichlarini tartiblang:"
+    lines:
+      - Kolbaga ishqor eritmasi quyiladi
+      - Unga bir-ikki tomchi fenolftalein tomiziladi va eritma pushti rangga kiradi
+      - Kislota eritmasi tomchilab qoʻshib boriladi
+      - Eritma rangsizlangan zahoti kislota qoʻshish toʻxtatiladi
+      - Eritma bugʻlatilib, tuz kristallari olinadi
+    explanation: Indikator ishqor toʻliq neytrallangan paytni koʻrsatadi; shundan keyin eritmada faqat tuz va suv qoladi, suv bugʻlatilsa, tuz ajralib chiqadi.
+  - id: acids-bases-salts-020
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Qaysi oksid suv bilan reaksiyaga kirishib, kislota hosil qiladi?
+    options:
+      - Na₂O
+      - SO₃
+      - CaO
+      - CuO
+    answer: 1
+    explanation: "SO₃ — kislotali oksid: SO₃ + H₂O → H₂SO₄. Na₂O va CaO suv bilan asos hosil qiladi, CuO esa suv bilan reaksiyaga kirishmaydi."

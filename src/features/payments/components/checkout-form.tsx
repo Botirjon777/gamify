@@ -9,17 +9,20 @@ import { Button } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
 import { previewPromo, requestPayment } from "../actions";
 import { discountedPrice } from "../promo-rules";
-import { BILLING, BILLINGS, perMonth, priceFor, yearlySaving, type Billing, type PaidPlan } from "../pricing";
+import { billingDiscount, BILLINGS, perMonth, priceFor, yearlySaving, type Billing, type PaidPlan, type PlanPricing } from "../pricing";
+import { groupDigits } from "@/lib/format";
 
 interface Props {
   plan: PaidPlan;
   initialBilling: Billing;
+  /** Today's prices (from the settings); the server computes the amount again when the request is sent. */
+  pricing: PlanPricing;
   cardNumber: string | null;
   cardHolder: string | null;
   contact: string | null;
 }
 
-export function CheckoutForm({ plan, initialBilling, cardNumber, cardHolder, contact }: Props) {
+export function CheckoutForm({ plan, initialBilling, pricing, cardNumber, cardHolder, contact }: Props) {
   const t = useTranslations("plans.checkout");
   const router = useRouter();
   const [billing, setBilling] = useState<Billing>(initialBilling);
@@ -29,10 +32,10 @@ export function CheckoutForm({ plan, initialBilling, cardNumber, cardHolder, con
   const [promoInput, setPromoInput] = useState("");
   /** A code the server accepted; the final price is computed again on the server when the request is sent. */
   const [promo, setPromo] = useState<{ code: string; percent: number } | null>(null);
-  const fullPrice = priceFor(plan, billing);
+  const fullPrice = priceFor(pricing, plan, billing);
   const amount = promo ? discountedPrice(fullPrice, promo.percent) : fullPrice;
   const free = amount === 0;
-  const som = (n: number) => n.toLocaleString("uz-UZ");
+  const som = groupDigits;
 
   const applyPromo = () =>
     start(async () => {
@@ -49,7 +52,7 @@ export function CheckoutForm({ plan, initialBilling, cardNumber, cardHolder, con
         <h2 className="mb-3 font-display text-base font-bold">{t("period")}</h2>
         <div className="grid grid-cols-2 gap-3" role="radiogroup" aria-label={t("period")}>
           {BILLINGS.map((b) => {
-            const p = BILLING[b];
+            const discount = billingDiscount(pricing, b);
             const active = b === billing;
             return (
               <button
@@ -62,14 +65,14 @@ export function CheckoutForm({ plan, initialBilling, cardNumber, cardHolder, con
                   active ? "border-brand bg-brand/5" : "border-border hover:border-brand/40"
                 }`}
               >
-                {p.discount > 0 && (
+                {discount > 0 && (
                   <span className="absolute -top-2.5 rounded-full bg-grad-success px-2 py-0.5 text-[11px] font-bold text-white">
-                    {t("discount", { percent: p.discount })}
+                    {t("discount", { percent: discount })}
                   </span>
                 )}
                 <span className="font-display text-lg font-bold">{t(`billing.${b}`)}</span>
-                <span className="text-sm text-muted">{t("perMonthPrice", { price: som(perMonth(plan, b)) })}</span>
-                {b === "annual" && <span className="text-xs font-semibold text-success">{t("saving", { saving: som(yearlySaving(plan)) })}</span>}
+                <span className="text-sm text-muted">{t("perMonthPrice", { price: som(perMonth(pricing, plan, b)) })}</span>
+                {b === "annual" && discount > 0 && <span className="text-xs font-semibold text-success">{t("saving", { saving: som(yearlySaving(pricing, plan)) })}</span>}
               </button>
             );
           })}

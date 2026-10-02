@@ -1,0 +1,34 @@
+slug: physics
+title: Fizika asoslari
+description: Mexanika, issiqlik va elektr hodisalari — maktab fizikasining asosiy mavzulari.
+icon: atom
+order: 4
+subject: PHYSICS
+modules:
+  - slug: mechanics
+    title: Mexanika
+    skills:
+      - slug: motion-speed
+        title: Harakat va tezlik
+        description: Yoʻl, vaqt, tezlik va tezlanish; tekis va tekis tezlanuvchan harakat.
+      - slug: forces-newton
+        title: Kuchlar va Nyuton qonunlari
+        description: Ogʻirlik, ishqalanish va elastiklik kuchlari, Nyutonning uch qonuni.
+      - slug: work-energy
+        title: Ish, quvvat va energiya
+        description: Mexanik ish, quvvat, kinetik va potensial energiya, FIK.
+  - slug: matter-heat
+    title: Modda va issiqlik
+    skills:
+      - slug: density-pressure
+        title: Zichlik va bosim
+        description: Zichlik, qattiq jism va suyuqlik bosimi, Arximed kuchi.
+      - slug: heat-temperature
+        title: Issiqlik va harorat
+        description: Harorat, issiqlik miqdori, issiqlik uzatish va agregat holatlar.
+  - slug: electricity
+    title: Elektr
+    skills:
+      - slug: electricity-basics
+        title: Elektr toki asoslari
+        description: Tok kuchi, kuchlanish, qarshilik va Om qonuni.

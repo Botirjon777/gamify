@@ -1,0 +1,228 @@
+exercises:
+  - id: density-pressure-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Moddaning zichligi qaysi formula bilan aniqlanadi?
+    options:
+      - ρ = m · V
+      - ρ = V / m
+      - ρ = m · g
+      - ρ = m / V
+    answer: 3
+    explanation: "Zichlik — moddaning birlik hajmdagi massasi: ρ = m / V. SI dagi birligi — kg/m³."
+  - id: density-pressure-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Bosimning SI tizimidagi birligi qaysi?
+    options:
+      - Paskal
+      - Nyuton
+      - Joul
+      - Kilogramm
+    answer: 0
+    explanation: "Bosim paskallarda (Pa) oʻlchanadi: 1 Pa = 1 N/m², yaʼni 1 m² yuzaga tik taʼsir etuvchi 1 N kuchning bosimi."
+  - id: density-pressure-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Hajmi 2 m³ boʻlgan jismning massasi 1600 kg. Uning zichligi qancha?
+    options:
+      - 3200 kg/m³
+      - 800 kg/m³
+      - 400 kg/m³
+      - 1600 kg/m³
+    answer: 1
+    explanation: ρ = m / V = 1600 kg / 2 m³ = 800 kg/m³.
+  - id: density-pressure-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Atmosfera bosimi qaysi asbob bilan oʻlchanadi?
+    options:
+      - Dinamometr
+      - Termometr
+      - Barometr
+      - Ampermetr
+    answer: 2
+    explanation: Atmosfera bosimi barometr bilan oʻlchanadi. Dinamometr kuchni, termometr haroratni, ampermetr tok kuchini oʻlchaydi.
+  - id: density-pressure-005
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: Masalani yeching. Javobni paskalda, faqat son bilan yozing.
+    code: Yuzi 2 m² boʻlgan tayanchga 400 N kuch tik (perpendikulyar) taʼsir etmoqda. Tayanchga berilayotgan bosim qancha?
+    answer: "200"
+    explanation: p = F / S = 400 N / 2 m² = 200 Pa.
+  - id: density-pressure-006
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Bosim haqidagi gapni toʻldiring:"
+    code: Bosim kuchning tayanch yuziga nisbatiga teng (p = F / S). Kuch bir xil boʻlganda tayanch yuzi qancha katta boʻlsa, bosim shuncha ___ boʻladi. Shu sababli pichoq yaxshi kesishi uchun uning tigʻi ___ qilinadi.
+    answer:
+      - kichik
+      - oʻtkir
+    bank:
+      - katta
+      - ogʻir
+      - oʻtmas
+    explanation: p = F / S — bosim yuzaga teskari proporsional. Oʻtkir tigʻning yuzi juda kichik, shuning uchun kichik kuch bilan ham katta bosim hosil boʻladi.
+  - id: density-pressure-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Nima uchun changʻi taqqan odam qorga oddiy oyoq kiyimdagiga qaraganda kamroq botadi?
+    options:
+      - Changʻi odamning massasini kamaytiradi
+      - Changʻi odamga taʼsir etuvchi ogʻirlik kuchini kamaytiradi
+      - Changʻi bilan qor orasidagi ishqalanish kuchi katta boʻladi
+      - Changʻining tayanch yuzi katta boʻlgani uchun qorga berilgan bosim kichik boʻladi
+    answer: 3
+    explanation: p = F / S. Odamning ogʻirlik kuchi oʻzgarmaydi, lekin changʻining yuzi oyoq kiyimi tagidan ancha katta, shuning uchun bosim ancha kichik boʻladi.
+  - id: density-pressure-008
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Masalani yeching. Javobni kilogrammda, faqat son bilan yozing.
+    code: Suvning zichligi 1000 kg/m³. Hajmi 0,5 m³ boʻlgan suvning massasi qancha?
+    answer: "500"
+    explanation: ρ = m / V dan m = ρ · V = 1000 · 0,5 = 500 kg.
+  - id: density-pressure-009
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Koʻlning 5 m chuqurligida suv ustuni hosil qiladigan bosim qancha? Suvning zichligi 1000 kg/m³, g = 10 m/s².
+    options:
+      - 5 kPa
+      - 50 kPa
+      - 500 kPa
+      - 2 kPa
+    answer: 1
+    explanation: Suyuqlik bosimi p = ρ · g · h = 1000 · 10 · 5 = 50 000 Pa = 50 kPa.
+  - id: density-pressure-010
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Paskal qonuniga koʻra, suyuqlik yoki gazga berilgan bosim qanday uzatiladi?
+    options:
+      - Faqat pastga qarab
+      - Faqat kuch taʼsir etgan yoʻnalishda
+      - Barcha yoʻnalishlarda bir xil (oʻzgarishsiz)
+      - Faqat yuqoriga qarab
+    answer: 2
+    explanation: "Paskal qonuni: suyuqlik yoki gazga berilgan bosim uning har bir nuqtasiga barcha yoʻnalishlarda oʻzgarishsiz uzatiladi. Gidravlik press va tormozlar shu qonunga asoslangan."
+  - id: density-pressure-011
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Masalani yeching. Javobni paskalda, faqat son bilan yozing.
+    code: Massasi 60 kg boʻlgan odam polda turibdi. Oyoq kiyimlari tagining umumiy yuzi 0,03 m². Odam polga qancha bosim beradi? (g = 10 m/s²)
+    answer: "20000"
+    explanation: Bosim kuchi F = m · g = 60 · 10 = 600 N. p = F / S = 600 / 0,03 = 20 000 Pa.
+  - id: density-pressure-012
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Hajmi 0,002 m³ boʻlgan jism suvga toʻliq botirilgan. Unga taʼsir etuvchi Arximed kuchi qancha? Suvning zichligi 1000 kg/m³, g = 10 m/s².
+    options:
+      - 2 N
+      - 200 N
+      - 0,2 N
+      - 20 N
+    answer: 3
+    explanation: Arximed kuchi F = ρ(suyuqlik) · g · V = 1000 · 10 · 0,002 = 20 N.
+  - id: density-pressure-013
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Yaxlit jismning zichligi suyuqlik zichligidan kichik. Jism shu suyuqlikka toʻliq botirib qoʻyib yuborilsa, nima boʻladi?
+    options:
+      - Jism suyuqlik yuzasiga qalqib chiqadi
+      - Jism idish tubiga choʻkadi
+      - Jism qoʻyilgan joyida muallaq qoladi
+      - Jism suyuqlikda erib ketadi
+    answer: 0
+    explanation: Jism zichligi suyuqlik zichligidan kichik boʻlsa, Arximed kuchi ogʻirlik kuchidan katta boʻladi va jism qalqib chiqadi. Zichliklar teng boʻlsa — muallaq turadi, jism zichligi katta boʻlsa — choʻkadi.
+  - id: density-pressure-014
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Masala: oʻlchamlari 2 m, 1 m va 0,5 m boʻlgan toʻgʻri burchakli blokning massasi 2500 kg. Blok moddasining zichligini topish bosqichlarini toʻgʻri tartibda joylashtiring:"
+    lines:
+      - Blokning oʻlchamlari va massasini yozib olamiz
+      - "Oʻlchamlarni koʻpaytirib hajmni topamiz: V = 2 · 1 · 0,5 = 1 m³"
+      - "Massani topilgan hajmga boʻlamiz: ρ = m / V = 2500 / 1"
+      - "Javobni birligi bilan yozamiz: ρ = 2500 kg/m³"
+    explanation: V = 2 · 1 · 0,5 = 1 m³; ρ = m / V = 2500 / 1 = 2500 kg/m³.
+  - id: density-pressure-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Togʻga koʻtarilgan sari atmosfera bosimi qanday oʻzgaradi?
+    options:
+      - Ortadi
+      - Kamayadi
+      - Oʻzgarmaydi
+      - Avval ortadi, keyin kamayadi
+    answer: 1
+    explanation: Balandlik ortgan sari yuqoridagi havo qatlami yupqalashadi va havo siyraklashadi, shuning uchun atmosfera bosimi kamayadi.
+  - id: density-pressure-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Gidravlik pressning kichik porsheni yuzi 10 sm², katta porsheni yuzi 200 sm². Kichik porshenga 50 N kuch qoʻyilsa, katta porshen qanday kuch bilan taʼsir qiladi? (Ishqalanish hisobga olinmaydi.)
+    options:
+      - 2,5 N
+      - 250 N
+      - 1000 N
+      - 10 000 N
+    answer: 2
+    explanation: "Ikkala porshen ostidagi bosim bir xil: F₁ / S₁ = F₂ / S₂. F₂ = F₁ · S₂ / S₁ = 50 · 200 / 10 = 1000 N."
+  - id: density-pressure-017
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Masalani yeching. Javobni kg/m³ da, faqat son bilan yozing.
+    code: Massasi 540 g boʻlgan alyuminiy detalning hajmi 200 sm³. Alyuminiyning zichligi qancha?
+    answer: "2700"
+    explanation: ρ = m / V = 540 g / 200 sm³ = 2,7 g/sm³. 1 g/sm³ = 1000 kg/m³, demak ρ = 2700 kg/m³.
+  - id: density-pressure-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Dinamometrga osilgan jismning havodagi vazni 10 N. Jism suvga toʻliq botirilganda dinamometr 6 N ni koʻrsatdi. Jismning hajmi qancha? Suvning zichligi 1000 kg/m³, g = 10 m/s².
+    options:
+      - 400 sm³
+      - 600 sm³
+      - 1000 sm³
+      - 40 sm³
+    answer: 0
+    explanation: Arximed kuchi F = 10 − 6 = 4 N. F = ρ · g · V dan V = F / (ρ · g) = 4 / (1000 · 10) = 0,0004 m³ = 400 sm³.
+  - id: density-pressure-019
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Idishga 0,2 m qalinlikda suv, uning ustiga 0,1 m qalinlikda kerosin quyilgan. Suyuqliklar idish tubiga qancha bosim beradi? Suvning zichligi 1000 kg/m³, kerosinniki 800 kg/m³, g = 10 m/s².
+    options:
+      - 2000 Pa
+      - 3000 Pa
+      - 2400 Pa
+      - 2800 Pa
+    answer: 3
+    explanation: "Bosimlar qoʻshiladi: p = ρ(suv) · g · h(suv) + ρ(kerosin) · g · h(kerosin) = 1000 · 10 · 0,2 + 800 · 10 · 0,1 = 2000 + 800 = 2800 Pa."
+  - id: density-pressure-020
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Arximed qonuni haqidagi gapni toʻldiring:"
+    code: Suyuqlikka botirilgan jismga yuqoriga yoʻnalgan itarib chiqaruvchi kuch taʼsir etadi. Bu kuch jism siqib chiqargan suyuqlikning ___ teng boʻlib, ___ kuchi deb ataladi.
+    answer:
+      - ogʻirligiga
+      - Arximed
+    bank:
+      - Paskal
+      - hajmiga
+      - zichligiga
+    explanation: "Arximed qonuni: F = ρ(suyuqlik) · g · V — bu jism siqib chiqargan suyuqlikning ogʻirligiga teng."

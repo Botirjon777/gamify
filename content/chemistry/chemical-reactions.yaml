@@ -3,95 +3,238 @@ exercises:
     type: choice
     difficulty: 1
     lang: text
-    prompt: Bir moddadan ikki yoki undan ortiq modda hosil boʻladigan reaksiya qanday ataladi?
+    prompt: Bitta murakkab moddadan ikki yoki undan ortiq yangi modda hosil boʻladigan reaksiya qanday ataladi?
     options:
       - Birikish reaksiyasi
-      - Ajralish reaksiyasi
+      - Parchalanish reaksiyasi
       - Oʻrin olish reaksiyasi
       - Almashinish reaksiyasi
     answer: 1
-    explanation: Modda parchalanib, bir nechta modda hosil qilsa, ajralish reaksiyasi deyiladi.
+    explanation: Bitta murakkab modda bir nechta yangi moddaga ajralsa, bu parchalanish (ajralish) reaksiyasi deyiladi.
   - id: chemical-reactions-002
     type: choice
     difficulty: 1
     lang: text
-    prompt: Ikki yoki undan ortiq moddadan bitta murakkab modda hosil boʻladigan reaksiya nima deb ataladi?
+    prompt: Ikki yoki undan ortiq moddadan bitta murakkab modda hosil boʻladigan reaksiya qanday ataladi?
     options:
       - Birikish reaksiyasi
-      - Ajralish reaksiyasi
+      - Parchalanish reaksiyasi
       - Oʻrin olish reaksiyasi
       - Almashinish reaksiyasi
     answer: 0
-    explanation: Bir nechta moddalarning birlashishidan bitta modda hosil boʻlishi birikishdir.
+    explanation: Bir nechta moddaning birikib, bitta yangi murakkab modda hosil qilishi birikish reaksiyasi deyiladi.
   - id: chemical-reactions-003
     type: choice
     difficulty: 2
     lang: text
-    prompt: Kislota va asos reaksiyaga kirishib suv va tuz hosil qilishi qanday reaksiya deyiladi?
+    prompt: Kislota bilan asos oʻzaro taʼsirlashib, tuz va suv hosil qiladigan reaksiya qanday ataladi?
     options:
-      - neytrallanish
-      - neytrallanish (xato)
-      - Boshqa
-      - Nomaʼlum
+      - Neytrallanish reaksiyasi
+      - Parchalanish reaksiyasi
+      - Yonish reaksiyasi
+      - Oʻrin olish reaksiyasi
     answer: 0
-    explanation: Kislota + asos = tuz + suv neytrallanish reaksiyasi hisoblanadi.
+    explanation: "Kislota + asos → tuz + suv — bu neytrallanish reaksiyasi, masalan: HCl + NaOH → NaCl + H₂O."
   - id: chemical-reactions-004
     type: choice
     difficulty: 2
     lang: text
-    prompt: Yonish reaksiyasi bu qanday jarayon?
+    prompt: Yonish reaksiyasi qanday jarayon?
     options:
       - Issiqlik yutilishi bilan boradi
       - Issiqlik va yorugʻlik ajralishi bilan boradi
       - Hech qanday energiya oʻzgarishisiz boradi
-      - Faqat suv ajralib chiqishi bilan boradi
+      - Faqat katalizator ishtirokida boradi
     answer: 1
-    explanation: Yonish reaksiyasi ekzotermik boʻlib, energiya ajratib chiqaradi.
+    explanation: Yonish — moddaning kislorod bilan issiqlik va yorugʻlik ajratib boradigan reaksiyasi, yaʼni ekzotermik jarayon.
   - id: chemical-reactions-005
     type: choice
     difficulty: 3
     lang: text
-    prompt: Reaksiya tezligini oshiradigan, ammo oʻzi sarflanmaydigan modda nima deyiladi?
+    prompt: Reaksiya tezligini oshiradigan, lekin oʻzi sarflanmaydigan modda qanday ataladi?
     options:
-      - katalizator
-      - katalizator (xato)
-      - Boshqa
-      - Nomaʼlum
+      - Katalizator
+      - Ingibitor
+      - Indikator
+      - Reagent
     answer: 0
-    explanation: Katalizator kimyoviy reaksiya tezligini oshirib beradi.
+    explanation: Katalizator reaksiyani tezlashtiradi, lekin reaksiya oxirida oʻzgarmay qoladi; ingibitor esa, aksincha, reaksiyani sekinlashtiradi.
   - id: chemical-reactions-006
     type: choice
     difficulty: 3
     lang: text
-    prompt: Endotermik reaksiya nima?
+    prompt: Quyidagi jarayonlardan qaysi biri endotermik?
     options:
-      - Issiqlik ajralib chiqishi bilan boradigan reaksiya
-      - Issiqlik yutilishi bilan boradigan reaksiya
-      - Oksidlanish-qaytarilish reaksiyasi
-      - Choʻkma hosil qiladigan reaksiya
+      - Koʻmirning yonishi
+      - Ohaktoshning (CaCO₃) qizdirilganda parchalanishi
+      - Kislotaning ishqor bilan neytrallanishi
+      - Soʻndirilmagan ohakning (CaO) suv bilan birikishi
     answer: 1
-    explanation: Endotermik jarayon tashqaridan energiya (issiqlik) yutadi.
+    explanation: Ohaktosh parchalanishi uchun uni uzluksiz qizdirib turish, yaʼni issiqlik berish kerak — bu endotermik jarayon. Yonish, neytrallanish va ohakni soʻndirish reaksiyalarida esa issiqlik ajralib chiqadi.
   - id: chemical-reactions-007
     type: choice
     difficulty: 2
     lang: text
-    prompt: Fe + CuSO4 = FeSO4 + Cu qanday reaksiya turi?
+    prompt: Fe + CuSO₄ → FeSO₄ + Cu reaksiyasi qaysi turga kiradi?
     options:
       - Birikish
-      - Ajralish
+      - Parchalanish
       - Oʻrin olish
       - Almashinish
     answer: 2
-    explanation: Temir misning oʻrnini egallayapti, bu oʻrin olish reaksiyasi.
+    explanation: Oddiy modda (temir) murakkab modda tarkibidagi misning oʻrnini egallamoqda — bu oʻrin olish reaksiyasi.
   - id: chemical-reactions-008
     type: choice
     difficulty: 2
     lang: text
-    prompt: Organik moddalar toʻliq yonganda karbonat angidrid va nima hosil boʻladi?
+    prompt: Metan (CH₄) kislorodda toʻliq yonganda karbonat angidrid bilan birga yana qaysi modda hosil boʻladi?
     options:
-      - suv
-      - suv (xato)
-      - Boshqa
-      - Nomaʼlum
+      - Suv (H₂O)
+      - Vodorod (H₂)
+      - Is gazi (CO)
+      - Kislorod (O₂)
     answer: 0
-    explanation: CH4 + 2O2 -> CO2 + 2H2O.
+    explanation: "CH₄ + 2O₂ → CO₂ + 2H₂O: metandagi uglerod karbonat angidridga, vodorod esa suvga aylanadi. Is gazi faqat kislorod yetishmaganda, chala yonishda hosil boʻladi."
+  - id: chemical-reactions-009
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Quyidagi hodisalardan qaysi biri kimyoviy hodisa?
+    options:
+      - Muzning erishi
+      - Suvning bugʻlanishi
+      - Shishaning sinishi
+      - Temirning zanglashi
+    answer: 3
+    explanation: Zanglashda temirdan yangi modda — temir oksidi hosil boʻladi; qolgan hodisalarda moddaning faqat holati yoki shakli oʻzgaradi.
+  - id: chemical-reactions-010
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Kimyoviy reaksiyada reaksiyaga kirishgan moddalar massasi bilan hosil boʻlgan moddalar massasi qanday bogʻlangan?
+    options:
+      - Hosil boʻlgan moddalar massasi har doim kattaroq
+      - Hosil boʻlgan moddalar massasi har doim kichikroq
+      - Ular oʻzaro teng
+      - Ular orasida hech qanday bogʻliqlik yoʻq
+    answer: 2
+    explanation: Massaning saqlanish qonuniga koʻra atomlar yoʻqolmaydi va yangidan paydo boʻlmaydi, faqat qayta guruhlanadi, shuning uchun massa oʻzgarmaydi.
+  - id: chemical-reactions-011
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Gapni toʻldiring:"
+    code: Reaksiyaga kirishayotgan moddalar ___, reaksiya natijasida hosil boʻlgan moddalar esa ___ deb ataladi.
+    answer:
+      - reagentlar
+      - mahsulotlar
+    bank:
+      - eritmalar
+      - indikatorlar
+      - katalizatorlar
+    explanation: Tenglamaning chap tomonida reagentlar, oʻng tomonida esa reaksiya mahsulotlari yoziladi.
+  - id: chemical-reactions-012
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: 2H₂ + O₂ → 2H₂O reaksiyasi qaysi turga kiradi?
+    options:
+      - Parchalanish
+      - Oʻrin olish
+      - Almashinish
+      - Birikish
+    answer: 3
+    explanation: Ikki oddiy moddadan (vodorod va kislorod) bitta murakkab modda — suv hosil boʻlmoqda, bu birikish reaksiyasi.
+  - id: chemical-reactions-013
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: "Tenglamani eng kichik butun koeffitsiyentlar bilan tenglashtiring va O₂ oldidagi koeffitsiyentni yozing:"
+    code: P + O₂ → P₂O₅
+    answer: "5"
+    explanation: "Tenglashtirilgan tenglama: 4P + 5O₂ → 2P₂O₅. Har ikki tomonda 4 ta fosfor va 10 ta kislorod atomi bor."
+  - id: chemical-reactions-014
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: CaCO₃ → CaO + CO₂ reaksiyasi qaysi turga kiradi?
+    options:
+      - Birikish
+      - Parchalanish
+      - Oʻrin olish
+      - Almashinish
+    answer: 1
+    explanation: Bitta murakkab modda (kalsiy karbonat) qizdirilganda ikkita yangi moddaga ajralmoqda, bu parchalanish reaksiyasi.
+  - id: chemical-reactions-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: NaOH + HCl → NaCl + H₂O reaksiyasi qaysi turga kiradi?
+    options:
+      - Birikish
+      - Parchalanish
+      - Almashinish
+      - Oʻrin olish
+    answer: 2
+    explanation: Ikki murakkab modda oʻz tarkibiy qismlarini almashtirib, ikkita yangi murakkab modda hosil qilmoqda — bu almashinish reaksiyasi.
+  - id: chemical-reactions-016
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Kimyoviy tenglama tuzish bosqichlarini toʻgʻri tartibda joylashtiring:"
+    lines:
+      - Reagentlar va mahsulotlarning formulalarini yozish
+      - Chap va oʻng tomondagi har bir element atomlari sonini sanash
+      - Atomlar sonini tenglashtirish uchun koeffitsiyentlar tanlash
+      - Har ikki tomonda atomlar soni teng ekanini qayta tekshirish
+    explanation: Avval reaksiya sxemasi yoziladi, soʻng atomlar sanaladi va koeffitsiyentlar tanlanadi; oxirida natija tekshiriladi.
+  - id: chemical-reactions-017
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Quyidagi oʻzgarishlardan qaysi biri reaksiya tezligini oshiradi?
+    options:
+      - Haroratni pasaytirish
+      - Reagentlar konsentratsiyasini kamaytirish
+      - Ingibitor qoʻshish
+      - Qattiq reagentni maydalash
+    answer: 3
+    explanation: Qattiq modda maydalanganda zarrachalarning toʻqnashish yuzasi kattalashadi va reaksiya tezlashadi; qolgan oʻzgarishlar reaksiyani sekinlashtiradi.
+  - id: chemical-reactions-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Al + HCl → AlCl₃ + H₂ tenglamasi eng kichik butun koeffitsiyentlar bilan tenglashtirilganda HCl oldidagi koeffitsiyent nechaga teng boʻladi?
+    options:
+      - "2"
+      - "3"
+      - "6"
+      - "4"
+    answer: 2
+    explanation: "Tenglashtirilgan tenglama: 2Al + 6HCl → 2AlCl₃ + 3H₂."
+  - id: chemical-reactions-019
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Gapni toʻldiring:"
+    code: Issiqlik ajralib chiqadigan reaksiyalar ___, issiqlik yutiladigan reaksiyalar esa ___ reaksiyalar deyiladi.
+    answer:
+      - ekzotermik
+      - endotermik
+    bank:
+      - almashinish
+      - katalitik
+      - qaytar
+    explanation: Ekzotermik reaksiyada energiya atrof-muhitga chiqadi (masalan, yonish), endotermik reaksiyada esa tashqaridan yutiladi.
+  - id: chemical-reactions-020
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Oksidlanish-qaytarilish reaksiyasida oksidlovchi nima qiladi?
+    options:
+      - Elektron beradi va oksidlanadi
+      - Elektron qabul qiladi va oksidlanadi
+      - Elektron beradi va qaytariladi
+      - Elektron qabul qiladi va qaytariladi
+    answer: 3
+    explanation: Oksidlovchi boshqa zarrachadan elektron tortib oladi va oʻzi qaytariladi; elektron bergan qaytaruvchi esa oksidlanadi.

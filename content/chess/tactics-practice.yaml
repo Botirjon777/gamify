@@ -1,0 +1,97 @@
+exercises:
+  - id: tactics-practice-001
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Ot bilan shoh va turaga bir vaqtda hujum qiling (vilka).
+    board: r3k3/8/8/3N4/8/8/8/4K3 w - - 0 1
+    answer: Nc7+
+    explanation: Ot c7 dan e8 dagi shohga ham, a8 dagi turaga ham hujum qiladi. Qoralar shohni olib qochishga majbur, keyin ot turani uradi.
+  - id: tactics-practice-002
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Ot bilan shoh va vazirga vilka qoʻying.
+    board: 6k1/3q4/8/8/4N3/8/8/6K1 w - - 0 1
+    answer: Nf6+
+    explanation: "«Qirollik vilkasi»: ot f6 dan shohga shoh beradi va ayni paytda vazirga hujum qiladi. Shoh qochgach, ot vazirni yutadi."
+  - id: tactics-practice-003
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Ot bilan ikkita turaga vilka qoʻying.
+    board: r3r1k1/5ppp/8/1N6/8/8/5PPP/6K1 w - - 0 1
+    answer: Nc7
+    explanation: Ot c7 dan a8 va e8 dagi ikkala turaga hujum qiladi. Qoralar bitta yurishda faqat bittasini qutqara oladi.
+  - id: tactics-practice-004
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Piyoda bilan ikki donaga vilka qoʻying.
+    board: 4k3/8/3b1n2/8/4P3/8/8/4K3 w - - 0 1
+    answer: e5
+    explanation: "Piyoda e5 dan d6 dagi filga ham, f6 dagi otga ham hujum qiladi. Piyoda vilkasi juda foydali: piyoda eng arzon dona."
+  - id: tactics-practice-005
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Vazir bilan shoh bering va ayni paytda turaga hujum qiling.
+    board: r5k1/3p2pp/8/8/8/8/5PPP/3Q2K1 w - - 0 1
+    answer: Qd5+
+    explanation: "Vazir d5 dan ikki diagonalga qaraydi: biri g8 dagi shohga, ikkinchisi a8 dagi turaga boradi. Shoh qochgach, vazir turani uradi."
+  - id: tactics-practice-006
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Qoralar yuradi. Vazir bilan shoh bering va ayni paytda turaga hujum qiling.
+    board: 3q2k1/5ppp/8/8/8/8/3P2PP/R5K1 b - - 0 1
+    answer: Qd4+
+    explanation: Vazir d4 dan g1 dagi shohga ham, a1 dagi turaga ham hujum qiladi — vazir vilkasi.
+  - id: tactics-practice-007
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Fil bilan otni shohga bogʻlang.
+    board: 4k3/8/2n5/8/8/8/8/4KB2 w - - 0 1
+    answer: Bb5
+    explanation: Fil b5 dan otga hujum qiladi, otning ortida esa shoh turibdi. Bogʻlangan ot joyidan jila olmaydi — aks holda shoh zarba ostida qolar edi.
+  - id: tactics-practice-008
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Tura bilan vazirni shohga bogʻlang.
+    board: 4k3/8/8/4q3/8/8/8/R4K2 w - - 0 1
+    answer: Re1
+    explanation: "Tura e-vertikalga chiqadi: vazir shohni toʻsib turgani uchun qocha olmaydi. Vazir turani ursa ham, oq shoh uni qaytarib uradi — oqlar vazirni tura evaziga yutadi."
+  - id: tactics-practice-009
+    type: move
+    difficulty: 3
+    lang: text
+    prompt: "Shish (skewer): tura bilan shoh bering va shoh ortidagi vazirni yutib oling."
+    board: q2k4/8/8/8/8/8/8/4K2R w - - 0 1
+    answer: Rh8+
+    explanation: Tura 8-gorizontalda shoh beradi. Shoh chetga chiqishga majbur, shunda uning ortidagi vazir ochilib qoladi va tura uni uradi.
+  - id: tactics-practice-010
+    type: move
+    difficulty: 3
+    lang: text
+    prompt: "Ochiq shoh: filni shunday yuringki, tura shoh bersin, fil esa vazirni yutsin."
+    board: 4k3/1q6/8/8/4B3/8/8/4R1K1 w - - 0 1
+    answer: Bxb7+
+    explanation: Fil e-vertikaldan ketishi bilan ortidagi tura shoh beradi. Fil shu yurishning oʻzida vazirni uradi — qoralar esa shohdan qutulish bilan band.
+  - id: tactics-practice-011
+    type: move
+    difficulty: 3
+    lang: text
+    prompt: Qora donalardan biri himoyasiz. Uni toping va urib oling.
+    board: 6k1/5ppp/4p3/3n3b/8/8/5PPP/3Q2K1 w - - 0 1
+    answer: Qxh5
+    explanation: Otni e6 dagi piyoda himoya qiladi — uni urgan vazir yoʻqotiladi. h5 dagi filni esa hech kim himoya qilmayapti.
+  - id: tactics-practice-012
+    type: move
+    difficulty: 3
+    lang: text
+    prompt: Piyodani shunday donaga aylantiringki, shoh va vazirga vilka boʻlsin.
+    board: 8/2q1P1k1/8/8/8/8/8/4K3 w - - 0 1
+    answer: e8=N+
+    explanation: Har doim ham vazir eng yaxshi tanlov emas. Otga aylangan piyoda shoh beradi va vazirga hujum qiladi — keyingi yurishda ot vazirni yutadi.

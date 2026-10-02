@@ -12,7 +12,7 @@ export const uzText = (field: unknown) => localized(field as LocalizedText | nul
 const STATUSES: ContentStatus[] = ["DRAFT", "PUBLISHED", "ARCHIVED"];
 /** A value from the URL → a status, or undefined when it isn't one. */
 export const toStatus = (value: string | undefined) => STATUSES.find((s) => s === value);
-const TYPES: ExerciseType[] = ["CHOICE", "OUTPUT", "FILL", "ORDER"];
+const TYPES: ExerciseType[] = ["CHOICE", "OUTPUT", "FILL", "ORDER", "MOVE"];
 export const toExerciseType = (value: string | undefined) => TYPES.find((t) => t === value);
 
 const byStatus = (rows: { status: ContentStatus; _count: number }[]) => {

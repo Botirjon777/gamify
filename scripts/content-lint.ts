@@ -87,7 +87,9 @@ for (const dir of readdirSync(ROOT, { withFileTypes: true }).filter((d) => d.isD
             ? { type: "OUTPUT", text: a.accepted[0] }
             : a.type === "FILL"
               ? { type: "FILL", blanks: a.blanks.map((b) => b[0]) }
-              : { type: "ORDER", lines: a.lines };
+              : a.type === "ORDER"
+                ? { type: "ORDER", lines: a.lines }
+                : { type: "MOVE", move: a.moves[0] };
       if (!checkAnswer(a, submission, def.lang === "text").correct) add(file, `${def.id}: its own answer is not accepted`);
       if (def.type === "choice" && new Set(def.options.map((o) => o.uz)).size !== def.options.length) add(file, `${def.id}: duplicate options`);
       if (def.type === "order" && new Set(def.lines).size === 1) add(file, `${def.id}: all lines identical`);

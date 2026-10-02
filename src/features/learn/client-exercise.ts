@@ -15,6 +15,7 @@ export async function toClientExercise(exercise: Exercise, locale: string): Prom
     xp: exercise.xp,
     prompt: localized(content.prompt, locale),
     lang: content.lang,
+    ...(content.board && { board: content.board }),
   };
 
   switch (content.type) {
@@ -37,6 +38,8 @@ export async function toClientExercise(exercise: Exercise, locale: string): Prom
       for (let i = 0; i < 10 && lines.join("\n") === correctOrder; i++) lines = shuffle(content.lines);
       return { ...base, type: "ORDER", lines: lines.map((text) => ({ key: randomUUID(), text })) };
     }
+    case "MOVE":
+      return { ...base, type: "MOVE", board: content.board };
   }
 }
 

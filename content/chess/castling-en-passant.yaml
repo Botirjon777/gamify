@@ -96,3 +96,20 @@ exercises:
       - ikkinchi
       - saqlanib
     explanation: Yoʻl-yoʻlakay urib olish huquqi faqat oʻsha zaxoti kuchga ega, oʻtkazib yuborilsa undan foydalanib boʻlmaydi.
+  - id: castling-en-passant-009
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Oqlar yuradi. Ular qisqa qalʼalana oladimi?
+    board:
+      fen: r3k2r/8/8/8/8/5r2/8/R3K2R w KQkq - 0 1
+      marks:
+        - f1
+        - f3
+    options:
+      - Ha, hech narsa xalaqit bermaydi
+      - Yoʻq, chunki shoh hujum ostidagi f1 katagidan oʻta olmaydi
+      - Yoʻq, chunki taxtada qora tura bor
+      - Yoʻq, chunki shoh allaqachon yurgan
+    answer: 1
+    explanation: Qalʼalanishda shoh hujum ostidagi katakdan oʻta olmaydi. f3 dagi qora tura f1 katagini nazorat qilyapti, shuning uchun qisqa qalʼalanish mumkin emas — uzun qalʼalanish esa mumkin.

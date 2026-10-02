@@ -6,7 +6,7 @@ import { useSyncExternalStore } from "react";
  * Sound effects, synthesized with the Web Audio API — no audio files to download.
  * On by default; the switch (settings, drill header) is remembered on this device.
  */
-export type SoundName = "tap" | "correct" | "wrong" | "levelUp" | "complete" | "win" | "lose" | "tick" | "go" | "claim";
+export type SoundName = "tap" | "correct" | "wrong" | "levelUp" | "complete" | "win" | "lose" | "tick" | "go" | "claim" | "move" | "capture";
 
 interface Note {
   /** Frequency in Hz; glides to `to` when given. */
@@ -61,6 +61,12 @@ const SOUNDS: Record<SoundName, Note[]> = {
   claim: [
     { f: 988, at: 0, dur: 0.08 },
     { f: 1319, at: 0.07, dur: 0.35 },
+  ],
+  // Chess: a piece put down on the board; a capture knocks twice.
+  move: [{ f: 190, to: 90, at: 0, dur: 0.07, type: "triangle", gain: 1.6 }],
+  capture: [
+    { f: 260, to: 120, at: 0, dur: 0.05, type: "triangle", gain: 1.6 },
+    { f: 170, to: 80, at: 0.05, dur: 0.08, type: "triangle", gain: 1.6 },
   ],
 };
 

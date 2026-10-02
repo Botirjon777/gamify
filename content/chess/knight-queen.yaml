@@ -96,3 +96,26 @@ exercises:
       - 8 ta
     answer: 1
     explanation: Har bir oʻyinchida oʻyin boshida faqat 1 tadan vazir boʻladi, lekin pion evrilishi orqali ularni koʻpaytirish mumkin.
+  - id: knight-queen-009
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Ot taxta markazida turibdi. U nechta katakka yura oladi (kataklar belgilangan)?
+    board:
+      fen: 8/8/8/8/3N4/8/8/8
+      marks:
+        - b3
+        - b5
+        - c2
+        - c6
+        - e2
+        - e6
+        - f3
+        - f5
+    options:
+      - "4"
+      - "6"
+      - "8"
+      - "2"
+    answer: 2
+    explanation: Markazdagi ot 8 ta katakka yura oladi. Taxta chetida bu son kamayadi (burchakda — atigi 2 ta), shuning uchun «ot chetda — ahvoli chatoq» deyishadi.

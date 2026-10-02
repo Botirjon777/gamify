@@ -11,3 +11,18 @@ modules:
       - slug: geometry-basics
         title: Geometriya asoslari
         description: Burchaklar, yuzalar, hajmlar va tekislikdagi figuralar.
+      - slug: angles-lines
+        title: Burchaklar va toʻgʻri chiziqlar
+        description: Qoʻshni va vertikal burchaklar, bissektrisa, parallel toʻgʻri chiziqlar.
+      - slug: triangles
+        title: Uchburchaklar
+        description: Uchburchak turlari, burchaklar yigʻindisi va Pifagor teoremasi.
+      - slug: quadrilaterals-circles
+        title: Toʻrtburchaklar va aylana
+        description: Parallelogramm, romb, trapetsiya, aylana va uning elementlari.
+  - slug: geometry-measurement
+    title: Yuza va hajm
+    skills:
+      - slug: area-volume
+        title: Yuza va hajm
+        description: Shakllarning yuzi, jismlarning hajmi va sirt yuzi.

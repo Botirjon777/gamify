@@ -1,7 +1,8 @@
 "use client";
 
 import { useCallback } from "react";
-import { useFormatter, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
+import { useTimeText } from "@/components/use-time-text";
 import { Link } from "@/i18n/navigation";
 import { SkeletonRows } from "@/components/skeletons";
 import { useInfinite } from "@/components/use-infinite";
@@ -18,7 +19,7 @@ export function NotificationList({ initial, now }: { initial: NotificationItem[]
   const t = useTranslations("notifications");
   const tb = useTranslations("badges");
   const tc = useTranslations("common");
-  const format = useFormatter();
+  const time = useTimeText();
   const loadPage = useCallback((loaded: NotificationItem[]) => {
     const last = loaded[loaded.length - 1];
     return loadMoreNotifications({ createdAt: last.createdAt, id: last.id });
@@ -43,7 +44,7 @@ export function NotificationList({ initial, now }: { initial: NotificationItem[]
                   <span className="block text-sm leading-relaxed">
                     {t.rich(`types.${n.type}`, { ...values, b: (chunks) => <b className="font-bold">{chunks}</b> })}
                   </span>
-                  <span className="mt-0.5 block text-xs text-muted">{format.relativeTime(new Date(n.createdAt), new Date(now))}</span>
+                  <span className="mt-0.5 block text-xs text-muted">{time.ago(new Date(n.createdAt), new Date(now))}</span>
                 </span>
                 {!n.read && <span className="mt-1.5 size-2.5 shrink-0 rounded-full bg-grad-streak" />}
               </Link>

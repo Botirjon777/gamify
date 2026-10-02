@@ -1,0 +1,236 @@
+exercises:
+  - id: moles-mass-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Modda miqdorining oʻlchov birligi qaysi?
+    options:
+      - Gramm
+      - Mol
+      - Litr
+      - Kilogramm
+    answer: 1
+    explanation: Modda miqdori mol bilan oʻlchanadi; gramm va kilogramm — massa, litr esa hajm birligi.
+  - id: moles-mass-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: 1 mol moddada nechta zarracha (atom yoki molekula) boʻladi?
+    options:
+      - 6,02·10²³
+      - 3,01·10²³
+      - 6,02·10²²
+      - 22,4·10²³
+    answer: 0
+    explanation: Har qanday moddaning 1 molida Avogadro soniga teng, yaʼni 6,02·10²³ ta zarracha boʻladi.
+  - id: moles-mass-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Molyar massaning oʻlchov birligi qaysi?
+    options:
+      - mol/l
+      - g/l
+      - g/mol
+      - mol
+    answer: 2
+    explanation: Molyar massa 1 mol moddaning massasini bildiradi, shuning uchun u g/mol da oʻlchanadi.
+  - id: moles-mass-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Suvning (H₂O) molyar massasi nechaga teng? (H = 1, O = 16)
+    options:
+      - 16 g/mol
+      - 17 g/mol
+      - 34 g/mol
+      - 18 g/mol
+    answer: 3
+    explanation: M(H₂O) = 2 · 1 + 16 = 18 g/mol.
+  - id: moles-mass-005
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Gapni toʻldiring:"
+    code: Modda miqdorini topish uchun moddaning ___ uning ___ massasiga boʻlinadi.
+    answer:
+      - massasi
+      - molyar
+    bank:
+      - hajmi
+      - umumiy
+      - zaryadi
+    explanation: "Modda miqdori n = m / M formulasi bilan hisoblanadi: massa molyar massaga boʻlinadi."
+  - id: moles-mass-006
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: "Hisoblang va javobni g/mol da, faqat son bilan yozing (O = 16):"
+    code: Kislorod (O₂) ning molyar massasi nechaga teng?
+    answer:
+      - "32"
+      - 32 g/mol
+    explanation: "Kislorod molekulasi ikki atomdan iborat: M(O₂) = 2 · 16 = 32 g/mol."
+  - id: moles-mass-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Normal sharoitda 1 mol har qanday gaz qancha hajmni egallaydi?
+    options:
+      - 11,2 l
+      - 22,4 l
+      - 1 l
+      - 44,8 l
+    answer: 1
+    explanation: Normal sharoitda (0 °C, 1 atm) gazlarning molyar hajmi 22,4 l/mol ga teng.
+  - id: moles-mass-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: 2 mol karbonat angidridda (CO₂) nechta molekula bor?
+    options:
+      - 3,01·10²³
+      - 6,02·10²³
+      - 1,204·10²⁴
+      - 1,806·10²⁴
+    answer: 2
+    explanation: "Molekulalar soni modda miqdorini Avogadro soniga koʻpaytirib topiladi: 2 · 6,02·10²³ = 12,04·10²³ = 1,204·10²⁴ ta."
+  - id: moles-mass-009
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: "Hisoblang va javobni molda, faqat son bilan yozing (H = 1, O = 16):"
+    code: 36 g suv (H₂O) necha molga teng?
+    answer:
+      - "2"
+      - 2 mol
+    explanation: M(H₂O) = 18 g/mol, demak n = m / M = 36 / 18 = 2 mol.
+  - id: moles-mass-010
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: 2 mol natriy xlorid (NaCl) ning massasi qancha? (Na = 23, Cl = 35,5)
+    options:
+      - 29,25 g
+      - 58,5 g
+      - 175,5 g
+      - 117 g
+    answer: 3
+    explanation: M(NaCl) = 23 + 35,5 = 58,5 g/mol, demak m = n · M = 2 · 58,5 = 117 g.
+  - id: moles-mass-011
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Sulfat kislota (H₂SO₄) ning molyar massasi nechaga teng? (H = 1, S = 32, O = 16)
+    options:
+      - 82 g/mol
+      - 96 g/mol
+      - 98 g/mol
+      - 114 g/mol
+    answer: 2
+    explanation: M(H₂SO₄) = 2 · 1 + 32 + 4 · 16 = 98 g/mol.
+  - id: moles-mass-012
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: "Hisoblang va javobni grammda, faqat son bilan yozing (Ca = 40, C = 12, O = 16):"
+    code: 0,5 mol kalsiy karbonat (CaCO₃) ning massasi qancha?
+    answer:
+      - "50"
+      - 50 g
+    explanation: M(CaCO₃) = 40 + 12 + 3 · 16 = 100 g/mol, demak m = 0,5 · 100 = 50 g.
+  - id: moles-mass-013
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Gapni toʻldiring:"
+    code: Bir xil sharoitda teng hajmdagi turli gazlarda molekulalar soni ___ boʻladi; bu ___ qonuni deyiladi.
+    answer:
+      - teng
+      - Avogadro
+    bank:
+      - Lomonosov
+      - Mendeleyev
+      - turlicha
+    explanation: Avogadro qonuniga koʻra bir xil harorat va bosimda teng hajmdagi gazlarda molekulalar soni bir xil boʻladi.
+  - id: moles-mass-014
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Normal sharoitda 11,2 l kislorod necha molga teng?
+    options:
+      - 0,25 mol
+      - 0,5 mol
+      - 1 mol
+      - 2 mol
+    answer: 1
+    explanation: "Normal sharoitda 1 mol gaz 22,4 l hajmni egallaydi: n = 11,2 / 22,4 = 0,5 mol."
+  - id: moles-mass-015
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Massasi maʼlum boʻlgan moddadagi molekulalar sonini topish bosqichlarini tartiblang:"
+    lines:
+      - Moddaning kimyoviy formulasini yozish
+      - Atom massalari yordamida molyar massani hisoblash
+      - Massani molyar massaga boʻlib, modda miqdorini topish
+      - Modda miqdorini Avogadro soniga koʻpaytirish
+    explanation: Avval M topiladi, soʻng n = m / M, oxirida esa N = n · 6,02·10²³ hisoblanadi.
+  - id: moles-mass-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: 3,01·10²³ ta suv molekulasining massasi qancha? (H = 1, O = 16)
+    options:
+      - 9 g
+      - 18 g
+      - 4,5 g
+      - 36 g
+    answer: 0
+    explanation: 3,01·10²³ ta molekula — Avogadro sonining yarmi, yaʼni 0,5 mol; m = 0,5 · 18 = 9 g.
+  - id: moles-mass-017
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: "Hisoblang va javobni grammda, faqat son bilan yozing (H = 1, O = 16):"
+    code: 8 g vodorod (H₂) toʻliq yonganda necha gramm suv hosil boʻladi? 2H₂ + O₂ → 2H₂O
+    answer:
+      - "72"
+      - 72 g
+    explanation: "8 g H₂ — bu 8 / 2 = 4 mol. Tenglamaga koʻra shuncha mol suv hosil boʻladi: 4 · 18 = 72 g."
+  - id: moles-mass-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Temir(III) oksid (Fe₂O₃) tarkibidagi temirning massa ulushi qancha? (Fe = 56, O = 16)
+    options:
+      - 30%
+      - 35%
+      - 56%
+      - 70%
+    answer: 3
+    explanation: M(Fe₂O₃) = 2 · 56 + 3 · 16 = 160 g/mol; temirning ulushi 112 / 160 = 0,7, yaʼni 70%.
+  - id: moles-mass-019
+    type: order
+    difficulty: 3
+    lang: text
+    prompt: "Moddalarni molyar massasi ortib borish tartibida joylashtiring (H = 1, C = 12, O = 16):"
+    lines:
+      - H₂
+      - CH₄
+      - H₂O
+      - O₂
+      - CO₂
+    explanation: "Molyar massalar: H₂ — 2, CH₄ — 16, H₂O — 18, O₂ — 32, CO₂ — 44 g/mol."
+  - id: moles-mass-020
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Normal sharoitda 44,8 l karbonat angidrid (CO₂) ning massasi qancha? (C = 12, O = 16)
+    options:
+      - 88 g
+      - 44 g
+      - 22 g
+      - 66 g
+    answer: 0
+    explanation: n = 44,8 / 22,4 = 2 mol; M(CO₂) = 44 g/mol, demak m = 2 · 44 = 88 g.

@@ -90,6 +90,7 @@
       }
     },
     "nav": {
+      "iq": "IQ test",
       "how": "Qanday ishlaydi",
       "directions": "Yoʻnalishlar",
       "game": "Musobaqa",
@@ -184,6 +185,22 @@
       "contact": "Aloqa",
       "telegram": "Telegram",
       "rights": "Barcha huquqlar himoyalangan."
+    },
+    "iq": {
+      "badge": "Roʻyxatdan oʻtmasdan",
+      "title": "IQ darajangizni 10 daqiqada bilib oling",
+      "text": "Mantiqiy fikrlash boʻyicha qisqa test: ketma-ketliklar, oʻxshatishlar, mantiqiy masalalar. Savollar sizning darajangizga moslashadi.",
+      "points": {
+        "questions": "{count} ta savol, har biriga {seconds} soniya",
+        "certificate": "IQ ballingiz va ism-familiyangiz yozilgan sertifikat (PDF)",
+        "share": "Natijani doʻstlarga yuboring yoki storiga joylang"
+      },
+      "cta": "IQ testni boshlash",
+      "price": "Test bepul · natija va sertifikat — <price></price>",
+      "sample": "Namuna",
+      "certificate": "IQ sertifikati",
+      "sampleName": "Ism Familiya",
+      "percentile": "Odamlarning {percentile} foizidan yuqori"
     }
   },
   "auth": {
@@ -424,7 +441,8 @@
       "CHOICE": "Toʻgʻri javobni tanlang",
       "OUTPUT": "Natijani toping",
       "FILL": "Boʻsh joylarni toʻldiring",
-      "ORDER": "Tartibga keltiring"
+      "ORDER": "Tartibga keltiring",
+      "MOVE": "Yurishni toping"
     },
     "outputPlaceholder": "Javobingizni yozing",
     "orderHint": "Qatorlarni toʻgʻri tartibda bosing. Olib tashlash uchun yuqoridagi qatorni bosing.",
@@ -503,6 +521,25 @@
       "level": "Daraja",
       "disclaimer": "Zukko IQ — mantiqiy fikrlash boʻyicha taxminiy baho. Bu klinik IQ test emas.",
       "print": "Chop etish / PDF saqlash"
+    },
+    "cheer": {
+      "done": "{done} / {total} savol ortda",
+      "continue": "Davom etish",
+      "start": {
+        "title": "Zoʻr boshladingiz!",
+        "fast": "Siz koʻpchilik ishtirokchilardan tezroq ketyapsiz. Koʻpchilikka shu yergacha yetish uchun koʻproq vaqt kerak boʻladi. Shu surʼatda davom eting!",
+        "steady": "Siz shoshilmasdan, oʻylab javob beryapsiz — aniqlik tezlikdan muhimroq. Shunday davom eting!"
+      },
+      "half": {
+        "title": "Yarmi ortda!",
+        "fast": "Surʼatingiz hali ham koʻpchilikdan yuqori. Diqqatni yoʻqotmang — eng qiziq savollar hali oldinda!",
+        "steady": "Testning yarmini tugatdingiz. Chuqur nafas oling va diqqatni jamlang — qolgani ham qoʻlingizdan keladi!"
+      },
+      "almost": {
+        "title": "Marraga oz qoldi!",
+        "fast": "Atigi {left} ta savol qoldi. Siz bu yerga koʻpchilikdan tezroq yetib keldingiz — oxirigacha shu surʼatni ushlang!",
+        "steady": "Atigi {left} ta savol qoldi. Oxirgi savollarga bor diqqatingizni qarating — natijangiz ularga ham bogʻliq!"
+      }
     }
   },
   "leaderboard": {
@@ -1088,7 +1125,8 @@
           "CHOICE": "Variantli test",
           "OUTPUT": "Natijani yozish",
           "FILL": "Boʻsh joyni toʻldirish",
-          "ORDER": "Tartiblash"
+          "ORDER": "Tartiblash",
+          "MOVE": "Shaxmat: yurish"
         },
         "level": "{difficulty}-daraja · {xp} XP",
         "lang": "Til",
@@ -1110,7 +1148,15 @@
         "explanation": "Tushuntirish",
         "explanationHint": "Ixtiyoriy. Oʻquvchi javob berganidan keyin koʻrsatiladi.",
         "preview": "Oʻquvchiga koʻrinishi",
-        "previewNote": "Toʻgʻri javoblar bu yerda belgilangan. Oʻquvchiga variantlar va qatorlar aralashtirib koʻrsatiladi."
+        "previewNote": "Toʻgʻri javoblar bu yerda belgilangan. Oʻquvchiga variantlar va qatorlar aralashtirib koʻrsatiladi.",
+        "board": "Shaxmat taxtasi (FEN)",
+        "boardHint": "Ixtiyoriy. Savol ustida diagramma koʻrsatiladi. Faqat donalar joylashuvi yetarli.",
+        "boardMoveHint": "Toʻliq FEN: joylashuv, kim yurishi (w yoki b), qalʼalanish huquqi… Oʻquvchi yuradigan tomon — FEN dagi navbat.",
+        "boardMarks": "Belgilangan kataklar",
+        "boardMarksHint": "Vergul bilan: e4, d5",
+        "boardFlip": "Qoralar tomonidan koʻrsatish",
+        "moves": "Toʻgʻri yurishlar",
+        "movesHint": "Shaxmat yozuvida, vergul bilan: Qh7#, Nf3, exd5, O-O, e8=Q. Agar yurish mat boʻlsa, boshqa har qanday mat ham qabul qilinadi."
       },
       "iq": {
         "new": "Yangi IQ savol",
@@ -1472,8 +1518,19 @@
         "contact": "Telegram: @username yoki https://t.me/… koʻrinishida yozing",
         "iqPriceUzs": "Narx 1 000 soʻmdan kam boʻlmasin",
         "iqOldPriceUzs": "Eski narx yangi narxdan katta boʻlishi kerak",
+        "proPriceUzs": "Pro narxi 1 000 soʻmdan kam boʻlmasin",
+        "diamondPriceUzs": "Diamond narxi 1 000 soʻmdan kam boʻlmasin",
+        "annualDiscount": "Chegirma 0 dan 90 gacha butun son boʻlishi kerak",
         "invalid": "Maʼlumotlarni tekshiring"
-      }
+      },
+      "plans": "Tariflar narxi",
+      "plansText": "Pro va Diamond tariflarining bir oylik narxi. Yillik toʻlov chegirmasi shu narxlardan hisoblanadi. Kutilayotgan toʻlovlar summasi oʻzgarmaydi.",
+      "proPrice": "Pro — oyiga, soʻm",
+      "diamondPrice": "Diamond — oyiga, soʻm",
+      "annualDiscount": "Yillik toʻlov chegirmasi, %",
+      "annualDiscountHint": "0 dan 90 gacha. 0 — chegirmasiz.",
+      "planMonthly": "Oylik: {price} soʻm",
+      "planAnnual": "Yillik: {total} soʻm (oyiga {perMonth})"
     }
   },
   "common": {
@@ -1673,6 +1730,46 @@
       "imageLabel": "Zukko IQ",
       "imagePercentile": "{percentile}% dan yuqori",
       "imageInvite": "Sen ham sinab koʻr!"
+    }
+  },
+  "chess": {
+    "board": "Shaxmat taxtasi",
+    "white": "oq",
+    "black": "qora",
+    "pieces": {
+      "K": "shoh",
+      "Q": "vazir",
+      "R": "tura",
+      "B": "fil",
+      "N": "ot",
+      "P": "piyoda"
+    },
+    "whiteToMove": "Oqlar yuradi — donani bosing yoki suring",
+    "blackToMove": "Qoralar yuradi — donani bosing yoki suring",
+    "made": "Yurish qilindi",
+    "takeBack": "Qaytarish",
+    "promote": "Piyoda qaysi donaga aylansin?",
+    "answer": "Toʻgʻri yurish: {move}"
+  },
+  "time": {
+    "now": "hozirgina",
+    "minutes": "{count} daqiqa oldin",
+    "hours": "{count} soat oldin",
+    "days": "{count} kun oldin",
+    "date": "{day}-{month}",
+    "months": {
+      "0": "yanvar",
+      "1": "fevral",
+      "2": "mart",
+      "3": "aprel",
+      "4": "may",
+      "5": "iyun",
+      "6": "iyul",
+      "7": "avgust",
+      "8": "sentabr",
+      "9": "oktabr",
+      "10": "noyabr",
+      "11": "dekabr"
     }
   }
 }

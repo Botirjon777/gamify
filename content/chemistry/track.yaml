@@ -8,6 +8,9 @@ modules:
   - slug: general-chem
     title: Umumiy kimyo
     skills:
+      - slug: atom-structure
+        title: Atom tuzilishi
+        description: Proton, neytron, elektron va izotoplar.
       - slug: periodic-table
         title: Davriy sistema
         description: Kimyoviy elementlar va ularning xossalari.
@@ -20,3 +23,12 @@ modules:
       - slug: chemical-reactions
         title: Kimyoviy reaksiyalar
         description: Reaksiya turlari va ularning tezligi.
+      - slug: acids-bases-salts
+        title: Kislotalar, asoslar va tuzlar
+        description: Kislota, asos va tuzlarning xossalari, pH va indikatorlar.
+  - slug: chem-calculations
+    title: Kimyoviy hisoblashlar
+    skills:
+      - slug: moles-mass
+        title: Mol va molyar massa
+        description: Modda miqdori, molyar massa va oddiy hisob-kitoblar.

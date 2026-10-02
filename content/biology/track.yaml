@@ -1,6 +1,6 @@
 slug: biology
 title: Biologiya asoslari
-description: Hujayra tuzilishi, genetika va inson anatomiyasi.
+description: Hujayra tuzilishi, genetika, inson anatomiyasi, oʻsimliklar, hayvonlar va ekologiya.
 icon: dna
 order: 4
 subject: BIOLOGY
@@ -20,3 +20,18 @@ modules:
       - slug: human-anatomy
         title: Inson anatomiyasi
         description: Inson organlari va tana tizimlari.
+  - slug: plants-animals
+    title: Oʻsimliklar va hayvonlar
+    skills:
+      - slug: plants-photosynthesis
+        title: Oʻsimliklar va fotosintez
+        description: Oʻsimlik organlari, fotosintez va koʻpayish.
+      - slug: animals-classification
+        title: Hayvonlar va tasnif
+        description: Hayvon guruhlari va tirik organizmlar sistematikasi.
+  - slug: bio-ecology
+    title: Ekologiya
+    skills:
+      - slug: ecology-ecosystems
+        title: Ekologiya va ekotizimlar
+        description: Oziq zanjiri, ekotizimlar va organizmlar munosabatlari.

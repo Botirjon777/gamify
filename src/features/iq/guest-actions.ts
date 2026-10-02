@@ -10,7 +10,8 @@ import { getCurrentTenant, isDefaultTenant } from "@/lib/tenant";
 import { partnerFromCookie } from "@/features/partners/service";
 import { GUEST_IQ_QUESTIONS, guestQuestion, newGuestCode, newGuestToken, normalizeGuestCode } from "./guest";
 import { iqFromRating, pickIqItem, START_RATING, updateRatings, userK } from "./rating";
-import { isInTime } from "./service";
+import type { IqCheer } from "./cheer";
+import { isInTime, nextQuestionStart, typicalAnswerMs } from "./service";
 import type { IqQuestion } from "./types";
 
 const nameSchema = z
@@ -113,14 +114,15 @@ export async function answerGuestIq(token: string, itemId: string, rawChoice: nu
   const limit = await getRateLimiter().hit(`guestiq:answer:${key.slice(0, 16)}`, 40, 60);
   if (!limit.ok) throw new Error("Too many answers");
 
-  await db.$transaction(async (tx) => {
+  const typicalMs = await typicalAnswerMs();
+  const cheer = await db.$transaction(async (tx): Promise<IqCheer | null> => {
     const test = await tx.guestIqTest.findUnique({ where: { token: key } });
     if (!test) throw new Error("Test not found");
-    if (test.status === "FINISHED") return;
+    if (test.status === "FINISHED") return null;
 
     // Claim the current question atomically — a double submit finds nothing to claim and just gets the current state.
     const claimed = await tx.guestIqTest.updateMany({ where: { id: test.id, status: "ACTIVE", currentItemId: itemId }, data: { currentItemId: null } });
-    if (claimed.count === 0) return;
+    if (claimed.count === 0) return null;
 
     const item = await tx.iqItem.findUniqueOrThrow({ where: { id: itemId } });
     const correct = isInTime(test.currentShownAt!) && choice !== null && choice === item.answer;
@@ -134,15 +136,17 @@ export async function answerGuestIq(token: string, itemId: string, rawChoice: nu
     // Out of questions (tiny bank) → finish early rather than repeat one.
     if (!next || test.askedItemIds.includes(next.id)) {
       await tx.guestIqTest.update({ where: { id: test.id }, data: { ...progress, status: "FINISHED", finishedAt: new Date(), iq: iqFromRating(rating) } });
-      return;
+      return null;
     }
+    const start = nextQuestionStart(answered, test.total, test.createdAt, typicalMs);
     await tx.guestIqTest.update({
       where: { id: test.id },
-      data: { ...progress, currentItemId: next.id, currentShownAt: new Date(), askedItemIds: { push: next.id } },
+      data: { ...progress, currentItemId: next.id, currentShownAt: start.shownAt, askedItemIds: { push: next.id } },
     });
+    return start.cheer;
   });
 
   const test = await db.guestIqTest.findUniqueOrThrow({ where: { token: key } });
   if (test.status === "FINISHED" || !test.currentItemId) return { status: "FINISHED" };
-  return { status: "ACTIVE", question: await guestQuestion(test, locale) };
+  return { status: "ACTIVE", question: { ...(await guestQuestion(test, locale)), ...(cheer && { cheer }) } };
 }

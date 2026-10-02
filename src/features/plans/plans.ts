@@ -8,15 +8,13 @@ export interface PlanLimits {
   /** Max members in a clan this user leads. */
   clanMemberLimit: number;
   maxFriends: number;
-  /** Monthly price in soʻm (payments via Click / Payme — coming soon). */
-  priceUzs: number;
 }
 
-/** Free grows slower on purpose; Pro and Diamond remove the brakes. */
+/** Free grows slower on purpose; Pro and Diamond remove the brakes. (What they cost: payments/pricing.) */
 export const PLANS: Record<UserPlan, PlanLimits> = {
-  FREE: { xpMultiplier: 1, dailyExerciseXpCap: 150, clanMemberLimit: 15, maxFriends: 50, priceUzs: 0 },
-  PRO: { xpMultiplier: 1.5, dailyExerciseXpCap: 600, clanMemberLimit: 30, maxFriends: 300, priceUzs: 39_000 },
-  DIAMOND: { xpMultiplier: 2, dailyExerciseXpCap: null, clanMemberLimit: 50, maxFriends: 1000, priceUzs: 79_000 },
+  FREE: { xpMultiplier: 1, dailyExerciseXpCap: 150, clanMemberLimit: 15, maxFriends: 50 },
+  PRO: { xpMultiplier: 1.5, dailyExerciseXpCap: 600, clanMemberLimit: 30, maxFriends: 300 },
+  DIAMOND: { xpMultiplier: 2, dailyExerciseXpCap: null, clanMemberLimit: 50, maxFriends: 1000 },
 };
 
 export const PLAN_ORDER: UserPlan[] = ["FREE", "PRO", "DIAMOND"];

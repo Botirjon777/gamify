@@ -7,7 +7,7 @@ import { requireSession } from "@/lib/auth/session";
 import { getRateLimiter } from "@/lib/rate-limit";
 import { notifyMany } from "@/features/notifications/service";
 import { iqCertificateAccess } from "@/features/iq/certificate";
-import { iqPrice } from "@/features/settings/service";
+import { iqPrice, planPricing } from "@/features/settings/service";
 import { BILLING, BILLINGS, priceFor, type PaidPlan } from "./pricing";
 import { checkPromo } from "./promo";
 import { discountedPrice, type PromoProblem } from "./promo-rules";
@@ -52,7 +52,7 @@ export async function requestPayment(input: { plan: string; billing: string; ref
 
   const { plan, billing, reference } = parsed.data;
   const { months } = BILLING[billing];
-  const fullPrice = priceFor(plan as PaidPlan, billing);
+  const fullPrice = priceFor(await planPricing(), plan as PaidPlan, billing);
 
   // The price is always computed here — the browser only shows a preview.
   const promo = parsed.data.promo ? await checkPromo(db, parsed.data.promo, user.id, plan) : null;

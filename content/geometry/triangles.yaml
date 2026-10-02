@@ -1,0 +1,232 @@
+exercises:
+  - id: triangles-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Uchala tomoni oʻzaro teng boʻlgan uchburchak qanday ataladi?
+    options:
+      - Toʻgʻri burchakli uchburchak
+      - Teng tomonli uchburchak
+      - Oʻtmas burchakli uchburchak
+      - Turli tomonli uchburchak
+    answer: 1
+    explanation: Barcha tomonlari teng boʻlgan uchburchak teng tomonli (muntazam) uchburchak deyiladi.
+  - id: triangles-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Toʻgʻri burchakli uchburchakda toʻgʻri burchak qarshisida yotgan tomon qanday ataladi?
+    options:
+      - Katet
+      - Mediana
+      - Gipotenuza
+      - Balandlik
+    answer: 2
+    explanation: Toʻgʻri burchak qarshisidagi tomon gipotenuza, toʻgʻri burchakni hosil qiluvchi ikki tomon esa katetlar deyiladi.
+  - id: triangles-003
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: Uchburchakning ikki burchagi 50° va 60°. Uchinchi burchagi necha gradus?
+    code: 180° − 50° − 60° = ?
+    answer:
+      - "70"
+      - 70°
+    explanation: Uchburchak burchaklari yigʻindisi 180°, shuning uchun uchinchi burchak 180° − 50° − 60° = 70°.
+  - id: triangles-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Teng tomonli uchburchakning har bir burchagi necha gradus?
+    options:
+      - "60"
+      - "45"
+      - "90"
+      - "30"
+    answer: 0
+    explanation: Teng tomonli uchburchakning uchala burchagi teng, shuning uchun har biri 180° / 3 = 60°.
+  - id: triangles-005
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Uchburchakning uchini qarshisidagi tomonning oʻrtasi bilan tutashtiruvchi kesma qanday ataladi?
+    options:
+      - Bissektrisa
+      - Balandlik
+      - Oʻrta chiziq
+      - Mediana
+    answer: 3
+    explanation: Mediana uchburchak uchini qarshi tomonning oʻrtasi bilan tutashtiradi. Oʻrta chiziq esa ikki tomonning oʻrtalarini tutashtiradi.
+  - id: triangles-006
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Pifagor teoremasini toʻldiring:"
+    code: Toʻgʻri burchakli uchburchakda ___ kvadrati ___ kvadratlarining yigʻindisiga teng.
+    answer:
+      - gipotenuzaning
+      - katetlarning
+    bank:
+      - burchaklarning
+      - medianalarning
+    explanation: Pifagor teoremasi c² = a² + b² koʻrinishida yoziladi, bu yerda c — gipotenuza, a va b — katetlar.
+  - id: triangles-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Teng yonli uchburchakning asosidagi burchaklari haqida qaysi tasdiq har doim toʻgʻri?
+    options:
+      - Ularning yigʻindisi 180° ga teng
+      - Ularning har biri 60° ga teng
+      - Ular oʻzaro teng
+      - Ulardan biri toʻgʻri burchak
+    answer: 2
+    explanation: Teng yonli uchburchakda teng tomonlar qarshisidagi burchaklar, yaʼni asosdagi burchaklar oʻzaro teng boʻladi.
+  - id: triangles-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Uchburchakning bir tomoni 18 sm. Shu tomonga parallel boʻlgan oʻrta chizigʻi necha sm?
+    options:
+      - "18"
+      - "36"
+      - "6"
+      - "9"
+    answer: 3
+    explanation: Uchburchakning oʻrta chizigʻi ikki tomonning oʻrtalarini tutashtiradi, u uchinchi tomonga parallel va uning yarmiga teng. 18 / 2 = 9 sm.
+  - id: triangles-009
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Teng yonli uchburchakning uchidagi (yon tomonlar orasidagi) burchagi 40°. Asosidagi har bir burchak necha gradus?
+    options:
+      - "70"
+      - "140"
+      - "40"
+      - "80"
+    answer: 0
+    explanation: Asosdagi ikki burchak teng va ularning yigʻindisi 180° − 40° = 140°. Har biri 140° / 2 = 70°.
+  - id: triangles-010
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Asosi 10 sm, shu asosga tushirilgan balandligi 6 sm boʻlgan uchburchakning yuzini toping (sm² da).
+    code: S = (10 · 6) / 2 = ?
+    answer: "30"
+    explanation: Uchburchak yuzi asos bilan balandlik koʻpaytmasining yarmiga teng. S = (10 · 6) / 2 = 30 sm².
+  - id: triangles-011
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Qaysi uchta kesmadan uchburchak yasab boʻlmaydi?
+    options:
+      - 3 sm, 4 sm, 5 sm
+      - 2 sm, 3 sm, 6 sm
+      - 5 sm, 5 sm, 8 sm
+      - 4 sm, 6 sm, 7 sm
+    answer: 1
+    explanation: Uchburchakda istalgan ikki tomon yigʻindisi uchinchi tomondan katta boʻlishi kerak. 2 + 3 = 5 < 6, shuning uchun bunday uchburchak mavjud emas.
+  - id: triangles-012
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Toʻgʻri burchakli uchburchakning oʻtkir burchaklaridan biri 35°. Ikkinchi oʻtkir burchagi necha gradus?
+    options:
+      - "65"
+      - "145"
+      - "55"
+      - "45"
+    answer: 2
+    explanation: Toʻgʻri burchakli uchburchakda oʻtkir burchaklar yigʻindisi 90°, demak ikkinchisi 90° − 35° = 55°.
+  - id: triangles-013
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Teng tomonli uchburchakning perimetri 27 sm. Uning tomoni necha sm?
+    code: 27 / 3 = ?
+    answer:
+      - "9"
+      - 9 sm
+    explanation: Uchala tomon teng, shuning uchun har bir tomon 27 / 3 = 9 sm.
+  - id: triangles-014
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Katetlari 5 sm va 12 sm boʻlgan toʻgʻri burchakli uchburchakning gipotenuzasini topish bosqichlarini tartiblang:"
+    lines:
+      - "Pifagor teoremasini yozamiz: c² = a² + b²"
+      - "Qiymatlarni qoʻyamiz: c² = 5² + 12²"
+      - "Kvadratlarni hisoblaymiz: c² = 25 + 144"
+      - "Qoʻshamiz: c² = 169"
+      - "Ildiz chiqaramiz: c = 13 sm"
+    explanation: 5² + 12² = 25 + 144 = 169, 169 ning kvadrat ildizi 13. Demak gipotenuza 13 sm.
+  - id: triangles-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Uchburchakning tashqi burchagi 120°. Unga qoʻshni boʻlmagan ikki ichki burchakdan biri 50°. Ikkinchisi necha gradus?
+    options:
+      - "60"
+      - "70"
+      - "130"
+      - "10"
+    answer: 1
+    explanation: Tashqi burchak unga qoʻshni boʻlmagan ikki ichki burchak yigʻindisiga teng. 120° − 50° = 70°.
+  - id: triangles-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Gipotenuzasi 17 sm, bir kateti 8 sm boʻlgan toʻgʻri burchakli uchburchakning ikkinchi kateti necha sm?
+    options:
+      - "9"
+      - "25"
+      - "15"
+      - "13"
+    answer: 2
+    explanation: b² = 17² − 8² = 289 − 64 = 225, demak b = 15 sm.
+  - id: triangles-017
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Teng yonli uchburchakning yon tomonlari 10 sm dan, asosi 12 sm. Asosiga tushirilgan balandligini toping (sm da).
+    code: h² = 10² − 6², h = ?
+    answer: "8"
+    explanation: Teng yonli uchburchakda asosga tushirilgan balandlik asosni teng ikkiga (6 sm dan) boʻladi. h² = 100 − 36 = 64, h = 8 sm.
+  - id: triangles-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: "Uchburchak burchaklarining nisbati 1 : 2 : 3 kabi. Eng katta burchagi necha gradus?"
+    options:
+      - "90"
+      - "60"
+      - "120"
+      - "108"
+    answer: 0
+    explanation: x + 2x + 3x = 180°, 6x = 180°, x = 30°. Eng katta burchak 3 · 30° = 90°.
+  - id: triangles-019
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "30° li burchak qarshisidagi katet xossasini toʻldiring:"
+    code: Toʻgʻri burchakli uchburchakda 30° li burchak qarshisidagi katet gipotenuzaning ___ teng. Gipotenuza 14 sm boʻlsa, bu katet ___ sm boʻladi.
+    answer:
+      - yarmiga
+      - "7"
+    bank:
+      - "21"
+      - "28"
+      - choragiga
+    explanation: 30° li burchak qarshisidagi katet gipotenuzaning yarmiga teng, shuning uchun 14 / 2 = 7 sm.
+  - id: triangles-020
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Tomonlari 6 sm, 8 sm va 10 sm boʻlgan uchburchak qanday uchburchak?
+    options:
+      - Oʻtkir burchakli uchburchak
+      - Oʻtmas burchakli uchburchak
+      - Teng yonli uchburchak
+      - Toʻgʻri burchakli uchburchak
+    answer: 3
+    explanation: 6² + 8² = 36 + 64 = 100 = 10². Pifagor teoremasiga teskari teoremaga koʻra bu uchburchak toʻgʻri burchakli.

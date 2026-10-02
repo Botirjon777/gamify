@@ -8,9 +8,11 @@ import { toast } from "@/components/ui/toast";
 import { PriceTag } from "@/features/settings/components/price-tag";
 import { discountPercent, formatCardNumber } from "@/features/settings/rules";
 import { updateSettings } from "../settings-actions";
+import { groupDigits } from "@/lib/format";
+import { perMonth, priceFor, type PlanPricing } from "@/features/payments/pricing";
 
 const input = "h-11 w-full rounded-xl border border-border bg-background px-3.5 outline-none focus:border-brand focus:ring-4 focus:ring-brand/15";
-const group = (n: number) => n.toLocaleString("en-US").replace(/,/g, " ");
+const group = groupDigits;
 
 function Field({ label, hint, children }: { label: string; hint?: string; children: React.ReactNode }) {
   return (
@@ -28,6 +30,7 @@ export interface SettingsValues {
   contact: string;
   iqPriceUzs: number;
   iqOldPriceUzs: number | null;
+  pricing: PlanPricing;
 }
 
 /** Everything in the Setting table on one form. */
@@ -40,6 +43,10 @@ export function SettingsForm({ initial }: { initial: SettingsValues }) {
   const [contact, setContact] = useState(initial.contact);
   const [price, setPrice] = useState(String(initial.iqPriceUzs));
   const [oldPrice, setOldPrice] = useState(initial.iqOldPriceUzs ? String(initial.iqOldPriceUzs) : "");
+  const [proPrice, setProPrice] = useState(String(initial.pricing.monthly.PRO));
+  const [diamondPrice, setDiamondPrice] = useState(String(initial.pricing.monthly.DIAMOND));
+  const [annualDiscount, setAnnualDiscount] = useState(String(initial.pricing.annualDiscount));
+  const pricing: PlanPricing = { monthly: { PRO: Number(proPrice) || 0, DIAMOND: Number(diamondPrice) || 0 }, annualDiscount: Math.min(90, Math.max(0, Number(annualDiscount) || 0)) };
 
   const priceUzs = Number(price) || 0;
   const oldPriceUzs = oldPrice.trim() ? Number(oldPrice) || 0 : null;
@@ -52,7 +59,16 @@ export function SettingsForm({ initial }: { initial: SettingsValues }) {
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     start(async () => {
-      const result = await updateSettings({ cardNumber, cardHolder, contact, iqPriceUzs: priceUzs, iqOldPriceUzs: oldPriceUzs }).catch(() => ({ ok: false as const, error: "invalid" }));
+      const result = await updateSettings({
+        cardNumber,
+        cardHolder,
+        contact,
+        iqPriceUzs: priceUzs,
+        iqOldPriceUzs: oldPriceUzs,
+        proPriceUzs: pricing.monthly.PRO,
+        diamondPriceUzs: pricing.monthly.DIAMOND,
+        annualDiscount: Number(annualDiscount),
+      }).catch(() => ({ ok: false as const, error: "invalid" }));
       if (!result.ok) return void toast.error(t.has(`errors.${result.error}`) ? t(`errors.${result.error}`) : t("errors.invalid"));
       toast.success(t("saved"));
       router.refresh();
@@ -106,6 +122,33 @@ export function SettingsForm({ initial }: { initial: SettingsValues }) {
             <PriceTag price={preview} />
           </span>
         </p>
+      </section>
+
+      <section className={card}>
+        <div>
+          <h2 className="font-display text-lg font-bold">{t("plans")}</h2>
+          <p className="mt-1 text-sm text-muted">{t("plansText")}</p>
+        </div>
+        <div className="grid gap-4 sm:grid-cols-3">
+          <Field label={t("proPrice")}>
+            <input type="number" min={1000} step={1000} value={proPrice} onChange={(e) => setProPrice(e.target.value)} required className={input} />
+          </Field>
+          <Field label={t("diamondPrice")}>
+            <input type="number" min={1000} step={1000} value={diamondPrice} onChange={(e) => setDiamondPrice(e.target.value)} required className={input} />
+          </Field>
+          <Field label={t("annualDiscount")} hint={t("annualDiscountHint")}>
+            <input type="number" min={0} max={90} step={1} value={annualDiscount} onChange={(e) => setAnnualDiscount(e.target.value)} required className={input} />
+          </Field>
+        </div>
+        <ul className="grid gap-2 rounded-2xl bg-background px-4 py-3 text-sm sm:grid-cols-2">
+          {(["PRO", "DIAMOND"] as const).map((plan) => (
+            <li key={plan}>
+              <b>{plan === "PRO" ? "Pro" : "Diamond"}</b>
+              <span className="block text-muted">{t("planMonthly", { price: group(priceFor(pricing, plan, "monthly")) })}</span>
+              <span className="block text-muted">{t("planAnnual", { total: group(priceFor(pricing, plan, "annual")), perMonth: group(perMonth(pricing, plan, "annual")) })}</span>
+            </li>
+          ))}
+        </ul>
       </section>
 
       <Button type="submit" disabled={pending} className="h-12 w-full sm:w-fit sm:px-10">

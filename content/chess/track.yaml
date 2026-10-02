@@ -59,3 +59,15 @@ modules:
       - slug: pawn-endgame
         title: Pion endshpili
         description: Pionlar ishtirokidagi oxirgi oʻyin qoidalari va pionni farzinga aylantirish.
+  - slug: board-practice
+    title: Taxtada amaliyot
+    skills:
+      - slug: moves-practice
+        title: Yurishlar amaliyoti
+        description: "Donalarni taxtada oʻzingiz yuring: urish, qalʼalanish, yoʻl-yoʻlakay urish, piyodani aylantirish va shohdan himoyalanish."
+      - slug: tactics-practice
+        title: Taktika amaliyoti
+        description: Vilka, bogʻlash, shish va ochiq shoh — taxtada toʻgʻri yurishni toping.
+      - slug: mate-in-one
+        title: Bir yurishda mat
+        description: "Mashhur mat qoliplari: bitta yurishda oʻyinni yakunlang."

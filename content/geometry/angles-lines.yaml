@@ -1,0 +1,236 @@
+exercises:
+  - id: angles-lines-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Yoyiq burchak necha gradusga teng?
+    options:
+      - "90"
+      - "180"
+      - "270"
+      - "360"
+    answer: 1
+    explanation: Yoyiq burchakning tomonlari bitta toʻgʻri chiziqda yotadi va u 180° ga teng.
+  - id: angles-lines-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: 40° li burchak qaysi turga kiradi?
+    options:
+      - Oʻtkir burchak
+      - Toʻgʻri burchak
+      - Oʻtmas burchak
+      - Yoyiq burchak
+    answer: 0
+    explanation: 90° dan kichik burchaklar oʻtkir burchak deyiladi. 40° < 90°, demak bu oʻtkir burchak.
+  - id: angles-lines-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Qoʻshni burchaklarning yigʻindisi necha gradus?
+    options:
+      - "90"
+      - "360"
+      - "180"
+      - "120"
+    answer: 2
+    explanation: Qoʻshni burchaklar birgalikda yoyiq burchak hosil qiladi, shuning uchun ularning yigʻindisi 180° ga teng.
+  - id: angles-lines-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Vertikal burchaklar haqida qaysi tasdiq har doim toʻgʻri?
+    options:
+      - Ularning yigʻindisi 180° ga teng
+      - Ularning har biri toʻgʻri burchak
+      - Ularning yigʻindisi 90° ga teng
+      - Ular oʻzaro teng
+    answer: 3
+    explanation: Ikki toʻgʻri chiziq kesishganda hosil boʻladigan vertikal burchaklar har doim oʻzaro teng boʻladi.
+  - id: angles-lines-005
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: Qoʻshni burchaklardan biri 70°. Ikkinchisi necha gradus?
+    code: 180° − 70° = ?
+    answer:
+      - "110"
+      - 110°
+    explanation: Qoʻshni burchaklar yigʻindisi 180°, shuning uchun ikkinchi burchak 180° − 70° = 110°.
+  - id: angles-lines-006
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Bir tekislikda yotib, kesishmaydigan ikki toʻgʻri chiziq qanday ataladi?
+    options:
+      - Perpendikulyar toʻgʻri chiziqlar
+      - Parallel toʻgʻri chiziqlar
+      - Kesishuvchi toʻgʻri chiziqlar
+      - Ayqash toʻgʻri chiziqlar
+    answer: 1
+    explanation: Bir tekislikda yotgan va umumiy nuqtasi boʻlmagan toʻgʻri chiziqlar parallel deyiladi. Ayqash toʻgʻri chiziqlar esa bir tekislikda yotmaydi.
+  - id: angles-lines-007
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Taʼriflarni toʻldiring:"
+    code: Burchakni teng ikkiga boʻluvchi nur burchakning ___ deyiladi. 90° li burchak hosil qilib kesishuvchi toʻgʻri chiziqlar esa ___ toʻgʻri chiziqlar deyiladi.
+    answer:
+      - bissektrisasi
+      - perpendikulyar
+    bank:
+      - medianasi
+      - parallel
+    explanation: Bissektrisa burchakni ikkita teng burchakka boʻladi. Toʻgʻri burchak ostida kesishuvchi toʻgʻri chiziqlar perpendikulyar deyiladi.
+  - id: angles-lines-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Ikki toʻgʻri chiziq kesishganda hosil boʻlgan burchaklardan biri 35°. Unga vertikal boʻlgan burchak necha gradus?
+    options:
+      - "35"
+      - "55"
+      - "145"
+      - "70"
+    answer: 0
+    explanation: Vertikal burchaklar oʻzaro teng, demak u ham 35°. 145° esa unga qoʻshni burchakning kattaligi.
+  - id: angles-lines-009
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: 60° li burchakning bissektrisasi uni qanday burchaklarga boʻladi?
+    options:
+      - 20° va 40°
+      - 60° va 60°
+      - 15° va 45°
+      - 30° va 30°
+    answer: 3
+    explanation: Bissektrisa burchakni teng ikkiga boʻladi, shuning uchun har bir qism 60° / 2 = 30°.
+  - id: angles-lines-010
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Ikki parallel toʻgʻri chiziqni uchinchi toʻgʻri chiziq kesib oʻtdi. Ichki almashinuvchi burchaklar haqida qaysi tasdiq har doim toʻgʻri?
+    options:
+      - Ularning yigʻindisi 180° ga teng
+      - Ular oʻzaro teng
+      - Ularning yigʻindisi 90° ga teng
+      - Biri ikkinchisidan ikki marta katta
+    answer: 1
+    explanation: Parallel toʻgʻri chiziqlarni kesuvchi kesganda ichki almashinuvchi burchaklar oʻzaro teng boʻladi. Yigʻindisi 180° boʻladiganlari ichki bir tomonli burchaklardir.
+  - id: angles-lines-011
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Ikki parallel toʻgʻri chiziqni kesuvchi kesganda hosil boʻlgan ichki bir tomonli burchaklardan biri 65°. Ikkinchisi necha gradus?
+    code: 180° − 65° = ?
+    answer:
+      - "115"
+      - 115°
+    explanation: Ichki bir tomonli burchaklar yigʻindisi 180°, demak ikkinchisi 180° − 65° = 115°.
+  - id: angles-lines-012
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Soat roppa-rosa 3 ni koʻrsatganda soat mili bilan minut mili orasidagi burchak necha gradus?
+    options:
+      - "30"
+      - "60"
+      - "90"
+      - "120"
+    answer: 2
+    explanation: Siferblat 12 ta teng qismga boʻlingan, har biri 360° / 12 = 30°. Millar orasida 3 ta qism bor, yaʼni 3 · 30° = 90°.
+  - id: angles-lines-013
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Toʻliq burchak (360°) bir nuqtadan chiquvchi nurlar bilan 8 ta teng burchakka boʻlindi. Har bir burchak necha gradus?
+    code: 360° / 8 = ?
+    answer:
+      - "45"
+      - 45°
+    explanation: Toʻliq burchak 360°, shuning uchun har bir qism 360° / 8 = 45°.
+  - id: angles-lines-014
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Ikki burchakning yigʻindisi 90°. Ulardan biri 25° boʻlsa, ikkinchisi necha gradus?
+    options:
+      - "155"
+      - "75"
+      - "65"
+      - "55"
+    answer: 2
+    explanation: Ikkinchi burchak 90° − 25° = 65°.
+  - id: angles-lines-015
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Qoʻshni burchaklardan biri ikkinchisidan 40° katta. Shu burchaklarni topish bosqichlarini tartiblang:"
+    lines:
+      - Kichik burchakni x deb belgilaymiz, shunda kattasi x + 40° boʻladi
+      - "Tenglama tuzamiz: x + x + 40° = 180°"
+      - "Soddalashtiramiz: 2x = 140°"
+      - "Kichik burchak: x = 70°"
+      - "Katta burchak: 70° + 40° = 110°"
+    explanation: Qoʻshni burchaklar yigʻindisi 180°. x + (x + 40°) = 180° tenglamasidan x = 70°, ikkinchi burchak esa 110°.
+  - id: angles-lines-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Qoʻshni burchaklarning biri ikkinchisidan 4 marta katta. Kichik burchak necha gradus?
+    options:
+      - "36"
+      - "45"
+      - "30"
+      - "144"
+    answer: 0
+    explanation: Kichik burchak x boʻlsa, x + 4x = 180°, 5x = 180°, x = 36°. Katta burchak esa 144°.
+  - id: angles-lines-017
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Ikki toʻgʻri chiziq kesishganda hosil boʻlgan toʻrtta burchakdan uchtasining yigʻindisi 250°. Toʻrtinchi burchak necha gradus?
+    options:
+      - "70"
+      - "125"
+      - "55"
+      - "110"
+    answer: 3
+    explanation: Toʻrtta burchakning yigʻindisi 360°, shuning uchun toʻrtinchisi 360° − 250° = 110°.
+  - id: angles-lines-018
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Parallel toʻgʻri chiziqlarning xossalarini toʻldiring:"
+    code: Parallel toʻgʻri chiziqlarni kesuvchi kesganda mos burchaklar oʻzaro ___ boʻladi, ichki bir tomonli burchaklarning yigʻindisi esa ___ gradusga teng.
+    answer:
+      - teng
+      - "180"
+    bank:
+      - "360"
+      - "90"
+      - perpendikulyar
+    explanation: Mos burchaklar va ichki almashinuvchi burchaklar oʻzaro teng, ichki bir tomonli burchaklar esa birgalikda 180° ni tashkil qiladi.
+  - id: angles-lines-019
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Qoʻshni burchaklardan biri 50°. Shu ikki qoʻshni burchakning bissektrisalari orasidagi burchak necha gradus?
+    code: 50° / 2 + 130° / 2 = ?
+    answer:
+      - "90"
+      - 90°
+    explanation: Ikkinchi burchak 180° − 50° = 130°. Bissektrisalar orasidagi burchak burchaklar yarimlarining yigʻindisiga teng, 25° + 65° = 90°. Qoʻshni burchaklarning bissektrisalari har doim oʻzaro perpendikulyar boʻladi.
+  - id: angles-lines-020
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: "Ikki parallel toʻgʻri chiziqni kesuvchi kesganda hosil boʻlgan ichki bir tomonli burchaklarning nisbati 2 : 7 kabi. Katta burchak necha gradus?"
+    options:
+      - "40"
+      - "140"
+      - "126"
+      - "160"
+    answer: 1
+    explanation: Ichki bir tomonli burchaklar yigʻindisi 180°. 2x + 7x = 180°, x = 20°, katta burchak 7 · 20° = 140°.

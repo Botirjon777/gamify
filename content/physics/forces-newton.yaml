@@ -1,0 +1,229 @@
+exercises:
+  - id: forces-newton-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Kuchning SI tizimidagi birligi qaysi?
+    options:
+      - Joul
+      - Vatt
+      - Paskal
+      - Nyuton
+    answer: 3
+    explanation: Kuch nyutonlarda (N) oʻlchanadi. 1 N — massasi 1 kg boʻlgan jismga 1 m/s² tezlanish beradigan kuch.
+  - id: forces-newton-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Massasi 5 kg boʻlgan jismga taʼsir etuvchi ogʻirlik kuchi qancha? (g = 10 m/s²)
+    options:
+      - 50 N
+      - 5 N
+      - 0,5 N
+      - 15 N
+    answer: 0
+    explanation: Ogʻirlik kuchi F = m · g = 5 kg · 10 m/s² = 50 N.
+  - id: forces-newton-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Avtobus keskin tormoz berganda yoʻlovchilar oldinga engashib ketadi. Bu qaysi hodisa bilan tushuntiriladi?
+    options:
+      - Diffuziya bilan
+      - Inersiya bilan
+      - Atmosfera bosimi bilan
+      - Konveksiya bilan
+    answer: 1
+    explanation: Inersiya — jismning oʻz tezligini saqlashga intilishi. Avtobus sekinlashganda yoʻlovchilar inersiya tufayli avvalgi tezligi bilan harakatni davom ettiradi.
+  - id: forces-newton-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Kuch qaysi asbob yordamida oʻlchanadi?
+    options:
+      - Barometr
+      - Spidometr
+      - Dinamometr
+      - Termometr
+    answer: 2
+    explanation: Dinamometr prujinasining choʻzilishi qoʻyilgan kuchga proporsional boʻlgani uchun u kuchni oʻlchaydi. Barometr bosimni, spidometr tezlikni, termometr haroratni oʻlchaydi.
+  - id: forces-newton-005
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: Masalani yeching. Javobni nyutonda, faqat son bilan yozing.
+    code: Massasi 2 kg boʻlgan jism 3 m/s² tezlanish bilan harakatlanmoqda. Jismga taʼsir etayotgan teng taʼsir etuvchi kuch qancha?
+    answer: "6"
+    explanation: "Nyutonning ikkinchi qonuni: F = m · a = 2 · 3 = 6 N."
+  - id: forces-newton-006
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Nyutonning ikkinchi qonuni haqidagi gapni toʻldiring:"
+    code: Jismga taʼsir etuvchi kuch jism massasi va ___ koʻpaytmasiga teng (F = m · a). Bir xil kuch taʼsirida massasi kattaroq jism ___ tezlanish oladi.
+    answer:
+      - tezlanish
+      - kichikroq
+    bank:
+      - kattaroq
+      - tezlik
+      - vaqt
+    explanation: F = m · a, bundan a = F / m. Kuch bir xil boʻlganda massa qancha katta boʻlsa, tezlanish shuncha kichik boʻladi.
+  - id: forces-newton-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Nyutonning uchinchi qonuni nimani taʼkidlaydi?
+    options:
+      - Jismga kuch taʼsir etmasa, u albatta toʻxtab qoladi
+      - Jismning tezlanishi uning massasiga toʻgʻri proporsional
+      - Barcha jismlar Yerga bir xil kuch bilan tortiladi
+      - Ikki jism bir-biriga moduli teng, yoʻnalishi qarama-qarshi kuchlar bilan taʼsir qiladi
+    answer: 3
+    explanation: "Uchinchi qonun: taʼsir aks taʼsirga teng, yaʼni F₁ = −F₂. Kuchlar moduli boʻyicha teng, yoʻnalishi boʻyicha qarama-qarshi va turli jismlarga qoʻyilgan."
+  - id: forces-newton-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Jismga bir toʻgʻri chiziq boʻylab qarama-qarshi yoʻnalgan 12 N va 7 N kuchlar taʼsir etmoqda. Teng taʼsir etuvchi kuchning moduli qancha?
+    options:
+      - 5 N
+      - 19 N
+      - 84 N
+      - 7 N
+    answer: 0
+    explanation: "Qarama-qarshi yoʻnalgan kuchlarning teng taʼsir etuvchisi ularning ayirmasiga teng: 12 − 7 = 5 N, u katta kuch tomonga yoʻnalgan."
+  - id: forces-newton-009
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Masalani yeching. Javobni kilogrammda, faqat son bilan yozing.
+    code: Jismga 20 N kuch taʼsir etib, unga 4 m/s² tezlanish berdi. Jismning massasi qancha?
+    answer: "5"
+    explanation: F = m · a dan m = F / a = 20 / 4 = 5 kg.
+  - id: forces-newton-010
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Nyutonning birinchi qonuniga koʻra, jismga taʼsir etayotgan kuchlarning teng taʼsir etuvchisi nolga teng boʻlsa, jism oʻzini qanday tutadi?
+    options:
+      - Tezligi bir tekis ortib boradi
+      - Harakatlanayotgan boʻlsa, tezda toʻxtab qoladi
+      - Tinch turadi yoki toʻgʻri chiziqli tekis harakat qiladi
+      - Aylana boʻylab harakatlana boshlaydi
+    answer: 2
+    explanation: "Kuchlar oʻzaro muvozanatlashganda jism tezligini oʻzgartirmaydi: tinch turgan boʻlsa tinch turaveradi, harakatlanayotgan boʻlsa toʻgʻri chiziqli tekis harakatini davom ettiradi."
+  - id: forces-newton-011
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Masalani yeching. Javobni nyutonda, faqat son bilan yozing.
+    code: Prujinaning bikrligi 200 N/m. Uni 0,05 m ga choʻzish uchun qancha kuch kerak?
+    answer: "10"
+    explanation: "Guk qonuni: F = k · x = 200 · 0,05 = 10 N."
+  - id: forces-newton-012
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Massasi 10 kg boʻlgan quti gorizontal pol ustida sirpanmoqda. Sirpanish ishqalanish koeffitsiyenti 0,3. Qutiga taʼsir etuvchi ishqalanish kuchi qancha? (g = 10 m/s²)
+    options:
+      - 3 N
+      - 30 N
+      - 300 N
+      - 33 N
+    answer: 1
+    explanation: Gorizontal sirtda tayanchning reaksiya kuchi N = m · g = 100 N. Ishqalanish kuchi F = μ · N = 0,3 · 100 = 30 N.
+  - id: forces-newton-013
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Quyidagi hollarning qaysi birida ishqalanish foydali hisoblanadi?
+    options:
+      - Odam yurganda oyoq kiyimi tagi bilan yoʻl orasidagi ishqalanish
+      - Dvigatel porshenining silindr devoriga ishqalanishi
+      - Eshik oshiq-moshigʻidagi ishqalanish
+      - Velosiped gʻildiragi oʻqidagi ishqalanish
+    answer: 0
+    explanation: Oyoq kiyimi bilan yer orasida ishqalanish boʻlmasa, odam sirpanib ketib, yura olmas edi. Qolgan hollarda ishqalanish detallarni yeyiltiradi, shuning uchun u moylash orqali kamaytiriladi.
+  - id: forces-newton-014
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Masala: massasi 4 kg boʻlgan jismga 12 N kuch taʼsir etmoqda. Jismning tezlanishini toping. Yechish bosqichlarini toʻgʻri tartibda joylashtiring:"
+    lines:
+      - "Berilganlarni yozamiz: m = 4 kg, F = 12 N"
+      - "Berilgan kattaliklarni bogʻlovchi Nyutonning ikkinchi qonunini yozamiz: F = m · a"
+      - "Qonundan tezlanishni ifodalaymiz: a = F / m"
+      - "Son qiymatlarni qoʻyib hisoblaymiz: a = 12 / 4 = 3"
+      - "Javobni birligi bilan yozamiz: a = 3 m/s²"
+    explanation: F = m · a dan a = F / m = 12 N / 4 kg = 3 m/s².
+  - id: forces-newton-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Yer stol ustidagi kitobni 4 N kuch bilan tortmoqda. Kitob Yerni qanday kuch bilan tortadi?
+    options:
+      - Kitob Yerni tortmaydi (0 N)
+      - 4 N
+      - 4 N dan ancha kichik kuch bilan
+      - 4 N dan ancha katta kuch bilan
+    answer: 1
+    explanation: "Nyutonning uchinchi qonuniga koʻra oʻzaro taʼsir kuchlari moduli boʻyicha teng: kitob ham Yerni 4 N kuch bilan tortadi. Yerning massasi juda katta boʻlgani uchun uning tezlanishi sezilmaydi."
+  - id: forces-newton-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Massasi 60 kg boʻlgan odam liftda turibdi. Lift 2 m/s² tezlanish bilan yuqoriga tezlanuvchan koʻtarilmoqda. Odamning vazni (lift poliga bosadigan kuchi) qancha? (g = 10 m/s²)
+    options:
+      - 600 N
+      - 480 N
+      - 720 N
+      - 120 N
+    answer: 2
+    explanation: "Tezlanish yuqoriga yoʻnalganda vazn ortadi: P = m · (g + a) = 60 · (10 + 2) = 720 N."
+  - id: forces-newton-017
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Masalani yeching. Javobni m/s² da, faqat son bilan yozing.
+    code: Massasi 5 kg boʻlgan jism gorizontal sirtda 30 N gorizontal kuch bilan tortilmoqda. Ishqalanish kuchi 10 N. Jismning tezlanishi qancha?
+    answer: "4"
+    explanation: Teng taʼsir etuvchi kuch F = 30 − 10 = 20 N. a = F / m = 20 / 5 = 4 m/s².
+  - id: forces-newton-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Prujinaga massasi 2 kg boʻlgan yuk osilganda u 4 sm ga choʻzildi. Prujinaning bikrligi qancha? (g = 10 m/s²)
+    options:
+      - 5 N/m
+      - 50 N/m
+      - 80 N/m
+      - 500 N/m
+    answer: 3
+    explanation: "Yuk muvozanatda turganda elastiklik kuchi ogʻirlik kuchiga teng: F = m · g = 20 N. Choʻzilish x = 4 sm = 0,04 m. k = F / x = 20 / 0,04 = 500 N/m."
+  - id: forces-newton-019
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Massasi 1000 kg boʻlgan avtomobil 20 m/s tezlikdan tekis sekinlanib, 5 s da toʻxtadi. Tormozlovchi kuchning moduli qancha?
+    options:
+      - 250 N
+      - 4000 N
+      - 20 000 N
+      - 100 000 N
+    answer: 1
+    explanation: Tezlanish moduli a = 20 / 5 = 4 m/s². Kuch F = m · a = 1000 · 4 = 4000 N.
+  - id: forces-newton-020
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Vazn haqidagi gapni toʻldiring:"
+    code: Jismning Yerga tortilishi tufayli tayanchga yoki osmaga taʼsir etadigan kuchi ___ deb ataladi. Erkin tushayotgan jismda bu kuch nolga teng boʻladi, bunday holat ___ deyiladi.
+    answer:
+      - vazn
+      - vaznsizlik
+    bank:
+      - inersiya
+      - ishqalanish
+      - massa
+    explanation: Vazn — jismning tayanch yoki osmaga taʼsir kuchi. Erkin tushishda jism ham, tayanch ham bir xil g tezlanish bilan tushadi, shuning uchun P = m · (g − g) = 0 — vaznsizlik holati.

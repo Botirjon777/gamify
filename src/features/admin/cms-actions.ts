@@ -221,7 +221,7 @@ export async function deleteCmsSkill(skillId: string): Promise<CmsResult> {
 const exerciseInput = z.object({
   key: z.string().trim().min(2).max(80),
   skillId: id,
-  type: z.enum(["CHOICE", "OUTPUT", "FILL", "ORDER"]),
+  type: z.enum(["CHOICE", "OUTPUT", "FILL", "ORDER", "MOVE"]),
   difficulty: z.number().int(),
   xp: z.number().int().optional(),
   status: statusSchema.default("PUBLISHED"),
@@ -237,6 +237,12 @@ const exerciseInput = z.object({
   /** Word-bank distractors for a fill exercise (empty = answers are typed). */
   fillBank: z.array(z.string()).optional(),
   orderLines: z.array(z.string()).optional(),
+  /** Chess diagram (any type) or the position to move in (MOVE): a FEN, squares to highlight, seen from Black's side. */
+  boardFen: z.string().trim().optional(),
+  boardMarks: z.array(z.string()).optional(),
+  boardFlip: z.boolean().optional(),
+  /** MOVE: the right moves as written in chess books ("Qh7#"). */
+  moveAnswers: z.array(z.string()).optional(),
 });
 export type CmsExerciseInput = z.input<typeof exerciseInput>;
 
@@ -255,6 +261,7 @@ export async function saveCmsExercise(input: CmsExerciseInput, exerciseId?: stri
     lang: e.lang,
     prompt: e.promptUz,
     explanation: e.explanationUz || undefined,
+    board: e.boardFen ? { fen: e.boardFen, marks: e.boardMarks?.length ? e.boardMarks : undefined, flip: e.boardFlip || undefined } : undefined,
   };
   const code = e.code?.trim() ? e.code : undefined;
   const def = exerciseDef.safeParse(
@@ -264,7 +271,9 @@ export async function saveCmsExercise(input: CmsExerciseInput, exerciseId?: stri
         ? { ...common, type: "output", code: code ?? "", answer: e.outputAnswers ?? [] }
         : e.type === "FILL"
           ? { ...common, type: "fill", code: code ?? "", answer: e.fillBlanksAnswers ?? [], bank: e.fillBank?.length ? e.fillBank : undefined }
-          : { ...common, type: "order", lines: e.orderLines ?? [] },
+          : e.type === "ORDER"
+            ? { ...common, type: "order", lines: e.orderLines ?? [] }
+            : { ...common, type: "move", answer: e.moveAnswers ?? [] },
   );
   if (!def.success) return invalid(def.error);
   if (def.data.type === "output" && !def.data.code.trim()) return fail("invalid", "code: required");

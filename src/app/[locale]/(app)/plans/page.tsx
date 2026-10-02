@@ -6,7 +6,8 @@ import { getFormatter, getTranslations, setRequestLocale } from "next-intl/serve
 import { requireSession } from "@/lib/auth/session";
 import { PageHeader } from "@/components/page-header";
 import { effectivePlan, PLAN_ORDER, PLANS } from "@/features/plans/plans";
-import { BILLING, BILLINGS, isBilling, perMonth, priceFor, yearlySaving, type Billing } from "@/features/payments/pricing";
+import { billingDiscount, BILLINGS, isBilling, perMonth, priceFor, yearlySaving, type Billing } from "@/features/payments/pricing";
+import { planPricing } from "@/features/settings/service";
 
 const som = (n: number) => n.toLocaleString("uz-UZ");
 
@@ -25,7 +26,7 @@ export default async function PlansPage({ params, searchParams }: PageProps<"/[l
   const format = await getFormatter();
   const { user } = await requireSession();
   const current = effectivePlan(user);
-  const pendingPayment = await db.payment.findFirst({ where: { userId: user.id, status: "PENDING" } });
+  const [pendingPayment, pricing] = await Promise.all([db.payment.findFirst({ where: { userId: user.id, status: "PENDING" } }), planPricing()]);
 
   return (
     <div className="flex flex-col gap-8">
@@ -66,9 +67,9 @@ export default async function PlansPage({ params, searchParams }: PageProps<"/[l
               }`}
             >
               {t(`billing.${b}`)}
-              {BILLING[b].discount > 0 && (
+              {billingDiscount(pricing, b) > 0 && (
                 <span className={`rounded-full px-2 py-0.5 text-[11px] ${b === billing ? "bg-white/25" : "bg-success/15 text-success"}`}>
-                  −{BILLING[b].discount}%
+                  −{billingDiscount(pricing, b)}%
                 </span>
               )}
             </Link>
@@ -109,16 +110,16 @@ export default async function PlansPage({ params, searchParams }: PageProps<"/[l
                 <div className="mt-5">
                   {billing === "annual" && (
                     <p className={`text-sm font-medium line-through ${look.text}`}>
-                      {som(perMonth(plan, "monthly"))} {t("perMonth")}
+                      {som(perMonth(pricing, plan, "monthly"))} {t("perMonth")}
                     </p>
                   )}
                   <p className="flex flex-wrap items-baseline gap-x-1.5 font-display text-3xl font-bold">
-                    {som(perMonth(plan, billing))}
+                    {som(perMonth(pricing, plan, billing))}
                     <span className={`font-sans text-sm font-medium ${look.text}`}>{t("perMonth")}</span>
                   </p>
                   {billing === "annual" && (
                     <p className={`mt-1 text-sm ${look.text}`}>
-                      {t("annualTotal", { total: som(priceFor(plan, "annual")), saving: som(yearlySaving(plan)) })}
+                      {t("annualTotal", { total: som(priceFor(pricing, plan, "annual")), saving: som(yearlySaving(pricing, plan)) })}
                     </p>
                   )}
                 </div>

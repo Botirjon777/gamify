@@ -8,7 +8,7 @@ import { requireSession } from "@/lib/auth/session";
 import { getRateLimiter } from "@/lib/rate-limit";
 import { tashkentToday } from "@/lib/time";
 import { START_RATING, updateRatings, userK } from "./rating";
-import { finishSession, isInTime, nextItemId, resultFromSession, toQuestion, withRank } from "./service";
+import { finishSession, isInTime, nextItemId, nextQuestionStart, resultFromSession, toQuestion, typicalAnswerMs, withRank } from "./service";
 import { IQ_QUESTIONS, IQ_SECONDS_PER_QUESTION, type IqKind, type IqState } from "./types";
 
 const kindSchema = z.enum(["PLACEMENT", "DAILY"]);
@@ -85,6 +85,7 @@ export async function answerIq(sessionId: string, itemId: string, rawChoice: num
   const limit = await getRateLimiter().hit(`iq:${user.id}`, 30, 60);
   if (!limit.ok) throw new Error("Too many answers");
 
+  const typicalMs = await typicalAnswerMs();
   const outcome = await db.$transaction(async (tx) => {
     const session = await tx.iqSession.findFirst({ where: { id: sessionId, userId: user.id } });
     if (!session) throw new Error("Session not found");
@@ -112,7 +113,8 @@ export async function answerIq(sessionId: string, itemId: string, rawChoice: num
         itemId,
         choice: inTime ? choice : null,
         correct,
-        timeMs: Math.min(now - session.currentShownAt!.getTime(), (IQ_SECONDS_PER_QUESTION + 5) * 1000),
+        // Not below zero: an answer can arrive while the encouragement before the question is still on screen.
+        timeMs: Math.max(0, Math.min(now - session.currentShownAt!.getTime(), (IQ_SECONDS_PER_QUESTION + 5) * 1000)),
         ratingBefore: me.iqRating,
         ratingAfter: ratings.user,
       },
@@ -136,8 +138,9 @@ export async function answerIq(sessionId: string, itemId: string, rawChoice: num
     if (!next) {
       return { finished: await finishSession(tx, updated, { ...me, iqRating: ratings.user }, ratings.user) };
     }
-    await tx.iqSession.update({ where: { id: session.id }, data: { currentItemId: next, currentShownAt: new Date() } });
-    return { current: true as const };
+    const { cheer, shownAt } = nextQuestionStart(updated.answered, updated.total, session.startedAt, typicalMs);
+    await tx.iqSession.update({ where: { id: session.id }, data: { currentItemId: next, currentShownAt: shownAt } });
+    return { current: true as const, cheer };
   });
 
   if ("finished" in outcome && outcome.finished) {
@@ -148,7 +151,8 @@ export async function answerIq(sessionId: string, itemId: string, rawChoice: num
   if (session.status === "FINISHED") {
     return { status: "FINISHED", result: await withRank(resultFromSession(session), user.id, tenant.id) };
   }
-  return { status: "ACTIVE", sessionId, kind: session.kind, question: await toQuestion(db, session, locale) };
+  const cheer = "cheer" in outcome ? outcome.cheer : null;
+  return { status: "ACTIVE", sessionId, kind: session.kind, question: { ...(await toQuestion(db, session, locale)), ...(cheer && { cheer }) } };
 }
 
 /** Hide the "take the IQ test" invitation on the dashboard (the test itself stays available). */

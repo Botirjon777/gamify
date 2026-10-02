@@ -1,10 +1,13 @@
 import "server-only";
 import type { IqSession, Prisma, User } from "@/generated/prisma/client";
 import { localized, type LocalizedText } from "@/i18n/content";
+import { cached } from "@/lib/cache";
+import { db } from "@/lib/db";
 import { tashkentWeekStart } from "@/lib/time";
 import { getLeaderboardStore } from "@/lib/leaderboard";
 import { awardXp } from "@/features/gamification/xp";
 import { evaluateBadges } from "@/features/badges/service";
+import { DEFAULT_TYPICAL_ANSWER_MS, IQ_CHEER_PAUSE_MS, iqCheer, type IqCheer } from "./cheer";
 import type { IqPublicContent } from "./content-schema";
 import { iqFromRating, iqPercentile, pickIqItem } from "./rating";
 import { IQ_SECONDS_PER_QUESTION, type IqKind, type IqQuestion, type IqResult } from "./types";
@@ -20,6 +23,29 @@ export function isInTime(shownAt: Date, now = Date.now()) {
   return now - shownAt.getTime() <= IQ_SECONDS_PER_QUESTION * 1000 + GRACE_MS;
 }
 
+/** How long people usually take per answer (timeouts aside) — what "faster than most" is measured against. */
+export const typicalAnswerMs = () =>
+  cached("iq:typical-answer-ms", 600, async () => {
+    const { _avg, _count } = await db.iqAttempt.aggregate({ where: { choice: { not: null } }, _avg: { timeMs: true }, _count: true });
+    return _count >= 100 && _avg.timeMs ? Math.round(_avg.timeMs) : DEFAULT_TYPICAL_ANSWER_MS;
+  });
+
+/**
+ * After an answer: the encouragement due now (if any) and when the next question's clock starts.
+ * `typicalMs` = typicalAnswerMs(), read before the transaction (it is a query of its own).
+ */
+export function nextQuestionStart(answered: number, total: number, startedAt: Date, typicalMs: number): { cheer: IqCheer | null; shownAt: Date } {
+  const now = Date.now();
+  const cheer = iqCheer({ answered, total, elapsedMs: now - startedAt.getTime(), typicalMs });
+  return { cheer, shownAt: new Date(now + (cheer ? IQ_CHEER_PAUSE_MS : 0)) };
+}
+
+/** Seconds on the clock for a question shown at `shownAt` (which is in the future while a message is on screen). */
+export function secondsLeft(shownAt: Date) {
+  const elapsed = Math.max(0, Date.now() - shownAt.getTime()) / 1000;
+  return Math.max(0, Math.round(IQ_SECONDS_PER_QUESTION - elapsed));
+}
+
 /** Choose the next unseen question closest to the user's current rating. */
 export async function nextItemId(tx: Tx, userId: string, rating: number, lastItemId: string | null) {
   const [pool, seen, last] = await Promise.all([
@@ -33,7 +59,6 @@ export async function nextItemId(tx: Tx, userId: string, rating: number, lastIte
 export async function toQuestion(tx: Tx, session: IqSession, locale: string): Promise<IqQuestion> {
   const item = await tx.iqItem.findUniqueOrThrow({ where: { id: session.currentItemId! } });
   const content = item.content as IqPublicContent;
-  const elapsed = (Date.now() - session.currentShownAt!.getTime()) / 1000;
   return {
     itemId: item.id,
     number: session.answered + 1,
@@ -41,7 +66,7 @@ export async function toQuestion(tx: Tx, session: IqSession, locale: string): Pr
     prompt: localized(content.prompt, locale),
     figure: content.figure,
     options: content.options.map((o: LocalizedText) => localized(o, locale)),
-    secondsLeft: Math.max(0, Math.round(IQ_SECONDS_PER_QUESTION - elapsed)),
+    secondsLeft: secondsLeft(session.currentShownAt!),
   };
 }
 
