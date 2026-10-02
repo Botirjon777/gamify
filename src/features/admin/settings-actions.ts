@@ -20,6 +20,7 @@ export async function updateSettings(input: SettingsInput): Promise<SettingsResu
   await audit(db, admin.id, "settings.update", null, {
     iqPriceUzs: parsed.data.iqPriceUzs,
     iqOldPriceUzs: parsed.data.iqOldPriceUzs,
+    iqPictureShare: parsed.data.iqPictureShare,
     proPriceUzs: parsed.data.proPriceUzs,
     diamondPriceUzs: parsed.data.diamondPriceUzs,
     annualDiscount: parsed.data.annualDiscount,

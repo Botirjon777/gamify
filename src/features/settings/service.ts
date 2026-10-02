@@ -2,7 +2,7 @@ import "server-only";
 import { db } from "@/lib/db";
 import { cached, invalidateCache } from "@/lib/cache";
 import { DEFAULT_PRICING, type PlanPricing } from "@/features/payments/pricing";
-import { DEFAULT_IQ_PRICE_UZS, discountPercent, formatCardNumber, type SettingKey } from "./rules";
+import { DEFAULT_IQ_PICTURE_SHARE, DEFAULT_IQ_PRICE_UZS, discountPercent, formatCardNumber, type SettingKey } from "./rules";
 
 /**
  * Site-wide values that are changed without a deploy: where card transfers go, what the IQ test and the plans cost.
@@ -18,6 +18,8 @@ export interface SiteSettings {
   iqPriceUzs: number;
   /** "Before" price shown crossed out; null = no discount. */
   iqOldPriceUzs: number | null;
+  /** How many of an IQ test's questions are pictures, 0–100 %. */
+  iqPictureShare: number;
   /** Paid plans: monthly prices and the discount for a year paid at once. */
   pricing: PlanPricing;
 }
@@ -36,12 +38,14 @@ export const getSettings = () =>
     const iqPriceUzs = amount("iq.priceUzs") ?? DEFAULT_IQ_PRICE_UZS;
     const old = amount("iq.oldPriceUzs");
     const percent = Number(rows.get("plan.annualDiscount") ?? "x");
+    const pictures = Number(rows.get("iq.pictureShare") ?? "x");
     return {
       cardNumber: text("payment.cardNumber", process.env.PAYMENT_CARD_NUMBER)?.replace(/\D/g, "") || null,
       cardHolder: text("payment.cardHolder", process.env.PAYMENT_CARD_HOLDER),
       contact: text("payment.contact", process.env.PAYMENT_CONTACT),
       iqPriceUzs,
       iqOldPriceUzs: old && old > iqPriceUzs ? old : null,
+      iqPictureShare: Number.isInteger(pictures) && pictures >= 0 && pictures <= 100 ? pictures : DEFAULT_IQ_PICTURE_SHARE,
       pricing: {
         monthly: { PRO: amount("plan.proPriceUzs") ?? DEFAULT_PRICING.monthly.PRO, DIAMOND: amount("plan.diamondPriceUzs") ?? DEFAULT_PRICING.monthly.DIAMOND },
         annualDiscount: Number.isInteger(percent) && percent >= 0 && percent <= 90 ? percent : DEFAULT_PRICING.annualDiscount,

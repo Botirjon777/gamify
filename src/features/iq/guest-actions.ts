@@ -9,9 +9,9 @@ import { getRateLimiter } from "@/lib/rate-limit";
 import { getCurrentTenant, isDefaultTenant } from "@/lib/tenant";
 import { partnerFromCookie } from "@/features/partners/service";
 import { GUEST_IQ_QUESTIONS, guestQuestion, newGuestCode, newGuestToken, normalizeGuestCode } from "./guest";
-import { iqFromRating, pickIqItem, START_RATING, updateRatings, userK } from "./rating";
+import { iqFromRating, START_RATING, updateRatings, userK } from "./rating";
 import type { IqCheer } from "./cheer";
-import { isInTime, nextQuestionStart, typicalAnswerMs } from "./service";
+import { iqPicking, isInTime, nextQuestionStart, pickNext, typicalAnswerMs } from "./service";
 import type { IqQuestion } from "./types";
 
 const nameSchema = z
@@ -39,9 +39,6 @@ export type GuestStartState = {
   values?: Record<string, string>;
 };
 
-const published = { status: "PUBLISHED" as const };
-const itemPool = () => db.iqItem.findMany({ where: published, select: { id: true, category: true, rating: true } });
-
 /** The form before the test: name, surname, age, phone → a new test with its first question. */
 export async function startGuestIq(_prev: GuestStartState, formData: FormData): Promise<GuestStartState> {
   const raw = Object.fromEntries(["firstName", "lastName", "age", "phone", "ref"].map((k) => [k, String(formData.get(k) ?? "")]));
@@ -66,7 +63,7 @@ export async function startGuestIq(_prev: GuestStartState, formData: FormData): 
   const limit = await getRateLimiter().hit(`guestiq:ip:${await getClientIp()}`, 6, 60 * 60);
   if (!limit.ok) return { error: "tooMany", values };
 
-  const first = pickIqItem(await itemPool(), START_RATING, new Set(), null);
+  const first = pickNext(await iqPicking(), START_RATING, new Set(), null);
   if (!first) return { error: "noQuestions", values };
 
   const refCode = normalizeGuestCode(parsed.data.ref ?? "");
@@ -114,7 +111,7 @@ export async function answerGuestIq(token: string, itemId: string, rawChoice: nu
   const limit = await getRateLimiter().hit(`guestiq:answer:${key.slice(0, 16)}`, 40, 60);
   if (!limit.ok) throw new Error("Too many answers");
 
-  const typicalMs = await typicalAnswerMs();
+  const [typicalMs, picking] = await Promise.all([typicalAnswerMs(), iqPicking()]);
   const cheer = await db.$transaction(async (tx): Promise<IqCheer | null> => {
     const test = await tx.guestIqTest.findUnique({ where: { token: key } });
     if (!test) throw new Error("Test not found");
@@ -131,8 +128,7 @@ export async function answerGuestIq(token: string, itemId: string, rawChoice: nu
     const answered = test.answered + 1;
     const progress = { answered, correct: test.correct + (correct ? 1 : 0), rating };
 
-    const pool = await tx.iqItem.findMany({ where: published, select: { id: true, category: true, rating: true } });
-    const next = answered >= test.total ? null : pickIqItem(pool, rating, new Set(test.askedItemIds), item.category);
+    const next = answered >= test.total ? null : pickNext(picking, rating, new Set(test.askedItemIds), itemId);
     // Out of questions (tiny bank) → finish early rather than repeat one.
     if (!next || test.askedItemIds.includes(next.id)) {
       await tx.guestIqTest.update({ where: { id: test.id }, data: { ...progress, status: "FINISHED", finishedAt: new Date(), iq: iqFromRating(rating) } });

@@ -8,9 +8,10 @@ import { getLeaderboardStore } from "@/lib/leaderboard";
 import { mediaUrl } from "@/lib/media";
 import { awardXp } from "@/features/gamification/xp";
 import { evaluateBadges } from "@/features/badges/service";
+import { getSettings } from "@/features/settings/service";
 import { DEFAULT_TYPICAL_ANSWER_MS, IQ_CHEER_PAUSE_MS, iqCheer, type IqCheer } from "./cheer";
 import type { IqPublicContent } from "./content-schema";
-import { iqFromRating, iqPercentile, pickIqItem } from "./rating";
+import { iqFromRating, iqPercentile, pickIqItem, type IqCandidate } from "./rating";
 import { IQ_SECONDS_PER_QUESTION, type IqKind, type IqQuestion, type IqResult } from "./types";
 
 type Tx = Prisma.TransactionClient;
@@ -47,14 +48,35 @@ export function secondsLeft(shownAt: Date) {
   return Math.max(0, Math.round(IQ_SECONDS_PER_QUESTION - elapsed));
 }
 
-/** Choose the next unseen question closest to the user's current rating. */
-export async function nextItemId(tx: Tx, userId: string, rating: number, lastItemId: string | null) {
-  const [pool, seen, last] = await Promise.all([
-    tx.iqItem.findMany({ where: { status: "PUBLISHED" }, select: { id: true, category: true, rating: true } }),
-    tx.iqAttempt.findMany({ where: { userId }, select: { itemId: true }, distinct: ["itemId"] }),
-    lastItemId ? tx.iqItem.findUnique({ where: { id: lastItemId }, select: { category: true } }) : null,
+/**
+ * What a test chooses its questions from: the published bank (kept for a minute) and how often a question should be
+ * a picture (admin → Sozlamalar). Read it before opening a transaction — it is a query of its own.
+ */
+export async function iqPicking() {
+  const [pool, settings] = await Promise.all([
+    cached<IqCandidate[]>("iq:pool", 60, async () => {
+      const items = await db.iqItem.findMany({ where: { status: "PUBLISHED" }, select: { id: true, category: true, rating: true, content: true } });
+      return items.map(({ content, ...item }) => {
+        const c = content as IqPublicContent;
+        return { ...item, picture: !!(c.image || c.optionsImage) };
+      });
+    }),
+    getSettings(),
   ]);
-  return pickIqItem(pool, rating, new Set(seen.map((s) => s.itemId)), last?.category ?? null)?.id ?? null;
+  return { pool, pictureShare: settings.iqPictureShare / 100 };
+}
+export type IqPicking = Awaited<ReturnType<typeof iqPicking>>;
+
+/** The next question for someone at `rating` who has seen `seen`; `lastItemId` = the question just answered. */
+export function pickNext(picking: IqPicking, rating: number, seen: Set<string>, lastItemId: string | null) {
+  const lastCategory = lastItemId ? (picking.pool.find((i) => i.id === lastItemId)?.category ?? null) : null;
+  return pickIqItem(picking.pool, rating, seen, lastCategory, Math.random, picking.pictureShare);
+}
+
+/** Choose the next question for a signed-in user: one they have never been asked. */
+export async function nextItemId(tx: Tx, picking: IqPicking, userId: string, rating: number, lastItemId: string | null) {
+  const seen = await tx.iqAttempt.findMany({ where: { userId }, select: { itemId: true }, distinct: ["itemId"] });
+  return pickNext(picking, rating, new Set(seen.map((s) => s.itemId)), lastItemId)?.id ?? null;
 }
 
 /** The stored question in the reader's language, pictures as URLs. */

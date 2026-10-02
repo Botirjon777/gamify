@@ -3,6 +3,7 @@
  *   pnpm settings                                   show them (local dev database)
  *   pnpm settings cardNumber=8600123456789012 "cardHolder=ALI VALIYEV" contact=@ali iqPriceUzs=13000 iqOldPriceUzs=25000
  *   pnpm settings iqOldPriceUzs=                    empty value = not set (no discount)
+ *   pnpm settings iqPictureShare=100                picture questions in an IQ test, % (100 = pictures only, 0 = text only)
  *   pnpm settings proPriceUzs=39000 diamondPriceUzs=79000 annualDiscount=25     plan prices (per month) and the yearly discount, %
  *   pnpm settings --prod …                          the same against production
  *
@@ -18,6 +19,7 @@ const FIELDS = {
   contact: "payment.contact",
   iqPriceUzs: "iq.priceUzs",
   iqOldPriceUzs: "iq.oldPriceUzs",
+  iqPictureShare: "iq.pictureShare",
   proPriceUzs: "plan.proPriceUzs",
   diamondPriceUzs: "plan.diamondPriceUzs",
   annualDiscount: "plan.annualDiscount",
@@ -42,6 +44,7 @@ async function main() {
         contact: next.contact,
         iqPriceUzs: Number(next.iqPriceUzs || DEFAULT_IQ_PRICE_UZS),
         iqOldPriceUzs: next.iqOldPriceUzs ? Number(next.iqOldPriceUzs) : null,
+        iqPictureShare: next.iqPictureShare ? Number(next.iqPictureShare) : undefined,
         // Empty = the default.
         proPriceUzs: next.proPriceUzs ? Number(next.proPriceUzs) : undefined,
         diamondPriceUzs: next.diamondPriceUzs ? Number(next.diamondPriceUzs) : undefined,

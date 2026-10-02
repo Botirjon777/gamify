@@ -189,7 +189,7 @@
     "iq": {
       "badge": "Roʻyxatdan oʻtmasdan",
       "title": "IQ darajangizni 10 daqiqada bilib oling",
-      "text": "Mantiqiy fikrlash boʻyicha qisqa test: ketma-ketliklar, oʻxshatishlar, mantiqiy masalalar. Savollar sizning darajangizga moslashadi.",
+      "text": "Mantiqiy fikrlash boʻyicha qisqa test: rasmli topshiriqlarda qonuniyatni toping va boʻsh katakka mos shaklni tanlang. Savollar sizning darajangizga moslashadi.",
       "points": {
         "questions": "{count} ta savol, har biriga {seconds} soniya",
         "certificate": "IQ ballingiz va ism-familiyangiz yozilgan sertifikat (PDF)",
@@ -1518,9 +1518,19 @@
       "iqPrice": "Narx, soʻm",
       "iqOldPrice": "Chegirmadan oldingi narx, soʻm",
       "iqOldPriceHint": "Ixtiyoriy. Toʻldirilsa, saytda ustiga chizilgan eski narx va chegirma foizi koʻrsatiladi.",
+      "iqPictureShare": "Rasmli savollar ulushi, %",
+      "iqPictureShareHint": "IQ testdagi savollarning qancha qismi rasmli (matritsa) boʻlsin. 100 — faqat rasmli, 0 — faqat matnli savollar.",
       "preview": "Saytda koʻrinishi:",
       "save": "Saqlash",
       "saved": "Sozlamalar saqlandi",
+      "plans": "Tariflar narxi",
+      "plansText": "Pro va Diamond tariflarining bir oylik narxi. Yillik toʻlov chegirmasi shu narxlardan hisoblanadi. Kutilayotgan toʻlovlar summasi oʻzgarmaydi.",
+      "proPrice": "Pro — oyiga, soʻm",
+      "diamondPrice": "Diamond — oyiga, soʻm",
+      "annualDiscount": "Yillik toʻlov chegirmasi, %",
+      "annualDiscountHint": "0 dan 90 gacha. 0 — chegirmasiz.",
+      "planMonthly": "Oylik: {price} soʻm",
+      "planAnnual": "Yillik: {total} soʻm (oyiga {perMonth})",
       "errors": {
         "cardNumber": "Karta raqami 16 ta raqamdan iborat boʻlishi kerak",
         "cardHolder": "Karta egasi nomi juda uzun",
@@ -1530,16 +1540,9 @@
         "proPriceUzs": "Pro narxi 1 000 soʻmdan kam boʻlmasin",
         "diamondPriceUzs": "Diamond narxi 1 000 soʻmdan kam boʻlmasin",
         "annualDiscount": "Chegirma 0 dan 90 gacha butun son boʻlishi kerak",
+        "iqPictureShare": "Ulush 0 dan 100 gacha butun son boʻlishi kerak",
         "invalid": "Maʼlumotlarni tekshiring"
-      },
-      "plans": "Tariflar narxi",
-      "plansText": "Pro va Diamond tariflarining bir oylik narxi. Yillik toʻlov chegirmasi shu narxlardan hisoblanadi. Kutilayotgan toʻlovlar summasi oʻzgarmaydi.",
-      "proPrice": "Pro — oyiga, soʻm",
-      "diamondPrice": "Diamond — oyiga, soʻm",
-      "annualDiscount": "Yillik toʻlov chegirmasi, %",
-      "annualDiscountHint": "0 dan 90 gacha. 0 — chegirmasiz.",
-      "planMonthly": "Oylik: {price} soʻm",
-      "planAnnual": "Yillik: {total} soʻm (oyiga {perMonth})"
+      }
     }
   },
   "common": {

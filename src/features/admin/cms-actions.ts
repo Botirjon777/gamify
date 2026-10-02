@@ -49,7 +49,7 @@ const orNull = <T>(value: T | undefined) => value ?? Prisma.DbNull;
 /** After every change: audit trail, and learners see it at once (not after the catalog cache expires). */
 async function changed(adminId: string, action: string, data: Prisma.InputJsonValue) {
   await audit(db, adminId, action, null, data);
-  await Promise.all([invalidateCache("catalog:"), invalidateCache("weekly:")]);
+  await Promise.all([invalidateCache("catalog:"), invalidateCache("weekly:"), invalidateCache("iq:pool")]);
   revalidatePath("/", "layout");
 }
 

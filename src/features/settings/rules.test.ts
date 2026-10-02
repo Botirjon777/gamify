@@ -22,6 +22,7 @@ describe("site settings", () => {
       "payment.contact": "@ali_v",
       "iq.priceUzs": "13000",
       "iq.oldPriceUzs": "25000",
+      "iq.pictureShare": "100",
       // Not given → the default plan prices.
       "plan.proPriceUzs": "39000",
       "plan.diamondPriceUzs": "79000",
@@ -42,6 +43,8 @@ describe("site settings", () => {
     expect(settingsInput.safeParse({ ...valid, iqOldPriceUzs: 13_000 }).success).toBe(false);
     expect(settingsInput.safeParse({ ...valid, cardNumber: "", cardHolder: "", contact: "" }).success).toBe(true);
     expect(settingsInput.safeParse({ ...valid, proPriceUzs: 500 }).success).toBe(false);
+    expect(settingsInput.safeParse({ ...valid, iqPictureShare: 70 }).success).toBe(true);
+    expect(settingsInput.safeParse({ ...valid, iqPictureShare: 101 }).success).toBe(false);
     expect(settingsInput.safeParse({ ...valid, annualDiscount: 95 }).success).toBe(false);
     expect(settingsInput.safeParse({ ...valid, annualDiscount: 12.5 }).success).toBe(false);
   });
