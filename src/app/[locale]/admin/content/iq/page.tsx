@@ -6,6 +6,8 @@ import { getCmsIqItems, toStatus, uzText } from "@/features/admin/cms-queries";
 import { StatusToggle } from "@/features/admin/components/cms-status-controls";
 import { IqItemDialog } from "@/features/admin/components/iq-item-dialog";
 import { IQ_CATEGORIES, type IqPublicContent } from "@/features/iq/content-schema";
+import { IqImage } from "@/features/iq/components/iq-picture";
+import { mediaUrl } from "@/lib/media";
 import { buttonClass } from "@/components/ui/button";
 
 const one = (value: string | string[] | undefined) => (typeof value === "string" ? value : undefined);
@@ -112,7 +114,9 @@ export default async function CmsIqPage({ params, searchParams }: PageProps<"/[l
                         <p className="line-clamp-2 text-sm font-medium leading-snug">{uzText(content.prompt)}</p>
                       </td>
                       <td className="px-4 py-3.5 font-mono text-xs font-bold">
-                        {content.figure ? <span className="block w-fit rounded-lg border border-border bg-background px-2.5 py-1">{content.figure}</span> : <span className="font-normal text-muted">—</span>}
+                        {content.image ? (
+                          <IqImage src={mediaUrl(content.image)} className="size-14 rounded-lg p-0.5" />
+                        ) : content.figure ? <span className="block w-fit rounded-lg border border-border bg-background px-2.5 py-1">{content.figure}</span> : <span className="font-normal text-muted">—</span>}
                       </td>
                       <td className="px-4 py-3.5 text-xs font-semibold text-muted">
                         <span className="block text-foreground">{t(`iq.categories.${itemCategory}`)}</span>
@@ -131,6 +135,8 @@ export default async function CmsIqPage({ params, searchParams }: PageProps<"/[l
                             difficulty: item.difficulty,
                             prompt: uzText(content.prompt),
                             figure: content.figure ?? "",
+                            image: content.image,
+                            optionsImage: content.optionsImage,
                             options: content.options.map(uzText),
                             answer: item.answer,
                             status: item.status,

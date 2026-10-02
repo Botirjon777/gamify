@@ -17,6 +17,8 @@ const nextConfig: NextConfig = {
     // Client router cache: going back to a page seen in the last 30 s is instant (no server round trip).
     // Every server action that changes data calls revalidatePath, which clears this cache.
     staleTimes: { dynamic: 30, static: 300 },
+    // Admins upload question pictures through a server action (2 MB each, see lib/media-store.ts); the default is 1 MB.
+    serverActions: { bodySizeLimit: "3mb" },
   },
 };
 

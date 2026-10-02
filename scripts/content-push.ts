@@ -1,6 +1,7 @@
 /**
  * /content → database. The database is the source of truth (see content:pull); this uploads what was edited
- * in the files: /content/<track>/track.yaml + /content/<track>/<skill>.yaml and /content/iq/items.yaml.
+ * in the files: /content/<track>/track.yaml + /content/<track>/<skill>.yaml and /content/iq/{items,pictures}.yaml.
+ * Pictures themselves are not content: they go to the media store with `pnpm media:push`.
  *   pnpm content:push              validate, show what differs, write it to the local dev database
  *   pnpm content:push --dry-run    only show what would change
  *   pnpm content:push --prune      also archive exercises / IQ items / courses that are not in the files
@@ -16,7 +17,7 @@ import { join } from "node:path";
 import { parse } from "yaml";
 import { Prisma, type PrismaClient } from "../src/generated/prisma/client";
 import { skillFile, toDbExercise, trackFile, type ExerciseDef, type TrackDef } from "../src/features/learn/content-schema";
-import { INITIAL_ITEM_RATING, iqFile, type IqItemDef, type IqPublicContent } from "../src/features/iq/content-schema";
+import { INITIAL_ITEM_RATING, IQ_FILES, iqFile, toIqContent, type IqItemDef } from "../src/features/iq/content-schema";
 import { CONTENT_DIR, connect } from "./lib/content-db";
 
 const flag = (name: string) => process.argv.includes(`--${name}`);
@@ -78,22 +79,26 @@ function load(): Loaded[] {
 }
 
 function loadIq(): IqItemDef[] {
-  const file = join(CONTENT_DIR, "iq", "items.yaml");
-  if (!existsSync(file)) return [];
-  const parsed = iqFile.safeParse(parse(readFileSync(file, "utf8")));
-  if (!parsed.success) {
-    console.error(`✘ ${file}:\n${parsed.error.issues.map((i) => `  ${i.path.join(".")}: ${i.message}`).join("\n")}`);
-    process.exit(1);
-  }
+  const items: IqItemDef[] = [];
   const ids = new Set<string>();
-  for (const item of parsed.data.items) {
-    if (ids.has(item.id)) {
-      console.error(`✘ duplicate IQ item id "${item.id}"`);
+  for (const name of Object.values(IQ_FILES)) {
+    const file = join(CONTENT_DIR, "iq", name);
+    if (!existsSync(file)) continue;
+    const parsed = iqFile.safeParse(parse(readFileSync(file, "utf8")));
+    if (!parsed.success) {
+      console.error(`✘ ${file}:\n${parsed.error.issues.map((i) => `  ${i.path.join(".")}: ${i.message}`).join("\n")}`);
       process.exit(1);
     }
-    ids.add(item.id);
+    for (const item of parsed.data.items) {
+      if (ids.has(item.id)) {
+        console.error(`✘ duplicate IQ item id "${item.id}"`);
+        process.exit(1);
+      }
+      ids.add(item.id);
+    }
+    items.push(...parsed.data.items);
   }
-  return parsed.data.items;
+  return items;
 }
 
 // ─── Comparing files with the database ──────────────────────────────────────
@@ -240,7 +245,7 @@ async function push(db: PrismaClient, tracks: Loaded[], iqItems: IqItemDef[]) {
 
   const fileIqKeys = new Set(iqItems.map((i) => i.id));
   for (const item of iqItems) {
-    const content: IqPublicContent = { prompt: item.prompt, figure: item.figure, options: item.options };
+    const content = toIqContent(item);
     const data = { category: item.category, difficulty: item.difficulty, content, answer: item.answer, status: item.status };
     const existing = iqByKey.get(item.id);
     const write = changes.iq.see(

@@ -10,6 +10,7 @@ import { answerIq, startIq } from "../actions";
 import { IQ_CHEER_PAUSE_MS, type IqCheer } from "../cheer";
 import { IQ_QUESTIONS, IQ_SECONDS_PER_QUESTION, type IqKind, type IqQuestion, type IqResult, type IqState } from "../types";
 import { IqCertificate, type IqCertificateState } from "./iq-certificate";
+import { IqImage, IqOptionCell } from "./iq-picture";
 
 export function IqTest({ kind, initial, certificate }: { kind: IqKind; initial: IqState | null; certificate: IqCertificateState }) {
   const t = useTranslations("iq");
@@ -210,25 +211,47 @@ function TimedQuestion({
         </p>
       )}
 
-      <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
-        {q.options.map((option, i) => (
-          <button
-            key={i}
-            type="button"
-            disabled={busy || picked !== null}
-            onClick={() => void answer(i)}
-            className={`flex items-center gap-3 rounded-2xl border-2 px-4 py-4 text-left text-lg font-semibold transition disabled:cursor-default ${
-              picked === i ? "border-brand bg-brand/10" : "border-border bg-surface hover:border-brand/40"
-            }`}
-          >
-            <span className="grid size-7 shrink-0 place-items-center rounded-lg border border-border text-xs font-bold text-muted">
-              {i + 1}
-            </span>
-            {/* Symbol answers (◐ ▲ →) need to be as big as the figure to be readable. */}
-            <span className={[...option].length <= 2 ? "font-mono text-3xl leading-none" : ""}>{option}</span>
-          </button>
-        ))}
-      </div>
+      {q.image && <IqImage src={q.image} className="mx-auto mt-5 w-full max-w-xs rounded-2xl p-3 sm:max-w-sm" />}
+
+      {q.optionsImage ? (
+        <div className="mx-auto mt-6 grid max-w-lg gap-2 sm:gap-2.5" style={{ gridTemplateColumns: `repeat(${q.optionsImage.columns}, minmax(0, 1fr))` }}>
+          {q.options.map((option, i) => (
+            <button
+              key={i}
+              type="button"
+              aria-label={option}
+              disabled={busy || picked !== null}
+              onClick={() => void answer(i)}
+              className={`relative overflow-hidden rounded-2xl border-2 bg-white p-1.5 transition disabled:cursor-default ${
+                picked === i ? "border-brand ring-4 ring-brand/25" : "border-border hover:border-brand/40"
+              }`}
+            >
+              <IqOptionCell sheet={q.optionsImage!} index={i} />
+              <span className="absolute left-1 top-1 grid size-5 place-items-center rounded-md bg-white/90 text-[10px] font-bold text-neutral-500">{i + 1}</span>
+            </button>
+          ))}
+        </div>
+      ) : (
+        <div className="mt-6 grid gap-2.5 sm:grid-cols-2">
+          {q.options.map((option, i) => (
+            <button
+              key={i}
+              type="button"
+              disabled={busy || picked !== null}
+              onClick={() => void answer(i)}
+              className={`flex items-center gap-3 rounded-2xl border-2 px-4 py-4 text-left text-lg font-semibold transition disabled:cursor-default ${
+                picked === i ? "border-brand bg-brand/10" : "border-border bg-surface hover:border-brand/40"
+              }`}
+            >
+              <span className="grid size-7 shrink-0 place-items-center rounded-lg border border-border text-xs font-bold text-muted">
+                {i + 1}
+              </span>
+              {/* Symbol answers (◐ ▲ →) need to be as big as the figure to be readable. */}
+              <span className={[...option].length <= 2 ? "font-mono text-3xl leading-none" : ""}>{option}</span>
+            </button>
+          ))}
+        </div>
+      )}
 
       <p className="mt-5 h-5 text-center text-sm text-muted">
         {error ? <span className="text-danger">{t("error")}</span> : busy ? (left === 0 ? t("timeUp") : t("submitting")) : null}

@@ -21,6 +21,7 @@
     "plan:set": "tsx scripts/set-plan.ts",
     "settings": "tsx scripts/settings.ts",
     "deploy:prod": "tsx scripts/deploy.ts",
+    "media:push": "tsx scripts/media-push.ts",
     "content:lint": "tsx scripts/content-lint.ts"
   },
   "dependencies": {

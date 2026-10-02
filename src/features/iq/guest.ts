@@ -2,10 +2,9 @@ import "server-only";
 import { randomBytes, randomInt } from "node:crypto";
 import type { GuestIqTest } from "@/generated/prisma/client";
 import { db } from "@/lib/db";
-import { localized, type LocalizedText } from "@/i18n/content";
 import type { IqPublicContent } from "./content-schema";
 import { iqPercentile } from "./rating";
-import { secondsLeft } from "./service";
+import { questionContent, secondsLeft } from "./service";
 import { IQ_QUESTIONS, type IqQuestion } from "./types";
 
 /**
@@ -29,14 +28,11 @@ export const guestTestByToken = (token: string) => (token.length > 10 && token.l
 /** The question on screen, as the browser may see it (no answer). */
 export async function guestQuestion(test: GuestIqTest, locale: string): Promise<IqQuestion> {
   const item = await db.iqItem.findUniqueOrThrow({ where: { id: test.currentItemId! } });
-  const content = item.content as IqPublicContent;
   return {
     itemId: item.id,
     number: test.answered + 1,
     total: test.total,
-    prompt: localized(content.prompt, locale),
-    figure: content.figure,
-    options: content.options.map((o: LocalizedText) => localized(o, locale)),
+    ...questionContent(item.content as IqPublicContent, locale),
     secondsLeft: secondsLeft(test.currentShownAt!),
   };
 }
