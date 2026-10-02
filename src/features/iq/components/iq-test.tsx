@@ -7,7 +7,7 @@ import { Link } from "@/i18n/navigation";
 import { Button, buttonClass } from "@/components/ui/button";
 import { playSound } from "@/lib/sound";
 import { answerIq, startIq } from "../actions";
-import { IQ_QUESTIONS, IQ_SECONDS_PER_QUESTION, type IqKind, type IqResult, type IqState } from "../types";
+import { IQ_QUESTIONS, IQ_SECONDS_PER_QUESTION, type IqKind, type IqQuestion, type IqResult, type IqState } from "../types";
 import { IqCertificate, type IqCertificateState } from "./iq-certificate";
 
 export function IqTest({ kind, initial, certificate }: { kind: IqKind; initial: IqState | null; certificate: IqCertificateState }) {
@@ -65,9 +65,9 @@ export function IqTest({ kind, initial, certificate }: { kind: IqKind; initial: 
   if (state.status === "FINISHED") return <Result result={state.result} certificate={certificate} />;
 
   return (
-    <Question
+    <IqQuestionView
       key={state.question.itemId}
-      state={state}
+      question={state.question}
       busy={busy}
       error={error}
       onAnswer={(choice) => run(() => answerIq(state.sessionId, state.question.itemId, choice))}
@@ -75,19 +75,19 @@ export function IqTest({ kind, initial, certificate }: { kind: IqKind; initial: 
   );
 }
 
-function Question({
-  state,
+/** One timed question (shared with the test without registration). Remount it per question: `key={question.itemId}`. */
+export function IqQuestionView({
+  question: q,
   busy,
   error,
   onAnswer,
 }: {
-  state: Extract<IqState, { status: "ACTIVE" }>;
+  question: IqQuestion;
   busy: boolean;
   error: boolean;
   onAnswer: (choice: number | null) => Promise<boolean>;
 }) {
   const t = useTranslations("iq");
-  const q = state.question;
   const [deadline] = useState(() => Date.now() + q.secondsLeft * 1000);
   const [left, setLeft] = useState(q.secondsLeft);
   const [picked, setPicked] = useState<number | null>(null);

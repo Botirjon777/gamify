@@ -1,0 +1,55 @@
+import "server-only";
+import { randomBytes, randomInt } from "node:crypto";
+import type { GuestIqTest } from "@/generated/prisma/client";
+import { db } from "@/lib/db";
+import { localized, type LocalizedText } from "@/i18n/content";
+import type { IqPublicContent } from "./content-schema";
+import { IQ_CERTIFICATE_PRICE_UZS } from "./certificate";
+import { iqPercentile } from "./rating";
+import { IQ_QUESTIONS, IQ_SECONDS_PER_QUESTION, type IqQuestion } from "./types";
+
+/**
+ * IQ test without an account (/iq-test). Taking it is free; the score and the certificate are shown after
+ * the payment is confirmed by an admin. Flip this to show the score right away and sell only the certificate.
+ */
+export const GUEST_IQ_SCORE_IS_FREE = false;
+export const GUEST_IQ_QUESTIONS = IQ_QUESTIONS.PLACEMENT;
+export const GUEST_IQ_PRICE_UZS = IQ_CERTIFICATE_PRICE_UZS;
+
+/** No 0/O, 1/I/L — the code is read aloud and typed into Telegram. */
+const CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";
+export const newGuestToken = () => randomBytes(18).toString("base64url");
+export const newGuestCode = () => Array.from({ length: 6 }, () => CODE_ALPHABET[randomInt(CODE_ALPHABET.length)]).join("");
+export const normalizeGuestCode = (code: string) => code.trim().toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 12);
+
+export const guestTestByToken = (token: string) => (token.length > 10 && token.length < 64 ? db.guestIqTest.findUnique({ where: { token } }) : null);
+
+/** The question on screen, as the browser may see it (no answer). */
+export async function guestQuestion(test: GuestIqTest, locale: string): Promise<IqQuestion> {
+  const item = await db.iqItem.findUniqueOrThrow({ where: { id: test.currentItemId! } });
+  const content = item.content as IqPublicContent;
+  const elapsed = (Date.now() - test.currentShownAt!.getTime()) / 1000;
+  return {
+    itemId: item.id,
+    number: test.answered + 1,
+    total: test.total,
+    prompt: localized(content.prompt, locale),
+    figure: content.figure,
+    options: content.options.map((o: LocalizedText) => localized(o, locale)),
+    secondsLeft: Math.max(0, Math.round(IQ_SECONDS_PER_QUESTION - elapsed)),
+  };
+}
+
+/** What a paid certificate shows. */
+export function guestCertificate(test: GuestIqTest) {
+  const iq = test.iq ?? 100;
+  return {
+    name: `${test.firstName} ${test.lastName}`,
+    iq,
+    percentile: iqPercentile(iq),
+    correct: test.correct,
+    total: test.total,
+    date: test.finishedAt ?? test.createdAt,
+    code: test.code,
+  };
+}

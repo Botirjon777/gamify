@@ -73,7 +73,8 @@
     "features": {
       "iq": {
         "title": "Zukko IQ",
-        "text": "Mantiqiy fikrlash testlari, kunlik IQ savollar va IQ reytingi."
+        "text": "Mantiqiy fikrlash testlari, kunlik IQ savollar va IQ reytingi.",
+        "cta": "Roʻyxatdan oʻtmasdan IQ test"
       },
       "friends": {
         "title": "Doʻstlar",
@@ -1147,7 +1148,8 @@
       "audit": "Amallar tarixi",
       "events": "Mavsum va bonuslar",
       "promos": "Promokodlar",
-      "partners": "Hamkorlar"
+      "partners": "Hamkorlar",
+      "guestIq": "IQ testlar"
     },
     "stats": {
       "totalUsers": "Jami foydalanuvchilar",
@@ -1334,6 +1336,10 @@
         "update": "Hamkorni tahrirladi",
         "enable": "Hamkorni yoqdi",
         "disable": "Hamkorni oʻchirdi"
+      },
+      "guestIq": {
+        "paid": "IQ test toʻlovini tasdiqladi",
+        "unpaid": "IQ test toʻlovini bekor qildi"
       }
     },
     "events": {
@@ -1410,6 +1416,34 @@
       "active": "Faol",
       "seeUsers": "{count} ta foydalanuvchini koʻrish",
       "promoCodes": "Promokodlari"
+    },
+    "guestIq": {
+      "subtitle": "Roʻyxatdan oʻtmasdan topshirilgan IQ testlar. Toʻlov chekini Telegramda olgach, kod boʻyicha toping va tasdiqlang. Jami tushum: {amount} soʻm.",
+      "tabs": {
+        "waiting": "Toʻlov kutilmoqda",
+        "paid": "Toʻlangan",
+        "all": "Hammasi"
+      },
+      "search": "Kod, telefon yoki ism…",
+      "empty": "Hech narsa topilmadi.",
+      "age": "{age} yosh",
+      "result": "IQ {iq} · {correct}/{total} toʻgʻri",
+      "unfinished": "Tugatilmagan: {answered}/{total}",
+      "paidAt": "Toʻlangan: {date} · {amount} soʻm",
+      "partner": "Hamkor: {name}",
+      "referredBy": "{code} havolasi orqali kelgan",
+      "brought": "{count} kishini olib kelgan",
+      "markPaid": "Toʻlov qabul qilindi",
+      "confirmTitle": "{name} toʻlovi tasdiqlansinmi?",
+      "confirmText": "Tasdiqlangach, uning sahifasida natija va sertifikat ochiladi.",
+      "confirm": "Tasdiqlash",
+      "markedPaid": "Tasdiqlandi — sertifikat ochildi",
+      "markedUnpaid": "Toʻlov bekor qilindi",
+      "copyLink": "Havola",
+      "copyMessage": "Telegram xabari",
+      "open": "Sertifikat",
+      "undo": "Bekor qilish",
+      "message": "Salom, {name}! Toʻlovingiz tasdiqlandi. IQ sertifikatingiz shu yerda: {url}\nSahifadagi tugma orqali PDF qilib saqlashingiz va doʻstlaringizga ulashishingiz mumkin."
     }
   },
   "common": {
@@ -1543,6 +1577,49 @@
       "forbidden": "Bu amalni bajarib boʻlmaydi",
       "expired": "Duel muddati tugagan",
       "late": "Vaqt tugadi"
+    }
+  },
+  "guestIq": {
+    "metaTitle": "IQ test — roʻyxatdan oʻtmasdan",
+    "metaDescription": "12 ta mantiqiy savol, har biriga 60 soniya. Testni bepul yeching, natija va IQ sertifikatini oling.",
+    "title": "IQ test",
+    "text": "Mantiqiy fikrlash darajangizni sinab koʻring. Roʻyxatdan oʻtish shart emas — maʼlumotlaringizni kiriting va boshlang.",
+    "priceNote": "Test bepul. Natijangiz va IQ sertifikati — {price} soʻm: test oxirida toʻlov qilasiz, tasdiqlangach natija va sertifikat ochiladi.",
+    "firstName": "Ism",
+    "lastName": "Familiya",
+    "age": "Yosh",
+    "phone": "Telefon raqami",
+    "start": "Testni boshlash",
+    "starting": "Kuting…",
+    "errors": {
+      "required": "Bu maydon toʻldirilishi shart",
+      "nameShort": "Kamida 2 ta harf",
+      "nameLong": "Juda uzun",
+      "nameLetters": "Faqat harflar",
+      "ageInvalid": "Yoshingizni kiriting (6–99)",
+      "invalidPhone": "Telefon raqami notoʻgʻri. Masalan: +998 90 123 45 67",
+      "tooMany": "Juda koʻp urinish. Birozdan soʻng qayta urinib koʻring.",
+      "noQuestions": "Hozircha savollar yoʻq. Keyinroq urinib koʻring.",
+      "closed": "IQ test asosiy saytda: zukkolar.uz/iq-test"
+    },
+    "pay": {
+      "title": "Test yakunlandi, {name}!",
+      "locked": "Natija toʻlovdan soʻng ochiladi",
+      "text": "Natijangiz tayyor. Uni va IQ sertifikatini ochish uchun {price} soʻm toʻlang.",
+      "step1": "{price} soʻmni shu kartaga oʻtkazing",
+      "step2": "Toʻlov chekini Telegram orqali yuboring",
+      "codeHint": "Xabarda shu kodni yozing — toʻlovingizni shu orqali topamiz:",
+      "telegram": "Telegramda yozish",
+      "telegramMessage": "Salom! IQ test uchun toʻlov qildim.\nKod: {code}\nIsm: {name}\n(chekni shu yerga yuboraman)",
+      "contact": "Aloqa: {contact}",
+      "cardMissing": "Karta raqami hali sozlanmagan. Toʻlov uchun yozing: {contact}",
+      "step3": "Tasdiqlangach, natija va sertifikat shu sahifada ochiladi",
+      "keepLink": "Sahifa oʻzi yangilanadi. Havolani saqlab qoʻying — sertifikatingiz shu manzilda boʻladi (uni Telegram orqali ham yuboramiz):",
+      "copy": "Nusxa olish"
+    },
+    "certificate": {
+      "correct": "Toʻgʻri javoblar",
+      "number": "Sertifikat № {code}"
     }
   }
 }

@@ -592,6 +592,55 @@ model Partner {
 
   users      User[]
   promoCodes PromoCode[]
+  guestTests GuestIqTest[]
+}
+
+/// An IQ test taken without an account (/iq-test). The test is free; the result and the certificate are paid:
+/// the person transfers the money, sends the receipt in Telegram together with `code`, an admin marks the test
+/// paid, and /iq-test/<token> turns into the certificate.
+model GuestIqTest {
+  id             String          @id @default(cuid())
+  /// In the URL. Unguessable: whoever has the link can open the (paid) certificate.
+  token          String          @unique
+  /// Short code the person tells us when paying — also their code in share links (/iq-test?r=<code>).
+  code           String          @unique
+  firstName      String
+  lastName       String
+  age            Int
+  /// E.164, +998XXXXXXXXX
+  phone          String
+  status         IqSessionStatus @default(ACTIVE)
+  total          Int
+  answered       Int             @default(0)
+  correct        Int             @default(0)
+  /// Elo rating during the test (questions adapt to it); the score is derived from it.
+  rating         Float           @default(1000)
+  /// Questions already asked — never repeated within a test.
+  askedItemIds   String[]
+  /// The question on screen right now; its deadline is enforced on the server.
+  currentItemId  String?
+  currentShownAt DateTime?
+  /// Final score, set when the test is finished.
+  iq             Int?
+  finishedAt     DateTime?
+  /// Set by an admin once the transfer is confirmed.
+  paidAt         DateTime?
+  paidById       String?
+  amountUzs      Int             @default(0)
+  /// Came through a partner's link.
+  partnerId      String?
+  /// Came through another guest's share link.
+  referredById   String?
+  createdAt      DateTime        @default(now())
+
+  partner    Partner?      @relation(fields: [partnerId], references: [id], onDelete: SetNull)
+  referredBy GuestIqTest?  @relation("GuestIqReferrals", fields: [referredById], references: [id], onDelete: SetNull)
+  referrals  GuestIqTest[] @relation("GuestIqReferrals")
+
+  @@index([status, paidAt, finishedAt])
+  @@index([phone])
+  @@index([partnerId])
+  @@index([referredById])
 }
 
 /// Every admin action, for accountability.
