@@ -4,6 +4,7 @@ import { useState, useTransition } from "react";
 import { Check, Gift } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Button } from "@/components/ui/button";
+import { playSound } from "@/lib/sound";
 import { claimDailyBonus } from "../daily-bonus";
 
 interface Props {
@@ -24,6 +25,7 @@ export function DailyBonusCard({ claimed: initialClaimed, cycle, nextDay }: Prop
       // An "alreadyClaimed" result means another tab got there first — same end state.
       await claimDailyBonus();
       setClaimed(true);
+      playSound("claim");
     });
 
   return (

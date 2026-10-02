@@ -26,6 +26,7 @@ import { Reveal } from "@/components/reveal";
 import { buttonClass } from "@/components/ui/button";
 import { getCurrentSession } from "@/lib/auth/session";
 import { siteOrigin } from "@/lib/site-url";
+import { telegramUrl } from "@/lib/telegram";
 import { getCurrentTenant } from "@/lib/tenant";
 import { currentSeason, weeklyTopic } from "@/features/events/service";
 import { daysLeft, seasonProgress } from "@/features/events/season";
@@ -55,13 +56,6 @@ type Faq = { q: string; a: string };
 /** The landing page is the canonical home; title / description come from the locale layout. */
 export const metadata: Metadata = { alternates: { canonical: "/" } };
 
-/** "@handle" or a t.me link → a Telegram URL; anything else (a phone, empty) → no link. */
-function telegramUrl(contact: string | null): string | null {
-  if (!contact) return null;
-  if (contact.startsWith("https://t.me/")) return contact;
-  return /^@[\w]{4,}$/.test(contact) ? `https://t.me/${contact.slice(1)}` : null;
-}
-
 export default async function LandingPage({ params }: PageProps<"/[locale]">) {
   const { locale } = await params;
   setRequestLocale(locale);
@@ -72,12 +66,13 @@ export default async function LandingPage({ params }: PageProps<"/[locale]">) {
   const tMeta = await getTranslations("meta");
 
   const tenant = await getCurrentTenant();
-  const [current, catalog, season, topic, origin] = await Promise.all([
+  const [current, catalog, season, topic, origin, payment] = await Promise.all([
     getCurrentSession(),
     getCatalogStructure(tenant.id, locale),
     currentSeason(),
     weeklyTopic(undefined, await getLocale()),
     siteOrigin(),
+    paymentDetails(),
   ]);
 
   // Real numbers from the catalog — nothing invented.
@@ -106,7 +101,7 @@ export default async function LandingPage({ params }: PageProps<"/[locale]">) {
 
   const faq = t.raw("faq") as Faq[];
   const trust = t.raw("trust") as string[];
-  const telegram = telegramUrl(paymentDetails().contact);
+  const telegram = telegramUrl(payment.contact);
   const som = (n: number) => n.toLocaleString("uz-UZ");
 
   // Structured data: who we are, the site, and the FAQ (eligible for rich results).
@@ -401,6 +396,11 @@ function handleClick() {
                   </span>
                   <h3 className="mt-4 text-lg font-bold">{t(`features.${key}.title`)}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-muted">{t(`features.${key}.text`)}</p>
+                  {key === "iq" && (
+                    <Link href="/iq-test" className="mt-3 inline-flex items-center gap-1 text-sm font-bold text-brand hover:underline">
+                      {t("features.iq.cta")} <ArrowRight className="size-4" />
+                    </Link>
+                  )}
                 </Reveal>
               ))}
             </div>

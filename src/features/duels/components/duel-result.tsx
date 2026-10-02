@@ -5,6 +5,7 @@ import { Frown, Handshake, RotateCcw, Trophy } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { buttonClass } from "@/components/ui/button";
+import { playSound } from "@/lib/sound";
 import type { DuelPlayer } from "../queries";
 
 interface Side {
@@ -40,6 +41,11 @@ export function DuelResult({
   const [shown, setShown] = useState(0);
   const look = LOOK[result];
   const Icon = look.icon;
+
+  // The verdict has a sound (a draw stays quiet).
+  useEffect(() => {
+    if (result !== "draw") playSound(result);
+  }, [result]);
 
   // Count to the XP change over ~1 s, starting after the verdict has popped in.
   useEffect(() => {

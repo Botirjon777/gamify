@@ -23,7 +23,7 @@ export default async function CheckoutPage({ params, searchParams }: PageProps<"
         <ArrowLeft className="size-4" /> {t("title")}
       </Link>
       <PageHeader title={t("checkout.title", { plan: t(`names.${plan!}`) })} />
-      <CheckoutForm plan={plan!} initialBilling={billing} {...paymentDetails()} />
+      <CheckoutForm plan={plan!} initialBilling={billing} {...(await paymentDetails())} />
     </div>
   );
 }

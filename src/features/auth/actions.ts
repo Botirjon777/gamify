@@ -22,6 +22,7 @@ import { awardXp } from "@/features/gamification/xp";
 import { notify } from "@/features/notifications/service";
 import { normalizeReferralCode, REFERRAL_NEW_USER_XP } from "@/features/referrals/service";
 import { defaultStyleFor } from "@/lib/avatar";
+import { partnerFromCookie } from "@/features/partners/service";
 
 function fieldErrors(error: z.ZodError): FormState["fieldErrors"] {
   const out: Record<string, string> = {};
@@ -79,6 +80,9 @@ export async function register(_prev: FormState, formData: FormData): Promise<Fo
     };
   }
 
+  // Came through a partner's link (/p/<code>) in the last 30 days?
+  const partnerId = await partnerFromCookie();
+
   let userId: string;
   const passwordHash = await hashPassword(password);
   try {
@@ -93,6 +97,7 @@ export async function register(_prev: FormState, formData: FormData): Promise<Fo
           // Not everyone starts with the same look: base style picked from the username.
           avatarStyle: defaultStyleFor(username),
           referredById: referrer?.id,
+          ...(partnerId && { partnerId, partnerAt: new Date() }),
           memberships: { create: { tenantId: tenant.id, role: "STUDENT" } },
         },
       });

@@ -54,6 +54,11 @@ export default async function AdminPayments({ params, searchParams }: PageProps<
                 <span className="font-display text-xl font-bold">{t("som", { amount: p.amountUzs.toLocaleString("uz-UZ") })}</span>
                 <span className="font-semibold">{p.plan ? t("payments.planPeriod", { plan: p.plan, months: p.months }) : t(`payments.products.${p.product}`)}</span>
                 <span className="text-sm text-muted">{t("payments.current", { plan: effectivePlan(p.user) })}</span>
+                {p.promoCode && (
+                  <span className="rounded-lg bg-success/10 px-2 py-0.5 text-sm font-semibold text-success">
+                    {t("payments.promo", { code: p.promoCode.code, percent: p.promoCode.percent, discount: p.discountUzs.toLocaleString("uz-UZ") })}
+                  </span>
+                )}
               </div>
               {p.reference && (
                 <p className="rounded-xl bg-background px-3 py-2 text-sm">

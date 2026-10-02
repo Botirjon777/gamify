@@ -30,7 +30,11 @@ export async function approvePayment(paymentId: string, note?: string): Promise<
     });
     if (claimed.count === 0) return { ok: false as const, error: "notPending" };
 
-    const payment = await tx.payment.findUniqueOrThrow({ where: { id: paymentId }, include: { user: true } });
+    const payment = await tx.payment.findUniqueOrThrow({ where: { id: paymentId }, include: { user: true, promoCode: { select: { partnerId: true } } } });
+    // Paid with a partner's promo code and nobody brought this user before → the partner did.
+    if (payment.promoCode?.partnerId && !payment.user.partnerId) {
+      await tx.user.update({ where: { id: payment.userId }, data: { partnerId: payment.promoCode.partnerId, partnerAt: new Date() } });
+    }
     if (payment.product !== "PLAN" || !payment.plan) {
       // One-time product: the approved payment itself is the unlock (see iqCertificateAccess).
       await notify(tx, payment.userId, "PAYMENT_APPROVED", { plan: payment.product });

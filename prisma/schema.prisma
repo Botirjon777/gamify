@@ -116,6 +116,10 @@ model User {
   /// When the inviter got their reward (invitee reached the required level).
   referralRewardedAt DateTime?
   referredBy         User?     @relation("Referrals", fields: [referredById], references: [id], onDelete: SetNull)
+  /// The partner who brought this user (their link, or their promo code on the first payment). Set once.
+  partnerId          String?
+  partnerAt          DateTime?
+  partner            Partner?  @relation(fields: [partnerId], references: [id], onDelete: SetNull)
   referrals          User[]    @relation("Referrals")
   currentStreak      Int       @default(0)
   longestStreak      Int       @default(0)
@@ -150,6 +154,7 @@ model User {
 
   @@index([xp(sort: Desc)])
   @@index([iqRating(sort: Desc)])
+  @@index([partnerId])
 }
 
 /// DB-backed session = one logged-in device. Only the SHA-256 of the token is stored.
@@ -533,11 +538,117 @@ model Payment {
   createdAt    DateTime       @default(now())
   reviewedAt   DateTime?
   reviewedById String?
+  /// Promo code used; `amountUzs` is already the discounted price, `discountUzs` what was taken off.
+  promoCodeId  String?
+  discountUzs  Int            @default(0)
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  promoCode PromoCode? @relation(fields: [promoCodeId], references: [id], onDelete: SetNull)
 
   @@index([status, createdAt])
   @@index([userId, createdAt])
+  @@index([promoCodeId])
+}
+
+/// A discount code for buying a subscription, created by an admin. One use per user.
+model PromoCode {
+  id          String    @id @default(cuid())
+  /// What the user types, stored uppercase: "YOZ25"
+  code        String    @unique
+  /// Discount in percent, 1–100.
+  percent     Int
+  /// Only for this plan; null = any paid plan.
+  plan        UserPlan?
+  /// How many payments may use it (pending + approved); null = unlimited.
+  maxUses     Int?
+  /// null = never expires.
+  expiresAt   DateTime?
+  /// Switched off by an admin: can't be used any more, history stays.
+  active      Boolean   @default(true)
+  note        String?
+  /// A partner's own code: a user who pays with it is attributed to that partner.
+  partnerId   String?
+  createdById String?
+  createdAt   DateTime  @default(now())
+
+  payments Payment[]
+  partner  Partner?  @relation(fields: [partnerId], references: [id], onDelete: SetNull)
+}
+
+/// Someone who recommends Zukkolar (a blogger, a teacher, a channel). People who arrive through their link
+/// (/p/<code>) or pay with their promo code are attributed to them, so we know what each partner brings.
+model Partner {
+  id        String   @id @default(cuid())
+  /// In the link, lowercase: zukkolar.uz/p/aziz
+  code      String   @unique
+  name      String
+  contact   String?
+  note      String?
+  /// Switched off: the link still opens the site but nobody new is attributed.
+  active    Boolean  @default(true)
+  /// How many times the link was opened.
+  clicks    Int      @default(0)
+  createdAt DateTime @default(now())
+
+  users      User[]
+  promoCodes PromoCode[]
+  guestTests GuestIqTest[]
+}
+
+/// An IQ test taken without an account (/iq-test). The test is free; the result and the certificate are paid:
+/// the person transfers the money, sends the receipt in Telegram together with `code`, an admin marks the test
+/// paid, and /iq-test/<token> turns into the certificate.
+model GuestIqTest {
+  id             String          @id @default(cuid())
+  /// In the URL. Unguessable: whoever has the link can open the (paid) certificate.
+  token          String          @unique
+  /// Short code the person tells us when paying — also their code in share links (/iq-test?r=<code>).
+  code           String          @unique
+  firstName      String
+  lastName       String
+  age            Int
+  /// E.164, +998XXXXXXXXX
+  phone          String
+  status         IqSessionStatus @default(ACTIVE)
+  total          Int
+  answered       Int             @default(0)
+  correct        Int             @default(0)
+  /// Elo rating during the test (questions adapt to it); the score is derived from it.
+  rating         Float           @default(1000)
+  /// Questions already asked — never repeated within a test.
+  askedItemIds   String[]
+  /// The question on screen right now; its deadline is enforced on the server.
+  currentItemId  String?
+  currentShownAt DateTime?
+  /// Final score, set when the test is finished.
+  iq             Int?
+  finishedAt     DateTime?
+  /// Set by an admin once the transfer is confirmed.
+  paidAt         DateTime?
+  paidById       String?
+  amountUzs      Int             @default(0)
+  /// Came through a partner's link.
+  partnerId      String?
+  /// Came through another guest's share link.
+  referredById   String?
+  createdAt      DateTime        @default(now())
+
+  partner    Partner?      @relation(fields: [partnerId], references: [id], onDelete: SetNull)
+  referredBy GuestIqTest?  @relation("GuestIqReferrals", fields: [referredById], references: [id], onDelete: SetNull)
+  referrals  GuestIqTest[] @relation("GuestIqReferrals")
+
+  @@index([status, paidAt, finishedAt])
+  @@index([phone])
+  @@index([partnerId])
+  @@index([referredById])
+}
+
+/// Site-wide values changed without a deploy (payment card, IQ price): one row per key, see features/settings.
+model Setting {
+  key         String   @id
+  value       String
+  updatedAt   DateTime @updatedAt
+  updatedById String?
 }
 
 /// Every admin action, for accountability.

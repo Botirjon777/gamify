@@ -31,6 +31,7 @@ pnpm dev
 | `pnpm content:pull` | Database → `/content` YAML files |
 | `pnpm content:push` | `/content` → database (shows what differs first; `--dry-run` to only look) |
 | `pnpm content:lint` | Report every problem in the content files |
+| `pnpm settings` | Show / change the site settings kept in the database (payment card, Telegram contact, IQ price) — also in admin → Sozlamalar |
 
 ## Content
 

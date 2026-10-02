@@ -5,8 +5,9 @@ import { ArrowRight, Brain, CircleCheck, HelpCircle, Timer } from "lucide-react"
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Button, buttonClass } from "@/components/ui/button";
+import { playSound } from "@/lib/sound";
 import { answerIq, startIq } from "../actions";
-import { IQ_QUESTIONS, IQ_SECONDS_PER_QUESTION, type IqKind, type IqResult, type IqState } from "../types";
+import { IQ_QUESTIONS, IQ_SECONDS_PER_QUESTION, type IqKind, type IqQuestion, type IqResult, type IqState } from "../types";
 import { IqCertificate, type IqCertificateState } from "./iq-certificate";
 
 export function IqTest({ kind, initial, certificate }: { kind: IqKind; initial: IqState | null; certificate: IqCertificateState }) {
@@ -20,7 +21,9 @@ export function IqTest({ kind, initial, certificate }: { kind: IqKind; initial: 
     setBusy(true);
     setError(false);
     try {
-      setState(await fn());
+      const next = await fn();
+      setState(next);
+      if (next.status === "FINISHED") playSound("complete");
       return true;
     } catch {
       setError(true);
@@ -62,9 +65,9 @@ export function IqTest({ kind, initial, certificate }: { kind: IqKind; initial: 
   if (state.status === "FINISHED") return <Result result={state.result} certificate={certificate} />;
 
   return (
-    <Question
+    <IqQuestionView
       key={state.question.itemId}
-      state={state}
+      question={state.question}
       busy={busy}
       error={error}
       onAnswer={(choice) => run(() => answerIq(state.sessionId, state.question.itemId, choice))}
@@ -72,19 +75,19 @@ export function IqTest({ kind, initial, certificate }: { kind: IqKind; initial: 
   );
 }
 
-function Question({
-  state,
+/** One timed question (shared with the test without registration). Remount it per question: `key={question.itemId}`. */
+export function IqQuestionView({
+  question: q,
   busy,
   error,
   onAnswer,
 }: {
-  state: Extract<IqState, { status: "ACTIVE" }>;
+  question: IqQuestion;
   busy: boolean;
   error: boolean;
   onAnswer: (choice: number | null) => Promise<boolean>;
 }) {
   const t = useTranslations("iq");
-  const q = state.question;
   const [deadline] = useState(() => Date.now() + q.secondsLeft * 1000);
   const [left, setLeft] = useState(q.secondsLeft);
   const [picked, setPicked] = useState<number | null>(null);
@@ -94,6 +97,7 @@ function Question({
     async (choice: number | null) => {
       if (sent.current) return;
       sent.current = true;
+      if (choice !== null) playSound("tap");
       setPicked(choice);
       if (!(await onAnswer(choice))) {
         // Request failed — let the user answer again.
@@ -124,6 +128,11 @@ function Question({
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
   }, [answer, q.options.length]);
+
+  // The last seconds are audible.
+  useEffect(() => {
+    if (left > 0 && left <= 5) playSound("tick");
+  }, [left]);
 
   const share = left / IQ_SECONDS_PER_QUESTION;
 

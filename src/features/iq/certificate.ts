@@ -3,9 +3,6 @@ import { db } from "@/lib/db";
 import { effectivePlan, planAtLeast } from "@/features/plans/plans";
 import type { UserPlan } from "@/generated/prisma/enums";
 
-/** One-time price of the printable IQ certificate (≈ $1). Free with Pro / Diamond. */
-export const IQ_CERTIFICATE_PRICE_UZS = 13_000;
-
 export type IqCertificateAccess = { unlocked: true } | { unlocked: false; /** A payment for it is waiting for an admin. */ pending: boolean };
 
 /**
