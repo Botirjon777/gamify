@@ -52,9 +52,7 @@ export default async function AdminPayments({ params, searchParams }: PageProps<
               </div>
               <div className="flex flex-wrap items-baseline gap-x-6 gap-y-1">
                 <span className="font-display text-xl font-bold">{t("som", { amount: p.amountUzs.toLocaleString("uz-UZ") })}</span>
-                <span className="font-semibold">
-                  {p.plan} · {p.months} oy
-                </span>
+                <span className="font-semibold">{p.plan ? t("payments.planPeriod", { plan: p.plan, months: p.months }) : t(`payments.products.${p.product}`)}</span>
                 <span className="text-sm text-muted">{t("payments.current", { plan: effectivePlan(p.user) })}</span>
               </div>
               {p.reference && (

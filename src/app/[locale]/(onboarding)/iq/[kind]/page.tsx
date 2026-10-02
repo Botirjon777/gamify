@@ -3,7 +3,10 @@ import { setRequestLocale } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
 import { requireSession } from "@/lib/auth/session";
 import { getIqState } from "@/features/iq/actions";
+import { IQ_CERTIFICATE_PRICE_UZS, iqCertificateAccess } from "@/features/iq/certificate";
+import type { IqCertificateState } from "@/features/iq/components/iq-certificate";
 import { IqTest } from "@/features/iq/components/iq-test";
+import { paymentDetails } from "@/features/payments/config";
 import type { IqKind } from "@/features/iq/types";
 
 const KINDS: Record<string, IqKind> = { placement: "PLACEMENT", daily: "DAILY" };
@@ -18,6 +21,9 @@ export default async function IqPage({ params }: PageProps<"/[locale]/iq/[kind]"
   // Daily tests need a placement rating first.
   if (kind === "DAILY" && !user.iqTestedAt) redirect({ href: "/iq/placement", locale });
 
-  const state = await getIqState(kind);
-  return <IqTest kind={kind} initial={state} />;
+  const [state, access] = await Promise.all([getIqState(kind), iqCertificateAccess(user)]);
+  // The result screen offers the certificate: open it, or (Free plan) buy it once.
+  // The price is formatted here, on the server: browsers without Uzbek locale data would format it differently.
+  const certificate: IqCertificateState = access.unlocked ? access : { ...access, price: IQ_CERTIFICATE_PRICE_UZS.toLocaleString("uz-UZ"), ...paymentDetails() };
+  return <IqTest kind={kind} initial={state} certificate={certificate} />;
 }

@@ -87,9 +87,7 @@ export default async function AdminUserPage({ params }: PageProps<"/[locale]/adm
               {user.payments.map((p) => (
                 <li key={p.id} className="flex flex-wrap items-center gap-x-3 gap-y-1 py-2">
                   <PaymentStatusPill status={p.status} />
-                  <span className="font-semibold">
-                    {p.plan} · {p.months}
-                  </span>
+                  <span className="font-semibold">{p.plan ? t("payments.planPeriod", { plan: p.plan, months: p.months }) : t(`payments.products.${p.product}`)}</span>
                   <span>{t("som", { amount: p.amountUzs.toLocaleString("uz-UZ") })}</span>
                   <span className="ml-auto text-muted">{format.dateTime(p.createdAt, { dateStyle: "medium" })}</span>
                 </li>

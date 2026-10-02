@@ -7,8 +7,9 @@ import { Link } from "@/i18n/navigation";
 import { Button, buttonClass } from "@/components/ui/button";
 import { answerIq, startIq } from "../actions";
 import { IQ_QUESTIONS, IQ_SECONDS_PER_QUESTION, type IqKind, type IqResult, type IqState } from "../types";
+import { IqCertificate, type IqCertificateState } from "./iq-certificate";
 
-export function IqTest({ kind, initial }: { kind: IqKind; initial: IqState | null }) {
+export function IqTest({ kind, initial, certificate }: { kind: IqKind; initial: IqState | null; certificate: IqCertificateState }) {
   const t = useTranslations("iq");
   const [state, setState] = useState<IqState | null>(initial);
   const [busy, setBusy] = useState(false);
@@ -58,7 +59,7 @@ export function IqTest({ kind, initial }: { kind: IqKind; initial: IqState | nul
     );
   }
 
-  if (state.status === "FINISHED") return <Result result={state.result} />;
+  if (state.status === "FINISHED") return <Result result={state.result} certificate={certificate} />;
 
   return (
     <Question
@@ -180,7 +181,7 @@ function Question({
   );
 }
 
-function Result({ result }: { result: IqResult }) {
+function Result({ result, certificate }: { result: IqResult; certificate: IqCertificateState }) {
   const t = useTranslations("iq.result");
   return (
     <Card>
@@ -208,6 +209,8 @@ function Result({ result }: { result: IqResult }) {
         <Pill>{result.rank ? t("rank", { rank: result.rank }) : "—"}</Pill>
         <Pill className="text-xp">{t("xp", { xp: result.xp })}</Pill>
       </div>
+
+      <IqCertificate state={certificate} />
 
       {result.kind === "DAILY" && <p className="mt-6 text-sm text-muted">{t("comeBack")}</p>}
       <div className="mt-8 flex flex-col gap-3 sm:flex-row">

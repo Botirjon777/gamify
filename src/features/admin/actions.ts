@@ -31,6 +31,12 @@ export async function approvePayment(paymentId: string, note?: string): Promise<
     if (claimed.count === 0) return { ok: false as const, error: "notPending" };
 
     const payment = await tx.payment.findUniqueOrThrow({ where: { id: paymentId }, include: { user: true } });
+    if (payment.product !== "PLAN" || !payment.plan) {
+      // One-time product: the approved payment itself is the unlock (see iqCertificateAccess).
+      await notify(tx, payment.userId, "PAYMENT_APPROVED", { plan: payment.product });
+      await audit(tx, admin.id, "payment.approve", payment.userId, { paymentId, product: payment.product, amountUzs: payment.amountUzs });
+      return { ok: true as const };
+    }
     const until = newExpiry(payment.user, payment.plan as PaidPlan, payment.months);
     await tx.user.update({ where: { id: payment.userId }, data: { plan: payment.plan, planExpiresAt: until } });
     await notify(tx, payment.userId, "PAYMENT_APPROVED", { plan: payment.plan, until: until.toISOString() });
@@ -60,7 +66,7 @@ export async function rejectPayment(paymentId: string, reason: string): Promise<
     });
     if (claimed.count === 0) return { ok: false as const, error: "notPending" };
     const payment = await tx.payment.findUniqueOrThrow({ where: { id: paymentId } });
-    await notify(tx, payment.userId, "PAYMENT_REJECTED", { plan: payment.plan, reason: text.data });
+    await notify(tx, payment.userId, "PAYMENT_REJECTED", { plan: payment.plan ?? payment.product, reason: text.data });
     await audit(tx, admin.id, "payment.reject", payment.userId, { paymentId, reason: text.data });
     return { ok: true as const };
   });

@@ -470,7 +470,39 @@
     },
     "error": "Xatolik yuz berdi. Sahifani yangilab koʻring.",
     "later": "Keyinroq",
-    "toDashboard": "Bosh sahifa"
+    "toDashboard": "Bosh sahifa",
+    "certificate": {
+      "title": "IQ sertifikati",
+      "open": "IQ sertifikatini ochish",
+      "get": "IQ sertifikatini olish — {price} soʻm",
+      "text": "Natijangiz yozilgan sertifikat: chop eting yoki PDF qilib saqlang va ulashing.",
+      "price": "{price} soʻm",
+      "oneTime": "Bir martalik toʻlov — sertifikat doim sizniki. Har bir yangi natija bilan yangilanadi.",
+      "proHint": "Pro va Diamond tariflarida sertifikat bepul.",
+      "copy": "Nusxa olish",
+      "copied": "Nusxa olindi",
+      "cardMissing": "Karta raqami hali sozlanmagan. Toʻlov uchun administratorga yozing.",
+      "reference": "Toʻlov maʼlumoti",
+      "referencePlaceholder": "Masalan: 8600 **** 1234 kartadan, 14:32 da",
+      "contact": "Savollar uchun: {contact}",
+      "cancel": "Bekor qilish",
+      "submit": "Toʻlovni yubordim",
+      "submitted": "Rahmat! Toʻlov maʼlumotingiz yuborildi. Tasdiqlangach, bildirishnoma olasiz.",
+      "pending": "Sertifikat uchun toʻlovingiz tekshirilmoqda — tasdiqlangach shu yerda ochiladi.",
+      "errors": {
+        "invalid": "Toʻlov maʼlumotini yozing (kamida 3 ta belgi)",
+        "alreadyUnlocked": "Sertifikat allaqachon ochilgan — sahifani yangilang",
+        "pendingExists": "Sizda tekshirilayotgan toʻlov bor. Avval u koʻrib chiqiladi.",
+        "tooMany": "Juda koʻp urinish. Keyinroq qayta urining.",
+        "network": "Yuborilmadi — internetni tekshirib, qayta urining."
+      },
+      "percentile": "Natija",
+      "percentileValue": "{percentile}% dan yuqori",
+      "date": "Sana",
+      "level": "Daraja",
+      "disclaimer": "Zukko IQ — mantiqiy fikrlash boʻyicha taxminiy baho. Bu klinik IQ test emas.",
+      "print": "Chop etish / PDF saqlash"
+    }
   },
   "leaderboard": {
     "title": "Reyting",
@@ -559,7 +591,8 @@
       "monthly": "Oylik",
       "annual": "Yillik"
     },
-    "annualTotal": "Yiliga {total} soʻm — {saving} soʻm tejaysiz"
+    "annualTotal": "Yiliga {total} soʻm — {saving} soʻm tejaysiz",
+    "pendingCertificate": "IQ sertifikati · {amount} soʻm. Administrator tasdiqlagach, sertifikat ochiladi."
   },
   "friends": {
     "title": "Doʻstlar",
@@ -680,9 +713,9 @@
       "LEVEL_UP": "Tabriklaymiz! Siz {level}-darajaga chiqdingiz",
       "REFERRAL_JOINED": "<b>{username}</b> taklif kodingiz bilan roʻyxatdan oʻtdi",
       "REFERRAL_REWARD": "<b>{username}</b> 3-darajaga yetdi — sizga +{xp} XP",
-      "PAYMENT_SUBMITTED": "<b>{username}</b> {plan} tarifi uchun {amount} soʻm toʻlov yubordi",
-      "PAYMENT_APPROVED": "Toʻlovingiz tasdiqlandi — {plan} tarifi faollashtirildi",
-      "PAYMENT_REJECTED": "{plan} uchun toʻlovingiz rad etildi: {reason}",
+      "PAYMENT_SUBMITTED": "{plan, select, IQ_CERTIFICATE {<b>{username}</b> IQ sertifikati uchun {amount} soʻm toʻlov yubordi} other {<b>{username}</b> {plan} tarifi uchun {amount} soʻm toʻlov yubordi}}",
+      "PAYMENT_APPROVED": "{plan, select, IQ_CERTIFICATE {Toʻlovingiz tasdiqlandi — IQ sertifikatingiz ochildi} other {Toʻlovingiz tasdiqlandi — {plan} tarifi faollashtirildi}}",
+      "PAYMENT_REJECTED": "{plan, select, IQ_CERTIFICATE {IQ sertifikati uchun toʻlovingiz rad etildi: {reason}} other {{plan} uchun toʻlovingiz rad etildi: {reason}}}",
       "TRACK_COMPLETED": "<b>{track}</b> kursini toʻliq tugatdingiz! +{xp} XP",
       "SEASON_RESULT": "{season}-mavsum yakunlandi: siz <b>{rank}-oʻrinni</b> egalladingiz ({xp} XP)",
       "DUEL_INVITE": "<b>{username}</b> sizni «{track}» boʻyicha duelga chaqirdi — {stake} XP tikilgan",
@@ -1193,7 +1226,12 @@
       "rejectPlaceholder": "Masalan: toʻlov topilmadi",
       "note": "Izoh",
       "current": "Hozirgi tarif: {plan}",
-      "reviewed": "{date} · {note}"
+      "reviewed": "{date} · {note}",
+      "planPeriod": "{plan} · {months} oy",
+      "products": {
+        "PLAN": "Tarif",
+        "IQ_CERTIFICATE": "IQ sertifikati"
+      }
     },
     "errors": {
       "notPending": "Bu toʻlov allaqachon koʻrib chiqilgan",
