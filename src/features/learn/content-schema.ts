@@ -3,6 +3,7 @@
  * Shared by the sync script and the app, so no server-only imports here.
  */
 import { CATEGORIES } from "./categories";
+import { SUBJECT_CATEGORIES, SUBJECTS } from "./subjects";
 import { z } from "zod";
 import type { LocalizedText } from "@/i18n/content";
 
@@ -84,31 +85,47 @@ export type ExerciseDef = z.infer<typeof exerciseDef>;
 
 export const skillFile = z.object({ exercises: z.array(exerciseDef).min(1) });
 
-export const trackFile = z.object({
-  slug: z.string().regex(/^[a-z0-9-]+$/),
-  title: localized,
-  description: localized.optional(),
-  icon: z.string().optional(),
-  order: z.number().int().default(0),
-  category: z.enum(CATEGORIES),
-  modules: z
-    .array(
-      z.object({
-        slug: z.string().regex(/^[a-z0-9-]+$/),
-        title: localized,
-        skills: z
-          .array(
-            z.object({
-              slug: z.string().regex(/^[a-z0-9-]+$/),
-              title: localized,
-              description: localized.optional(),
-            }),
-          )
-          .min(1),
-      }),
-    )
-    .min(1),
-});
+/** /learn/c/… and /learn/s/… are the category and subject pages, so a track can't live at /learn/c or /learn/s. */
+const RESERVED_TRACK_SLUGS = ["c", "s"];
+
+export const trackFile = z
+  .object({
+    slug: z
+      .string()
+      .regex(/^[a-z0-9-]+$/)
+      .refine((s) => !RESERVED_TRACK_SLUGS.includes(s), { message: "this slug is reserved for a page URL" }),
+    title: localized,
+    description: localized.optional(),
+    icon: z.string().optional(),
+    order: z.number().int().default(0),
+    subject: z.enum(SUBJECTS),
+    /** Only for subjects that are split into categories (Programming). */
+    category: z.enum(CATEGORIES).optional(),
+    modules: z
+      .array(
+        z.object({
+          slug: z.string().regex(/^[a-z0-9-]+$/),
+          title: localized,
+          skills: z
+            .array(
+              z.object({
+                slug: z.string().regex(/^[a-z0-9-]+$/),
+                title: localized,
+                description: localized.optional(),
+              }),
+            )
+            .min(1),
+        }),
+      )
+      .min(1),
+  })
+  .refine(
+    (t) => {
+      const allowed = SUBJECT_CATEGORIES[t.subject];
+      return allowed.length ? !!t.category && allowed.includes(t.category) : !t.category;
+    },
+    { message: "must be one of the subject's categories, and left out when the subject has none", path: ["category"] },
+  );
 export type TrackDef = z.infer<typeof trackFile>;
 
 // ─── Stored shapes (Exercise.content = public, Exercise.answer = private) ───

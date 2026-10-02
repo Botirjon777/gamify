@@ -10,6 +10,7 @@ import { getRateLimiter } from "@/lib/rate-limit";
 import { AVATAR_STYLES, type AvatarStyle } from "@/lib/avatar";
 import { AVATAR_UNLOCK_LEVEL } from "@/features/badges/catalog";
 import { effectivePlan, planAtLeast } from "@/features/plans/plans";
+import { normalizeInterests, SUBJECTS } from "@/features/learn/subjects";
 
 export type ProfileResult = { ok: true } | { ok: false; error: "locked" | "planRequired" | "invalid" };
 
@@ -18,6 +19,16 @@ export async function updateBio(bio: string): Promise<ProfileResult> {
   const parsed = z.string().trim().max(160).safeParse(bio);
   if (!parsed.success) return { ok: false, error: "invalid" };
   await db.user.update({ where: { id: user.id }, data: { bio: parsed.data || null } });
+  revalidatePath("/", "layout");
+  return { ok: true };
+}
+
+/** Subjects the user follows. Skipping the question saves an empty list — either way they aren't asked again. */
+export async function updateInterests(subjects: string[]): Promise<ProfileResult> {
+  const { user } = await requireSession();
+  const parsed = z.array(z.enum(SUBJECTS)).max(SUBJECTS.length).safeParse(subjects);
+  if (!parsed.success) return { ok: false, error: "invalid" };
+  await db.user.update({ where: { id: user.id }, data: { interests: normalizeInterests(parsed.data), interestsSetAt: new Date() } });
   revalidatePath("/", "layout");
   return { ok: true };
 }

@@ -3,6 +3,7 @@ title: JavaScript
 description: Massivlar, obyektlar, asinxronlik va zamonaviy sintaksis.
 icon: braces
 order: 3
+subject: PROGRAMMING
 category: FRONTEND
 modules:
   - slug: fundamentals

@@ -30,7 +30,7 @@ import { getCurrentTenant } from "@/lib/tenant";
 import { currentSeason, weeklyTopic } from "@/features/events/service";
 import { daysLeft, seasonProgress } from "@/features/events/season";
 import { DAILY_BONUS_XP } from "@/features/gamification/xp";
-import { CATEGORIES, CATEGORY_STYLE } from "@/features/learn/categories";
+import { groupKey, groupMessageKey, groupStyle, inGroup, TRACK_GROUPS } from "@/features/learn/subjects";
 import { getCatalogStructure } from "@/features/learn/queries";
 import { paymentDetails } from "@/features/payments/config";
 import { ANNUAL_DISCOUNT, perMonth } from "@/features/payments/pricing";
@@ -88,10 +88,14 @@ export default async function LandingPage({ params }: PageProps<"/[locale]">) {
     { value: skills.length, label: t("stats.skills") },
     { value: 4, label: t("stats.types"), hint: t("stats.typesHint") },
   ];
-  const directions = CATEGORIES.map((category) => ({
-    category,
+  // Programming is shown by direction (Frontend, Backend …); the other subjects as one card each.
+  const directions = TRACK_GROUPS.map((group) => ({
+    key: groupKey(group),
+    style: groupStyle(group),
+    title: tLearn(`${groupMessageKey(group)}.title`),
+    text: tLearn(`${groupMessageKey(group)}.text`),
     tracks: catalog
-      .filter((tr) => tr.category === category)
+      .filter((tr) => inGroup(group, tr))
       .map((tr) => {
         const s = tr.modules.flatMap((m) => m.skills);
         return { slug: tr.slug, title: tr.title, skills: s.length, exercises: s.reduce((n, x) => n + x.exerciseCount, 0) };
@@ -261,45 +265,39 @@ function handleClick() {
           <h2 className="font-display text-3xl font-bold">{t("tracksTitle")}</h2>
           <p className="mt-3 max-w-2xl text-lg text-muted">{t("tracksText")}</p>
           <div className="mt-10 grid items-start gap-4 md:grid-cols-2 xl:grid-cols-3">
-            {ready.map(({ category, tracks }, i) => {
-              const style = CATEGORY_STYLE[category];
-              return (
-                <Reveal key={category} delay={i * 60} className="rounded-3xl border border-border bg-surface p-6">
-                  <div className="flex items-center gap-3">
-                    <IconTile name={style.icon} gradient={style.gradient} size="md" />
-                    <h3 className="font-display text-lg font-bold uppercase tracking-wide">{tLearn(`categories.${category}.title`)}</h3>
-                  </div>
-                  <p className="mt-3 text-sm leading-relaxed text-muted">{tLearn(`categories.${category}.text`)}</p>
-                  <ul className="mt-4 flex flex-col gap-2">
-                    {tracks.map((tr) => (
-                      <li key={tr.slug} className="flex flex-wrap items-baseline justify-between gap-x-3 rounded-xl bg-background/70 px-3 py-2">
-                        <span className="font-mono font-semibold">{tr.title}</span>
-                        <span className="text-xs text-muted">{t("courseStats", { skills: tr.skills, exercises: tr.exercises })}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </Reveal>
-              );
-            })}
+            {ready.map(({ key, style, title, text, tracks }, i) => (
+              <Reveal key={key} delay={i * 60} className="rounded-3xl border border-border bg-surface p-6">
+                <div className="flex items-center gap-3">
+                  <IconTile name={style.icon} gradient={style.gradient} size="md" />
+                  <h3 className="font-display text-lg font-bold uppercase tracking-wide">{title}</h3>
+                </div>
+                <p className="mt-3 text-sm leading-relaxed text-muted">{text}</p>
+                <ul className="mt-4 flex flex-col gap-2">
+                  {tracks.map((tr) => (
+                    <li key={tr.slug} className="flex flex-wrap items-baseline justify-between gap-x-3 rounded-xl bg-background/70 px-3 py-2">
+                      <span className="font-mono font-semibold">{tr.title}</span>
+                      <span className="text-xs text-muted">{t("courseStats", { skills: tr.skills, exercises: tr.exercises })}</span>
+                    </li>
+                  ))}
+                </ul>
+              </Reveal>
+            ))}
           </div>
 
           {soon.length > 0 && (
             <ul className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-              {soon.map(({ category }, i) => {
-                const style = CATEGORY_STYLE[category];
-                return (
-                  <Reveal as="li" key={category} delay={i * 50} className="flex items-center gap-3 rounded-2xl border border-dashed border-border bg-surface/50 p-4">
-                    <IconTile name={style.icon} gradient={style.gradient} size="sm" className="opacity-60 grayscale" />
-                    <div className="min-w-0 flex-1">
-                      <h3 className="font-display text-sm font-bold uppercase tracking-wide">{tLearn(`categories.${category}.title`)}</h3>
-                      <p className="truncate text-xs text-muted">{tLearn(`categories.${category}.text`)}</p>
-                    </div>
-                    <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-background px-2 py-1 text-[11px] font-semibold text-muted">
-                      <Lock className="size-3" /> {t("comingSoon")}
-                    </span>
-                  </Reveal>
-                );
-              })}
+              {soon.map(({ key, style, title, text }, i) => (
+                <Reveal as="li" key={key} delay={i * 50} className="flex items-center gap-3 rounded-2xl border border-dashed border-border bg-surface/50 p-4">
+                  <IconTile name={style.icon} gradient={style.gradient} size="sm" className="opacity-60 grayscale" />
+                  <div className="min-w-0 flex-1">
+                    <h3 className="font-display text-sm font-bold uppercase tracking-wide">{title}</h3>
+                    <p className="truncate text-xs text-muted">{text}</p>
+                  </div>
+                  <span className="inline-flex shrink-0 items-center gap-1 rounded-full bg-background px-2 py-1 text-[11px] font-semibold text-muted">
+                    <Lock className="size-3" /> {t("comingSoon")}
+                  </span>
+                </Reveal>
+              ))}
             </ul>
           )}
         </section>

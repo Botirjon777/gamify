@@ -112,8 +112,8 @@ export async function register(_prev: FormState, formData: FormData): Promise<Fo
   }
 
   await createSession(userId, tenant.id);
-  // New users are offered the (optional) placement IQ test first.
-  return { redirectTo: "/iq/placement" };
+  // New users first pick the subjects they are interested in, then get the (optional) placement IQ test offer.
+  return { redirectTo: "/interests" };
 }
 
 export async function login(_prev: FormState, formData: FormData): Promise<FormState> {

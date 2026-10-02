@@ -8,10 +8,12 @@ export default async function AuthLayout({ children, params }: LayoutProps<"/[lo
   const current = await getCurrentSession();
   if (current) {
     // Signing up sets the cookie and Next.js re-renders this layout — so this is also where a brand-new
-    // account gets its (optional) IQ test offer. Everyone else who is logged in goes to the dashboard.
+    // account is asked about its interests and then gets its (optional) IQ test offer.
+    // Everyone else who is logged in goes to the dashboard.
     const { user } = current;
-    const offerIq = !user.iqTestedAt && !user.iqPromptHiddenAt && (await isJustSignedUp(user));
-    redirect({ href: offerIq ? "/iq/placement" : "/dashboard", locale });
+    const offerIq = !user.iqTestedAt && !user.iqPromptHiddenAt;
+    const isNew = (!user.interestsSetAt || offerIq) && (await isJustSignedUp(user));
+    redirect({ href: !isNew ? "/dashboard" : !user.interestsSetAt ? "/interests" : "/iq/placement", locale });
   }
   const tenant = await getCurrentTenant();
 

@@ -114,10 +114,18 @@ async function sync(tracks: Loaded[], iqItems: IqItemDef[]) {
     for (const { track, exercises } of tracks) {
       await db.$transaction(
         async (tx) => {
+          const data = {
+            title: track.title,
+            description: track.description,
+            icon: track.icon,
+            order: track.order,
+            subject: track.subject,
+            category: track.category ?? null,
+          };
           const t = await tx.track.upsert({
             where: { slug: track.slug },
-            create: { slug: track.slug, title: track.title, description: track.description, icon: track.icon, order: track.order, category: track.category },
-            update: { title: track.title, description: track.description, icon: track.icon, order: track.order, category: track.category, status: "PUBLISHED" },
+            create: { slug: track.slug, ...data },
+            update: { ...data, status: "PUBLISHED" },
           });
 
           for (const [mi, mod] of track.modules.entries()) {

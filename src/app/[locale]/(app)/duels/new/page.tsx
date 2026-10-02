@@ -5,7 +5,7 @@ import { db } from "@/lib/db";
 import { requireSession } from "@/lib/auth/session";
 import { PageHeader } from "@/components/page-header";
 import { getCatalogStructure } from "@/features/learn/queries";
-import { CATEGORIES } from "@/features/learn/categories";
+import { groupMessageKey, inGroup, TRACK_GROUPS } from "@/features/learn/subjects";
 import { getFriends } from "@/features/social/queries";
 import { DuelForm } from "@/features/duels/components/duel-form";
 import { DUEL_QUESTIONS } from "@/features/duels/constants";
@@ -32,9 +32,9 @@ export default async function NewDuelPage({ params, searchParams }: PageProps<"/
   if (named && named.id !== user.id && !opponents.some((o) => o.id === named.id)) opponents.unshift({ id: named.id, label: named.username });
 
   const playable = catalog.filter((tr) => tr.modules.reduce((n, m) => n + m.skills.reduce((k, s) => k + s.exerciseCount, 0), 0) >= DUEL_QUESTIONS);
-  const tracks = CATEGORIES.map((c) => ({
-    category: tl(`categories.${c}.title`),
-    items: playable.filter((tr) => tr.category === c).map((tr) => ({ id: tr.id, label: tr.title })),
+  const tracks = TRACK_GROUPS.map((g) => ({
+    category: tl(`${groupMessageKey(g)}.title`),
+    items: playable.filter((tr) => inGroup(g, tr)).map((tr) => ({ id: tr.id, label: tr.title })),
   })).filter((g) => g.items.length);
   const defaultTrack = playable.find((tr) => tr.slug === sp.track)?.id;
 
