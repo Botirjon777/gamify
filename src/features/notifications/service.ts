@@ -15,8 +15,9 @@ export interface NotificationData {
   LEVEL_UP: { level: number };
   REFERRAL_JOINED: { username: string };
   REFERRAL_REWARD: { username: string; xp: number };
+  /** `plan`: PRO / DIAMOND, or the product for a one-time payment ("IQ_CERTIFICATE"). */
   PAYMENT_SUBMITTED: { username: string; plan: string; amount: number };
-  PAYMENT_APPROVED: { plan: string; until: string };
+  PAYMENT_APPROVED: { plan: string; until?: string };
   PAYMENT_REJECTED: { plan: string; reason: string };
   TRACK_COMPLETED: { track: string; trackSlug: string; xp: number };
   SEASON_RESULT: { season: number; rank: number; xp: number };

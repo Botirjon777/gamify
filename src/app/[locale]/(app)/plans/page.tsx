@@ -37,11 +37,13 @@ export default async function PlansPage({ params, searchParams }: PageProps<"/[l
           <div className="flex-1">
             <p className="font-semibold">{t("pending")}</p>
             <p className="text-sm text-muted">
-              {t("pendingText", {
-                plan: t(`names.${pendingPayment.plan}`),
-                period: t(pendingPayment.months === 12 ? "billing.annual" : "billing.monthly"),
-                amount: pendingPayment.amountUzs.toLocaleString("uz-UZ"),
-              })}
+              {pendingPayment.plan
+                ? t("pendingText", {
+                    plan: t(`names.${pendingPayment.plan}`),
+                    period: t(pendingPayment.months === 12 ? "billing.annual" : "billing.monthly"),
+                    amount: pendingPayment.amountUzs.toLocaleString("uz-UZ"),
+                  })
+                : t("pendingCertificate", { amount: pendingPayment.amountUzs.toLocaleString("uz-UZ") })}
             </p>
           </div>
           <form action={cancelPaymentRequest.bind(null, pendingPayment.id)}>

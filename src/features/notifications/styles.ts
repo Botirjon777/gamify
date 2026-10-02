@@ -32,8 +32,9 @@ export const NOTIFICATION_STYLE: Record<string, { icon: LucideIcon; gradient: st
   REFERRAL_JOINED: { icon: Gift, gradient: "bg-grad-success", href: (d) => `/u/${d.username}` },
   REFERRAL_REWARD: { icon: Gift, gradient: "bg-grad-gold", href: (d) => `/u/${d.username}` },
   PAYMENT_SUBMITTED: { icon: Wallet, gradient: "bg-grad-xp", href: () => "/admin/payments" },
-  PAYMENT_APPROVED: { icon: BadgeCheck, gradient: "bg-grad-success", href: () => "/plans" },
-  PAYMENT_REJECTED: { icon: Ban, gradient: "bg-grad-streak", href: () => "/plans" },
+  // The IQ certificate is opened from the test result (the placement page keeps showing it).
+  PAYMENT_APPROVED: { icon: BadgeCheck, gradient: "bg-grad-success", href: (d) => (d.plan === "IQ_CERTIFICATE" ? "/iq/placement" : "/plans") },
+  PAYMENT_REJECTED: { icon: Ban, gradient: "bg-grad-streak", href: (d) => (d.plan === "IQ_CERTIFICATE" ? "/iq/placement" : "/plans") },
   TRACK_COMPLETED: { icon: GraduationCap, gradient: "bg-grad-success", href: (d) => `/learn/${d.trackSlug}` },
   SEASON_RESULT: { icon: Medal, gradient: "bg-grad-gold", href: () => "/leaderboard?board=XP&period=season" },
   DUEL_INVITE: { icon: Swords, gradient: "bg-grad-streak", href: (d) => `/duels/${d.duelId}` },
