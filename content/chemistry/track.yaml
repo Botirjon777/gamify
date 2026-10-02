@@ -1,22 +1,22 @@
 slug: chemistry
-title: "Kimyo asoslari"
-description: "Kimyoviy elementlar, bogʻlanishlar va reaksiyalar."
-icon: "flask"
+title: Kimyo asoslari
+description: Kimyoviy elementlar, bogʻlanishlar va reaksiyalar.
+icon: flask
 order: 3
 subject: CHEMISTRY
 modules:
   - slug: general-chem
-    title: "Umumiy kimyo"
+    title: Umumiy kimyo
     skills:
       - slug: periodic-table
-        title: "Davriy sistema"
-        description: "Kimyoviy elementlar va ularning xossalari."
+        title: Davriy sistema
+        description: Kimyoviy elementlar va ularning xossalari.
       - slug: chemical-bonds
-        title: "Kimyoviy bogʻlanishlar"
-        description: "Ion va kovalent bogʻlanishlar."
+        title: Kimyoviy bogʻlanishlar
+        description: Ion va kovalent bogʻlanishlar.
   - slug: reactions
-    title: "Reaksiyalar"
+    title: Reaksiyalar
     skills:
       - slug: chemical-reactions
-        title: "Kimyoviy reaksiyalar"
-        description: "Reaksiya turlari va ularning tezligi."
+        title: Kimyoviy reaksiyalar
+        description: Reaksiya turlari va ularning tezligi.

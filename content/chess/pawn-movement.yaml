@@ -3,107 +3,97 @@ exercises:
     type: choice
     difficulty: 1
     lang: text
-    prompt: "Pion (♙) birinchi marta oʻz joyidan siljiganda necha katak oldinga yurishi mumkin?"
+    prompt: Pion (♙) birinchi marta oʻz joyidan siljiganda necha katak oldinga yurishi mumkin?
     options:
-      - "Faqat 1 katak"
-      - "1 yoki 2 katak"
-      - "2 yoki 3 katak"
-      - "Istalgancha"
+      - Faqat 1 katak
+      - 1 yoki 2 katak
+      - 2 yoki 3 katak
+      - Istalgancha
     answer: 1
-    explanation: "Pion oʻyin boshida oʻz joyidan 1 yoki 2 katak oldinga yurish huquqiga ega."
-
+    explanation: Pion oʻyin boshida oʻz joyidan 1 yoki 2 katak oldinga yurish huquqiga ega.
   - id: pawn-movement-002
     type: fill
     difficulty: 1
     lang: text
-    prompt: "Qoidani toʻldiring."
-    code: |-
-      Pionlar faqatgina ___ tomonga harakatlanadi, ular hech qachon ___ yura olmaydi.
+    prompt: Qoidani toʻldiring.
+    code: Pionlar faqatgina ___ tomonga harakatlanadi, ular hech qachon ___ yura olmaydi.
     answer:
       - oldinga
       - orqaga
-    explanation: "Shaxmatdagi boshqa donalardan farqli oʻlaroq, pionlar orqaga yura olmaydi."
     bank:
-      - diagonal
       - aylanib
-
+      - diagonal
+    explanation: Shaxmatdagi boshqa donalardan farqli oʻlaroq, pionlar orqaga yura olmaydi.
   - id: pawn-movement-003
     type: choice
     difficulty: 1
     lang: text
-    prompt: "Pion raqib donasini qanday urib oladi?"
+    prompt: Pion raqib donasini qanday urib oladi?
     options:
-      - "Toʻgʻriga harakatlanib"
-      - "Orqaga yurib"
-      - "Diagonal (qiyalik) boʻylab bir katak oldinga"
-      - "Ot kabi sakrab"
+      - Toʻgʻriga harakatlanib
+      - Orqaga yurib
+      - Diagonal (qiyalik) boʻylab bir katak oldinga
+      - Ot kabi sakrab
     answer: 2
-    explanation: "Pion toʻgʻriga yuradi, lekin raqib donasini oldinga-diagonal yoʻnalishda bir katakdagi donani urib oladi."
-
+    explanation: Pion toʻgʻriga yuradi, lekin raqib donasini oldinga-diagonal yoʻnalishda bir katakdagi donani urib oladi.
   - id: pawn-movement-004
     type: order
     difficulty: 2
     lang: text
     prompt: "Pion oxirgi qatorga yetib borsa, nima sodir boʻlishi jarayonini tartiblang:"
     lines:
-      - "Pion raqibning eng oxirgi (8-yoki 1-) qatoriga yetib boradi."
-      - "Oʻyinchi pionni boshqa donaga (vazir, tura, fil yoki ot) almashtirishi kerakligini eʼlon qiladi."
-      - "Pion taxtadan olinadi va oʻrniga tanlangan dona (masalan, vazir) qoʻyiladi."
-      - "Yangi dona oʻsha katakdan oʻz qoidalari boʻyicha harakatlanishda davom etadi."
-    explanation: "Pion oxirgi qatorga yetib borganda, u oʻz qiymatini oshirib, boshqa donaga (koʻpincha vazirga) aylanadi. Bu 'pionning evrilishi' deb ataladi."
-
+      - Pion raqibning eng oxirgi (8-yoki 1-) qatoriga yetib boradi.
+      - Oʻyinchi pionni boshqa donaga (vazir, tura, fil yoki ot) almashtirishi kerakligini eʼlon qiladi.
+      - Pion taxtadan olinadi va oʻrniga tanlangan dona (masalan, vazir) qoʻyiladi.
+      - Yangi dona oʻsha katakdan oʻz qoidalari boʻyicha harakatlanishda davom etadi.
+    explanation: Pion oxirgi qatorga yetib borganda, u oʻz qiymatini oshirib, boshqa donaga (koʻpincha vazirga) aylanadi. Bu 'pionning evrilishi' deb ataladi.
   - id: pawn-movement-005
     type: fill
     difficulty: 2
     lang: text
     prompt: "Pionning evrilishini toʻldiring:"
-    code: |-
-      Pion oxirgi qatorga chiqqanda uni ___ aylantirish mumkin emas, faqat Vazir, Tura, Fil yoki ___ga aylantirish mumkin.
+    code: Pion oxirgi qatorga chiqqanda uni ___ aylantirish mumkin emas, faqat Vazir, Tura, Fil yoki ___ga aylantirish mumkin.
     answer:
       - shohga
       - Ot
-    explanation: "Pion oxirgi qatorga borganda shohga yoki yana pionning oʻziga aylana olmaydi."
     bank:
-      - vazirga
       - Pion
-
+      - vazirga
+    explanation: Pion oxirgi qatorga borganda shohga yoki yana pionning oʻziga aylana olmaydi.
   - id: pawn-movement-006
     type: choice
     difficulty: 2
     lang: text
-    prompt: "Agar oq pion 'e4' katagida boʻlsa va uning oldida 'e5' katagida qora pion tursa, oq pion oldinga yura oladimi?"
+    prompt: Agar oq pion 'e4' katagida boʻlsa va uning oldida 'e5' katagida qora pion tursa, oq pion oldinga yura oladimi?
     options:
-      - "Ha, u qora pionni urib olib oldinga oʻtadi"
-      - "Yoʻq, chunki pionlar toʻgʻridagi donani urib ololmaydi va yoʻli toʻsilgan"
-      - "Ha, uning ustidan sakrab oʻtishi mumkin"
-      - "Ha, diagonal yurib oʻtib ketadi"
+      - Ha, u qora pionni urib olib oldinga oʻtadi
+      - Yoʻq, chunki pionlar toʻgʻridagi donani urib ololmaydi va yoʻli toʻsilgan
+      - Ha, uning ustidan sakrab oʻtishi mumkin
+      - Ha, diagonal yurib oʻtib ketadi
     answer: 1
-    explanation: "Pion oldidagi donani urib ololmaydi. Agar uning toʻgʻrisida boshqa dona tursa, u harakatlana olmaydi (yoʻli toʻsilgan)."
-
+    explanation: Pion oldidagi donani urib ololmaydi. Agar uning toʻgʻrisida boshqa dona tursa, u harakatlana olmaydi (yoʻli toʻsilgan).
   - id: pawn-movement-007
     type: choice
     difficulty: 1
     lang: text
-    prompt: "Pion oʻz yoʻlida turgan oʻz donasining (masalan, oq pion oq otdan) ustidan sakrab oʻta oladimi?"
+    prompt: Pion oʻz yoʻlida turgan oʻz donasining (masalan, oq pion oq otdan) ustidan sakrab oʻta oladimi?
     options:
-      - "Ha, agar 2 katak yurayotgan boʻlsa"
-      - "Yoʻq, pion hech qachon boshqa donalar ustidan sakrab oʻtolmaydi"
-      - "Faqat birinchi yurishda ha"
-      - "Ha, istalgan vaqtda"
+      - Ha, agar 2 katak yurayotgan boʻlsa
+      - Yoʻq, pion hech qachon boshqa donalar ustidan sakrab oʻtolmaydi
+      - Faqat birinchi yurishda ha
+      - Ha, istalgan vaqtda
     answer: 1
-    explanation: "Faqat otgina boshqa donalar ustidan sakrab oʻtish qobiliyatiga ega, pion esa yoʻq."
-
+    explanation: Faqat otgina boshqa donalar ustidan sakrab oʻtish qobiliyatiga ega, pion esa yoʻq.
   - id: pawn-movement-008
     type: fill
     difficulty: 1
     lang: text
-    prompt: "Pion haqidagi faktlarni toʻldiring."
-    code: |-
-      Shaxmat oʻyini boshida har bir oʻyinchida ___ ta pion boʻladi. Ular ___ qatorga (oqlar uchun 2-qator) terib chiqiladi.
+    prompt: Pion haqidagi faktlarni toʻldiring.
+    code: Shaxmat oʻyini boshida har bir oʻyinchida ___ ta pion boʻladi. Ular ___ qatorga (oqlar uchun 2-qator) terib chiqiladi.
     answer:
       - "8"
       - bitta
-    explanation: "Har bir oʻyinchida 8 tadan pion boʻlib, ular bitta qatorda, asosiy donalarning oldida joylashadi."
     bank:
       - "16"
       - ikkita
+    explanation: Har bir oʻyinchida 8 tadan pion boʻlib, ular bitta qatorda, asosiy donalarning oldida joylashadi.

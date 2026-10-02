@@ -9,9 +9,8 @@ exercises:
         return f"Salom, {name}!"
 
       print(greet())
-    answer: "Salom, Doʻstim!"
+    answer: Salom, Doʻstim!
     explanation: Funksiya argumenti berilmaganda uning default qiymati ("Doʻstim") ishlatiladi.
-
   - id: py-func-002
     type: fill
     difficulty: 1
@@ -23,7 +22,6 @@ exercises:
     answer:
       - lambda
     explanation: lambda kalit soʻzi yordamida kichik, nomsiz (anonim) funksiyalar yoziladi.
-
   - id: py-func-003
     type: choice
     difficulty: 1
@@ -33,10 +31,9 @@ exercises:
       - "*args"
       - "**kwargs"
       - "&args"
-      - "...args"
+      - ...args
     answer: 0
     explanation: "*args barcha qoʻshimcha pozitsion argumentlarni tuple koʻrinishida yigʻib beradi."
-
   - id: py-func-004
     type: fill
     difficulty: 2
@@ -50,7 +47,6 @@ exercises:
     answer:
       - "**"
     explanation: "**kwargs barcha kalitli argumentlarni lugʻat (dict) koʻrinishida qabul qiladi."
-
   - id: py-func-005
     type: output
     difficulty: 2
@@ -63,7 +59,6 @@ exercises:
       print(multiply(3, c=3))
     answer: "18"
     explanation: a=3, b default 2 boʻlib qoladi, c esa kalitli argument sifatida 3 ga teng boʻladi. 3 * 2 * 3 = 18.
-
   - id: py-func-006
     type: choice
     difficulty: 2
@@ -76,7 +71,6 @@ exercises:
       - Metaclass
     answer: 0
     explanation: Decorator boshqa funksiyani argument sifatida qabul qilib, uning bajarilishidan oldin yoki keyin qoʻshimcha amallarni (loglash, vaqt oʻlchash, avtorizatsiya) bajaradi.
-
   - id: py-func-007
     type: output
     difficulty: 2
@@ -92,7 +86,6 @@ exercises:
       print(x)
     answer: "20"
     explanation: global x kalit soʻzi funksiya ichida tashqi (global) x oʻzgaruvchisini oʻzgartirish imkonini beradi.
-
   - id: py-func-008
     type: order
     difficulty: 2
@@ -106,7 +99,6 @@ exercises:
       - "        return res"
       - "    return wrapper"
     explanation: Dekorator funksiyani oladi, ichki wrapper funksiyasini eʼlon qilib qaytaradi.
-
   - id: py-func-009
     type: output
     difficulty: 3
@@ -120,8 +112,7 @@ exercises:
       append_to(1)
       print(append_to(2))
     answer: "[1, 2]"
-    explanation: "Python'da oʻzgaruvchan (mutable) default parametrlar (masalan target=[]) faqat funksiya eʼlon qilinganda bir marta yaratiladi va barcha chaqiriqlar orasida umumiy boʻlib qoladi."
-
+    explanation: Python'da oʻzgaruvchan (mutable) default parametrlar (masalan target=[]) faqat funksiya eʼlon qilinganda bir marta yaratiladi va barcha chaqiriqlar orasida umumiy boʻlib qoladi.
   - id: py-func-010
     type: choice
     difficulty: 3

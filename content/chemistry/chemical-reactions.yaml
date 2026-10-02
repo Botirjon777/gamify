@@ -28,13 +28,13 @@ exercises:
     difficulty: 2
     lang: text
     prompt: Kislota va asos reaksiyaga kirishib suv va tuz hosil qilishi qanday reaksiya deyiladi?
-    answer: 0
-    explanation: Kislota + asos = tuz + suv neytrallanish reaksiyasi hisoblanadi.
     options:
       - neytrallanish
       - neytrallanish (xato)
       - Boshqa
       - Nomaʼlum
+    answer: 0
+    explanation: Kislota + asos = tuz + suv neytrallanish reaksiyasi hisoblanadi.
   - id: chemical-reactions-004
     type: choice
     difficulty: 2
@@ -52,13 +52,13 @@ exercises:
     difficulty: 3
     lang: text
     prompt: Reaksiya tezligini oshiradigan, ammo oʻzi sarflanmaydigan modda nima deyiladi?
-    answer: 0
-    explanation: Katalizator kimyoviy reaksiya tezligini oshirib beradi.
     options:
       - katalizator
       - katalizator (xato)
       - Boshqa
       - Nomaʼlum
+    answer: 0
+    explanation: Katalizator kimyoviy reaksiya tezligini oshirib beradi.
   - id: chemical-reactions-006
     type: choice
     difficulty: 3
@@ -88,10 +88,10 @@ exercises:
     difficulty: 2
     lang: text
     prompt: Organik moddalar toʻliq yonganda karbonat angidrid va nima hosil boʻladi?
-    answer: 0
-    explanation: CH4 + 2O2 -> CO2 + 2H2O.
     options:
       - suv
       - suv (xato)
       - Boshqa
       - Nomaʼlum
+    answer: 0
+    explanation: CH4 + 2O2 -> CO2 + 2H2O.

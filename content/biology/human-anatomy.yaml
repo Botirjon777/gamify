@@ -28,13 +28,13 @@ exercises:
     difficulty: 2
     lang: text
     prompt: Nafas olish va chiqarish uchun javobgar boʻlgan asosiy organ nima?
-    answer: 0
-    explanation: Oʻpka gaz almashinuvini taʼminlaydi.
     options:
       - oʻpka
       - oʻpka (xato)
       - Boshqa
       - Nomaʼlum
+    answer: 0
+    explanation: Oʻpka gaz almashinuvini taʼminlaydi.
   - id: human-anatomy-004
     type: choice
     difficulty: 2
@@ -52,13 +52,13 @@ exercises:
     difficulty: 2
     lang: text
     prompt: Katta odam skeletida taxminan necha suyak bor?
-    answer: 1
-    explanation: Voyaga yetgan insonda odatda 206 ta suyak mavjud boʻladi.
     options:
       - "204"
       - "206"
       - "208"
       - "211"
+    answer: 1
+    explanation: Voyaga yetgan insonda odatda 206 ta suyak mavjud boʻladi.
   - id: human-anatomy-006
     type: choice
     difficulty: 3
@@ -88,10 +88,10 @@ exercises:
     difficulty: 3
     lang: text
     prompt: Zaharli moddalarni parchalovchi va safro ishlab chiqaruvchi organ nima?
-    answer: 0
-    explanation: Jigar moddalar almashinuvida va detoksifikatsiyada muhim rol oʻynaydi.
     options:
       - jigar
       - jigar (xato)
       - Boshqa
       - Nomaʼlum
+    answer: 0
+    explanation: Jigar moddalar almashinuvida va detoksifikatsiyada muhim rol oʻynaydi.

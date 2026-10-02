@@ -2,6 +2,7 @@ exercises:
   - id: use-effect-001
     type: choice
     difficulty: 1
+    lang: jsx
     prompt: useEffect ichidagi kod qachon ishlaydi?
     options:
       - Komponent render qilinib, ekranga chiqqandan keyin
@@ -9,13 +10,11 @@ exercises:
       - Faqat tugma bosilganda
       - Faqat server tomonda
     answer: 0
-    explanation: >-
-      Effektlar renderdan keyin ishlaydi — React avval ekranni yangilaydi, keyin effektni chaqiradi.
-      Shuning uchun effektlar tashqi tizimlar bilan ishlash uchun (API, taymer, obuna) mos joy.
-
+    explanation: Effektlar renderdan keyin ishlaydi — React avval ekranni yangilaydi, keyin effektni chaqiradi. Shuning uchun effektlar tashqi tizimlar bilan ishlash uchun (API, taymer, obuna) mos joy.
   - id: use-effect-002
     type: choice
     difficulty: 1
+    lang: jsx
     prompt: Bu effekt necha marta ishlaydi?
     code: |-
       useEffect(() => {
@@ -27,13 +26,11 @@ exercises:
       - Hech qachon
       - Faqat komponent oʻchirilganda
     answer: 1
-    explanation: >-
-      Boʻsh bogʻliqliklar massivi ([]) — "hech narsaga bogʻliq emas" degani, shuning uchun effekt faqat mount paytida ishlaydi.
-      (Development rejimida StrictMode tekshirish uchun uni ikki marta ishga tushiradi.)
-
+    explanation: Boʻsh bogʻliqliklar massivi ([]) — "hech narsaga bogʻliq emas" degani, shuning uchun effekt faqat mount paytida ishlaydi. (Development rejimida StrictMode tekshirish uchun uni ikki marta ishga tushiradi.)
   - id: use-effect-003
     type: choice
     difficulty: 1
+    lang: jsx
     prompt: Bogʻliqliklar massivi umuman berilmasa, effekt qachon ishlaydi?
     code: |-
       useEffect(() => {
@@ -46,10 +43,10 @@ exercises:
       - Faqat holat oʻzgarmaganda
     answer: 1
     explanation: Massiv berilmasa, effekt har bir renderdan keyin qayta ishlaydi. Koʻpincha bu keraksiz — aniq bogʻliqliklarni yozing.
-
   - id: use-effect-004
     type: fill
     difficulty: 1
+    lang: jsx
     prompt: Sahifa sarlavhasi count oʻzgargandagina yangilansin.
     code: |-
       useEffect(() => {
@@ -58,11 +55,11 @@ exercises:
     answer:
       - count
     explanation: Effekt ichida ishlatilgan holat/prop bogʻliqliklar massivida boʻlishi kerak — shunda u oʻzgarganda effekt qayta ishlaydi.
-
   - id: use-effect-005
     type: output
     difficulty: 2
-    prompt: "Birinchi renderda konsolga qanday tartibda chiqadi? (StrictMode oʻchirilgan; soʻzlarni vergul bilan yozing)"
+    lang: jsx
+    prompt: Birinchi renderda konsolga qanday tartibda chiqadi? (StrictMode oʻchirilgan; soʻzlarni vergul bilan yozing)
     code: |-
       function App() {
         useEffect(() => {
@@ -76,10 +73,10 @@ exercises:
       - render, effect
       - render effect
     explanation: Komponent funksiyasi (render) avval toʻliq bajariladi, effekt esa undan keyin ishlaydi.
-
   - id: use-effect-006
     type: fill
     difficulty: 2
+    lang: jsx
     prompt: Komponent oʻchirilganda taymer toʻxtatilsin (tozalash funksiyasi).
     code: |-
       useEffect(() => {
@@ -88,13 +85,11 @@ exercises:
       }, []);
     answer:
       - clearInterval
-    explanation: >-
-      Effektdan qaytarilgan funksiya — tozalash (cleanup). U komponent oʻchirilganda chaqiriladi.
-      setInterval → clearInterval, setTimeout → clearTimeout, addEventListener → removeEventListener.
-
+    explanation: Effektdan qaytarilgan funksiya — tozalash (cleanup). U komponent oʻchirilganda chaqiriladi. setInterval → clearInterval, setTimeout → clearTimeout, addEventListener → removeEventListener.
   - id: use-effect-007
     type: choice
     difficulty: 2
+    lang: jsx
     prompt: Bu kodda nima boʻladi?
     code: |-
       const [count, setCount] = useState(0);
@@ -108,13 +103,11 @@ exercises:
       - Hech narsa — effekt ichida setCount ishlamaydi
       - Xato — useEffect ichida useState ishlatib boʻlmaydi
     answer: 1
-    explanation: >-
-      Massiv berilmagani uchun effekt har renderdan keyin ishlaydi va har safar holatni oʻzgartirib yangi render chaqiradi.
-      Effekt ichida holatni oʻzgartirsangiz, bogʻliqliklarni aniq belgilang yoki bu hisobni render paytida qiling.
-
+    explanation: Massiv berilmagani uchun effekt har renderdan keyin ishlaydi va har safar holatni oʻzgartirib yangi render chaqiradi. Effekt ichida holatni oʻzgartirsangiz, bogʻliqliklarni aniq belgilang yoki bu hisobni render paytida qiling.
   - id: use-effect-008
     type: choice
     difficulty: 2
+    lang: jsx
     prompt: Nega bunday yozish notoʻgʻri?
     code: |-
       useEffect(async () => {
@@ -127,13 +120,11 @@ exercises:
       - await faqat klass komponentlarda ishlaydi
       - Bogʻliqliklar massivi boʻsh boʻlmasligi kerak
     answer: 1
-    explanation: >-
-      React effektdan qaytgan qiymatni tozalash funksiyasi deb qabul qiladi. Toʻgʻri usul — effekt ichida async funksiya
-      eʼlon qilib, uni chaqirish: useEffect(() => { async function load() { … } load(); }, []).
-
+    explanation: "React effektdan qaytgan qiymatni tozalash funksiyasi deb qabul qiladi. Toʻgʻri usul — effekt ichida async funksiya eʼlon qilib, uni chaqirish: useEffect(() => { async function load() { … } load(); }, [])."
   - id: use-effect-009
     type: choice
     difficulty: 3
+    lang: jsx
     prompt: Tozalash (cleanup) funksiyasi qachon ishlaydi?
     code: |-
       useEffect(() => {
@@ -146,16 +137,14 @@ exercises:
       - Har bir renderdan oldin
       - Hech qachon — uni oʻzingiz chaqirishingiz kerak
     answer: 1
-    explanation: >-
-      Bogʻliqlik oʻzgarsa, React avval eski effektni tozalaydi (eski xonadan uziladi), keyin yangi qiymat bilan effektni qayta ishga tushiradi.
-      Komponent oʻchirilganda ham tozalash chaqiriladi.
-
+    explanation: Bogʻliqlik oʻzgarsa, React avval eski effektni tozalaydi (eski xonadan uziladi), keyin yangi qiymat bilan effektni qayta ishga tushiradi. Komponent oʻchirilganda ham tozalash chaqiriladi.
   - id: use-effect-010
     type: order
     difficulty: 3
+    lang: jsx
     prompt: "Qatorlarni tartiblang: id oʻzgarganda foydalanuvchi yuklansin va eskirgan javob eʼtiborsiz qoldirilsin."
     lines:
-      - "useEffect(() => {"
+      - useEffect(() => {
       - "  let ignore = false;"
       - "  fetch(`/api/users/${id}`)"
       - "    .then((res) => res.json())"
@@ -166,6 +155,4 @@ exercises:
       - "    ignore = true;"
       - "  };"
       - "}, [id]);"
-    explanation: >-
-      ignore bayrogʻi "poyga" (race condition) muammosini hal qiladi: id tez oʻzgarsa, eski soʻrov javobi kech kelishi mumkin.
-      Tozalash ignore = true qiladi, shunda eskirgan javob holatga yozilmaydi.
+    explanation: 'ignore bayrogʻi "poyga" (race condition) muammosini hal qiladi: id tez oʻzgarsa, eski soʻrov javobi kech kelishi mumkin. Tozalash ignore = true qiladi, shunda eskirgan javob holatga yozilmaydi.'

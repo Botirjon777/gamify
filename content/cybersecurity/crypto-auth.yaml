@@ -11,7 +11,6 @@ exercises:
       - Shunchaki MD5 yoki SHA1 bilan tuzsiz
     answer: 0
     explanation: Parollar hech qachon ochiq saqlanmaydi va qayta tiklanmaydigan sekin kriptografik xeshlar (bcrypt, argon2) orqali tuz (salt) bilan birga saqlanadi.
-
   - id: sec-auth-002
     type: choice
     difficulty: 1
@@ -24,18 +23,16 @@ exercises:
       - Ikkalasi ham aynan bir xil tushuncha
     answer: 0
     explanation: Hashing bir tomonlama matematik funksiya boʻlib, uning natijasidan asl matnni qaytarib boʻlmaydi. Shifrlash esa maxfiy kalit yordamida qayta ochilishi mumkin.
-
   - id: sec-auth-003
     type: fill
     difficulty: 1
     lang: js
     prompt: "JSON Web Token (JWT) nuqta bilan ajratilgan 3 qismdan iborat: Header, Payload va ___."
-    code: |-
-      const jwt = "header.payload.___";
+    code: const jwt = "header.payload.___";
     answer:
-      - [signature, Signature]
+      - - signature
+        - Signature
     explanation: JWT tuzilishi Header (algoritm), Payload (maʼlumotlar) va Signature (server maxfiy kaliti bilan tasdiqlangan imzo) dan iborat.
-
   - id: sec-auth-004
     type: choice
     difficulty: 2
@@ -48,18 +45,15 @@ exercises:
       - Parolni avtomatik eslab qolish uchun
     answer: 0
     explanation: Har bir foydalanuvchiga tasodifiy salt berilsa, hatto ikkita odam '123456' parolini qoʻysa ham, ularning xeshlari butunlay boshqacha boʻladi va oldindan hisoblangan jadvallar (rainbow tables) ish bermaydi.
-
   - id: sec-auth-005
     type: fill
     difficulty: 2
     lang: bash
     prompt: Brauzer va server oʻrtasidagi aloqani toʻliq shifrlab uzatuvchi xavfsiz protokol prefiksini toʻldiring.
-    code: |-
-      curl ___://example.com/api/login
+    code: curl ___://example.com/api/login
     answer:
       - https
     explanation: HTTPS protokoli TLS (1.2/1.3) orqali tarmoqdagi barcha trafikni shifrlaydi, bu esa oraliqdagi odam (MITM) hujumlaridan himoya qiladi.
-
   - id: sec-auth-006
     type: choice
     difficulty: 2
@@ -72,7 +66,6 @@ exercises:
       - Unga faqat adminlar kirishi mumkin
     answer: 0
     explanation: Standart JWT (JWS) faqat imzolangan, lekin shifrlanmagan. Istalgan odam payloadni base64 decode qilib oʻqiy oladi, faqat server kalitisiz uni soxtalashtira olmaydi.
-
   - id: sec-auth-007
     type: choice
     difficulty: 2
@@ -85,18 +78,16 @@ exercises:
       - Barcha soʻrovlarni bekor qilish
     answer: 0
     explanation: Rate Limiting maʼlum IP yoki hisobdan qisqa vaqt ichida juda koʻp xato parollar kiritilishini bloklaydi yoki kechiktiradi.
-
   - id: sec-auth-008
     type: order
     difficulty: 2
     lang: js
     prompt: Xavfsiz foydalanuvchi roʻyxatdan oʻtish tartibini tiklang.
     lines:
-      - "const { email, password } = req.body;"
-      - "const hash = await bcrypt.hash(password, 12);"
+      - const { email, password } = req.body;
+      - const hash = await bcrypt.hash(password, 12);
       - "await db.user.create({ data: { email, passwordHash: hash } });"
     explanation: Email va parol soʻrovdan olinadi, parol bcrypt bilan (12 cost factor) xeshlanadi va bazaga faqat xesh yoziladi.
-
   - id: sec-auth-009
     type: choice
     difficulty: 3
@@ -109,7 +100,6 @@ exercises:
       - Dinamik parol
     answer: 0
     explanation: Asimmetrik shifrlashda ommaviy kalit (public key) hamma uchun ochiq boʻladi va maʼlumotni shifrlashda ishlatiladi, faqat maxfiy kalit (private key) egasigina uni ochishi mumkin.
-
   - id: sec-auth-010
     type: choice
     difficulty: 3

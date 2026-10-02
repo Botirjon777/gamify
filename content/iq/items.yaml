@@ -2,268 +2,321 @@
 # difficulty 1–5 faqat boshlangʻich reytingni belgilaydi; keyin reyting javoblar asosida oʻzi kalibrlanadi.
 # answer — toʻgʻri variant indeksi (0 dan boshlanadi). Javoblar hech qachon brauzerga yuborilmaydi.
 items:
-  # ─── 1-daraja ────────────────────────────────────────────────────────────
-  - id: iq-seq-001
-    category: sequence
-    difficulty: 1
-    prompt: Ketma-ketlikni davom ettiring
-    figure: "2, 4, 6, 8, ?"
-    options: ["9", "10", "12", "14"]
-    answer: 1
-
-  - id: iq-seq-002
-    category: sequence
-    difficulty: 1
-    prompt: Ketma-ketlikni davom ettiring
-    figure: "5, 10, 15, 20, ?"
-    options: ["22", "25", "30", "35"]
-    answer: 1
-
-  - id: iq-odd-001
-    category: odd
-    difficulty: 1
-    prompt: Qaysi biri ortiqcha?
-    options: [olma, nok, sabzi, uzum]
-    answer: 2
-
   - id: iq-analogy-001
     category: analogy
     difficulty: 1
-    prompt: "Kun — tun kabi, issiq — ?"
-    options: [iliq, sovuq, yoz, quyosh]
+    prompt: Kun — tun kabi, issiq — ?
+    options:
+      - iliq
+      - sovuq
+      - yoz
+      - quyosh
     answer: 1
-
   - id: iq-letters-001
     category: letters
     difficulty: 1
-    prompt: "Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)"
-    figure: "A, C, E, G, ?"
-    options: [H, I, J, K]
+    prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
+    figure: A, C, E, G, ?
+    options:
+      - H
+      - I
+      - J
+      - K
     answer: 1
-
-  - id: iq-shapes-001
-    category: shapes
-    difficulty: 1
-    prompt: Keyingi shakl qaysi?
-    figure: "▲ ■ ▲ ■ ▲ ?"
-    options: ["▲", "■", "●", "◆"]
-    answer: 1
-
   - id: iq-logic-001
     category: logic
     difficulty: 1
     prompt: Ali Validan katta. Vali Ganidan katta. Eng kichigi kim?
-    options: [Ali, Vali, Gani, Aniqlab boʻlmaydi]
+    options:
+      - Ali
+      - Vali
+      - Gani
+      - Aniqlab boʻlmaydi
     answer: 2
-
   - id: iq-math-001
     category: math
     difficulty: 1
     prompt: 3 ta daftar 12 000 soʻm turadi. 5 ta daftar necha soʻm turadi?
-    options: ["15 000", "18 000", "20 000", "25 000"]
+    options:
+      - 15 000
+      - 18 000
+      - 20 000
+      - 25 000
     answer: 2
-
-  # ─── 2-daraja ────────────────────────────────────────────────────────────
-  - id: iq-seq-003
+  - id: iq-odd-001
+    category: odd
+    difficulty: 1
+    prompt: Qaysi biri ortiqcha?
+    options:
+      - olma
+      - nok
+      - sabzi
+      - uzum
+    answer: 2
+  - id: iq-seq-001
     category: sequence
-    difficulty: 2
+    difficulty: 1
     prompt: Ketma-ketlikni davom ettiring
-    figure: "1, 4, 9, 16, 25, ?"
-    options: ["30", "34", "36", "49"]
-    answer: 2
-
-  - id: iq-seq-004
+    figure: 2, 4, 6, 8, ?
+    options:
+      - "9"
+      - "10"
+      - "12"
+      - "14"
+    answer: 1
+  - id: iq-seq-002
     category: sequence
-    difficulty: 2
+    difficulty: 1
     prompt: Ketma-ketlikni davom ettiring
-    figure: "3, 6, 12, 24, ?"
-    options: ["30", "36", "48", "72"]
-    answer: 2
-
-  - id: iq-seq-005
-    category: sequence
-    difficulty: 2
-    prompt: Ketma-ketlikni davom ettiring
-    figure: "100, 90, 81, 73, ?"
-    options: ["64", "65", "66", "67"]
-    answer: 2
-
-  - id: iq-shapes-002
+    figure: 5, 10, 15, 20, ?
+    options:
+      - "22"
+      - "25"
+      - "30"
+      - "35"
+    answer: 1
+  - id: iq-shapes-001
     category: shapes
-    difficulty: 2
-    prompt: Keyingi strelka qaysi?
-    figure: "→ ↓ ← ↑ → ↓ ?"
-    options: ["→", "↓", "←", "↑"]
-    answer: 2
-
+    difficulty: 1
+    prompt: Keyingi shakl qaysi?
+    figure: ▲ ■ ▲ ■ ▲ ?
+    options:
+      - ▲
+      - ■
+      - ●
+      - ◆
+    answer: 1
   - id: iq-analogy-002
     category: analogy
     difficulty: 2
-    prompt: "Kitob — oʻquvchi kabi, qoʻshiq — ?"
-    options: [radio, tinglovchi, nota, gitara]
+    prompt: Kitob — oʻquvchi kabi, qoʻshiq — ?
+    options:
+      - radio
+      - tinglovchi
+      - nota
+      - gitara
     answer: 1
-
-  - id: iq-odd-002
-    category: odd
+  - id: iq-letters-002
+    category: letters
     difficulty: 2
-    prompt: Qaysi son ortiqcha?
-    options: ["5", "7", "9", "11"]
-    answer: 2
-
+    prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
+    figure: Z, X, V, T, ?
+    options:
+      - S
+      - R
+      - Q
+      - P
+    answer: 1
   - id: iq-logic-002
     category: logic
     difficulty: 2
     prompt: "Barcha mushuklar — hayvon. Mosh — mushuk. Demak:"
-    options: [Mosh — hayvon, Barcha hayvonlar — mushuk, Mosh — it, Hech narsa aniq emas]
+    options:
+      - Mosh — hayvon
+      - Barcha hayvonlar — mushuk
+      - Mosh — it
+      - Hech narsa aniq emas
     answer: 0
-
-  - id: iq-letters-002
-    category: letters
-    difficulty: 2
-    prompt: "Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)"
-    figure: "Z, X, V, T, ?"
-    options: [S, R, Q, P]
-    answer: 1
-
   - id: iq-math-002
     category: math
     difficulty: 2
     prompt: Soat aynan 3:00 ni koʻrsatmoqda. Soat va minut millari orasidagi burchak necha gradus?
-    options: ["45°", "60°", "90°", "120°"]
+    options:
+      - 45°
+      - 60°
+      - 90°
+      - 120°
     answer: 2
-
-  # ─── 3-daraja ────────────────────────────────────────────────────────────
-  - id: iq-seq-006
-    category: sequence
-    difficulty: 3
-    prompt: Ketma-ketlikni davom ettiring
-    figure: "2, 3, 5, 8, 13, ?"
-    options: ["18", "20", "21", "26"]
+  - id: iq-odd-002
+    category: odd
+    difficulty: 2
+    prompt: Qaysi son ortiqcha?
+    options:
+      - "5"
+      - "7"
+      - "9"
+      - "11"
     answer: 2
-
-  - id: iq-seq-007
+  - id: iq-seq-003
     category: sequence
-    difficulty: 3
+    difficulty: 2
     prompt: Ketma-ketlikni davom ettiring
-    figure: "1, 2, 6, 24, 120, ?"
-    options: ["240", "600", "720", "840"]
+    figure: 1, 4, 9, 16, 25, ?
+    options:
+      - "30"
+      - "34"
+      - "36"
+      - "49"
     answer: 2
-
-  - id: iq-seq-008
+  - id: iq-seq-004
     category: sequence
-    difficulty: 3
+    difficulty: 2
     prompt: Ketma-ketlikni davom ettiring
-    figure: "7, 10, 8, 11, 9, ?"
-    options: ["10", "12", "13", "7"]
-    answer: 1
-
-  - id: iq-shapes-003
+    figure: 3, 6, 12, 24, ?
+    options:
+      - "30"
+      - "36"
+      - "48"
+      - "72"
+    answer: 2
+  - id: iq-seq-005
+    category: sequence
+    difficulty: 2
+    prompt: Ketma-ketlikni davom ettiring
+    figure: 100, 90, 81, 73, ?
+    options:
+      - "64"
+      - "65"
+      - "66"
+      - "67"
+    answer: 2
+  - id: iq-shapes-002
     category: shapes
-    difficulty: 3
-    prompt: Keyingi shakl qaysi?
-    figure: "◐ ◓ ◑ ◒ ◐ ?"
-    options: ["◐", "◓", "◑", "◒"]
-    answer: 1
-
+    difficulty: 2
+    prompt: Keyingi strelka qaysi?
+    figure: → ↓ ← ↑ → ↓ ?
+    options:
+      - →
+      - ↓
+      - ←
+      - ↑
+    answer: 2
   - id: iq-analogy-003
     category: analogy
     difficulty: 3
-    prompt: "Soat — vaqt kabi, termometr — ?"
-    options: [issiqlik, harorat, ob-havo, kasallik]
+    prompt: Soat — vaqt kabi, termometr — ?
+    options:
+      - issiqlik
+      - harorat
+      - ob-havo
+      - kasallik
     answer: 1
-
+  - id: iq-letters-003
+    category: letters
+    difficulty: 3
+    prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
+    figure: A, B, D, G, K, ?
+    options:
+      - N
+      - O
+      - P
+      - Q
+    answer: 2
   - id: iq-logic-003
     category: logic
     difficulty: 3
     prompt: Agar ertaga seshanba boʻlsa, kecha qaysi kun edi?
-    options: [Shanba, Yakshanba, Dushanba, Juma]
+    options:
+      - Shanba
+      - Yakshanba
+      - Dushanba
+      - Juma
     answer: 1
-
   - id: iq-math-003
     category: math
     difficulty: 3
     prompt: 3 ishchi bir ishni 6 kunda bajaradi. Xuddi shunday 9 ishchi bu ishni necha kunda bajaradi?
-    options: ["2", "3", "4", "18"]
+    options:
+      - "2"
+      - "3"
+      - "4"
+      - "18"
     answer: 0
-
   - id: iq-odd-003
     category: odd
     difficulty: 3
     prompt: Qaysi biri ortiqcha?
-    options: [kvadrat, uchburchak, doira, kub]
+    options:
+      - kvadrat
+      - uchburchak
+      - doira
+      - kub
     answer: 3
-
-  - id: iq-letters-003
-    category: letters
+  - id: iq-seq-006
+    category: sequence
     difficulty: 3
-    prompt: "Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)"
-    figure: "A, B, D, G, K, ?"
-    options: [N, O, P, Q]
-    answer: 2
-
-  # ─── 4-daraja ────────────────────────────────────────────────────────────
-  - id: iq-seq-009
-    category: sequence
-    difficulty: 4
     prompt: Ketma-ketlikni davom ettiring
-    figure: "2, 6, 12, 20, 30, ?"
-    options: ["36", "40", "42", "44"]
+    figure: 2, 3, 5, 8, 13, ?
+    options:
+      - "18"
+      - "20"
+      - "21"
+      - "26"
     answer: 2
-
-  - id: iq-seq-010
+  - id: iq-seq-007
     category: sequence
-    difficulty: 4
+    difficulty: 3
     prompt: Ketma-ketlikni davom ettiring
-    figure: "3, 5, 9, 17, 33, ?"
-    options: ["49", "63", "65", "66"]
+    figure: 1, 2, 6, 24, 120, ?
+    options:
+      - "240"
+      - "600"
+      - "720"
+      - "840"
     answer: 2
-
-  - id: iq-seq-011
+  - id: iq-seq-008
     category: sequence
-    difficulty: 4
+    difficulty: 3
     prompt: Ketma-ketlikni davom ettiring
-    figure: "2, 5, 11, 20, 32, ?"
-    options: ["44", "45", "47", "50"]
+    figure: 7, 10, 8, 11, 9, ?
+    options:
+      - "10"
+      - "12"
+      - "13"
+      - "7"
+    answer: 1
+  - id: iq-shapes-003
+    category: shapes
+    difficulty: 3
+    prompt: Keyingi shakl qaysi?
+    figure: ◐ ◓ ◑ ◒ ◐ ?
+    options:
+      - ◐
+      - ◓
+      - ◑
+      - ◒
+    answer: 1
+  - id: iq-letters-004
+    category: letters
+    difficulty: 4
+    prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
+    figure: B, E, I, N, ?
+    options:
+      - R
+      - S
+      - T
+      - U
     answer: 2
-
   - id: iq-logic-004
     category: logic
     difficulty: 4
     prompt: 5 ta mashina 5 daqiqada 5 ta detal yasaydi. 100 ta mashina 100 ta detalni necha daqiqada yasaydi?
-    options: ["1", "5", "20", "100"]
+    options:
+      - "1"
+      - "5"
+      - "20"
+      - "100"
     answer: 1
-
   - id: iq-logic-005
     category: logic
     difficulty: 4
     prompt: Navbatda Ali oldidan sanaganda ham, orqasidan sanaganda ham 7-oʻrinda turibdi. Navbatda necha kishi bor?
-    options: ["12", "13", "14", "15"]
+    options:
+      - "12"
+      - "13"
+      - "14"
+      - "15"
     answer: 1
-
-  - id: iq-math-004
-    category: math
-    difficulty: 4
-    prompt: Mahsulot narxi avval 20% oshdi, keyin 20% arzonladi. Yakuniy narx boshlangʻich narxga nisbatan qanday?
-    options: [Oʻzgarmadi, 4% arzon, 4% qimmat, 2% arzon]
-    answer: 1
-
-  - id: iq-letters-004
-    category: letters
-    difficulty: 4
-    prompt: "Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)"
-    figure: "B, E, I, N, ?"
-    options: [R, S, T, U]
-    answer: 2
-
   - id: iq-logic-006
     category: logic
     difficulty: 4
-    prompt: >-
-      Uchta quti bor: birida faqat olma, birida faqat nok, birida aralash. Uchala yorliq ham notoʻgʻri yopishtirilgan.
-      "Aralash" yorligʻli qutidan bitta meva oldingiz — olma chiqdi. Bu qutida nima bor?
-    options: [Faqat olma, Faqat nok, Aralash, Aniqlab boʻlmaydi]
+    prompt: 'Uchta quti bor: birida faqat olma, birida faqat nok, birida aralash. Uchala yorliq ham notoʻgʻri yopishtirilgan. "Aralash" yorligʻli qutidan bitta meva oldingiz — olma chiqdi. Bu qutida nima bor?'
+    options:
+      - Faqat olma
+      - Faqat nok
+      - Aralash
+      - Aniqlab boʻlmaydi
     answer: 0
-
   - id: iq-logic-007
     category: logic
     difficulty: 4
@@ -274,45 +327,98 @@ items:
       - Bittasi hech narsa tutmadi
       - Masalada xato bor
     answer: 1
-
-  # ─── 5-daraja ────────────────────────────────────────────────────────────
-  - id: iq-seq-012
+  - id: iq-math-004
+    category: math
+    difficulty: 4
+    prompt: Mahsulot narxi avval 20% oshdi, keyin 20% arzonladi. Yakuniy narx boshlangʻich narxga nisbatan qanday?
+    options:
+      - Oʻzgarmadi
+      - 4% arzon
+      - 4% qimmat
+      - 2% arzon
+    answer: 1
+  - id: iq-seq-009
     category: sequence
-    difficulty: 5
+    difficulty: 4
     prompt: Ketma-ketlikni davom ettiring
-    figure: "1, 4, 27, 256, ?"
-    options: ["625", "1024", "3125", "4096"]
+    figure: 2, 6, 12, 20, 30, ?
+    options:
+      - "36"
+      - "40"
+      - "42"
+      - "44"
     answer: 2
-
-  - id: iq-seq-013
+  - id: iq-seq-010
     category: sequence
-    difficulty: 5
+    difficulty: 4
     prompt: Ketma-ketlikni davom ettiring
-    figure: "8, 5, 13, 18, 31, ?"
-    options: ["44", "47", "49", "51"]
+    figure: 3, 5, 9, 17, 33, ?
+    options:
+      - "49"
+      - "63"
+      - "65"
+      - "66"
     answer: 2
-
+  - id: iq-seq-011
+    category: sequence
+    difficulty: 4
+    prompt: Ketma-ketlikni davom ettiring
+    figure: 2, 5, 11, 20, 32, ?
+    options:
+      - "44"
+      - "45"
+      - "47"
+      - "50"
+    answer: 2
   - id: iq-logic-008
     category: logic
     difficulty: 5
-    prompt: >-
-      Bir kishi rasmga qarab dedi: "Mening aka-ukam ham, opa-singlim ham yoʻq. Bu odamning otasi — mening otamning oʻgʻli."
-      U kimning rasmiga qarayapti?
-    options: [Oʻzining, Oʻgʻlining, Otasining, Jiyanining]
+    prompt: 'Bir kishi rasmga qarab dedi: "Mening aka-ukam ham, opa-singlim ham yoʻq. Bu odamning otasi — mening otamning oʻgʻli." U kimning rasmiga qarayapti?'
+    options:
+      - Oʻzining
+      - Oʻgʻlining
+      - Otasining
+      - Jiyanining
     answer: 1
-
   - id: iq-math-005
     category: math
     difficulty: 5
-    prompt: >-
-      Baliqning boshi 9 sm. Dumi boshi bilan tanasining yarmi yigʻindisiga teng. Tanasi esa boshi va dumi yigʻindisiga teng.
-      Baliqning umumiy uzunligi necha sm?
-    options: ["54", "63", "72", "81"]
+    prompt: Baliqning boshi 9 sm. Dumi boshi bilan tanasining yarmi yigʻindisiga teng. Tanasi esa boshi va dumi yigʻindisiga teng. Baliqning umumiy uzunligi necha sm?
+    options:
+      - "54"
+      - "63"
+      - "72"
+      - "81"
     answer: 2
-
   - id: iq-math-006
     category: math
     difficulty: 5
     prompt: Soat 12:00 dan keyin soat va minut millari birinchi marta qachon ustma-ust tushadi?
-    options: ["Aynan 13:00 da", "13:05 dan biroz keyin", "13:06 dan keyin", "13:10 da"]
+    options:
+      - Aynan 13:00 da
+      - 13:05 dan biroz keyin
+      - 13:06 dan keyin
+      - 13:10 da
     answer: 1
+  - id: iq-seq-012
+    category: sequence
+    difficulty: 5
+    prompt: Ketma-ketlikni davom ettiring
+    figure: 1, 4, 27, 256, ?
+    options:
+      - "625"
+      - "1024"
+      - "3125"
+      - "4096"
+    answer: 2
+  - id: iq-seq-013
+    category: sequence
+    difficulty: 5
+    prompt: Ketma-ketlikni davom ettiring
+    figure: 8, 5, 13, 18, 31, ?
+    options:
+      - "44"
+      - "47"
+      - "49"
+      - "51"
+    answer: 2

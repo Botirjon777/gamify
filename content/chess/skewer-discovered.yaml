@@ -5,103 +5,94 @@ exercises:
     lang: text
     prompt: "'Shish' (Skewer) taktikasi Bogʻlash (Pin) taktikasidan nimasi bilan farq qiladi?"
     options:
-      - "Hech qanday farqi yoʻq"
-      - "Shishda qimmatliroq dona oldinda turadi. U qochishga majbur boʻlganda ortidagi arzonroq dona urib olinadi."
-      - "Shish faqat Vazir bilan qilinadi"
-      - "Bogʻlash faqat Shoh bilan qilinadi"
+      - Hech qanday farqi yoʻq
+      - Shishda qimmatliroq dona oldinda turadi. U qochishga majbur boʻlganda ortidagi arzonroq dona urib olinadi.
+      - Shish faqat Vazir bilan qilinadi
+      - Bogʻlash faqat Shoh bilan qilinadi
     answer: 1
-    explanation: "Bogʻlash (Pin) da arzonroq dona qimmatli donani toʻsib turadi. Shish (Skewer) da esa aksincha, oldinda qimmatli dona (masalan, shoh) turadi, u qochganda ortidagi dona yeyiladi."
-
+    explanation: Bogʻlash (Pin) da arzonroq dona qimmatli donani toʻsib turadi. Shish (Skewer) da esa aksincha, oldinda qimmatli dona (masalan, shoh) turadi, u qochganda ortidagi dona yeyiladi.
   - id: skewer-discovered-002
     type: fill
     difficulty: 2
     lang: text
     prompt: "Shish taktikasini toʻldiring:"
-    code: |-
-      Shish (Skewer) baʼzan teskari ___ deb ham ataladi. U faqat toʻgʻri chiziq boʻylab yuradigan donalar: Vazir, Tura va ___ tomonidan amalga oshiriladi.
+    code: "Shish (Skewer) baʼzan teskari ___ deb ham ataladi. U faqat toʻgʻri chiziq boʻylab yuradigan donalar: Vazir, Tura va ___ tomonidan amalga oshiriladi."
     answer:
       - bogʻlash
       - fil
-    explanation: "Xuddi bogʻlash kabi shish amaliyotini ham chiziqli harakat qiluvchi donalar (Vazir, Tura, Fil) yaratadi."
     bank:
-      - vilka
       - ot
-
+      - vilka
+    explanation: Xuddi bogʻlash kabi shish amaliyotini ham chiziqli harakat qiluvchi donalar (Vazir, Tura, Fil) yaratadi.
   - id: skewer-discovered-003
     type: order
     difficulty: 2
     lang: text
     prompt: "Shish (Skewer) taktikasining amalga oshish jarayonini tartiblang:"
     lines:
-      - "Raqibning ikki donasi (oldinda qimmatli, ortida boshqa dona) bir chiziqda joylashganini koʻrish."
-      - "Oʻsha chiziq boʻylab oldindagi qimmatli donaga (masalan shohga) hujum qilish."
-      - "Raqib shohi xavfdan (zarbadan) chetga qochishga majbur boʻladi."
-      - "Siz ochilib qolgan ortdagi donani (masalan vazirni) urib olasiz."
-    explanation: "Shishda nishonga olingan oldindagi qimmatli dona joyini boʻshatgach, orqadagi dona fido boʻladi."
-
+      - Raqibning ikki donasi (oldinda qimmatli, ortida boshqa dona) bir chiziqda joylashganini koʻrish.
+      - Oʻsha chiziq boʻylab oldindagi qimmatli donaga (masalan shohga) hujum qilish.
+      - Raqib shohi xavfdan (zarbadan) chetga qochishga majbur boʻladi.
+      - Siz ochilib qolgan ortdagi donani (masalan vazirni) urib olasiz.
+    explanation: Shishda nishonga olingan oldindagi qimmatli dona joyini boʻshatgach, orqadagi dona fido boʻladi.
   - id: skewer-discovered-004
     type: choice
     difficulty: 1
     lang: text
     prompt: "'Ochiq hujum' (Discovered Attack) nima?"
     options:
-      - "Taxtaning ochiq joyida oʻynash"
-      - "Oʻz donangizni chetga olib qochib, uning ortida turgan uzoqqa uruvchi donangizning (masalan tura) yoʻlini ochib, raqibga kutilmagan hujum qilish"
-      - "Raqibga oldindan hujum qilishni aytish"
-      - "Hech qanday himoyasiz hujum qilish"
+      - Taxtaning ochiq joyida oʻynash
+      - Oʻz donangizni chetga olib qochib, uning ortida turgan uzoqqa uruvchi donangizning (masalan tura) yoʻlini ochib, raqibga kutilmagan hujum qilish
+      - Raqibga oldindan hujum qilishni aytish
+      - Hech qanday himoyasiz hujum qilish
     answer: 1
-    explanation: "Ochiq hujumda bitta dona joyidan jiladi va uning orqasida yashirinib turgan boshqa bir dona (Tura, Fil, Vazir) kutilmaganda raqibga zarba beradi."
-
+    explanation: Ochiq hujumda bitta dona joyidan jiladi va uning orqasida yashirinib turgan boshqa bir dona (Tura, Fil, Vazir) kutilmaganda raqibga zarba beradi.
   - id: skewer-discovered-005
     type: fill
     difficulty: 2
     lang: text
     prompt: "Ochiq hujumning eng xavfli turini toʻldiring:"
-    code: |-
-      Agar oldindagi dona ochilib ketib, orqadagi dona raqib shohiga hujum qilsa, bu Ochiq ___ deb ataladi. Bu juda kuchli taktika, chunki ochib yuborilgan dona istalgan ___ bemalol amalga oshira oladi (shohni qutqarish majburiyati borligi uchun).
+    code: Agar oldindagi dona ochilib ketib, orqadagi dona raqib shohiga hujum qilsa, bu Ochiq ___ deb ataladi. Bu juda kuchli taktika, chunki ochib yuborilgan dona istalgan ___ bemalol amalga oshira oladi (shohni qutqarish majburiyati borligi uchun).
     answer:
       - shoh
       - hujumni
-    explanation: "Ochiq shohda oldinga surilgan dona oʻzi bilan ham nimagadir xavf tugʻdirsa, raqib avval shohni himoya qilishi kerakligi uchun ikkinchi xavfni toʻxtata olmaydi (qoʻshaloq zarba boʻladi)."
     bank:
-      - mat
       - himoyani
-
+      - mat
+    explanation: Ochiq shohda oldinga surilgan dona oʻzi bilan ham nimagadir xavf tugʻdirsa, raqib avval shohni himoya qilishi kerakligi uchun ikkinchi xavfni toʻxtata olmaydi (qoʻshaloq zarba boʻladi).
   - id: skewer-discovered-006
     type: choice
     difficulty: 2
     lang: text
     prompt: "'Qoʻshaloq shoh' (Double Check) nima?"
     options:
-      - "Ikki marta ketma-ket shoh eʼlon qilish"
-      - "Ochiq hujum natijasida bir vaqtning oʻzida ham oldinga yurgan dona, ham yoʻli ochilgan dona tomonidan raqib shohiga hujum qilish"
-      - "Faqat ikkita Vazir bilan shoh deyish"
-      - "Ikkala oʻyinchi bir-biriga shoh deyishi"
+      - Ikki marta ketma-ket shoh eʼlon qilish
+      - Ochiq hujum natijasida bir vaqtning oʻzida ham oldinga yurgan dona, ham yoʻli ochilgan dona tomonidan raqib shohiga hujum qilish
+      - Faqat ikkita Vazir bilan shoh deyish
+      - Ikkala oʻyinchi bir-biriga shoh deyishi
     answer: 1
-    explanation: "Qoʻshaloq shoh eng halokatli hujumlardan biridir, chunki bir vaqtning oʻzida 2 ta donadan hujum boʻlgani uchun, na toʻsish, na hujumchini urib olish yordam beradi. Shoh faqat qochishga majbur."
-
+    explanation: Qoʻshaloq shoh eng halokatli hujumlardan biridir, chunki bir vaqtning oʻzida 2 ta donadan hujum boʻlgani uchun, na toʻsish, na hujumchini urib olish yordam beradi. Shoh faqat qochishga majbur.
   - id: skewer-discovered-007
     type: choice
     difficulty: 2
     lang: text
-    prompt: "Qoʻshaloq shohdan (Double check) qutulishning yagona yoʻli qaysi?"
+    prompt: Qoʻshaloq shohdan (Double check) qutulishning yagona yoʻli qaysi?
     options:
-      - "Bitta hujumchini urib olish"
-      - "Bitta hujumning yoʻlini toʻsish"
-      - "Faqatgina shohni qochirish (xavfsiz joyga koʻchirish)"
-      - "Qutulishning umuman iloji yoʻq"
+      - Bitta hujumchini urib olish
+      - Bitta hujumning yoʻlini toʻsish
+      - Faqatgina shohni qochirish (xavfsiz joyga koʻchirish)
+      - Qutulishning umuman iloji yoʻq
     answer: 2
-    explanation: "Bir vaqtning oʻzida 2 ta yerdan kelayotgan xavfni urib olish yoki toʻsish imkonsiz (bir yurishda faqat bir ish qilinadi). Shuning uchun shoh darhol boshqa katakka koʻchishi shart."
-
+    explanation: Bir vaqtning oʻzida 2 ta yerdan kelayotgan xavfni urib olish yoki toʻsish imkonsiz (bir yurishda faqat bir ish qilinadi). Shuning uchun shoh darhol boshqa katakka koʻchishi shart.
   - id: skewer-discovered-008
     type: choice
     difficulty: 2
     lang: text
-    prompt: "Shish (Skewer) taktikasida koʻpincha qaysi dona qurbon qilinadi?"
+    prompt: Shish (Skewer) taktikasida koʻpincha qaysi dona qurbon qilinadi?
     options:
-      - "Oldinda turgan eng qimmat dona"
-      - "Hujum qilayotgan dona"
-      - "Orqada turgan arzonroq (lekin qiymatli) dona"
-      - "Faqat piyoda"
+      - Oldinda turgan eng qimmat dona
+      - Hujum qilayotgan dona
+      - Orqada turgan arzonroq (lekin qiymatli) dona
+      - Faqat piyoda
     answer: 2
-    explanation: "Shish holatida oldindagi qimmatbaho dona (masalan, Shoh yoki Vazir) oʻzini qutqarish uchun chekinadi. Natijada orqada qolib ketgan dona hujum qiluvchi tomonidan urib olinadi."
+    explanation: Shish holatida oldindagi qimmatbaho dona (masalan, Shoh yoki Vazir) oʻzini qutqarish uchun chekinadi. Natijada orqada qolib ketgan dona hujum qiluvchi tomonidan urib olinadi.

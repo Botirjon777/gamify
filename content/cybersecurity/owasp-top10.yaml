@@ -11,7 +11,6 @@ exercises:
       - Maʼlumotlar bazasida parollarni oʻchirib qoʻyish
     answer: 0
     explanation: Parametrlangan soʻrovlar (Prepared Statements) maʼlumotlarni SQL buyrugʻidan toʻliq ajratib qoʻyadi, natijada kiritilgan matn hech qachon bajariluvchi kod sifatida ishlamaydi.
-
   - id: sec-owasp-002
     type: choice
     difficulty: 1
@@ -24,7 +23,6 @@ exercises:
       - Brute Force
     answer: 0
     explanation: XSS (Cross-Site Scripting) orqali hujumchi qurbon nomidan veb-sahifada ixtiyoriy JavaScript kodini ishga tushirishi va seans maʼlumotlarini (cookie) oʻgʻirlashi mumkin.
-
   - id: sec-owasp-003
     type: fill
     difficulty: 1
@@ -38,22 +36,19 @@ exercises:
     answer:
       - http
     explanation: httpOnly bayrogʻi qoʻyilgan cookielarni document.cookie orqali JavaScript oʻqiy olmaydi, bu esa XSS orqali token oʻgʻirlash xavfini kamaytiradi.
-
   - id: sec-owasp-004
     type: choice
     difficulty: 2
     lang: sql
-    prompt: "Login maydoniga admin' OR '1'='1 kiritilsa, quyidagi soʻrov bilan nima sodir boʻladi?"
-    code: |-
-      SELECT * FROM users WHERE username = 'admin' OR '1'='1' AND password = 'xyz';
+    prompt: Login maydoniga admin' OR '1'='1 kiritilsa, quyidagi soʻrov bilan nima sodir boʻladi?
+    code: SELECT * FROM users WHERE username = 'admin' OR '1'='1' AND password = 'xyz';
     options:
-      - "AND ustuvor boʻlgani uchun shart username='admin' OR ('1'='1' AND password='xyz') boʻladi — admin qatori parolsiz qaytadi (SQL Injection)"
+      - AND ustuvor boʻlgani uchun shart username='admin' OR ('1'='1' AND password='xyz') boʻladi — admin qatori parolsiz qaytadi (SQL Injection)
       - Maʼlumotlar bazasi xatolik tashlaydi
       - Soʻrov hech narsa qaytarmaydi
       - Faqat '1'='1' ismli foydalanuvchi chiqadi
     answer: 0
-    explanation: "SQL da AND operatori OR dan oldin bajariladi, shuning uchun username='admin' sharti parol tekshiruvidan mustaqil rost boʻladi va admin qatori parolsiz qaytadi."
-
+    explanation: SQL da AND operatori OR dan oldin bajariladi, shuning uchun username='admin' sharti parol tekshiruvidan mustaqil rost boʻladi va admin qatori parolsiz qaytadi.
   - id: sec-owasp-005
     type: fill
     difficulty: 2
@@ -65,9 +60,11 @@ exercises:
         <button type="submit">Oʻtkazish</button>
       </form>
     answer:
-      - [csrf_token, _csrf, csrfToken, authenticity_token]
+      - - csrf_token
+        - _csrf
+        - csrfToken
+        - authenticity_token
     explanation: CSRF (Cross-Site Request Forgery) tokeni har bir forma uchun server tomonidan yaratiladigan maxfiy kalit boʻlib, soʻrov aynan shu sahifadan yuborilganini tasdiqlaydi.
-
   - id: sec-owasp-006
     type: choice
     difficulty: 2
@@ -80,7 +77,6 @@ exercises:
       - Blind XSS
     answer: 0
     explanation: Stored XSS maʼlumotlar bazasida (masalan sharhlar yoki profil nomida) saqlanadi va ushbu sahifani koʻrgan har bir foydalanuvchida avtomatik ishga tushadi.
-
   - id: sec-owasp-007
     type: choice
     difficulty: 2
@@ -92,19 +88,16 @@ exercises:
       - document.write
       - eval()
     answer: 0
-    explanation: "textContent matnni oddiy matn sifatida chiqaradi. innerHTML esa HTML ni tahlil qiladi va <img onerror=...> kabi atributlar orqali XSS ga olib kelishi mumkin."
-
+    explanation: textContent matnni oddiy matn sifatida chiqaradi. innerHTML esa HTML ni tahlil qiladi va <img onerror=...> kabi atributlar orqali XSS ga olib kelishi mumkin.
   - id: sec-owasp-008
     type: fill
     difficulty: 2
     lang: js
     prompt: SQL Injection dan himoyalanish uchun parametrlangan soʻrovdagi birinchi parametr oʻrinbosarini (placeholder, PostgreSQL) toʻldiring.
-    code: |-
-      const result = await db.query('SELECT * FROM users WHERE email = ___', [userEmail]);
+    code: const result = await db.query('SELECT * FROM users WHERE email = ___', [userEmail]);
     answer:
-      - "$1"
+      - $1
     explanation: SQL soʻrovida $1, $2 kabi oʻrinbosarlar ishlatiladi, qiymatlar esa alohida massivda uzatiladi — shu sababli ular hech qachon SQL kodi sifatida bajarilmaydi.
-
   - id: sec-owasp-009
     type: choice
     difficulty: 3
@@ -117,7 +110,6 @@ exercises:
       - X-Content-Type-Options
     answer: 0
     explanation: CSP (Content Security Policy) sarlavhasi orqali veb-sayt ruxsat berilgan skript manbalarini belgilaydi, bu esa koʻplab XSS hujumlarini toʻxtatadi.
-
   - id: sec-owasp-010
     type: choice
     difficulty: 3

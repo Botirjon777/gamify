@@ -16,13 +16,13 @@ exercises:
     difficulty: 2
     lang: text
     prompt: Osh tuzi (NaCl) da qanday bogʻlanish turi mavjud? (soʻz bilan yozing)
-    answer: 0
-    explanation: NaCl kristall panjarasi ionlardan iborat.
     options:
       - ion
       - ion (xato)
       - Boshqa
       - Nomaʼlum
+    answer: 0
+    explanation: NaCl kristall panjarasi ionlardan iborat.
   - id: chemical-bonds-003
     type: choice
     difficulty: 2
@@ -52,13 +52,13 @@ exercises:
     difficulty: 3
     lang: text
     prompt: Bitta juft elektron orqali hosil boʻladigan kovalent bogʻlanish qanday ataladi?
-    answer: 0
-    explanation: Bitta elektron juft orqali oddiy yoki bir karratli bogʻlanish hosil boʻladi.
     options:
       - oddi
       - oddi (xato)
       - Boshqa
       - Nomaʼlum
+    answer: 0
+    explanation: Bitta elektron juft orqali oddiy yoki bir karratli bogʻlanish hosil boʻladi.
   - id: chemical-bonds-006
     type: choice
     difficulty: 3
@@ -88,10 +88,10 @@ exercises:
     difficulty: 2
     lang: text
     prompt: Suv molekulalari oʻrtasidagi oʻzaro bogʻlanish qanday ataladi?
-    answer: 0
-    explanation: Suv molekulalari orasida vodorod bogʻlanishi mavjud.
     options:
       - vodorod
       - vodorod (xato)
       - Boshqa
       - Nomaʼlum
+    answer: 0
+    explanation: Suv molekulalari orasida vodorod bogʻlanishi mavjud.

@@ -28,13 +28,13 @@ exercises:
     difficulty: 2
     lang: text
     prompt: Oʻsimlik hujayrasida fotosintez jarayoni kechadigan yashil plastidalar nima deyiladi?
-    answer: 0
-    explanation: Fotosintez xloroplastlarda sodir boʻladi.
     options:
       - xloroplast
       - xloroplast (xato)
       - Boshqa
       - Nomaʼlum
+    answer: 0
+    explanation: Fotosintez xloroplastlarda sodir boʻladi.
   - id: cell-structure-004
     type: choice
     difficulty: 2
@@ -52,13 +52,13 @@ exercises:
     difficulty: 2
     lang: text
     prompt: Oqsil sintezini amalga oshiruvchi organoid qanday ataladi?
-    answer: 0
-    explanation: Ribosomalar oqsil sintezida qatnashadi.
     options:
       - ribosoma
       - ribosoma (xato)
       - Boshqa
       - Nomaʼlum
+    answer: 0
+    explanation: Ribosomalar oqsil sintezida qatnashadi.
   - id: cell-structure-006
     type: choice
     difficulty: 3
@@ -88,10 +88,10 @@ exercises:
     difficulty: 2
     lang: text
     prompt: Hujayra ichidagi suyuqlik nima deb ataladi?
-    answer: 0
-    explanation: Sitoplazma barcha organoidlarni oʻrab turadigan suyuqlikdir.
     options:
       - sitoplazma
       - sitoplazma (xato)
       - Boshqa
       - Nomaʼlum
+    answer: 0
+    explanation: Sitoplazma barcha organoidlarni oʻrab turadigan suyuqlikdir.
