@@ -90,6 +90,7 @@
       }
     },
     "nav": {
+      "iq": "IQ test",
       "how": "Qanday ishlaydi",
       "directions": "Yoʻnalishlar",
       "game": "Musobaqa",
@@ -184,6 +185,22 @@
       "contact": "Aloqa",
       "telegram": "Telegram",
       "rights": "Barcha huquqlar himoyalangan."
+    },
+    "iq": {
+      "badge": "Roʻyxatdan oʻtmasdan",
+      "title": "IQ darajangizni 10 daqiqada bilib oling",
+      "text": "Mantiqiy fikrlash boʻyicha qisqa test: ketma-ketliklar, oʻxshatishlar, mantiqiy masalalar. Savollar sizning darajangizga moslashadi.",
+      "points": {
+        "questions": "{count} ta savol, har biriga {seconds} soniya",
+        "certificate": "IQ ballingiz va ism-familiyangiz yozilgan sertifikat (PDF)",
+        "share": "Natijani doʻstlarga yuboring yoki storiga joylang"
+      },
+      "cta": "IQ testni boshlash",
+      "price": "Test bepul · natija va sertifikat — <price></price>",
+      "sample": "Namuna",
+      "certificate": "IQ sertifikati",
+      "sampleName": "Ism Familiya",
+      "percentile": "Odamlarning {percentile} foizidan yuqori"
     }
   },
   "auth": {
@@ -503,6 +520,25 @@
       "level": "Daraja",
       "disclaimer": "Zukko IQ — mantiqiy fikrlash boʻyicha taxminiy baho. Bu klinik IQ test emas.",
       "print": "Chop etish / PDF saqlash"
+    },
+    "cheer": {
+      "done": "{done} / {total} savol ortda",
+      "continue": "Davom etish",
+      "start": {
+        "title": "Zoʻr boshladingiz!",
+        "fast": "Siz koʻpchilik ishtirokchilardan tezroq ketyapsiz. Koʻpchilikka shu yergacha yetish uchun koʻproq vaqt kerak boʻladi. Shu surʼatda davom eting!",
+        "steady": "Siz shoshilmasdan, oʻylab javob beryapsiz — aniqlik tezlikdan muhimroq. Shunday davom eting!"
+      },
+      "half": {
+        "title": "Yarmi ortda!",
+        "fast": "Surʼatingiz hali ham koʻpchilikdan yuqori. Diqqatni yoʻqotmang — eng qiziq savollar hali oldinda!",
+        "steady": "Testning yarmini tugatdingiz. Chuqur nafas oling va diqqatni jamlang — qolgani ham qoʻlingizdan keladi!"
+      },
+      "almost": {
+        "title": "Marraga oz qoldi!",
+        "fast": "Atigi {left} ta savol qoldi. Siz bu yerga koʻpchilikdan tezroq yetib keldingiz — oxirigacha shu surʼatni ushlang!",
+        "steady": "Atigi {left} ta savol qoldi. Oxirgi savollarga bor diqqatingizni qarating — natijangiz ularga ham bogʻliq!"
+      }
     }
   },
   "leaderboard": {

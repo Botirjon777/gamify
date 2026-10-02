@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import {
   ArrowRight,
+  Award,
   Brain,
   Building2,
   CalendarClock,
@@ -27,15 +28,20 @@ import { buttonClass } from "@/components/ui/button";
 import { getCurrentSession } from "@/lib/auth/session";
 import { siteOrigin } from "@/lib/site-url";
 import { telegramUrl } from "@/lib/telegram";
-import { getCurrentTenant } from "@/lib/tenant";
+import { getCurrentTenant, isDefaultTenant } from "@/lib/tenant";
 import { currentSeason, weeklyTopic } from "@/features/events/service";
 import { daysLeft, seasonProgress } from "@/features/events/season";
 import { DAILY_BONUS_XP } from "@/features/gamification/xp";
+import { GUEST_IQ_QUESTIONS } from "@/features/iq/guest";
+import { iqPercentile } from "@/features/iq/rating";
+import { IQ_SECONDS_PER_QUESTION } from "@/features/iq/types";
 import { groupKey, groupMessageKey, groupStyle, inGroup, TRACK_GROUPS } from "@/features/learn/subjects";
 import { getCatalogStructure } from "@/features/learn/queries";
 import { paymentDetails } from "@/features/payments/config";
 import { ANNUAL_DISCOUNT, perMonth } from "@/features/payments/pricing";
 import { PLAN_ORDER, PLANS } from "@/features/plans/plans";
+import { PriceTag } from "@/features/settings/components/price-tag";
+import { iqPrice } from "@/features/settings/service";
 
 const STEPS = [
   { key: "pick", icon: Crosshair, gradient: "bg-grad-brand" },
@@ -49,7 +55,9 @@ const FEATURES = [
   { key: "clans", icon: Shield, gradient: "bg-grad-dark" },
   { key: "badges", icon: Sparkles, gradient: "bg-grad-gold" },
 ] as const;
-const SECTIONS = ["how", "directions", "game", "plans", "faq"] as const;
+const SECTIONS = ["iq", "how", "directions", "game", "plans", "faq"] as const;
+/** The score on the sample certificate in the IQ section. */
+const SAMPLE_IQ = 124;
 
 type Faq = { q: string; a: string };
 
@@ -66,14 +74,17 @@ export default async function LandingPage({ params }: PageProps<"/[locale]">) {
   const tMeta = await getTranslations("meta");
 
   const tenant = await getCurrentTenant();
-  const [current, catalog, season, topic, origin, payment] = await Promise.all([
+  const [current, catalog, season, topic, origin, payment, iq] = await Promise.all([
     getCurrentSession(),
     getCatalogStructure(tenant.id, locale),
     currentSeason(),
     weeklyTopic(undefined, await getLocale()),
     siteOrigin(),
     paymentDetails(),
+    iqPrice(),
   ]);
+  // The test without registration lives on the main site only (not on a study center's own address).
+  const sections = SECTIONS.filter((id) => id !== "iq" || isDefaultTenant(tenant));
 
   // Real numbers from the catalog — nothing invented.
   const skills = catalog.flatMap((tr) => tr.modules.flatMap((m) => m.skills));
@@ -131,7 +142,7 @@ export default async function LandingPage({ params }: PageProps<"/[locale]">) {
         <div className="mx-auto flex w-full max-w-7xl items-center justify-between gap-4 px-5 py-4">
           <Logo name={current?.tenant.name} />
           <nav aria-label={t("footer.platform")} className="hidden items-center gap-1 lg:flex">
-            {SECTIONS.map((id) => (
+            {sections.map((id) => (
               <a key={id} href={`#${id}`} className="rounded-lg px-3 py-2 text-sm font-semibold text-muted transition hover:bg-surface hover:text-foreground">
                 {t(`nav.${id}`)}
               </a>
@@ -235,6 +246,49 @@ function handleClick() {
             ))}
           </dl>
         </section>
+
+        {/* IQ test without registration */}
+        {sections.includes("iq") && (
+          <section id="iq" className="mx-auto w-full max-w-7xl scroll-mt-20 px-5 pb-16">
+            <Reveal className="relative grid items-center gap-10 overflow-hidden rounded-4xl bg-grad-dark p-8 text-white sm:p-12 lg:grid-cols-[1.3fr_1fr]">
+              <div className="absolute -left-24 -top-24 size-80 rounded-full bg-grad-iq opacity-40 blur-3xl" />
+              <div className="absolute -bottom-32 right-0 size-80 rounded-full bg-xp/20 blur-3xl" />
+              <div className="relative">
+                <span className="inline-flex items-center gap-2 rounded-full bg-white/10 px-3 py-1 text-sm font-semibold">
+                  <Brain className="size-4" /> {t("iq.badge")}
+                </span>
+                <h2 className="mt-5 font-display text-3xl font-bold sm:text-4xl">{t("iq.title")}</h2>
+                <p className="mt-4 max-w-xl text-lg leading-relaxed text-white/75">{t("iq.text")}</p>
+                <ul className="mt-6 flex flex-col gap-2.5 font-medium">
+                  {[t("iq.points.questions", { count: GUEST_IQ_QUESTIONS, seconds: IQ_SECONDS_PER_QUESTION }), t("iq.points.certificate"), t("iq.points.share")].map((point) => (
+                    <li key={point} className="flex items-start gap-2.5">
+                      <Check className="mt-1 size-4 shrink-0 text-[#7ff0b6]" /> {point}
+                    </li>
+                  ))}
+                </ul>
+                <div className="mt-8 flex flex-wrap items-center gap-x-5 gap-y-3">
+                  <Link href="/iq-test" className="inline-flex h-12 items-center gap-2 rounded-xl bg-white px-7 text-base font-bold text-foreground hover:bg-white/90">
+                    {t("iq.cta")} <ArrowRight className="size-5" />
+                  </Link>
+                  <p className="text-sm text-white/75">{t.rich("iq.price", { price: () => <PriceTag price={iq} /> })}</p>
+                </div>
+              </div>
+
+              {/* What you get: a sample certificate */}
+              <div className="relative mx-auto w-full max-w-sm rotate-2 rounded-3xl bg-surface p-6 text-center text-foreground shadow-2xl">
+                <span className="absolute right-4 top-4 rounded-full bg-background px-2.5 py-1 text-[11px] font-bold uppercase tracking-wider text-muted">{t("iq.sample")}</span>
+                <Award className="mx-auto size-10 text-xp" />
+                <p className="mt-3 text-xs font-bold uppercase tracking-[0.2em] text-muted">{t("iq.certificate")}</p>
+                <p className="mt-2 text-lg font-bold">{t("iq.sampleName")}</p>
+                <p className="mt-3 font-display text-7xl font-bold leading-none">
+                  <span className="text-grad-brand">{SAMPLE_IQ}</span>
+                </p>
+                <p className="mt-1 text-sm font-bold">Zukko IQ</p>
+                <p className="mt-4 rounded-xl bg-background px-3 py-2.5 text-sm font-semibold">{t("iq.percentile", { percentile: iqPercentile(SAMPLE_IQ) })}</p>
+              </div>
+            </Reveal>
+          </section>
+        )}
 
         {/* How it works */}
         <section id="how" className="scroll-mt-20 border-y border-border/70 bg-surface/70">
@@ -511,7 +565,7 @@ function handleClick() {
           <nav aria-label={t("footer.platform")}>
             <h2 className="text-sm font-bold">{t("footer.platform")}</h2>
             <ul className="mt-3 flex flex-col gap-2 text-sm text-muted">
-              {SECTIONS.map((id) => (
+              {sections.map((id) => (
                 <li key={id}>
                   <a href={`#${id}`} className="hover:text-foreground">
                     {t(`nav.${id}`)}

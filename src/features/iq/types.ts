@@ -1,3 +1,5 @@
+import type { IqCheer } from "./cheer";
+
 export type IqKind = "PLACEMENT" | "DAILY";
 
 export const IQ_QUESTIONS: Record<IqKind, number> = { PLACEMENT: 12, DAILY: 5 };
@@ -12,6 +14,8 @@ export interface IqQuestion {
   figure?: string;
   options: string[];
   secondsLeft: number;
+  /** Shown before this question: a word of encouragement (only right after the previous answer). */
+  cheer?: IqCheer;
 }
 
 export interface IqResult {

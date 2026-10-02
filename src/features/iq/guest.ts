@@ -5,7 +5,8 @@ import { db } from "@/lib/db";
 import { localized, type LocalizedText } from "@/i18n/content";
 import type { IqPublicContent } from "./content-schema";
 import { iqPercentile } from "./rating";
-import { IQ_QUESTIONS, IQ_SECONDS_PER_QUESTION, type IqQuestion } from "./types";
+import { secondsLeft } from "./service";
+import { IQ_QUESTIONS, type IqQuestion } from "./types";
 
 /**
  * IQ test without an account (/iq-test). Taking it is free; the score and the certificate are shown after
@@ -29,7 +30,6 @@ export const guestTestByToken = (token: string) => (token.length > 10 && token.l
 export async function guestQuestion(test: GuestIqTest, locale: string): Promise<IqQuestion> {
   const item = await db.iqItem.findUniqueOrThrow({ where: { id: test.currentItemId! } });
   const content = item.content as IqPublicContent;
-  const elapsed = (Date.now() - test.currentShownAt!.getTime()) / 1000;
   return {
     itemId: item.id,
     number: test.answered + 1,
@@ -37,7 +37,7 @@ export async function guestQuestion(test: GuestIqTest, locale: string): Promise<
     prompt: localized(content.prompt, locale),
     figure: content.figure,
     options: content.options.map((o: LocalizedText) => localized(o, locale)),
-    secondsLeft: Math.max(0, Math.round(IQ_SECONDS_PER_QUESTION - elapsed)),
+    secondsLeft: secondsLeft(test.currentShownAt!),
   };
 }
 

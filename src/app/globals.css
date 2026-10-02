@@ -248,6 +248,16 @@ html {
   animation: toast-in 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) both;
 }
 
+/* IQ test: the bar that fills while the encouragement between two questions is on screen (duration set inline). */
+@keyframes fill-x {
+  from { transform: scaleX(0); }
+  to { transform: none; }
+}
+.iq-cheer-bar {
+  transform-origin: left;
+  animation: fill-x linear both;
+}
+
 /* ─── Dialogs (native <dialog> + showModal: focus trap, Esc, top layer for free) ─── */
 @keyframes drawer-in {
   from { transform: translateX(100%); }

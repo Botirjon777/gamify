@@ -1,12 +1,13 @@
 "use client";
 
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowRight, Brain, CircleCheck, HelpCircle, Timer } from "lucide-react";
+import { ArrowRight, Brain, CircleCheck, Flag, HelpCircle, Rocket, Target, Timer } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link } from "@/i18n/navigation";
 import { Button, buttonClass } from "@/components/ui/button";
 import { playSound } from "@/lib/sound";
 import { answerIq, startIq } from "../actions";
+import { IQ_CHEER_PAUSE_MS, type IqCheer } from "../cheer";
 import { IQ_QUESTIONS, IQ_SECONDS_PER_QUESTION, type IqKind, type IqQuestion, type IqResult, type IqState } from "../types";
 import { IqCertificate, type IqCertificateState } from "./iq-certificate";
 
@@ -75,18 +76,64 @@ export function IqTest({ kind, initial, certificate }: { kind: IqKind; initial: 
   );
 }
 
-/** One timed question (shared with the test without registration). Remount it per question: `key={question.itemId}`. */
-export function IqQuestionView({
-  question: q,
-  busy,
-  error,
-  onAnswer,
-}: {
+interface QuestionProps {
   question: IqQuestion;
   busy: boolean;
   error: boolean;
   onAnswer: (choice: number | null) => Promise<boolean>;
-}) {
+}
+
+/**
+ * One timed question (shared with the test without registration), preceded now and then by a word of
+ * encouragement. Remount it per question: `key={question.itemId}`.
+ */
+export function IqQuestionView(props: QuestionProps) {
+  const { cheer } = props.question;
+  const [cheering, setCheering] = useState(!!cheer);
+  if (cheer && cheering) return <CheerView cheer={cheer} number={props.question.number} total={props.question.total} onDone={() => setCheering(false)} />;
+  return <TimedQuestion {...props} />;
+}
+
+const CHEER_ICON = { start: Rocket, half: Target, almost: Flag } as const;
+
+/** The pause between two questions. Goes on by itself; the question's clock has not started yet. */
+function CheerView({ cheer, number, total, onDone }: { cheer: IqCheer; number: number; total: number; onDone: () => void }) {
+  const t = useTranslations("iq.cheer");
+  const Icon = CHEER_ICON[cheer.stage];
+  const pace = cheer.fast ? "fast" : "steady";
+
+  useEffect(() => {
+    playSound("claim");
+    // A little before the server starts the clock, so the question never appears with seconds already gone.
+    const id = setTimeout(onDone, IQ_CHEER_PAUSE_MS - 500);
+    return () => clearTimeout(id);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- once per message
+  }, []);
+
+  return (
+    <div className="animate-page mx-auto w-full max-w-2xl rounded-3xl border border-border bg-surface p-6 text-center shadow-xl shadow-brand/5 sm:p-10">
+      <span className={`mx-auto grid size-16 place-items-center rounded-3xl text-white shadow-xl shadow-brand/20 ${cheer.fast ? "bg-grad-xp" : "bg-grad-iq"}`}>
+        <Icon className="size-8" />
+      </span>
+      <p className="mt-4 text-xs font-bold uppercase tracking-wider text-muted">{t("done", { done: number - 1, total })}</p>
+      <h1 className="mt-2 text-2xl font-bold tracking-tight sm:text-3xl">{t(`${cheer.stage}.title`)}</h1>
+      <p className="mx-auto mt-3 max-w-md text-lg leading-relaxed text-muted">{t(`${cheer.stage}.${pace}`, { left: cheer.left })}</p>
+      <div className="mx-auto mt-6 h-1.5 max-w-xs overflow-hidden rounded-full bg-border">
+        <div className="iq-cheer-bar h-full rounded-full bg-grad-brand" style={{ animationDuration: `${IQ_CHEER_PAUSE_MS - 500}ms` }} />
+      </div>
+      <Button onClick={onDone} className="mt-6 h-12 text-base sm:px-10">
+        {t("continue")} <ArrowRight className="size-5" />
+      </Button>
+    </div>
+  );
+}
+
+function TimedQuestion({
+  question: q,
+  busy,
+  error,
+  onAnswer,
+}: QuestionProps) {
   const t = useTranslations("iq");
   const [deadline] = useState(() => Date.now() + q.secondsLeft * 1000);
   const [left, setLeft] = useState(q.secondsLeft);
