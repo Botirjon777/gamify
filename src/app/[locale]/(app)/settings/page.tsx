@@ -12,6 +12,7 @@ import { AvatarPicker } from "@/features/profile/components/avatar-picker";
 import { GenderSettings } from "@/features/profile/components/gender-settings";
 import { PasswordDialog } from "@/features/profile/components/password-dialog";
 import { BioForm } from "@/features/profile/components/bio-form";
+import { SoundSwitch } from "@/components/sound-toggle";
 import { InterestsForm } from "@/features/profile/components/interests-form";
 import { getUpcomingSubjects } from "@/features/learn/queries";
 import { InviteBox } from "@/features/referrals/components/invite-box";
@@ -82,6 +83,9 @@ export default async function SettingsPage({ params }: PageProps<"/[locale]/sett
 
         {/* Links */}
         <div className="flex flex-col gap-3">
+          <div className="rounded-2xl border border-border bg-surface p-4">
+            <SoundSwitch label={t("sound")} text={t("soundText")} />
+          </div>
           <RowLink href="/plans" icon={<Crown className="size-5" />} gradient="bg-grad-xp" title={t("plan")} text={t("planText", { plan: tp(`names.${plan}`) })} />
           <RowLink href="/settings/devices" icon={<Monitor className="size-5" />} gradient="bg-grad-iq" title={t("devices")} text={t("devicesText")} />
         </div>

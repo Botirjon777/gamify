@@ -5,6 +5,8 @@ import { Award, CircleCheck, CircleX, Flame, Gauge, PartyPopper, Sparkles, Troph
 import { useTranslations } from "next-intl";
 import { Link, useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
+import { SoundToggle } from "@/components/sound-toggle";
+import { playSound } from "@/lib/sound";
 import { getNextExercise, leaveDrill, submitAnswer } from "../actions";
 import { useDrill } from "../store";
 import type { Reveal } from "../check";
@@ -51,7 +53,10 @@ export function DrillSession({ skillId, skillHref, skillTitle, initialMastery }:
     setChecking();
     setCheckError(false);
     try {
-      setResult(await submitAnswer(exercise.id, draft, Date.now() - shownAt));
+      const result = await submitAnswer(exercise.id, draft, Date.now() - shownAt);
+      setResult(result);
+      // The biggest thing that just happened wins.
+      playSound(!result.correct ? "wrong" : result.trackCompleted ? "complete" : result.leveledUp || result.badges.length ? "levelUp" : "correct");
     } catch {
       setCheckError(true);
       useDrill.setState({ phase: "answering" });
@@ -115,6 +120,7 @@ export function DrillSession({ skillId, skillHref, skillTitle, initialMastery }:
             </span>
           )}
           <span className="shrink-0 text-sm font-bold text-xp">+{s.sessionXp} XP</span>
+          <SoundToggle className="-mr-2" />
         </div>
       </header>
 

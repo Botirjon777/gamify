@@ -712,7 +712,9 @@
     "mustChangeCta": "Hozir oʻzgartirish",
     "genderConfirmTitle": "Jinsni oʻzgartirasizmi?",
     "genderConfirmText": "Avataringiz yangi jinsga mos ravishda qayta chiziladi.",
-    "passwordHint": "Yangi parol kamida 8 ta belgidan iborat boʻlsin. Oʻzgartirgach, boshqa qurilmalardagi sessiyalar yopiladi."
+    "passwordHint": "Yangi parol kamida 8 ta belgidan iborat boʻlsin. Oʻzgartirgach, boshqa qurilmalardagi sessiyalar yopiladi.",
+    "sound": "Ovoz effektlari",
+    "soundText": "Toʻgʻri va notoʻgʻri javob, daraja, duel va taymer ovozlari. Shu qurilmada eslab qolinadi."
   },
   "notifications": {
     "title": "Bildirishnomalar",
@@ -1417,7 +1419,9 @@
     "loadMore": "Yana yuklash",
     "cancel": "Bekor qilish",
     "wait": "Kuting…",
-    "close": "Yopish"
+    "close": "Yopish",
+    "soundOn": "Ovozni yoqish",
+    "soundOff": "Ovozni oʻchirish"
   },
   "weekly": {
     "label": "Haftaning bonus mavzusi",

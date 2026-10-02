@@ -5,6 +5,7 @@ import { CircleCheck, CircleX, Clock, Loader2, Swords } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
+import { playSound } from "@/lib/sound";
 import { ChoiceView, FillView, OrderView, OutputView } from "@/features/learn/components/exercise-views";
 import type { Submission } from "@/features/learn/content-schema";
 import type { Reveal } from "@/features/learn/check";
@@ -70,6 +71,7 @@ export function DuelArena({ duelId, me, them, stake, track, questions, resume }:
         return;
       }
       setResult(r);
+      playSound(r.correct ? "correct" : "wrong");
       setMarks((m) => [...m, r.correct]);
       setPhase("feedback");
     },
@@ -86,6 +88,7 @@ export function DuelArena({ duelId, me, them, stake, track, questions, resume }:
   // 3-2-1 countdown, then the first question.
   useEffect(() => {
     if (phase !== "countdown") return;
+    playSound(count > 0 ? "tick" : "go");
     // 3 → 2 → 1 → "Ketdik!" → first question
     const id = setTimeout(() => (count === 0 ? void load() : setCount((c) => c - 1)), 900);
     return () => clearTimeout(id);
@@ -94,6 +97,8 @@ export function DuelArena({ duelId, me, them, stake, track, questions, resume }:
   // Question clock: at 0 the (possibly empty) answer is sent.
   useEffect(() => {
     if (phase !== "question" || !q) return;
+    // The last seconds are audible.
+    if (left > 0 && left <= 5) playSound("tick");
     const id = setTimeout(() => (left <= 1 ? void submit(null) : setLeft((s) => s - 1)), left <= 0 ? 0 : 1000);
     return () => clearTimeout(id);
   }, [phase, q, left, submit]);

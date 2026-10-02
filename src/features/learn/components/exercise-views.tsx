@@ -5,6 +5,7 @@ import { useTranslations } from "next-intl";
 import type { Submission } from "../content-schema";
 import type { Reveal } from "../check";
 import type { ClientExercise } from "../types";
+import { playSound } from "@/lib/sound";
 
 type Of<T extends ClientExercise["type"]> = Extract<ClientExercise, { type: T }>;
 
@@ -40,6 +41,7 @@ export function ChoiceView({ exercise, locked, reveal, onDraft }: ViewProps<"CHO
 
   const choose = (i: number) => {
     if (locked) return;
+    playSound("tap");
     setSelected(i);
     onDraft({ type: "CHOICE", index: i });
   };
@@ -134,6 +136,7 @@ export function FillView({ exercise, locked, reveal, onDraft }: ViewProps<"FILL"
   const place = (word: number) => {
     const slot = picked.indexOf(null);
     if (locked || !bank || slot < 0) return;
+    playSound("tap");
     setPicked(picked.map((p, j) => (j === slot ? word : p)));
     update(slot, bank[word]);
   };
