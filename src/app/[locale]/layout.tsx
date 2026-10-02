@@ -7,6 +7,7 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { routing } from "@/i18n/routing";
 import { getCurrentTenant } from "@/lib/tenant";
 import { siteOrigin } from "@/lib/site-url";
+import { ToastContainer } from "@/components/ui/toast";
 import "../globals.css";
 
 // All three cover Uzbek Latin (oʻ gʻ) and Cyrillic (for Russian later).
@@ -53,7 +54,10 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
         <noscript>
           <style>{"[data-reveal]{opacity:1!important;transform:none!important}"}</style>
         </noscript>
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          {children}
+          <ToastContainer />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

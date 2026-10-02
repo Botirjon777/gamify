@@ -1,11 +1,12 @@
 "use client";
 
 import { useState, useTransition } from "react";
-import { Check, CircleCheck, Copy } from "lucide-react";
+import { Check, Copy } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { copyText } from "@/lib/clipboard";
 import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
+import { toast } from "@/components/ui/toast";
 import { requestPayment } from "../actions";
 import { BILLING, BILLINGS, perMonth, priceFor, yearlySaving, type Billing, type PaidPlan } from "../pricing";
 
@@ -23,20 +24,9 @@ export function CheckoutForm({ plan, initialBilling, cardNumber, cardHolder, con
   const [billing, setBilling] = useState<Billing>(initialBilling);
   const [reference, setReference] = useState("");
   const [copied, setCopied] = useState(false);
-  const [error, setError] = useState<string | null>(null);
-  const [done, setDone] = useState(false);
   const [pending, start] = useTransition();
   const amount = priceFor(plan, billing);
   const som = (n: number) => n.toLocaleString("uz-UZ");
-
-  if (done) {
-    return (
-      <div className="flex flex-col items-center gap-3 rounded-3xl border border-border bg-surface p-8 text-center">
-        <CircleCheck className="size-12 text-success" />
-        <p className="max-w-md font-semibold">{t("submitted")}</p>
-      </div>
-    );
-  }
 
   return (
     <div className="flex flex-col gap-6">
@@ -114,7 +104,6 @@ export function CheckoutForm({ plan, initialBilling, cardNumber, cardHolder, con
           />
           <span className="text-xs text-muted">{t("referenceHint")}</span>
         </label>
-        {error && <p className="mt-3 text-sm font-semibold text-danger">{error}</p>}
         <Button
           className="mt-5 h-12 w-full sm:w-auto sm:px-10"
           disabled={pending || reference.trim().length < 3}
@@ -122,9 +111,13 @@ export function CheckoutForm({ plan, initialBilling, cardNumber, cardHolder, con
             start(async () => {
               const r = await requestPayment({ plan, billing, reference });
               if (r.ok) {
-                setDone(true);
+                toast.success(t("submitted"));
+                // The plans page shows the request as "being checked".
+                router.push("/plans");
                 router.refresh();
-              } else setError(t(`errors.${r.error}`));
+              } else {
+                toast.error(t(`errors.${r.error}`));
+              }
             })
           }
         >

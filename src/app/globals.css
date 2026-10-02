@@ -239,6 +239,15 @@ html {
   animation: glow-pulse 1.8s ease-in-out infinite;
 }
 
+/* Toast notification slide-in from the right. */
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(100%); }
+  to { opacity: 1; transform: none; }
+}
+@utility animate-toast-in {
+  animation: toast-in 0.25s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+
 /* ─── Dialogs (native <dialog> + showModal: focus trap, Esc, top layer for free) ─── */
 @keyframes drawer-in {
   from { transform: translateX(100%); }
