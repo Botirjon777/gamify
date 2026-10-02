@@ -3,38 +3,38 @@ exercises:
     type: choice
     difficulty: 1
     lang: text
-    prompt: x + 5 = 12 tenglamada x nechaga teng?
+    prompt: x = 4 soni qaysi tenglamaning ildizi boʻladi?
     options:
-      - "5"
-      - "6"
-      - "7"
-      - "8"
-    answer: 2
-    explanation: x = 12 - 5 = 7.
+      - 2x = 6
+      - x + 5 = 9
+      - x - 1 = 5
+      - x/2 = 8
+    answer: 1
+    explanation: x oʻrniga 4 ni qoʻyamiz, 4 + 5 = 9 — tenglik toʻgʻri. Qolgan tenglamalarda tenglik bajarilmaydi, masalan, 2 * 4 = 8, 6 emas.
   - id: equations-algebra-002
     type: choice
     difficulty: 2
     lang: text
-    prompt: 2y = 16 tenglamada y nechaga teng?
+    prompt: 24 / y = 6 tenglamada y nechaga teng?
     options:
       - "4"
-      - "6"
-      - "8"
-      - "10"
-    answer: 2
-    explanation: y = 16 / 2 = 8.
+      - "18"
+      - "144"
+      - "30"
+    answer: 0
+    explanation: Nomaʼlum boʻluvchini topish uchun boʻlinuvchi boʻlinmaga boʻlinadi, y = 24 / 6 = 4.
   - id: equations-algebra-003
     type: choice
     difficulty: 2
     lang: text
-    prompt: 3z - 4 = 11 tenglamada z nechaga teng?
+    prompt: 2z + 9 = 3 tenglamada z nechaga teng?
     options:
       - "3"
-      - "5"
-      - "7"
-      - "10"
-    answer: 1
-    explanation: 3z = 15, z = 5.
+      - "6"
+      - "-3"
+      - "-6"
+    answer: 2
+    explanation: 2z = 3 - 9 = -6, z = -6 / 2 = -3.
   - id: equations-algebra-004
     type: choice
     difficulty: 3
@@ -43,55 +43,196 @@ exercises:
     options:
       - "4"
       - "6"
-      - "8"
-      - "10"
+      - "2"
+      - 4,4
     answer: 1
-    explanation: a - 2 = 4, a = 6.
+    explanation: Ikkala tomonni 5 ga boʻlamiz, a - 2 = 4, bundan a = 4 + 2 = 6.
   - id: equations-algebra-005
     type: choice
     difficulty: 2
     lang: text
-    prompt: x/4 = 5 tenglamada x ni toping.
+    prompt: x/2 + 3 = 8 tenglamada x ni toping.
     options:
-      - "18"
-      - "20"
+      - "5"
       - "22"
-      - "25"
-    answer: 1
-    explanation: x = 5 * 4 = 20.
+      - "13"
+      - "10"
+    answer: 3
+    explanation: x/2 = 8 - 3 = 5, x = 5 * 2 = 10.
   - id: equations-algebra-006
     type: choice
     difficulty: 2
     lang: text
-    prompt: "Ifodani soddalashtiring: 2x + 3x"
+    prompt: "Ifodani soddalashtiring: 3x + 4 + 2x - 1"
     options:
-      - 5x
-      - 6x
-      - 5x^2
-      - 6x^2
+      - 5x + 3
+      - 8x
+      - 5x + 5
+      - 6x + 3
     answer: 0
-    explanation: 2x + 3x = 5x.
+    explanation: Oʻxshash hadlarni alohida jamlaymiz, 3x + 2x = 5x va 4 - 1 = 3. Natija 5x + 3.
   - id: equations-algebra-007
     type: choice
     difficulty: 3
     lang: text
-    prompt: x^2 = 49 tenglamaning musbat yechimini toping.
+    prompt: x^2 = 49 tenglamaning musbat ildizini toping.
     options:
-      - "6"
-      - "7"
-      - "8"
+      - 24,5
       - "9"
-    answer: 1
-    explanation: 7 * 7 = 49.
+      - "7"
+      - "98"
+    answer: 2
+    explanation: 7 * 7 = 49, demak musbat ildiz x = 7. Tenglamaning ikkinchi ildizi x = -7.
   - id: equations-algebra-008
     type: choice
     difficulty: 3
     lang: text
-    prompt: 2(x + 3) = 14. x nechaga teng?
+    prompt: "Ifodani soddalashtiring: 5x - 2(x - 3)"
+    options:
+      - 3x - 6
+      - 3x + 6
+      - 3x - 3
+      - 7x - 6
+    answer: 1
+    explanation: Qavs oldida minus turgani uchun qavs ichidagi ishoralar oʻzgaradi, 5x - 2x + 6 = 3x + 6.
+  - id: equations-algebra-009
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: x - 9 = 6 tenglamada x nechaga teng?
+    options:
+      - "15"
+      - "3"
+      - "54"
+      - "14"
+    answer: 0
+    explanation: x = 6 + 9 = 15.
+  - id: equations-algebra-010
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: 4x = 28 tenglamada x nechaga teng?
+    options:
+      - "24"
+      - "32"
+      - "6"
+      - "7"
+    answer: 3
+    explanation: x = 28 / 4 = 7.
+  - id: equations-algebra-011
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: x = 3 boʻlganda ifodaning qiymatini hisoblang.
+    code: 2x + 5
+    answer: "11"
+    explanation: x oʻrniga 3 ni qoʻyamiz, 2 * 3 + 5 = 6 + 5 = 11.
+  - id: equations-algebra-012
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Yechimni toʻldiring:"
+    code: x + 8 = 15 tenglamada x ni topish uchun 15 dan ___ ni ayiramiz, natijada x = ___ boʻladi.
+    answer:
+      - "8"
+      - "7"
+    bank:
+      - "15"
+      - "23"
+    explanation: Nomaʼlum qoʻshiluvchini topish uchun yigʻindidan maʼlum qoʻshiluvchi ayiriladi, x = 15 - 8 = 7.
+  - id: equations-algebra-013
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: "Ifodani soddalashtiring: 7a - 2a"
+    options:
+      - 5a
+      - 9a
+      - "5"
+      - 5a^2
+    answer: 0
+    explanation: Oʻxshash hadlarning koeffitsiyentlari ayiriladi, 7a - 2a = 5a.
+  - id: equations-algebra-014
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: x/3 = 6 tenglamada x ni toping.
     options:
       - "2"
-      - "4"
-      - "6"
       - "9"
-    answer: 1
-    explanation: x + 3 = 7, shuning uchun x = 4.
+      - "3"
+      - "18"
+    answer: 3
+    explanation: x = 6 * 3 = 18.
+  - id: equations-algebra-015
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "3x + 5 = 20 tenglamani yechish bosqichlarini toʻgʻri tartibda joylashtiring:"
+    lines:
+      - 3x + 5 = 20
+      - 3x = 20 - 5
+      - 3x = 15
+      - x = 15 / 3
+      - x = 5
+    explanation: Avval 5 ni oʻng tomonga oʻtkazamiz, soʻng ikkala tomonni 3 ga boʻlamiz. Javob x = 5.
+  - id: equations-algebra-016
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Tenglamani yeching va x ning qiymatini yozing.
+    code: 5x - 7 = 18
+    answer:
+      - "5"
+      - x = 5
+      - x=5
+    explanation: 5x = 18 + 7 = 25, x = 25 / 5 = 5.
+  - id: equations-algebra-017
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Qavslarni oching: 3(x + 4)"
+    options:
+      - 3x + 4
+      - x + 12
+      - 3x + 12
+      - 3x + 7
+    answer: 2
+    explanation: Qavs ichidagi har bir had 3 ga koʻpaytiriladi, 3 * x + 3 * 4 = 3x + 12.
+  - id: equations-algebra-018
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Yechimni toʻldiring:"
+    code: 2x + 6 = 16 tenglamada avval 2x = ___ ni topamiz, soʻng ikkala tomonni 2 ga boʻlib x = ___ ni hosil qilamiz.
+    answer:
+      - "10"
+      - "5"
+    bank:
+      - "11"
+      - "22"
+      - "8"
+    explanation: 2x = 16 - 6 = 10, x = 10 / 2 = 5.
+  - id: equations-algebra-019
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: 3x + 4 = x + 12 tenglamada x nechaga teng?
+    options:
+      - "8"
+      - "2"
+      - "16"
+      - "4"
+    answer: 3
+    explanation: Nomaʼlumlarni chapga, sonlarni oʻngga oʻtkazamiz, 3x - x = 12 - 4, 2x = 8, x = 4.
+  - id: equations-algebra-020
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Tenglamani yeching va x ning qiymatini yozing.
+    code: 4(x - 2) = 2x + 6
+    answer:
+      - "7"
+      - x = 7
+      - x=7
+    explanation: Qavsni ochamiz, 4x - 8 = 2x + 6. Bundan 2x = 14, x = 7.

@@ -3,14 +3,14 @@ exercises:
     type: choice
     difficulty: 1
     lang: text
-    prompt: DNK yoyilmasining toʻliq nomi nima?
+    prompt: DNK qisqartmasining toʻliq nomi qaysi?
     options:
-      - Dezoksiribonuklein kislotasi
-      - Ribonuklein kislotasi
-      - Aminokislota
-      - Fosfat kislota
-    answer: 0
-    explanation: DNK - dezoksiribonuklein kislotasi soʻzining qisqartmasi.
+      - Ribonuklein kislota
+      - Dezoksiribonuklein kislota
+      - Adenozintrifosfat kislota
+      - Dezoksiriboza
+    answer: 1
+    explanation: DNK — dezoksiribonuklein kislota. Ribonuklein kislota qisqacha RNK, adenozintrifosfat kislota esa ATF deb yoziladi. Dezoksiriboza — DNK tarkibiga kiradigan uglevod.
   - id: dna-genetics-002
     type: choice
     difficulty: 1
@@ -19,79 +19,224 @@ exercises:
     options:
       - Charlz Darvin
       - Gregor Mendel
+      - Tomas Morgan
       - Lui Paster
-      - Robert Guk
     answer: 1
-    explanation: Gregor Mendel genetika fani asoschisidir.
+    explanation: Gregor Mendel noʻxat oʻsimligi ustida oʻtkazgan tajribalari asosida irsiyatning asosiy qonunlarini kashf etgan, shuning uchun u genetika fanining asoschisi hisoblanadi.
   - id: dna-genetics-003
     type: choice
     difficulty: 2
     lang: text
-    prompt: DNK strukturasida Adenin har doim qaysi azotli asos bilan juftlashadi?
+    prompt: DNK ning bir zanjirida nukleotidlar adenin – guanin – timin tartibida joylashgan. Ikkinchi zanjirda ularning qarshisida qaysi nukleotidlar turadi?
     options:
-      - timin
-      - timin (xato)
-      - Boshqa
-      - Nomaʼlum
-    answer: 0
-    explanation: Komplementarlik qoidasiga koʻra Adenin-Timin bilan bogʻlanadi.
+      - Adenin – guanin – timin
+      - Uratsil – sitozin – adenin
+      - Guanin – adenin – sitozin
+      - Timin – sitozin – adenin
+    answer: 3
+    explanation: Komplementarlik qoidasiga koʻra DNK da adenin qarshisida timin, guanin qarshisida sitozin turadi. Uratsil esa faqat RNK tarkibida uchraydi.
   - id: dna-genetics-004
     type: choice
     difficulty: 2
     lang: text
-    prompt: Irsiy belgilarning nasldan naslga oʻtishini oʻrganadigan fan?
+    prompt: Irsiyat va oʻzgaruvchanlik qonuniyatlarini oʻrganadigan fan qaysi?
     options:
-      - Ekologiya
       - Genetika
+      - Ekologiya
       - Fiziologiya
-      - Anatomiya
-    answer: 1
-    explanation: Genetika irsiyat va oʻzgaruvchanlik haqidagi fan.
+      - Sitologiya
+    answer: 0
+    explanation: Genetika — organizmlarning irsiyati va oʻzgaruvchanligi haqidagi fan. U belgilarning nasldan naslga qanday oʻtishini oʻrganadi.
   - id: dna-genetics-005
     type: choice
     difficulty: 3
     lang: text
-    prompt: Sogʻlom insonning tana hujayralarida jami necha xromosoma mavjud?
+    prompt: Sogʻlom odamning tana (somatik) hujayralarida nechta xromosoma boʻladi?
     options:
+      - "23"
       - "44"
       - "46"
       - "48"
-      - "51"
-    answer: 1
-    explanation: Sogʻlom insonda 23 juft (yaʼni 46 ta) xromosoma boʻladi.
+    answer: 2
+    explanation: Odamning tana hujayralarida 23 juft, yaʼni 46 ta xromosoma boʻladi.
   - id: dna-genetics-006
     type: choice
     difficulty: 2
     lang: text
-    prompt: Fenotip nima?
+    prompt: Genotip oʻzgarmagan holda, tashqi muhit taʼsirida fenotipning oʻzgarishi qanday ataladi?
     options:
-      - Organizmdagi genlar yigʻindisi
-      - Organizmning tashqi va ichki belgilari yigʻindisi
-      - Xromosomalar soni
-      - DNK ketma-ketligi
-    answer: 1
-    explanation: Genotip asosida yuzaga chiqqan barcha belgilar fenotip deyiladi.
+      - Modifikatsion oʻzgaruvchanlik
+      - Mutatsion oʻzgaruvchanlik
+      - Kombinativ oʻzgaruvchanlik
+      - Irsiy oʻzgaruvchanlik
+    answer: 0
+    explanation: Modifikatsion oʻzgaruvchanlikda genotip oʻzgarmaydi, shuning uchun bunday oʻzgarishlar nasldan naslga oʻtmaydi. Masalan, quyosh nuri taʼsirida terining qorayishi.
   - id: dna-genetics-007
     type: choice
     difficulty: 3
     lang: text
-    prompt: Qaysi xromosomalar toʻplami oʻgʻil bolalarga xos?
+    prompt: Odamda erkak jinsiga qaysi jinsiy xromosomalar juftligi xos?
     options:
       - XX
-      - YY
       - XY
+      - YY
       - XO
-    answer: 2
-    explanation: Erkaklarda jinsiy xromosomalar X va Y dan iborat.
+    answer: 1
+    explanation: Odamda ayollarning jinsiy xromosomalari XX, erkaklarniki esa XY. Bolaning jinsi otadan X yoki Y xromosoma oʻtishiga bogʻliq.
   - id: dna-genetics-008
     type: choice
     difficulty: 2
     lang: text
-    prompt: DNK ning bir qismi boʻlib, muayyan oqsil haqida maʼlumot saqlovchi birlik nima deyiladi?
+    prompt: DNK molekulasining muayyan bir oqsil tuzilishi haqidagi axborotni saqlaydigan qismi nima deb ataladi?
     options:
-      - gen
-      - gen (xato)
-      - Boshqa
-      - Nomaʼlum
+      - Gen
+      - Nukleotid
+      - Xromosoma
+      - Triplet (kodon)
     answer: 0
-    explanation: Gen irsiyatning eng kichik funksional birligidir.
+    explanation: Gen — DNK molekulasining bitta oqsil tuzilishi haqidagi axborotni saqlaydigan qismi, irsiyatning funksional birligi.
+  - id: dna-genetics-009
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: DNK molekulasi qanday tuzilishga ega?
+    options:
+      - Bitta toʻgʻri zanjir
+      - Uch zanjirli spiral
+      - Qoʻsh spiral
+      - Shar shaklidagi tugun
+    answer: 2
+    explanation: DNK bir-biriga oʻralgan ikkita polinukleotid zanjirdan iborat, yaʼni qoʻsh spiral shaklida boʻladi.
+  - id: dna-genetics-010
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Qaysi azotli asos DNK tarkibida uchramaydi, faqat RNK da boʻladi?
+    options:
+      - Adenin
+      - Guanin
+      - Sitozin
+      - Uratsil
+    answer: 3
+    explanation: RNK da timin oʻrnida uratsil boʻladi. Adenin, guanin va sitozin esa ikkala nuklein kislotada ham uchraydi.
+  - id: dna-genetics-011
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: DNK molekulasida guanin qaysi azotli asos bilan juftlashadi?
+    options:
+      - Sitozin
+      - Adenin
+      - Timin
+      - Uratsil
+    answer: 0
+    explanation: Komplementarlik qoidasiga koʻra guanin har doim sitozin bilan, adenin esa timin bilan juftlashadi.
+  - id: dna-genetics-012
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Sogʻlom insonning jinsiy hujayralarida (tuxum hujayra va spermatozoidda) nechta xromosoma boʻladi?
+    options:
+      - "46"
+      - "44"
+      - "23"
+      - "22"
+    answer: 2
+    explanation: Jinsiy hujayralarda xromosomalar toʻplami yakka (gaploid) boʻladi — 23 ta. Urugʻlanishda ular qoʻshilib, 46 ta xromosomali zigota hosil qiladi.
+  - id: dna-genetics-013
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Genetikaning asosiy tushunchalarini toʻldiring:"
+    code: Organizmdagi barcha genlar yigʻindisi — ___. Shu genlar asosida yuzaga chiqqan belgilar yigʻindisi esa — ___.
+    answer:
+      - genotip
+      - fenotip
+    bank:
+      - mutatsiya
+      - xromosoma
+    explanation: Genotip — organizm genlarining yigʻindisi, fenotip esa genotip va muhit taʼsirida namoyon boʻlgan belgilar yigʻindisi.
+  - id: dna-genetics-014
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Birinchi avlod duragaylarida namoyon boʻladigan, ustunlik qiluvchi belgi qanday ataladi?
+    options:
+      - Retsessiv belgi
+      - Oraliq belgi
+      - Mutant belgi
+      - Dominant belgi
+    answer: 3
+    explanation: Ustunlik qilib, birinchi avlodda yuzaga chiqadigan belgi dominant, yashirin qoladigani esa retsessiv belgi deyiladi.
+  - id: dna-genetics-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Bir genning ikkita bir xil alleliga ega (masalan, AA yoki aa) organizm qanday ataladi?
+    options:
+      - Geterozigota
+      - Duragay
+      - Gomozigota
+      - Poliploid
+    answer: 2
+    explanation: Gomozigota organizmda genning ikkala alleli bir xil (AA yoki aa), geterozigotada esa har xil (Aa) boʻladi.
+  - id: dna-genetics-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Ikkita geterozigota (Aa × Aa) organizm chatishtirilganda, toʻliq dominantlik holatida avlodda fenotip boʻyicha qanday nisbat kuzatiladi?
+    options:
+      - 1:1
+      - 1:2:1
+      - 9:3:3:1
+      - 3:1
+    answer: 3
+    explanation: Avlodning genotiplari 1 AA, 2 Aa va 1 aa nisbatda boʻladi. AA va Aa da dominant belgi yuzaga chiqqani uchun fenotip boʻyicha 3:1 nisbat kuzatiladi (Mendelning ajralish qonuni).
+  - id: dna-genetics-017
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Irsiy axborot gendan belgigacha qanday yoʻl bosadi? Toʻgʻri ketma-ketlikda joylashtiring:"
+    lines:
+      - DNK (gen)
+      - i-RNK
+      - Oqsil
+      - Belgi
+    explanation: Gendagi axborot avval i-RNK ga koʻchiriladi, soʻng shu axborot asosida oqsil sintezlanadi, oqsil esa organizmning belgisini yuzaga chiqaradi.
+  - id: dna-genetics-018
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Oqsil biosintezi bosqichlarini toʻldiring:"
+    code: DNK asosida i-RNK sintezlanishi — ___. i-RNK dagi axborot asosida ribosomada oqsil sintezlanishi — ___.
+    answer:
+      - transkripsiya
+      - translyatsiya
+    bank:
+      - mutatsiya
+      - replikatsiya
+    explanation: Transkripsiyada axborot DNK dan i-RNK ga koʻchiriladi, translyatsiyada esa ribosomada aminokislotalardan oqsil zanjiri yigʻiladi.
+  - id: dna-genetics-019
+    type: order
+    difficulty: 3
+    lang: text
+    prompt: "Irsiy material tuzilmalarini eng kichigidan eng kattasiga qarab joylashtiring:"
+    lines:
+      - Nukleotid
+      - Gen
+      - Xromosoma
+      - Hujayradagi barcha xromosomalar toʻplami
+    explanation: Nukleotidlar ketma-ketligi genni tashkil etadi, koʻplab genlar bitta xromosomada joylashadi, xromosomalar esa birgalikda hujayraning xromosomalar toʻplamini hosil qiladi. Shu toʻplamning xromosomalar soni, shakli va oʻlchamiga koʻra tavsifi kariotip deyiladi.
+  - id: dna-genetics-020
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Irsiy material bilan bogʻliq jarayonlarni toʻldiring:"
+    code: DNK molekulasining oʻz nusxasini hosil qilib, ikki hissa ortishi — ___. Irsiy materialning toʻsatdan oʻzgarishi esa — ___.
+    answer:
+      - replikatsiya
+      - mutatsiya
+    bank:
+      - meyoz
+      - translyatsiya
+    explanation: Replikatsiya hujayra boʻlinishidan oldin DNK nusxasini hosil qiladi, mutatsiya esa genlar yoki xromosomalarning irsiylanadigan oʻzgarishidir.

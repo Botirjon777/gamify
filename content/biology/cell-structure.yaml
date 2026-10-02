@@ -8,90 +8,239 @@ exercises:
       - Toʻqima
       - Organ
       - Hujayra
-      - Tana
+      - Organlar sistemasi
     answer: 2
-    explanation: Hujayra - barcha tirik mavjudotlarning eng kichik strukturaviy birligi.
+    explanation: Hujayra — tirik organizmlarning tuzilish va hayotiy faoliyat birligi. Toʻqima, organ va organlar sistemasi hujayralardan tashkil topadi.
   - id: cell-structure-002
     type: choice
     difficulty: 1
     lang: text
-    prompt: Hujayraning 'energiya stansiyasi' deb qaysi organoid ataladi?
+    prompt: Qaysi organoid hujayraning «energiya stansiyasi» deb ataladi?
     options:
       - Yadro
       - Mitoxondriya
       - Ribosoma
-      - Vakuola
+      - Lizosoma
     answer: 1
-    explanation: Mitoxondriya hujayrani ATF (energiya) bilan taʼminlaydi.
+    explanation: Mitoxondriyada organik moddalar parchalanadi va ajralgan energiya ATF shaklida toʻplanadi, shuning uchun u hujayraning «energiya stansiyasi» deyiladi.
   - id: cell-structure-003
     type: choice
     difficulty: 2
     lang: text
-    prompt: Oʻsimlik hujayrasida fotosintez jarayoni kechadigan yashil plastidalar nima deyiladi?
+    prompt: Oʻsimlik hujayrasida fotosintez jarayoni kechadigan yashil plastidalar nima deb ataladi?
     options:
-      - xloroplast
-      - xloroplast (xato)
-      - Boshqa
-      - Nomaʼlum
-    answer: 0
-    explanation: Fotosintez xloroplastlarda sodir boʻladi.
+      - Leykoplastlar
+      - Xromoplastlar
+      - Mitoxondriyalar
+      - Xloroplastlar
+    answer: 3
+    explanation: Xloroplastlar tarkibida yashil pigment — xlorofill boʻladi va fotosintez shu plastidalarda kechadi. Xromoplastlar sariq yoki qizil, leykoplastlar esa rangsiz plastidalardir.
   - id: cell-structure-004
     type: choice
     difficulty: 2
     lang: text
-    prompt: Genetik maʼlumot qayerda saqlanadi?
+    prompt: Eukariot hujayrada irsiy axborotning asosiy qismi qayerda saqlanadi?
     options:
-      - Sitoplazma
       - Yadro
+      - Sitoplazma
       - Lizosoma
       - Golji majmuasi
-    answer: 1
-    explanation: Yadroda DNK va xromosomalar (genetik maʼlumot) saqlanadi.
+    answer: 0
+    explanation: Irsiy axborot DNK molekulalarida yozilgan, DNK esa asosan yadrodagi xromosomalarda joylashgan.
   - id: cell-structure-005
     type: choice
     difficulty: 2
     lang: text
-    prompt: Oqsil sintezini amalga oshiruvchi organoid qanday ataladi?
+    prompt: Oqsil sintezini amalga oshiradigan organoid qaysi?
     options:
-      - ribosoma
-      - ribosoma (xato)
-      - Boshqa
-      - Nomaʼlum
+      - Ribosoma
+      - Lizosoma
+      - Golji majmuasi
+      - Hujayra markazi
     answer: 0
-    explanation: Ribosomalar oqsil sintezida qatnashadi.
+    explanation: Ribosomalarda aminokislotalardan oqsil molekulalari sintezlanadi.
   - id: cell-structure-006
     type: choice
     difficulty: 3
     lang: text
-    prompt: Qaysi organoid faqat oʻsimlik hujayralariga xos?
+    prompt: Oʻsimlik hujayrasida bor, hayvon hujayrasida esa boʻlmaydigan tuzilma qaysi?
     options:
       - Hujayra devori
       - Mitoxondriya
-      - Yadro
-      - Sitoplazma
+      - Hujayra membranasi
+      - Ribosoma
     answer: 0
-    explanation: Qattiq sellyuloza hujayra devori oʻsimliklarga xos.
+    explanation: Oʻsimlik hujayrasi membrana ustidan sellyulozali qattiq hujayra devori bilan oʻralgan, hayvon hujayrasida esa hujayra devori boʻlmaydi. Hujayra devori zamburugʻ va bakteriyalarda ham bor, lekin uning tarkibi boshqacha.
   - id: cell-structure-007
     type: choice
     difficulty: 3
     lang: text
-    prompt: Moddalarni qadoqlash va tashish funksiyasini qaysi organoid bajaradi?
+    prompt: Hujayrada sintezlangan moddalarni toʻplab, saralaydigan va qadoqlaydigan organoid qaysi?
     options:
       - Endoplazmatik toʻr
       - Golji majmuasi
       - Lizosoma
-      - Xloroplast
+      - Ribosoma
     answer: 1
-    explanation: Golji majmuasi hujayra ichidagi moddalarni saralaydi va qadoqlaydi.
+    explanation: Golji majmuasida hujayrada sintezlangan moddalar toʻplanadi, saralanadi va pufakchalarga qadoqlanib, kerakli joyga joʻnatiladi.
   - id: cell-structure-008
     type: choice
     difficulty: 2
     lang: text
-    prompt: Hujayra ichidagi suyuqlik nima deb ataladi?
+    prompt: Hujayraning membrana bilan yadro oraligʻini toʻldirib turadigan, organoidlar joylashgan yarim suyuq ichki muhiti nima deb ataladi?
     options:
-      - sitoplazma
-      - sitoplazma (xato)
-      - Boshqa
-      - Nomaʼlum
-    answer: 0
-    explanation: Sitoplazma barcha organoidlarni oʻrab turadigan suyuqlikdir.
+      - Hujayra shirasi
+      - Sitoplazma
+      - Yadro shirasi
+      - Hujayra devori
+    answer: 1
+    explanation: Sitoplazma — hujayraning yarim suyuq ichki muhiti. Unda organoidlar joylashadi va moddalar almashinuvi jarayonlari kechadi. Hujayra shirasi esa vakuola ichidagi suyuqlikdir.
+  - id: cell-structure-009
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Hujayrani tashqi muhitdan ajratib turadigan va moddalarni tanlab oʻtkazadigan tuzilma qaysi?
+    options:
+      - Yadro
+      - Ribosoma
+      - Hujayra membranasi
+      - Mitoxondriya
+    answer: 2
+    explanation: Hujayra membranasi hujayrani oʻrab turadi va unga kiradigan hamda undan chiqadigan moddalarni tanlab oʻtkazadi.
+  - id: cell-structure-010
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Hujayrasida shakllangan yadrosi boʻlmagan organizmlar nima deb ataladi?
+    options:
+      - Eukariotlar
+      - Avtotroflar
+      - Koʻp hujayralilar
+      - Prokariotlar
+    answer: 3
+    explanation: Prokariotlarda yadro qobigʻi yoʻq, irsiy material bevosita sitoplazmada joylashgan. Yadrosi shakllangan organizmlar esa eukariotlar deyiladi.
+  - id: cell-structure-011
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Quyidagilardan qaysi biri prokariot organizm hisoblanadi?
+    options:
+      - Achitqi zamburugʻi
+      - Bakteriya
+      - Amyoba
+      - Infuzoriya
+    answer: 1
+    explanation: Bakteriyalarning shakllangan yadrosi yoʻq, shuning uchun ular prokariotlarga kiradi. Zamburugʻlar va bir hujayrali hayvonlar eukariotlardir.
+  - id: cell-structure-012
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: 1665-yilda poʻkak kesmasini mikroskopda koʻrib, «hujayra» atamasini fanga kiritgan olim kim?
+    options:
+      - Charlz Darvin
+      - Gregor Mendel
+      - Lui Paster
+      - Robert Guk
+    answer: 3
+    explanation: Robert Guk poʻkak kesmasida mayda katakchalarni koʻrgan va ularni hujayra deb atagan.
+  - id: cell-structure-013
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Oʻsimlik hujayrasi haqidagi gaplarni toʻldiring:"
+    code: Oʻsimlik hujayrasi devorining asosiy moddasi — ___. Hujayra shirasi toʻplanadigan organoid — ___.
+    answer:
+      - sellyuloza
+      - vakuola
+    bank:
+      - kraxmal
+      - ribosoma
+      - xitin
+    explanation: Oʻsimlik hujayrasining devori sellyulozadan tuzilgan, hujayra shirasi esa yirik vakuolada toʻplanadi.
+  - id: cell-structure-014
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Hujayradagi eskirgan organoidlar va oziq zarralarini fermentlar yordamida parchalaydigan organoid qaysi?
+    options:
+      - Ribosoma
+      - Xloroplast
+      - Lizosoma
+      - Hujayra markazi
+    answer: 2
+    explanation: Lizosomalar tarkibida parchalovchi fermentlar boʻladi, shuning uchun ular hujayraning «hazm qilish» organoidi hisoblanadi.
+  - id: cell-structure-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Mitoz natijasida bitta ona hujayradan nechta qiz hujayra hosil boʻladi?
+    options:
+      - "1"
+      - "3"
+      - "4"
+      - "2"
+    answer: 3
+    explanation: Mitozda bitta hujayradan xromosomalar toʻplami ona hujayraniki bilan bir xil boʻlgan ikkita qiz hujayra hosil boʻladi.
+  - id: cell-structure-016
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Mitoz bosqichlarini toʻgʻri ketma-ketlikda joylashtiring:"
+    lines:
+      - Profaza
+      - Metafaza
+      - Anafaza
+      - Telofaza
+    explanation: Profazada xromosomalar spirallashadi, metafazada hujayra ekvatoriga tiziladi, anafazada qutblarga tarqaladi, telofazada ikkita yangi yadro shakllanadi.
+  - id: cell-structure-017
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Mitoxondriyaning ishi haqidagi gapni toʻldiring:"
+    code: Mitoxondriyalarda organik moddalar ___ ishtirokida parchalanadi va ajralgan energiya ___ molekulalarida toʻplanadi.
+    answer:
+      - kislorod
+      - ATF
+    bank:
+      - DNK
+      - azot
+      - kraxmal
+    explanation: Hujayraviy nafas olishda organik moddalar kislorod ishtirokida oksidlanadi, ajralgan energiya esa ATF molekulalarida jamgʻariladi.
+  - id: cell-structure-018
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Suv molekulalarining yarim oʻtkazuvchan membrana orqali oʻtishi nima deb ataladi?
+    options:
+      - Fagotsitoz
+      - Fotosintez
+      - Osmos
+      - Mitoz
+    answer: 2
+    explanation: Osmos — suvning yarim oʻtkazuvchan membrana orqali erigan moddalar konsentratsiyasi yuqori boʻlgan tomonga oʻtishi.
+  - id: cell-structure-019
+    type: order
+    difficulty: 3
+    lang: text
+    prompt: "Tirik organizmning tuzilish darajalarini eng kichigidan eng kattasiga qarab joylashtiring:"
+    lines:
+      - Hujayra
+      - Toʻqima
+      - Organ
+      - Organlar sistemasi
+      - Organizm
+    explanation: Oʻxshash hujayralar toʻqimani, toʻqimalar organni, organlar organlar sistemasini, sistemalar esa yaxlit organizmni hosil qiladi.
+  - id: cell-structure-020
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Hujayra boʻlinishi haqidagi gaplarni toʻldiring:"
+    code: Jinsiy hujayralar hosil boʻladigan boʻlinish usuli — ___. Bunda xromosomalar soni ___ marta kamayadi.
+    answer:
+      - meyoz
+      - ikki
+    bank:
+      - mitoz
+      - toʻrt
+      - uch
+    explanation: Meyozda xromosomalar soni ikki marta kamayadi, shuning uchun jinsiy hujayralar gaploid (yakka) toʻplamga ega boʻladi.

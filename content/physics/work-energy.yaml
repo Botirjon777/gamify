@@ -1,0 +1,229 @@
+exercises:
+  - id: work-energy-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Mexanik ishning SI tizimidagi birligi qaysi?
+    options:
+      - Nyuton
+      - Vatt
+      - Joul
+      - Paskal
+    answer: 2
+    explanation: "Ish joullarda (J) oʻlchanadi: 1 J = 1 N · 1 m, yaʼni 1 N kuch jismni 1 m ga koʻchirganda bajarilgan ish."
+  - id: work-energy-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Jismga 10 N kuch taʼsir etib, uni kuch yoʻnalishida 5 m ga koʻchirdi. Bajarilgan ish qancha?
+    options:
+      - 2 J
+      - 15 J
+      - 0,5 J
+      - 50 J
+    answer: 3
+    explanation: A = F · s = 10 N · 5 m = 50 J.
+  - id: work-energy-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Quvvat nimani koʻrsatadi?
+    options:
+      - Vaqt birligi ichida bajarilgan ishni
+      - Jismga taʼsir etayotgan kuchni
+      - Jismning bosib oʻtgan yoʻlini
+      - Jismdagi modda miqdorini
+    answer: 0
+    explanation: "Quvvat — ishning bajarilish tezligi: N = A / t. Birligi — vatt (W), 1 W = 1 J/s."
+  - id: work-energy-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Jism harakatlanayotgani tufayli ega boʻlgan mexanik energiya qanday ataladi?
+    options:
+      - Potensial energiya
+      - Kinetik energiya
+      - Kimyoviy energiya
+      - Elektr energiyasi
+    answer: 1
+    explanation: "Harakatdagi jismning energiyasi kinetik energiya deyiladi: E = m · v² / 2. Potensial energiya esa jismning vaziyatiga (masalan, balandligiga) bogʻliq."
+  - id: work-energy-005
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: Masalani yeching. Javobni vattda, faqat son bilan yozing.
+    code: Dvigatel 10 s da 2000 J ish bajardi. Uning quvvati qancha?
+    answer: "200"
+    explanation: N = A / t = 2000 J / 10 s = 200 W.
+  - id: work-energy-006
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Energiya turlari haqidagi gapni toʻldiring:"
+    code: Yerdan yuqoriga koʻtarilgan jism ___ energiyaga ega boʻladi. Jism pastga tushayotganda bu energiya ___ energiyaga aylanadi.
+    answer:
+      - potensial
+      - kinetik
+    bank:
+      - elektr
+      - kimyoviy
+      - yadro
+    explanation: Balandlikdagi jismning potensial energiyasi E = m · g · h. Tushish davomida balandlik kamayadi, tezlik ortadi — potensial energiya kinetik energiyaga aylanadi.
+  - id: work-energy-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Qaysi holda mexanik ish bajarilmaydi?
+    options:
+      - Ot aravani yoʻl boʻylab tortib bormoqda
+      - Kran yukni yuqoriga koʻtarmoqda
+      - Oʻquvchi ogʻir sumkani qoʻlida qimirlatmay ushlab turibdi
+      - Bola chanani qor ustida sudrab bormoqda
+    answer: 2
+    explanation: Mexanik ish A = F · s. Sumka koʻchmayapti (s = 0), shuning uchun kuch taʼsir etsa ham mexanik ish nolga teng.
+  - id: work-energy-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Massasi 2 kg boʻlgan jism 3 m/s tezlik bilan harakatlanmoqda. Uning kinetik energiyasi qancha?
+    options:
+      - 6 J
+      - 18 J
+      - 3 J
+      - 9 J
+    answer: 3
+    explanation: E = m · v² / 2 = 2 · 3² / 2 = 2 · 9 / 2 = 9 J.
+  - id: work-energy-009
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Masalani yeching. Javobni joulda, faqat son bilan yozing.
+    code: Massasi 4 kg boʻlgan jism yer sirtidan 5 m balandlikda turibdi. Uning yer sirtiga nisbatan potensial energiyasi qancha? (g = 10 m/s²)
+    answer: "200"
+    explanation: E = m · g · h = 4 · 10 · 5 = 200 J.
+  - id: work-energy-010
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Quvvati 500 W boʻlgan dvigatel 1 minutda qancha ish bajaradi?
+    options:
+      - 30 kJ
+      - 500 J
+      - 3 kJ
+      - 300 kJ
+    answer: 0
+    explanation: 1 min = 60 s. A = N · t = 500 W · 60 s = 30 000 J = 30 kJ.
+  - id: work-energy-011
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Masalani yeching. Javobni joulda, faqat son bilan yozing.
+    code: Kran massasi 200 kg boʻlgan yukni 10 m balandlikka tekis koʻtardi. Kran bajargan ish qancha? (g = 10 m/s²)
+    answer: "20000"
+    explanation: "Tekis koʻtarishda kuch ogʻirlik kuchiga teng: F = m · g = 2000 N. A = F · h = 2000 · 10 = 20 000 J."
+  - id: work-energy-012
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Mexanizmning foydali ish koeffitsiyenti (FIK) qanday aniqlanadi?
+    options:
+      - Toʻliq ishning foydali ishga nisbati bilan
+      - Foydali ish va toʻliq ish yigʻindisi bilan
+      - Foydali ishning toʻliq (sarflangan) ishga nisbati bilan
+      - Toʻliq ish va foydali ish ayirmasi bilan
+    answer: 2
+    explanation: "FIK: η = A(foydali) / A(toʻliq) · 100 %. Ishqalanish tufayli foydali ish har doim toʻliq ishdan kichik, shuning uchun FIK 100 % dan kichik boʻladi."
+  - id: work-energy-013
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Jismning tezligi 2 marta ortsa (massasi oʻzgarmasa), uning kinetik energiyasi qanday oʻzgaradi?
+    options:
+      - 2 marta ortadi
+      - 4 marta ortadi
+      - Oʻzgarmaydi
+      - 2 marta kamayadi
+    answer: 1
+    explanation: E = m · v² / 2 — kinetik energiya tezlikning kvadratiga proporsional. Tezlik 2 marta ortsa, energiya 2² = 4 marta ortadi.
+  - id: work-energy-014
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Masala: massasi 50 kg boʻlgan oʻquvchi zinadan 6 m balandlikka 20 s da chiqdi (g = 10 m/s²). Uning quvvatini topish bosqichlarini toʻgʻri tartibda joylashtiring:"
+    lines:
+      - "Berilganlarni yozamiz: m = 50 kg, h = 6 m, t = 20 s"
+      - "Ogʻirlik kuchini topamiz: F = m · g = 50 · 10 = 500 N"
+      - "Shu kuch yordamida ishni topamiz: A = F · h = 500 · 6 = 3000 J"
+      - "Topilgan ishni vaqtga boʻlamiz: N = A / t = 3000 / 20 = 150 W"
+      - "Javobni yozamiz: oʻquvchining quvvati 150 W"
+    explanation: A = m · g · h = 50 · 10 · 6 = 3000 J; N = A / t = 3000 / 20 = 150 W.
+  - id: work-energy-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Oddiy mexanizmlar (richag, blok, qiya tekislik) uchun “mexanikaning oltin qoidasi” nimani bildiradi?
+    options:
+      - Kuchdan necha marta yutsak, masofadan shuncha marta yutqazamiz
+      - Mexanizm har doim ishdan yutuq beradi
+      - Kuchdan ham, masofadan ham bir vaqtda yutish mumkin
+      - Mexanizmning FIK har doim 100 % dan katta boʻladi
+    answer: 0
+    explanation: "Hech bir oddiy mexanizm ishdan yutuq bermaydi: F₁ · s₁ = F₂ · s₂. Kuchdan necha marta yutilsa, masofadan shuncha marta yutqaziladi."
+  - id: work-energy-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Mexanizm 400 J energiya sarflab, 300 J foydali ish bajardi. Uning FIK qancha?
+    options:
+      - 133 %
+      - 75 %
+      - 25 %
+      - 100 %
+    answer: 1
+    explanation: η = A(foydali) / A(toʻliq) · 100 % = 300 / 400 · 100 % = 75 %.
+  - id: work-energy-017
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Masalani yeching. Javobni m/s da, faqat son bilan yozing.
+    code: Jism 20 m balandlikdan boshlangʻich tezliksiz erkin tushdi. Havo qarshiligi hisobga olinmaydi. Yerga urilish paytida uning tezligi qancha boʻladi? (g = 10 m/s²)
+    answer: "20"
+    explanation: "Energiyaning saqlanish qonuni: m · g · h = m · v² / 2, bundan v² = 2 · g · h = 2 · 10 · 20 = 400, v = 20 m/s."
+  - id: work-energy-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Avtomobil dvigatelining tortish kuchi 2000 N boʻlib, avtomobil 15 m/s tezlik bilan tekis harakatlanmoqda. Dvigatelning foydali quvvati qancha?
+    options:
+      - 133 W
+      - 3 kW
+      - 30 kW
+      - 300 kW
+    answer: 2
+    explanation: Tekis harakatda N = F · v = 2000 N · 15 m/s = 30 000 W = 30 kW.
+  - id: work-energy-019
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Massasi 0,5 kg boʻlgan tosh 10 m/s tezlik bilan tik yuqoriga otildi. Havo qarshiligi hisobga olinmasa, tosh otilgan nuqtadan qancha balandlikka koʻtariladi? (g = 10 m/s²)
+    options:
+      - 1 m
+      - 10 m
+      - 2,5 m
+      - 5 m
+    answer: 3
+    explanation: "Eng yuqori nuqtada butun kinetik energiya potensial energiyaga aylanadi: m · v² / 2 = m · g · h, bundan h = v² / (2 · g) = 100 / 20 = 5 m. Natija massaga bogʻliq emas."
+  - id: work-energy-020
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Mexanik energiyaning saqlanish qonuni haqidagi gapni toʻldiring:"
+    code: Ishqalanish va qarshilik kuchlari boʻlmasa, jismning kinetik va potensial energiyalari yigʻindisi ___. Tik yuqoriga otilgan jism koʻtarilayotganda uning kinetik energiyasi kamayadi, potensial energiyasi esa ___.
+    answer:
+      - oʻzgarmaydi
+      - ortadi
+    bank:
+      - ikki marta kamayadi
+      - nolga teng
+      - yoʻqoladi
+    explanation: E(kinetik) + E(potensial) = const. Jism koʻtarilganda tezligi kamayadi (kinetik energiya kamayadi), balandligi ortadi (potensial energiya ortadi), yigʻindi esa oʻzgarmay qoladi.

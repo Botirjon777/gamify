@@ -1,0 +1,244 @@
+exercises:
+  - id: animals-classification-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Tirik organizmlarni guruhlarga ajratish va tasniflash bilan shugʻullanadigan fan qaysi?
+    options:
+      - Sistematika
+      - Ekologiya
+      - Genetika
+      - Anatomiya
+    answer: 0
+    explanation: Sistematika organizmlarni oʻxshashligi va qarindoshligiga koʻra guruhlarga ajratadi.
+  - id: animals-classification-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Quyidagi hayvonlardan qaysi biri sutemizuvchi hisoblanadi?
+    options:
+      - Akula
+      - Delfin
+      - Pingvin
+      - Timsoh
+    answer: 1
+    explanation: Delfin suvda yashasa ham oʻpka bilan nafas oladi va bolasini sut bilan boqadi. Akula — baliq, pingvin — qush, timsoh — sudralib yuruvchi.
+  - id: animals-classification-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Hasharotlarning nechta oyogʻi bor?
+    options:
+      - "4"
+      - "8"
+      - "6"
+      - "10"
+    answer: 2
+    explanation: Barcha hasharotlarda uch juft, yaʼni 6 ta oyoq boʻladi.
+  - id: animals-classification-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Baliqlar qaysi organ yordamida nafas oladi?
+    options:
+      - Oʻpka
+      - Teri
+      - Traxeya
+      - Jabra
+    answer: 3
+    explanation: Baliqlar jabralari orqali suvda erigan kislorodni oladi.
+  - id: animals-classification-005
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Qushlarning tanasi nima bilan qoplangan?
+    options:
+      - Pat
+      - Tangacha
+      - Jun
+      - Xitin qoplam
+    answer: 0
+    explanation: Pat faqat qushlarga xos boʻlib, tana haroratini saqlashga va uchishga yordam beradi.
+  - id: animals-classification-006
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Hayvonlarning ikki katta guruhi haqidagi gapni toʻldiring:"
+    code: Umurtqa pogʻonasi bor hayvonlar — ___, umurtqa pogʻonasi yoʻq hayvonlar esa — ___.
+    answer:
+      - umurtqalilar
+      - umurtqasizlar
+    bank:
+      - hasharotlar
+      - sutemizuvchilar
+    explanation: Baliqlar, amfibiyalar, sudralib yuruvchilar, qushlar va sutemizuvchilar umurtqalilarga, chuvalchanglar, molluskalar va hasharotlar esa umurtqasizlarga kiradi.
+  - id: animals-classification-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Quyidagi hayvonlardan qaysi biri hasharot emas?
+    options:
+      - Chumoli
+      - Oʻrgimchak
+      - Asalari
+      - Chigirtka
+    answer: 1
+    explanation: Oʻrgimchakning oyoqlari toʻrt juft (8 ta), hasharotlarniki esa uch juft (6 ta). Oʻrgimchak hasharotlar sinfiga emas, oʻrgimchaksimonlar sinfiga mansub.
+  - id: animals-classification-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Quyidagi hayvonlardan qaysi biri suvda hamda quruqlikda yashovchilarga (amfibiyalarga) mansub?
+    options:
+      - Kaltakesak
+      - Toshbaqa
+      - Baqa
+      - Ilon
+    answer: 2
+    explanation: Baqa amfibiya — uning lichinkasi suvda rivojlanadi, voyaga yetgani quruqlikda ham yashaydi. Kaltakesak, toshbaqa va ilon sudralib yuruvchilardir.
+  - id: animals-classification-009
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Sistematikaning eng kichik asosiy birligi qaysi?
+    options:
+      - Sinf
+      - Oila
+      - Turkum
+      - Tur
+    answer: 3
+    explanation: Tur — bir-biri bilan erkin chatishib, nasl beradigan oʻxshash organizmlar guruhi. U sistematikaning asosiy va eng kichik birligi.
+  - id: animals-classification-010
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Sutemizuvchilarni boshqa hayvonlardan ajratib turadigan asosiy belgi qaysi?
+    options:
+      - Bolasini sut bilan boqadi
+      - Tanasi pat bilan qoplangan
+      - Jabra orqali nafas oladi
+      - Tana harorati muhitga qarab oʻzgaradi
+    answer: 0
+    explanation: Sutemizuvchilarning urgʻochilarida sut bezlari boʻladi va ular bolasini sut bilan boqadi — sinf nomi ham shundan olingan.
+  - id: animals-classification-011
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Quyidagi hayvonlardan qaysi biri sudralib yuruvchilar sinfiga mansub?
+    options:
+      - Baqa
+      - Kaltakesak
+      - Triton
+      - Yomgʻir chuvalchangi
+    answer: 1
+    explanation: Kaltakesakning terisi quruq va tangachali, u oʻpka bilan nafas oladi. Baqa va triton amfibiya, yomgʻir chuvalchangi esa umurtqasiz hayvon.
+  - id: animals-classification-012
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Hayvonlar qaysi sinfga mansubligini toʻldiring:"
+    code: Koʻrshapalak ___ sinfiga, pingvin esa ___ sinfiga mansub.
+    answer:
+      - sutemizuvchilar
+      - qushlar
+    bank:
+      - baliqlar
+      - hasharotlar
+    explanation: Koʻrshapalak ucha olsa ham bolasini sut bilan boqadi, pingvin esa ucha olmasa ham tanasi pat bilan qoplangan va tuxum qoʻyadi.
+  - id: animals-classification-013
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Hayvonlar sistematikasi birliklarini eng kattasidan eng kichigiga qarab joylashtiring:"
+    lines:
+      - Tip
+      - Sinf
+      - Turkum
+      - Oila
+      - Urugʻ
+      - Tur
+    explanation: Turlar urugʻlarga, urugʻlar oilalarga, oilalar turkumlarga, turkumlar sinflarga, sinflar esa tiplarga birlashadi.
+  - id: animals-classification-014
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Baliqlarning yuragi nechta kameradan iborat?
+    options:
+      - "1"
+      - "3"
+      - "2"
+      - "4"
+    answer: 2
+    explanation: Baliqlarning yuragi ikki kamerali — bitta boʻlmacha va bitta qorinchadan iborat, qon aylanish doirasi esa bitta.
+  - id: animals-classification-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Hasharotlar hayvonlarning qaysi tipiga mansub?
+    options:
+      - Molluskalar
+      - Xordalilar
+      - Halqali chuvalchanglar
+      - Boʻgʻimoyoqlilar
+    answer: 3
+    explanation: Hasharotlar, oʻrgimchaksimonlar va qisqichbaqasimonlar boʻgʻimoyoqlilar tipiga kiradi — ularning oyoqlari boʻgʻimlardan tuzilgan.
+  - id: animals-classification-016
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Quyidagilardan qaysi biri bir hujayrali hayvon?
+    options:
+      - Amyoba
+      - Gidra
+      - Yomgʻir chuvalchangi
+      - Meduza
+    answer: 0
+    explanation: Amyobaning tanasi bitta hujayradan iborat. Gidra, meduza va yomgʻir chuvalchangi koʻp hujayrali hayvonlardir.
+  - id: animals-classification-017
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Tirik organizmlarni ikki soʻzli (binar) lotincha nom bilan atash tartibini fanga kim kiritgan?
+    options:
+      - Charlz Darvin
+      - Karl Linney
+      - Gregor Mendel
+      - Lui Paster
+    answer: 1
+    explanation: Karl Linney har bir turni urugʻ va tur nomidan iborat ikki soʻz bilan atashni joriy etgan, masalan, Homo sapiens.
+  - id: animals-classification-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Qaysi sutemizuvchi tuxum qoʻyib koʻpayadi?
+    options:
+      - Kenguru
+      - Koʻrshapalak
+      - Oʻrdakburun
+      - Delfin
+    answer: 2
+    explanation: Oʻrdakburun tuxum qoʻyuvchi sutemizuvchilarga kiradi — u tuxum qoʻyadi, lekin tuxumdan chiqqan bolasini sut bilan boqadi.
+  - id: animals-classification-019
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Amfibiyalarning nafas olishi haqidagi gapni toʻldiring:"
+    code: Baqaning lichinkasi (itbaliq) ___ orqali, voyaga yetgan baqa esa oʻpka va ___ orqali nafas oladi.
+    answer:
+      - jabra
+      - teri
+    bank:
+      - suzgich
+      - traxeya
+    explanation: Itbaliq suvda yashab, jabra bilan nafas oladi. Voyaga yetgan baqaning oʻpkasi sust rivojlangan, shuning uchun nam terisi ham gaz almashinuvida qatnashadi.
+  - id: animals-classification-020
+    type: order
+    difficulty: 3
+    lang: text
+    prompt: "Kapalakning rivojlanish bosqichlarini toʻgʻri ketma-ketlikda joylashtiring:"
+    lines:
+      - Tuxum
+      - Qurt (lichinka)
+      - Gʻumbak
+      - Voyaga yetgan kapalak
+    explanation: Kapalak toʻliq oʻzgarish bilan rivojlanadi — tuxumdan qurt chiqadi, qurt gʻumbakka aylanadi, gʻumbakdan esa voyaga yetgan kapalak chiqadi.

@@ -3,95 +3,227 @@ exercises:
     type: choice
     difficulty: 1
     lang: text
-    prompt: Uchburchakning ichki burchaklari yigʻindisi necha gradus?
+    prompt: Uchburchakning ichki burchaklari yigʻindisi necha gradusga teng?
     options:
       - "90"
       - "180"
       - "270"
       - "360"
     answer: 1
-    explanation: Uchburchakning barcha ichki burchaklari yigʻindisi 180 gradusga teng.
+    explanation: Har qanday uchburchakning ichki burchaklari yigʻindisi 180° ga teng.
   - id: geometry-basics-002
     type: choice
     difficulty: 1
     lang: text
-    prompt: Toʻgʻri toʻrtburchakning perimetri qanday topiladi (tomoni a va b)?
+    prompt: Tomonlari a va b boʻlgan toʻgʻri toʻrtburchakning perimetri qaysi formula bilan topiladi?
     options:
-      - a + b
-      - a * b
-      - 2(a + b)
-      - 2a + b
+      - P = a + b
+      - P = a · b
+      - P = 2 · (a + b)
+      - P = 2 · a + b
     answer: 2
-    explanation: Perimetr P = 2(a + b) formulasi orqali topiladi.
+    explanation: Toʻgʻri toʻrtburchakning qarama-qarshi tomonlari teng, shuning uchun P = a + b + a + b = 2 · (a + b). a · b esa uning yuzi.
   - id: geometry-basics-003
     type: choice
     difficulty: 2
     lang: text
-    prompt: Kvadratning tomoni 5 sm. Uning yuzi necha sm kvadrat boʻladi?
+    prompt: Kvadratning tomoni 5 sm. Uning yuzi necha sm²?
     options:
-      - "23"
       - "25"
-      - "27"
-      - "30"
-    answer: 1
-    explanation: Yuzasi = a * a = 5 * 5 = 25.
+      - "20"
+      - "10"
+      - "50"
+    answer: 0
+    explanation: Kvadratning yuzi tomonining kvadratiga teng. S = 5² = 5 · 5 = 25 sm². 20 sm esa uning perimetri.
   - id: geometry-basics-004
     type: choice
     difficulty: 2
     lang: text
-    prompt: Aylananing uzunligi qanday topiladi (radiusi r)?
+    prompt: Radiusi r boʻlgan aylananing uzunligi qaysi formula bilan topiladi?
     options:
-      - pi * r^2
-      - 2 * pi * r
-      - pi * d^2
-      - 2 * r
-    answer: 1
-    explanation: Aylana uzunligi L = 2 * pi * r.
+      - L = π · r²
+      - L = π · r
+      - L = 2 · π · r
+      - L = 2 · r
+    answer: 2
+    explanation: Aylana uzunligi L = 2 · π · r, yaʼni diametr (2 · r) bilan π ning koʻpaytmasi.
   - id: geometry-basics-005
     type: choice
     difficulty: 2
     lang: text
-    prompt: Toʻgʻri toʻrtburchakning tomonlari 4 va 6. Uning yuzi necha?
+    prompt: Toʻgʻri toʻrtburchakning tomonlari 4 sm va 6 sm. Uning yuzi necha sm²?
     options:
-      - "22"
+      - "20"
       - "24"
-      - "26"
-      - "29"
+      - "10"
+      - "48"
     answer: 1
-    explanation: Yuzasi = 4 * 6 = 24.
+    explanation: S = a · b = 4 · 6 = 24 sm². 20 sm esa uning perimetri.
   - id: geometry-basics-006
     type: choice
     difficulty: 3
     lang: text
-    prompt: Pifagor teoremasi qaysi uchburchakka tegishli?
+    prompt: Pifagor teoremasi qanday uchburchak uchun oʻrinli?
     options:
       - Teng yonli uchburchak
       - Teng tomonli uchburchak
       - Toʻgʻri burchakli uchburchak
       - Oʻtmas burchakli uchburchak
     answer: 2
-    explanation: Pifagor teoremasi faqat toʻgʻri burchakli uchburchaklar uchun qoʻllaniladi.
+    explanation: Pifagor teoremasi faqat toʻgʻri burchakli uchburchak uchun oʻrinli. Unga koʻra gipotenuzaning kvadrati katetlar kvadratlarining yigʻindisiga teng.
   - id: geometry-basics-007
     type: choice
     difficulty: 3
     lang: text
-    prompt: Katetlari 3 va 4 boʻlgan toʻgʻri burchakli uchburchakning gipotenuzasini toping.
+    prompt: Katetlari 3 sm va 4 sm boʻlgan toʻgʻri burchakli uchburchakning gipotenuzasi necha sm?
     options:
-      - "3"
-      - "5"
       - "7"
-      - "10"
+      - "5"
+      - "25"
+      - "12"
     answer: 1
-    explanation: 3^2 + 4^2 = 9 + 16 = 25. Ildiz 25 = 5.
+    explanation: Pifagor teoremasiga koʻra c² = 3² + 4² = 9 + 16 = 25, demak c = √25 = 5 sm.
   - id: geometry-basics-008
     type: choice
     difficulty: 1
     lang: text
-    prompt: Doira yuzini topish formulasi qanday?
+    prompt: Radiusi r boʻlgan doiraning yuzi qaysi formula bilan topiladi?
     options:
-      - pi * r
-      - 2 * pi * r
-      - pi * r^2
-      - 2 * r^2
+      - S = π · r
+      - S = π · r²
+      - S = 2 · π · r
+      - S = 2 · r²
+    answer: 1
+    explanation: Doiraning yuzi S = π · r². 2 · π · r esa aylana uzunligining formulasi.
+  - id: geometry-basics-009
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Ikki turli nuqta orqali nechta toʻgʻri chiziq oʻtkazish mumkin?
+    options:
+      - Faqat bitta
+      - Ikkita
+      - Uchta
+      - Cheksiz koʻp
+    answer: 0
+    explanation: Ikki turli nuqta orqali faqat bitta toʻgʻri chiziq oʻtadi — bu geometriyaning asosiy aksiomalaridan biri.
+  - id: geometry-basics-010
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Toʻgʻri burchak necha gradusga teng?
+    options:
+      - "45"
+      - "60"
+      - "180"
+      - "90"
+    answer: 3
+    explanation: Toʻgʻri burchak 90° ga teng. U yoyiq burchakning (180°) yarmidir.
+  - id: geometry-basics-011
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: Kvadratning tomoni 7 sm. Uning perimetrini toping (sm da).
+    code: P = 4 · 7 = ?
+    answer: "28"
+    explanation: Kvadratning toʻrtala tomoni teng, shuning uchun P = 4 · 7 = 28 sm.
+  - id: geometry-basics-012
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Kesma nima?
+    options:
+      - Toʻgʻri chiziqning ikki nuqta bilan chegaralangan qismi
+      - Toʻgʻri chiziqning bir nuqtadan boshlanib, bir tomonga cheksiz davom etadigan qismi
+      - Bir nuqtadan chiquvchi ikki nurdan hosil boʻlgan shakl
+      - Bir nuqtadan bir xil uzoqlikda joylashgan nuqtalar toʻplami
+    answer: 0
+    explanation: Kesmaning ikkita uchi bor va uning uzunligini oʻlchash mumkin. Bir tomonga cheksiz davom etadigan qism esa nur deyiladi.
+  - id: geometry-basics-013
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Burchak turlarini toʻldiring:"
+    code: 90° dan kichik burchak ___ burchak, 90° dan katta, lekin 180° dan kichik burchak esa ___ burchak deyiladi.
+    answer:
+      - oʻtkir
+      - oʻtmas
+    bank:
+      - toʻgʻri
+      - yoyiq
+    explanation: Oʻtkir burchak 90° dan kichik, oʻtmas burchak 90° bilan 180° orasida boʻladi. Toʻgʻri burchak aynan 90°, yoyiq burchak esa 180° ga teng.
+  - id: geometry-basics-014
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Uchburchakning tomonlari 5 sm, 7 sm va 9 sm. Uning perimetri necha sm?
+    options:
+      - "19"
+      - "20"
+      - "23"
+      - "21"
+    answer: 3
+    explanation: Perimetr barcha tomonlar yigʻindisiga teng. P = 5 + 7 + 9 = 21 sm.
+  - id: geometry-basics-015
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Toʻgʻri toʻrtburchakning tomonlari 8 sm va 5 sm. Uning perimetrini toping (sm da).
+    code: P = 2 · (8 + 5) = ?
+    answer: "26"
+    explanation: P = 2 · (8 + 5) = 2 · 13 = 26 sm.
+  - id: geometry-basics-016
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: C nuqta AB kesmada yotadi. AC = 4 sm, CB = 9 sm boʻlsa, AB kesmaning uzunligi necha sm?
+    options:
+      - "13"
+      - "5"
+      - "36"
+      - 6,5
+    answer: 0
+    explanation: C nuqta kesmani ikki qismga boʻladi, shuning uchun AB = AC + CB = 4 + 9 = 13 sm.
+  - id: geometry-basics-017
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Kvadratning perimetri 36 sm. Uning yuzi necha sm²?
+    options:
+      - "36"
+      - "72"
+      - "144"
+      - "81"
+    answer: 3
+    explanation: Kvadratning tomoni 36 / 4 = 9 sm. Yuzi S = 9 · 9 = 81 sm².
+  - id: geometry-basics-018
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Perimetri 20 sm, bir tomoni 6 sm boʻlgan toʻgʻri toʻrtburchakning yuzini topish bosqichlarini tartiblang:"
+    lines:
+      - "Yarim perimetrni topamiz: 20 / 2 = 10 sm"
+      - "Ikkinchi tomonni topamiz: 10 − 6 = 4 sm"
+      - "Tomonlarni koʻpaytiramiz: S = 6 · 4"
+      - "Javob: S = 24 sm²"
+    explanation: Yarim perimetr ikki qoʻshni tomon yigʻindisiga teng (10 sm), demak ikkinchi tomon 4 sm. Yuzi 6 · 4 = 24 sm².
+  - id: geometry-basics-019
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Toʻgʻri toʻrtburchakning yuzi 48 sm², bir tomoni 6 sm. Uning perimetrini toping (sm da).
+    code: b = 48 / 6, P = 2 · (6 + b) = ?
+    answer: "28"
+    explanation: Ikkinchi tomon 48 / 6 = 8 sm. Perimetr P = 2 · (6 + 8) = 28 sm.
+  - id: geometry-basics-020
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Aylananing radiusi 10 sm. π = 3,14 deb olinsa, aylana uzunligi necha sm boʻladi?
+    options:
+      - 31,4
+      - "314"
+      - 62,8
+      - "20"
     answer: 2
-    explanation: Doira yuzi S = pi * r^2 formulasi orqali topiladi.
+    explanation: L = 2 · π · r = 2 · 3,14 · 10 = 62,8 sm. 314 esa shu radiusli doiraning yuzi (sm² da).

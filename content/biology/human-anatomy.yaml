@@ -3,95 +3,245 @@ exercises:
     type: choice
     difficulty: 1
     lang: text
-    prompt: Inson tanasidagi eng katta organ qaysi?
+    prompt: Odam tanasidagi eng katta organ qaysi?
     options:
       - Yurak
       - Jigar
       - Teri
       - Oʻpka
     answer: 2
-    explanation: Teri inson tanasining butun sirtini qoplovchi eng katta organ hisoblanadi.
+    explanation: Teri tananing butun sirtini qoplaydi va odamning eng katta organi hisoblanadi. Jigar esa eng yirik ichki organdir.
   - id: human-anatomy-002
     type: choice
     difficulty: 1
     lang: text
-    prompt: Qonni tana boʻylab haydab beruvchi asosiy organ?
+    prompt: Qonni tomirlar orqali butun tanaga haydaydigan organ qaysi?
     options:
       - Jigar
       - Oʻpka
       - Yurak
       - Buyrak
     answer: 2
-    explanation: Yurak nasos funksiyasini bajaradi.
+    explanation: Yurak muskullari qisqarib, nasos kabi qonni tomirlarga haydaydi.
   - id: human-anatomy-003
     type: choice
     difficulty: 2
     lang: text
-    prompt: Nafas olish va chiqarish uchun javobgar boʻlgan asosiy organ nima?
+    prompt: Nafas olish tizimining qaysi organida qon kislorodga toʻyinadi va karbonat angidriddan tozalanadi?
     options:
-      - oʻpka
-      - oʻpka (xato)
-      - Boshqa
-      - Nomaʼlum
-    answer: 0
-    explanation: Oʻpka gaz almashinuvini taʼminlaydi.
+      - Burun boʻshligʻi
+      - Hiqildoq
+      - Traxeya
+      - Oʻpka
+    answer: 3
+    explanation: Oʻpkada havo bilan qon oʻrtasida gaz almashinuvi kechadi. Burun boʻshligʻi, hiqildoq va traxeya esa havo oʻtkazuvchi yoʻllardir.
   - id: human-anatomy-004
     type: choice
     difficulty: 2
     lang: text
-    prompt: Ovqat hazm qilish tizimining qaysi qismida oziq moddalar qonga eng koʻp soʻriladi?
+    prompt: Hazm boʻlgan oziq moddalarning asosiy qismi ovqat hazm qilish tizimining qaysi boʻlimida qonga soʻriladi?
     options:
       - Oshqozon
       - Ingichka ichak
       - Yoʻgʻon ichak
       - Qiziloʻngach
     answer: 1
-    explanation: Oziq moddalarning asosiy soʻrilish jarayoni ingichka ichakda kechadi.
+    explanation: Oziq moddalarning asosiy qismi ingichka ichak devoridagi vorsinkalar orqali qon va limfaga soʻriladi. Yoʻgʻon ichakda esa asosan suv soʻriladi.
   - id: human-anatomy-005
     type: choice
     difficulty: 2
     lang: text
-    prompt: Katta odam skeletida taxminan necha suyak bor?
+    prompt: Voyaga yetgan odam skeleti odatda nechta suyakdan iborat?
     options:
-      - "204"
+      - "106"
       - "206"
-      - "208"
-      - "211"
+      - "306"
+      - "406"
     answer: 1
-    explanation: Voyaga yetgan insonda odatda 206 ta suyak mavjud boʻladi.
+    explanation: Voyaga yetgan odam skeletida odatda 206 ta suyak boʻladi. Chaqaloqda suyaklar koʻproq (300 ga yaqin), keyinchalik ularning bir qismi oʻzaro birikib ketadi.
   - id: human-anatomy-006
     type: choice
     difficulty: 3
     lang: text
-    prompt: Qondagi qizil qon tanachalari nima deb ataladi?
+    prompt: Qizil qon tanachalari qanday ataladi?
     options:
       - Leykotsitlar
       - Eritrotsitlar
       - Trombotsitlar
-      - Plazma
+      - Limfotsitlar
     answer: 1
-    explanation: Eritrotsitlar qonga qizil rang beruvchi gemoglobinni tashiydi.
+    explanation: Eritrotsitlar tarkibida gemoglobin boʻladi. U qonga qizil rang beradi va kislorod tashiydi.
   - id: human-anatomy-007
     type: choice
     difficulty: 3
     lang: text
-    prompt: Markaziy asab tizimi qaysi organlardan iborat?
+    prompt: Markaziy asab tizimini qaysi organlar tashkil etadi?
     options:
       - Bosh miya va orqa miya
-      - Yurak va qon tomirlari
-      - Oshqozon va ichaklar
-      - Muskullar va suyaklar
+      - Bosh miya va undan chiqadigan nervlar
+      - Orqa miya va undan chiqadigan nervlar
+      - Nervlar va nerv tugunlari
     answer: 0
-    explanation: Markaziy asab tizimini bosh miya va orqa miya tashkil etadi.
+    explanation: Markaziy asab tizimi bosh miya va orqa miyadan iborat. Ulardan chiqadigan nervlar va nerv tugunlari esa periferik asab tizimini tashkil etadi.
   - id: human-anatomy-008
     type: choice
     difficulty: 3
     lang: text
-    prompt: Zaharli moddalarni parchalovchi va safro ishlab chiqaruvchi organ nima?
+    prompt: Qondagi zaharli moddalarni zararsizlantiradigan va oʻt suyuqligi (safro) ishlab chiqaradigan organ qaysi?
     options:
-      - jigar
-      - jigar (xato)
-      - Boshqa
-      - Nomaʼlum
+      - Jigar
+      - Oʻt pufagi
+      - Oshqozon osti bezi
+      - Buyrak
     answer: 0
-    explanation: Jigar moddalar almashinuvida va detoksifikatsiyada muhim rol oʻynaydi.
+    explanation: Jigar zaharli moddalarni zararsizlantiradi va yogʻlarning hazm boʻlishiga yordam beradigan oʻt suyuqligini ishlab chiqaradi. Oʻt pufagida esa oʻt suyuqligi faqat toʻplanadi.
+  - id: human-anatomy-009
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Inson yuragi nechta kameradan iborat?
+    options:
+      - "2"
+      - "3"
+      - "5"
+      - "4"
+    answer: 3
+    explanation: Inson yuragi toʻrt kamerali — ikkita boʻlmacha va ikkita qorinchadan iborat.
+  - id: human-anatomy-010
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Qonni yurakdan organlarga olib boradigan qon tomirlari qanday ataladi?
+    options:
+      - Venalar
+      - Kapillyarlar
+      - Arteriyalar
+      - Limfa tomirlari
+    answer: 2
+    explanation: Arteriyalar qonni yurakdan organlarga olib boradi, venalar esa qonni yurakka qaytaradi.
+  - id: human-anatomy-011
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Eritrotsitlar tarkibidagi kislorodni tashuvchi oqsil qaysi?
+    options:
+      - Gemoglobin
+      - Insulin
+      - Pepsin
+      - Keratin
+    answer: 0
+    explanation: Gemoglobin oʻpkada kislorodni biriktirib oladi va uni toʻqimalarga yetkazadi.
+  - id: human-anatomy-012
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Organizmni mikroblardan himoya qiladigan qon hujayralari qaysi?
+    options:
+      - Eritrotsitlar
+      - Leykotsitlar
+      - Trombotsitlar
+      - Neyronlar
+    answer: 1
+    explanation: Leykotsitlar (oq qon tanachalari) organizmga kirgan mikroblarni yoʻq qiladi va immunitetni taʼminlaydi.
+  - id: human-anatomy-013
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Inson skeleti haqidagi gaplarni toʻldiring:"
+    code: Inson tanasidagi eng uzun suyak — ___ suyagi. Bosh miyani ___ suyaklari himoya qiladi.
+    answer:
+      - son
+      - kalla
+    bank:
+      - qovurgʻa
+      - tovon
+      - yelka
+    explanation: Son suyagi skeletdagi eng uzun va eng mustahkam suyak, kalla suyaklari esa bosh miyani shikastlanishdan saqlaydi.
+  - id: human-anatomy-014
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Qondagi glyukoza (qand) miqdorini kamaytiradigan gormon qaysi?
+    options:
+      - Adrenalin
+      - Tiroksin
+      - Insulin
+      - Glyukagon
+    answer: 2
+    explanation: Insulin oshqozon osti bezida ishlab chiqariladi va glyukozaning hujayralarga oʻtishini taʼminlab, qondagi qand miqdorini pasaytiradi.
+  - id: human-anatomy-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Oʻpkada havo bilan qon oʻrtasidagi gaz almashinuvi qaysi tuzilmalarda kechadi?
+    options:
+      - Traxeya
+      - Bronxlar
+      - Hiqildoq
+      - Alveolalar
+    answer: 3
+    explanation: Alveolalar — kapillyarlar bilan oʻralgan oʻpka pufakchalari. Ularning yupqa devori orqali kislorod qonga, karbonat angidrid esa havoga oʻtadi.
+  - id: human-anatomy-016
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Qonni filtrlab, siydik hosil qiladigan organ qaysi?
+    options:
+      - Jigar
+      - Taloq
+      - Qovuq
+      - Buyrak
+    answer: 3
+    explanation: Buyraklar qonni keraksiz moddalardan tozalab, siydik hosil qiladi. Qovuqda esa siydik faqat toʻplanadi.
+  - id: human-anatomy-017
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Ovqat hazm qilish yoʻlining boʻlimlarini ovqat oʻtadigan tartibda joylashtiring:"
+    lines:
+      - Ogʻiz boʻshligʻi
+      - Halqum
+      - Qiziloʻngach
+      - Oshqozon
+      - Ingichka ichak
+      - Yoʻgʻon ichak
+    explanation: Ovqat ogʻizda maydalanadi, halqum va qiziloʻngach orqali oshqozonga tushadi, soʻng ingichka ichakda hazm boʻlib soʻriladi, qoldiqlari yoʻgʻon ichakka oʻtadi.
+  - id: human-anatomy-018
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Asab tizimi haqidagi gaplarni toʻldiring:"
+    code: Asab tizimining asosiy hujayrasi — ___. Ikki asab hujayrasi tutashadigan joy — ___.
+    answer:
+      - neyron
+      - sinaps
+    bank:
+      - akson
+      - nefron
+    explanation: Neyron — asab toʻqimasining tuzilish va vazifa birligi. Asab impulsi bir neyrondan ikkinchisiga sinaps orqali oʻtadi.
+  - id: human-anatomy-019
+    type: order
+    difficulty: 3
+    lang: text
+    prompt: "Katta qon aylanish doirasida qonning yoʻlini toʻgʻri ketma-ketlikda joylashtiring:"
+    lines:
+      - Chap qorincha
+      - Aorta
+      - Arteriyalar
+      - Kapillyarlar
+      - Venalar
+      - Oʻng boʻlmacha
+    explanation: Katta qon aylanish doirasi chap qorinchadan boshlanadi. Qon aorta va arteriyalar orqali organlarga boradi, kapillyarlarda moddalar almashinadi, soʻng venalar orqali oʻng boʻlmachaga qaytadi.
+  - id: human-anatomy-020
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Kichik qon aylanish doirasi haqidagi gapni toʻldiring:"
+    code: Kichik qon aylanish doirasi yurakning ___ qorinchasidan boshlanadi, qon oʻpkadan oʻtib, ___ boʻlmachaga qaytadi.
+    answer:
+      - oʻng
+      - chap
+    bank:
+      - orqa
+      - yuqori
+    explanation: Oʻng qorinchadan chiqqan qon oʻpkada kislorodga toʻyinadi va oʻpka venalari orqali chap boʻlmachaga keladi.

@@ -1,0 +1,243 @@
+exercises:
+  - id: ecology-ecosystems-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Tirik organizmlarning oʻzaro va atrof-muhit bilan munosabatlarini oʻrganadigan fan qaysi?
+    options:
+      - Ekologiya
+      - Genetika
+      - Anatomiya
+      - Sitologiya
+    answer: 0
+    explanation: Ekologiya organizmlarning bir-biri bilan va yashash muhiti bilan aloqalarini oʻrganadi.
+  - id: ecology-ecosystems-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Oziq zanjirining birinchi boʻgʻinini odatda qaysi organizmlar tashkil etadi?
+    options:
+      - Yirtqich hayvonlar
+      - Yashil oʻsimliklar
+      - Oʻtxoʻr hayvonlar
+      - Zamburugʻlar
+    answer: 1
+    explanation: Yashil oʻsimliklar fotosintez orqali organik modda hosil qiladi, shuning uchun oziq zanjiri ulardan boshlanadi.
+  - id: ecology-ecosystems-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Quyidagi hayvonlardan qaysi biri oʻtxoʻr hisoblanadi?
+    options:
+      - Boʻri
+      - Burgut
+      - Quyon
+      - Tulki
+    answer: 2
+    explanation: Quyon oʻsimliklar bilan oziqlanadi. Boʻri, burgut va tulki esa boshqa hayvonlarni ovlaydigan yirtqichlardir.
+  - id: ecology-ecosystems-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Yerdagi deyarli barcha ekotizimlar uchun asosiy energiya manbai nima?
+    options:
+      - Tuproq
+      - Shamol
+      - Suv
+      - Quyosh
+    answer: 3
+    explanation: Oʻsimliklar Quyosh yorugʻligi energiyasini organik moddalarga aylantiradi, bu energiya esa oziq zanjiri boʻylab boshqa organizmlarga oʻtadi.
+  - id: ecology-ecosystems-005
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Anorganik moddalardan organik moddalarni oʻzi hosil qiladigan organizmlar qanday ataladi?
+    options:
+      - Produtsentlar
+      - Konsumentlar
+      - Redutsentlar
+      - Parazitlar
+    answer: 0
+    explanation: Produtsentlar (asosan yashil oʻsimliklar) organik moddani oʻzi yaratadi, konsumentlar esa tayyor organik modda bilan oziqlanadi.
+  - id: ecology-ecosystems-006
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Hayvonlar orasidagi munosabat haqidagi gapni toʻldiring:"
+    code: Boshqa hayvonlarni ovlab yeydigan hayvon — ___, u ovlaydigan hayvon esa — ___.
+    answer:
+      - yirtqich
+      - oʻlja
+    bank:
+      - parazit
+      - produtsent
+    explanation: Yirtqich oʻljasini tutib yeydi. Masalan, tulki — yirtqich, sichqon esa uning oʻljasi.
+  - id: ecology-ecosystems-007
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Quyidagilardan qaysi biri abiotik (jonsiz tabiat) omilga kiradi?
+    options:
+      - Yirtqichlik
+      - Harorat
+      - Raqobat
+      - Parazitlik
+    answer: 1
+    explanation: Harorat, yorugʻlik va namlik — jonsiz tabiat omillari. Yirtqichlik, raqobat va parazitlik esa organizmlar orasidagi (biotik) munosabatlardir.
+  - id: ecology-ecosystems-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Oʻlik organik qoldiqlarni anorganik moddalargacha parchalaydigan organizmlar (redutsentlar) qaysilar?
+    options:
+      - Yashil oʻsimliklar
+      - Oʻtxoʻr hayvonlar
+      - Bakteriyalar va zamburugʻlar
+      - Yirtqich qushlar
+    answer: 2
+    explanation: Bakteriyalar va zamburugʻlar oʻsimlik hamda hayvon qoldiqlarini parchalab, mineral moddalarni tuproqqa qaytaradi.
+  - id: ecology-ecosystems-009
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Lishaynik tanasi asosan qaysi ikki organizmning birga yashashidan (simbiozidan) hosil boʻlgan?
+    options:
+      - Ikki xil zamburugʻ
+      - Yoʻsin va qirqquloq
+      - Bakteriya va gulli oʻsimlik
+      - Zamburugʻ va suvoʻt
+    answer: 3
+    explanation: Lishaynikda zamburugʻ suv va mineral tuzlarni shimadi, suvoʻt esa fotosintez orqali organik modda hosil qiladi — ikkalasi ham foyda koʻradi. Baʼzi lishayniklarda suvoʻt oʻrnida sianobakteriyalar (koʻk-yashil suvoʻtlar) boʻladi.
+  - id: ecology-ecosystems-010
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Oʻt → chigirtka → baqa → ilon oziq zanjirida birinchi tartibli konsument qaysi?
+    options:
+      - Chigirtka
+      - Oʻt
+      - Baqa
+      - Ilon
+    answer: 0
+    explanation: Birinchi tartibli konsument bevosita oʻsimlik bilan oziqlanadi. Bu zanjirda oʻtni chigirtka yeydi.
+  - id: ecology-ecosystems-011
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Maʼlum bir hududda yashaydigan, bir turga mansub organizmlar guruhi nima deb ataladi?
+    options:
+      - Biosfera
+      - Populyatsiya
+      - Ekotizim
+      - Biotsenoz
+    answer: 1
+    explanation: Populyatsiya — bir turning maʼlum hududda yashab, oʻzaro erkin chatishadigan individlari yigʻindisi.
+  - id: ecology-ecosystems-012
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Yer qobiqlari haqidagi gaplarni toʻldiring:"
+    code: Yerning hayot tarqalgan qobigʻi — ___. Atmosferadagi ___ qatlami tirik organizmlarni ultrabinafsha nurlardan himoya qiladi.
+    answer:
+      - biosfera
+      - ozon
+    bank:
+      - azot
+      - litosfera
+    explanation: Biosfera — tirik organizmlar yashaydigan Yer qobigʻi. Ozon qatlami Quyoshning zararli ultrabinafsha nurlarining katta qismini ushlab qoladi.
+  - id: ecology-ecosystems-013
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Oziq zanjirini birinchi boʻgʻindan boshlab toʻgʻri ketma-ketlikda joylashtiring:"
+    lines:
+      - Bugʻdoy
+      - Sichqon
+      - Ilon
+      - Burgut
+    explanation: Zanjir oʻsimlikdan boshlanadi — bugʻdoy donini sichqon yeydi, sichqonni ilon, ilonni esa burgut ovlaydi.
+  - id: ecology-ecosystems-014
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Oziq zanjirida bir oziq darajasidan keyingisiga energiyaning taxminan qancha qismi oʻtadi?
+    options:
+      - 1 %
+      - 50 %
+      - 10 %
+      - 90 %
+    answer: 2
+    explanation: Energiyaning katta qismi hayot faoliyatiga sarflanadi va issiqlik sifatida tarqaladi, keyingi darajaga esa oʻrtacha 10 % ga yaqini oʻtadi (10 foiz qoidasi). Bu taxminiy qoida — turli ekotizimlarda bu ulush har xil boʻlishi mumkin.
+  - id: ecology-ecosystems-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Yoqilgʻi yoqilganda atmosferada koʻpayib, issiqxona effektini kuchaytiradigan gaz qaysi?
+    options:
+      - Kislorod
+      - Azot
+      - Argon
+      - Karbonat angidrid
+    answer: 3
+    explanation: Karbonat angidrid Yer sirtidan qaytgan issiqlikni ushlab qoladi, shuning uchun uning koʻpayishi iqlim isishiga olib keladi.
+  - id: ecology-ecosystems-016
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Bir organizm ikkinchisi hisobiga yashab, unga zarar yetkazadigan munosabat qanday ataladi?
+    options:
+      - Parazitizm
+      - Simbioz
+      - Raqobat
+      - Neytralizm
+    answer: 0
+    explanation: Parazit xoʻjayin organizm hisobiga oziqlanadi va unga zarar keltiradi. Masalan, askarida odam ichagida parazitlik qiladi.
+  - id: ecology-ecosystems-017
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Yoʻqolib ketish xavfi ostidagi oʻsimlik va hayvon turlari qaysi kitobga kiritiladi?
+    options:
+      - Oq kitob
+      - Qizil kitob
+      - Sariq kitob
+      - Koʻk kitob
+    answer: 1
+    explanation: Qizil kitobga kamyob va yoʻqolib borayotgan turlar kiritiladi, ular davlat muhofazasiga olinadi.
+  - id: ecology-ecosystems-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Oʻt → quyon → tulki oziq zanjirida tulki nechanchi oziq (trofik) darajada turadi?
+    options:
+      - Birinchi
+      - Ikkinchi
+      - Uchinchi
+      - Toʻrtinchi
+    answer: 2
+    explanation: Birinchi darajada produtsent (oʻt), ikkinchi darajada oʻtxoʻr (quyon), uchinchi darajada esa yirtqich (tulki) turadi.
+  - id: ecology-ecosystems-019
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Tuganak bakteriyalar haqidagi gapni toʻldiring:"
+    code: Tuganak bakteriyalar ___ oʻsimliklar ildizida yashaydi va tuproqni ___ bilan boyitadi.
+    answer:
+      - dukkakli
+      - azot
+    bank:
+      - ignabargli
+      - kislorod
+    explanation: Tuganak bakteriyalar noʻxat, loviya, beda kabi dukkaklilar ildizida yashab, havodagi azotni oʻsimlik oʻzlashtira oladigan birikmalarga aylantiradi.
+  - id: ecology-ecosystems-020
+    type: order
+    difficulty: 3
+    lang: text
+    prompt: "Tirik tabiatning tuzilish darajalarini eng kichigidan eng kattasiga qarab joylashtiring:"
+    lines:
+      - Organizm
+      - Populyatsiya
+      - Biotsenoz (jamoa)
+      - Ekotizim
+      - Biosfera
+    explanation: Organizmlar populyatsiyani, turli populyatsiyalar biotsenozni, biotsenoz yashash muhiti bilan birga ekotizimni, barcha ekotizimlar esa biosferani tashkil etadi.

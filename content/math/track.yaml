@@ -1,6 +1,6 @@
 slug: math
 title: Matematika asoslari
-description: Arifmetika, algebra va tenglamalar.
+description: Arifmetika, kasrlar, foizlar, algebra va matnli masalalar.
 icon: calculator
 order: 2
 subject: MATH
@@ -14,3 +14,21 @@ modules:
       - slug: equations-algebra
         title: Tenglamalar va algebra
         description: Chiziqli tenglamalar va algebraik ifodalar.
+      - slug: powers-roots
+        title: Daraja va ildiz
+        description: Sonning darajasi, daraja xossalari va kvadrat ildiz.
+  - slug: fractions-percentages
+    title: Kasrlar va foizlar
+    skills:
+      - slug: fractions-decimals
+        title: Kasrlar va oʻnli kasrlar
+        description: Oddiy va oʻnli kasrlar, ularni taqqoslash va ular ustida amallar.
+      - slug: percentages
+        title: Foizlar
+        description: Sonning foizini topish, foiz boʻyicha sonni topish va foizga oid masalalar.
+  - slug: problem-solving
+    title: Masalalar yechish
+    skills:
+      - slug: word-problems
+        title: Matnli masalalar
+        description: Hayotiy vaziyatlarga oid masalalarni bosqichma-bosqich yechish.

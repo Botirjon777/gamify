@@ -1,0 +1,229 @@
+exercises:
+  - id: electricity-basics-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Tok kuchining SI tizimidagi birligi qaysi?
+    options:
+      - Volt
+      - Amper
+      - Om
+      - Vatt
+    answer: 1
+    explanation: Tok kuchi amperlarda (A) oʻlchanadi. Volt — kuchlanish, om — qarshilik, vatt — quvvat birligi.
+  - id: electricity-basics-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Elektr kuchlanishi qaysi asbob bilan oʻlchanadi?
+    options:
+      - Ampermetr
+      - Dinamometr
+      - Voltmetr
+      - Barometr
+    answer: 2
+    explanation: Kuchlanish voltmetr bilan oʻlchanadi. Ampermetr tok kuchini, dinamometr kuchni, barometr atmosfera bosimini oʻlchaydi.
+  - id: electricity-basics-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Zanjirning bir qismi uchun Om qonuni qaysi formula bilan ifodalanadi?
+    options:
+      - I = U · R
+      - I = R / U
+      - I = U + R
+      - I = U / R
+    answer: 3
+    explanation: "Om qonuni: tok kuchi kuchlanishga toʻgʻri, qarshilikka teskari proporsional — I = U / R."
+  - id: electricity-basics-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Quyidagilarning qaysi biri elektr tokini yaxshi oʻtkazadi?
+    options:
+      - Mis sim
+      - Rezina
+      - Shisha
+      - Quruq yogʻoch
+    answer: 0
+    explanation: Metallarda erkin elektronlar koʻp boʻlgani uchun ular yaxshi oʻtkazgich. Rezina, shisha va quruq yogʻoch — dielektriklar (izolyatorlar).
+  - id: electricity-basics-005
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: Masalani yeching. Javobni amperda, faqat son bilan yozing.
+    code: Qarshiligi 6 Ω boʻlgan oʻtkazgich uchlaridagi kuchlanish 12 V. Oʻtkazgichdagi tok kuchi qancha?
+    answer: "2"
+    explanation: "Om qonuni: I = U / R = 12 V / 6 Ω = 2 A."
+  - id: electricity-basics-006
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Oʻlchov asboblarini ulash haqidagi gapni toʻldiring:"
+    code: Ampermetr zanjirga isteʼmolchi bilan ___ ulanadi, voltmetr esa isteʼmolchiga ___ ulanadi.
+    answer:
+      - ketma-ket
+      - parallel
+    bank:
+      - aralash
+      - simsiz
+      - teskari
+    explanation: Ampermetr isteʼmolchidan oʻtayotgan tokni oʻlchashi uchun u bilan ketma-ket ulanadi. Voltmetr isteʼmolchi uchlaridagi kuchlanishni oʻlchashi uchun unga parallel ulanadi.
+  - id: electricity-basics-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Elektr toki deb nimaga aytiladi?
+    options:
+      - Zaryadli zarralarning tartibsiz harakatiga
+      - Zaryadli zarralarning tartibli (yoʻnalgan) harakatiga
+      - Molekulalarning issiqlik harakatiga
+      - Oʻtkazgichning qizishiga
+    answer: 1
+    explanation: Elektr toki — zaryadli zarralarning tartibli harakati. Metallarda bu zarralar — erkin elektronlar.
+  - id: electricity-basics-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Qarshiligi 15 Ω boʻlgan oʻtkazgichdan 2 A tok oʻtmoqda. Oʻtkazgich uchlaridagi kuchlanish qancha?
+    options:
+      - 7,5 V
+      - 17 V
+      - 30 V
+      - 13 V
+    answer: 2
+    explanation: Om qonunidan U = I · R = 2 A · 15 Ω = 30 V.
+  - id: electricity-basics-009
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Masalani yeching. Javobni omda (Ω), faqat son bilan yozing.
+    code: Qarshiliklari 4 Ω va 6 Ω boʻlgan ikki rezistor ketma-ket ulangan. Ularning umumiy qarshiligi qancha?
+    answer: "10"
+    explanation: "Ketma-ket ulashda qarshiliklar qoʻshiladi: R = R₁ + R₂ = 4 + 6 = 10 Ω."
+  - id: electricity-basics-010
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Oʻtkazgichning koʻndalang kesimidan 10 s da 20 C (kulon) zaryad oʻtdi. Oʻtkazgichdagi tok kuchi qancha?
+    options:
+      - 2 A
+      - 200 A
+      - 0,5 A
+      - 30 A
+    answer: 0
+    explanation: "Tok kuchi — vaqt birligida oʻtgan zaryad: I = q / t = 20 C / 10 s = 2 A."
+  - id: electricity-basics-011
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Masalani yeching. Javobni vattda, faqat son bilan yozing.
+    code: Lampa 220 V kuchlanishli tarmoqqa ulangan, undan 0,5 A tok oʻtmoqda. Lampaning quvvati qancha?
+    answer: "110"
+    explanation: Tokning quvvati P = U · I = 220 V · 0,5 A = 110 W.
+  - id: electricity-basics-012
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Simning materiali va koʻndalang kesim yuzi oʻzgartirilmay, uzunligi 2 marta orttirildi. Simning qarshiligi qanday oʻzgaradi?
+    options:
+      - 2 marta kamayadi
+      - 2 marta ortadi
+      - 4 marta ortadi
+      - Oʻzgarmaydi
+    answer: 1
+    explanation: R = ρ · l / S — qarshilik oʻtkazgich uzunligiga toʻgʻri proporsional. Uzunlik 2 marta ortsa, qarshilik ham 2 marta ortadi.
+  - id: electricity-basics-013
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Xonadondagi elektr asboblar (lampa, muzlatkich, televizor) tarmoqqa qanday ulanadi va nima uchun?
+    options:
+      - Ketma-ket, chunki shunda har bir asbobdagi kuchlanish ortadi
+      - Ketma-ket, chunki shunda bitta asbob oʻchirilsa, qolganlari ishlayveradi
+      - Parallel, chunki har bir asbobga bir xil kuchlanish beriladi va ular bir-biridan mustaqil ishlaydi
+      - Farqi yoʻq, ikkala usulda ham asboblar bir xil ishlaydi
+    answer: 2
+    explanation: Parallel ulashda har bir asbob uchlaridagi kuchlanish tarmoq kuchlanishiga (220 V) teng boʻladi va bittasi oʻchirilganda qolganlari ishlayveradi. Ketma-ket ulashda esa bittasi oʻchsa, zanjir uziladi.
+  - id: electricity-basics-014
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Masala: qarshiliklari R₁ = 3 Ω va R₂ = 5 Ω boʻlgan rezistorlar ketma-ket ulanib, 16 V kuchlanishli manbaga ulangan. Ikkinchi rezistordagi kuchlanishni topish bosqichlarini toʻgʻri tartibda joylashtiring:"
+    lines:
+      - "Berilganlarni yozamiz: R₁ = 3 Ω, R₂ = 5 Ω, U = 16 V"
+      - "Umumiy qarshilikni topamiz: R = R₁ + R₂ = 3 + 5 = 8 Ω"
+      - "Umumiy qarshilik orqali tok kuchini topamiz: I = U / R = 16 / 8 = 2 A"
+      - "Shu tok orqali ikkinchi rezistordagi kuchlanishni topamiz: U₂ = I · R₂ = 2 · 5 = 10 V"
+      - "Javobni yozamiz: ikkinchi rezistordagi kuchlanish 10 V"
+    explanation: R = 3 + 5 = 8 Ω; I = U / R = 16 / 8 = 2 A (ketma-ket ulashda tok hamma joyda bir xil); U₂ = I · R₂ = 2 · 5 = 10 V.
+  - id: electricity-basics-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Bir xil ishorali zaryadlangan ikki jism oʻzaro qanday taʼsirlashadi?
+    options:
+      - Bir-biriga tortiladi
+      - Umuman taʼsirlashmaydi
+      - Avval tortiladi, keyin itariladi
+      - Bir-biridan itariladi
+    answer: 3
+    explanation: Bir xil ishorali (bir ismli) zaryadlar itarishadi, har xil ishorali zaryadlar esa tortishadi.
+  - id: electricity-basics-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Qarshiliklari 6 Ω va 3 Ω boʻlgan ikki rezistor parallel ulangan. Ularning umumiy qarshiligi qancha?
+    options:
+      - 2 Ω
+      - 9 Ω
+      - 4,5 Ω
+      - 18 Ω
+    answer: 0
+    explanation: Parallel ulashda 1/R = 1/R₁ + 1/R₂ = 1/6 + 1/3 = 3/6 = 1/2, demak R = 2 Ω. Yoki R = R₁ · R₂ / (R₁ + R₂) = 18 / 9 = 2 Ω.
+  - id: electricity-basics-017
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Masalani yeching. Javobni joulda, faqat son bilan yozing.
+    code: Qarshiligi 10 Ω boʻlgan spiraldan 5 s davomida 2 A tok oʻtdi. Joul–Lens qonuniga koʻra spiralda qancha issiqlik ajraldi?
+    answer: "200"
+    explanation: "Joul–Lens qonuni: Q = I² · R · t = 2² · 10 · 5 = 4 · 10 · 5 = 200 J."
+  - id: electricity-basics-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Quvvati 2 kW boʻlgan isitkich 3 soat uzluksiz ishladi. U qancha elektr energiyasi sarfladi?
+    options:
+      - 1,5 kW·soat
+      - 6 kW·soat
+      - 5 kW·soat
+      - 0,6 kW·soat
+    answer: 1
+    explanation: Sarflangan energiya (tokning ishi) A = P · t = 2 kW · 3 soat = 6 kW·soat.
+  - id: electricity-basics-019
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: 220 V kuchlanishga moʻljallangan lampaning quvvati 110 W. Lampa spiralining ish holatidagi qarshiligi qancha?
+    options:
+      - 2 Ω
+      - 0,5 Ω
+      - 24 200 Ω
+      - 440 Ω
+    answer: 3
+    explanation: P = U² / R dan R = U² / P = 220² / 110 = 48 400 / 110 = 440 Ω. Yoki I = P / U = 0,5 A, R = U / I = 220 / 0,5 = 440 Ω.
+  - id: electricity-basics-020
+    type: fill
+    difficulty: 3
+    lang: text
+    prompt: "Oʻtkazgichlarni ulash usullari haqidagi gapni toʻldiring:"
+    code: Ketma-ket ulangan oʻtkazgichlarning barchasida ___ bir xil boʻladi. Parallel ulangan oʻtkazgichlarning barchasida esa ___ bir xil boʻladi.
+    answer:
+      - tok kuchi
+      - kuchlanish
+    bank:
+      - harorat
+      - qarshilik
+      - quvvat
+    explanation: Ketma-ket ulashda I = I₁ = I₂, kuchlanishlar esa qoʻshiladi (U = U₁ + U₂). Parallel ulashda U = U₁ = U₂, toklar esa qoʻshiladi (I = I₁ + I₂).

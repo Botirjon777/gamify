@@ -1,0 +1,238 @@
+exercises:
+  - id: percentages-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: 100 ning 10% i nechaga teng?
+    options:
+      - "10"
+      - "1"
+      - "90"
+      - "20"
+    answer: 0
+    explanation: 10% — sonning oʻndan bir qismi, 100 / 10 = 10.
+  - id: percentages-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: 50% qaysi kasrga teng?
+    options:
+      - 1/5
+      - 1/2
+      - 1/4
+      - 1/50
+    answer: 1
+    explanation: 50% = 50/100 = 1/2, yaʼni sonning yarmi.
+  - id: percentages-003
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Boʻsh joylarni toʻldiring:"
+    code: Foiz — sonning ___ dan bir qismi. Demak, 1% = ___.
+    answer:
+      - yuz
+      - - 0,01
+        - "0.01"
+        - 1/100
+    bank:
+      - 0,1
+      - ming
+      - oʻn
+    explanation: 1% sonning yuzdan bir qismiga teng, 1% = 1/100 = 0,01.
+  - id: percentages-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: 0,07 oʻnli kasri necha foizga teng?
+    options:
+      - 0,7%
+      - 70%
+      - 7%
+      - 0,07%
+    answer: 2
+    explanation: Oʻnli kasrni foizga aylantirish uchun uni 100 ga koʻpaytiramiz, 0,07 * 100 = 7, yaʼni 7%.
+  - id: percentages-005
+    type: output
+    difficulty: 1
+    lang: text
+    prompt: Hisoblang.
+    code: 80 ning 25% i
+    answer: "20"
+    explanation: 25% — sonning toʻrtdan bir qismi, 80 / 4 = 20.
+  - id: percentages-006
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: 25% oʻnli kasr koʻrinishida qanday yoziladi?
+    options:
+      - 2,5
+      - 0,025
+      - 25,0
+      - 0,25
+    answer: 3
+    explanation: 25% = 25/100 = 0,25.
+  - id: percentages-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Sinfdagi oʻquvchilarning 40% i qizlar. Oʻgʻil bolalar necha foizni tashkil etadi?
+    options:
+      - 60%
+      - 40%
+      - 50%
+      - 140%
+    answer: 0
+    explanation: Barcha oʻquvchilar 100% ni tashkil etadi, 100% - 40% = 60%.
+  - id: percentages-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: 40 ning 150% ini toping.
+    options:
+      - "20"
+      - "60"
+      - "190"
+      - "6"
+    answer: 1
+    explanation: 150% = 1,5, shuning uchun 40 * 1,5 = 60. 100% dan katta foiz sonning oʻzidan katta qiymat beradi.
+  - id: percentages-009
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: 20 soni 80 ning necha foizini tashkil etadi?
+    options:
+      - 20%
+      - 40%
+      - 25%
+      - 4%
+    answer: 2
+    explanation: 20 / 80 = 0,25, yaʼni 25%.
+  - id: percentages-010
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: Hisoblang.
+    code: 250 ning 12% i
+    answer: "30"
+    explanation: 250 * 0,12 = 30.
+  - id: percentages-011
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Narxi 50 000 soʻm boʻlgan kitob 20% ga arzonlashdi. Kitobning yangi narxi qancha?
+    options:
+      - 30 000 soʻm
+      - 45 000 soʻm
+      - 10 000 soʻm
+      - 40 000 soʻm
+    answer: 3
+    explanation: 50 000 ning 20% i 10 000 soʻm. Yangi narx 50 000 - 10 000 = 40 000 soʻm.
+  - id: percentages-012
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Boʻsh joylarni toʻldiring:"
+    code: Sonning 20% ini topish uchun uni ___ ga koʻpaytiramiz. Masalan, 150 ning 20% i ___ ga teng.
+    answer:
+      - - 0,2
+        - "0.2"
+        - 1/5
+      - "30"
+    bank:
+      - 0,02
+      - "20"
+      - "3"
+    explanation: 20% = 20/100 = 0,2, shuning uchun 150 * 0,2 = 30.
+  - id: percentages-013
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Qiymatlarni oʻsish tartibida (kichigidan kattasiga) joylashtiring:"
+    lines:
+      - 5%
+      - 0,1
+      - 1/4
+      - 40%
+      - 0,5
+      - 3/4
+    explanation: Hammasini foizga aylantirsak, 5%, 10%, 25%, 40%, 50%, 75% hosil boʻladi.
+  - id: percentages-014
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Maosh 2 000 000 soʻm edi va 10% ga oshdi. Yangi maosh qancha?
+    options:
+      - 2 200 000 soʻm
+      - 2 100 000 soʻm
+      - 2 020 000 soʻm
+      - 2 010 000 soʻm
+    answer: 0
+    explanation: 2 000 000 ning 10% i 200 000 soʻm. Yangi maosh 2 000 000 + 200 000 = 2 200 000 soʻm.
+  - id: percentages-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Sonning 10% i 7 ga teng. Shu sonni toping.
+    options:
+      - 0,7
+      - "70"
+      - "17"
+      - "700"
+    answer: 1
+    explanation: 10% sonning oʻndan bir qismi, demak son 7 * 10 = 70.
+  - id: percentages-016
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Koʻylak narxi 20% ga arzonlashgach, 64 000 soʻm boʻldi. Uning dastlabki narxi qancha edi?
+    options:
+      - 76 800 soʻm
+      - 84 000 soʻm
+      - 80 000 soʻm
+      - 51 200 soʻm
+    answer: 2
+    explanation: Arzonlashgandan keyin dastlabki narxning 100% - 20% = 80% i qoldi. Dastlabki narx 64 000 / 0,8 = 80 000 soʻm. Tekshirish, 80 000 ning 20% i 16 000 soʻm, 80 000 - 16 000 = 64 000 soʻm.
+  - id: percentages-017
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Masalani yeching va javobni son bilan yozing.
+    code: Narx 80 000 soʻmdan 100 000 soʻmga koʻtarildi. Narx necha foizga oshgan?
+    answer:
+      - "25"
+      - 25%
+      - 25 %
+    explanation: Oʻsish 100 000 - 80 000 = 20 000 soʻm. Uni dastlabki narxga boʻlamiz, 20 000 / 80 000 = 0,25, yaʼni 25%.
+  - id: percentages-018
+    type: order
+    difficulty: 3
+    lang: text
+    prompt: "Narxi 120 000 soʻm boʻlgan kurtka 25% chegirma bilan sotilmoqda. Yangi narxni topish bosqichlarini toʻgʻri tartibda joylashtiring:"
+    lines:
+      - "25% ni oʻnli kasrga aylantiramiz: 0,25"
+      - "Chegirma miqdorini topamiz: 120 000 * 0,25 = 30 000 soʻm"
+      - "Chegirmani dastlabki narxdan ayiramiz: 120 000 - 30 000"
+      - "Yangi narxni yozamiz: 90 000 soʻm"
+    explanation: Chegirma 120 000 * 0,25 = 30 000 soʻm, yangi narx 120 000 - 30 000 = 90 000 soʻm.
+  - id: percentages-019
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Narx avval 10% ga oshdi, soʻng yangi narx 10% ga kamaydi. Natijada narx dastlabkisiga nisbatan qanday oʻzgardi?
+    options:
+      - Oʻzgarmadi
+      - 1% ga oshdi
+      - 20% ga kamaydi
+      - 1% ga kamaydi
+    answer: 3
+    explanation: Dastlabki narx 100 boʻlsa, oshgandan keyin 110, soʻng 110 ning 10% i, yaʼni 11 ayiriladi va 99 qoladi. Narx 1% ga kamaydi.
+  - id: percentages-020
+    type: output
+    difficulty: 3
+    lang: text
+    prompt: Masalani yeching va javobni son bilan yozing.
+    code: Sonning 40% i 36 ga teng. Shu sonning 25% i nechaga teng?
+    answer:
+      - 22,5
+      - "22.5"
+    explanation: Son 36 / 0,4 = 90 ga teng. Uning 25% i 90 * 0,25 = 22,5.

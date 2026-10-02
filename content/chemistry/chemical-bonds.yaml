@@ -3,95 +3,243 @@ exercises:
     type: choice
     difficulty: 1
     lang: text
-    prompt: Suv (H2O) molekulasida qanday bogʻlanish mavjud?
+    prompt: Suv (H₂O) molekulasida atomlar orasida qanday bogʻlanish mavjud?
     options:
       - Ion bogʻlanish
       - Kovalent qutbli bogʻlanish
       - Kovalent qutbsiz bogʻlanish
-      - Metallik bogʻlanish
+      - Metall bogʻlanish
     answer: 1
-    explanation: Suv molekulasida kovalent qutbli bogʻlanish mavjud.
+    explanation: Vodorod va kislorod — elektromanfiyligi har xil boʻlgan metallmaslar, shuning uchun umumiy elektron juftlari kislorod tomonga siljigan — bogʻlanish kovalent qutbli.
   - id: chemical-bonds-002
     type: choice
     difficulty: 2
     lang: text
-    prompt: Osh tuzi (NaCl) da qanday bogʻlanish turi mavjud? (soʻz bilan yozing)
+    prompt: Osh tuzi (NaCl) kristalida qanday bogʻlanish mavjud?
     options:
-      - ion
-      - ion (xato)
-      - Boshqa
-      - Nomaʼlum
+      - Ion bogʻlanish
+      - Kovalent qutbsiz bogʻlanish
+      - Metall bogʻlanish
+      - Vodorod bogʻlanish
     answer: 0
-    explanation: NaCl kristall panjarasi ionlardan iborat.
+    explanation: NaCl kristall panjarasi Na⁺ va Cl⁻ ionlaridan tuzilgan; qarama-qarshi zaryadli ionlar bir-biriga tortilib, ion bogʻlanish hosil qiladi.
   - id: chemical-bonds-003
     type: choice
     difficulty: 2
     lang: text
-    prompt: Kovalent qutbsiz bogʻlanish qaysi moddada uchraydi?
+    prompt: Qaysi moddada kovalent qutbsiz bogʻlanish mavjud?
     options:
       - HCl
-      - H2O
-      - O2
+      - H₂O
+      - O₂
       - NaCl
     answer: 2
-    explanation: O2 kabi bir xil atomlardan iborat molekulalarda kovalent qutbsiz bogʻlanish mavjud.
+    explanation: O₂ molekulasi bir xil atomlardan tuzilgan, shuning uchun umumiy elektron juftlari hech qaysi atom tomonga siljimaydi — bogʻlanish kovalent qutbsiz.
   - id: chemical-bonds-004
     type: choice
     difficulty: 2
     lang: text
-    prompt: "Elektronlarni toʻliq berish yoki qabul qilish orqali hosil boʻladigan bogʻlanish:"
+    prompt: Bir atomdan ikkinchisiga elektron oʻtishi natijasida hosil boʻlgan qarama-qarshi zaryadli ionlar orasidagi bogʻlanish qanday ataladi?
     options:
       - Kovalent bogʻlanish
       - Vodorod bogʻlanish
       - Ion bogʻlanish
       - Metall bogʻlanish
     answer: 2
-    explanation: Ion bogʻlanish elektronlarni berish (kation) yoki olish (anion) orqali hosil boʻladi.
+    explanation: Elektron bergan atom kationga, qabul qilgan atom anionga aylanadi; ularning oʻzaro tortishishi ion bogʻlanish deyiladi.
   - id: chemical-bonds-005
     type: choice
     difficulty: 3
     lang: text
-    prompt: Bitta juft elektron orqali hosil boʻladigan kovalent bogʻlanish qanday ataladi?
+    prompt: Bitta umumiy elektron jufti orqali hosil boʻlgan kovalent bogʻ qanday ataladi?
     options:
-      - oddi
-      - oddi (xato)
-      - Boshqa
-      - Nomaʼlum
+      - Oddiy (bir karrali) bogʻ
+      - Qoʻsh (ikki karrali) bogʻ
+      - Uch karrali bogʻ
+      - Vodorod bogʻ
     answer: 0
-    explanation: Bitta elektron juft orqali oddiy yoki bir karratli bogʻlanish hosil boʻladi.
+    explanation: Bitta umumiy elektron jufti oddiy (bir karrali) bogʻ hosil qiladi; ikkita juft — qoʻsh bogʻ, uchta juft — uch karrali bogʻ.
   - id: chemical-bonds-006
     type: choice
     difficulty: 3
     lang: text
-    prompt: Qaysi molekulada uch karratli bogʻlanish mavjud?
+    prompt: Qaysi molekulada uch karrali bogʻ mavjud?
     options:
-      - H2
-      - O2
-      - N2
-      - F2
+      - H₂
+      - O₂
+      - N₂
+      - F₂
     answer: 2
-    explanation: Azot (N2) molekulasida uchta elektron juft orqali 3 karratli bogʻlanish hosil boʻladi.
+    explanation: Azot atomiga tashqi qavatni toʻldirish uchun 3 ta elektron yetishmaydi, shuning uchun N₂ molekulasida atomlar uchta umumiy elektron jufti bilan bogʻlangan (N≡N). H₂ va F₂ da oddiy, O₂ da qoʻsh bogʻ bor.
   - id: chemical-bonds-007
     type: choice
     difficulty: 1
     lang: text
-    prompt: Metall bogʻlanish qayerda uchraydi?
+    prompt: Metall kristalida musbat zaryadlangan metall ionlarini nima bogʻlab turadi?
     options:
-      - Gazlarda
-      - Metall va ularning qotishmalarida
-      - Suyuqliklarda
-      - Tuzlarda
+      - Manfiy zaryadlangan anionlar
+      - Butun kristall uchun umumiy boʻlgan erkin elektronlar
+      - Ikki atom orasidagi umumiy elektron juftlari
+      - Vodorod bogʻlar
     answer: 1
-    explanation: Metall bogʻlanish metallar va qotishmalarga xosdir.
+    explanation: Metall bogʻlanishda tashqi qavat elektronlari atomlardan ajralib, butun kristall boʻylab erkin harakatlanadi va musbat ionlarni bogʻlab turadi. Metallarning elektr tokini yaxshi oʻtkazishi ham shu bilan tushuntiriladi.
   - id: chemical-bonds-008
     type: choice
     difficulty: 2
     lang: text
-    prompt: Suv molekulalari oʻrtasidagi oʻzaro bogʻlanish qanday ataladi?
+    prompt: Suv molekulalari bir-biriga qanday bogʻlanish orqali tortilib turadi?
     options:
-      - vodorod
-      - vodorod (xato)
-      - Boshqa
-      - Nomaʼlum
+      - Vodorod bogʻlanish
+      - Ion bogʻlanish
+      - Metall bogʻlanish
+      - Kovalent qutbsiz bogʻlanish
     answer: 0
-    explanation: Suv molekulalari orasida vodorod bogʻlanishi mavjud.
+    explanation: Bir suv molekulasining vodorod atomi qoʻshni molekulaning kislorod atomiga tortiladi — bu vodorod bogʻlanish. Suvning nisbatan yuqori haroratda qaynashi shu bilan tushuntiriladi.
+  - id: chemical-bonds-009
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Kimyoviy bogʻlanish hosil boʻlishida atomning qaysi zarrachalari ishtirok etadi?
+    options:
+      - Protonlar
+      - Neytronlar
+      - Ichki qavat elektronlari
+      - Tashqi qavat (valent) elektronlari
+    answer: 3
+    explanation: Kimyoviy bogʻlanishni yadrodan eng uzoqda joylashgan va unga eng kuchsiz tortiladigan tashqi qavat elektronlari hosil qiladi.
+  - id: chemical-bonds-010
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Quyidagi moddalardan qaysi birida ion bogʻlanish mavjud?
+    options:
+      - H₂
+      - CO₂
+      - CH₄
+      - KCl
+    answer: 3
+    explanation: KCl tipik metall (kaliy) va tipik metallmas (xlor)dan tashkil topgan, shuning uchun unda K⁺ va Cl⁻ ionlari orasida ion bogʻlanish bor.
+  - id: chemical-bonds-011
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Gapni toʻldiring:"
+    code: Musbat zaryadlangan ion ___, manfiy zaryadlangan ion esa ___ deb ataladi.
+    answer:
+      - kation
+      - anion
+    bank:
+      - izotop
+      - neytron
+      - proton
+    explanation: Atom elektron bersa, musbat zaryadli kationga, elektron qabul qilsa, manfiy zaryadli anionga aylanadi.
+  - id: chemical-bonds-012
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Qaysi moddada metall bogʻlanish mavjud?
+    options:
+      - Mis (Cu)
+      - Osh tuzi (NaCl)
+      - Suv (H₂O)
+      - Kislorod (O₂)
+    answer: 0
+    explanation: Mis — metall, uning kristall panjarasidagi atomlarni umumiy erkin elektronlar bogʻlab turadi.
+  - id: chemical-bonds-013
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Vodorod xlorid (HCl) molekulasida umumiy elektron jufti qanday joylashgan?
+    options:
+      - Vodorod atomi tomonga siljigan
+      - Xlor atomi tomonga siljigan
+      - Ikki atom oʻrtasida, hech qaysi tomonga siljimagan
+      - Molekulada umumiy elektron jufti yoʻq
+    answer: 1
+    explanation: Xlorning elektromanfiyligi vodorodnikidan katta, shuning uchun umumiy elektron jufti xlor tomonga siljigan — HCl dagi bogʻlanish kovalent qutbli.
+  - id: chemical-bonds-014
+    type: output
+    difficulty: 2
+    lang: text
+    prompt: "Javobni son bilan yozing:"
+    code: Kislorod (O₂) molekulasida ikki atom orasida nechta umumiy elektron jufti bor?
+    answer:
+      - "2"
+      - 2 ta
+      - ikki
+      - ikkita
+    explanation: Har bir kislorod atomiga tashqi qavatni toʻldirish uchun 2 ta elektron yetishmaydi, shuning uchun ular ikkita umumiy juft — qoʻsh bogʻ hosil qiladi.
+  - id: chemical-bonds-015
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Natriy atomi ion bogʻlanish hosil qilganda nima sodir boʻladi?
+    options:
+      - Bitta elektron qabul qilib, Na⁻ ioniga aylanadi
+      - Bitta elektron berib, Na⁺ ioniga aylanadi
+      - Ikkita elektron berib, Na²⁺ ioniga aylanadi
+      - Elektronlar soni oʻzgarmaydi
+    answer: 1
+    explanation: Natriyning tashqi qavatida bitta elektron bor; uni berib, barqaror tashqi qavatli Na⁺ kationiga aylanadi.
+  - id: chemical-bonds-016
+    type: order
+    difficulty: 3
+    lang: text
+    prompt: "Elementlarni elektromanfiyligi ortib borish tartibida joylashtiring:"
+    lines:
+      - Natriy
+      - Uglerod
+      - Azot
+      - Kislorod
+      - Ftor
+    explanation: Metallarning elektromanfiyligi eng kichik; davrda chapdan oʻngga u ortib boradi va eng elektromanfiy element ftorda eng katta qiymatga yetadi.
+  - id: chemical-bonds-017
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Elektromanfiylik nima?
+    options:
+      - Atom yadrosidagi protonlar soni
+      - Moddaning elektr tokini oʻtkazish xususiyati
+      - Moddaning suvda erish xususiyati
+      - Atomning umumiy elektron juftini oʻziga tortish xususiyati
+    answer: 3
+    explanation: Elektromanfiylik — atomning birikmada bogʻlovchi elektron juftini oʻziga tortish qobiliyati; bogʻlanish qutbliligi shunga bogʻliq.
+  - id: chemical-bonds-018
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Qaysi qatorda faqat kovalent qutbli bogʻlanishli moddalar berilgan?
+    options:
+      - H₂, O₂, N₂
+      - NaCl, KBr, CaO
+      - HCl, H₂O, NH₃
+      - Fe, Cu, Al
+    answer: 2
+    explanation: HCl, H₂O va NH₃ har xil metallmas atomlaridan tuzilgan; qolgan qatorlarda qutbsiz kovalent, ion va metall bogʻlanishli moddalar berilgan.
+  - id: chemical-bonds-019
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Gapni toʻldiring:"
+    code: Bir xil metallmas atomlari orasida kovalent ___ bogʻlanish, elektromanfiyligi har xil boʻlgan metallmas atomlari orasida esa kovalent ___ bogʻlanish hosil boʻladi.
+    answer:
+      - qutbsiz
+      - qutbli
+    bank:
+      - ion
+      - metall
+      - vodorod
+    explanation: Atomlar bir xil boʻlsa, umumiy elektron jufti oʻrtada turadi (qutbsiz); har xil boʻlsa, elektromanfiyroq atom tomonga siljiydi (qutbli).
+  - id: chemical-bonds-020
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Karbonat angidrid (CO₂) molekulasida uglerod atomi har bir kislorod atomi bilan qanday bogʻ orqali bogʻlangan?
+    options:
+      - Oddiy (bir karrali) bogʻ
+      - Uch karrali bogʻ
+      - Ion bogʻ
+      - Qoʻsh (ikki karrali) bogʻ
+    answer: 3
+    explanation: "CO₂ ning tuzilishi O=C=O: uglerod toʻrtta valent elektroni bilan har bir kislorod atomiga ikkitadan umumiy juft hosil qiladi."
