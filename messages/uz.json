@@ -64,7 +64,7 @@
         "text": "Haftalik va mavsumiy reyting, duellar va doʻstlar bilan musobaqa."
       }
     },
-    "tracksTitle": "Yoʻnalishlar va kurslar",
+    "tracksTitle": "Fanlar, yoʻnalishlar va kurslar",
     "centersTitle": "Oʻquv markazlari uchun",
     "centersText": "Markazingiz uchun alohida manzil (markaz.zukkolar.uz), oʻz nomingiz va ranglaringiz, oʻquvchilaringiz reytingi hamda klanlararo musobaqalar.",
     "centersCta": "Bogʻlanish",
@@ -155,7 +155,7 @@
       },
       {
         "q": "Qaysi yoʻnalishlar bor?",
-        "a": "Frontend (HTML, CSS, JavaScript, TypeScript, React), Backend (Python, C#, C++) va kiberxavfsizlik. Linux va tarmoqlar boʻyicha kurslar tayyorlanmoqda."
+        "a": "Frontend (HTML, CSS, JavaScript, TypeScript, React), Backend (Python, C#, C++) va kiberxavfsizlik. Linux va tarmoqlar boʻyicha kurslar, shuningdek matematika, geometriya, fizika, kimyo, biologiya va shaxmat boʻyicha mashqlar tayyorlanmoqda."
       },
       {
         "q": "XP, daraja va streak nima?",
@@ -288,7 +288,7 @@
   },
   "learn": {
     "title": "Oʻrganish",
-    "subtitle": "Yoʻnalishni tanlang — keyin kurs va mavzuni.",
+    "subtitle": "Fanni tanlang — keyin kurs va mavzuni.",
     "exercises": "{count} ta mashq",
     "mastery": "Oʻzlashtirish",
     "start": "Mashqni boshlash",
@@ -311,16 +311,51 @@
     "howTitle": "Drill rejimi qanday ishlaydi",
     "how": "Topshiriqlar cheksiz davom etadi va darajangizga moslashadi: yangi va xato qilgan mashqlaringiz koʻproq chiqadi. Har toʻgʻri javob oʻzlashtirishni oshiradi, xato — biroz kamaytiradi. Birinchi marta yechilgan mashq toʻliq XP beradi, qayta yechilgani — 20%.",
     "suggestionsTitle": "Mashqni davom ettiring",
-    "suggestionsEmpty": "Hali birorta mavzuni boshlamadingiz. useState bilan boshlab koʻring!",
+    "suggestionsEmpty": "Hali birorta mavzuni boshlamadingiz. Oʻzingizga yoqqan fandan boshlang!",
     "browse": "Barcha mavzular",
     "comingSoon": "Tez orada",
     "tracksCount": "{count} ta kurs",
     "skillsCount": "{count} ta mavzu",
-    "backToCategories": "Barcha yoʻnalishlar",
+    "backToSubjects": "Barcha fanlar",
+    "mySubjects": "Mening fanlarim",
+    "otherSubjects": "Boshqa fanlar",
+    "editInterests": "Fanlarni tanlash",
+    "forYou": "Siz uchun kurslar",
+    "forYouText": "Qiziqishlaringizga mos, hali boshlanmagan kurslar.",
     "weeklyBadge": "x2 XP",
     "trackProgress": "oʻzlashtirildi",
     "completeReward": "Kursdagi barcha mashqlarni yeching — bir martalik +{xp} XP mukofot.",
     "completeRewardWeekly": "Bu hafta bonus mavzusi! Har bir mashq uchun XP ikki baravar, kursni tugatsangiz {xp} oʻrniga {double} XP.",
+    "subjects": {
+      "PROGRAMMING": {
+        "title": "Dasturlash",
+        "text": "Frontend, backend, kiberxavfsizlik va dasturlash tillari."
+      },
+      "MATH": {
+        "title": "Matematika",
+        "text": "Arifmetika, algebra, tenglamalar va mantiqiy masalalar."
+      },
+      "GEOMETRY": {
+        "title": "Geometriya",
+        "text": "Shakllar, burchaklar, yuza va hajm."
+      },
+      "PHYSICS": {
+        "title": "Fizika",
+        "text": "Mexanika, elektr, optika va tabiat qonunlari."
+      },
+      "CHEMISTRY": {
+        "title": "Kimyo",
+        "text": "Moddalar, elementlar va kimyoviy reaksiyalar."
+      },
+      "BIOLOGY": {
+        "title": "Biologiya",
+        "text": "Hujayra, oʻsimliklar, hayvonlar va inson organizmi."
+      },
+      "CHESS": {
+        "title": "Shaxmat",
+        "text": "Debyutlar, taktika, kombinatsiyalar va endshpil."
+      }
+    },
     "categories": {
       "FRONTEND": {
         "title": "Frontend",
@@ -351,6 +386,17 @@
         "text": "Turli yoʻnalishlardan aralash savollar."
       }
     }
+  },
+  "interests": {
+    "title": "Sizni qaysi fanlar qiziqtiradi?",
+    "text": "Bir yoki bir nechtasini tanlang — oʻrganish sahifasi va tavsiyalar shunga moslashadi. Keyinroq sozlamalardan oʻzgartirishingiz mumkin.",
+    "continue": "Davom etish",
+    "skip": "Oʻtkazib yuborish",
+    "later": "Keyinroq",
+    "save": "Saqlash",
+    "saved": "Saqlandi",
+    "soon": "Tez orada",
+    "error": "Saqlab boʻlmadi. Qayta urinib koʻring."
   },
   "drill": {
     "close": "Yopish",
@@ -564,7 +610,12 @@
     "notFound": "Foydalanuvchi topilmadi",
     "lockedBadges": "Qolgan nishonlar",
     "allBadges": "Barcha nishonlar",
-    "duel": "Duelga chaqirish"
+    "duel": "Duelga chaqirish",
+    "subjects": "Fanlar",
+    "noSubjects": "Hali fanlar tanlanmagan",
+    "chooseSubjects": "Fanlarni tanlash",
+    "interested": "Qiziqadi",
+    "subjectProgress": "{started} / {skills} ta mavzu boshlangan"
   },
   "settings": {
     "title": "Sozlamalar",
@@ -574,6 +625,8 @@
     "reroll": "Yangi koʻrinish",
     "styleLocked": "{plan} kerak",
     "saved": "Saqlandi",
+    "interests": "Qiziqishlarim",
+    "interestsText": "Tanlagan fanlaringiz profilingizda koʻrinadi, oʻrganish sahifasida birinchi boʻlib chiqadi va tavsiyalar shularga moslanadi.",
     "bio": "Men haqimda",
     "bioPlaceholder": "Masalan: React oʻrganyapman, tez orada junior boʻlaman!",
     "save": "Saqlash",
@@ -916,6 +969,7 @@
       "phone": "Telefon",
       "email": "E-pochta",
       "gender": "Jins",
+      "interests": "Qiziqishlari",
       "joined": "Roʻyxatdan oʻtgan",
       "lastActive": "Oxirgi faollik",
       "stats": "XP: {xp} · daraja {level} · mashqlar: {attempts} · IQ testlar: {iq} · nishonlar: {badges}",

@@ -16,6 +16,7 @@ export default async function AdminUserPage({ params }: PageProps<"/[locale]/adm
   const { user: admin } = await requireAdmin();
   const t = await getTranslations("admin");
   const tAuth = await getTranslations("auth");
+  const tLearn = await getTranslations("learn");
   const format = await getFormatter();
   const data = await getAdminUser(id);
   if (!data) notFound();
@@ -58,6 +59,7 @@ export default async function AdminUserPage({ params }: PageProps<"/[locale]/adm
             <Row label={t("user.phone")} value={user.phone ?? "—"} />
             <Row label={t("user.email")} value={user.email ?? "—"} />
             <Row label={t("user.gender")} value={user.gender ? (user.gender === "MALE" ? tAuth("male") : tAuth("female")) : "—"} />
+            <Row label={t("user.interests")} value={user.interests.map((s) => tLearn(`subjects.${s}.title`)).join(", ") || "—"} />
             <Row label={t("user.joined")} value={format.dateTime(user.createdAt, { dateStyle: "medium", timeStyle: "short" })} />
             <Row label={t("user.lastActive")} value={user.lastActiveDay ? format.dateTime(user.lastActiveDay, { dateStyle: "medium" }) : "—"} />
             <Row label={t("user.clan")} value={user.clanMembership ? `${user.clanMembership.clan.name} [${user.clanMembership.clan.tag}]` : "—"} />

@@ -1,5 +1,5 @@
 import { notFound } from "next/navigation";
-import { Brain, Flame, Pencil, Swords, Trophy, Zap } from "lucide-react";
+import { Brain, Flame, Heart, Pencil, Swords, Trophy, Zap } from "lucide-react";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { db } from "@/lib/db";
@@ -13,12 +13,15 @@ import { BADGES, BADGE_BY_KEY } from "@/features/badges/catalog";
 import { publicUserSelect, relationsTo, toPublicUser } from "@/features/social/queries";
 import { FriendButton } from "@/features/social/components/friend-button";
 import { MessageButton } from "@/features/chat/components/message-button";
+import { getSubjects } from "@/features/learn/queries";
+import { SUBJECT_STYLE } from "@/features/learn/subjects";
 
 export default async function ProfilePage({ params }: PageProps<"/[locale]/u/[username]">) {
   const { locale, username } = await params;
   setRequestLocale(locale);
   const t = await getTranslations("profile");
   const tb = await getTranslations("badges");
+  const tl = await getTranslations("learn");
   const format = await getFormatter();
   const { user: me, tenant } = await requireSession();
 
@@ -29,6 +32,7 @@ export default async function ProfilePage({ params }: PageProps<"/[locale]/u/[us
       bio: true,
       createdAt: true,
       longestStreak: true,
+      interests: true,
       badges: { orderBy: { earnedAt: "desc" } },
       clanMembership: { select: { role: true, clan: { select: { tag: true, slug: true, name: true, emblem: true, color: true } } } },
     },
@@ -38,10 +42,16 @@ export default async function ProfilePage({ params }: PageProps<"/[locale]/u/[us
   const isMe = user.id === me.id;
 
   const store = getLeaderboardStore();
-  const [rank, relations] = await Promise.all([
+  const [rank, relations, allSubjects] = await Promise.all([
     store.rankOf(user.id, { board: "XP", period: "all-time", tenantId: tenant.id }),
     relationsTo(me.id, [user.id]),
+    getSubjects(user.id, tenant.id, locale),
   ]);
+  // What this person is into: the subjects they follow plus the ones they actually practice — most practiced first.
+  const subjects = allSubjects
+    .map((s) => ({ ...s, interested: row.interests.includes(s.subject) }))
+    .filter((s) => s.interested || s.started > 0)
+    .sort((a, b) => b.started - a.started || Number(b.interested) - Number(a.interested));
   const rel = relations.get(user.id)!;
   const earned = new Set(row.badges.map((b) => b.badge));
   const clan = row.clanMembership?.clan;
@@ -99,6 +109,55 @@ export default async function ProfilePage({ params }: PageProps<"/[locale]/u/[us
         <Stat icon={<Brain className="size-5" />} gradient="bg-grad-iq" label={t("iq")} value={user.iq === null ? "—" : String(user.iq)} />
         <Stat icon={<Trophy className="size-5" />} gradient="bg-grad-gold" label={t("rank")} value={rank ? `#${rank}` : "—"} />
         <Stat icon={<Flame className="size-5" />} gradient="bg-grad-streak" label={t("streak")} value={t("days", { count: row.longestStreak })} />
+      </section>
+
+      {/* Subjects — chosen interests and progress in each */}
+      <section className="rounded-3xl border border-border bg-surface p-5 sm:p-6">
+        <div className="flex items-center justify-between gap-3">
+          <h2 className="font-display text-lg font-bold">{t("subjects")}</h2>
+          {isMe && (
+            <Link href="/settings#interests" className="text-sm font-semibold text-brand hover:underline">
+              {t("chooseSubjects")} →
+            </Link>
+          )}
+        </div>
+        {subjects.length === 0 ? (
+          <p className="mt-3 text-sm text-muted">{t("noSubjects")}</p>
+        ) : (
+          <ul className="stagger mt-4 grid gap-3 sm:grid-cols-2 2xl:grid-cols-3">
+            {subjects.map((s) => {
+              const style = SUBJECT_STYLE[s.subject];
+              return (
+                <li key={s.subject} className="flex items-center gap-3 rounded-2xl border border-border p-3">
+                  <IconTile name={style.icon} gradient={style.gradient} size="md" />
+                  <div className="min-w-0 flex-1">
+                    <p className="flex flex-wrap items-center gap-x-2 gap-y-1 font-semibold">
+                      {tl(`subjects.${s.subject}.title`)}
+                      {s.interested && (
+                        <span className="inline-flex items-center gap-1 rounded-full bg-brand/10 px-2 py-0.5 text-[11px] font-bold text-brand">
+                          <Heart className="size-3" /> {t("interested")}
+                        </span>
+                      )}
+                    </p>
+                    {s.skills > 0 ? (
+                      <>
+                        <div className="mt-2 flex items-center gap-2">
+                          <div className="h-1.5 flex-1 overflow-hidden rounded-full bg-border">
+                            <div className="h-full rounded-full bg-grad-brand" style={{ width: `${Math.round(s.mastery)}%` }} />
+                          </div>
+                          <span className="w-9 text-right text-xs font-bold text-muted">{Math.round(s.mastery)}%</span>
+                        </div>
+                        <p className="mt-1 text-xs text-muted">{t("subjectProgress", { started: s.started, skills: s.skills })}</p>
+                      </>
+                    ) : (
+                      <p className="mt-1 text-xs text-muted">{tl("comingSoon")}</p>
+                    )}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </section>
 
       {/* Badges — earned only; the full list with progress lives on /badges */}

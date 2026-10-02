@@ -12,6 +12,8 @@ import { AvatarPicker } from "@/features/profile/components/avatar-picker";
 import { GenderSettings } from "@/features/profile/components/gender-settings";
 import { PasswordDialog } from "@/features/profile/components/password-dialog";
 import { BioForm } from "@/features/profile/components/bio-form";
+import { InterestsForm } from "@/features/profile/components/interests-form";
+import { getUpcomingSubjects } from "@/features/learn/queries";
 import { InviteBox } from "@/features/referrals/components/invite-box";
 
 export default async function SettingsPage({ params }: PageProps<"/[locale]/settings">) {
@@ -19,11 +21,15 @@ export default async function SettingsPage({ params }: PageProps<"/[locale]/sett
   setRequestLocale(locale);
   const t = await getTranslations("settings");
   const tp = await getTranslations("plans");
-  const { user } = await requireSession();
+  const { user, tenant } = await requireSession();
   const plan = effectivePlan(user);
   const unlocked = user.level >= AVATAR_UNLOCK_LEVEL;
 
-  const [code, stats] = await Promise.all([getOrCreateReferralCode(user.id), referralStats(user.id)]);
+  const [code, stats, upcoming] = await Promise.all([
+    getOrCreateReferralCode(user.id),
+    referralStats(user.id),
+    getUpcomingSubjects(tenant.id, locale),
+  ]);
   const link = await inviteLink(code);
 
   return (
@@ -46,6 +52,12 @@ export default async function SettingsPage({ params }: PageProps<"/[locale]/sett
           <div className="mt-6 border-t border-border pt-5" id="gender">
             <GenderSettings seed={user.avatarSeed} style={user.avatarStyle} gender={user.gender} />
           </div>
+        </Card>
+
+        {/* Interests */}
+        <Card title={t("interests")} id="interests">
+          <p className="mb-4 text-sm leading-relaxed text-muted">{t("interestsText")}</p>
+          <InterestsForm initial={user.interests} upcoming={upcoming} variant="settings" />
         </Card>
 
         {/* Bio */}

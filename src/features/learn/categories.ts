@@ -1,6 +1,9 @@
 import type { GradientKey } from "@/components/icon";
 
-/** Learn page order. A category without published tracks is shown as "coming soon". */
+/**
+ * Directions inside the Programming subject (see subjects.ts), in page order.
+ * A category without published tracks is shown as "coming soon".
+ */
 export const CATEGORIES = ["FRONTEND", "BACKEND", "CYBERSECURITY", "LINUX", "NETWORKING", "BASIC", "MIX"] as const;
 export type Category = (typeof CATEGORIES)[number];
 

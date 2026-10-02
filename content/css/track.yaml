@@ -3,6 +3,7 @@ title: CSS
 description: Veb sahifalarni bezash va joylashtirish — selektorlar, box model, Flexbox va zamonaviy stillar.
 icon: palette
 order: 2
+subject: PROGRAMMING
 category: FRONTEND
 modules:
   - slug: layout

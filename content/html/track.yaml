@@ -3,6 +3,7 @@ title: HTML
 description: Veb sahifalarning poydevori — semantik teglar, matn, havolalar, jadvallar va formalar.
 icon: globe
 order: 1
+subject: PROGRAMMING
 category: FRONTEND
 modules:
   - slug: basics

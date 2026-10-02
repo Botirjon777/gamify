@@ -10,8 +10,10 @@ import { PlanBadge } from "@/components/plan-badge";
 import { buttonClass } from "@/components/ui/button";
 import { DAILY_BONUS_XP, xpForLevel } from "@/features/gamification/xp";
 import { DailyBonusCard } from "@/features/gamification/components/daily-bonus-card";
-import { getPracticeSuggestions } from "@/features/learn/queries";
+import { getPracticeSuggestions, getRecommendedTracks, getUpcomingSubjects } from "@/features/learn/queries";
 import { SkillCard } from "@/features/learn/components/skill-card";
+import { TrackCard } from "@/features/learn/components/track-card";
+import { InterestsForm } from "@/features/profile/components/interests-form";
 import { iqFromRating } from "@/features/iq/rating";
 import { hideIqPrompt } from "@/features/iq/actions";
 import { effectivePlan } from "@/features/plans/plans";
@@ -25,13 +27,14 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
   setRequestLocale(locale);
   const t = await getTranslations("dashboard");
   const tLearn = await getTranslations("learn");
+  const tInterests = await getTranslations("interests");
   const { user, tenant } = await requireSession();
 
   const today = tashkentToday();
   await finalizeEndedSeasons();
   const season = await currentSeason();
   const store = getLeaderboardStore();
-  const [claimedToday, iqDoneToday, weekly, rank, iqRank, suggestions] = await Promise.all([
+  const [claimedToday, iqDoneToday, weekly, rank, iqRank, suggestions, recommended, upcoming] = await Promise.all([
     db.dailyClaim.findUnique({ where: { userId_day_kind: { userId: user.id, day: today, kind: "LOGIN" } } }),
     db.dailyClaim.findUnique({ where: { userId_day_kind: { userId: user.id, day: today, kind: "IQ" } } }),
     db.weeklyScore.findUnique({
@@ -40,6 +43,8 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
     store.rankOf(user.id, { board: "XP", period: "all-time", tenantId: tenant.id }),
     store.rankOf(user.id, { board: "IQ", period: "all-time", tenantId: tenant.id }),
     getPracticeSuggestions(user.id, tenant.id, locale),
+    getRecommendedTracks(user.interests, user.id, tenant.id, locale),
+    user.interestsSetAt ? [] : getUpcomingSubjects(tenant.id, locale),
   ]);
 
   // A streak is alive only if the last active day is today or yesterday.
@@ -86,6 +91,15 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
       {!user.gender && (
         <section className="rounded-3xl border border-border bg-surface p-5 sm:p-6">
           <GenderSettings seed={user.avatarSeed} style={user.avatarStyle} gender={null} />
+        </section>
+      )}
+
+      {/* Never asked about interests (accounts older than the question, or sign-ups that left it open) */}
+      {!user.interestsSetAt && (
+        <section className="rounded-3xl border border-border bg-surface p-5 sm:p-6">
+          <h2 className="font-display text-lg font-bold">{tInterests("title")}</h2>
+          <p className="mb-4 mt-1 text-sm leading-relaxed text-muted">{tInterests("text")}</p>
+          <InterestsForm initial={user.interests} upcoming={upcoming} variant="prompt" />
         </section>
       )}
 
@@ -156,12 +170,25 @@ export default async function DashboardPage({ params }: PageProps<"/[locale]/das
           ) : (
             <div className="mt-3 flex flex-col items-start gap-4 rounded-2xl border border-dashed border-border bg-surface p-5 sm:flex-row sm:items-center sm:justify-between">
               <p className="text-muted">{tLearn("suggestionsEmpty")}</p>
-              <Link href="/learn/react/use-state" className={buttonClass("primary", "shrink-0")}>
+              <Link href="/learn" className={buttonClass("primary", "shrink-0")}>
                 {tLearn("start")}
               </Link>
             </div>
           )}
         </section>
+
+        {/* For you — courses not started yet, from the subjects the user follows */}
+        {recommended.length > 0 && (
+          <section className="xl:col-span-2">
+            <h2 className="font-display text-lg font-bold">{tLearn("forYou")}</h2>
+            <p className="mt-0.5 text-sm text-muted">{tLearn("forYouText")}</p>
+            <div className="stagger mt-3 grid gap-3 sm:grid-cols-2 2xl:grid-cols-3">
+              {recommended.map((track) => (
+                <TrackCard key={track.slug} track={track} />
+              ))}
+            </div>
+          </section>
+        )}
 
         <DailyBonusCard claimed={!!claimedToday} cycle={DAILY_BONUS_XP} nextDay={cycleDay} />
 

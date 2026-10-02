@@ -4,13 +4,13 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { requireSession } from "@/lib/auth/session";
 import { getTrack } from "@/features/learn/queries";
-import { categorySlug } from "@/features/learn/categories";
+import { groupMessageKey, SUBJECT_STYLE, trackParentHref } from "@/features/learn/subjects";
 import { TRACK_GRADIENTS } from "@/features/learn/track-style";
 import { SkillCard } from "@/features/learn/components/skill-card";
 import { TRACK_COMPLETE_XP, WEEKLY_BONUS_SHARE, weeklyTopic } from "@/features/events/service";
 import { IconTile } from "@/components/icon";
 
-/** Step 3: one track → modules → skills. */
+/** One track → modules → skills. */
 export default async function TrackPage({ params }: PageProps<"/[locale]/learn/[track]">) {
   const { locale, track: slug } = await params;
   setRequestLocale(locale);
@@ -19,18 +19,16 @@ export default async function TrackPage({ params }: PageProps<"/[locale]/learn/[
   const [track, topic] = await Promise.all([getTrack(slug, user.id, tenant.id, locale), weeklyTopic(undefined, locale)]);
   if (!track) notFound();
   const weekly = topic?.trackId === track.id;
+  const subject = SUBJECT_STYLE[track.subject];
 
   return (
     <div className="flex flex-col gap-6">
-      <Link
-        href={`/learn/c/${categorySlug(track.category)}`}
-        className="inline-flex w-fit items-center gap-1 text-sm font-semibold text-muted hover:text-foreground"
-      >
-        <ArrowLeft className="size-4" /> {t(`categories.${track.category}.title`)}
+      <Link href={trackParentHref(track)} className="inline-flex w-fit items-center gap-1 text-sm font-semibold text-muted hover:text-foreground">
+        <ArrowLeft className="size-4" /> {t(`${groupMessageKey(track)}.title`)}
       </Link>
 
       <header className="flex flex-wrap items-center gap-4">
-        <IconTile name={track.icon ?? "braces"} gradient={TRACK_GRADIENTS[track.slug] ?? "brand"} size="lg" />
+        <IconTile name={track.icon ?? subject.icon} gradient={TRACK_GRADIENTS[track.slug] ?? subject.gradient} size="lg" />
         <div className="min-w-0 flex-1">
           <h1 className="font-display text-2xl font-bold sm:text-3xl">{track.title}</h1>
           {track.description && <p className="mt-1 max-w-2xl text-muted">{track.description}</p>}

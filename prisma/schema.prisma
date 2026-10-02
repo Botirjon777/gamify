@@ -105,6 +105,11 @@ model User {
   avatarStyle String  @default("adventurer")
   bio         String?
 
+  /// Subjects the user chose to follow (onboarding / settings): shown on the profile, first on the learn page.
+  interests      Subject[] @default([])
+  /// null = never asked (the dashboard still offers the picker); set even when the user skipped.
+  interestsSetAt DateTime?
+
   /// Invite code others can register with, e.g. "K7M2QX". Created on first use.
   referralCode       String?   @unique
   referredById       String?
@@ -185,7 +190,9 @@ model Track {
   icon         String?
   order        Int           @default(0)
   status       ContentStatus @default(PUBLISHED)
-  category     TrackCategory @default(BASIC)
+  subject      Subject       @default(PROGRAMMING)
+  /// Only for subjects that are split into categories (Programming); null = listed directly under the subject.
+  category     TrackCategory?
   modules      Module[]
   weeklyTopics WeeklyTopic[]
   duels        Duel[]
@@ -193,7 +200,18 @@ model Track {
   @@index([category, order])
 }
 
-/// Learn page groups tracks by category. Empty categories are shown as "coming soon".
+/// Top level of the catalog and what users pick as interests. Empty subjects are shown as "coming soon".
+enum Subject {
+  PROGRAMMING
+  MATH
+  GEOMETRY
+  PHYSICS
+  CHEMISTRY
+  BIOLOGY
+  CHESS
+}
+
+/// Directions inside Programming. Empty categories are shown as "coming soon".
 enum TrackCategory {
   FRONTEND
   BACKEND
