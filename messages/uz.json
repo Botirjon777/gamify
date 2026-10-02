@@ -1076,7 +1076,8 @@
     "loading": "Yuklanmoqda…",
     "loadMore": "Yana yuklash",
     "cancel": "Bekor qilish",
-    "wait": "Kuting…"
+    "wait": "Kuting…",
+    "close": "Yopish"
   },
   "weekly": {
     "label": "Haftaning bonus mavzusi",
