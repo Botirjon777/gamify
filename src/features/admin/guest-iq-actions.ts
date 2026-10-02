@@ -3,7 +3,7 @@
 import { revalidatePath } from "next/cache";
 import { db } from "@/lib/db";
 import { audit, requireAdmin } from "@/lib/auth/admin";
-import { GUEST_IQ_PRICE_UZS } from "@/features/iq/guest";
+import { iqPrice } from "@/features/settings/service";
 import type { AdminResult } from "./actions";
 
 /**
@@ -12,10 +12,12 @@ import type { AdminResult } from "./actions";
  */
 export async function setGuestIqPaid(testId: string, paid: boolean): Promise<AdminResult> {
   const { user: admin } = await requireAdmin();
+  // Recorded at today's price (it can be changed in the settings).
+  const { priceUzs } = await iqPrice();
   const updated = await db.guestIqTest.updateMany({
     // Only a finished test can be paid for; "unpaid → paid" and back are both exact, so a double click changes nothing.
     where: { id: testId, status: "FINISHED", paidAt: paid ? null : { not: null } },
-    data: paid ? { paidAt: new Date(), paidById: admin.id, amountUzs: GUEST_IQ_PRICE_UZS } : { paidAt: null, paidById: null, amountUzs: 0 },
+    data: paid ? { paidAt: new Date(), paidById: admin.id, amountUzs: priceUzs } : { paidAt: null, paidById: null, amountUzs: 0 },
   });
   if (!updated.count) return { ok: false, error: "notFound" };
   await audit(db, admin.id, paid ? "guestIq.paid" : "guestIq.unpaid", null, { testId });

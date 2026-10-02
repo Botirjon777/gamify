@@ -19,6 +19,7 @@
     "content:check": "tsx scripts/content-push.ts --check",
     "test": "vitest run",
     "plan:set": "tsx scripts/set-plan.ts",
+    "settings": "tsx scripts/settings.ts",
     "deploy:prod": "tsx scripts/deploy.ts",
     "content:lint": "tsx scripts/content-lint.ts"
   },

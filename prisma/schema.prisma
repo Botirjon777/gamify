@@ -643,6 +643,14 @@ model GuestIqTest {
   @@index([referredById])
 }
 
+/// Site-wide values changed without a deploy (payment card, IQ price): one row per key, see features/settings.
+model Setting {
+  key         String   @id
+  value       String
+  updatedAt   DateTime @updatedAt
+  updatedById String?
+}
+
 /// Every admin action, for accountability.
 model AdminAction {
   id           String   @id @default(cuid())

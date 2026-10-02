@@ -66,12 +66,13 @@ export default async function LandingPage({ params }: PageProps<"/[locale]">) {
   const tMeta = await getTranslations("meta");
 
   const tenant = await getCurrentTenant();
-  const [current, catalog, season, topic, origin] = await Promise.all([
+  const [current, catalog, season, topic, origin, payment] = await Promise.all([
     getCurrentSession(),
     getCatalogStructure(tenant.id, locale),
     currentSeason(),
     weeklyTopic(undefined, await getLocale()),
     siteOrigin(),
+    paymentDetails(),
   ]);
 
   // Real numbers from the catalog — nothing invented.
@@ -100,7 +101,7 @@ export default async function LandingPage({ params }: PageProps<"/[locale]">) {
 
   const faq = t.raw("faq") as Faq[];
   const trust = t.raw("trust") as string[];
-  const telegram = telegramUrl(paymentDetails().contact);
+  const telegram = telegramUrl(payment.contact);
   const som = (n: number) => n.toLocaleString("uz-UZ");
 
   // Structured data: who we are, the site, and the FAQ (eligible for rich results).

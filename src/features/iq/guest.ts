@@ -4,7 +4,6 @@ import type { GuestIqTest } from "@/generated/prisma/client";
 import { db } from "@/lib/db";
 import { localized, type LocalizedText } from "@/i18n/content";
 import type { IqPublicContent } from "./content-schema";
-import { IQ_CERTIFICATE_PRICE_UZS } from "./certificate";
 import { iqPercentile } from "./rating";
 import { IQ_QUESTIONS, IQ_SECONDS_PER_QUESTION, type IqQuestion } from "./types";
 
@@ -14,7 +13,6 @@ import { IQ_QUESTIONS, IQ_SECONDS_PER_QUESTION, type IqQuestion } from "./types"
  */
 export const GUEST_IQ_SCORE_IS_FREE = false;
 export const GUEST_IQ_QUESTIONS = IQ_QUESTIONS.PLACEMENT;
-export const GUEST_IQ_PRICE_UZS = IQ_CERTIFICATE_PRICE_UZS;
 
 /** No 0/O, 1/I/L — the code is read aloud and typed into Telegram. */
 const CODE_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";

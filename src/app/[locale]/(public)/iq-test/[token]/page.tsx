@@ -9,11 +9,13 @@ import { Link } from "@/i18n/navigation";
 import { buttonClass } from "@/components/ui/button";
 import { telegramMessageUrl, telegramShareUrl } from "@/lib/telegram";
 import { getCurrentTenant } from "@/lib/tenant";
-import { GUEST_IQ_PRICE_UZS, GUEST_IQ_SCORE_IS_FREE, guestCertificate, guestQuestion, guestShareUrl, guestTestByToken } from "@/features/iq/guest";
+import { GUEST_IQ_SCORE_IS_FREE, guestCertificate, guestQuestion, guestShareUrl, guestTestByToken } from "@/features/iq/guest";
 import { GuestIqShare } from "@/features/iq/components/guest-iq-share";
 import { CopyField, GuestIqRunner, TelegramButton } from "@/features/iq/components/guest-iq";
 import { PrintButton } from "@/features/iq/components/print-button";
 import { paymentDetails } from "@/features/payments/config";
+import { PriceTag } from "@/features/settings/components/price-tag";
+import { iqPrice } from "@/features/settings/service";
 
 /**
  * Personal pages behind an unguessable link: never in search results.
@@ -52,9 +54,8 @@ export default async function GuestIqTestPage({ params }: PageProps<"/[locale]/i
 
   // ─── Finished, waiting for the payment ───────────────────────────────────
   if (!test.paidAt) {
-    const { cardNumber, cardHolder, contact } = paymentDetails();
-    const price = GUEST_IQ_PRICE_UZS.toLocaleString("uz-UZ");
-    const origin = await siteOrigin();
+    const [{ cardNumber, cardHolder, contact }, cost, origin] = await Promise.all([paymentDetails(), iqPrice(), siteOrigin()]);
+    const price = cost.price;
     const telegram = telegramMessageUrl(contact, t("pay.telegramMessage", { code: test.code, name: result.name }));
 
     return (
@@ -75,7 +76,10 @@ export default async function GuestIqTestPage({ params }: PageProps<"/[locale]/i
               <span className="sr-only">{t("pay.locked")}</span>
             </p>
           )}
-          <p className="mt-4 leading-relaxed text-muted">{t("pay.text", { price })}</p>
+          <p className="mt-4 leading-relaxed text-muted">{t("pay.text")}</p>
+          <p className="mt-2 font-display text-2xl font-bold">
+            <PriceTag price={cost} />
+          </p>
         </div>
 
         <ol className="mt-8 flex flex-col gap-6">

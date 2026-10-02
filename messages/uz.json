@@ -1149,7 +1149,8 @@
       "events": "Mavsum va bonuslar",
       "promos": "Promokodlar",
       "partners": "Hamkorlar",
-      "guestIq": "IQ testlar"
+      "guestIq": "IQ testlar",
+      "settings": "Sozlamalar"
     },
     "stats": {
       "totalUsers": "Jami foydalanuvchilar",
@@ -1340,6 +1341,9 @@
       "guestIq": {
         "paid": "IQ test toʻlovini tasdiqladi",
         "unpaid": "IQ test toʻlovini bekor qildi"
+      },
+      "settings": {
+        "update": "Sozlamalarni oʻzgartirdi"
       }
     },
     "events": {
@@ -1444,6 +1448,32 @@
       "open": "Sertifikat",
       "undo": "Bekor qilish",
       "message": "Salom, {name}! Toʻlovingiz tasdiqlandi. IQ sertifikatingiz shu yerda: {url}\nSahifadagi tugma orqali PDF qilib saqlashingiz va doʻstlaringizga ulashishingiz mumkin."
+    },
+    "settings": {
+      "subtitle": "Toʻlov rekvizitlari va narxlar. Saqlangach darhol saytda oʻzgaradi.",
+      "payment": "Toʻlov qabul qilish",
+      "paymentText": "Tarif va IQ test uchun toʻlovlar shu kartaga oʻtkaziladi; chek shu Telegramga yuboriladi.",
+      "cardNumber": "Karta raqami",
+      "cardNumberHint": "16 ta raqam",
+      "cardHolder": "Karta egasi",
+      "contact": "Telegram",
+      "contactHint": "@username yoki https://t.me/… havola",
+      "iq": "IQ test narxi",
+      "iqText": "Roʻyxatdan oʻtmasdan topshiriladigan IQ test natijasi va ilova ichidagi IQ sertifikati narxi.",
+      "iqPrice": "Narx, soʻm",
+      "iqOldPrice": "Chegirmadan oldingi narx, soʻm",
+      "iqOldPriceHint": "Ixtiyoriy. Toʻldirilsa, saytda ustiga chizilgan eski narx va chegirma foizi koʻrsatiladi.",
+      "preview": "Saytda koʻrinishi:",
+      "save": "Saqlash",
+      "saved": "Sozlamalar saqlandi",
+      "errors": {
+        "cardNumber": "Karta raqami 16 ta raqamdan iborat boʻlishi kerak",
+        "cardHolder": "Karta egasi nomi juda uzun",
+        "contact": "Telegram: @username yoki https://t.me/… koʻrinishida yozing",
+        "iqPriceUzs": "Narx 1 000 soʻmdan kam boʻlmasin",
+        "iqOldPriceUzs": "Eski narx yangi narxdan katta boʻlishi kerak",
+        "invalid": "Maʼlumotlarni tekshiring"
+      }
     }
   },
   "common": {
@@ -1455,7 +1485,8 @@
     "wait": "Kuting…",
     "close": "Yopish",
     "soundOn": "Ovozni yoqish",
-    "soundOff": "Ovozni oʻchirish"
+    "soundOff": "Ovozni oʻchirish",
+    "priceSom": "{price} soʻm"
   },
   "weekly": {
     "label": "Haftaning bonus mavzusi",
@@ -1584,7 +1615,7 @@
     "metaDescription": "12 ta mantiqiy savol, har biriga 60 soniya. Testni bepul yeching, natija va IQ sertifikatini oling.",
     "title": "IQ test",
     "text": "Mantiqiy fikrlash darajangizni sinab koʻring. Roʻyxatdan oʻtish shart emas — maʼlumotlaringizni kiriting va boshlang.",
-    "priceNote": "Test bepul. Natijangiz va IQ sertifikati — {price} soʻm: test oxirida toʻlov qilasiz, tasdiqlangach natija va sertifikat ochiladi.",
+    "priceNote": "Test bepul. Natijangiz va IQ sertifikati pullik: test oxirida toʻlov qilasiz, tasdiqlangach ular ochiladi. Narxi — <price></price>",
     "firstName": "Ism",
     "lastName": "Familiya",
     "age": "Yosh",
@@ -1605,7 +1636,7 @@
     "pay": {
       "title": "Test yakunlandi, {name}!",
       "locked": "Natija toʻlovdan soʻng ochiladi",
-      "text": "Natijangiz tayyor. Uni va IQ sertifikatini ochish uchun {price} soʻm toʻlang.",
+      "text": "Natijangiz tayyor. Uni va IQ sertifikatini ochish uchun toʻlov qiling:",
       "step1": "{price} soʻmni shu kartaga oʻtkazing",
       "step2": "Toʻlov chekini Telegram orqali yuboring",
       "codeHint": "Xabarda shu kodni yozing — toʻlovingizni shu orqali topamiz:",

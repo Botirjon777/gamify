@@ -6,7 +6,8 @@ import { db } from "@/lib/db";
 import { requireSession } from "@/lib/auth/session";
 import { getRateLimiter } from "@/lib/rate-limit";
 import { notifyMany } from "@/features/notifications/service";
-import { IQ_CERTIFICATE_PRICE_UZS, iqCertificateAccess } from "@/features/iq/certificate";
+import { iqCertificateAccess } from "@/features/iq/certificate";
+import { iqPrice } from "@/features/settings/service";
 import { BILLING, BILLINGS, priceFor, type PaidPlan } from "./pricing";
 import { checkPromo } from "./promo";
 import { discountedPrice, type PromoProblem } from "./promo-rules";
@@ -93,14 +94,14 @@ export async function requestIqCertificate(reference: string): Promise<Certifica
   if ((await iqCertificateAccess(user)).unlocked) return { ok: false, error: "alreadyUnlocked" };
   if (await db.payment.findFirst({ where: { userId: user.id, status: "PENDING" } })) return { ok: false, error: "pendingExists" };
 
-  const admins = await db.user.findMany({ where: { isSuperAdmin: true, blockedAt: null }, select: { id: true } });
+  const [admins, { priceUzs }] = await Promise.all([db.user.findMany({ where: { isSuperAdmin: true, blockedAt: null }, select: { id: true } }), iqPrice()]);
   await db.$transaction(async (tx) => {
-    await tx.payment.create({ data: { userId: user.id, product: "IQ_CERTIFICATE", months: 0, amountUzs: IQ_CERTIFICATE_PRICE_UZS, reference: ref.data } });
+    await tx.payment.create({ data: { userId: user.id, product: "IQ_CERTIFICATE", months: 0, amountUzs: priceUzs, reference: ref.data } });
     await notifyMany(
       tx,
       admins.map((a) => a.id),
       "PAYMENT_SUBMITTED",
-      { username: user.username, plan: "IQ_CERTIFICATE", amount: IQ_CERTIFICATE_PRICE_UZS },
+      { username: user.username, plan: "IQ_CERTIFICATE", amount: priceUzs },
     );
   });
   revalidatePath("/", "layout");

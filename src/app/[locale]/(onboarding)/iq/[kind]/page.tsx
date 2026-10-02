@@ -3,7 +3,8 @@ import { setRequestLocale } from "next-intl/server";
 import { redirect } from "@/i18n/navigation";
 import { requireSession } from "@/lib/auth/session";
 import { getIqState } from "@/features/iq/actions";
-import { IQ_CERTIFICATE_PRICE_UZS, iqCertificateAccess } from "@/features/iq/certificate";
+import { iqCertificateAccess } from "@/features/iq/certificate";
+import { iqPrice } from "@/features/settings/service";
 import type { IqCertificateState } from "@/features/iq/components/iq-certificate";
 import { IqTest } from "@/features/iq/components/iq-test";
 import { paymentDetails } from "@/features/payments/config";
@@ -23,7 +24,6 @@ export default async function IqPage({ params }: PageProps<"/[locale]/iq/[kind]"
 
   const [state, access] = await Promise.all([getIqState(kind), iqCertificateAccess(user)]);
   // The result screen offers the certificate: open it, or (Free plan) buy it once.
-  // The price is formatted here, on the server: browsers without Uzbek locale data would format it differently.
-  const certificate: IqCertificateState = access.unlocked ? access : { ...access, price: IQ_CERTIFICATE_PRICE_UZS.toLocaleString("uz-UZ"), ...paymentDetails() };
+  const certificate: IqCertificateState = access.unlocked ? access : { ...access, price: await iqPrice(), ...(await paymentDetails()) };
   return <IqTest kind={kind} initial={state} certificate={certificate} />;
 }

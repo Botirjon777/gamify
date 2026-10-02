@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { ArrowRight, Award, Brain, HelpCircle, Timer } from "lucide-react";
 import { getTranslations, setRequestLocale } from "next-intl/server";
-import { GUEST_IQ_PRICE_UZS, GUEST_IQ_QUESTIONS } from "@/features/iq/guest";
+import { GUEST_IQ_QUESTIONS } from "@/features/iq/guest";
+import { PriceTag } from "@/features/settings/components/price-tag";
+import { iqPrice } from "@/features/settings/service";
 import { GuestIqForm } from "@/features/iq/components/guest-iq";
 import { IQ_SECONDS_PER_QUESTION } from "@/features/iq/types";
 
@@ -17,7 +19,7 @@ export default async function GuestIqStartPage({ params, searchParams }: PagePro
   const { r } = await searchParams;
   const t = await getTranslations("guestIq");
   const tIq = await getTranslations("iq");
-  const price = GUEST_IQ_PRICE_UZS.toLocaleString("uz-UZ");
+  const price = await iqPrice();
 
   return (
     <div className="mx-auto w-full max-w-2xl rounded-3xl border border-border bg-surface p-6 text-center shadow-xl shadow-brand/5 sm:p-10">
@@ -36,7 +38,9 @@ export default async function GuestIqStartPage({ params, searchParams }: PagePro
       {/* Said before the test starts, not after it: what is free and what is paid. */}
       <p className="mt-4 flex items-start gap-3 rounded-2xl border border-xp/40 bg-xp/10 p-4 text-left text-sm leading-relaxed">
         <Award className="mt-0.5 size-5 shrink-0 text-xp" />
-        <span>{t("priceNote", { price })}</span>
+        <span>
+          {t.rich("priceNote", { price: () => <PriceTag price={price} /> })}
+        </span>
       </p>
 
       <div className="mt-6">

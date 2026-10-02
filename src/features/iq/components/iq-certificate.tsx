@@ -8,11 +8,13 @@ import { Link } from "@/i18n/navigation";
 import { Button, buttonClass } from "@/components/ui/button";
 import { toast } from "@/components/ui/toast";
 import { requestIqCertificate } from "@/features/payments/actions";
+import { PriceTag } from "@/features/settings/components/price-tag";
+import type { IqPrice } from "@/features/settings/service";
 
 /** What the result screen knows about the user's certificate. */
 export type IqCertificateState =
   | { unlocked: true }
-  | { unlocked: false; pending: boolean; /** Already formatted, e.g. "13 000". */ price: string; cardNumber: string | null; cardHolder: string | null; contact: string | null };
+  | { unlocked: false; pending: boolean; price: IqPrice; cardNumber: string | null; cardHolder: string | null; contact: string | null };
 
 /**
  * Under an IQ result: open the certificate, or — for Free users — buy it once (card transfer checked by an admin).
@@ -43,7 +45,7 @@ export function IqCertificate({ state }: { state: IqCertificateState }) {
     );
   }
 
-  const { price } = state;
+  const { price } = state.price;
   const submit = () =>
     start(async () => {
       const result = await requestIqCertificate(reference).catch(() => ({ ok: false as const, error: "network" as const }));
@@ -76,7 +78,9 @@ export function IqCertificate({ state }: { state: IqCertificateState }) {
           </div>
 
           <div className="rounded-2xl border border-border bg-background p-3 text-center">
-            <p className="font-display text-xl font-bold">{t("price", { price })}</p>
+            <p className="font-display text-xl font-bold">
+              <PriceTag price={state.price} />
+            </p>
             <p className="text-xs text-muted">{t("oneTime")}</p>
           </div>
 
