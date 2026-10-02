@@ -1,6 +1,6 @@
 import { parse } from "yaml";
 import { describe, expect, it } from "vitest";
-import { exerciseDef, trackFile } from "./content-schema";
+import { exerciseDef, toDbExercise, trackFile } from "./content-schema";
 
 describe("track file", () => {
   const track = (extra: Record<string, unknown>) =>
@@ -44,5 +44,15 @@ answer: 0
   it("accepts plain strings and language-keyed text", () => {
     const def = { id: "demo-002", type: "choice", prompt: { uz: "Savol", ru: "Вопрос" }, options: ["a", "b"], answer: 1 };
     expect(exerciseDef.safeParse(def).success).toBe(true);
+  });
+
+  it("fill word bank: stored with the right words mixed in; a distractor can't be an accepted answer", () => {
+    const fill = { id: "demo-003", type: "fill", lang: "text", prompt: "Toʻldiring", code: "___ va ___", answer: ["shoh", ["mat", "mot"]] };
+    const ok = exerciseDef.parse({ ...fill, bank: ["pat", "vazir"] });
+    const content = toDbExercise(ok).content as { bank?: string[] };
+    expect(content.bank).toEqual(["mat", "pat", "shoh", "vazir"]);
+    expect(JSON.stringify(content)).not.toContain("mot");
+    expect(exerciseDef.safeParse({ ...fill, bank: ["mot"] }).success).toBe(false);
+    expect((toDbExercise(exerciseDef.parse(fill)).content as { bank?: string[] }).bank).toBeUndefined();
   });
 });

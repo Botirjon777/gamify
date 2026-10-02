@@ -1,0 +1,97 @@
+exercises:
+  - id: human-anatomy-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Inson tanasidagi eng katta organ qaysi?
+    options:
+      - Yurak
+      - Jigar
+      - Teri
+      - Oʻpka
+    answer: 2
+    explanation: Teri inson tanasining butun sirtini qoplovchi eng katta organ hisoblanadi.
+  - id: human-anatomy-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Qonni tana boʻylab haydab beruvchi asosiy organ?
+    options:
+      - Jigar
+      - Oʻpka
+      - Yurak
+      - Buyrak
+    answer: 2
+    explanation: Yurak nasos funksiyasini bajaradi.
+  - id: human-anatomy-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Nafas olish va chiqarish uchun javobgar boʻlgan asosiy organ nima?
+    answer: 0
+    explanation: Oʻpka gaz almashinuvini taʼminlaydi.
+    options:
+      - oʻpka
+      - oʻpka (xato)
+      - Boshqa
+      - Nomaʼlum
+  - id: human-anatomy-004
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Ovqat hazm qilish tizimining qaysi qismida oziq moddalar qonga eng koʻp soʻriladi?
+    options:
+      - Oshqozon
+      - Ingichka ichak
+      - Yoʻgʻon ichak
+      - Qiziloʻngach
+    answer: 1
+    explanation: Oziq moddalarning asosiy soʻrilish jarayoni ingichka ichakda kechadi.
+  - id: human-anatomy-005
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Katta odam skeletida taxminan necha suyak bor?
+    answer: 1
+    explanation: Voyaga yetgan insonda odatda 206 ta suyak mavjud boʻladi.
+    options:
+      - "204"
+      - "206"
+      - "208"
+      - "211"
+  - id: human-anatomy-006
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Qondagi qizil qon tanachalari nima deb ataladi?
+    options:
+      - Leykotsitlar
+      - Eritrotsitlar
+      - Trombotsitlar
+      - Plazma
+    answer: 1
+    explanation: Eritrotsitlar qonga qizil rang beruvchi gemoglobinni tashiydi.
+  - id: human-anatomy-007
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Markaziy asab tizimi qaysi organlardan iborat?
+    options:
+      - Bosh miya va orqa miya
+      - Yurak va qon tomirlari
+      - Oshqozon va ichaklar
+      - Muskullar va suyaklar
+    answer: 0
+    explanation: Markaziy asab tizimini bosh miya va orqa miya tashkil etadi.
+  - id: human-anatomy-008
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Zaharli moddalarni parchalovchi va safro ishlab chiqaruvchi organ nima?
+    answer: 0
+    explanation: Jigar moddalar almashinuvida va detoksifikatsiyada muhim rol oʻynaydi.
+    options:
+      - jigar
+      - jigar (xato)
+      - Boshqa
+      - Nomaʼlum

@@ -1,0 +1,107 @@
+exercises:
+  - id: king-special-moves-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: "Shoh (♔) qanday harakatlanadi?"
+    options:
+      - "Istalgan yoʻnalishda faqat bir katakka"
+      - "Istalgan yoʻnalishda uzoq masofaga"
+      - "Faqat vertikal boʻylab bir katak"
+      - "Faqat diagonal boʻylab ikki katak"
+    answer: 0
+    explanation: "Shoh vertikal, gorizontal yoki diagonal boʻylab har qanday qoʻshni (yonma-yon turgan) katakka, yaʼni bir katakka yura oladi."
+
+  - id: king-special-moves-002
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Shoh yurishidagi cheklovni toʻldiring:"
+    code: |-
+      Shoh hech qachon ___ ostida boʻlgan katakka yura olmaydi. Oʻz ixtiyori bilan shohini ___ ga tutib berish mumkin emas.
+    answer:
+      - zarba
+      - zarbaga
+    explanation: "Shohni raqib donasi hujum qilayotgan (zarba ostidagi) katakka yurish qoidalarga ziddir."
+    bank:
+      - himoya
+      - markazga
+
+  - id: king-special-moves-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Ikkita raqib shohi maydonda bir-biriga yonma-yon tura oladimi?"
+    options:
+      - "Ha, agar boshqa donalar boʻlmasa"
+      - "Yoʻq, ular orasida har doim kamida bitta boʻsh katak boʻlishi shart"
+      - "Faqat oʻyin boshida"
+      - "Ha, istalgan vaqtda"
+    answer: 1
+    explanation: "Shoh hujum ostidagi katakka kira olmasligi sababli, ikkita shoh hech qachon bir-biriga qoʻshni kataklarda tura olmaydi (ular orasida kamida bir katak masofa boʻlishi kerak)."
+
+  - id: king-special-moves-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: "Shohni raqib tomonidan urib olib, oʻyindan chiqarib yuborish mumkinmi?"
+    options:
+      - "Ha, xuddi boshqa donalar kabi"
+      - "Yoʻq, shohni urib olish mumkin emas"
+      - "Faqat vazir urib olishi mumkin"
+      - "Ha, faqat oxirgi oʻyinda"
+    answer: 1
+    explanation: "Shaxmatda shohni hech qachon maydondan olib tashlash (urib olish) mumkin emas. Maqsad shohni mat qilishdir."
+
+  - id: king-special-moves-005
+    type: order
+    difficulty: 1
+    lang: text
+    prompt: "Oʻyinchi shohiga xavf tugʻilganda (shoh eʼlon qilinganda) nima qilishlari kerakligini tartiblang:"
+    lines:
+      - "Raqib shoh eʼlon qiladi (hujum qiladi)."
+      - "Oʻyinchi shohini xavfsiz (zarba ostida boʻlmagan) katakka qochirishi kerak."
+      - "Yoki xavf va shoh orasiga oʻz donasini toʻsiq qilib qoʻyishi mumkin."
+      - "Yoki shohga hujum qilayotgan raqib donasini urib olishi kerak."
+    explanation: "Shohga hujum qilinganda, darhol uni qutqarish chorasi koʻrilishi shart. Boshqa yurish qilish mumkin emas."
+
+  - id: king-special-moves-006
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Shohning oʻyindagi ahamiyatini toʻldiring:"
+    code: |-
+      Shaxmatda eng muhim dona bu ___. Agar u ___ qilinsa, oʻyin darhol tugaydi.
+    answer:
+      - shoh
+      - mat
+    explanation: "Shoh shaxmatdagi eng muhim dona hisoblanadi. Oʻyinning asosiy maqsadi raqib shohini mat qilish va oʻz shohingizni asrashdir."
+    bank:
+      - vazir
+      - pat
+
+  - id: king-special-moves-007
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Agar oʻyinchining shohi xavf ostida qolsa (shoh berilsa) va u boshqa dona bilan shohga taalluqli boʻlmagan yurish qilsa, nima boʻladi?"
+    options:
+      - "Raqib uning shohini urib oladi va yutadi"
+      - "Bu yurish bekor qilinadi (notoʻgʻri yurish) va u shohni qutqarishga majbur boʻladi"
+      - "Oʻyin durrang boʻladi"
+      - "Oʻyin shu yerdan toʻxtatilib, yangitdan boshlanadi"
+    answer: 1
+    explanation: "Shoh xavf ostida boʻlganda boshqa yurish qilish qoidabuzarlik hisoblanadi (notoʻgʻri yurish). Yurish qaytariladi va toʻgʻri yurish qilinadi."
+
+  - id: king-special-moves-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Shoh ochiq (himoyalanmagan) raqib donasini urib ola biladimi?"
+    options:
+      - "Ha, agar oʻsha dona boshqa raqib donasi tomonidan himoyalanmagan boʻlsa"
+      - "Yoʻq, shoh hech qachon dona urib ololmaydi"
+      - "Faqat pionlarni urib oladi"
+      - "Ha, hattoki u himoyalangan boʻlsa ham"
+    answer: 0
+    explanation: "Shoh oʻziga qoʻshni boʻlgan istalgan raqib donasini urib olishi mumkin, faqat shart shuki, u dona boshqa raqib donasi tomonidan himoyalanmagan boʻlishi kerak."

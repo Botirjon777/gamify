@@ -1,0 +1,97 @@
+exercises:
+  - id: cell-structure-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Barcha tirik organizmlarning asosiy tuzilish birligi nima?
+    options:
+      - Toʻqima
+      - Organ
+      - Hujayra
+      - Tana
+    answer: 2
+    explanation: Hujayra - barcha tirik mavjudotlarning eng kichik strukturaviy birligi.
+  - id: cell-structure-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Hujayraning 'energiya stansiyasi' deb qaysi organoid ataladi?
+    options:
+      - Yadro
+      - Mitoxondriya
+      - Ribosoma
+      - Vakuola
+    answer: 1
+    explanation: Mitoxondriya hujayrani ATF (energiya) bilan taʼminlaydi.
+  - id: cell-structure-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Oʻsimlik hujayrasida fotosintez jarayoni kechadigan yashil plastidalar nima deyiladi?
+    answer: 0
+    explanation: Fotosintez xloroplastlarda sodir boʻladi.
+    options:
+      - xloroplast
+      - xloroplast (xato)
+      - Boshqa
+      - Nomaʼlum
+  - id: cell-structure-004
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Genetik maʼlumot qayerda saqlanadi?
+    options:
+      - Sitoplazma
+      - Yadro
+      - Lizosoma
+      - Golji majmuasi
+    answer: 1
+    explanation: Yadroda DNK va xromosomalar (genetik maʼlumot) saqlanadi.
+  - id: cell-structure-005
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Oqsil sintezini amalga oshiruvchi organoid qanday ataladi?
+    answer: 0
+    explanation: Ribosomalar oqsil sintezida qatnashadi.
+    options:
+      - ribosoma
+      - ribosoma (xato)
+      - Boshqa
+      - Nomaʼlum
+  - id: cell-structure-006
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Qaysi organoid faqat oʻsimlik hujayralariga xos?
+    options:
+      - Hujayra devori
+      - Mitoxondriya
+      - Yadro
+      - Sitoplazma
+    answer: 0
+    explanation: Qattiq sellyuloza hujayra devori oʻsimliklarga xos.
+  - id: cell-structure-007
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Moddalarni qadoqlash va tashish funksiyasini qaysi organoid bajaradi?
+    options:
+      - Endoplazmatik toʻr
+      - Golji majmuasi
+      - Lizosoma
+      - Xloroplast
+    answer: 1
+    explanation: Golji majmuasi hujayra ichidagi moddalarni saralaydi va qadoqlaydi.
+  - id: cell-structure-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Hujayra ichidagi suyuqlik nima deb ataladi?
+    answer: 0
+    explanation: Sitoplazma barcha organoidlarni oʻrab turadigan suyuqlikdir.
+    options:
+      - sitoplazma
+      - sitoplazma (xato)
+      - Boshqa
+      - Nomaʼlum

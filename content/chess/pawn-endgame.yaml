@@ -1,0 +1,107 @@
+exercises:
+  - id: pawn-endgame-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: "Pion (piyoda) oxirgi qatorga borsa nima boʻladi?"
+    options:
+      - "U oʻyindan chiqadi"
+      - "U yana oʻyinning boshiga qaytadi"
+      - "Oʻyinchi uni oʻz xohishiga koʻra Vazir, Tura, Fil yoki Otga aylantirishi mumkin"
+      - "Hech narsa, u shunchaki turaveradi"
+    answer: 2
+    explanation: "Pion endshpilidagi asosiy maqsad - piyodani raqibning oxirgi qatoriga olib borib, uni qiymatliroq donaga (koʻpincha vazirga) aylantirishdir (Evrilish)."
+
+  - id: pawn-endgame-002
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Evrilish (promotion) shartini toʻldiring:"
+    code: |-
+      Pion oxirgi qatorga borganda uni albatta almashtirish ___. Uni yana pionligicha qoldirish yoki ___ ga aylantirish qoidalarga ziddir.
+    answer:
+      - shart
+      - shoh
+    explanation: "Evrilish ixtiyoriy emas, majburiydir. Pion oxirgi qatorda hech qachon pion sifatida qola olmaydi va uni 2-shoh qilib olish ham mumkin emas."
+    bank:
+      - taqiqlangan
+      - vazir
+
+  - id: pawn-endgame-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Taxtada faqat shohlar va bitta piyoda qoldi. Yutuq uchun asosiy shart nima?"
+    options:
+      - "Tezroq harakat qilish"
+      - "Oʻz shohingiz bilan piyodaga yoʻl ochish va uni oxirgi qatorga olib chiqish"
+      - "Piyodani markazda qoldirib, shohlar bilan jang qilish"
+      - "Faqat piyodani oldinga surish, shohni himoyada qoldirish"
+    answer: 1
+    explanation: "Faqat piyodaning oʻzini oldinga haydash koʻpincha uni raqib shohiga yedirib yuborish bilan tugaydi. Oʻz shohingiz uning oldidan borib himoya qilib, unga yoʻl ochib berishi kerak."
+
+  - id: pawn-endgame-004
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "'Oppozitsiya' (shohlarning yuzma-yuz turishi) pion oxirgi oʻyinida nima uchun juda muhim?"
+    options:
+      - "Durrang eʼlon qilish uchun"
+      - "Shaxmat taxtasini chiroyli koʻrsatish uchun"
+      - "Raqib shohini siqib chiqarib, oʻz piyodangizning Vazirga aylanishi (oʻtishi) uchun yoʻl ochish maqsadida"
+      - "Shohlarni urib olish uchun"
+    answer: 2
+    explanation: "Shohlar oʻrtasida bitta boʻsh katak qoldirib yuzma-yuz kelishida yurish navbati raqibda boʻlsa, u chekinishga majbur boʻladi va sizning shohingiz piyoda uchun oldinga qadam bosadi. Bu oppozitsiyadan foydalanish deyiladi."
+
+  - id: pawn-endgame-005
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Oʻz piyodangizni vazirga aylantirish (haydash) ning toʻgʻri strategiyasini tartiblang:"
+    lines:
+      - "Oʻz shohingizni imkon qadar piyodangizdan oldinroqqa, raqib shohiga qarab olib chiqasiz."
+      - "Oppozitsiya holatiga erishib, raqib shohini chekinishga yoki yon tomonga ketishga majbur qilasiz."
+      - "Raqib shohi boʻshatgan katakka (oldinga va yon tomonga) oʻz shohingiz bilan kirib borasiz (ushbu yoʻl piyoda uchun xavfsiz boʻladi)."
+      - "Endi xotirjam piyodangizni himoyalangan kataklar orqali Vazirga aylantirasiz."
+    explanation: "Bu 'shoh-piyodadan oldinda borishi kerak' qoidasining asosiy bosqichlaridir."
+
+  - id: pawn-endgame-006
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Piyodalar tuzilishidagi zaifliklarni toʻldiring:"
+    code: |-
+      Ikkita piyoda bitta vertikall (ustun)da ustma-ust tushib qolsa, ular ___ piyodalar deyiladi va bu juda zaif holat, chunki ular bir-birini ___ qila olmaydi.
+    answer:
+      - qoʻshaloq
+      - himoya
+    explanation: "Qoʻshaloq piyodalar harakatlanishi qiyin va bir-birini himoya qila olmagani uchun endshpilda katta kamchilik hisoblanadi."
+    bank:
+      - ajralgan
+      - hujum
+
+  - id: pawn-endgame-007
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "'Oʻtkinchi piyoda' (Passed pawn) nima?"
+    options:
+      - "Orqaga yurib ketgan piyoda"
+      - "Oʻzining va qoʻshni vertikallarida (yoʻlida) raqibning piyodalari qolmagan, faqatgina donalar yoki shoh toʻxtatishi mumkin boʻlgan erkin piyoda"
+      - "Faqat oq katakda yuradigan piyoda"
+      - "Boshqa donaning oʻrniga oʻtib qolgan piyoda"
+    answer: 1
+    explanation: "Oʻtkinchi piyoda juda katta kuchdir, chunki uni toʻxtatish uchun raqib endi piyoda emas, balki muhimroq donasini (yoki shohini) band qilishga majbur boʻladi."
+
+  - id: pawn-endgame-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Kvadrat qoidasi (Rule of the Square) qachon qoʻllaniladi?"
+    options:
+      - "Shohni qafasga solishda"
+      - "Oʻz piyodangiz qochib ketayotganda, raqib shohi unga yetib olib ura olishi yoki ura olmasligini uzoqdan turib tezkor hisoblash uchun"
+      - "Taxtaning hajmini oʻlchashda"
+      - "Donalarni maydonga terishda"
+    answer: 1
+    explanation: "Piyoda turgan joydan evrilish katagigacha boʻlgan masofadan kvadrat chiziladi. Agar raqib shohi shu kvadratning ichida boʻlsa (yoki kirib ulgursa), piyodaga yetib oladi. Boʻlmasa piyoda qochib vazir boʻladi. Bu har bir qadamni hisoblab oʻtirmaslik uchun qulay usul."

@@ -1,0 +1,108 @@
+exercises:
+  - id: check-checkmate-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: "'Shoh' (Check) eʼlon qilish nima degani?"
+    options:
+      - "Raqib shohini taxtadan olib tashlash"
+      - "Raqib shohiga toʻgʻridan-toʻgʻri hujum qilish"
+      - "Oʻyinni yutganlikni eʼlon qilish"
+      - "Shohni boshqa joyga koʻchirish huquqi"
+    answer: 1
+    explanation: "Biror dona orqali raqib shohiga xavf solish (hujum qilish) 'shoh' deb ataladi."
+
+  - id: check-checkmate-002
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Shoh eʼlon qilingandagi holatni toʻldiring:"
+    code: |-
+      Agar sizning shohingizga hujum qilinsa, siz uni ___ qoldira olmaysiz. Keyingi yurishingizda xavfdan ___ majbursiz.
+    answer:
+      - xavf ostida
+      - qutulishga
+    explanation: "Qoidalarga koʻra, shoh hujum ostida qolsa, oʻyinchining keyingi yurishi albatta shohni himoya qilishga qaratilgan boʻlishi shart."
+    bank:
+      - markazda
+      - kutishga
+
+  - id: check-checkmate-003
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Shoh eʼlon qilinganda undan qutulishning 3 ta asosiy usulini tartiblang (bu yerda ixtiyoriy tartibda koʻrsatilgan):"
+    lines:
+      - "Shohni xavfsiz katakka qochirish."
+      - "Shoh bilan hujum qilayotgan dona orasiga oʻz donangizni toʻsiq qilib qoʻyish."
+      - "Shohga hujum qilib turgan raqib donasini (oʻz donangiz bilan) urib olish."
+    explanation: "Shoh eʼlon qilinganda qochish, toʻsish yoki hujumchini yoʻq qilish orqali qutulish mumkin."
+
+  - id: check-checkmate-004
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "'Mat' (Checkmate) nima degani?"
+    options:
+      - "Shoh eʼlon qilingan, lekin qochishga joyi bor holat"
+      - "Shohga hujum qilingan va undan qutulishning hech qanday iloji yoʻq holat"
+      - "Taxtada faqat shohlar qolgan holat"
+      - "Shohga hujum qilinmagan, lekin boshqa yurish yoʻq holat"
+    answer: 1
+    explanation: "Mat - bu raqib shohiga hujum qilingan (shoh berilgan) hamda qochishga, toʻsishga yoki hujumchini urib olishga hech qanday imkoniyat boʻlmagan holat. Bu oʻyinning gʻalaba bilan tugashidir."
+
+  - id: check-checkmate-005
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Mat holatidagi natijani toʻldiring:"
+    code: |-
+      Raqib shohini ___ qilgan oʻyinchi gʻalaba qozonadi. Shaxmat oʻyinining asosiy maqsadi shu boʻlib, buning uchun koʻp donaga ega boʻlish shart ___.
+    answer:
+      - mat
+      - emas
+    explanation: "Oʻyinda gʻalaba qozonish uchun shohni mat qilish kifoya, hamma donalarni urib olish yoki donalar ustunligiga ega boʻlish majburiy emas."
+    bank:
+      - pat
+      - ekan
+
+  - id: check-checkmate-006
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Ot orqali 'shoh' eʼlon qilinganda, undan qutulishning qaysi usulini qoʻllab boʻlmaydi?"
+    options:
+      - "Shohni qochirish"
+      - "Otni urib olish"
+      - "Ot va shoh orasini toʻsish"
+      - "Barcha usullarni qoʻllasa boʻladi"
+    answer: 2
+    explanation: "Ot boshqa donalar ustidan sakrab oʻtganligi uchun, uning yoʻlini toʻsib boʻlmaydi. Faqat qochish yoki otni urib olish mumkin."
+
+  - id: check-checkmate-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: "Oʻz shohingizga oʻzingiz shoh eʼlon qila olasizmi (masalan oʻzingizni xavf ostiga qoʻyib)?"
+    options:
+      - "Ha, agar bu taktik maqsad boʻlsa"
+      - "Yoʻq, bunday yurish shaxmat qoidalariga zid"
+      - "Faqat piyoda bilan shoh berilsa"
+      - "Ha, oʻyin boshida"
+    answer: 1
+    explanation: "Oʻz ixtiyori bilan oʻz shohini xavf (zarba) ostiga qoʻyish mumkin emas, bunday yurish qilish man etiladi."
+
+  - id: check-checkmate-008
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Bolalar moti (ushbu mot haqidagi qoidani) toʻldiring:"
+    code: |-
+      Oʻyin boshida bir necha yurishdayoq raqib shohini ___ qilish 'Bolalar moti' (yoki shunga oʻxshash tezkor matlar) deb ataladi. Bunda koʻpincha ___ eng zaif hisoblangan f7 yoki f2 katagiga hujum qiladi.
+    answer:
+      - mat
+      - vazir
+    explanation: "Tezkor matlar asosan shohning yonidagi faqat shoh tomonidan himoyalangan zaif piyon (f2/f7) ga vazir va fil bilan hujum qilish orqali amalga oshadi."
+    bank:
+      - pat
+      - pion

@@ -1,0 +1,107 @@
+exercises:
+  - id: stalemate-draw-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: "'Pat' (Stalemate) nima degani?"
+    options:
+      - "Raqib shohini mat qilish"
+      - "Oʻz shohini zarba ostiga qoʻyish"
+      - "Shohga hujum (shoh) eʼlon qilinmagan, biroq oʻyinchining qoidalarga muvofiq qila oladigan biron-bir yurishi qolmagan holat"
+      - "Oʻyinchining vaqti tugab qolgan holat"
+    answer: 2
+    explanation: "Pat holatida oʻyinchining shohi xavf ostida emas (shoh berilmagan), lekin u na shohi, na boshqa donasi bilan hech qanday toʻgʻri yurish qila olmaydi."
+
+  - id: stalemate-draw-002
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Pat holatidagi natijani toʻldiring:"
+    code: |-
+      Shaxmatda pat holati yuzaga kelsa, oʻyin ___ bilan tugaydi. Hech kim yutmaydi va tomonlarga 0.5 dan ___ yoziladi.
+    answer:
+      - durrang
+      - ochko
+    explanation: "Garchi bitta oʻyinchining donalari koʻp boʻlsa ham, agar raqib pat holatiga tushsa, oʻyin durrang (hech kim yutmagan) deb hisoblanadi."
+    bank:
+      - gʻalaba
+      - dona
+
+  - id: stalemate-draw-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Quyidagilardan qaysi biri oʻyinni durrangga olib kelmaydi?"
+    options:
+      - "Taxtada mat qilish uchun yetarli donalar qolmaganda (Masalan: faqat shohlar qolsa)"
+      - "Bir xil pozitsiya ketma-ket 3 marta qaytarilganda"
+      - "Raqib shohiga muttasil shoh berilaverganda (Abadiy shoh)"
+      - "Bitta oʻyinchining barcha piyodalari urib olinganda"
+    answer: 3
+    explanation: "Piyodalarning urib olinishi oʻyin tugashini bildirmaydi. Durrang qoidalari: donalar yetishmovchiligi, pat, 3 marta takrorlanish, 50 yurish qoidasi kabilar."
+
+  - id: stalemate-draw-004
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Shaxmatdagi '50 yurish qoidasi' ga koʻra durrang qanday eʼlon qilinishini tartiblang:"
+    lines:
+      - "Oʻyinda hech qanday dona (piyoda, fil, ot va h.k) urib olinmaydi."
+      - "Va birorta ham piyoda oldinga joyidan siljimaydi."
+      - "Shu holatda har ikki tomon jami 50 martadan (umumiy 100 ta) yurishni amalga oshiradi."
+      - "Oʻyinchilardan biri qoidani talab qiladi va hakam durrang qayd etadi."
+    explanation: "Agar 50 yurish davomida na biror dona yeyilsa, na pion siljisa, oʻyin durrang deb hisoblanishi mumkin."
+
+  - id: stalemate-draw-005
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Ikkala tomonda ham faqat shohlar qolgan boʻlsa oʻyin natijasi nima boʻladi?"
+    options:
+      - "Mat bilan tugaydi"
+      - "Vaqti koʻp oʻyinchi yutadi"
+      - "Avtomatik tarzda durrang eʼlon qilinadi (donalar yetishmovchiligi)"
+      - "Shohlar bir-birini urib olguncha davom etadi"
+    answer: 2
+    explanation: "Yolgʻiz shoh bilan mat qilib boʻlmaydi. Bunday holat 'mot qilish uchun material yetishmovchiligi' deb ataladi va durrang eʼlon qilinadi."
+
+  - id: stalemate-draw-006
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Durrang qoidalarini toʻldiring:"
+    code: |-
+      Oʻyinchilar oʻz xohishlariga koʻra oʻyin davomida oʻzaro kelishib ham ___ qayd etishlari mumkin. Buning uchun bir oʻyinchi durrang taklif qiladi, ikkinchisi esa ___ boʻlishi kerak.
+    answer:
+      - durrang
+      - rozi
+    explanation: "Shaxmatda 'kelishilgan durrang' tushunchasi mavjud boʻlib, oʻyinchilar teng kurash kechyapti deb hisoblasa, rozi boʻlishlari mumkin."
+    bank:
+      - mat
+      - qarshi
+
+  - id: stalemate-draw-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: "Oʻyinchida Vazir va Shoh bor, raqibda esa faqat Shoh. Vaqti tugab qolgan taqdirda, oʻyin qanday natija bilan tugaydi?"
+    options:
+      - "Vazir bor oʻyinchi baribir yutadi"
+      - "Yolgʻiz shohi bor oʻyinchi gʻalaba qozonadi, chunki uning raqibi vaqtdan yutqazdi"
+      - "Durrang qayd etiladi"
+      - "Oʻyin bekor qilinadi"
+    answer: 2
+    explanation: "Vaqti tugagan oʻyinchi odatda yutqazadi. Agar uning raqibida mat qilish imkoniyati umuman yoʻq boʻlsa (masalan faqat shoh), unda natija durrang boʻladi."
+
+  - id: stalemate-draw-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Pat holati koʻpincha qaysi bosqichda koʻp uchraydi?"
+    options:
+      - "Oʻyinning eng boshida (debyutda)"
+      - "Oʻrtasida (mitelshpilda)"
+      - "Oxirida, bir tomon yaqqol ustunlikka ega boʻlganda (endshpilda)"
+      - "Umuman uchramaydi"
+    answer: 2
+    explanation: "Pat koʻpincha bir oʻyinchida katta ustunlik (masalan, ortiqcha vazir) boʻlib, raqibning barcha yurishlarini bexosdan toʻsib qoʻyganda (shoh eʼlon qilmay turib) yuzaga keladi."

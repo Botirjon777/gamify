@@ -1,0 +1,107 @@
+exercises:
+  - id: rook-bishop-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: "Tura (♖) qanday harakatlanadi?"
+    options:
+      - "Faqat diagonallar boʻylab"
+      - "Toʻgʻri chiziq boʻylab vertikal va gorizontal"
+      - "Ot kabi 'G' harfi shaklida"
+      - "Faqat oldinga bir katak"
+    answer: 1
+    explanation: "Tura vertikal (tepaga-pastga) va gorizontal (oʻngga-chapga) boʻylab istalgancha katakka harakatlanishi mumkin."
+
+  - id: rook-bishop-002
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Fil (♗) harakatini toʻldiring:"
+    code: |-
+      Fil faqatgina ___ boʻylab harakatlanadi. Oq katakdagi fil hech qachon ___ katakka oʻta olmaydi.
+    answer:
+      - diagonal
+      - qora
+    explanation: "Fil faqat diagonal boʻylab yuradi. Shuning uchun bitta fil har doim oʻzi turgan rangdagi kataklarda harakatlanadi."
+    bank:
+      - vertikal
+      - oq
+
+  - id: rook-bishop-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Tura boshqa donalarning ustidan sakrab oʻta oladimi?"
+    options:
+      - "Ha, agar u oʻz donasi boʻlsa"
+      - "Ha, agar u raqib donasi boʻlsa"
+      - "Yoʻq, tura hech qachon sakrab oʻtolmaydi"
+      - "Faqat birinchi marta yurganda"
+    answer: 2
+    explanation: "Turaning yoʻli ochiq boʻlishi kerak. U boshqa donalar ustidan sakrab oʻta olmaydi."
+
+  - id: rook-bishop-004
+    type: order
+    difficulty: 1
+    lang: text
+    prompt: "Fil raqib donasini urib olish ketma-ketligini joylashtiring:"
+    lines:
+      - "Fil oʻzining diagonali boʻylab raqib donasi tomon yoʻnaladi."
+      - "Filning yoʻlida boshqa donalar yoʻqligiga ishonch hosil qilinadi."
+      - "Raqib donasi turgan katakka kelinadi."
+      - "Raqib donasi maydondan olinib, uning oʻrniga fil qoʻyiladi."
+    explanation: "Fil (va boshqa aksariyat donalar) raqib donasi turgan katakka borib, uni oʻyindan chiqaradi va oʻsha joyni egallaydi."
+
+  - id: rook-bishop-005
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: "Shaxmat taxtasida oʻyin boshida har bir oʻyinchida nechta tura va fil boʻladi?"
+    options:
+      - "1 ta tura, 1 ta fil"
+      - "2 ta tura, 2 ta fil"
+      - "3 ta tura, 2 ta fil"
+      - "2 ta tura, 3 ta fil"
+    answer: 1
+    explanation: "Oʻyin boshida har bir oʻyinchida burchaklarda turadigan 2 ta tura va ularning yonida turadigan 2 ta fil boʻladi."
+
+  - id: rook-bishop-006
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Oʻyin boshida fillarning joylashuvini taʼriflang:"
+    code: |-
+      Har bir oʻyinchida ikkita fil boʻlib, biri oq katakda, ikkinchisi ___ katakda joylashadi. Shuning uchun ularni oq maydon fili va ___ maydon fili deb atashadi.
+    answer:
+      - qora
+      - qora
+    explanation: "Ikkita fil barcha rangdagi diagonallarni nazorat qila olishi uchun har xil rangli kataklarda joylashgan boʻladi."
+    bank:
+      - oq
+      - markaziy
+
+  - id: rook-bishop-007
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Qaysi holatda Tura koʻproq foyda keltiradi (kuchliroq boʻladi)?"
+    options:
+      - "Yopiq pozitsiyada (pionlar koʻp va yoʻllar yopiq boʻlganda)"
+      - "Ochiq qatorlar va vertikallar boʻlganda"
+      - "Oʻyinning boshida, qatorlar toʻla boʻlganda"
+      - "U burchakda yashirinib turganda"
+    answer: 1
+    explanation: "Tura toʻgʻri chiziq boʻylab uzoq masofaga harakatlanganligi uchun, pionlarsiz ochiq vertikal va gorizontallarda uning kuchi maksimal boʻladi."
+
+  - id: rook-bishop-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Agar Filning yoʻlida oʻz pioningiz turgan boʻlsa, nima qila olasiz?"
+    options:
+      - "Pionning ustidan sakrab oʻtib ketaverasiz"
+      - "Oʻz pioningizni urib olasiz"
+      - "Faqat shu piongacha boʻlgan kataklarga yura olasiz"
+      - "Fil umuman harakatlana olmaydi"
+    answer: 2
+    explanation: "Fil yoʻlida dona chiqquncha boʻlgan boʻsh kataklarga yura oladi. Agar yoʻl toʻsilgan boʻlsa, undan nariga oʻta olmaydi."

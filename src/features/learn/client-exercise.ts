@@ -23,12 +23,13 @@ export async function toClientExercise(exercise: Exercise, locale: string): Prom
         ...base,
         type: "CHOICE",
         codeHtml: content.code ? await highlight(content.code, content.lang) : undefined,
-        options: content.options.map((o: LocalizedText) => localized(o, locale)),
+        // Shuffled, so the position of the right answer can't be learned.
+        options: shuffle(content.options.map((o: LocalizedText, index) => ({ index, text: localized(o, locale) }))),
       };
     case "OUTPUT":
       return { ...base, type: "OUTPUT", codeHtml: await highlight(content.code, content.lang) };
     case "FILL":
-      return { ...base, type: "FILL", parts: content.code.split(BLANK) };
+      return { ...base, type: "FILL", parts: content.code.split(BLANK), bank: content.bank && shuffle(content.bank) };
     case "ORDER": {
       // Never show the lines already in the correct order.
       const correctOrder = (exercise.answer as Extract<PrivateAnswer, { type: "ORDER" }>).lines.join("\n");

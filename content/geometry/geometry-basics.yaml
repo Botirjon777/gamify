@@ -1,0 +1,97 @@
+exercises:
+  - id: geometry-basics-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Uchburchakning ichki burchaklari yigʻindisi necha gradus?
+    options:
+      - "90"
+      - "180"
+      - "270"
+      - "360"
+    answer: 1
+    explanation: Uchburchakning barcha ichki burchaklari yigʻindisi 180 gradusga teng.
+  - id: geometry-basics-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Toʻgʻri toʻrtburchakning perimetri qanday topiladi (tomoni a va b)?
+    options:
+      - a + b
+      - a * b
+      - 2(a + b)
+      - 2a + b
+    answer: 2
+    explanation: Perimetr P = 2(a + b) formulasi orqali topiladi.
+  - id: geometry-basics-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Kvadratning tomoni 5 sm. Uning yuzi necha sm kvadrat boʻladi?
+    answer: 1
+    explanation: Yuzasi = a * a = 5 * 5 = 25.
+    options:
+      - "23"
+      - "25"
+      - "27"
+      - "30"
+  - id: geometry-basics-004
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Aylananing uzunligi qanday topiladi (radiusi r)?
+    options:
+      - pi * r^2
+      - 2 * pi * r
+      - pi * d^2
+      - 2 * r
+    answer: 1
+    explanation: Aylana uzunligi L = 2 * pi * r.
+  - id: geometry-basics-005
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Toʻgʻri toʻrtburchakning tomonlari 4 va 6. Uning yuzi necha?
+    answer: 1
+    explanation: Yuzasi = 4 * 6 = 24.
+    options:
+      - "22"
+      - "24"
+      - "26"
+      - "29"
+  - id: geometry-basics-006
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Pifagor teoremasi qaysi uchburchakka tegishli?
+    options:
+      - Teng yonli uchburchak
+      - Teng tomonli uchburchak
+      - Toʻgʻri burchakli uchburchak
+      - Oʻtmas burchakli uchburchak
+    answer: 2
+    explanation: Pifagor teoremasi faqat toʻgʻri burchakli uchburchaklar uchun qoʻllaniladi.
+  - id: geometry-basics-007
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Katetlari 3 va 4 boʻlgan toʻgʻri burchakli uchburchakning gipotenuzasini toping.
+    answer: 1
+    explanation: 3^2 + 4^2 = 9 + 16 = 25. Ildiz 25 = 5.
+    options:
+      - "3"
+      - "5"
+      - "7"
+      - "10"
+  - id: geometry-basics-008
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Doira yuzini topish formulasi qanday?
+    options:
+      - pi * r
+      - 2 * pi * r
+      - pi * r^2
+      - 2 * r^2
+    answer: 2
+    explanation: Doira yuzi S = pi * r^2 formulasi orqali topiladi.

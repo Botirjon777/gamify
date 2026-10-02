@@ -28,8 +28,13 @@ export const LANGS = [
   "csharp",
   "bash",
   "sql",
+  /** Not code: prose, formulas, chess moves. Shown as normal wrapping text; answers are checked leniently. */
+  "text",
 ] as const;
 export type CodeLang = (typeof LANGS)[number];
+
+/** Plain-text exercise (not code)? Decides how it is rendered and how typed answers are compared. */
+export const isProse = (content: { lang: CodeLang }) => content.lang === "text";
 
 /** Marker for a blank in FILL exercises. */
 export const BLANK = "___";
@@ -67,10 +72,19 @@ const fill = z
     code: z.string(),
     /** One entry per ___ in `code`; each entry is the accepted answer(s) for that blank. */
     answer: z.array(accepted).min(1),
+    /**
+     * Word bank: wrong words to mix with the right ones. When present the blanks are filled by tapping
+     * words instead of typing — use it for prose, where the exact word can't be guessed.
+     */
+    bank: z.array(z.string().min(1)).min(1).max(8).optional(),
   })
   .refine((e) => e.code.split(BLANK).length - 1 === e.answer.length, {
     message: `number of ${BLANK} blanks must equal number of answers`,
     path: ["answer"],
+  })
+  .refine((e) => !e.bank?.some((w) => e.answer.flat().includes(w)), {
+    message: "a word-bank distractor is also an accepted answer",
+    path: ["bank"],
   });
 
 const order = z.object({
@@ -133,7 +147,8 @@ export type TrackDef = z.infer<typeof trackFile>;
 export type PublicContent =
   | { type: "CHOICE"; prompt: LocalizedText; code?: string; lang: CodeLang; options: LocalizedText[] }
   | { type: "OUTPUT"; prompt: LocalizedText; code: string; lang: CodeLang }
-  | { type: "FILL"; prompt: LocalizedText; code: string; lang: CodeLang }
+  /** `bank`: right words (first accepted answer of each blank) + distractors, stored sorted, shuffled per request. */
+  | { type: "FILL"; prompt: LocalizedText; code: string; lang: CodeLang; bank?: string[] }
   /** Lines are stored sorted (not in the correct order) and shuffled per request. */
   | { type: "ORDER"; prompt: LocalizedText; lines: string[]; lang: CodeLang };
 
@@ -186,7 +201,13 @@ export function toDbExercise(def: ExerciseDef) {
       return {
         ...common,
         type: "FILL" as const,
-        content: { type: "FILL", prompt: def.prompt, code: def.code, lang: def.lang } satisfies PublicContent,
+        content: {
+          type: "FILL",
+          prompt: def.prompt,
+          code: def.code,
+          lang: def.lang,
+          bank: def.bank && [...def.answer.map((a) => a[0]), ...def.bank].sort(),
+        } satisfies PublicContent,
         answer: { type: "FILL", blanks: def.answer } satisfies PrivateAnswer,
       };
     case "order":

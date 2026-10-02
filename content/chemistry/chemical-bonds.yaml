@@ -1,0 +1,97 @@
+exercises:
+  - id: chemical-bonds-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Suv (H2O) molekulasida qanday bogʻlanish mavjud?
+    options:
+      - Ion bogʻlanish
+      - Kovalent qutbli bogʻlanish
+      - Kovalent qutbsiz bogʻlanish
+      - Metallik bogʻlanish
+    answer: 1
+    explanation: Suv molekulasida kovalent qutbli bogʻlanish mavjud.
+  - id: chemical-bonds-002
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Osh tuzi (NaCl) da qanday bogʻlanish turi mavjud? (soʻz bilan yozing)
+    answer: 0
+    explanation: NaCl kristall panjarasi ionlardan iborat.
+    options:
+      - ion
+      - ion (xato)
+      - Boshqa
+      - Nomaʼlum
+  - id: chemical-bonds-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Kovalent qutbsiz bogʻlanish qaysi moddada uchraydi?
+    options:
+      - HCl
+      - H2O
+      - O2
+      - NaCl
+    answer: 2
+    explanation: O2 kabi bir xil atomlardan iborat molekulalarda kovalent qutbsiz bogʻlanish mavjud.
+  - id: chemical-bonds-004
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Elektronlarni toʻliq berish yoki qabul qilish orqali hosil boʻladigan bogʻlanish:"
+    options:
+      - Kovalent bogʻlanish
+      - Vodorod bogʻlanish
+      - Ion bogʻlanish
+      - Metall bogʻlanish
+    answer: 2
+    explanation: Ion bogʻlanish elektronlarni berish (kation) yoki olish (anion) orqali hosil boʻladi.
+  - id: chemical-bonds-005
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Bitta juft elektron orqali hosil boʻladigan kovalent bogʻlanish qanday ataladi?
+    answer: 0
+    explanation: Bitta elektron juft orqali oddiy yoki bir karratli bogʻlanish hosil boʻladi.
+    options:
+      - oddi
+      - oddi (xato)
+      - Boshqa
+      - Nomaʼlum
+  - id: chemical-bonds-006
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Qaysi molekulada uch karratli bogʻlanish mavjud?
+    options:
+      - H2
+      - O2
+      - N2
+      - F2
+    answer: 2
+    explanation: Azot (N2) molekulasida uchta elektron juft orqali 3 karratli bogʻlanish hosil boʻladi.
+  - id: chemical-bonds-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Metall bogʻlanish qayerda uchraydi?
+    options:
+      - Gazlarda
+      - Metall va ularning qotishmalarida
+      - Suyuqliklarda
+      - Tuzlarda
+    answer: 1
+    explanation: Metall bogʻlanish metallar va qotishmalarga xosdir.
+  - id: chemical-bonds-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Suv molekulalari oʻrtasidagi oʻzaro bogʻlanish qanday ataladi?
+    answer: 0
+    explanation: Suv molekulalari orasida vodorod bogʻlanishi mavjud.
+    options:
+      - vodorod
+      - vodorod (xato)
+      - Boshqa
+      - Nomaʼlum

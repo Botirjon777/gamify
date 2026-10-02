@@ -261,7 +261,7 @@ function Feedback({ exercise }: { exercise: ClientExercise }) {
 function revealText(exercise: ClientExercise, reveal: Reveal): string | null {
   switch (reveal.type) {
     case "CHOICE":
-      return exercise.type === "CHOICE" ? exercise.options[reveal.index] : null;
+      return exercise.type === "CHOICE" ? (exercise.options.find((o) => o.index === reveal.index)?.text ?? null) : null;
     case "OUTPUT":
       return reveal.answer;
     case "FILL":
