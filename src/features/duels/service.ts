@@ -5,7 +5,7 @@ import { localized, type LocalizedText } from "@/i18n/content";
 import { awardXp } from "@/features/gamification/xp";
 import { notify } from "@/features/notifications/service";
 import { checkAnswer } from "@/features/learn/check";
-import type { PrivateAnswer, Submission } from "@/features/learn/content-schema";
+import { isProse, type PrivateAnswer, type PublicContent, type Submission } from "@/features/learn/content-schema";
 import { shuffle } from "@/features/learn/client-exercise";
 import { DUEL_HOURS, DUEL_QUESTIONS, DUEL_STAKES, QUESTION_SECONDS } from "./constants";
 
@@ -153,7 +153,7 @@ export async function answerQuestion(duelId: string, userId: string, index: numb
 
     const exercise = await tx.exercise.findUniqueOrThrow({ where: { id: duel.questionIds[index] } });
     // No answer (time ran out) is checked as an impossible choice — still gives us the reveal.
-    const checked = checkAnswer(exercise.answer as PrivateAnswer, submission ?? NO_ANSWER);
+    const checked = checkAnswer(exercise.answer as PrivateAnswer, submission ?? NO_ANSWER, isProse(exercise.content as PublicContent));
     const correct = !late && !!submission && checked.correct;
     const next: RunAnswer[] = [...answers, { correct, timeMs: Math.min(timeMs, QUESTION_SECONDS * 1000), at: now.toISOString() }];
     const finished = next.length >= duel.questionIds.length;

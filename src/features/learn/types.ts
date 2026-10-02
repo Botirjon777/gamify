@@ -9,10 +9,11 @@ export type ClientExercise = {
   prompt: string;
   lang: CodeLang;
 } & (
-  | { type: "CHOICE"; codeHtml?: string; options: string[] }
+  /** Options are shuffled per request; `index` is the option's position in the content (what is submitted and revealed). */
+  | { type: "CHOICE"; codeHtml?: string; options: { index: number; text: string }[] }
   | { type: "OUTPUT"; codeHtml: string }
   /** Code split on the blanks: parts.length = blanks + 1. Rendered as plain monospace with inputs. */
-  | { type: "FILL"; parts: string[] }
+  | { type: "FILL"; parts: string[]; /** Words to fill the blanks with (shuffled); absent = the answers are typed. */ bank?: string[] }
   /** Shuffled lines; `key` is only for React lists. */
   | { type: "ORDER"; lines: { key: string; text: string }[] }
 );

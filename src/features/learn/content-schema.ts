@@ -28,8 +28,19 @@ export const LANGS = [
   "csharp",
   "bash",
   "sql",
+  /** Not code: prose, formulas, chess moves. Shown as normal wrapping text; answers are checked leniently. */
+  "text",
 ] as const;
 export type CodeLang = (typeof LANGS)[number];
+
+/** Plain-text exercise (not code)? Decides how it is rendered and how typed answers are compared. */
+export const isProse = (content: { lang: CodeLang }) => content.lang === "text";
+
+/**
+ * Drafts live in the database and in the files, but learners don't see them.
+ * (Archived content is not in the files at all: `content:pull` leaves it out.)
+ */
+const status = z.enum(["DRAFT", "PUBLISHED"]).default("PUBLISHED");
 
 /** Marker for a blank in FILL exercises. */
 export const BLANK = "___";
@@ -38,6 +49,7 @@ const base = {
   id: z.string().regex(/^[a-z0-9-]+$/, "lowercase letters, digits and -"),
   difficulty: z.number().int().min(1).max(3).default(1),
   xp: z.number().int().positive().optional(),
+  status,
   prompt: localized,
   explanation: localized.optional(),
   lang: z.enum(LANGS).default("jsx"),
@@ -67,10 +79,19 @@ const fill = z
     code: z.string(),
     /** One entry per ___ in `code`; each entry is the accepted answer(s) for that blank. */
     answer: z.array(accepted).min(1),
+    /**
+     * Word bank: wrong words to mix with the right ones. When present the blanks are filled by tapping
+     * words instead of typing — use it for prose, where the exact word can't be guessed.
+     */
+    bank: z.array(z.string().min(1)).min(1).max(8).optional(),
   })
   .refine((e) => e.code.split(BLANK).length - 1 === e.answer.length, {
     message: `number of ${BLANK} blanks must equal number of answers`,
     path: ["answer"],
+  })
+  .refine((e) => !e.bank?.some((w) => e.answer.flat().includes(w)), {
+    message: "a word-bank distractor is also an accepted answer",
+    path: ["bank"],
   });
 
 const order = z.object({
@@ -83,7 +104,8 @@ const order = z.object({
 export const exerciseDef = z.union([choice, output, fill, order]);
 export type ExerciseDef = z.infer<typeof exerciseDef>;
 
-export const skillFile = z.object({ exercises: z.array(exerciseDef).min(1) });
+/** A skill may have no exercises yet (created in the admin panel, still being written) — learners don't see it. */
+export const skillFile = z.object({ exercises: z.array(exerciseDef) });
 
 /** /learn/c/… and /learn/s/… are the category and subject pages, so a track can't live at /learn/c or /learn/s. */
 const RESERVED_TRACK_SLUGS = ["c", "s"];
@@ -98,6 +120,7 @@ export const trackFile = z
     description: localized.optional(),
     icon: z.string().optional(),
     order: z.number().int().default(0),
+    status,
     subject: z.enum(SUBJECTS),
     /** Only for subjects that are split into categories (Programming). */
     category: z.enum(CATEGORIES).optional(),
@@ -114,10 +137,10 @@ export const trackFile = z
                 description: localized.optional(),
               }),
             )
-            .min(1),
+            .default([]),
         }),
       )
-      .min(1),
+      .default([]),
   })
   .refine(
     (t) => {
@@ -133,7 +156,8 @@ export type TrackDef = z.infer<typeof trackFile>;
 export type PublicContent =
   | { type: "CHOICE"; prompt: LocalizedText; code?: string; lang: CodeLang; options: LocalizedText[] }
   | { type: "OUTPUT"; prompt: LocalizedText; code: string; lang: CodeLang }
-  | { type: "FILL"; prompt: LocalizedText; code: string; lang: CodeLang }
+  /** `bank`: right words (first accepted answer of each blank) + distractors, stored sorted, shuffled per request. */
+  | { type: "FILL"; prompt: LocalizedText; code: string; lang: CodeLang; bank?: string[] }
   /** Lines are stored sorted (not in the correct order) and shuffled per request. */
   | { type: "ORDER"; prompt: LocalizedText; lines: string[]; lang: CodeLang };
 
@@ -156,12 +180,13 @@ export const submissionSchema: z.ZodType<Submission> = z.discriminatedUnion("typ
   z.object({ type: z.literal("ORDER"), lines: z.array(z.string().max(500)).max(20) }),
 ]);
 
-const XP_BY_DIFFICULTY = { 1: 5, 2: 10, 3: 15 } as Record<number, number>;
+export const XP_BY_DIFFICULTY = { 1: 5, 2: 10, 3: 15 } as Record<number, number>;
 
 /** Content file entry → DB columns. */
 export function toDbExercise(def: ExerciseDef) {
   const common = {
     key: def.id,
+    status: def.status,
     difficulty: def.difficulty,
     xp: def.xp ?? XP_BY_DIFFICULTY[def.difficulty],
     explanation: def.explanation ?? undefined,
@@ -186,7 +211,13 @@ export function toDbExercise(def: ExerciseDef) {
       return {
         ...common,
         type: "FILL" as const,
-        content: { type: "FILL", prompt: def.prompt, code: def.code, lang: def.lang } satisfies PublicContent,
+        content: {
+          type: "FILL",
+          prompt: def.prompt,
+          code: def.code,
+          lang: def.lang,
+          bank: def.bank && [...def.answer.map((a) => a[0]), ...def.bank].sort(),
+        } satisfies PublicContent,
         answer: { type: "FILL", blanks: def.answer } satisfies PrivateAnswer,
       };
     case "order":

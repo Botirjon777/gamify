@@ -470,7 +470,39 @@
     },
     "error": "Xatolik yuz berdi. Sahifani yangilab koʻring.",
     "later": "Keyinroq",
-    "toDashboard": "Bosh sahifa"
+    "toDashboard": "Bosh sahifa",
+    "certificate": {
+      "title": "IQ sertifikati",
+      "open": "IQ sertifikatini ochish",
+      "get": "IQ sertifikatini olish — {price} soʻm",
+      "text": "Natijangiz yozilgan sertifikat: chop eting yoki PDF qilib saqlang va ulashing.",
+      "price": "{price} soʻm",
+      "oneTime": "Bir martalik toʻlov — sertifikat doim sizniki. Har bir yangi natija bilan yangilanadi.",
+      "proHint": "Pro va Diamond tariflarida sertifikat bepul.",
+      "copy": "Nusxa olish",
+      "copied": "Nusxa olindi",
+      "cardMissing": "Karta raqami hali sozlanmagan. Toʻlov uchun administratorga yozing.",
+      "reference": "Toʻlov maʼlumoti",
+      "referencePlaceholder": "Masalan: 8600 **** 1234 kartadan, 14:32 da",
+      "contact": "Savollar uchun: {contact}",
+      "cancel": "Bekor qilish",
+      "submit": "Toʻlovni yubordim",
+      "submitted": "Rahmat! Toʻlov maʼlumotingiz yuborildi. Tasdiqlangach, bildirishnoma olasiz.",
+      "pending": "Sertifikat uchun toʻlovingiz tekshirilmoqda — tasdiqlangach shu yerda ochiladi.",
+      "errors": {
+        "invalid": "Toʻlov maʼlumotini yozing (kamida 3 ta belgi)",
+        "alreadyUnlocked": "Sertifikat allaqachon ochilgan — sahifani yangilang",
+        "pendingExists": "Sizda tekshirilayotgan toʻlov bor. Avval u koʻrib chiqiladi.",
+        "tooMany": "Juda koʻp urinish. Keyinroq qayta urining.",
+        "network": "Yuborilmadi — internetni tekshirib, qayta urining."
+      },
+      "percentile": "Natija",
+      "percentileValue": "{percentile}% dan yuqori",
+      "date": "Sana",
+      "level": "Daraja",
+      "disclaimer": "Zukko IQ — mantiqiy fikrlash boʻyicha taxminiy baho. Bu klinik IQ test emas.",
+      "print": "Chop etish / PDF saqlash"
+    }
   },
   "leaderboard": {
     "title": "Reyting",
@@ -559,7 +591,8 @@
       "monthly": "Oylik",
       "annual": "Yillik"
     },
-    "annualTotal": "Yiliga {total} soʻm — {saving} soʻm tejaysiz"
+    "annualTotal": "Yiliga {total} soʻm — {saving} soʻm tejaysiz",
+    "pendingCertificate": "IQ sertifikati · {amount} soʻm. Administrator tasdiqlagach, sertifikat ochiladi."
   },
   "friends": {
     "title": "Doʻstlar",
@@ -680,9 +713,9 @@
       "LEVEL_UP": "Tabriklaymiz! Siz {level}-darajaga chiqdingiz",
       "REFERRAL_JOINED": "<b>{username}</b> taklif kodingiz bilan roʻyxatdan oʻtdi",
       "REFERRAL_REWARD": "<b>{username}</b> 3-darajaga yetdi — sizga +{xp} XP",
-      "PAYMENT_SUBMITTED": "<b>{username}</b> {plan} tarifi uchun {amount} soʻm toʻlov yubordi",
-      "PAYMENT_APPROVED": "Toʻlovingiz tasdiqlandi — {plan} tarifi faollashtirildi",
-      "PAYMENT_REJECTED": "{plan} uchun toʻlovingiz rad etildi: {reason}",
+      "PAYMENT_SUBMITTED": "{plan, select, IQ_CERTIFICATE {<b>{username}</b> IQ sertifikati uchun {amount} soʻm toʻlov yubordi} other {<b>{username}</b> {plan} tarifi uchun {amount} soʻm toʻlov yubordi}}",
+      "PAYMENT_APPROVED": "{plan, select, IQ_CERTIFICATE {Toʻlovingiz tasdiqlandi — IQ sertifikatingiz ochildi} other {Toʻlovingiz tasdiqlandi — {plan} tarifi faollashtirildi}}",
+      "PAYMENT_REJECTED": "{plan, select, IQ_CERTIFICATE {IQ sertifikati uchun toʻlovingiz rad etildi: {reason}} other {{plan} uchun toʻlovingiz rad etildi: {reason}}}",
       "TRACK_COMPLETED": "<b>{track}</b> kursini toʻliq tugatdingiz! +{xp} XP",
       "SEASON_RESULT": "{season}-mavsum yakunlandi: siz <b>{rank}-oʻrinni</b> egalladingiz ({xp} XP)",
       "DUEL_INVITE": "<b>{username}</b> sizni «{track}» boʻyicha duelga chaqirdi — {stake} XP tikilgan",
@@ -907,8 +940,190 @@
   "admin": {
     "title": "Admin panel",
     "backToSite": "Saytga qaytish",
+    "cms": {
+      "title": "Kontent boshqaruvi",
+      "subtitle": "Kurslar, modullar, mavzular, mashqlar va IQ savollari. Oʻzgarishlar oʻquvchilarga darhol koʻrinadi.",
+      "home": "Kontent boshqaruvi",
+      "tracks": "Kurslar",
+      "newExercise": "Yangi mashq",
+      "totalTracks": "Kurslar",
+      "publishedVsTotal": "nashr etilgan / jami",
+      "modulesAndSkills": "Modullar / mavzular",
+      "modulesSkillsCount": "barcha kurslarda",
+      "totalExercises": "Mashqlar",
+      "iqItems": "IQ savollar",
+      "drafts": "{count} ta qoralama",
+      "published": "{count} ta nashr etilgan",
+      "tracksTitle": "Kurslar",
+      "tracksDesc": "Fanlar boʻyicha kurslar, ularning modullari va mavzulari.",
+      "exercisesTitle": "Mashqlar banki",
+      "exercisesDesc": "Barcha mashqlar: qidirish, tahrirlash, nashr etish yoki arxivlash.",
+      "iqTitle": "IQ savollar banki",
+      "iqDesc": "Zukko IQ testi uchun ketma-ketlik, shakl va mantiq savollari.",
+      "filesNote": "Kontent maʼlumotlar bazasida saqlanadi. Uni fayllarga olish uchun `pnpm content:pull`, fayllarda tahrirlanganini bazaga yuklash uchun `pnpm content:push` ishlatiladi.",
+      "cancel": "Bekor qilish",
+      "save": "Saqlash",
+      "saving": "Saqlanmoqda…",
+      "edit": "Tahrirlash",
+      "delete": "Oʻchirish",
+      "deleteText": "Faqat hali hech kim mashq qilmagan kontentni oʻchirish mumkin. Oʻchirilgach, ortga qaytarib boʻlmaydi.",
+      "filter": "Filtrlash",
+      "found": "{count} ta topildi",
+      "searchPlaceholder": "Kalit yoki savol matni…",
+      "allTypes": "Barcha turlar",
+      "allStatuses": "Barcha holatlar",
+      "allCategories": "Barcha kategoriyalar",
+      "allDifficulties": "Barcha darajalar",
+      "allSkills": "Barcha mavzular",
+      "page": "{page} / {pages}",
+      "prev": "Oldingi",
+      "next": "Keyingi",
+      "structure": "{modules} modul · {skills} mavzu · {exercises} mashq",
+      "exerciseCount": "{count} ta mashq",
+      "statusLabel": "Holat",
+      "statusSaved": "Holat yangilandi",
+      "status": {
+        "PUBLISHED": "Nashr etilgan",
+        "DRAFT": "Qoralama",
+        "ARCHIVED": "Arxivlangan"
+      },
+      "errors": {
+        "invalid": "Maʼlumotlar notoʻgʻri",
+        "notFound": "Topilmadi — sahifani yangilab koʻring",
+        "slugTaken": "Bu slug band",
+        "keyTaken": "Bu kalit band",
+        "inUse": "Oʻquvchilar bu yerda mashq qilgan — oʻchirib boʻlmaydi. Mashqlarni arxivlang.",
+        "network": "Saqlab boʻlmadi. Internetni tekshirib, qayta urinib koʻring."
+      },
+      "columns": {
+        "track": "Kurs",
+        "subject": "Fan",
+        "structure": "Tarkibi",
+        "actions": "Amallar",
+        "question": "Savol"
+      },
+      "fields": {
+        "title": "Nomi",
+        "slug": "Slug",
+        "slugHint": "Kichik lotin harflari, raqamlar va chiziqcha",
+        "description": "Tavsifi",
+        "subject": "Fan",
+        "category": "Kategoriya",
+        "icon": "Ikonka",
+        "iconDefault": "Fan ikonkasi",
+        "status": "Holat",
+        "order": "Tartib raqami",
+        "key": "Kalit",
+        "difficulty": "Qiyinlik",
+        "prompt": "Savol matni",
+        "options": "Javob variantlari (toʻgʻrisini belgilang)",
+        "correctOption": "{n}-variant toʻgʻri",
+        "optionN": "{n}-variant",
+        "addOption": "Variant qoʻshish",
+        "skill": "Mavzu",
+        "type": "Turi"
+      },
+      "track": {
+        "new": "Yangi kurs",
+        "newTitle": "Yangi kurs",
+        "editTitle": "Kursni tahrirlash",
+        "saved": "Kurs saqlandi",
+        "created": "Kurs yaratildi",
+        "empty": "Hali kurslar yoʻq.",
+        "open": "Modullar"
+      },
+      "module": {
+        "new": "Modul qoʻshish",
+        "newTitle": "Yangi modul",
+        "editTitle": "Modulni tahrirlash",
+        "saved": "Modul saqlandi",
+        "created": "Modul qoʻshildi",
+        "deleteTitle": "«{title}» moduli oʻchirilsinmi?",
+        "deleted": "Modul oʻchirildi",
+        "empty": "Bu kursda hali modul yoʻq",
+        "emptyText": "Avval modul qoʻshing, keyin uning ichiga mavzular va mashqlar."
+      },
+      "skill": {
+        "new": "Mavzu qoʻshish",
+        "newTitle": "Yangi mavzu",
+        "editTitle": "Mavzuni tahrirlash",
+        "saved": "Mavzu saqlandi",
+        "created": "Mavzu qoʻshildi",
+        "deleteTitle": "«{title}» mavzusi oʻchirilsinmi?",
+        "deleted": "Mavzu oʻchirildi",
+        "empty": "Bu modulda hali mavzu yoʻq.",
+        "slugHint": "Mavzu sahifasining manzili — barcha kurslar boʻyicha yagona boʻlishi kerak",
+        "exercises": "Mavzu mashqlari"
+      },
+      "exercise": {
+        "short": "Mashq",
+        "newTitle": "Yangi mashq",
+        "editTitle": "Mashqni tahrirlash",
+        "saved": "Mashq saqlandi",
+        "created": "Mashq yaratildi",
+        "empty": "Mashqlar topilmadi.",
+        "noSkills": "Avval kurs, modul va mavzu yarating — mashq mavzuga biriktiriladi.",
+        "basics": "Asosiy parametrlar",
+        "content": "Mashq mazmuni",
+        "types": {
+          "CHOICE": "Variantli test",
+          "OUTPUT": "Natijani yozish",
+          "FILL": "Boʻsh joyni toʻldirish",
+          "ORDER": "Tartiblash"
+        },
+        "level": "{difficulty}-daraja · {xp} XP",
+        "lang": "Til",
+        "langHint": "Kod uchun dasturlash tili. Oddiy matn (matematika, kimyo, shaxmat…) uchun «matn»ni tanlang.",
+        "langText": "matn (kod emas)",
+        "text": "Matn",
+        "code": "Kod",
+        "optional": "Ixtiyoriy",
+        "fillHint": "Boʻsh joy oʻrniga {blank} yozing. Hozir: {count} ta boʻsh joy.",
+        "accepted": "Qabul qilinadigan javoblar",
+        "addAccepted": "Yana bir javob qoʻshish",
+        "fillAnswers": "Boʻsh joylar javoblari",
+        "fillAnswersHint": "Har bir boʻsh joy uchun alohida qator. Bir nechta toʻgʻri shaklni vergul bilan ajrating.",
+        "bank": "Soʻzlar banki — chalgʻituvchi soʻzlar",
+        "bankHint": "Vergul bilan ajrating. Toʻldirilsa, oʻquvchi javobni yozmaydi — soʻzlarni bosib tanlaydi. Matnli mashqlar uchun tavsiya etiladi.",
+        "lines": "Qatorlar (toʻgʻri tartibda kiriting)",
+        "lineN": "{n}-qator",
+        "addLine": "Qator qoʻshish",
+        "explanation": "Tushuntirish",
+        "explanationHint": "Ixtiyoriy. Oʻquvchi javob berganidan keyin koʻrsatiladi.",
+        "preview": "Oʻquvchiga koʻrinishi",
+        "previewNote": "Toʻgʻri javoblar bu yerda belgilangan. Oʻquvchiga variantlar va qatorlar aralashtirib koʻrsatiladi."
+      },
+      "iq": {
+        "new": "Yangi IQ savol",
+        "newTitle": "Yangi IQ savol",
+        "editTitle": "IQ savolni tahrirlash",
+        "saved": "IQ savol saqlandi",
+        "created": "IQ savol yaratildi",
+        "empty": "IQ savollar topilmadi.",
+        "figure": "Figura",
+        "figureHint": "Ixtiyoriy: oʻrtada katta koʻrsatiladigan ketma-ketlik yoki shakllar, masalan «2, 4, 8, 16, ?»",
+        "rating": "{difficulty}-daraja · reyting {rating}",
+        "categories": {
+          "sequence": "Ketma-ketlik",
+          "letters": "Harflar",
+          "shapes": "Shakllar",
+          "analogy": "Analogiya",
+          "odd": "Ortiqchasini topish",
+          "logic": "Mantiq",
+          "math": "Matematika"
+        },
+        "difficulty": {
+          "1": "1 — juda oson",
+          "2": "2 — oson",
+          "3": "3 — oʻrtacha",
+          "4": "4 — qiyin",
+          "5": "5 — juda qiyin"
+        }
+      }
+    },
     "nav": {
       "dashboard": "Statistika",
+      "content": "Kontent",
       "users": "Foydalanuvchilar",
       "payments": "Toʻlovlar",
       "audit": "Amallar tarixi",
@@ -1011,7 +1226,12 @@
       "rejectPlaceholder": "Masalan: toʻlov topilmadi",
       "note": "Izoh",
       "current": "Hozirgi tarif: {plan}",
-      "reviewed": "{date} · {note}"
+      "reviewed": "{date} · {note}",
+      "planPeriod": "{plan} · {months} oy",
+      "products": {
+        "PLAN": "Tarif",
+        "IQ_CERTIFICATE": "IQ sertifikati"
+      }
     },
     "errors": {
       "notPending": "Bu toʻlov allaqachon koʻrib chiqilgan",
@@ -1045,6 +1265,38 @@
         "weeklyTopic": "Haftalik bonus mavzusini tanladi",
         "seasonLength": "Mavsum davomiyligini oʻzgartirdi",
         "planSeason": "Yangi mavsumni rejalashtirdi"
+      },
+      "cms": {
+        "track": {
+          "create": "Kurs yaratdi",
+          "update": "Kursni tahrirladi",
+          "delete": "Kursni oʻchirdi",
+          "status": "Kurs holatini oʻzgartirdi"
+        },
+        "module": {
+          "create": "Modul yaratdi",
+          "update": "Modulni tahrirladi",
+          "delete": "Modulni oʻchirdi",
+          "status": "Modul holatini oʻzgartirdi"
+        },
+        "skill": {
+          "create": "Mavzu yaratdi",
+          "update": "Mavzuni tahrirladi",
+          "delete": "Mavzuni oʻchirdi",
+          "status": "Mavzu holatini oʻzgartirdi"
+        },
+        "exercise": {
+          "create": "Mashq yaratdi",
+          "update": "Mashqni tahrirladi",
+          "delete": "Mashqni oʻchirdi",
+          "status": "Mashq holatini oʻzgartirdi"
+        },
+        "iq": {
+          "create": "IQ savol yaratdi",
+          "update": "IQ savolni tahrirladi",
+          "delete": "IQ savolni oʻchirdi",
+          "status": "IQ savol holatini oʻzgartirdi"
+        }
       }
     },
     "events": {

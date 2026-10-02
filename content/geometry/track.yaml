@@ -1,0 +1,13 @@
+slug: geometry
+title: Geometriya asoslari
+description: Burchaklar, shakllar, yuza va hajm.
+icon: triangle
+order: 3
+subject: GEOMETRY
+modules:
+  - slug: plane-geometry
+    title: Tekislikdagi shakllar
+    skills:
+      - slug: geometry-basics
+        title: Geometriya asoslari
+        description: Burchaklar, yuzalar, hajmlar va tekislikdagi figuralar.

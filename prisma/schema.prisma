@@ -182,15 +182,15 @@ enum ContentStatus {
 
 /// e.g. React. `tenantId = null` → global content made by us.
 model Track {
-  id           String        @id @default(cuid())
-  slug         String        @unique
+  id           String         @id @default(cuid())
+  slug         String         @unique
   tenantId     String?
   title        Json /// { "uz": "..." }
   description  Json?
   icon         String?
-  order        Int           @default(0)
-  status       ContentStatus @default(PUBLISHED)
-  subject      Subject       @default(PROGRAMMING)
+  order        Int            @default(0)
+  status       ContentStatus  @default(PUBLISHED)
+  subject      Subject        @default(PROGRAMMING)
   /// Only for subjects that are split into categories (Programming); null = listed directly under the subject.
   category     TrackCategory?
   modules      Module[]
@@ -507,19 +507,30 @@ enum PaymentMethod {
   CASH
 }
 
-/// A subscription purchase. Card transfers are checked and approved by an admin; approval activates the plan.
+/// What a payment buys.
+enum PaymentProduct {
+  /// A subscription: `plan` for `months`.
+  PLAN
+  /// One-time: the printable IQ certificate (free with Pro / Diamond).
+  IQ_CERTIFICATE
+}
+
+/// A purchase. Card transfers are checked and approved by an admin; approval activates the plan / unlocks the product.
 model Payment {
-  id           String        @id @default(cuid())
+  id           String         @id @default(cuid())
   userId       String
-  plan         UserPlan
+  product      PaymentProduct @default(PLAN)
+  /// Only for PLAN payments.
+  plan         UserPlan?
+  /// Subscription length; 0 for one-time products.
   months       Int
   amountUzs    Int
-  method       PaymentMethod @default(CARD_TRANSFER)
+  method       PaymentMethod  @default(CARD_TRANSFER)
   /// What the user entered to identify the transfer (payer card last digits, time, transaction id…)
   reference    String?
-  status       PaymentStatus @default(PENDING)
+  status       PaymentStatus  @default(PENDING)
   adminNote    String?
-  createdAt    DateTime      @default(now())
+  createdAt    DateTime       @default(now())
   reviewedAt   DateTime?
   reviewedById String?
 

@@ -1,0 +1,97 @@
+exercises:
+  - id: equations-algebra-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: x + 5 = 12 tenglamada x nechaga teng?
+    options:
+      - "5"
+      - "6"
+      - "7"
+      - "8"
+    answer: 2
+    explanation: x = 12 - 5 = 7.
+  - id: equations-algebra-002
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: 2y = 16 tenglamada y nechaga teng?
+    options:
+      - "4"
+      - "6"
+      - "8"
+      - "10"
+    answer: 2
+    explanation: y = 16 / 2 = 8.
+  - id: equations-algebra-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: 3z - 4 = 11 tenglamada z nechaga teng?
+    options:
+      - "3"
+      - "5"
+      - "7"
+      - "10"
+    answer: 1
+    explanation: 3z = 15, z = 5.
+  - id: equations-algebra-004
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: 5(a - 2) = 20 tenglamada a nechaga teng?
+    options:
+      - "4"
+      - "6"
+      - "8"
+      - "10"
+    answer: 1
+    explanation: a - 2 = 4, a = 6.
+  - id: equations-algebra-005
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: x/4 = 5 tenglamada x ni toping.
+    options:
+      - "18"
+      - "20"
+      - "22"
+      - "25"
+    answer: 1
+    explanation: x = 5 * 4 = 20.
+  - id: equations-algebra-006
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "Ifodani soddalashtiring: 2x + 3x"
+    options:
+      - 5x
+      - 6x
+      - 5x^2
+      - 6x^2
+    answer: 0
+    explanation: 2x + 3x = 5x.
+  - id: equations-algebra-007
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: x^2 = 49 tenglamaning musbat yechimini toping.
+    options:
+      - "6"
+      - "7"
+      - "8"
+      - "9"
+    answer: 1
+    explanation: 7 * 7 = 49.
+  - id: equations-algebra-008
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: 2(x + 3) = 14. x nechaga teng?
+    options:
+      - "2"
+      - "4"
+      - "6"
+      - "9"
+    answer: 1
+    explanation: x + 3 = 7, shuning uchun x = 4.

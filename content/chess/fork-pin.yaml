@@ -1,0 +1,98 @@
+exercises:
+  - id: fork-pin-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: "'Vilka' (Fork) taktikasi nima?"
+    options:
+      - Bitta dona bilan bir vaqtning oʻzida ikkita (yoki undan ortiq) raqib donasiga hujum qilish
+      - Oʻz shohini raqib zarbasidan qutqarish usuli
+      - Ikki dona bilan bir raqib donasiga hujum qilish
+      - Donalarni maydondan chetga chiqarib tashlash
+    answer: 0
+    explanation: Vilka (sanchqi) taktikasi raqibni ikkita yoʻqotish oʻrtasida tanlov qilishga majbur qiladi, chunki u bitta yurishda faqat bitta donasini qutqara oladi.
+  - id: fork-pin-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Qaysi dona vilka (fork) qilish bilan juda mashhur hisoblanadi?
+    options:
+      - Shoh
+      - Tura
+      - Ot
+      - Fil
+    answer: 2
+    explanation: Otning noodatiy (sakrab) yurishi tufayli u kutilmagan holda bir vaqtda ikkita qimmatli donaga (masalan shoh va vazirga) vilka qilishi mumkin, bu 'Qirollik vilkasi' deb ham ataladi.
+  - id: fork-pin-003
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Vilka taktikasini toʻldiring:"
+    code: "Vilkani deyarli barcha donalar bilan, hatto ___ bilan ham amalga oshirish mumkin. Piyoda vilkasi juda xavfli, chunki piyoda eng ___ dona: raqib hujum ostidagi donalaridan birini baribir yoʻqotadi."
+    answer:
+      - piyoda
+      - arzon
+    bank:
+      - qimmat
+      - shoh
+    explanation: Piyoda bilan qilingan vilka oʻzidan qimmatroq boʻlgan ikkita donaga (masalan, ikkita otga) qilingani uchun judayam foydalidir.
+  - id: fork-pin-004
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Vilka yaratish va undan foyda koʻrish jarayonini tartiblang:"
+    lines:
+      - Raqibning ikkita himoyasiz yoki qimmatli donasi hujum qilishga qulay masofada turganini payqash.
+      - Oʻz donangizni shu ikkala donaga bir vaqtda hujum qiladigan katakka olib kelish (Vilka qoʻyish).
+      - Raqib donalaridan muhimrogʻini (masalan, shohni) qutqaradi.
+      - Siz ikkinchi donani urib olasiz.
+    explanation: "Vilka taktikasining amaldagi mexanizmi shunday: ikki maqsadni nishonga olish, bittasidan foyda koʻrish."
+  - id: fork-pin-005
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: "'Bogʻlash' (Pin) taktikasi nima?"
+    options:
+      - Ikki oʻyinchining qoʻllarini bogʻlab qoʻyish
+      - Raqib donasini shunday holatga tushirishki, u joyidan jilsa ortidagi qimmatliroq dona hujum ostida qoladi
+      - Bitta donani ikki dona bilan himoya qilish
+      - Donalarni zanjir kabi biriktirish
+    answer: 1
+    explanation: Bogʻlash (Pin) - bu dona harakatlansa ortidagi qiymati baland dona (yoki shoh) urib olinadigan vaziyatdir. Shuning uchun bogʻlangan dona harakatlana olmaydi.
+  - id: fork-pin-006
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Bogʻlashning turlarini toʻldiring:"
+    code: Agar donaning ortida Shoh turgan boʻlsa, bu ___ bogʻlanish deyiladi, chunki shohni zarba ostida qoldirib boʻlmaydi (harakat qonunan taqiqlanadi). Agar ortida Vazir tursa, bu ___ bogʻlanish deyiladi (harakatlanish qoidalarga zid emas, lekin katta yoʻqotish olib keladi).
+    answer:
+      - mutlaq
+      - nisbiy
+    bank:
+      - ochiq
+      - yopiq
+    explanation: Mutlaq bogʻlanishda yurish butunlay man etiladi (shoh qoidalari sababli), nisbiy bogʻlanishda yurish mumkin lekin moddiy zarar keltirgani uchun yurilmaydi.
+  - id: fork-pin-007
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Qaysi donalar BOGʻLASH (Pin) taktikasini amalga OSHIRA OLMAYDI?
+    options:
+      - Vazir va Tura
+      - Fil
+      - Ot va Shoh
+      - Faqat Tura
+    answer: 2
+    explanation: Bogʻlash uchun uzoq masofaga toʻgʻri chiziq boʻylab harakatlanuvchi donalar (Vazir, Tura, Fil) kerak. Ot sakrab yurganga, shoh esa faqat 1 katak yurganga bogʻlay olmaydi.
+  - id: fork-pin-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Siz raqib otini shohiga mutlaq bogʻlab qoʻydingiz (ortida shoh turibdi). Agar imkon boʻlsa, eng yaxshi keyingi qadamingiz nima?
+    options:
+      - Kutish
+      - Oʻsha bogʻlangan otga yana boshqa donalar bilan, ayniqsa pionlar bilan hujum qilish
+      - Bogʻlangan otni darhol urib olish
+      - Oʻz shohingizni himoya qilish
+    answer: 1
+    explanation: Bogʻlangan dona qoʻl-oyogʻi bogʻliq holatda, u qoʻzgʻala olmaydi. Eng yaxshi strategiya u yoqqa qochib qutula olmaydigan donaga qoʻshimcha bosim (hujum) oʻtkazib, keyin uni yeyishdir.

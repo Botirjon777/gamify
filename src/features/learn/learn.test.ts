@@ -2,8 +2,9 @@ import { readdirSync, readFileSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { parse } from "yaml";
 import { describe, expect, it } from "vitest";
-import { checkAnswer, normalize } from "./check";
-import { skillFile, toDbExercise, type PrivateAnswer, type Submission } from "./content-schema";
+import { checkAnswer, normalize, normalizeText } from "./check";
+import { exerciseDef, skillFile, toDbExercise, type PrivateAnswer, type Submission } from "./content-schema";
+import { toFileExercise } from "./content-export";
 import { nextMastery, reviewIntervalDays } from "./mastery";
 import { pickNext } from "./picker";
 
@@ -15,6 +16,13 @@ describe("normalize", () => {
   });
   it("is case-sensitive", () => {
     expect(normalize("True")).not.toBe(normalize("true"));
+  });
+});
+
+describe("normalizeText", () => {
+  it("lower-cases and unifies apostrophes on top of normalize", () => {
+    expect(normalizeText(" Oʻzbek ")).toBe(normalizeText("o'zbek"));
+    expect(normalizeText("Maʼno")).toBe("ma'no");
   });
 });
 
@@ -40,6 +48,13 @@ describe("checkAnswer", () => {
     const answer: PrivateAnswer = { type: "ORDER", lines: ["a {", "}", "b {", "}"] };
     expect(checkAnswer(answer, { type: "ORDER", lines: ["a {", "}", "b {", "}"] }).correct).toBe(true);
     expect(checkAnswer(answer, { type: "ORDER", lines: ["b {", "}", "a {", "}"] }).correct).toBe(false);
+  });
+  it("prose answers ignore letter case and the kind of apostrophe; code answers don't", () => {
+    const answer: PrivateAnswer = { type: "FILL", blanks: [["hujum"], ["yoʻqolib"]] };
+    const typed: Submission = { type: "FILL", blanks: ["Hujum", "yo'qolib "] };
+    expect(checkAnswer(answer, typed, true).correct).toBe(true);
+    expect(checkAnswer(answer, typed).correct).toBe(false);
+    expect(checkAnswer({ type: "OUTPUT", accepted: ["Durrang"] }, { type: "OUTPUT", text: "durrang" }, true).correct).toBe(true);
   });
   it("rejects a submission of the wrong type", () => {
     expect(checkAnswer({ type: "CHOICE", index: 0 }, { type: "OUTPUT", text: "0" }).correct).toBe(false);
@@ -111,6 +126,8 @@ describe("content answers are self-consistent", () => {
         expect(checkAnswer(answer, submission).correct).toBe(true);
         // The public part must never contain the answer for CHOICE/FILL/OUTPUT.
         expect(JSON.stringify(db.content)).not.toContain('"answer"');
+        // content:pull writes the stored row back as an equivalent file entry (database ⇄ files round trip).
+        expect(toDbExercise(exerciseDef.parse(toFileExercise(db)))).toEqual(db);
       });
     }
   }

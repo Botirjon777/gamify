@@ -1,0 +1,98 @@
+exercises:
+  - id: castling-en-passant-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Qalʼalanish (Rokirovka) qanday harakat?
+    options:
+      - Pionni oxiriga olib chiqib Vazirga aylantirish
+      - Bitta yurishda shoh va turaning joylashuvini oʻzgartirish (shohni himoyaga olish)
+      - Ot bilan ikkita donaga hujum qilish
+      - Shohni maydon markaziga olib chiqish
+    answer: 1
+    explanation: Qalʼalanish shaxmatdagi maxsus yurish boʻlib, unda shoh va tura birgalikda yuritiladi. Maqsad shohni chekkaga (xavfsiz joyga) olib oʻtish va turani oʻyinga kiritishdir.
+  - id: castling-en-passant-002
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Qalʼalanish shartlarini toʻldiring:"
+    code: Qalʼalanish faqat shoh ham, tura ham avval ___ qilinmagan (joyidan jilmagan) boʻlsagina mumkin. Ular orasida boshqa donalar boʻlishi ___ emas.
+    answer:
+      - yurish
+      - mumkin
+    bank:
+      - hujum
+      - shart
+    explanation: Shoh yoki tura bir marta boʻlsa ham joyidan siljigan boʻlsa, bu oʻyinda ular boshqa qalʼalanish qila olmaydi. Yoʻl boʻsh boʻlishi ham shart.
+  - id: castling-en-passant-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Qalʼalanishni qachon bajarish TAQIQLANADI?
+    options:
+      - Shoh zarba (xavf) ostida boʻlmasa
+      - Shoh hozirgi vaqtda shoh (xavf) ostida boʻlsa
+      - Oʻyinning 10-yurishidan keyin
+      - Tura qora katakda turganda
+    answer: 1
+    explanation: Agar sizga shoh eʼlon qilingan boʻlsa (shohingiz zarbada boʻlsa), qalʼalanish qilish orqali bu xavfdan qochish taqiqlanadi. Avval xavfni bartaraf etish kerak.
+  - id: castling-en-passant-004
+    type: order
+    difficulty: 1
+    lang: text
+    prompt: "Qisqa qalʼalanish (0-0) qanday amalga oshiriladi? Ketma-ketlikni belgilang:"
+    lines:
+      - Oʻyinchi shohni ushlab turaga qarab ikki katak (chapga yoki oʻngga) siljitadi.
+      - Shoh tushgan katakning narigi tomoniga, yoniga turani qoʻyadi.
+      - Shu tariqa bitta yurish toʻliq tugallanadi.
+    explanation: Avval albatta shoh ushlanadi. Shoh 2 katak suriladi, keyin tura uning ustidan sakratib yoniga qoʻyiladi.
+  - id: castling-en-passant-005
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Shohning qalʼalanishdagi cheklovini toʻldiring:"
+    code: Qalʼalanish vaqtida shoh sakrab oʻtadigan katak yoki shoh kelib tushadigan katak raqib donasi tomonidan ___ (zarba) ostida boʻlsa, qalʼalanish qilish mumkin ___.
+    answer:
+      - hujum
+      - emas
+    bank:
+      - himoya
+      - shart
+    explanation: Shoh zarba ostida turgan yoki zarba ostidagi katak orqali oʻtib qalʼalana olmaydi (himoyaga qochib boʻlmaydi).
+  - id: castling-en-passant-006
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: En passant (yoʻl-yoʻlakay urib olish) qoidasi faqat qaysi donaga nisbatan qoʻllaniladi?
+    options:
+      - Faqat fillarga
+      - Faqat otlarga
+      - Faqat pionlarga
+      - Istalgan donaga
+    answer: 2
+    explanation: En passant - faqatgina pionlarga taalluqli boʻlgan maxsus urib olish qoidasidir.
+  - id: castling-en-passant-007
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: En passant qanday holatda yuz beradi?
+    options:
+      - Pion birinchi yurishida 2 katak oldinga oʻtib, raqib pioni turgan qatorga (yoniga) kelib qolsa
+      - Pion orqaga yurish qilganda
+      - Pion vazirga aylanganda
+      - Raqib pioni 1 katak yurganda
+    answer: 0
+    explanation: Agar sizning pioningiz 5-qatorda (oqlar uchun) tursa va raqib oʻz pionini ilk bor 2 katak siljitib sizning pioningiz yoniga kelsa, siz uning pionini 'yoʻl-yoʻlakay' xuddi 1 katak yurgandek urib olishingiz mumkin.
+  - id: castling-en-passant-008
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "En passant yurishidagi vaqt cheklovini toʻldiring:"
+    code: En passant huquqidan faqat raqib yurish qilganidan keyingi darhol ___ javob yurishidagina foydalanish mumkin. Keyingi yurishlarga qolib ketsa, bu huquq ___ ketadi.
+    answer:
+      - birinchi
+      - yoʻqolib
+    bank:
+      - ikkinchi
+      - saqlanib
+    explanation: Yoʻl-yoʻlakay urib olish huquqi faqat oʻsha zaxoti kuchga ega, oʻtkazib yuborilsa undan foydalanib boʻlmaydi.

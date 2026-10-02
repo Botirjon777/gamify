@@ -1,0 +1,97 @@
+exercises:
+  - id: chemical-reactions-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Bir moddadan ikki yoki undan ortiq modda hosil boʻladigan reaksiya qanday ataladi?
+    options:
+      - Birikish reaksiyasi
+      - Ajralish reaksiyasi
+      - Oʻrin olish reaksiyasi
+      - Almashinish reaksiyasi
+    answer: 1
+    explanation: Modda parchalanib, bir nechta modda hosil qilsa, ajralish reaksiyasi deyiladi.
+  - id: chemical-reactions-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Ikki yoki undan ortiq moddadan bitta murakkab modda hosil boʻladigan reaksiya nima deb ataladi?
+    options:
+      - Birikish reaksiyasi
+      - Ajralish reaksiyasi
+      - Oʻrin olish reaksiyasi
+      - Almashinish reaksiyasi
+    answer: 0
+    explanation: Bir nechta moddalarning birlashishidan bitta modda hosil boʻlishi birikishdir.
+  - id: chemical-reactions-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Kislota va asos reaksiyaga kirishib suv va tuz hosil qilishi qanday reaksiya deyiladi?
+    options:
+      - neytrallanish
+      - neytrallanish (xato)
+      - Boshqa
+      - Nomaʼlum
+    answer: 0
+    explanation: Kislota + asos = tuz + suv neytrallanish reaksiyasi hisoblanadi.
+  - id: chemical-reactions-004
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Yonish reaksiyasi bu qanday jarayon?
+    options:
+      - Issiqlik yutilishi bilan boradi
+      - Issiqlik va yorugʻlik ajralishi bilan boradi
+      - Hech qanday energiya oʻzgarishisiz boradi
+      - Faqat suv ajralib chiqishi bilan boradi
+    answer: 1
+    explanation: Yonish reaksiyasi ekzotermik boʻlib, energiya ajratib chiqaradi.
+  - id: chemical-reactions-005
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Reaksiya tezligini oshiradigan, ammo oʻzi sarflanmaydigan modda nima deyiladi?
+    options:
+      - katalizator
+      - katalizator (xato)
+      - Boshqa
+      - Nomaʼlum
+    answer: 0
+    explanation: Katalizator kimyoviy reaksiya tezligini oshirib beradi.
+  - id: chemical-reactions-006
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Endotermik reaksiya nima?
+    options:
+      - Issiqlik ajralib chiqishi bilan boradigan reaksiya
+      - Issiqlik yutilishi bilan boradigan reaksiya
+      - Oksidlanish-qaytarilish reaksiyasi
+      - Choʻkma hosil qiladigan reaksiya
+    answer: 1
+    explanation: Endotermik jarayon tashqaridan energiya (issiqlik) yutadi.
+  - id: chemical-reactions-007
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Fe + CuSO4 = FeSO4 + Cu qanday reaksiya turi?
+    options:
+      - Birikish
+      - Ajralish
+      - Oʻrin olish
+      - Almashinish
+    answer: 2
+    explanation: Temir misning oʻrnini egallayapti, bu oʻrin olish reaksiyasi.
+  - id: chemical-reactions-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Organik moddalar toʻliq yonganda karbonat angidrid va nima hosil boʻladi?
+    options:
+      - suv
+      - suv (xato)
+      - Boshqa
+      - Nomaʼlum
+    answer: 0
+    explanation: CH4 + 2O2 -> CO2 + 2H2O.

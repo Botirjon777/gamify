@@ -1,0 +1,98 @@
+exercises:
+  - id: center-control-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Shaxmat taxtasida 'Markaz' deb qaysi kataklar aytiladi?
+    options:
+      - Taxtaning 4 ta burchagi (a1, h1, a8, h8)
+      - Taxtaning eng oʻrtasidagi 4 ta katak (e4, d4, e5, d5)
+      - Barcha oq kataklar
+      - Chekkadagi barcha kataklar
+    answer: 1
+    explanation: Taxtaning mutlaq markazi d4, e4, d5, e5 kataklari hisoblanadi. Kengaytirilgan markazga ularning atrofidagi kataklar ham kiradi.
+  - id: center-control-002
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Markazning ahamiyatini toʻldiring:"
+    code: Shaxmat oʻyinining boshlanishida (debyutda) asosan ___ uchun kurash olib boriladi. Markazni nazorat qilgan oʻyinchining donalari koʻproq maydonga ega boʻladi va osonroq ___ qila oladi.
+    answer:
+      - markaz
+      - harakat
+    bank:
+      - qanot
+      - taslim
+    explanation: Markazni nazorat qilish debyutning eng muhim tamoyilidir. Markazdan turib istalgan yoʻnalishga tezkorlik bilan hujumga oʻtish mumkin.
+  - id: center-control-003
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Donalarning kuchi qayerda koʻproq boʻladi?
+    options:
+      - Maydonning chetlarida
+      - Maydon markazida
+      - Burchaklarda
+      - Faqat oʻz hududida
+    answer: 1
+    explanation: Aksariyat donalar, ayniqsa ot va vazir maydon markazida oʻzining eng yuqori salohiyatida ishlaydi, chunki ularning harakatlanish yoʻllari maksimal darajada ochiq boʻladi.
+  - id: center-control-004
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Markazni qanday qilib eng yaxshi usul bilan egallash mumkin?
+    options:
+      - Faqat shohni u yerga olib borib
+      - Pionlarni e4 va d4 (yoki e5 va d5) kataklariga joylashtirib va orqadan yengil donalar bilan himoya qilib
+      - Birinchi yurishdanoq vazirni markazga olib chiqib
+      - Turani oldinga surib
+    answer: 1
+    explanation: Markaziy pionlar markazni kuchli ushlab turadi, ularning ortidan yengil donalar (ot va fil) ham markazga qaratilgan boʻlsa, kuchli pozitsiya yuzaga keladi.
+  - id: center-control-005
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Ochilishda (debyutda) markaz uchun kurashish ketma-ketligini joylashtiring:"
+    lines:
+      - Markaziy (e yoki d) pionlarni oʻrtaga 2 katak oldinga surish.
+      - Otlarni markaz tomon (masalan, f3 va c3 kataklariga) rivojlantirish.
+      - Fillarni ochilgan yoʻllardan markaziy diagonallarga chiqarish.
+      - Qalʼalanish orqali shohni chekkaga olib, markazga turani tayyorlash.
+    explanation: Debyutda eng koʻp tarqalgan klassik rivojlanish shunday koʻrinishga ega.
+  - id: center-control-006
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Markazga nisbatan qoʻllaniladigan strategiyani toʻldiring:"
+    code: Agar raqib markazni egallab olsa, unga qanotlardan (chekkalardan) turib zarba berish yoki oʻz ___ orqali uning markazini parchalashga urinish kerak. Bu 'markazga ___ qilish' deb ataladi.
+    answer:
+      - pionlar
+      - hujum
+    bank:
+      - himoya
+      - shohi
+    explanation: Agar markaz berib qoʻyilgan boʻlsa, uni shunday tashlab qoʻymasdan qanotlardan hujum uyushtirib buzishga harakat qilinadi (gipermodernizm).
+  - id: center-control-007
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Nima uchun oʻyin boshida faqat chekkadagi pionlarni (a yoki h) surish tavsiya etilmaydi?
+    options:
+      - Chunki ular chiroyli koʻrinmaydi
+      - Chunki ular markaz uchun kurashda yordam bermaydi va yengil donalar yoʻlini ochmaydi
+      - Chunki ular orqaga yura olmaydi
+      - Chunki raqib ularni tez yeb qoʻyadi
+    answer: 1
+    explanation: Chekka pionlar (a, h) markaziy nazoratga deyarli hissa qoʻshmaydi. Ochilishda vaqtdan yutqazmaslik va donalarni oʻyinga kiritish uchun markaziy pionlar surilishi kerak.
+  - id: center-control-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Otni h3 yoki a3 (burchakka yaqin) joylashtirish nima uchun koʻpincha yomon harakat hisoblanadi?
+    options:
+      - Ot u yerda quyoshda qorayib ketadi
+      - Chekkada otning nazorat qiladigan kataklari kamayadi (markazga taʼsiri past boʻladi)
+      - U u yerdan umuman yura olmaydi
+      - Raqib vaziri uni sanchib qoʻyadi
+    answer: 1
+    explanation: Chekkada ot atigi 4 ta, burchakda esa 2 ta katakka yura oladi. Markazga qarab rivojlantirilgan ot (masalan, f3 da) 8 tagacha katakni, shu jumladan markaziy kataklarni nazorat qiladi.

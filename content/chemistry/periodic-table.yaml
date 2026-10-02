@@ -1,0 +1,97 @@
+exercises:
+  - id: periodic-table-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Davriy sistemadagi birinchi element qaysi?
+    options:
+      - Kislorod
+      - Uglerod
+      - Vodorod
+      - Geli
+    answer: 2
+    explanation: Vodorod (H) davriy sistemadagi 1-element.
+  - id: periodic-table-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Uglerodning kimyoviy belgisi nima?
+    options:
+      - C
+      - C (xato)
+      - Boshqa
+      - Nomaʼlum
+    answer: 0
+    explanation: Uglerod 'C' belgisi bilan belgilanadi.
+  - id: periodic-table-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Qaysi metall suyuq holatda boʻladi (xona haroratida)?
+    options:
+      - Temir
+      - Simob
+      - Mis
+      - Oltin
+    answer: 1
+    explanation: Simob xona haroratida suyuq holda boʻladigan yagona metall.
+  - id: periodic-table-004
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Kislorodning atom raqami nechaga teng?
+    options:
+      - "6"
+      - "8"
+      - "10"
+      - "13"
+    answer: 1
+    explanation: Kislorodning atom raqami 8.
+  - id: periodic-table-005
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Inert gazlar qaysi guruhga tegishli?
+    options:
+      - 1-guruh
+      - 2-guruh
+      - 7-guruh
+      - 8-guruh
+    answer: 3
+    explanation: Inert gazlar 8-guruhga joylashgan.
+  - id: periodic-table-006
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Dmitriy Mendeleyev qachon davriy sistemani yaratdi?
+    options:
+      - "1869"
+      - "1905"
+      - "1899"
+      - "1789"
+    answer: 0
+    explanation: Mendeleyev 1869 yilda elementlarning davriy qonunini eʼlon qilgan.
+  - id: periodic-table-007
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Natriy (Na) elementi qaysi guruhga mansub? (Raqam bilan yozing)
+    options:
+      - "-1"
+      - "1"
+      - "3"
+      - "6"
+    answer: 1
+    explanation: Natriy 1-guruh, ishqoriy metallar qatoriga kiradi.
+  - id: periodic-table-008
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Eng yengil gaz qaysi?
+    options:
+      - Azot
+      - Geli
+      - Kislorod
+      - Vodorod
+    answer: 3
+    explanation: Vodorod koinotdagi eng yengil gaz hisoblanadi.

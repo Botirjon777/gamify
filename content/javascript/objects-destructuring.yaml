@@ -8,9 +8,8 @@ exercises:
       const user = { name: "Anvar", age: 24 };
       const { name } = user;
       console.log(name);
-    answer: "Anvar"
+    answer: Anvar
     explanation: Obyekt destrukturizatsiyasi orqali kalit nomiga mos oʻzgaruvchi osonlik bilan ajratib olinadi.
-
   - id: js-obj-002
     type: output
     difficulty: 1
@@ -22,7 +21,6 @@ exercises:
       console.log(b.length);
     answer: "4"
     explanation: Spread (...) operatori massiv elementlarini yoyib chiqadi, natijada [1, 2, 3, 4] hosil boʻlib, uzunligi 4 ga teng boʻladi.
-
   - id: js-obj-003
     type: fill
     difficulty: 1
@@ -32,9 +30,8 @@ exercises:
       const person = { info: null };
       console.log(person.info___city);
     answer:
-      - "?."
+      - ?.
     explanation: Optional chaining (?.) chap tomondagi qiymat (person.info) null yoki undefined boʻlsa, xususiyatga murojaat qilmasdan darhol undefined qaytaradi. Oddiy nuqta (.) bu holda TypeError beradi.
-
   - id: js-obj-004
     type: output
     difficulty: 2
@@ -45,8 +42,7 @@ exercises:
       const res = count ?? 10;
       console.log(res);
     answer: "0"
-    explanation: "Nullish coalescing (??) faqat null yoki undefined boʻlgandagina oʻng tomondagi qiymatni oladi. 0 falsy boʻlsa ham saqlanib qoladi."
-
+    explanation: Nullish coalescing (??) faqat null yoki undefined boʻlgandagina oʻng tomondagi qiymatni oladi. 0 falsy boʻlsa ham saqlanib qoladi.
   - id: js-obj-005
     type: output
     difficulty: 2
@@ -56,9 +52,8 @@ exercises:
       const user = { name: "Botir" };
       const { name: username, role = "student" } = user;
       console.log(username + " " + role);
-    answer: "Botir student"
+    answer: Botir student
     explanation: 'name: username nomi orqali oʻzgaruvchiga yangi nom berildi, role mavjud boʻlmagani sababli default qiymat "student" olindi.'
-
   - id: js-obj-006
     type: fill
     difficulty: 2
@@ -70,9 +65,8 @@ exercises:
       }
       console.log(sum(10, 20, 30));
     answer:
-      - "..."
+      - ...
     explanation: Rest parametri (...rest) funksiyaga berilgan qolgan barcha argumentlarni massivga yigʻib beradi.
-
   - id: js-obj-007
     type: output
     difficulty: 2
@@ -85,7 +79,6 @@ exercises:
       console.log(merged.b);
     answer: "99"
     explanation: "Obyektlar spread bilan birlashtirilganda, keyinroq kelgan obyektning kaliti (b: 99) avvalgisining ustiga yoziladi (overwrite)."
-
   - id: js-obj-008
     type: choice
     difficulty: 2
@@ -98,7 +91,6 @@ exercises:
       - obj.getKeys()
     answer: 0
     explanation: Object.keys() obyektning barcha xususiyat nomlarini (kalitlarini) satrlar massivi koʻrinishida qaytaradi.
-
   - id: js-obj-009
     type: output
     difficulty: 3
@@ -109,12 +101,11 @@ exercises:
       console.log(tail.length);
     answer: "3"
     explanation: Massiv destrukturizatsiyasida head 10 qiymatini oladi, qolgan [20, 30, 40] esa tail massiviga tushadi va uning uzunligi 3 ga teng.
-
   - id: js-obj-010
     type: choice
     difficulty: 3
     lang: js
-    prompt: "Object.freeze(obj) va Object.seal(obj) oʻrtasidagi asosiy farq nima?"
+    prompt: Object.freeze(obj) va Object.seal(obj) oʻrtasidagi asosiy farq nima?
     options:
       - freeze mavjud xususiyatlarni oʻzgartirishga ham yoʻl qoʻymaydi (read-only), seal esa mavjud xususiyatlar qiymatini oʻzgartirishga ruxsat beradi
       - seal toʻliq muzlatadi, freeze esa yangi kalit qoʻshishga ruxsat beradi

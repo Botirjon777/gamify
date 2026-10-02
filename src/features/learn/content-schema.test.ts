@@ -1,6 +1,7 @@
 import { parse } from "yaml";
 import { describe, expect, it } from "vitest";
-import { exerciseDef, trackFile } from "./content-schema";
+import { exerciseDef, toDbExercise, trackFile } from "./content-schema";
+import { toFileExercise } from "./content-export";
 
 describe("track file", () => {
   const track = (extra: Record<string, unknown>) =>
@@ -44,5 +45,45 @@ answer: 0
   it("accepts plain strings and language-keyed text", () => {
     const def = { id: "demo-002", type: "choice", prompt: { uz: "Savol", ru: "Вопрос" }, options: ["a", "b"], answer: 1 };
     expect(exerciseDef.safeParse(def).success).toBe(true);
+  });
+
+  it("fill word bank: stored with the right words mixed in; a distractor can't be an accepted answer", () => {
+    const fill = { id: "demo-003", type: "fill", lang: "text", prompt: "Toʻldiring", code: "___ va ___", answer: ["shoh", ["mat", "mot"]] };
+    const ok = exerciseDef.parse({ ...fill, bank: ["pat", "vazir"] });
+    const content = toDbExercise(ok).content as { bank?: string[] };
+    expect(content.bank).toEqual(["mat", "pat", "shoh", "vazir"]);
+    expect(JSON.stringify(content)).not.toContain("mot");
+    expect(exerciseDef.safeParse({ ...fill, bank: ["mot"] }).success).toBe(false);
+    expect((toDbExercise(exerciseDef.parse(fill)).content as { bank?: string[] }).bank).toBeUndefined();
+  });
+
+  it("export keeps what the defaults would lose: custom xp, draft status, several accepted answers, the word bank", () => {
+    const def = exerciseDef.parse({
+      id: "demo-004",
+      type: "fill",
+      lang: "text",
+      difficulty: 2,
+      xp: 25,
+      status: "DRAFT",
+      prompt: { uz: "Toʻldiring", ru: "Заполните" },
+      code: "___ va ___",
+      answer: ["shoh", ["mat", "mot"]],
+      bank: ["pat"],
+    });
+    expect(toFileExercise(toDbExercise(def))).toEqual({
+      id: "demo-004",
+      type: "fill",
+      difficulty: 2,
+      xp: 25,
+      status: "DRAFT",
+      lang: "text",
+      prompt: { uz: "Toʻldiring", ru: "Заполните" },
+      code: "___ va ___",
+      answer: ["shoh", ["mat", "mot"]],
+      bank: ["pat"],
+    });
+    // defaults are left out of the file
+    const plain = toFileExercise(toDbExercise(exerciseDef.parse({ id: "demo-005", type: "choice", prompt: "Savol", options: ["a", "b"], answer: 0 })));
+    expect(plain).toEqual({ id: "demo-005", type: "choice", difficulty: 1, lang: "jsx", prompt: "Savol", options: ["a", "b"], answer: 0 });
   });
 });

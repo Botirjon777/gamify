@@ -1,0 +1,99 @@
+exercises:
+  - id: piece-development-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Shaxmatda 'donalarni rivojlantirish' nima degani?
+    options:
+      - Ularning shaklini chiroyliroq qilish
+      - Donalarni oʻzining boshlangʻich joyidan faolroq va foydaliroq kataklarga olib chiqish
+      - Faqat pionlarni oldinga surish
+      - Raqib donalarini urib olish
+    answer: 1
+    explanation: Rivojlantirish bu oʻyin boshida orqa qatorda turgan 'uxlayotgan' donalarni oʻyinga kiritish va hujum hamda himoya uchun eng yaxshi joylarga joylashtirishdir.
+  - id: piece-development-002
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Rivojlantirish ketma-ketligini toʻldiring:"
+    code: Odatda oʻyin boshida avval ___ donalar (ot va fil) rivojlantiriladi, soʻngra ogʻir donalar (___ va tura) oʻyinga qoʻshiladi.
+    answer:
+      - yengil
+      - vazir
+    bank:
+      - ogʻir
+      - shoh
+    explanation: Otlarni va fillarni tezroq oʻyinga olib kiritish ochilishning muhim tamoyilidir. Vazir va tura koʻpincha biroz keyinroq, yoʻllar ochilganda harakatga keladi.
+  - id: piece-development-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Nima uchun oʻyin boshida bir xil dona bilan bir necha marta yurish tavsiya etilmaydi?
+    options:
+      - Chunki bu qoidalarga zid
+      - Chunki raqib bu donani yeb qoʻyishi aniq
+      - Chunki bitta donani yurgizguncha boshqa donalar oʻyindan qolib ketadi va rivojlanishda orqada qolasiz (tempni yoʻqotasiz)
+      - Chunki hakam jarima yozadi
+    answer: 2
+    explanation: Debyutda vaqt (temp) juda muhim. Bitta donaga vaqt sarflash oʻrniga boshqa donalarni ham oʻyinga qoʻshish kerak. 'Har bir yurish - bitta yangi dona' qoidasiga amal qilish tavsiya etiladi.
+  - id: piece-development-004
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Nima uchun oʻyin boshidanoq zudlik bilan Vazirni (♕) maydon markaziga olib chiqish xavfli hisoblanadi?
+    options:
+      - Vazir judayam tez harakatlanib ketadi
+      - Raqibning yengil donalari (ot, fil) vazirga hujum qilib, ham oʻzini rivojlantiradi, ham sizni vazirni qochirishga vaqt sarflashga majbur qiladi
+      - Vazir faqat oʻyin oxirida kerak boʻladi
+      - Vazir markazda uxlab qoladi
+    answer: 1
+    explanation: Erta oʻyinga chiqqan vazir raqibning arzon donalari uchun nishonga aylanadi. Ular vazirga hujum qilish bahonasida maydonga chiqib oladilar va temp yutadilar.
+  - id: piece-development-005
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Eng muvaffaqiyatli rivojlanish bosqichlarini toʻgʻri tartiblang:"
+    lines:
+      - Markaziy pionlar bilan maydon markaziga daʼvo qilish.
+      - Ot va fillarni faol kataklarga chiqarish.
+      - Qalʼalanish (rokirovka) qilib, shohni himoyaga olish.
+      - Turalarni ochiq yoki yarim ochiq vertikallarga joylashtirib, vazirni qulay oʻringa oʻtkazish.
+    explanation: Bu bosqichlar har qanday toʻgʻri va xavfsiz ochilishning 'oltin qoidalari' hisoblanadi.
+  - id: piece-development-006
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Turalarni rivojlantirish qoidasini toʻldiring:"
+    code: Shoh qalʼalanish qilgandan soʻng turalar oʻrtaga yaqinlashadi. Turalarni ___ yoki yarim-___ vertikallarga qoʻyish ularning kuchini sezilarli darajada oshiradi.
+    answer:
+      - ochiq
+      - ochiq
+    bank:
+      - chekka
+      - yopiq
+    explanation: Tura uchun eng zoʻr joy oʻzining yoʻlida pionlar boʻlmagan qator (vertikal) hisoblanadi.
+  - id: piece-development-007
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: "'Rivojlanishdagi ustunlik' nimani anglatadi?"
+    options:
+      - Sizning donalaringiz raqibnikidan koʻproq ekanligini
+      - Siz raqibga qaraganda koʻproq donalarni oʻyinga kiritganingizni va faol pozitsiyalar egallaganingizni
+      - Sizning barcha pionlaringiz Vazirga aylanganligini
+      - Faqat donalaringizning tashqi koʻrinishini
+    answer: 1
+    explanation: Rivojlanishdagi ustunlik - bu hujum uchun koʻproq donalar shay ekanligini bildiradi. Baʼzida bu moddiy ustunlikdan ham muhimroqdir.
+  - id: piece-development-008
+    type: fill
+    difficulty: 1
+    lang: text
+    prompt: "Fil va ot qachon kuchliroq boʻlishini toʻldiring:"
+    code: Fil uzoq masofali dona boʻlgani uchun u ___ diagonallarda oʻzini erkin his qiladi. Ot esa yaqin masofada jang qilgani uchun uni koʻproq maydon ___ ga joylashtirgan maʼqul.
+    answer:
+      - ochiq
+      - markaziga
+    bank:
+      - chekkasiga
+      - yopiq
+    explanation: Fil ochiq joylarni yoqtiradi, uzoqdan turib nishonga oladi. Ot esa jangga yaqin (markazda) boʻlishi kerak, shunda koʻproq joyni nazorat qiladi.

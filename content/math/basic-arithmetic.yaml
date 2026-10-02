@@ -1,0 +1,97 @@
+exercises:
+  - id: basic-arithmetic-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: 5 ga 7 ni qoʻshganda natija necha boʻladi?
+    options:
+      - "10"
+      - "11"
+      - "12"
+      - "13"
+    answer: 2
+    explanation: 5 + 7 = 12.
+  - id: basic-arithmetic-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: 15 dan 6 ni ayirganda qancha qoladi?
+    options:
+      - "7"
+      - "8"
+      - "9"
+      - "10"
+    answer: 2
+    explanation: 15 - 6 = 9.
+  - id: basic-arithmetic-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: 8 ni 9 ga koʻpaytiring.
+    options:
+      - "64"
+      - "72"
+      - "81"
+      - "88"
+    answer: 1
+    explanation: 8 * 9 = 72.
+  - id: basic-arithmetic-004
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: 48 ni 6 ga boʻlganda necha chiqadi?
+    options:
+      - "6"
+      - "8"
+      - "10"
+      - "13"
+    answer: 1
+    explanation: 48 / 6 = 8.
+  - id: basic-arithmetic-005
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Qaysi son eng katta?
+    options:
+      - "14"
+      - "25"
+      - "19"
+      - "8"
+    answer: 1
+    explanation: 25 qolganlardan katta.
+  - id: basic-arithmetic-006
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: 100 dan 45 ayiring.
+    options:
+      - "53"
+      - "55"
+      - "57"
+      - "60"
+    answer: 1
+    explanation: 100 - 45 = 55.
+  - id: basic-arithmetic-007
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: 12 * 12 natijasi qancha?
+    options:
+      - "124"
+      - "144"
+      - "164"
+      - "142"
+    answer: 1
+    explanation: 12 * 12 = 144.
+  - id: basic-arithmetic-008
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: 144 ni 12 ga boʻling.
+    options:
+      - "10"
+      - "12"
+      - "14"
+      - "17"
+    answer: 1
+    explanation: 144 / 12 = 12.

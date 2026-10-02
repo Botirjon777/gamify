@@ -9,7 +9,6 @@ exercises:
       console.log(nums.map((n) => n * 2));
     answer: "[2, 4, 6]"
     explanation: map har bir elementga funksiyani qoʻllab, natijalardan yangi massiv yasaydi.
-
   - id: array-methods-002
     type: choice
     difficulty: 1
@@ -22,7 +21,6 @@ exercises:
       - Hech narsa qaytarmaydi (undefined)
     answer: 1
     explanation: map, filter va reduce asl massivni oʻzgartirmaydi — shuning uchun ular React holati bilan ishlashda juda qulay.
-
   - id: array-methods-003
     type: output
     difficulty: 1
@@ -33,17 +31,14 @@ exercises:
       console.log(nums.filter((n) => n > 10));
     answer: "[12, 130, 44]"
     explanation: filter faqat shart true boʻlgan elementlarni, oʻz tartibida qoldiradi.
-
   - id: array-methods-004
     type: output
     difficulty: 1
     lang: js
     prompt: Konsolga nima chiqadi?
-    code: |-
-      console.log([1, 2, 3].includes(2));
+    code: console.log([1, 2, 3].includes(2));
     answer: "true"
     explanation: includes massivda shunday qiymat bor-yoʻqligini tekshiradi va true yoki false qaytaradi.
-
   - id: array-methods-005
     type: output
     difficulty: 2
@@ -54,7 +49,6 @@ exercises:
       console.log(total);
     answer: "10"
     explanation: "reduce massivni bitta qiymatga yigʻadi: 0 → 1 → 3 → 6 → 10. Ikkinchi argument (0) — boshlangʻich qiymat."
-
   - id: array-methods-006
     type: fill
     difficulty: 1
@@ -67,7 +61,6 @@ exercises:
     answer:
       - map
     explanation: Har bir elementni boshqa koʻrinishga oʻtkazish (obyekt → ism) — map ning ishi.
-
   - id: array-methods-007
     type: output
     difficulty: 2
@@ -82,7 +75,6 @@ exercises:
       console.log(users.find((u) => u.age > 18).name);
     answer: Vali
     explanation: find shartga mos kelgan BIRINCHI elementni qaytaradi (massiv emas). Hech biri mos kelmasa — undefined.
-
   - id: array-methods-008
     type: output
     difficulty: 2
@@ -93,12 +85,11 @@ exercises:
       console.log(result);
     answer: undefined
     explanation: forEach faqat har element uchun funksiyani chaqiradi va hech narsa qaytarmaydi. Yangi massiv kerak boʻlsa — map.
-
   - id: array-methods-009
     type: output
     difficulty: 2
     lang: js
-    prompt: "Konsolga nima chiqadi? (ikkala qiymatni probel bilan yozing)"
+    prompt: Konsolga nima chiqadi? (ikkala qiymatni probel bilan yozing)
     code: |-
       const nums = [3, 7, 12];
       console.log(nums.some((n) => n > 10), nums.every((n) => n > 10));
@@ -106,7 +97,6 @@ exercises:
       - true false
       - true, false
     explanation: some — kamida bittasi shartga mos kelsa true; every — hammasi mos kelsagina true.
-
   - id: array-methods-010
     type: output
     difficulty: 3
@@ -119,7 +109,6 @@ exercises:
       console.log(result);
     answer: "[4, 16, 36]"
     explanation: "Zanjir chapdan oʻngga ishlaydi: filter juftlarni qoldiradi [2, 4, 6], map ularni kvadratga oshiradi."
-
   - id: array-methods-011
     type: fill
     difficulty: 3
@@ -135,19 +124,16 @@ exercises:
     answer:
       - acc
       - "{}"
-    explanation: >-
-      reduce funksiyasi har qadamda yigʻuvchini (acc) qaytarishi shart — aks holda keyingi qadamda u undefined boʻladi.
-      Boshlangʻich qiymat boʻsh obyekt {}.
-
+    explanation: reduce funksiyasi har qadamda yigʻuvchini (acc) qaytarishi shart — aks holda keyingi qadamda u undefined boʻladi. Boshlangʻich qiymat boʻsh obyekt {}.
   - id: array-methods-012
     type: order
     difficulty: 2
     lang: js
     prompt: "Qatorlarni tartiblang: 100 dan qimmat narxlarga 10% chegirma qilinib, konsolga chiqarilsin."
     lines:
-      - "const prices = [120, 45, 300, 80];"
-      - "const discounted = prices"
+      - const prices = [120, 45, 300, 80];
+      - const discounted = prices
       - "  .filter((p) => p > 100)"
       - "  .map((p) => p * 0.9);"
-      - "console.log(discounted);"
+      - console.log(discounted);
     explanation: Avval kerakli elementlarni ajratamiz (filter), keyin ularni oʻzgartiramiz (map). Natija — [108, 270].

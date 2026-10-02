@@ -1,0 +1,97 @@
+exercises:
+  - id: dna-genetics-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: DNK yoyilmasining toʻliq nomi nima?
+    options:
+      - Dezoksiribonuklein kislotasi
+      - Ribonuklein kislotasi
+      - Aminokislota
+      - Fosfat kislota
+    answer: 0
+    explanation: DNK - dezoksiribonuklein kislotasi soʻzining qisqartmasi.
+  - id: dna-genetics-002
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Genetika fanining asoschisi kim?
+    options:
+      - Charlz Darvin
+      - Gregor Mendel
+      - Lui Paster
+      - Robert Guk
+    answer: 1
+    explanation: Gregor Mendel genetika fani asoschisidir.
+  - id: dna-genetics-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: DNK strukturasida Adenin har doim qaysi azotli asos bilan juftlashadi?
+    options:
+      - timin
+      - timin (xato)
+      - Boshqa
+      - Nomaʼlum
+    answer: 0
+    explanation: Komplementarlik qoidasiga koʻra Adenin-Timin bilan bogʻlanadi.
+  - id: dna-genetics-004
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Irsiy belgilarning nasldan naslga oʻtishini oʻrganadigan fan?
+    options:
+      - Ekologiya
+      - Genetika
+      - Fiziologiya
+      - Anatomiya
+    answer: 1
+    explanation: Genetika irsiyat va oʻzgaruvchanlik haqidagi fan.
+  - id: dna-genetics-005
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Sogʻlom insonning tana hujayralarida jami necha xromosoma mavjud?
+    options:
+      - "44"
+      - "46"
+      - "48"
+      - "51"
+    answer: 1
+    explanation: Sogʻlom insonda 23 juft (yaʼni 46 ta) xromosoma boʻladi.
+  - id: dna-genetics-006
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Fenotip nima?
+    options:
+      - Organizmdagi genlar yigʻindisi
+      - Organizmning tashqi va ichki belgilari yigʻindisi
+      - Xromosomalar soni
+      - DNK ketma-ketligi
+    answer: 1
+    explanation: Genotip asosida yuzaga chiqqan barcha belgilar fenotip deyiladi.
+  - id: dna-genetics-007
+    type: choice
+    difficulty: 3
+    lang: text
+    prompt: Qaysi xromosomalar toʻplami oʻgʻil bolalarga xos?
+    options:
+      - XX
+      - YY
+      - XY
+      - XO
+    answer: 2
+    explanation: Erkaklarda jinsiy xromosomalar X va Y dan iborat.
+  - id: dna-genetics-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: DNK ning bir qismi boʻlib, muayyan oqsil haqida maʼlumot saqlovchi birlik nima deyiladi?
+    options:
+      - gen
+      - gen (xato)
+      - Boshqa
+      - Nomaʼlum
+    answer: 0
+    explanation: Gen irsiyatning eng kichik funksional birligidir.

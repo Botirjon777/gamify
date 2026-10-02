@@ -11,7 +11,6 @@ exercises:
       - Undefined
     answer: 0
     explanation: async funksiyalar har doim avtomatik ravishda Promise qaytaradi. Agar funksiyadan oddiy qiymat qaytsa, u Promise.resolve(qiymat) koʻrinishida oʻraladi.
-
   - id: js-async-002
     type: output
     difficulty: 1
@@ -24,7 +23,6 @@ exercises:
       getNumber().then((val) => console.log(val));
     answer: "42"
     explanation: async funksiya return qilgan 42 qiymati Promise orqali yetib keladi va .then() callbacki uni konsolga chiqaradi.
-
   - id: js-async-003
     type: fill
     difficulty: 1
@@ -38,7 +36,6 @@ exercises:
       - then
       - catch
     explanation: .then() muvaffaqiyatli natijani, .catch() esa xatolikni ushlab olish uchun xizmat qiladi.
-
   - id: js-async-004
     type: output
     difficulty: 2
@@ -48,9 +45,11 @@ exercises:
       console.log("A");
       setTimeout(() => console.log("B"), 0);
       console.log("C");
-    answer: "A\nC\nB"
-    explanation: "setTimeout Event Loop ning Macrotask navbatiga tushadi, shuning uchun sinxron kodlar (A va C) avval ishlaydi, soʻng B chiqadi."
-
+    answer: |-
+      A
+      C
+      B
+    explanation: setTimeout Event Loop ning Macrotask navbatiga tushadi, shuning uchun sinxron kodlar (A va C) avval ishlaydi, soʻng B chiqadi.
   - id: js-async-005
     type: fill
     difficulty: 2
@@ -70,20 +69,18 @@ exercises:
       - try
       - await
     explanation: await async funksiya ichida (yoki ES modulning yuqori darajasida) ishlaydi va Promisening bajarilishini kutadi. Xatolarni ushlash uchun try/catch blokidan foydalaniladi.
-
   - id: js-async-006
     type: choice
     difficulty: 2
     lang: js
-    prompt: "Promise.all([p1, p2, p3]) haqida qaysi gap toʻgʻri?"
+    prompt: Promise.all([p1, p2, p3]) haqida qaysi gap toʻgʻri?
     options:
       - Barchasi muvaffaqiyatli boʻlgandagina barcha natijalar massivini qaytaradi, bittasi xato bersa butunlay reject boʻladi
       - Faqat birinchi tayyor boʻlgan Promiseni qaytaradi
       - Barcha Promislar xato bersa ham toʻxtamaydi
       - Promislarni ketma-ket (biri tugagach ikkinchisi) ishga tushiradi
     answer: 0
-    explanation: "Promise.all promislarni ishga tushirmaydi — ular yaratilgan paytdayoq ishlay boshlagan, u faqat barchasini birga kutadi. Hammasi fulfilled boʻlsa natijalar massivi (asl tartibda) qaytadi; bittasi reject boʻlsa Promise.all darhol oʻsha xato bilan reject boʻladi."
-
+    explanation: Promise.all promislarni ishga tushirmaydi — ular yaratilgan paytdayoq ishlay boshlagan, u faqat barchasini birga kutadi. Hammasi fulfilled boʻlsa natijalar massivi (asl tartibda) qaytadi; bittasi reject boʻlsa Promise.all darhol oʻsha xato bilan reject boʻladi.
   - id: js-async-007
     type: output
     difficulty: 2
@@ -95,28 +92,26 @@ exercises:
         resolve("Ikki");
       });
       p.then((val) => console.log(val));
-    answer: "Bir"
+    answer: Bir
     explanation: Promise holati faqat bir marta oʻzgarishi mumkin (settled). Birinchi resolve chaqirilgach, keyingi chaqiriqlar eʼtiborsiz qoldiriladi.
-
   - id: js-async-008
     type: order
     difficulty: 2
     lang: js
     prompt: async/await yordamida API dan maʼlumot olib keluvchi funksiyaning toʻgʻri tartibini tiklang.
     lines:
-      - "async function fetchPosts() {"
+      - async function fetchPosts() {
       - "  const response = await fetch('/api/posts');"
       - "  if (!response.ok) throw new Error('Yuklashda xato');"
       - "  const posts = await response.json();"
       - "  return posts;"
       - "}"
     explanation: Avval fetch chaqiriladi va kutiladi, status tekshiriladi, JSON parse qilinadi va natija qaytariladi.
-
   - id: js-async-009
     type: choice
     difficulty: 3
     lang: js
-    prompt: "Bir nechta Promislardan qaysi biri birinchi boʻlib yakunlansa (resolve yoki reject boʻlishidan qatʼi nazar) oʻshaning natijasini qaytaruvchi metod qaysi?"
+    prompt: Bir nechta Promislardan qaysi biri birinchi boʻlib yakunlansa (resolve yoki reject boʻlishidan qatʼi nazar) oʻshaning natijasini qaytaruvchi metod qaysi?
     options:
       - Promise.race
       - Promise.any
@@ -124,7 +119,6 @@ exercises:
       - Promise.first
     answer: 0
     explanation: Promise.race birinchi hal boʻlgan (resolve yoki reject) natijani oladi. Promise.any esa birinchi MUVAFFAQIYATLI (fulfilled) Promiseni kutadi.
-
   - id: js-async-010
     type: output
     difficulty: 3
@@ -134,5 +128,8 @@ exercises:
       console.log("1");
       Promise.resolve().then(() => console.log("2"));
       console.log("3");
-    answer: "1\n3\n2"
-    explanation: "Promise .then() microtask hisoblanadi. Sinxron kod (1 va 3) ishlab boʻlgach, joriy navbat oxirida microtasklar (2) bajariladi."
+    answer: |-
+      1
+      3
+      2
+    explanation: Promise .then() microtask hisoblanadi. Sinxron kod (1 va 3) ishlab boʻlgach, joriy navbat oxirida microtasklar (2) bajariladi.

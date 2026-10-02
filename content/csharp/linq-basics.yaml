@@ -13,7 +13,6 @@ exercises:
       Console.Write(count);
     answer: "3"
     explanation: Count shartga mos keladigan elementlar sonini sanaydi. 2 dan katta sonlar 3, 4, 5 (jami 3 ta).
-
   - id: cs-linq-002
     type: fill
     difficulty: 1
@@ -25,7 +24,6 @@ exercises:
     answer:
       - Select
     explanation: Select metodi toʻplamdagi har bir elementni yangi qiymatga oʻzgartiradi (JavaScript'dagi map ga oʻxshash).
-
   - id: cs-linq-003
     type: fill
     difficulty: 1
@@ -37,7 +35,6 @@ exercises:
     answer:
       - Where
     explanation: Where metodi berilgan predikat (shart) true boʻlgan elementlarni tanlab oladi (JavaScript'dagi filter).
-
   - id: cs-linq-004
     type: output
     difficulty: 2
@@ -52,7 +49,6 @@ exercises:
       Console.Write(first);
     answer: "12"
     explanation: FirstOrDefault shartga mos keluvchi birinchi elementni qaytaradi. 10 dan katta birinchi son 12 dir.
-
   - id: cs-linq-005
     type: output
     difficulty: 2
@@ -67,7 +63,6 @@ exercises:
       Console.Write(val);
     answer: "0"
     explanation: Agar toʻplam boʻsh boʻlsa, int tipining default qiymati (0) qaytadi.
-
   - id: cs-linq-006
     type: choice
     difficulty: 2
@@ -80,7 +75,6 @@ exercises:
       - Has()
     answer: 0
     explanation: Any() metodi shartga mos kamida bitta element topsa true qaytaradi. All() esa hamma elementlar shartga mos kelishini talab qiladi.
-
   - id: cs-linq-007
     type: fill
     difficulty: 2
@@ -92,21 +86,19 @@ exercises:
     answer:
       - ToList
     explanation: LINQ standart holda kechiktirilgan bajarilishga (deferred execution) ega. ToList() yoki ToArray() chaqirilganda soʻrov darhol hisoblanadi.
-
   - id: cs-linq-008
     type: order
     difficulty: 2
     lang: csharp
     prompt: LINQ yordamida faol foydalanuvchilarni filtrlash, ularning ismlarini olish, ismlarni uzunligi boʻyicha saralash va roʻyxatga aylantirish tartibini tiklang.
     lines:
-      - "var users = GetUsers();"
-      - "var names = users"
+      - var users = GetUsers();
+      - var names = users
       - "    .Where(u => u.IsActive)"
       - "    .Select(u => u.Name)"
       - "    .OrderBy(name => name.Length)"
       - "    .ToList();"
     explanation: Foydalanuvchilar olinadi, Where bilan faollari filtrlanadi (IsActive faqat User obyektida bor), Select bilan ismlari olinadi, OrderBy bilan ismlar uzunligi boʻyicha saralanadi (Length faqat string da bor) va ToList() bilan yakunlanadi.
-
   - id: cs-linq-009
     type: choice
     difficulty: 3
@@ -119,7 +111,6 @@ exercises:
       - Concat
     answer: 0
     explanation: SelectMany har bir element ichidagi toʻplamlarni ochib, bitta tekis ketma-ketlikka birlashtiradi.
-
   - id: cs-linq-010
     type: output
     difficulty: 3

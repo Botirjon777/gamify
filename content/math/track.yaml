@@ -1,0 +1,16 @@
+slug: math
+title: Matematika asoslari
+description: Arifmetika, algebra va tenglamalar.
+icon: calculator
+order: 2
+subject: MATH
+modules:
+  - slug: algebra
+    title: Algebra
+    skills:
+      - slug: basic-arithmetic
+        title: Asosiy arifmetika
+        description: Qoʻshish, ayirish, koʻpaytirish va boʻlish asoslari.
+      - slug: equations-algebra
+        title: Tenglamalar va algebra
+        description: Chiziqli tenglamalar va algebraik ifodalar.

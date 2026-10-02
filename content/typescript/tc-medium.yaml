@@ -3,121 +3,111 @@ exercises:
     type: fill
     difficulty: 2
     lang: ts
-    prompt: "Funksiya qaytaradigan qiymat tipini ajratib oluvchi MyReturnType<T> tipini toʻldiring."
+    prompt: Funksiya qaytaradigan qiymat tipini ajratib oluvchi MyReturnType<T> tipini toʻldiring.
     code: |-
       type MyReturnType<T extends (...args: any[]) => any> =
         T extends (...args: any[]) => ___ R ? R : never;
     answer:
       - infer
-    explanation: "infer R kalit soʻzi funksiya qaytaradigan haqiqiy tipni R oʻzgaruvchisiga bogʻlab beradi."
-
+    explanation: infer R kalit soʻzi funksiya qaytaradigan haqiqiy tipni R oʻzgaruvchisiga bogʻlab beradi.
   - id: tc-med-002
     type: fill
     difficulty: 2
     lang: ts
-    prompt: "Key Remapping (as operatori) yordamida MyOmit<T, K> tipini hosil qilish uchun shartni toʻldiring."
+    prompt: Key Remapping (as operatori) yordamida MyOmit<T, K> tipini hosil qilish uchun shartni toʻldiring.
     code: |-
       type MyOmit<T, K extends keyof any> = {
         [P in keyof T as P extends K ? ___ : P]: T[P];
       };
     answer:
       - never
-    explanation: "Kalit remapping paytida never qaytarsa, TypeScript oʻsha kalitni yangi obyektdan butunlay olib tashlaydi."
-
+    explanation: Kalit remapping paytida never qaytarsa, TypeScript oʻsha kalitni yangi obyektdan butunlay olib tashlaydi.
   - id: tc-med-003
     type: choice
     difficulty: 2
     lang: ts
-    prompt: "Massivning oxirgi elementini qaytaruvchi Last<T> tipi qanday yoziladi?"
+    prompt: Massivning oxirgi elementini qaytaruvchi Last<T> tipi qanday yoziladi?
     options:
       - "type Last<T extends any[]> = T extends [...any[], infer L] ? L : never;"
       - "type Last<T extends any[]> = T extends [infer L, ...any[]] ? L : never;"
-      - "type Last<T extends any[]> = T[T['length']];"
-      - "type Last<T extends any[]> = T[-1];"
+      - type Last<T extends any[]> = T[T['length']];
+      - type Last<T extends any[]> = T[-1];
     answer: 0
     explanation: "[...any[], infer L] patterni orqali oxirgi element L oʻzgaruvchisiga olinadi."
-
   - id: tc-med-004
     type: fill
     difficulty: 2
     lang: ts
-    prompt: "Tuple elementlaridan iborat Union tip hosil qiluvchi TupleToUnion tipini toʻldiring."
-    code: |-
-      type TupleToUnion<T extends any[]> = T[___];
+    prompt: Tuple elementlaridan iborat Union tip hosil qiluvchi TupleToUnion tipini toʻldiring.
+    code: type TupleToUnion<T extends any[]> = T[___];
     answer:
       - number
-    explanation: "T[number] massiv indeksator tipiga murojaat qilib, barcha elementlarning union tipini qaytaradi."
-
+    explanation: T[number] massiv indeksator tipiga murojaat qilib, barcha elementlarning union tipini qaytaradi.
   - id: tc-med-005
     type: fill
     difficulty: 2
     lang: ts
-    prompt: "Satr boshidagi boʻshliqlarni olib tashlovchi TrimLeft<S> rekursiv tipini toʻldiring."
+    prompt: Satr boshidagi boʻshliqlarni olib tashlovchi TrimLeft<S> rekursiv tipini toʻldiring.
     code: |-
       type Space = " " | "\t" | "\n";
       type TrimLeft<S extends string> = S extends `${Space}${infer Rest}` ? ___<Rest> : S;
     answer:
       - TrimLeft
-    explanation: "Satr boshida boʻshliq belgisi topsa, qolgan Rest qismi uchun TrimLeft qayta rekursiv chaqiriladi."
-
+    explanation: Satr boshida boʻshliq belgisi topsa, qolgan Rest qismi uchun TrimLeft qayta rekursiv chaqiriladi.
   - id: tc-med-006
     type: choice
     difficulty: 2
     lang: ts
-    prompt: "Obyektning ichma-ich joylashgan barcha darajadagi xususiyatlarini readonly qiluvchi DeepReadonly<T> qanday ishlaydi?"
+    prompt: Obyektning ichma-ich joylashgan barcha darajadagi xususiyatlarini readonly qiluvchi DeepReadonly<T> qanday ishlaydi?
     options:
-      - "Xususiyat tipi obyekt (object) boʻlsa, unga rekursiv tarzda DeepReadonly qoʻllaniladi"
-      - "Obyektni String ga oʻgirib muzlatadi"
-      - "Faqat birinchi darajadagi kalitlarni readonly qiladi"
-      - "Xususiyatlarni massivga aylantiradi"
+      - Xususiyat tipi obyekt (object) boʻlsa, unga rekursiv tarzda DeepReadonly qoʻllaniladi
+      - Obyektni String ga oʻgirib muzlatadi
+      - Faqat birinchi darajadagi kalitlarni readonly qiladi
+      - Xususiyatlarni massivga aylantiradi
     answer: 0
-    explanation: "DeepReadonly mapped type boʻlib, agar T[P] funksiya boʻlmagan obyekt boʻlsa, oʻzini oʻzi rekursiv chaqirib ichki xususiyatlarni ham readonly qiladi."
-
+    explanation: DeepReadonly mapped type boʻlib, agar T[P] funksiya boʻlmagan obyekt boʻlsa, oʻzini oʻzi rekursiv chaqirib ichki xususiyatlarni ham readonly qiladi.
   - id: tc-med-007
     type: fill
     difficulty: 2
     lang: ts
-    prompt: "Satrning birinchi harfini katta qilish uchun MyCapitalize tipini toʻldiring."
+    prompt: Satrning birinchi harfini katta qilish uchun MyCapitalize tipini toʻldiring.
     code: |-
       type MyCapitalize<S extends string> = S extends `${infer F}${infer Rest}`
         ? `${___<F>}${Rest}`
         : S;
     answer:
-      - [Uppercase, Capitalize]
-    explanation: "TypeScriptʼning intrinsic utility tipi Uppercase<F> birinchi harfni katta harfga oʻzgartiradi (Capitalize<F> ham ishlaydi)."
-
+      - - Uppercase
+        - Capitalize
+    explanation: TypeScriptʼning intrinsic utility tipi Uppercase<F> birinchi harfni katta harfga oʻzgartiradi (Capitalize<F> ham ishlaydi).
   - id: tc-med-008
     type: order
     difficulty: 2
     lang: ts
-    prompt: "Massivning oxirgi elementini olib tashlovchi Pop<T> tipining toʻgʻri ketma-ketligini tiklang."
+    prompt: Massivning oxirgi elementini olib tashlovchi Pop<T> tipining toʻgʻri ketma-ketligini tiklang.
     lines:
-      - "type Pop<T extends any[]> ="
+      - type Pop<T extends any[]> =
       - "  T extends [...infer Rest, any]"
       - "    ? Rest"
       - "    : [];"
-    explanation: "T oxirgi elementsiz qismga mos kelsa Rest qaytariladi, boʻsh massiv boʻlsa [] qaytadi."
-
+    explanation: T oxirgi elementsiz qismga mos kelsa Rest qaytariladi, boʻsh massiv boʻlsa [] qaytadi.
   - id: tc-med-009
     type: choice
     difficulty: 3
     lang: ts
-    prompt: "T tipi never ekanligini xavfsiz tekshiruvchi IsNever<T> tipi nima uchun [T] qavslariga oʻralishi shart?"
-    code: |-
-      type IsNever<T> = [T] extends [never] ? true : false;
+    prompt: T tipi never ekanligini xavfsiz tekshiruvchi IsNever<T> tipi nima uchun [T] qavslariga oʻralishi shart?
+    code: "type IsNever<T> = [T] extends [never] ? true : false;"
     options:
-      - "Chunki never boʻsh union hisoblanadi va [T] boʻlmasa conditional type umuman ishlamay toʻgʻridan-toʻgʻri never qaytadi"
-      - "Tuple sintaksisi tezroq ishlaydi"
-      - "never qavssiz xatolik beradi"
-      - "TypeScript qavssiz tiplarni taqiqlaydi"
+      - Chunki never boʻsh union hisoblanadi va [T] boʻlmasa conditional type umuman ishlamay toʻgʻridan-toʻgʻri never qaytadi
+      - Tuple sintaksisi tezroq ishlaydi
+      - never qavssiz xatolik beradi
+      - TypeScript qavssiz tiplarni taqiqlaydi
     answer: 0
-    explanation: "Distributive Conditional Types tufayli never tarqatilganda (naked type parameter) tekshiruv sharti umuman bajarilmaydi va natija never boʻlib qoladi. [T] qavsi bu tarqalishni (distribution) toʻxtatadi."
-
+    explanation: Distributive Conditional Types tufayli never tarqatilganda (naked type parameter) tekshiruv sharti umuman bajarilmaydi va natija never boʻlib qoladi. [T] qavsi bu tarqalishni (distribution) toʻxtatadi.
   - id: tc-med-010
     type: fill
     difficulty: 3
     lang: ts
-    prompt: "Ichma-ich massivlarni bitta tekis massivga keltiruvchi Flatten<T> rekursiv tipini toʻldiring."
+    prompt: Ichma-ich massivlarni bitta tekis massivga keltiruvchi Flatten<T> rekursiv tipini toʻldiring.
     code: |-
       type Flatten<T extends any[]> = T extends [infer Head, ...infer Tail]
         ? Head extends any[]
@@ -126,4 +116,4 @@ exercises:
         : [];
     answer:
       - Flatten
-    explanation: "Agar Head massiv boʻlsa, unga Flatten rekursiv chaqirilib ochiladi va Tail bilan birlashtiriladi."
+    explanation: Agar Head massiv boʻlsa, unga Flatten rekursiv chaqirilib ochiladi va Tail bilan birlashtiriladi.

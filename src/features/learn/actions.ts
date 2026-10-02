@@ -12,7 +12,7 @@ import { touchStreak } from "@/features/gamification/streak";
 import { evaluateBadges } from "@/features/badges/service";
 import { WEEKLY_BONUS_SHARE, weeklyTopic } from "@/features/events/service";
 import { completeTrackIfDone } from "./completion";
-import { submissionSchema, type PrivateAnswer, type Submission } from "./content-schema";
+import { isProse, submissionSchema, type PrivateAnswer, type PublicContent, type Submission } from "./content-schema";
 import { checkAnswer } from "./check";
 import { nextMastery, reviewIntervalDays } from "./mastery";
 import { pickNext } from "./picker";
@@ -69,7 +69,7 @@ export async function submitAnswer(exerciseId: string, rawSubmission: Submission
     include: { skill: { select: { module: { select: { track: { select: { id: true, slug: true, title: true } } } } } } },
   });
   const track = exercise.skill.module.track;
-  const { correct, reveal } = checkAnswer(exercise.answer as PrivateAnswer, submission);
+  const { correct, reveal } = checkAnswer(exercise.answer as PrivateAnswer, submission, isProse(exercise.content as PublicContent));
   const weekly = correct ? (await weeklyTopic(undefined, locale))?.trackId === track.id : false;
 
   return db.$transaction(async (tx) => {

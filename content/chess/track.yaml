@@ -1,0 +1,61 @@
+slug: chess
+title: Shaxmat asoslari
+description: Shaxmat oʻyinining qoidalari, taktikalar va strategiyalar.
+icon: crown
+order: 1
+subject: CHESS
+modules:
+  - slug: pieces-movement
+    title: Donalar va harakatlar
+    skills:
+      - slug: pawn-movement
+        title: Pion harakati
+        description: Pionlar (piyodalar) qanday harakatlanishi va qanday qilib raqib donalarini urib olishini oʻrganing.
+      - slug: rook-bishop
+        title: Tura va fil
+        description: Tura va fillarning yurish qoidalari va maydondagi imkoniyatlari.
+      - slug: knight-queen
+        title: Ot va vazir
+        description: Shaxmatdagi eng kuchli dona (vazir) va eng oʻziga xos dona (ot) harakatlari.
+      - slug: king-special-moves
+        title: Shoh va maxsus harakatlar
+        description: Shohning harakati va oʻyindagi roli.
+  - slug: basic-rules
+    title: Asosiy qoidalar
+    skills:
+      - slug: check-checkmate
+        title: Shoh va mat
+        description: Shoh eʼlon qilish va oʻyinni mat bilan yakunlash qoidalari.
+      - slug: stalemate-draw
+        title: Pat va durrang
+        description: Qanday holatlarda oʻyin durrang (pat) bilan tugashi.
+      - slug: castling-en-passant
+        title: Qalʼalanish va yoʻl-yoʻlakay urib olish
+        description: "Shaxmatdagi maxsus yurishlar: qalʼalanish (rokirovka) va en passant."
+  - slug: opening-principles
+    title: Ochilish tamoyillari
+    skills:
+      - slug: center-control
+        title: Markazni nazorat qilish
+        description: Oʻyin boshida markaziy kataklarni egallashning ahamiyati.
+      - slug: piece-development
+        title: Donalarni rivojlantirish
+        description: Donalarni oʻyinga tez va samarali olib kirish qoidalari.
+  - slug: basic-tactics
+    title: Asosiy taktikalar
+    skills:
+      - slug: fork-pin
+        title: Vilka va bogʻlash
+        description: Raqibga bir vaqtda ikkita hujum qilish (vilka) va donalarni bogʻlash taktikasi.
+      - slug: skewer-discovered
+        title: Shish va ochiq hujum
+        description: Shish (skewer) taktikasi va ochiq hujum orqali ustunlikka erishish.
+  - slug: endgame-basics
+    title: Endshpil asoslari
+    skills:
+      - slug: king-queen-endgame
+        title: Shoh va Vazir endshpili
+        description: Shoh va vazir bilan raqib yolgʻiz shohini qanday mat qilish usullari.
+      - slug: pawn-endgame
+        title: Pion endshpili
+        description: Pionlar ishtirokidagi oxirgi oʻyin qoidalari va pionni farzinga aylantirish.

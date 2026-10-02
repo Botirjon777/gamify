@@ -1,0 +1,98 @@
+exercises:
+  - id: king-queen-endgame-001
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Shoh va Vazir bilan yolgʻiz qolgan raqib Shohini qayerga qisib borish (haydash) kerak?
+    options:
+      - Taxta oʻrtasiga
+      - Taxtaning chekkasiga yoki burchagiga
+      - Oʻz shohingizning yoniga
+      - Joyida qoldirish kerak
+    answer: 1
+    explanation: Mat qilish uchun raqib shohini qochishga joyi qolmasligi kerak. Buning uchun eng qulay joy taxtaning chekka qatorlari yoki burchaklaridir.
+  - id: king-queen-endgame-002
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Vazir bilan mat qilishdagi xavfni toʻldiring:"
+    code: Raqib shohini chekkaga haydagach, uni ___ holatiga tushirib qoʻymaslik uchun juda ehtiyot boʻlish kerak. Shohga qochish uchun kamida bitta boʻsh katak qoldirish yoki uni darhol ___ qilish zarur.
+    answer:
+      - pat
+      - mat
+    bank:
+      - durrang
+      - shoh
+    explanation: Yolgʻiz shohga qarshi oʻyinda oʻyinchilar koʻpincha bexosdan raqib shohini harakatlanish imkoniyatidan mahrum qilib qoʻyishadi (pat), bu esa tayyor yutuqni durrangga aylantiradi.
+  - id: king-queen-endgame-003
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Yolgʻiz Vazir bilan raqib shohini mat qilib boʻladimi?
+    options:
+      - Ha, Vazir shunga yetarli kuchga ega
+      - Yoʻq, oʻz Shohingiz yordami ham kerak boʻladi
+      - Faqat burchakda qilsa boʻladi
+      - Ha, agar raqib xato qilsa
+    answer: 1
+    explanation: Garchi Vazir juda kuchli boʻlsa ham, shohni mat qilish uchun unga oʻz shohi himoyasi va koʻmagi kerak boʻladi (chunki Vazir yakka oʻzi shohga juda yaqin kela olmaydi).
+  - id: king-queen-endgame-004
+    type: order
+    difficulty: 2
+    lang: text
+    prompt: "Shoh va Vazir endshpilida (oxirgi oʻyinda) mat qilish bosqichlarini tartiblang:"
+    lines:
+      - Vazir yordamida raqib shohini cheklab (qafasga solib), maydon chetiga qarab surib borish.
+      - Raqib shohi maydonning oxirgi qatoriga yoki chetiga yetib borganda qafasni yopish.
+      - Oʻz shohingizni raqib shohi yaqiniga (koʻmakka) olib kelish.
+      - Oʻz shohingiz himoyasida Vazir bilan halokatli shoh berib mat qilish.
+    explanation: Bu yolgʻiz shohni vazir va shoh yordamida mat qilishning klassik, xatosiz algoritmidir.
+  - id: king-queen-endgame-005
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Shoh va Tura bilan mat qilish bosqichida qaysi usuldan koʻp foydalaniladi?
+    options:
+      - Vazir qilish
+      - "'Qafas' (yoki quti) qurib uni toraytirib borish"
+      - Ot kabi sakrash
+      - Turaning joyini shoh bilan almashtirish
+    answer: 1
+    explanation: Tura shohni bir chiziq bilan toʻsib (qafasga solib) qoʻyadi. Shoh yordami bilan bu qafas asta-sekin toraytirilib, raqib shohi chekkaga siqib boriladi.
+  - id: king-queen-endgame-006
+    type: fill
+    difficulty: 2
+    lang: text
+    prompt: "Shoh va Tura endshpilidagi farqni toʻldiring:"
+    code: Tura Vazirdek diagonal harakatlana olmagani uchun u shohni oʻz holicha hayday olmaydi. Shu sababli Tura bilan mat qilishda boshidanoq oʻz ___ faol ishtiroki (raqib shohi roʻparasida turishi) ___ hisoblanadi.
+    answer:
+      - shohingizning
+      - shart
+    bank:
+      - ortiqcha
+      - piyodangizning
+    explanation: Turali endshpilda shohning koʻmagi vazirnikidan koʻra koʻproq kerak. Ikkala shoh yuzma-yuz kelgan (oppozitsiya) paytda tura bilan zarba beriladi.
+  - id: king-queen-endgame-007
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Shoh va Tura matida (Linear mate/Qafas) ikkala shohning 'oppozitsiya' holati (yuzma-yuz turishi) nima uchun kerak?
+    options:
+      - Shunchaki chiroyli koʻrinish uchun
+      - Sizning shohingiz raqib shohining oldinga qochish yoʻllarini (3 ta katakni) toʻsib turishi uchun
+      - Shohlar bir-birini urib olishi uchun
+      - Vaqtni choʻzish uchun
+    answer: 1
+    explanation: Oppozitsiyada sizning shohingiz raqibga orqaga chekinishdan boshqa yoʻl qoldirmaydi, chunki shohlar bir-biriga yaqinlasha olmaydi. Ayni shu paytda Tura bilan yon tomondan shoh berib raqibni bitta qator orqaga chekinishga majbur qilinadi.
+  - id: king-queen-endgame-008
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Vazir yordamida 'Ot yurishi' masofasida (L-shaklida) raqib shohini kuzatib borish nima maqsadida qilinadi?
+    options:
+      - Vazirni otga aylantirish uchun
+      - Raqib shohi turgan kataklardan asta-sekin 'qafas' ni xavfsiz masofada toraytirib, uni chekkaga siqish uchun
+      - Shoh eʼlon qilib turish uchun
+      - Pat qilib qoʻyish uchun
+    answer: 1
+    explanation: Agar Vazir raqib shohini 'Ot yurishi' (L-shakli) masofasidan takrorlab kuzatib borsa, hech qachon shoh berilmaydi, lekin raqib shohi uzluksiz tarzda chekkaga siqilib borilaveradi (juda oson usul).

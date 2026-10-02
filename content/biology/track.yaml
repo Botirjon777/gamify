@@ -1,0 +1,22 @@
+slug: biology
+title: Biologiya asoslari
+description: Hujayra tuzilishi, genetika va inson anatomiyasi.
+icon: dna
+order: 4
+subject: BIOLOGY
+modules:
+  - slug: cell-genetics
+    title: Hujayra va genetika
+    skills:
+      - slug: cell-structure
+        title: Hujayra tuzilishi
+        description: Oʻsimlik va hayvon hujayralari.
+      - slug: dna-genetics
+        title: DNK va genetika
+        description: Genetika qonuniyatlari va irsiyat.
+  - slug: anatomy
+    title: Anatomiya
+    skills:
+      - slug: human-anatomy
+        title: Inson anatomiyasi
+        description: Inson organlari va tana tizimlari.
