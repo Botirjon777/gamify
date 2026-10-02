@@ -46,3 +46,7 @@ next-env.d.ts
 # deploy build output
 /.deploy
 /.deploy-src
+
+# local media store (uploaded pictures) — sent to the server with `pnpm media:push`
+/.media
+/.media.tgz

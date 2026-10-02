@@ -5,6 +5,7 @@ import { cached } from "@/lib/cache";
 import { db } from "@/lib/db";
 import { tashkentWeekStart } from "@/lib/time";
 import { getLeaderboardStore } from "@/lib/leaderboard";
+import { mediaUrl } from "@/lib/media";
 import { awardXp } from "@/features/gamification/xp";
 import { evaluateBadges } from "@/features/badges/service";
 import { DEFAULT_TYPICAL_ANSWER_MS, IQ_CHEER_PAUSE_MS, iqCheer, type IqCheer } from "./cheer";
@@ -56,16 +57,24 @@ export async function nextItemId(tx: Tx, userId: string, rating: number, lastIte
   return pickIqItem(pool, rating, new Set(seen.map((s) => s.itemId)), last?.category ?? null)?.id ?? null;
 }
 
+/** The stored question in the reader's language, pictures as URLs. */
+export function questionContent(content: IqPublicContent, locale: string): Pick<IqQuestion, "prompt" | "figure" | "image" | "options" | "optionsImage"> {
+  return {
+    prompt: localized(content.prompt, locale),
+    figure: content.figure,
+    image: content.image && mediaUrl(content.image),
+    options: content.options.map((o: LocalizedText) => localized(o, locale)),
+    optionsImage: content.optionsImage && { ...content.optionsImage, src: mediaUrl(content.optionsImage.src) },
+  };
+}
+
 export async function toQuestion(tx: Tx, session: IqSession, locale: string): Promise<IqQuestion> {
   const item = await tx.iqItem.findUniqueOrThrow({ where: { id: session.currentItemId! } });
-  const content = item.content as IqPublicContent;
   return {
     itemId: item.id,
     number: session.answered + 1,
     total: session.total,
-    prompt: localized(content.prompt, locale),
-    figure: content.figure,
-    options: content.options.map((o: LocalizedText) => localized(o, locale)),
+    ...questionContent(item.content as IqPublicContent, locale),
     secondsLeft: secondsLeft(session.currentShownAt!),
   };
 }

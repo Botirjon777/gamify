@@ -10,7 +10,8 @@ import { Prisma } from "@/generated/prisma/client";
 import { exerciseDef, LANGS, toDbExercise, trackFile } from "@/features/learn/content-schema";
 import { CATEGORIES } from "@/features/learn/categories";
 import { SUBJECTS } from "@/features/learn/subjects";
-import { INITIAL_ITEM_RATING, IQ_CATEGORIES, iqItemDef, type IqPublicContent } from "@/features/iq/content-schema";
+import { INITIAL_ITEM_RATING, IQ_CATEGORIES, iqItemDef, toIqContent } from "@/features/iq/content-schema";
+import { MAX_UPLOAD_BYTES, saveMedia } from "@/lib/media-store";
 
 /**
  * Content management for super admins. The database is the source of truth for content; `pnpm content:pull`
@@ -295,11 +296,23 @@ const iqInput = z.object({
   difficulty: z.number().int(),
   promptUz: z.string().trim(),
   figure: z.string().trim().optional(),
+  /** Media paths, as returned by uploadCmsIqImage. */
+  image: z.string().optional(),
+  /** All answers as one picture; the text options are then not used. */
+  optionsImage: z.object({ src: z.string(), columns: z.number().int(), rows: z.number().int() }).optional(),
   optionsUz: z.array(z.string().trim()),
   answerIndex: z.number().int(),
   status: statusSchema.default("PUBLISHED"),
 });
 export type CmsIqInput = z.input<typeof iqInput>;
+
+/** Store a picture for an IQ question; the returned media path is saved with the question. */
+export async function uploadCmsIqImage(form: FormData): Promise<{ ok: true; path: string } | CmsFailure> {
+  await requireAdmin();
+  const file = form.get("file");
+  const path = file instanceof File && file.size <= MAX_UPLOAD_BYTES ? await saveMedia("iq/u", Buffer.from(await file.arrayBuffer())) : null;
+  return path ? { ok: true, path } : fail("invalid", "PNG, JPG, WebP, SVG ≤ 2 MB");
+}
 
 export async function saveCmsIqItem(input: CmsIqInput, itemId?: string): Promise<CmsResult> {
   const admin = await requireAdmin();
@@ -312,7 +325,9 @@ export async function saveCmsIqItem(input: CmsIqInput, itemId?: string): Promise
     difficulty: i.difficulty,
     prompt: i.promptUz,
     figure: i.figure || undefined,
-    options: i.optionsUz,
+    image: i.image || undefined,
+    options: i.optionsImage ? undefined : i.optionsUz,
+    optionsImage: i.optionsImage,
     answer: i.answerIndex,
     status: fileStatus(i.status),
   });
@@ -321,7 +336,7 @@ export async function saveCmsIqItem(input: CmsIqInput, itemId?: string): Promise
   const clash = await db.iqItem.findUnique({ where: { key: i.key }, select: { id: true } });
   if (clash && clash.id !== itemId) return fail("keyTaken");
 
-  const content: IqPublicContent = { prompt: def.data.prompt, figure: def.data.figure, options: def.data.options };
+  const content = toIqContent(def.data);
   const data = { key: i.key, category: i.category, difficulty: i.difficulty, content, answer: i.answerIndex, status: i.status };
   if (itemId) {
     if (!(await db.iqItem.findUnique({ where: { id: itemId }, select: { id: true } }))) return fail("notFound");

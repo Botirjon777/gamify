@@ -3,7 +3,8 @@ import { join } from "node:path";
 import { parse } from "yaml";
 import { describe, expect, it } from "vitest";
 import { IQ_CHEER_PAUSE_MS, iqCheer } from "./cheer";
-import { iqFile } from "./content-schema";
+import { MEDIA_PATH } from "@/lib/media";
+import { IQ_FILES, iqFile, iqItemDef, isNumbered } from "./content-schema";
 import { expectedScore, iqFromRating, iqPercentile, pickIqItem, START_RATING, updateRatings, userK } from "./rating";
 
 describe("Elo rating", () => {
@@ -103,5 +104,32 @@ describe("encouragement between questions", () => {
   it("does not count its own pauses as answering time", () => {
     // 6 answers at 24 s each, plus one pause before the fourth question.
     expect(at(6, 12, 6 * 24_000 + IQ_CHEER_PAUSE_MS)?.fast).toBe(true);
+  });
+});
+
+describe("picture questions", () => {
+  const picture = { id: "iq-matrix-x", category: "matrix", difficulty: 2, prompt: "?", image: "iq/sandia/s001.png", answer: 5 };
+  const sheet = { src: "iq/sandia/s001-answers.png", columns: 4, rows: 2 };
+
+  it("numbers the answers when they are one picture", () => {
+    const item = iqItemDef.parse({ ...picture, optionsImage: sheet });
+    expect(item.options).toHaveLength(8);
+    expect(isNumbered(item.options)).toBe(true);
+  });
+  it("rejects an answer outside the grid, a grid that is too big, and no answers at all", () => {
+    expect(iqItemDef.safeParse({ ...picture, optionsImage: sheet, answer: 8 }).success).toBe(false);
+    expect(iqItemDef.safeParse({ ...picture, optionsImage: { ...sheet, rows: 3 } }).success).toBe(false);
+    expect(iqItemDef.safeParse(picture).success).toBe(false);
+  });
+  it("accepts only paths that stay inside the media store", () => {
+    for (const path of ["iq/u/0a1b2c.png", "iq/omib/o001-answers.svg"]) expect(MEDIA_PATH.test(path), path).toBe(true);
+    for (const path of ["../.env", "iq/../../etc/passwd.png", "/iq/a.png", "iq/a.php", "iq/a.png.exe", "iq//a.png", "IQ/a.png"]) {
+      expect(MEDIA_PATH.test(path), path).toBe(false);
+    }
+  });
+  it("keeps the picture bank valid", () => {
+    const { items } = iqFile.parse(parse(readFileSync(join(process.cwd(), "content/iq", IQ_FILES.pictures), "utf8")));
+    expect(new Set(items.map((i) => i.id)).size).toBe(items.length);
+    for (const item of items) expect(item.image && item.optionsImage, item.id).toBeTruthy();
   });
 });

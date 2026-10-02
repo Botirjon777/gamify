@@ -9,6 +9,7 @@ HERE="$(cd "$(dirname "$0")" && pwd)"
 id zukkolar &>/dev/null || useradd --system --home-dir /srv/zukkolar --shell /usr/sbin/nologin zukkolar
 install -d -o zukkolar -g zukkolar -m 755 /srv/zukkolar /srv/zukkolar/releases
 install -d -o zukkolar -g zukkolar -m 750 /srv/zukkolar/shared
+install -d -o zukkolar -g zukkolar -m 755 /srv/zukkolar/shared/media
 
 # 2. TLS certificate for the origin. Self-signed wildcard for now → Cloudflare SSL mode "Full".
 #    To use "Full (strict)", replace these two files with a Cloudflare Origin Certificate.

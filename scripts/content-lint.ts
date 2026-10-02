@@ -8,7 +8,7 @@ import { existsSync, readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { parseDocument, visit } from "yaml";
 import { skillFile, toDbExercise, trackFile, LANGS, type PrivateAnswer, type Submission } from "../src/features/learn/content-schema";
-import { iqFile } from "../src/features/iq/content-schema";
+import { IQ_FILES, iqFile } from "../src/features/iq/content-schema";
 import { checkAnswer } from "../src/features/learn/check";
 
 const ROOT = join(process.cwd(), "content");
@@ -98,10 +98,12 @@ for (const dir of readdirSync(ROOT, { withFileTypes: true }).filter((d) => d.isD
   }
 }
 
-const iq = load(join(ROOT, "iq", "items.yaml"));
-if (iq !== undefined) {
+for (const name of Object.values(IQ_FILES)) {
+  if (!existsSync(join(ROOT, "iq", name))) continue;
+  const iq = load(join(ROOT, "iq", name));
+  if (iq === undefined) continue;
   const r = iqFile.safeParse(iq);
-  if (!r.success) for (const i of r.error.issues) add(join(ROOT, "iq/items.yaml"), `${i.path.join(".")}: ${i.message}`);
+  if (!r.success) for (const i of r.error.issues) add(join(ROOT, "iq", name), `${i.path.join(".")}: ${i.message}`);
 }
 
 console.log(`checked ${exercises} exercises in ${skillSlugs.size} skills`);

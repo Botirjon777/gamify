@@ -15,27 +15,22 @@
  *   /srv/zukkolar/releases/<id>/   one folder per deploy (last 3 kept)
  *   /srv/zukkolar/current          → symlink to the live release
  *   /srv/zukkolar/shared/.env      secrets, never overwritten by a deploy
+ *   /srv/zukkolar/shared/media/    uploaded pictures (MEDIA_DIR) — filled by the admin panel and `pnpm media:push`
  */
 import { execSync } from "node:child_process";
 import { cpSync, existsSync, mkdirSync, readFileSync, rmSync } from "node:fs";
 import { join } from "node:path";
-import { parse } from "dotenv";
-import { Client, type SFTPWrapper } from "ssh2";
+import type { Client, SFTPWrapper } from "ssh2";
+import { REMOTE, connect, exec, readEnv, sftp, upload, writeRemote } from "./lib/vps";
 
 const ROOT = process.cwd();
 const OUT = join(ROOT, ".deploy");
 const APP = join(OUT, "app");
 const TARBALL = join(OUT, "release.tgz");
-const REMOTE = "/srv/zukkolar";
 const PORT = 3010;
 
 const args = new Set(process.argv.slice(2));
 const step = (msg: string) => console.log(`\n▶ ${msg}`);
-
-function readEnv(file: string) {
-  if (!existsSync(file)) throw new Error(`${file} not found`);
-  return parse(readFileSync(file));
-}
 
 // ─── local build ────────────────────────────────────────────────────────────
 
@@ -75,52 +70,6 @@ function build() {
   console.log(`  ${(readFileSync(TARBALL).length / 1024 / 1024).toFixed(1)} MB`);
 }
 
-// ─── ssh helpers ────────────────────────────────────────────────────────────
-
-function connect(vps: Record<string, string>): Promise<Client> {
-  return new Promise((resolve, reject) => {
-    const c = new Client();
-    c.on("ready", () => resolve(c))
-      .on("error", reject)
-      .connect({
-        host: vps.VPS_IP,
-        port: Number(vps.VPS_SSH_PORT ?? 22),
-        username: vps.VPS_SSH_USER,
-        password: vps.VPS_SSH_PASSWORD,
-        readyTimeout: 20_000,
-      });
-  });
-}
-
-function exec(c: Client, cmd: string, { quiet = false } = {}): Promise<string> {
-  return new Promise((resolve, reject) => {
-    c.exec(cmd, (err, stream) => {
-      if (err) return reject(err);
-      let out = "";
-      stream
-        .on("close", (code: number) => (code === 0 ? resolve(out) : reject(new Error(`remote command failed (${code})\n${out}`))))
-        .on("data", (d: Buffer) => {
-          out += d;
-          if (!quiet) process.stdout.write(d);
-        })
-        .stderr.on("data", (d: Buffer) => {
-          out += d;
-          if (!quiet) process.stderr.write(d);
-        });
-    });
-  });
-}
-
-const sftp = (c: Client) => new Promise<SFTPWrapper>((res, rej) => c.sftp((e, s) => (e ? rej(e) : res(s))));
-
-function upload(s: SFTPWrapper, local: string, remote: string) {
-  return new Promise<void>((res, rej) => s.fastPut(local, remote, (e) => (e ? rej(e) : res())));
-}
-
-function writeRemote(s: SFTPWrapper, remote: string, content: string, mode: number) {
-  return new Promise<void>((res, rej) => s.writeFile(remote, content, { mode }, (e) => (e ? rej(e) : res())));
-}
-
 // ─── steps ──────────────────────────────────────────────────────────────────
 
 async function setup(c: Client, s: SFTPWrapper) {
@@ -150,6 +99,7 @@ async function setup(c: Client, s: SFTPWrapper) {
     "DEFAULT_TENANT_SLUG=gamify",
     "FEATURE_SMS_OTP=false",
     "FEATURE_REDIS=false",
+    `MEDIA_DIR=${REMOTE}/shared/media`,
     "",
   ].join("\n");
   await writeRemote(s, `${REMOTE}/shared/.env`, env, 0o600);
@@ -179,6 +129,9 @@ cd ${REMOTE}
 mkdir releases/${id}
 tar -xzf releases/${id}.tgz -C releases/${id} && rm releases/${id}.tgz
 chown -R zukkolar:zukkolar releases/${id}
+# Media store: outside the releases, so pictures survive a deploy. Servers set up before it existed get it here.
+install -d -o zukkolar -g zukkolar -m 755 shared/media
+grep -q '^MEDIA_DIR=' shared/.env || echo 'MEDIA_DIR=${REMOTE}/shared/media' >> shared/.env
 # Previous release (only if "current" is a real symlink to an existing directory)
 PREV=""
 if [ -L current ] && [ -d "$(readlink current)" ]; then PREV=$(readlink current); fi
