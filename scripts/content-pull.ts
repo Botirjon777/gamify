@@ -12,7 +12,7 @@ import { join } from "node:path";
 import { stringify } from "yaml";
 import { fileText, toFileExercise } from "../src/features/learn/content-export";
 import type { LocalizedText } from "../src/i18n/content";
-import type { IqPublicContent } from "../src/features/iq/content-schema";
+import { IQ_FILES, isNumbered, type IqPublicContent } from "../src/features/iq/content-schema";
 import { CONTENT_DIR, connect } from "./lib/content-db";
 
 const yaml = (value: unknown) => stringify(value, { lineWidth: 0 });
@@ -22,6 +22,8 @@ const draft = (status: string) => (status === "DRAFT" ? { status: "DRAFT" } : {}
 const IQ_HEADER = `# Zukko IQ — savollar banki.
 # difficulty 1–5 faqat boshlangʻich reytingni belgilaydi; keyin reyting javoblar asosida oʻzi kalibrlanadi.
 # answer — toʻgʻri variant indeksi (0 dan boshlanadi). Javoblar hech qachon brauzerga yuborilmaydi.
+# image / optionsImage.src — media omboridagi rasm yoʻli (pnpm media:push). optionsImage — barcha javoblar bitta rasmda:
+# columns x rows kvadrat katak, chapdan oʻngga; options yozilmasa, javoblar 1, 2, 3… deb raqamlanadi.
 `;
 
 async function main() {
@@ -102,25 +104,42 @@ async function main() {
 
     const items = await db.iqItem.findMany({ where: { status: { not: "ARCHIVED" } }, orderBy: [{ difficulty: "asc" }, { key: "asc" }] });
     mkdirSync(join(CONTENT_DIR, "iq"), { recursive: true });
-    writeFileSync(
-      join(CONTENT_DIR, "iq", "items.yaml"),
-      IQ_HEADER +
-        yaml({
-          items: items.map((item) => {
-            const content = item.content as IqPublicContent;
-            return {
-              id: item.key,
-              category: item.category,
-              difficulty: item.difficulty,
-              ...draft(item.status),
-              prompt: text(content.prompt),
-              ...(content.figure && { figure: content.figure }),
-              options: content.options.map(text),
-              answer: item.answer,
-            };
+    const hasPicture = (item: (typeof items)[number]) => {
+      const content = item.content as IqPublicContent;
+      return !!(content.image || content.optionsImage);
+    };
+    for (const [name, own] of [
+      [IQ_FILES.text, items.filter((i) => !hasPicture(i))],
+      [IQ_FILES.pictures, items.filter(hasPicture)],
+    ] as const) {
+      const file = join(CONTENT_DIR, "iq", name);
+      if (!own.length) {
+        rmSync(file, { force: true });
+        continue;
+      }
+      writeFileSync(
+        file,
+        IQ_HEADER +
+          yaml({
+            items: own.map((item) => {
+              const content = item.content as IqPublicContent;
+              return {
+                id: item.key,
+                category: item.category,
+                difficulty: item.difficulty,
+                ...draft(item.status),
+                prompt: text(content.prompt),
+                ...(content.figure && { figure: content.figure }),
+                ...(content.image && { image: content.image }),
+                // Answers that are a picture are only numbered — the schema fills those in.
+                ...(!(content.optionsImage && isNumbered(content.options)) && { options: content.options.map(text) }),
+                ...(content.optionsImage && { optionsImage: content.optionsImage }),
+                answer: item.answer,
+              };
+            }),
           }),
-        }),
-    );
+      );
+    }
     console.log(`✔ iq: ${items.length} items`);
     console.log(`Done: ${tracks.length} courses, ${exercises} exercises, ${items.length} IQ items written to /content`);
   } finally {

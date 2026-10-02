@@ -12,7 +12,11 @@ export interface IqQuestion {
   total: number;
   prompt: string;
   figure?: string;
+  /** Picture of the question (URL). */
+  image?: string;
   options: string[];
+  /** The answers as one picture: a grid of cells, one per option (URL). */
+  optionsImage?: { src: string; columns: number; rows: number };
   secondsLeft: number;
   /** Shown before this question: a word of encouragement (only right after the previous answer). */
   cheer?: IqCheer;
