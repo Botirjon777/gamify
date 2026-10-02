@@ -34,11 +34,23 @@ describe("badge catalog", () => {
 
 describe("pricing", () => {
   it("annual is cheaper per month by the annual discount", async () => {
-    const { ANNUAL_DISCOUNT, perMonth, priceFor, yearlySaving } = await import("@/features/payments/pricing");
-    expect(priceFor("PRO", "monthly")).toBe(PLANS.PRO.priceUzs);
-    expect(priceFor("PRO", "annual")).toBe(Math.round((PLANS.PRO.priceUzs * 12 * (1 - ANNUAL_DISCOUNT / 100)) / 1000) * 1000);
-    expect(perMonth("DIAMOND", "annual")).toBeLessThan(perMonth("DIAMOND", "monthly"));
-    expect(yearlySaving("PRO")).toBe(PLANS.PRO.priceUzs * 12 - priceFor("PRO", "annual"));
+    const { DEFAULT_PRICING: p, perMonth, priceFor, yearlySaving } = await import("@/features/payments/pricing");
+    expect(priceFor(p, "PRO", "monthly")).toBe(p.monthly.PRO);
+    expect(priceFor(p, "PRO", "annual")).toBe(Math.round((p.monthly.PRO * 12 * (1 - p.annualDiscount / 100)) / 1000) * 1000);
+    expect(perMonth(p, "DIAMOND", "annual")).toBeLessThan(perMonth(p, "DIAMOND", "monthly"));
+    expect(yearlySaving(p, "PRO")).toBe(p.monthly.PRO * 12 - priceFor(p, "PRO", "annual"));
+  });
+
+  it("follows the prices saved in the settings", async () => {
+    const { billingDiscount, perMonth, priceFor, yearlySaving } = await import("@/features/payments/pricing");
+    const p = { monthly: { PRO: 50_000, DIAMOND: 100_000 }, annualDiscount: 10 };
+    expect(priceFor(p, "PRO", "monthly")).toBe(50_000);
+    expect(priceFor(p, "DIAMOND", "annual")).toBe(1_080_000);
+    expect(perMonth(p, "DIAMOND", "annual")).toBe(90_000);
+    expect(yearlySaving(p, "DIAMOND")).toBe(120_000);
+    expect([billingDiscount(p, "monthly"), billingDiscount(p, "annual")]).toEqual([0, 10]);
+    // No annual discount → a year costs twelve months.
+    expect(yearlySaving({ ...p, annualDiscount: 0 }, "PRO")).toBe(0);
   });
 
   it("a year extends to the same date next year; renewals stack", async () => {

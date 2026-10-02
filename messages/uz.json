@@ -1518,8 +1518,19 @@
         "contact": "Telegram: @username yoki https://t.me/… koʻrinishida yozing",
         "iqPriceUzs": "Narx 1 000 soʻmdan kam boʻlmasin",
         "iqOldPriceUzs": "Eski narx yangi narxdan katta boʻlishi kerak",
+        "proPriceUzs": "Pro narxi 1 000 soʻmdan kam boʻlmasin",
+        "diamondPriceUzs": "Diamond narxi 1 000 soʻmdan kam boʻlmasin",
+        "annualDiscount": "Chegirma 0 dan 90 gacha butun son boʻlishi kerak",
         "invalid": "Maʼlumotlarni tekshiring"
-      }
+      },
+      "plans": "Tariflar narxi",
+      "plansText": "Pro va Diamond tariflarining bir oylik narxi. Yillik toʻlov chegirmasi shu narxlardan hisoblanadi. Kutilayotgan toʻlovlar summasi oʻzgarmaydi.",
+      "proPrice": "Pro — oyiga, soʻm",
+      "diamondPrice": "Diamond — oyiga, soʻm",
+      "annualDiscount": "Yillik toʻlov chegirmasi, %",
+      "annualDiscountHint": "0 dan 90 gacha. 0 — chegirmasiz.",
+      "planMonthly": "Oylik: {price} soʻm",
+      "planAnnual": "Yillik: {total} soʻm (oyiga {perMonth})"
     }
   },
   "common": {

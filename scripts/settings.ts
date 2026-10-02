@@ -3,6 +3,7 @@
  *   pnpm settings                                   show them (local dev database)
  *   pnpm settings cardNumber=8600123456789012 "cardHolder=ALI VALIYEV" contact=@ali iqPriceUzs=13000 iqOldPriceUzs=25000
  *   pnpm settings iqOldPriceUzs=                    empty value = not set (no discount)
+ *   pnpm settings proPriceUzs=39000 diamondPriceUzs=79000 annualDiscount=25     plan prices (per month) and the yearly discount, %
  *   pnpm settings --prod …                          the same against production
  *
  * Values are validated exactly like the admin form. The running app picks a change up within a minute
@@ -11,7 +12,16 @@
 import { DEFAULT_IQ_PRICE_UZS, SETTING_KEYS, settingsInput, toRows, type SettingKey } from "../src/features/settings/rules";
 import { connect } from "./lib/content-db";
 
-const FIELDS = { cardNumber: "payment.cardNumber", cardHolder: "payment.cardHolder", contact: "payment.contact", iqPriceUzs: "iq.priceUzs", iqOldPriceUzs: "iq.oldPriceUzs" } as const satisfies Record<string, SettingKey>;
+const FIELDS = {
+  cardNumber: "payment.cardNumber",
+  cardHolder: "payment.cardHolder",
+  contact: "payment.contact",
+  iqPriceUzs: "iq.priceUzs",
+  iqOldPriceUzs: "iq.oldPriceUzs",
+  proPriceUzs: "plan.proPriceUzs",
+  diamondPriceUzs: "plan.diamondPriceUzs",
+  annualDiscount: "plan.annualDiscount",
+} as const satisfies Record<string, SettingKey>;
 type Field = keyof typeof FIELDS;
 
 async function main() {
@@ -32,6 +42,10 @@ async function main() {
         contact: next.contact,
         iqPriceUzs: Number(next.iqPriceUzs || DEFAULT_IQ_PRICE_UZS),
         iqOldPriceUzs: next.iqOldPriceUzs ? Number(next.iqOldPriceUzs) : null,
+        // Empty = the default.
+        proPriceUzs: next.proPriceUzs ? Number(next.proPriceUzs) : undefined,
+        diamondPriceUzs: next.diamondPriceUzs ? Number(next.diamondPriceUzs) : undefined,
+        annualDiscount: next.annualDiscount ? Number(next.annualDiscount) : undefined,
       });
       if (!parsed.success) throw new Error(`Invalid: ${parsed.error.issues.map((i) => `${i.path.join(".")} (${i.message})`).join(", ")}`);
       const rows = toRows(parsed.data);
@@ -44,7 +58,7 @@ async function main() {
 
     console.log(`Settings in the ${target}:`);
     const after = new Map((await db.setting.findMany()).map((r) => [r.key, r.value]));
-    for (const [field, key] of Object.entries(FIELDS)) console.log(`  ${field.padEnd(14)} ${after.get(key) ?? "(not set)"}`);
+    for (const [field, key] of Object.entries(FIELDS)) console.log(`  ${field.padEnd(16)} ${after.get(key) ?? "(not set)"}`);
   } finally {
     await db.$disconnect();
   }

@@ -22,6 +22,15 @@ describe("site settings", () => {
       "payment.contact": "@ali_v",
       "iq.priceUzs": "13000",
       "iq.oldPriceUzs": "25000",
+      // Not given → the default plan prices.
+      "plan.proPriceUzs": "39000",
+      "plan.diamondPriceUzs": "79000",
+      "plan.annualDiscount": "25",
+    });
+    expect(toRows(settingsInput.parse({ ...valid, proPriceUzs: 45_000, diamondPriceUzs: 90_000, annualDiscount: 0 }))).toMatchObject({
+      "plan.proPriceUzs": "45000",
+      "plan.diamondPriceUzs": "90000",
+      "plan.annualDiscount": "0",
     });
     expect(toRows(settingsInput.parse({ ...valid, iqOldPriceUzs: null }))["iq.oldPriceUzs"]).toBe("");
   });
@@ -32,5 +41,8 @@ describe("site settings", () => {
     expect(settingsInput.safeParse({ ...valid, contact: "https://t.me/ali_v" }).success).toBe(true);
     expect(settingsInput.safeParse({ ...valid, iqOldPriceUzs: 13_000 }).success).toBe(false);
     expect(settingsInput.safeParse({ ...valid, cardNumber: "", cardHolder: "", contact: "" }).success).toBe(true);
+    expect(settingsInput.safeParse({ ...valid, proPriceUzs: 500 }).success).toBe(false);
+    expect(settingsInput.safeParse({ ...valid, annualDiscount: 95 }).success).toBe(false);
+    expect(settingsInput.safeParse({ ...valid, annualDiscount: 12.5 }).success).toBe(false);
   });
 });

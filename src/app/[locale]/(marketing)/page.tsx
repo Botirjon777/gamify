@@ -38,10 +38,10 @@ import { IQ_SECONDS_PER_QUESTION } from "@/features/iq/types";
 import { groupKey, groupMessageKey, groupStyle, inGroup, TRACK_GROUPS } from "@/features/learn/subjects";
 import { getCatalogStructure } from "@/features/learn/queries";
 import { paymentDetails } from "@/features/payments/config";
-import { ANNUAL_DISCOUNT, perMonth } from "@/features/payments/pricing";
+import { perMonth } from "@/features/payments/pricing";
 import { PLAN_ORDER, PLANS } from "@/features/plans/plans";
 import { PriceTag } from "@/features/settings/components/price-tag";
-import { iqPrice } from "@/features/settings/service";
+import { iqPrice, planPricing } from "@/features/settings/service";
 
 const STEPS = [
   { key: "pick", icon: Crosshair, gradient: "bg-grad-brand" },
@@ -74,7 +74,7 @@ export default async function LandingPage({ params }: PageProps<"/[locale]">) {
   const tMeta = await getTranslations("meta");
 
   const tenant = await getCurrentTenant();
-  const [current, catalog, season, topic, origin, payment, iq] = await Promise.all([
+  const [current, catalog, season, topic, origin, payment, iq, pricing] = await Promise.all([
     getCurrentSession(),
     getCatalogStructure(tenant.id, locale),
     currentSeason(),
@@ -82,6 +82,7 @@ export default async function LandingPage({ params }: PageProps<"/[locale]">) {
     siteOrigin(),
     paymentDetails(),
     iqPrice(),
+    planPricing(),
   ]);
   // The test without registration lives on the main site only (not on a study center's own address).
   const sections = SECTIONS.filter((id) => id !== "iq" || isDefaultTenant(tenant));
@@ -487,10 +488,10 @@ function handleClick() {
                   <h3 className="font-display text-2xl font-bold">{tPlans(`names.${plan}`)}</h3>
                   <p className={`text-sm ${highlight ? "text-white/80" : "text-muted"}`}>{tPlans(`taglines.${plan}`)}</p>
                   <p className="mt-5 flex flex-wrap items-baseline gap-x-1.5 font-display text-3xl font-bold">
-                    {paid ? som(perMonth(plan, "monthly")) : tPlans("free")}
+                    {paid ? som(perMonth(pricing, plan, "monthly")) : tPlans("free")}
                     {paid && <span className={`font-sans text-sm font-medium ${highlight ? "text-white/80" : "text-muted"}`}>{tPlans("perMonth")}</span>}
                   </p>
-                  <p className={`mt-1 min-h-5 text-sm ${highlight ? "text-white/80" : "text-success"}`}>{paid && t("plansAnnual", { percent: ANNUAL_DISCOUNT })}</p>
+                  <p className={`mt-1 min-h-5 text-sm ${highlight ? "text-white/80" : "text-success"}`}>{paid && pricing.annualDiscount > 0 && t("plansAnnual", { percent: pricing.annualDiscount })}</p>
                   <ul className="mt-5 flex flex-1 flex-col gap-2.5 text-sm">
                     {features.map((f) => (
                       <li key={f} className="flex items-start gap-2">

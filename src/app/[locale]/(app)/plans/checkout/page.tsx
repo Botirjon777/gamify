@@ -6,6 +6,7 @@ import { PageHeader } from "@/components/page-header";
 import { paymentDetails } from "@/features/payments/config";
 import { isBilling, PAID_PLANS, type PaidPlan } from "@/features/payments/pricing";
 import { CheckoutForm } from "@/features/payments/components/checkout-form";
+import { planPricing } from "@/features/settings/service";
 
 export default async function CheckoutPage({ params, searchParams }: PageProps<"/[locale]/plans/checkout">) {
   const { locale } = await params;
@@ -23,7 +24,7 @@ export default async function CheckoutPage({ params, searchParams }: PageProps<"
         <ArrowLeft className="size-4" /> {t("title")}
       </Link>
       <PageHeader title={t("checkout.title", { plan: t(`names.${plan!}`) })} />
-      <CheckoutForm plan={plan!} initialBilling={billing} {...(await paymentDetails())} />
+      <CheckoutForm plan={plan!} initialBilling={billing} pricing={await planPricing()} {...(await paymentDetails())} />
     </div>
   );
 }

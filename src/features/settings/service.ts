@@ -1,10 +1,11 @@
 import "server-only";
 import { db } from "@/lib/db";
 import { cached, invalidateCache } from "@/lib/cache";
+import { DEFAULT_PRICING, type PlanPricing } from "@/features/payments/pricing";
 import { DEFAULT_IQ_PRICE_UZS, discountPercent, formatCardNumber, type SettingKey } from "./rules";
 
 /**
- * Site-wide values that are changed without a deploy: where card transfers go and what the IQ test costs.
+ * Site-wide values that are changed without a deploy: where card transfers go, what the IQ test and the plans cost.
  * They live in the Setting table (admin → Sozlamalar, or `pnpm settings:set`). Not in the code: the repository
  * is public. PAYMENT_* environment variables are only a fallback for values that were never saved.
  */
@@ -17,6 +18,8 @@ export interface SiteSettings {
   iqPriceUzs: number;
   /** "Before" price shown crossed out; null = no discount. */
   iqOldPriceUzs: number | null;
+  /** Paid plans: monthly prices and the discount for a year paid at once. */
+  pricing: PlanPricing;
 }
 
 const CACHE_KEY = "settings:all";
@@ -32,12 +35,17 @@ export const getSettings = () =>
     };
     const iqPriceUzs = amount("iq.priceUzs") ?? DEFAULT_IQ_PRICE_UZS;
     const old = amount("iq.oldPriceUzs");
+    const percent = Number(rows.get("plan.annualDiscount") ?? "x");
     return {
       cardNumber: text("payment.cardNumber", process.env.PAYMENT_CARD_NUMBER)?.replace(/\D/g, "") || null,
       cardHolder: text("payment.cardHolder", process.env.PAYMENT_CARD_HOLDER),
       contact: text("payment.contact", process.env.PAYMENT_CONTACT),
       iqPriceUzs,
       iqOldPriceUzs: old && old > iqPriceUzs ? old : null,
+      pricing: {
+        monthly: { PRO: amount("plan.proPriceUzs") ?? DEFAULT_PRICING.monthly.PRO, DIAMOND: amount("plan.diamondPriceUzs") ?? DEFAULT_PRICING.monthly.DIAMOND },
+        annualDiscount: Number.isInteger(percent) && percent >= 0 && percent <= 90 ? percent : DEFAULT_PRICING.annualDiscount,
+      },
     };
   });
 
@@ -56,6 +64,9 @@ export async function paymentDetails() {
   const s = await getSettings();
   return { cardNumber: s.cardNumber ? formatCardNumber(s.cardNumber) : null, cardHolder: s.cardHolder, contact: s.contact };
 }
+
+/** What the paid plans cost now. */
+export const planPricing = async () => (await getSettings()).pricing;
 
 /** The IQ result / certificate price, ready to show: "13 000", and when discounted "25 000" and 48. */
 export async function iqPrice() {

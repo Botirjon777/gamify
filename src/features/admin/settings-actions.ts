@@ -9,7 +9,7 @@ import { saveSettings } from "@/features/settings/service";
 /** `error` is the field that failed (a key under admin.settings.errors), or "invalid". */
 export type SettingsResult = { ok: true } | { ok: false; error: string };
 
-/** Payment card, Telegram contact and the IQ price — applied on the site at once. */
+/** Payment card, Telegram contact, the IQ price and the plan prices — applied on the site at once. */
 export async function updateSettings(input: SettingsInput): Promise<SettingsResult> {
   const { user: admin } = await requireAdmin();
   const parsed = settingsInput.safeParse(input);
@@ -17,7 +17,13 @@ export async function updateSettings(input: SettingsInput): Promise<SettingsResu
 
   await saveSettings(toRows(parsed.data), admin.id);
   // The card number itself stays out of the audit log; what changed can be seen in the settings.
-  await audit(db, admin.id, "settings.update", null, { iqPriceUzs: parsed.data.iqPriceUzs, iqOldPriceUzs: parsed.data.iqOldPriceUzs });
+  await audit(db, admin.id, "settings.update", null, {
+    iqPriceUzs: parsed.data.iqPriceUzs,
+    iqOldPriceUzs: parsed.data.iqOldPriceUzs,
+    proPriceUzs: parsed.data.proPriceUzs,
+    diamondPriceUzs: parsed.data.diamondPriceUzs,
+    annualDiscount: parsed.data.annualDiscount,
+  });
   revalidatePath("/", "layout");
   return { ok: true };
 }
