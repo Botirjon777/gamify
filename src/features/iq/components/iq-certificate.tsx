@@ -30,8 +30,8 @@ export function IqCertificate({ state }: { state: IqCertificateState }) {
 
   if (state.unlocked) {
     return (
-      // Plain <a>: a route handler outside the locale routes, opened in its own tab for printing.
-      <a href="/api/iq/certificate" target="_blank" rel="noopener" className={buttonClass("success", "mt-6")}>
+      // Plain <a>: a route handler outside the locale routes — the PDF opens in its own tab.
+      <a href="/api/iq/certificate?format=pdf" target="_blank" rel="noopener" className={buttonClass("success", "mt-6")}>
         <Award className="size-4" /> {t("open")}
       </a>
     );
