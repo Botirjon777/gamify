@@ -578,14 +578,30 @@
       "errors": {
         "invalid": "Maʼlumotlarni tekshiring (kamida 3 ta belgi)",
         "pendingExists": "Sizda tekshirilayotgan toʻlov bor. Avval u koʻrib chiqiladi.",
-        "tooMany": "Juda koʻp urinish. Keyinroq qayta urining."
+        "tooMany": "Juda koʻp urinish. Keyinroq qayta urining.",
+        "promo": {
+          "notFound": "Bunday promokod topilmadi",
+          "expired": "Promokod muddati tugagan",
+          "usedUp": "Promokod limiti tugagan",
+          "alreadyUsed": "Siz bu promokoddan allaqachon foydalangansiz",
+          "wrongPlan": "Bu promokod boshqa tarif uchun"
+        }
       },
       "billing": {
         "monthly": "Oylik",
         "annual": "Yillik"
       },
       "perMonthPrice": "{price} soʻm / oy",
-      "saving": "Yiliga {saving} soʻm tejaysiz"
+      "saving": "Yiliga {saving} soʻm tejaysiz",
+      "promo": {
+        "placeholder": "Promokod",
+        "apply": "Qoʻllash",
+        "applied": "{code} — {percent}% chegirma",
+        "remove": "Promokodni olib tashlash",
+        "discount": "Chegirma ({percent}%)",
+        "free": "Promokod toʻliq narxni qoplaydi — toʻlov qilish shart emas. Soʻrovni yuboring, administrator tasdiqlagach tarif faollashadi.",
+        "submitFree": "Soʻrov yuborish"
+      }
     },
     "billing": {
       "monthly": "Oylik",
@@ -1127,7 +1143,8 @@
       "users": "Foydalanuvchilar",
       "payments": "Toʻlovlar",
       "audit": "Amallar tarixi",
-      "events": "Mavsum va bonuslar"
+      "events": "Mavsum va bonuslar",
+      "promos": "Promokodlar"
     },
     "stats": {
       "totalUsers": "Jami foydalanuvchilar",
@@ -1231,7 +1248,8 @@
       "products": {
         "PLAN": "Tarif",
         "IQ_CERTIFICATE": "IQ sertifikati"
-      }
+      },
+      "promo": "{code} · −{percent}% (−{discount} soʻm)"
     },
     "errors": {
       "notPending": "Bu toʻlov allaqachon koʻrib chiqilgan",
@@ -1241,7 +1259,9 @@
       "adminTarget": "Boshqa adminga bu amalni qila olmaysiz",
       "notFound": "Topilmadi",
       "seasonPast": "Bu muddat allaqachon oʻtib ketgan",
-      "alreadyPlanned": "Keyingi mavsum allaqachon rejalashtirilgan"
+      "alreadyPlanned": "Keyingi mavsum allaqachon rejalashtirilgan",
+      "promoTaken": "Bunday kod allaqachon bor",
+      "promoPast": "Oxirgi kun oʻtib ketgan"
     },
     "audit": {
       "empty": "Hali amallar yoʻq",
@@ -1297,6 +1317,11 @@
           "delete": "IQ savolni oʻchirdi",
           "status": "IQ savol holatini oʻzgartirdi"
         }
+      },
+      "promo": {
+        "create": "Promokod yaratdi",
+        "enable": "Promokodni yoqdi",
+        "disable": "Promokodni oʻchirdi"
       }
     },
     "events": {
@@ -1320,6 +1345,30 @@
       "auto": "Avtomatik (navbat bilan)",
       "autoShort": "avtomatik",
       "thisWeek": "shu hafta"
+    },
+    "promos": {
+      "subtitle": "Tariflar uchun chegirma kodlari. Har bir foydalanuvchi kodni bir marta ishlata oladi.",
+      "new": "Yangi promokod",
+      "code": "Kod",
+      "codeHint": "Lotin harflari va raqamlar, 3–24 ta belgi",
+      "random": "Tasodifiy kod",
+      "percent": "Chegirma, %",
+      "plan": "Tarif",
+      "anyPlan": "Istalgan tarif",
+      "maxUses": "Necha marta",
+      "unlimited": "cheksiz",
+      "lastDay": "Oxirgi kun",
+      "note": "Izoh",
+      "notePlaceholder": "Masalan: Telegram kanal aksiyasi",
+      "create": "Yaratish",
+      "created": "{code} yaratildi",
+      "empty": "Hali promokodlar yoʻq.",
+      "used": "Ishlatilgan",
+      "usedUp": "limit tugagan",
+      "expired": "muddati tugagan",
+      "revenue": "Tushum",
+      "discountGiven": "{count} ta toʻlov · chegirma {amount} soʻm",
+      "active": "Faol"
     }
   },
   "common": {

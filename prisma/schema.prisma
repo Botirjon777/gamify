@@ -533,11 +533,38 @@ model Payment {
   createdAt    DateTime       @default(now())
   reviewedAt   DateTime?
   reviewedById String?
+  /// Promo code used; `amountUzs` is already the discounted price, `discountUzs` what was taken off.
+  promoCodeId  String?
+  discountUzs  Int            @default(0)
 
-  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+  promoCode PromoCode? @relation(fields: [promoCodeId], references: [id], onDelete: SetNull)
 
   @@index([status, createdAt])
   @@index([userId, createdAt])
+  @@index([promoCodeId])
+}
+
+/// A discount code for buying a subscription, created by an admin. One use per user.
+model PromoCode {
+  id          String    @id @default(cuid())
+  /// What the user types, stored uppercase: "YOZ25"
+  code        String    @unique
+  /// Discount in percent, 1–100.
+  percent     Int
+  /// Only for this plan; null = any paid plan.
+  plan        UserPlan?
+  /// How many payments may use it (pending + approved); null = unlimited.
+  maxUses     Int?
+  /// null = never expires.
+  expiresAt   DateTime?
+  /// Switched off by an admin: can't be used any more, history stays.
+  active      Boolean   @default(true)
+  note        String?
+  createdById String?
+  createdAt   DateTime  @default(now())
+
+  payments Payment[]
 }
 
 /// Every admin action, for accountability.

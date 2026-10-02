@@ -156,7 +156,10 @@ export async function listPayments(status: "PENDING" | "APPROVED" | "REJECTED") 
     where: { status },
     orderBy: status === "PENDING" ? { createdAt: "asc" } : { reviewedAt: "desc" },
     take: 100,
-    include: { user: { select: { id: true, username: true, phone: true, avatarSeed: true, avatarStyle: true, gender: true, plan: true, planExpiresAt: true } } },
+    include: {
+      user: { select: { id: true, username: true, phone: true, avatarSeed: true, avatarStyle: true, gender: true, plan: true, planExpiresAt: true } },
+      promoCode: { select: { code: true, percent: true } },
+    },
   });
 }
 

@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart3, CalendarRange, FolderKanban, History, Users, Wallet, type LucideIcon } from "lucide-react";
+import { BarChart3, CalendarRange, FolderKanban, History, TicketPercent, Users, Wallet, type LucideIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { NavPending } from "@/components/nav-pending";
@@ -10,6 +10,7 @@ const LINKS: { href: string; key: string; icon: LucideIcon; exact?: boolean }[] 
   { href: "/admin/content", key: "content", icon: FolderKanban },
   { href: "/admin/users", key: "users", icon: Users },
   { href: "/admin/payments", key: "payments", icon: Wallet },
+  { href: "/admin/promos", key: "promos", icon: TicketPercent },
   { href: "/admin/events", key: "events", icon: CalendarRange },
   { href: "/admin/audit", key: "audit", icon: History },
 ];
