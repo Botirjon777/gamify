@@ -21,6 +21,9 @@ export function connect(prod: boolean): { db: PrismaClient; target: string } {
     const url = new URL(process.env.PRODUCTION_DATABASE_URL);
     url.hostname = host;
     url.searchParams.set("sslmode", "require");
+    // node-postgres reads "require" as "verify the certificate" and rejects the server's self-signed one.
+    // libpq semantics (what `prisma migrate deploy` uses): encrypted, certificate not verified.
+    url.searchParams.set("uselibpqcompat", "true");
     connectionString = url.toString();
   }
   if (!connectionString) throw new Error("DATABASE_URL missing in .env");
