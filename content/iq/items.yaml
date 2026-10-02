@@ -45,6 +45,7 @@ items:
   - id: iq-letters-001
     category: letters
     difficulty: 1
+    status: DRAFT
     prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
     figure: A, C, E, G, ?
     options:
@@ -56,6 +57,7 @@ items:
   - id: iq-letters-005
     category: letters
     difficulty: 1
+    status: DRAFT
     prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
     figure: A, B, C, D, ?
     options:
@@ -295,6 +297,7 @@ items:
   - id: iq-letters-002
     category: letters
     difficulty: 2
+    status: DRAFT
     prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
     figure: Z, X, V, T, ?
     options:
@@ -306,6 +309,7 @@ items:
   - id: iq-letters-006
     category: letters
     difficulty: 2
+    status: DRAFT
     prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
     figure: A, D, G, J, ?
     options:
@@ -317,6 +321,7 @@ items:
   - id: iq-letters-007
     category: letters
     difficulty: 2
+    status: DRAFT
     prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
     figure: Z, W, T, Q, ?
     options:
@@ -328,6 +333,7 @@ items:
   - id: iq-letters-008
     category: letters
     difficulty: 2
+    status: DRAFT
     prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
     figure: C, G, K, O, ?
     options:
@@ -649,6 +655,7 @@ items:
   - id: iq-letters-003
     category: letters
     difficulty: 3
+    status: DRAFT
     prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
     figure: A, B, D, G, K, ?
     options:
@@ -660,6 +667,7 @@ items:
   - id: iq-letters-009
     category: letters
     difficulty: 3
+    status: DRAFT
     prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
     figure: A, Z, B, Y, C, ?
     options:
@@ -671,6 +679,7 @@ items:
   - id: iq-letters-010
     category: letters
     difficulty: 3
+    status: DRAFT
     prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
     figure: AB, DE, GH, JK, ?
     options:
@@ -682,6 +691,7 @@ items:
   - id: iq-letters-011
     category: letters
     difficulty: 3
+    status: DRAFT
     prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
     figure: A, D, I, P, ?
     options:
@@ -1037,6 +1047,7 @@ items:
   - id: iq-letters-004
     category: letters
     difficulty: 4
+    status: DRAFT
     prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
     figure: B, E, I, N, ?
     options:
@@ -1048,6 +1059,7 @@ items:
   - id: iq-letters-012
     category: letters
     difficulty: 4
+    status: DRAFT
     prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
     figure: A, B, D, H, ?
     options:
@@ -1059,6 +1071,7 @@ items:
   - id: iq-letters-013
     category: letters
     difficulty: 4
+    status: DRAFT
     prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
     figure: A, Z, C, X, E, V, ?
     options:
@@ -1330,6 +1343,7 @@ items:
   - id: iq-letters-014
     category: letters
     difficulty: 5
+    status: DRAFT
     prompt: Ketma-ketlikni davom ettiring (ingliz alifbosi, A–Z)
     figure: A, B, C, E, H, ?
     options:

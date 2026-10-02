@@ -50,3 +50,6 @@ next-env.d.ts
 # local media store (uploaded pictures) — sent to the server with `pnpm media:push`
 /.media
 /.media.tgz
+
+# design sources from third parties (templates) — not ours to publish; the app uses public/certificate/background.png
+/design/*.pptx

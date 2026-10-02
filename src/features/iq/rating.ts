@@ -44,11 +44,20 @@ export interface IqCandidate {
   id: string;
   category: string;
   rating: number;
+  /** The question is a picture (a matrix puzzle), not text. */
+  picture?: boolean;
 }
 
 /**
- * Next question: never seen before, closest to the user's current rating,
- * not the same category as the previous one; random among the 3 best so tests differ.
+ * Questions this close (in rating points) to the best match are equally good choices. Hundreds of questions start
+ * with the same rating; picking "the first three" of them gave everybody the same test.
+ */
+const NEAR = 60;
+
+/**
+ * Next question: never seen before, close to the user's current rating, and — when there is a choice — not the same
+ * category as the previous one. Random among everything near the best match, so two tests are not alike.
+ * `pictureShare` (0–1): how often a picture question is asked rather than a text one, while the bank has both.
  */
 export function pickIqItem(
   pool: IqCandidate[],
@@ -56,17 +65,19 @@ export function pickIqItem(
   seen: Set<string>,
   lastCategory: string | null,
   random: () => number = Math.random,
+  pictureShare = 1,
 ): IqCandidate | null {
   const fresh = pool.filter((i) => !seen.has(i.id));
-  const candidates = fresh.length ? fresh : pool;
+  let candidates = fresh.length ? fresh : pool;
   if (!candidates.length) return null;
 
-  const ranked = [...candidates].sort(
-    (a, b) =>
-      Math.abs(a.rating - userRating) +
-      (a.category === lastCategory ? 150 : 0) -
-      (Math.abs(b.rating - userRating) + (b.category === lastCategory ? 150 : 0)),
-  );
-  const top = ranked.slice(0, 3);
-  return top[Math.floor(random() * top.length)];
+  const pictures = candidates.filter((i) => i.picture);
+  if (pictures.length && pictures.length < candidates.length) {
+    candidates = random() < pictureShare ? pictures : candidates.filter((i) => !i.picture);
+  }
+
+  const score = (i: IqCandidate) => Math.abs(i.rating - userRating) + (i.category === lastCategory ? 150 : 0);
+  const best = candidates.reduce((min, i) => Math.min(min, score(i)), Infinity);
+  const near = candidates.filter((i) => score(i) <= best + NEAR);
+  return near[Math.floor(random() * near.length)];
 }

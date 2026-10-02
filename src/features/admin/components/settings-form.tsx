@@ -30,6 +30,7 @@ export interface SettingsValues {
   contact: string;
   iqPriceUzs: number;
   iqOldPriceUzs: number | null;
+  iqPictureShare: number;
   pricing: PlanPricing;
 }
 
@@ -43,6 +44,7 @@ export function SettingsForm({ initial }: { initial: SettingsValues }) {
   const [contact, setContact] = useState(initial.contact);
   const [price, setPrice] = useState(String(initial.iqPriceUzs));
   const [oldPrice, setOldPrice] = useState(initial.iqOldPriceUzs ? String(initial.iqOldPriceUzs) : "");
+  const [pictureShare, setPictureShare] = useState(String(initial.iqPictureShare));
   const [proPrice, setProPrice] = useState(String(initial.pricing.monthly.PRO));
   const [diamondPrice, setDiamondPrice] = useState(String(initial.pricing.monthly.DIAMOND));
   const [annualDiscount, setAnnualDiscount] = useState(String(initial.pricing.annualDiscount));
@@ -65,6 +67,7 @@ export function SettingsForm({ initial }: { initial: SettingsValues }) {
         contact,
         iqPriceUzs: priceUzs,
         iqOldPriceUzs: oldPriceUzs,
+        iqPictureShare: Number(pictureShare),
         proPriceUzs: pricing.monthly.PRO,
         diamondPriceUzs: pricing.monthly.DIAMOND,
         annualDiscount: Number(annualDiscount),
@@ -114,6 +117,9 @@ export function SettingsForm({ initial }: { initial: SettingsValues }) {
           </Field>
           <Field label={t("iqOldPrice")} hint={t("iqOldPriceHint")}>
             <input type="number" min={1000} step={100} value={oldPrice} onChange={(e) => setOldPrice(e.target.value)} className={input} />
+          </Field>
+          <Field label={t("iqPictureShare")} hint={t("iqPictureShareHint")}>
+            <input type="number" min={0} max={100} step={5} value={pictureShare} onChange={(e) => setPictureShare(e.target.value)} required className={input} />
           </Field>
         </div>
         <p className="flex flex-wrap items-center gap-3 rounded-2xl bg-background px-4 py-3 text-sm">

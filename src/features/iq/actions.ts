@@ -8,7 +8,7 @@ import { requireSession } from "@/lib/auth/session";
 import { getRateLimiter } from "@/lib/rate-limit";
 import { tashkentToday } from "@/lib/time";
 import { START_RATING, updateRatings, userK } from "./rating";
-import { finishSession, isInTime, nextItemId, nextQuestionStart, resultFromSession, toQuestion, typicalAnswerMs, withRank } from "./service";
+import { finishSession, iqPicking, isInTime, nextItemId, nextQuestionStart, resultFromSession, toQuestion, typicalAnswerMs, withRank } from "./service";
 import { IQ_QUESTIONS, IQ_SECONDS_PER_QUESTION, type IqKind, type IqState } from "./types";
 
 const kindSchema = z.enum(["PLACEMENT", "DAILY"]);
@@ -45,6 +45,7 @@ export async function startIq(rawKind: IqKind): Promise<IqState> {
   if (kind === "PLACEMENT" && user.iqTestedAt) throw new Error("Placement test already taken");
   if (kind === "DAILY" && !user.iqTestedAt) throw new Error("Take the placement test first");
 
+  const picking = await iqPicking();
   await db.$transaction(async (tx) => {
     if (kind === "DAILY") {
       // One daily IQ test per Tashkent day — the primary key makes this race-safe.
@@ -56,7 +57,7 @@ export async function startIq(rawKind: IqKind): Promise<IqState> {
     }
 
     const rating = kind === "PLACEMENT" ? START_RATING : user.iqRating;
-    const first = await nextItemId(tx, user.id, rating, null);
+    const first = await nextItemId(tx, picking, user.id, rating, null);
     if (!first) throw new Error("No IQ items available");
 
     await tx.iqSession.create({
@@ -85,7 +86,7 @@ export async function answerIq(sessionId: string, itemId: string, rawChoice: num
   const limit = await getRateLimiter().hit(`iq:${user.id}`, 30, 60);
   if (!limit.ok) throw new Error("Too many answers");
 
-  const typicalMs = await typicalAnswerMs();
+  const [typicalMs, picking] = await Promise.all([typicalAnswerMs(), iqPicking()]);
   const outcome = await db.$transaction(async (tx) => {
     const session = await tx.iqSession.findFirst({ where: { id: sessionId, userId: user.id } });
     if (!session) throw new Error("Session not found");
@@ -134,7 +135,7 @@ export async function answerIq(sessionId: string, itemId: string, rawChoice: num
       return { finished: await finishSession(tx, updated, { ...me, iqRating: ratings.user }, ratings.user) };
     }
 
-    const next = await nextItemId(tx, user.id, ratings.user, itemId);
+    const next = await nextItemId(tx, picking, user.id, ratings.user, itemId);
     if (!next) {
       return { finished: await finishSession(tx, updated, { ...me, iqRating: ratings.user }, ratings.user) };
     }

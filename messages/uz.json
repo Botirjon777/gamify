@@ -189,7 +189,7 @@
     "iq": {
       "badge": "Roʻyxatdan oʻtmasdan",
       "title": "IQ darajangizni 10 daqiqada bilib oling",
-      "text": "Mantiqiy fikrlash boʻyicha qisqa test: ketma-ketliklar, oʻxshatishlar, mantiqiy masalalar. Savollar sizning darajangizga moslashadi.",
+      "text": "Mantiqiy fikrlash boʻyicha qisqa test: rasmli topshiriqlarda qonuniyatni toping va boʻsh katakka mos shaklni tanlang. Savollar sizning darajangizga moslashadi.",
       "points": {
         "questions": "{count} ta savol, har biriga {seconds} soniya",
         "certificate": "IQ ballingiz va ism-familiyangiz yozilgan sertifikat (PDF)",
@@ -494,7 +494,7 @@
       "title": "IQ sertifikati",
       "open": "IQ sertifikatini ochish",
       "get": "IQ sertifikatini olish — {price} soʻm",
-      "text": "Natijangiz yozilgan sertifikat: chop eting yoki PDF qilib saqlang va ulashing.",
+      "text": "Natijangiz yozilgan sertifikat: PDF qilib yuklab oling, chop eting va ulashing. Undagi QR kod sertifikat haqiqiyligini tasdiqlaydi.",
       "price": "{price} soʻm",
       "oneTime": "Bir martalik toʻlov — sertifikat doim sizniki. Har bir yangi natija bilan yangilanadi.",
       "proHint": "Pro va Diamond tariflarida sertifikat bepul.",
@@ -519,8 +519,7 @@
       "percentileValue": "{percentile}% dan yuqori",
       "date": "Sana",
       "level": "Daraja",
-      "disclaimer": "Zukko IQ — mantiqiy fikrlash boʻyicha taxminiy baho. Bu klinik IQ test emas.",
-      "print": "Chop etish / PDF saqlash"
+      "disclaimer": "Zukko IQ — mantiqiy fikrlash boʻyicha taxminiy baho. Bu klinik IQ test emas."
     },
     "cheer": {
       "done": "{done} / {total} savol ortda",
@@ -1518,9 +1517,19 @@
       "iqPrice": "Narx, soʻm",
       "iqOldPrice": "Chegirmadan oldingi narx, soʻm",
       "iqOldPriceHint": "Ixtiyoriy. Toʻldirilsa, saytda ustiga chizilgan eski narx va chegirma foizi koʻrsatiladi.",
+      "iqPictureShare": "Rasmli savollar ulushi, %",
+      "iqPictureShareHint": "IQ testdagi savollarning qancha qismi rasmli (matritsa) boʻlsin. 100 — faqat rasmli, 0 — faqat matnli savollar.",
       "preview": "Saytda koʻrinishi:",
       "save": "Saqlash",
       "saved": "Sozlamalar saqlandi",
+      "plans": "Tariflar narxi",
+      "plansText": "Pro va Diamond tariflarining bir oylik narxi. Yillik toʻlov chegirmasi shu narxlardan hisoblanadi. Kutilayotgan toʻlovlar summasi oʻzgarmaydi.",
+      "proPrice": "Pro — oyiga, soʻm",
+      "diamondPrice": "Diamond — oyiga, soʻm",
+      "annualDiscount": "Yillik toʻlov chegirmasi, %",
+      "annualDiscountHint": "0 dan 90 gacha. 0 — chegirmasiz.",
+      "planMonthly": "Oylik: {price} soʻm",
+      "planAnnual": "Yillik: {total} soʻm (oyiga {perMonth})",
       "errors": {
         "cardNumber": "Karta raqami 16 ta raqamdan iborat boʻlishi kerak",
         "cardHolder": "Karta egasi nomi juda uzun",
@@ -1530,16 +1539,9 @@
         "proPriceUzs": "Pro narxi 1 000 soʻmdan kam boʻlmasin",
         "diamondPriceUzs": "Diamond narxi 1 000 soʻmdan kam boʻlmasin",
         "annualDiscount": "Chegirma 0 dan 90 gacha butun son boʻlishi kerak",
+        "iqPictureShare": "Ulush 0 dan 100 gacha butun son boʻlishi kerak",
         "invalid": "Maʼlumotlarni tekshiring"
-      },
-      "plans": "Tariflar narxi",
-      "plansText": "Pro va Diamond tariflarining bir oylik narxi. Yillik toʻlov chegirmasi shu narxlardan hisoblanadi. Kutilayotgan toʻlovlar summasi oʻzgarmaydi.",
-      "proPrice": "Pro — oyiga, soʻm",
-      "diamondPrice": "Diamond — oyiga, soʻm",
-      "annualDiscount": "Yillik toʻlov chegirmasi, %",
-      "annualDiscountHint": "0 dan 90 gacha. 0 — chegirmasiz.",
-      "planMonthly": "Oylik: {price} soʻm",
-      "planAnnual": "Yillik: {total} soʻm (oyiga {perMonth})"
+      }
     }
   },
   "common": {
@@ -1779,6 +1781,38 @@
       "9": "oktabr",
       "10": "noyabr",
       "11": "dekabr"
+    }
+  },
+  "certificate": {
+    "title": "Sertifikat",
+    "subtitle": "IQ test natijasi",
+    "presented": "Ushbu sertifikat taqdim etiladi",
+    "body": "{site} IQ testida {iq} ball natija koʻrsatgani uchun.\nBu natija odamlarning {percentile} foizidan yuqori.",
+    "date": "{day}-{month}, {year}-yil",
+    "dateLabel": "Sana",
+    "numberLabel": "Sertifikat raqami",
+    "userLabel": "Foydalanuvchi",
+    "scan": "Haqiqiyligini tekshirish:",
+    "disclaimer": "Zukko IQ — mantiqiy fikrlash boʻyicha taxminiy baho. Bu klinik IQ test emas.",
+    "alt": "{name} — IQ sertifikati, {iq} ball",
+    "downloadPdf": "PDF yuklab olish",
+    "downloadPng": "Rasm sifatida saqlash",
+    "proofHint": "Sertifikatdagi QR kod shu sahifani ochadi:",
+    "proof": {
+      "metaTitle": "Sertifikatni tekshirish",
+      "title": "Sertifikat haqiqiy",
+      "text": "Bu sertifikat {site} tomonidan berilgan. Qoʻlingizdagi sertifikatni quyidagi maʼlumotlar bilan solishtiring.",
+      "name": "Kimga berilgan",
+      "iq": "Zukko IQ",
+      "percentile": "Natija",
+      "percentileValue": "odamlarning {percentile} foizidan yuqori",
+      "date": "Sana",
+      "live": "Zukko IQ har bir yangi test bilan yangilanadi — bu yerda hozirgi natija koʻrsatilgan.",
+      "cta": "Men ham test topshiraman",
+      "notFoundTitle": "Sertifikat topilmadi",
+      "notFoundText": "Bunday raqamli sertifikat yoʻq. QR kodni qayta skanerlang yoki raqamni tekshiring.",
+      "tooManyTitle": "Juda koʻp soʻrov",
+      "tooManyText": "Birozdan soʻng qayta urinib koʻring."
     }
   }
 }

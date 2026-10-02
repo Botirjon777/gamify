@@ -60,6 +60,31 @@ describe("pickIqItem", () => {
   it("avoids repeating the previous category", () => {
     expect(pickIqItem(pool, 1000, new Set(), "sequence", first)?.id).toBe("mid-logic");
   });
+  it("chooses at random among everything near the best match, not among the first three", () => {
+    // 200 questions with the same rating, as in the real bank: each of them must be reachable.
+    const many = Array.from({ length: 200 }, (_, i) => ({ id: `q${i}`, category: "matrix", rating: 1000, picture: true }));
+    expect(pickIqItem(many, 1000, new Set(), null, () => 0)?.id).toBe("q0");
+    expect(pickIqItem(many, 1000, new Set(), null, () => 0.5)?.id).toBe("q100");
+    expect(pickIqItem(many, 1000, new Set(), "matrix", () => 0.999)?.id).toBe("q199");
+    // A clearly worse match is never chosen.
+    const far = [...many, { id: "hard", category: "matrix", rating: 1300, picture: true }];
+    for (const r of [0, 0.5, 0.999]) expect(pickIqItem(far, 1000, new Set(), null, () => r)?.id).not.toBe("hard");
+  });
+  it("asks picture questions as often as the share says", () => {
+    const mixed = [
+      { id: "text", category: "sequence", rating: 1000 },
+      { id: "pic", category: "matrix", rating: 1000, picture: true },
+    ];
+    // Share 1: pictures only — even right after another picture question.
+    for (const r of [0, 0.5, 0.999]) expect(pickIqItem(mixed, 1000, new Set(), "matrix", () => r, 1)?.id).toBe("pic");
+    // Share 0: text only.
+    for (const r of [0, 0.5, 0.999]) expect(pickIqItem(mixed, 1000, new Set(), null, () => r, 0)?.id).toBe("text");
+    // Share 0.7: the first random number decides the kind.
+    expect(pickIqItem(mixed, 1000, new Set(), null, () => 0.69, 0.7)?.id).toBe("pic");
+    expect(pickIqItem(mixed, 1000, new Set(), null, () => 0.71, 0.7)?.id).toBe("text");
+    // No pictures left unseen → text rather than a repeat.
+    expect(pickIqItem(mixed, 1000, new Set(["pic"]), null, () => 0, 1)?.id).toBe("text");
+  });
   it("skips seen items, falls back to the whole pool when all are seen", () => {
     expect(pickIqItem(pool, 1000, new Set(["mid-seq", "mid-logic"]), null, first)?.id).not.toMatch(/^mid/);
     expect(pickIqItem(pool, 1000, new Set(pool.map((p) => p.id)), null, first)).not.toBeNull();

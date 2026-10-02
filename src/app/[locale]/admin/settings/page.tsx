@@ -16,7 +16,7 @@ export default async function AdminSettings({ params }: PageProps<"/[locale]/adm
     <div className="flex max-w-3xl flex-col gap-5">
       <PageHeader title={t("nav.settings")} subtitle={t("settings.subtitle")} />
       <SettingsForm
-        initial={{ cardNumber: s.cardNumber ?? "", cardHolder: s.cardHolder ?? "", contact: s.contact ?? "", iqPriceUzs: s.iqPriceUzs, iqOldPriceUzs: s.iqOldPriceUzs, pricing: s.pricing }}
+        initial={{ cardNumber: s.cardNumber ?? "", cardHolder: s.cardHolder ?? "", contact: s.contact ?? "", iqPriceUzs: s.iqPriceUzs, iqOldPriceUzs: s.iqOldPriceUzs, iqPictureShare: s.iqPictureShare, pricing: s.pricing }}
       />
     </div>
   );

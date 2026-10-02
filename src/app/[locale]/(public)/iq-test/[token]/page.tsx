@@ -1,18 +1,17 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { ArrowRight, CircleCheck, Lock } from "lucide-react";
-import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
+import { ArrowRight, CircleCheck, Download, ImageDown, Lock } from "lucide-react";
+import { getTranslations, setRequestLocale } from "next-intl/server";
 import { AutoRefresh } from "@/components/auto-refresh";
 import { siteOrigin } from "@/lib/site-url";
 import { db } from "@/lib/db";
 import { Link } from "@/i18n/navigation";
 import { buttonClass } from "@/components/ui/button";
 import { telegramMessageUrl, telegramShareUrl } from "@/lib/telegram";
-import { getCurrentTenant } from "@/lib/tenant";
+import { guestProofUrl } from "@/features/iq/certificate-data";
 import { GUEST_IQ_SCORE_IS_FREE, guestCertificate, guestQuestion, guestShareUrl, guestTestByToken } from "@/features/iq/guest";
 import { GuestIqShare } from "@/features/iq/components/guest-iq-share";
 import { CopyField, GuestIqRunner, TelegramButton } from "@/features/iq/components/guest-iq";
-import { PrintButton } from "@/features/iq/components/print-button";
 import { paymentDetails } from "@/features/payments/config";
 import { PriceTag } from "@/features/settings/components/price-tag";
 import { iqPrice } from "@/features/settings/service";
@@ -35,7 +34,7 @@ export async function generateMetadata({ params }: PageProps<"/[locale]/iq-test/
 
 /**
  * One guest test, by its secret link. Depending on where it is:
- * still running → the questions; finished → how to pay; paid → the certificate.
+ * still running → the questions; finished → how to pay; paid → the certificate (a picture, a PDF, a proof link).
  */
 export default async function GuestIqTestPage({ params }: PageProps<"/[locale]/iq-test/[token]">) {
   const { locale, token } = await params;
@@ -110,39 +109,45 @@ export default async function GuestIqTestPage({ params }: PageProps<"/[locale]/i
   }
 
   // ─── Paid: the certificate ───────────────────────────────────────────────
-  const format = await getFormatter();
-  const tIq = await getTranslations("iq");
-  const [tenant, origin, referrals] = await Promise.all([getCurrentTenant(), siteOrigin(), db.guestIqTest.count({ where: { referredById: test.id } })]);
+  const tCert = await getTranslations("certificate");
+  const [origin, referrals] = await Promise.all([siteOrigin(), db.guestIqTest.count({ where: { referredById: test.id } })]);
   const shareUrl = guestShareUrl(origin, test.code);
+  const certificate = `/iq-test/${test.token}/certificate`;
+  const proofUrl = guestProofUrl(origin, test.code);
 
   return (
-    <div className="mx-auto flex w-full max-w-2xl flex-col gap-5">
-      <article className="overflow-hidden rounded-3xl border border-border bg-surface shadow-xl shadow-brand/5 print:rounded-none print:border-0 print:shadow-none">
-        <header className="bg-grad-brand px-6 py-8 text-center text-white [print-color-adjust:exact] sm:py-10">
-          <p className="text-sm font-bold uppercase tracking-widest text-white/85">{tenant.name}</p>
-          <h1 className="mt-1 font-display text-2xl font-bold sm:text-3xl">{tIq("certificate.title")}</h1>
-        </header>
-        <div className="px-6 py-8 text-center sm:px-10">
-          <p className="font-display text-2xl font-bold sm:text-3xl">{result.name}</p>
-          <p className="mt-4 font-display text-8xl font-bold leading-none text-brand sm:text-9xl">{result.iq}</p>
-          <dl className="mt-8 grid grid-cols-3 gap-2 sm:gap-3">
-            <Fact label={tIq("certificate.percentile")} value={tIq("certificate.percentileValue", { percentile: result.percentile })} />
-            <Fact label={t("certificate.correct")} value={`${result.correct} / ${result.total}`} />
-            <Fact label={tIq("certificate.date")} value={format.dateTime(result.date, { dateStyle: "medium", timeZone: "Asia/Tashkent" })} />
-          </dl>
-          <p className="mt-6 text-xs leading-relaxed text-muted">
-            {t("certificate.number", { code: result.code })} · {tIq("disclaimer")}
-          </p>
-        </div>
-      </article>
+    <div className="mx-auto flex w-full max-w-3xl flex-col gap-5">
+      <h1 className="sr-only">{tCert("alt", { name: result.name, iq: result.iq })}</h1>
+      {/* The certificate itself is one picture (and the same picture as a PDF): what is seen here is what is saved. */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- made per person by a route handler, nothing to optimise */}
+      <img
+        src={certificate}
+        alt={tCert("alt", { name: result.name, iq: result.iq })}
+        width={2246}
+        height={1588}
+        className="h-auto w-full rounded-2xl border border-border bg-white shadow-xl shadow-brand/10"
+      />
 
-      <div className="flex flex-wrap justify-center gap-3 print:hidden">
-        <PrintButton>{tIq("certificate.print")}</PrintButton>
+      <div className="flex flex-wrap justify-center gap-3">
+        {/* Plain <a>: a file from a route handler, not a page. */}
+        <a href={`${certificate}?format=pdf&download=1`} className={buttonClass("primary", "h-11")}>
+          <Download className="size-4" /> {tCert("downloadPdf")}
+        </a>
+        <a href={`${certificate}?download=1`} className={buttonClass("secondary", "h-11")}>
+          <ImageDown className="size-4" /> {tCert("downloadPng")}
+        </a>
         {/* For whoever received this link: take the test too (counted for the person who shared it). */}
-        <Link href={`/iq-test?r=${test.code}`} className={buttonClass("primary", "h-11")}>
+        <Link href={`/iq-test?r=${test.code}`} className={buttonClass("secondary", "h-11")}>
           {t("share.takeTest")} <ArrowRight className="size-4" />
         </Link>
       </div>
+
+      <p className="text-center text-sm leading-relaxed text-muted">
+        {t("certificate.correct")}: <b className="text-foreground">{result.correct} / {result.total}</b> · {tCert("proofHint")}{" "}
+        <a href={proofUrl} className="font-semibold text-brand hover:underline">
+          {proofUrl.replace(/^https?:\/\//, "")}
+        </a>
+      </p>
 
       <GuestIqShare
         telegramHref={telegramShareUrl(shareUrl, t("share.message", { iq: result.iq, percentile: result.percentile }))}
@@ -163,14 +168,5 @@ function Step({ n, title, children }: { n: number; title: string; children: Reac
         {children}
       </div>
     </li>
-  );
-}
-
-function Fact({ label, value }: { label: string; value: string }) {
-  return (
-    <div className="rounded-2xl bg-background p-3 [print-color-adjust:exact]">
-      <dt className="text-[11px] font-semibold uppercase tracking-wide text-muted">{label}</dt>
-      <dd className="mt-1 text-sm font-bold sm:text-base">{value}</dd>
-    </div>
   );
 }

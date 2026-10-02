@@ -9,11 +9,15 @@ export const SETTING_KEYS = [
   "payment.contact",
   "iq.priceUzs",
   "iq.oldPriceUzs",
+  "iq.pictureShare",
   "plan.proPriceUzs",
   "plan.diamondPriceUzs",
   "plan.annualDiscount",
 ] as const;
 export type SettingKey = (typeof SETTING_KEYS)[number];
+
+/** Share of picture questions in an IQ test, %, until one is saved: pictures only. */
+export const DEFAULT_IQ_PICTURE_SHARE = 100;
 
 /** Used until a price is saved in the database. */
 export const DEFAULT_IQ_PRICE_UZS = 13_000;
@@ -43,6 +47,8 @@ export const settingsInput = z
     iqPriceUzs: money,
     /** The crossed-out "before" price; null = no discount shown. */
     iqOldPriceUzs: money.nullable(),
+    /** How many of a test's questions are pictures (matrix puzzles), %: 100 = pictures only, 0 = text only. */
+    iqPictureShare: z.number().int().min(0).max(100).default(DEFAULT_IQ_PICTURE_SHARE),
     /** Paid plans: the price of one month, and how much cheaper a year paid at once is (%). */
     proPriceUzs: money.default(DEFAULT_PRICING.monthly.PRO),
     diamondPriceUzs: money.default(DEFAULT_PRICING.monthly.DIAMOND),
@@ -59,6 +65,7 @@ export function toRows(s: z.output<typeof settingsInput>): Record<SettingKey, st
     "payment.contact": s.contact,
     "iq.priceUzs": String(s.iqPriceUzs),
     "iq.oldPriceUzs": s.iqOldPriceUzs === null ? "" : String(s.iqOldPriceUzs),
+    "iq.pictureShare": String(s.iqPictureShare),
     "plan.proPriceUzs": String(s.proPriceUzs),
     "plan.diamondPriceUzs": String(s.diamondPriceUzs),
     "plan.annualDiscount": String(s.annualDiscount),
