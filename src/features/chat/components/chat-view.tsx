@@ -2,7 +2,8 @@
 
 import { useCallback, useEffect, useRef, useState, useTransition } from "react";
 import { ArrowUp, Loader2 } from "lucide-react";
-import { useFormatter, useTranslations } from "next-intl";
+import { useTranslations } from "next-intl";
+import { useTimeText } from "@/components/use-time-text";
 import { fetchNewMessages, fetchOlderMessages, markChatRead, sendMessage } from "../actions";
 import type { ChatMessage } from "../service";
 import { MESSAGE_MAX, MESSAGES_PAGE, POLL_MS } from "../constants";
@@ -24,7 +25,7 @@ interface Props {
  */
 export function ChatView({ conversationId, meId, initial, hasMore: initialHasMore, canSend, showNames }: Props) {
   const t = useTranslations("chat");
-  const format = useFormatter();
+  const time = useTimeText();
   const [messages, setMessages] = useState(initial);
   const [hasMore, setHasMore] = useState(initialHasMore);
   const [text, setText] = useState("");
@@ -100,7 +101,7 @@ export function ChatView({ conversationId, meId, initial, hasMore: initialHasMor
       setMessages((prev) => [...older, ...prev]);
     });
 
-  const dayOf = (iso: string) => format.dateTime(new Date(iso), { day: "numeric", month: "long", timeZone: "Asia/Tashkent" });
+  const dayOf = (iso: string) => time.day(new Date(iso));
   return (
     <div className="flex min-h-0 flex-1 flex-col">
       <div className="flex flex-1 flex-col gap-1.5 overflow-y-auto px-1 py-3">
@@ -128,7 +129,7 @@ export function ChatView({ conversationId, meId, initial, hasMore: initialHasMor
                 >
                   {m.body}
                   <time dateTime={m.createdAt} className={`ml-2 inline-block translate-y-0.5 text-[10px] ${mine ? "text-white/70" : "text-muted"}`}>
-                    {format.dateTime(date, { hour: "2-digit", minute: "2-digit", timeZone: "Asia/Tashkent" })}
+                    {time.clock(date)}
                   </time>
                 </div>
               </div>

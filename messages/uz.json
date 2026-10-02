@@ -1739,5 +1739,26 @@
     "takeBack": "Qaytarish",
     "promote": "Piyoda qaysi donaga aylansin?",
     "answer": "Toʻgʻri yurish: {move}"
+  },
+  "time": {
+    "now": "hozirgina",
+    "minutes": "{count} daqiqa oldin",
+    "hours": "{count} soat oldin",
+    "days": "{count} kun oldin",
+    "date": "{day}-{month}",
+    "months": {
+      "0": "yanvar",
+      "1": "fevral",
+      "2": "mart",
+      "3": "aprel",
+      "4": "may",
+      "5": "iyun",
+      "6": "iyul",
+      "7": "avgust",
+      "8": "sentabr",
+      "9": "oktabr",
+      "10": "noyabr",
+      "11": "dekabr"
+    }
   }
 }

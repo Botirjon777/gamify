@@ -5,6 +5,7 @@ import { Award, ChevronRight, Crown, Gift, Swords, LogOut, Settings, ShieldCheck
 import { useTranslations } from "next-intl";
 import { Link, usePathname } from "@/i18n/navigation";
 import { LogoutButton } from "@/features/auth/components/logout-button";
+import { groupDigits } from "@/lib/format";
 
 interface Props {
   username: string;
@@ -61,7 +62,7 @@ export function ProfileMenu({ username, avatar, avatarLarge, planBadge, planLabe
             {avatarLarge}
             <p className="mt-1 font-display text-lg font-bold">{username}</p>
             <p className="text-sm text-muted">
-              {t("levelXp", { level, xp: xp.toLocaleString("uz-UZ") })}
+              {t("levelXp", { level, xp: groupDigits(xp) })}
             </p>
           </div>
 
