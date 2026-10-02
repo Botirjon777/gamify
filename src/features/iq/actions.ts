@@ -45,6 +45,7 @@ export async function startIq(rawKind: IqKind): Promise<IqState> {
   if (kind === "PLACEMENT" && user.iqTestedAt) throw new Error("Placement test already taken");
   if (kind === "DAILY" && !user.iqTestedAt) throw new Error("Take the placement test first");
 
+  const picking = await iqPicking();
   await db.$transaction(async (tx) => {
     if (kind === "DAILY") {
       // One daily IQ test per Tashkent day — the primary key makes this race-safe.
