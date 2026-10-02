@@ -2,6 +2,7 @@
  * Database rows → entries of the files in /content (the inverse of toDbExercise), used by `pnpm content:pull`.
  * Shared with tests, so no server-only imports here.
  */
+import type { BoardSpec } from "@/features/chess/board";
 import type { LocalizedText } from "@/i18n/content";
 import { XP_BY_DIFFICULTY, type PrivateAnswer, type PublicContent } from "./content-schema";
 
@@ -12,6 +13,10 @@ export function fileText(text: LocalizedText | null | undefined): string | Local
   if (!keys.length) return undefined;
   return keys.length === 1 && keys[0] === "uz" ? text.uz : text;
 }
+
+/** A board with nothing but a position is written as its FEN. */
+const fileBoard = (board: BoardSpec) =>
+  board.marks?.length || board.flip ? { fen: board.fen, ...(board.marks?.length && { marks: board.marks }), ...(board.flip && { flip: true }) } : board.fen;
 
 /** One accepted answer is written as a plain value, several as a list. */
 const oneOrMany = (values: string[]) => (values.length === 1 ? values[0] : values);
@@ -38,6 +43,7 @@ export function toFileExercise(row: StoredExercise): Record<string, unknown> {
     ...(row.status === "DRAFT" && { status: "DRAFT" }),
     lang: content.lang,
     prompt: fileText(content.prompt),
+    ...(content.board && { board: fileBoard(content.board) }),
   };
   const explanation = fileText(row.explanation as LocalizedText | null);
   const tail = explanation === undefined ? {} : { explanation };
@@ -62,6 +68,9 @@ export function toFileExercise(row: StoredExercise): Record<string, unknown> {
   }
   if (content.type === "ORDER" && answer.type === "ORDER") {
     return { ...head, lines: answer.lines, ...tail };
+  }
+  if (content.type === "MOVE" && answer.type === "MOVE") {
+    return { ...head, answer: oneOrMany(answer.san), ...tail };
   }
   throw new Error(`exercise ${row.key}: content is ${content.type} but the answer is ${answer.type}`);
 }

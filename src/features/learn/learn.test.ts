@@ -122,7 +122,9 @@ describe("content answers are self-consistent", () => {
               ? { type: "OUTPUT", text: answer.accepted[0] }
               : answer.type === "FILL"
                 ? { type: "FILL", blanks: answer.blanks.map((b) => b[0]) }
-                : { type: "ORDER", lines: answer.lines };
+                : answer.type === "ORDER"
+                  ? { type: "ORDER", lines: answer.lines }
+                  : { type: "MOVE", move: answer.moves[0] };
         expect(checkAnswer(answer, submission).correct).toBe(true);
         // The public part must never contain the answer for CHOICE/FILL/OUTPUT.
         expect(JSON.stringify(db.content)).not.toContain('"answer"');

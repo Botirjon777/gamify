@@ -96,3 +96,29 @@ exercises:
       - pat
       - pion
     explanation: Tezkor matlar asosan shohning yonidagi faqat shoh tomonidan himoyalangan zaif piyon (f2/f7) ga vazir va fil bilan hujum qilish orqali amalga oshadi.
+  - id: check-checkmate-009
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Diagrammada qoralar yurishi kerak. Bu qanday holat?
+    board: 6rk/5Npp/8/8/8/8/8/6K1 b - - 0 1
+    options:
+      - Pat — oʻyin durrang
+      - Shoh — qora shoh qocha oladi
+      - Oddiy holat — shohga hujum yoʻq
+      - Mat — oqlar yutdi
+    answer: 3
+    explanation: Ot h8 dagi shohga hujum qilyapti. Shohni oʻz turasi va piyodalari oʻrab olgan, otni esa hech kim ura olmaydi — bu mat («boʻgʻiq mat»).
+  - id: check-checkmate-010
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Diagrammada qoralar yurishi kerak. Bu qanday holat?
+    board: 4k3/8/8/8/8/8/4R3/4K3 b - - 0 1
+    options:
+      - Shoh — lekin mat emas
+      - Mat — oqlar yutdi
+      - Pat — oʻyin durrang
+      - Shohga hujum yoʻq
+    answer: 0
+    explanation: Tura e-vertikal boʻylab shohga hujum qilyapti — bu shoh. Lekin qora shoh d7, d8, f7 yoki f8 ga qochishi mumkin, demak mat emas.

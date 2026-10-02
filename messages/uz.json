@@ -441,7 +441,8 @@
       "CHOICE": "Toʻgʻri javobni tanlang",
       "OUTPUT": "Natijani toping",
       "FILL": "Boʻsh joylarni toʻldiring",
-      "ORDER": "Tartibga keltiring"
+      "ORDER": "Tartibga keltiring",
+      "MOVE": "Yurishni toping"
     },
     "outputPlaceholder": "Javobingizni yozing",
     "orderHint": "Qatorlarni toʻgʻri tartibda bosing. Olib tashlash uchun yuqoridagi qatorni bosing.",
@@ -1124,7 +1125,8 @@
           "CHOICE": "Variantli test",
           "OUTPUT": "Natijani yozish",
           "FILL": "Boʻsh joyni toʻldirish",
-          "ORDER": "Tartiblash"
+          "ORDER": "Tartiblash",
+          "MOVE": "Shaxmat: yurish"
         },
         "level": "{difficulty}-daraja · {xp} XP",
         "lang": "Til",
@@ -1146,7 +1148,15 @@
         "explanation": "Tushuntirish",
         "explanationHint": "Ixtiyoriy. Oʻquvchi javob berganidan keyin koʻrsatiladi.",
         "preview": "Oʻquvchiga koʻrinishi",
-        "previewNote": "Toʻgʻri javoblar bu yerda belgilangan. Oʻquvchiga variantlar va qatorlar aralashtirib koʻrsatiladi."
+        "previewNote": "Toʻgʻri javoblar bu yerda belgilangan. Oʻquvchiga variantlar va qatorlar aralashtirib koʻrsatiladi.",
+        "board": "Shaxmat taxtasi (FEN)",
+        "boardHint": "Ixtiyoriy. Savol ustida diagramma koʻrsatiladi. Faqat donalar joylashuvi yetarli.",
+        "boardMoveHint": "Toʻliq FEN: joylashuv, kim yurishi (w yoki b), qalʼalanish huquqi… Oʻquvchi yuradigan tomon — FEN dagi navbat.",
+        "boardMarks": "Belgilangan kataklar",
+        "boardMarksHint": "Vergul bilan: e4, d5",
+        "boardFlip": "Qoralar tomonidan koʻrsatish",
+        "moves": "Toʻgʻri yurishlar",
+        "movesHint": "Shaxmat yozuvida, vergul bilan: Qh7#, Nf3, exd5, O-O, e8=Q. Agar yurish mat boʻlsa, boshqa har qanday mat ham qabul qilinadi."
       },
       "iq": {
         "new": "Yangi IQ savol",
@@ -1710,5 +1720,24 @@
       "imagePercentile": "{percentile}% dan yuqori",
       "imageInvite": "Sen ham sinab koʻr!"
     }
+  },
+  "chess": {
+    "board": "Shaxmat taxtasi",
+    "white": "oq",
+    "black": "qora",
+    "pieces": {
+      "K": "shoh",
+      "Q": "vazir",
+      "R": "tura",
+      "B": "fil",
+      "N": "ot",
+      "P": "piyoda"
+    },
+    "whiteToMove": "Oqlar yuradi — donani bosing yoki suring",
+    "blackToMove": "Qoralar yuradi — donani bosing yoki suring",
+    "made": "Yurish qilindi",
+    "takeBack": "Qaytarish",
+    "promote": "Piyoda qaysi donaga aylansin?",
+    "answer": "Toʻgʻri yurish: {move}"
   }
 }

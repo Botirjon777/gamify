@@ -11,7 +11,7 @@ import { getNextExercise, leaveDrill, submitAnswer } from "../actions";
 import { useDrill } from "../store";
 import type { Reveal } from "../check";
 import type { ClientExercise } from "../types";
-import { ChoiceView, FillView, OrderView, OutputView } from "./exercise-views";
+import { ExerciseView } from "./exercise-views";
 
 interface Props {
   skillId: string;
@@ -196,10 +196,7 @@ function ExerciseBody({ exercise, locked, reveal }: { exercise: ClientExercise; 
         </p>
         <h1 className="mt-2 font-sans text-xl font-bold leading-snug tracking-tight sm:text-2xl">{exercise.prompt}</h1>
       </div>
-      {exercise.type === "CHOICE" && <ChoiceView exercise={exercise} {...props} />}
-      {exercise.type === "OUTPUT" && <OutputView exercise={exercise} {...props} />}
-      {exercise.type === "FILL" && <FillView exercise={exercise} {...props} />}
-      {exercise.type === "ORDER" && <OrderView exercise={exercise} {...props} />}
+      <ExerciseView exercise={exercise} {...props} />
     </div>
   );
 }
@@ -274,5 +271,7 @@ function revealText(exercise: ClientExercise, reveal: Reveal): string | null {
       return reveal.blanks.join(" · ");
     case "ORDER":
       return reveal.lines.join("\n");
+    case "MOVE":
+      return reveal.san;
   }
 }

@@ -296,6 +296,7 @@ enum ExerciseType {
   OUTPUT /// predict what the code prints / renders
   FILL /// fill the ___ blanks in code
   ORDER /// put code lines in the right order
+  MOVE /// chess: make the move on the board
 }
 
 model Exercise {

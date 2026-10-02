@@ -1,0 +1,107 @@
+exercises:
+  - id: moves-practice-001
+    type: move
+    difficulty: 1
+    lang: text
+    prompt: Shoh oldidagi piyodani ikki katak oldinga suring.
+    board: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+    answer: e4
+    explanation: "Boshlangʻich holatdagi piyoda bir yoki ikki katak yura oladi. e4 — eng mashhur birinchi yurish: u markazni egallaydi."
+  - id: moves-practice-002
+    type: move
+    difficulty: 1
+    lang: text
+    prompt: Shoh qanotidagi otni f3 katagiga chiqaring.
+    board: rnbqkbnr/pppppppp/8/8/8/8/PPPPPPPP/RNBQKBNR w KQkq - 0 1
+    answer: Nf3
+    explanation: Ot «Г» harfi shaklida yuradi va boshqa donalar ustidan sakray oladi — shuning uchun u oʻyin boshida piyodalar surilmasdan ham chiqa oladi.
+  - id: moves-practice-003
+    type: move
+    difficulty: 1
+    lang: text
+    prompt: Oq piyoda bilan qora piyodani urib oling.
+    board: rnbqkbnr/ppp1pppp/8/3p4/4P3/8/PPPP1PPP/RNBQKBNR w KQkq d6 0 2
+    answer: exd5
+    explanation: Piyoda toʻgʻriga yuradi, lekin faqat diagonal boʻylab bir katak oldinga uradi.
+  - id: moves-practice-004
+    type: move
+    difficulty: 1
+    lang: text
+    prompt: Himoyasiz qora otni urib oling.
+    board: 4k3/8/8/3n4/8/8/3Q4/4K3 w - - 0 1
+    answer: Qxd5
+    explanation: Vazir vertikal, gorizontal va diagonal boʻylab istalgan masofaga yuradi. Ot himoyasiz turibdi — uni bepul olish mumkin.
+  - id: moves-practice-005
+    type: move
+    difficulty: 1
+    lang: text
+    prompt: Ot ikkita donani ura oladi. Qimmatrogʻini urib oling.
+    board: 4k3/8/2r3p1/4N3/8/8/8/4K3 w - - 0 1
+    answer: Nxc6
+    explanation: Tura 5 piyodaga, piyoda esa 1 ga teng. Ikkalasi ham himoyasiz, shuning uchun turani olish foydaliroq.
+  - id: moves-practice-006
+    type: move
+    difficulty: 1
+    lang: text
+    prompt: Piyodani oxirgi gorizontalga surib, vazirga aylantiring.
+    board: 8/4P3/8/8/8/2k5/8/4K3 w - - 0 1
+    answer: e8=Q
+    explanation: Oxirgi gorizontalga yetgan piyoda vazir, tura, fil yoki otga aylanadi. Deyarli har doim eng kuchli dona — vazir tanlanadi.
+  - id: moves-practice-007
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Qisqa qalʼalaning (rokirovka).
+    board: r1bqk1nr/pppp1ppp/2n5/2b1p3/2B1P3/5N2/PPPP1PPP/RNBQK2R w KQkq - 4 4
+    answer: O-O
+    explanation: Qalʼalanishda shoh tura tomonga ikki katak yuradi, tura esa uning ustidan sakrab oʻtib yoniga turadi. Buning uchun shohni g1 ga suring.
+  - id: moves-practice-008
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Uzun qalʼalaning (vazir qanoti tomonga).
+    board: r3kbnr/ppp1pppp/2nqb3/3p4/3P4/2NQB3/PPP1PPPP/R3KBNR w KQkq - 6 5
+    answer: O-O-O
+    explanation: Uzun qalʼalanishda shoh c1 ga, a1 dagi tura esa d1 ga oʻtadi. Shoh bilan tura orasidagi kataklar boʻsh boʻlishi shart.
+  - id: moves-practice-009
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Qora piyoda hozirgina f7 dan f5 ga ikki katak yurdi. Uni yoʻl-yoʻlakay (en passant) urib oling.
+    board: rnbqkbnr/ppp1p1pp/8/3pPp2/8/8/PPPP1PPP/RNBQKBNR w KQkq f6 0 3
+    answer: exf6
+    explanation: Yoʻl-yoʻlakay urishda piyoda raqib piyodasi sakrab oʻtgan katakka (f6) boradi, raqib piyodasi esa taxtadan olinadi. Buni faqat darhol, keyingi yurishda qilish mumkin.
+  - id: moves-practice-010
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Fil bilan qora shohga shoh bering.
+    board: 4k3/8/8/8/8/8/4B3/4K3 w - - 0 1
+    answer:
+      - Bb5+
+      - Bh5+
+    explanation: "Fil diagonal boʻylab yuradi. e8 dagi shohga ikki diagonaldan hujum qilish mumkin: b5 dan yoki h5 dan."
+  - id: moves-practice-011
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Oq shohga shoh berildi. Shohni xavfsiz katakka olib qoching.
+    board: 6k1/8/8/8/8/7P/5PP1/r5K1 w - - 0 1
+    answer: Kh2
+    explanation: "Tura butun 1-gorizontalga hujum qilyapti, shuning uchun f1 ham xavfli. Yagona xavfsiz katak — h2: piyoda oldindan surilib, shohga «darcha» ochib qoʻyilgan."
+  - id: moves-practice-012
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Oq shohga shoh berildi. Shohni fil bilan toʻsib himoya qiling.
+    board: 4r1k1/8/8/8/8/8/3P1P2/3QKB2 w - - 0 1
+    answer: Be2
+    explanation: "Shohdan uch xil yoʻl bilan qutulish mumkin: qochish, toʻsish yoki shoh berayotgan donani urish. Bu yerda fil tura va shoh orasiga turadi. Vazir bilan toʻsish yomon — vazir turadan qimmat."
+  - id: moves-practice-013
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Oq shohga shoh berildi. Shoh berayotgan donani urib oling.
+    board: 6k1/8/8/8/8/8/4q3/4K3 w - - 0 1
+    answer: Kxe2
+    explanation: Vazir shohning yoniga himoyasiz kelgan — shoh uni oʻzi urib oladi. Shoh faqat himoyalanmagan donani ura oladi.

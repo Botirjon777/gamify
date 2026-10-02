@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { Button } from "@/components/ui/button";
 import { playSound } from "@/lib/sound";
-import { ChoiceView, FillView, OrderView, OutputView } from "@/features/learn/components/exercise-views";
+import { ExerciseView } from "@/features/learn/components/exercise-views";
 import type { Submission } from "@/features/learn/content-schema";
 import type { Reveal } from "@/features/learn/check";
 import { getDuelQuestion, submitDuelAnswer, type DuelQuestion } from "../actions";
@@ -191,10 +191,7 @@ export function DuelArena({ duelId, me, them, stake, track, questions, resume }:
           {/* Body font (not the wide display face): long questions stay readable on a phone. */}
           <h1 className="mt-1.5 font-sans text-lg font-bold leading-snug tracking-tight sm:text-2xl">{ex.prompt}</h1>
         </div>
-        {ex.type === "CHOICE" && <ChoiceView exercise={ex} {...view} />}
-        {ex.type === "OUTPUT" && <OutputView exercise={ex} {...view} />}
-        {ex.type === "FILL" && <FillView exercise={ex} {...view} />}
-        {ex.type === "ORDER" && <OrderView exercise={ex} {...view} />}
+        <ExerciseView exercise={ex} {...view} />
       </div>
 
       {/* Answer bar: pinned to the bottom of the screen, like the drill. */}

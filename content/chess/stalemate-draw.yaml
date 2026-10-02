@@ -96,3 +96,16 @@ exercises:
       - Umuman uchramaydi
     answer: 2
     explanation: Pat koʻpincha bir oʻyinchida katta ustunlik (masalan, ortiqcha vazir) boʻlib, raqibning barcha yurishlarini bexosdan toʻsib qoʻyganda (shoh eʼlon qilmay turib) yuzaga keladi.
+  - id: stalemate-draw-009
+    type: choice
+    difficulty: 2
+    lang: text
+    prompt: Diagrammada qoralar yurishi kerak. Bu qanday holat?
+    board: 7k/5Q2/6K1/8/8/8/8/8 b - - 0 1
+    options:
+      - Mat — oqlar yutdi
+      - Pat — oʻyin durrang
+      - Shoh — qoralar himoyalanishi kerak
+      - Oddiy holat — oʻyin davom etadi
+    answer: 1
+    explanation: "Qora shohga shoh berilmagan, lekin uning birorta ham mumkin boʻlgan yurishi yoʻq: g8, g7 va h7 kataklari hujum ostida. Bu — pat, oʻyin durrang. Vazir bilan yutayotganda bunday xatodan ehtiyot boʻling."

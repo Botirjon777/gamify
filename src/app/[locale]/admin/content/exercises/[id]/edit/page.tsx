@@ -29,7 +29,7 @@ export default async function EditExercisePage({ params }: PageProps<"/[locale]/
     prompt: uzText(content.prompt),
     explanation: uzText(exercise.explanation),
     lang: content.lang,
-    code: content.type === "ORDER" ? "" : (content.code ?? ""),
+    code: "code" in content ? (content.code ?? "") : "",
     options: content.type === "CHOICE" ? content.options.map(uzText) : undefined,
     choiceAnswer: answer.type === "CHOICE" ? answer.index : undefined,
     outputAnswers: answer.type === "OUTPUT" ? answer.accepted : undefined,
@@ -37,6 +37,8 @@ export default async function EditExercisePage({ params }: PageProps<"/[locale]/
     // The stored bank also holds the right words; the form edits only the distractors (as in the files).
     fillBank: content.type === "FILL" ? (toFileExercise(exercise).bank as string[] | undefined) : undefined,
     orderLines: answer.type === "ORDER" ? answer.lines : undefined,
+    board: content.board,
+    moveAnswers: answer.type === "MOVE" ? answer.san : undefined,
   };
 
   return (

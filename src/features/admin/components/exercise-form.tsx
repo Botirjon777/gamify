@@ -6,13 +6,15 @@ import { useTranslations } from "next-intl";
 import { useRouter } from "@/i18n/navigation";
 import { Button, buttonClass } from "@/components/ui/button";
 import type { ContentStatus, ExerciseType } from "@/generated/prisma/enums";
+import type { BoardSpec } from "@/features/chess/board";
+import { BoardDiagram } from "@/features/chess/components/board-diagram";
 import { BLANK, LANGS, type CodeLang } from "@/features/learn/content-schema";
 import { saveCmsExercise } from "../cms-actions";
 import type { CmsSkillOption } from "../cms-queries";
 import { StatusOptions } from "./cms-status-controls";
 import { Field, areaClass, inputClass, useCmsAction } from "./cms-ui";
 
-const TYPES: ExerciseType[] = ["CHOICE", "OUTPUT", "FILL", "ORDER"];
+const TYPES: ExerciseType[] = ["CHOICE", "OUTPUT", "FILL", "ORDER", "MOVE"];
 
 export interface ExerciseFormData {
   id: string;
@@ -34,6 +36,9 @@ export interface ExerciseFormData {
   fillAnswers?: string[][];
   fillBank?: string[];
   orderLines?: string[];
+  board?: BoardSpec;
+  /** MOVE: the right moves, as written in chess books. */
+  moveAnswers?: string[];
 }
 
 const splitList = (text: string) =>
@@ -67,6 +72,10 @@ export function ExerciseForm({ skills, initial, defaultSkillId }: { skills: CmsS
   const [fillAnswers, setFillAnswers] = useState((initial?.fillAnswers ?? []).map((b) => b.join(", ")).join("\n"));
   const [fillBank, setFillBank] = useState((initial?.fillBank ?? []).join(", "));
   const [orderLines, setOrderLines] = useState<string[]>(initial?.orderLines ?? ["", "", ""]);
+  const [boardFen, setBoardFen] = useState(initial?.board?.fen ?? "");
+  const [boardMarks, setBoardMarks] = useState((initial?.board?.marks ?? []).join(", "));
+  const [boardFlip, setBoardFlip] = useState(initial?.board?.flip ?? false);
+  const [moveAnswers, setMoveAnswers] = useState((initial?.moveAnswers ?? []).join(", "));
 
   const prose = lang === "text";
   const blanks = code.split(BLANK).length - 1;
@@ -95,6 +104,10 @@ export function ExerciseForm({ skills, initial, defaultSkillId }: { skills: CmsS
             fillBank: splitList(fillBank),
             // Indentation matters in code; only fully empty lines are dropped.
             orderLines: orderLines.map((l) => l.trimEnd()).filter((l) => l.trim()),
+            boardFen: boardFen.trim(),
+            boardMarks: splitList(boardMarks),
+            boardFlip,
+            moveAnswers: splitList(moveAnswers),
           },
           initial?.id,
         ),
@@ -169,7 +182,7 @@ export function ExerciseForm({ skills, initial, defaultSkillId }: { skills: CmsS
             </select>
           </Field>
 
-          {type !== "ORDER" && (
+          {type !== "ORDER" && type !== "MOVE" && (
             <Field
               label={prose ? t("exercise.text") : t("exercise.code")}
               hint={type === "FILL" ? t("exercise.fillHint", { blank: BLANK, count: blanks }) : type === "CHOICE" ? t("exercise.optional") : undefined}
@@ -286,6 +299,30 @@ export function ExerciseForm({ skills, initial, defaultSkillId }: { skills: CmsS
             </fieldset>
           )}
 
+          {/* Chess: the position to move in, or a diagram above any other kind of question. */}
+          {(type === "MOVE" || lang === "text") && (
+            <div className="flex flex-col gap-4 border-t border-border pt-4">
+              <Field label={t("exercise.board")} hint={type === "MOVE" ? t("exercise.boardMoveHint") : t("exercise.boardHint")}>
+                <input value={boardFen} onChange={(e) => setBoardFen(e.target.value)} required={type === "MOVE"} spellCheck={false} placeholder="6k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1" className={`${inputClass} font-mono text-xs`} />
+              </Field>
+              {type === "MOVE" && (
+                <Field label={t("exercise.moves")} hint={t("exercise.movesHint")}>
+                  <input value={moveAnswers} onChange={(e) => setMoveAnswers(e.target.value)} required spellCheck={false} placeholder="Rd8#" className={`${inputClass} font-mono`} />
+                </Field>
+              )}
+              {boardFen.trim() && (
+                <div className="grid gap-3 sm:grid-cols-2">
+                  <Field label={t("exercise.boardMarks")} hint={t("exercise.boardMarksHint")}>
+                    <input value={boardMarks} onChange={(e) => setBoardMarks(e.target.value)} spellCheck={false} placeholder="e4, d5" className={`${inputClass} font-mono`} />
+                  </Field>
+                  <label className="flex items-center gap-2 self-end pb-2.5 text-sm font-semibold">
+                    <input type="checkbox" checked={boardFlip} onChange={(e) => setBoardFlip(e.target.checked)} className="size-4" /> {t("exercise.boardFlip")}
+                  </label>
+                </div>
+              )}
+            </div>
+          )}
+
           <Field label={t("exercise.explanation")} hint={t("exercise.explanationHint")} className="border-t border-border pt-4">
             <textarea value={explanation} onChange={(e) => setExplanation(e.target.value)} rows={2} className={areaClass} />
           </Field>
@@ -313,7 +350,12 @@ export function ExerciseForm({ skills, initial, defaultSkillId }: { skills: CmsS
             </p>
             <h3 className="font-sans text-base font-bold leading-snug">{prompt || "…"}</h3>
 
-            {code && type !== "ORDER" && (
+            {boardFen.trim() && (type === "MOVE" || prose) && (
+              <BoardDiagram board={{ fen: boardFen.trim(), marks: splitList(boardMarks).filter((s) => /^[a-h][1-8]$/.test(s)), flip: boardFlip || (type === "MOVE" && boardFen.trim().split(/\s+/)[1] === "b") }} />
+            )}
+            {type === "MOVE" && <PreviewAnswer label={t("exercise.moves")} value={splitList(moveAnswers).join("  ·  ")} />}
+
+            {code && type !== "ORDER" && type !== "MOVE" && (
               <pre
                 className={
                   prose

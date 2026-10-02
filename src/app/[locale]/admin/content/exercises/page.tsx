@@ -8,7 +8,7 @@ import type { PublicContent } from "@/features/learn/content-schema";
 import { buttonClass } from "@/components/ui/button";
 
 const one = (value: string | string[] | undefined) => (typeof value === "string" ? value : undefined);
-const TYPES = ["CHOICE", "OUTPUT", "FILL", "ORDER"] as const;
+const TYPES = ["CHOICE", "OUTPUT", "FILL", "ORDER", "MOVE"] as const;
 const STATUSES = ["PUBLISHED", "DRAFT", "ARCHIVED"] as const;
 
 /** The question bank: search and filter every exercise. ?skill=<id> narrows it to one skill. */

@@ -97,3 +97,20 @@ exercises:
       - "16"
       - ikkita
     explanation: Har bir oʻyinchida 8 tadan pion boʻlib, ular bitta qatorda, asosiy donalarning oldida joylashadi.
+  - id: pawn-movement-009
+    type: choice
+    difficulty: 1
+    lang: text
+    prompt: Boshlangʻich oʻrnidagi oq piyoda birinchi yurishida qaysi kataklarga bora oladi?
+    board:
+      fen: 8/8/8/8/8/8/4P3/8
+      marks:
+        - e3
+        - e4
+    options:
+      - Faqat e3 ga
+      - e3 yoki e4 ga
+      - d3 yoki f3 ga
+      - e3, e4 yoki e5 ga
+    answer: 1
+    explanation: Piyoda oʻzining birinchi yurishida bir yoki ikki katak oldinga yura oladi. Keyingi yurishlarda — faqat bir katakdan.

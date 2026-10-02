@@ -1,0 +1,165 @@
+exercises:
+  - id: mate-in-one-001
+    type: move
+    difficulty: 1
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: 6k1/5ppp/8/8/8/8/5PPP/3R2K1 w - - 0 1
+    answer: Rd8#
+    explanation: "Tura oxirgi gorizontalga tushadi: shoh oʻz piyodalari ortida qamalib qolgan va qochadigan katagi yoʻq. Bu — «oxirgi gorizontal mati»."
+  - id: mate-in-one-002
+    type: move
+    difficulty: 1
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: 7k/R7/1R6/8/8/8/8/6K1 w - - 0 1
+    answer: Rb8#
+    explanation: Bir tura 7-gorizontalni yopib turibdi, ikkinchisi 8-gorizontalda shoh beradi — «zinapoya» mati.
+  - id: mate-in-one-003
+    type: move
+    difficulty: 1
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: k7/8/1K6/8/8/8/8/7R w - - 0 1
+    answer: Rh8#
+    explanation: Oq shoh a7 va b7 kataklarini egallab turibdi, tura esa butun 8-gorizontalni nazorat qiladi.
+  - id: mate-in-one-004
+    type: move
+    difficulty: 1
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: k7/8/2K5/8/8/8/8/1Q6 w - - 0 1
+    answer: Qb7#
+    explanation: Vazir shoh yoniga keladi va uni oʻz shohi himoya qiladi — qora shoh vazirni ura olmaydi.
+  - id: mate-in-one-005
+    type: move
+    difficulty: 1
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: 7k/8/6K1/8/8/8/Q7/8 w - - 0 1
+    answer: Qa8#
+    explanation: Vazir 8-gorizontal boʻylab shoh beradi, g7 va h7 kataklarini esa oq shoh yopib turibdi.
+  - id: mate-in-one-006
+    type: move
+    difficulty: 1
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: r1bqkb1r/pppp1ppp/2n2n2/4p2Q/2B1P3/8/PPPP1PPP/RNB1K1NR w KQkq - 4 4
+    answer: Qxf7#
+    explanation: "«Bolalar mati»: vazir f7 piyodasini uradi, uni c4 dagi fil himoya qiladi. f7 — oʻyin boshida eng zaif katak."
+  - id: mate-in-one-007
+    type: move
+    difficulty: 1
+    lang: text
+    prompt: Qoralar yuradi. Bir yurishda mat qiling.
+    board: rnbqkbnr/pppp1ppp/8/4p3/6P1/5P2/PPPPP2P/RNBQKBNR b KQkq g3 0 2
+    answer: Qh4#
+    explanation: «Ahmoqona mat» — shaxmatdagi eng tez mat. Oqlar f va g piyodalarini surib, shohiga boradigan diagonalni ochib qoʻygan.
+  - id: mate-in-one-008
+    type: move
+    difficulty: 1
+    lang: text
+    prompt: Qoralar yuradi. Bir yurishda mat qiling.
+    board: 3r2k1/5ppp/8/8/8/8/5PPP/6K1 b - - 0 1
+    answer: Rd1#
+    explanation: Oq shoh oʻz piyodalari ortida qolgan, 1-gorizontalni esa hech kim himoya qilmayapti.
+  - id: mate-in-one-009
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: 6rk/6pp/8/6N1/8/8/8/6K1 w - - 0 1
+    answer: Nf7#
+    explanation: "«Boʻgʻiq mat»: shohni oʻz donalari har tomondan oʻrab olgan, ot esa ular ustidan sakrab shoh beradi."
+  - id: mate-in-one-010
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: 5rk1/5ppp/8/7Q/8/3B4/5PPP/6K1 w - - 0 1
+    answer: Qxh7#
+    explanation: Vazir h7 ni uradi, uni d3 dagi fil diagonal boʻylab himoya qiladi. Shohning f8 katagini oʻz turasi egallagan.
+  - id: mate-in-one-011
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: 7k/R7/5N2/8/8/8/8/6K1 w - - 0 1
+    answer: Rh7#
+    explanation: "«Arab mati»: tura burchakdagi shohga shoh beradi, ot esa turani himoya qiladi va g8 katagini yopadi."
+  - id: mate-in-one-012
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: 7k/6pp/8/6NQ/8/8/8/6K1 w - - 0 1
+    answer:
+      - Qxh7#
+      - Qe8#
+    explanation: Bu yerda ikkita mat bor. Vazir h7 piyodasini ursa, uni ot himoya qiladi. Vazir e8 ga borsa — himoyasiz oxirgi gorizontalda mat.
+  - id: mate-in-one-013
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: 6k1/5p1p/5BpQ/8/8/8/8/6K1 w - - 0 1
+    answer: Qg7#
+    explanation: Vazir g7 ga kiradi, uni f6 dagi fil himoya qiladi. Shoh atrofidagi qora kataklar zaiflashgani uchun mat.
+  - id: mate-in-one-014
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Qoralar yuradi. Bir yurishda mat qiling.
+    board: 6k1/8/8/8/8/5bPq/5P1P/6K1 b - - 0 1
+    answer: Qg2#
+    explanation: Vazir g2 ga kiradi, uni f3 dagi fil himoya qiladi. Oq shoh vazirni ura olmaydi va qochadigan katagi yoʻq.
+  - id: mate-in-one-015
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: 6k1/5p1p/6pB/8/8/8/8/4R1K1 w - - 0 1
+    answer: Re8#
+    explanation: Tura oxirgi gorizontalda shoh beradi, h6 dagi fil esa shohning yagona qochish katagi — g7 ni yopadi.
+  - id: mate-in-one-016
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: 3rkr2/8/8/8/8/7Q/8/6K1 w - - 0 1
+    answer: Qe6#
+    explanation: "«Epolet mati»: shohning ikki yonidagi kataklarni oʻz turalari egallagan, oldidagi uch katakni esa vazir nazorat qiladi."
+  - id: mate-in-one-017
+    type: move
+    difficulty: 2
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: 6k1/4P1pp/8/8/8/8/8/6K1 w - - 0 1
+    answer: e8=Q#
+    explanation: Piyoda oxirgi gorizontalga yetib vazirga aylanadi va shu zahoti mat qiladi. Turaga aylansa, shoh f7 ga qochib ketar edi.
+  - id: mate-in-one-018
+    type: move
+    difficulty: 3
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: 7k/8/6PK/8/2B5/8/8/8 w - - 0 1
+    answer: g7#
+    explanation: "Piyoda shoh beradi: uni oq shoh himoya qiladi, g8 katagini fil, h7 ni esa oq shoh yopgan."
+  - id: mate-in-one-019
+    type: move
+    difficulty: 3
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: 7k/8/4B2K/8/8/8/8/2B5 w - - 0 1
+    answer: Bb2#
+    explanation: "Ikki fil mati: bir fil katta diagonal boʻylab shoh beradi, ikkinchisi g8 katagini yopadi, oq shoh esa g7 va h7 ni."
+  - id: mate-in-one-020
+    type: move
+    difficulty: 3
+    lang: text
+    prompt: Oqlar yuradi. Bir yurishda mat qiling.
+    board: 4k3/8/4K3/8/8/8/8/Q7 w - - 0 1
+    answer:
+      - Qa8#
+      - Qh8#
+    explanation: Oq shoh d7, e7, f7 kataklarini yopgan, vazir 8-gorizontalda shoh beradi. Vazir a8 ga ham, h8 ga ham borishi mumkin — ikkalasi ham mat.
