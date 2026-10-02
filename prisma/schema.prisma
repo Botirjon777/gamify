@@ -116,6 +116,10 @@ model User {
   /// When the inviter got their reward (invitee reached the required level).
   referralRewardedAt DateTime?
   referredBy         User?     @relation("Referrals", fields: [referredById], references: [id], onDelete: SetNull)
+  /// The partner who brought this user (their link, or their promo code on the first payment). Set once.
+  partnerId          String?
+  partnerAt          DateTime?
+  partner            Partner?  @relation(fields: [partnerId], references: [id], onDelete: SetNull)
   referrals          User[]    @relation("Referrals")
   currentStreak      Int       @default(0)
   longestStreak      Int       @default(0)
@@ -150,6 +154,7 @@ model User {
 
   @@index([xp(sort: Desc)])
   @@index([iqRating(sort: Desc)])
+  @@index([partnerId])
 }
 
 /// DB-backed session = one logged-in device. Only the SHA-256 of the token is stored.
@@ -561,10 +566,32 @@ model PromoCode {
   /// Switched off by an admin: can't be used any more, history stays.
   active      Boolean   @default(true)
   note        String?
+  /// A partner's own code: a user who pays with it is attributed to that partner.
+  partnerId   String?
   createdById String?
   createdAt   DateTime  @default(now())
 
   payments Payment[]
+  partner  Partner?  @relation(fields: [partnerId], references: [id], onDelete: SetNull)
+}
+
+/// Someone who recommends Zukkolar (a blogger, a teacher, a channel). People who arrive through their link
+/// (/p/<code>) or pay with their promo code are attributed to them, so we know what each partner brings.
+model Partner {
+  id        String   @id @default(cuid())
+  /// In the link, lowercase: zukkolar.uz/p/aziz
+  code      String   @unique
+  name      String
+  contact   String?
+  note      String?
+  /// Switched off: the link still opens the site but nobody new is attributed.
+  active    Boolean  @default(true)
+  /// How many times the link was opened.
+  clicks    Int      @default(0)
+  createdAt DateTime @default(now())
+
+  users      User[]
+  promoCodes PromoCode[]
 }
 
 /// Every admin action, for accountability.

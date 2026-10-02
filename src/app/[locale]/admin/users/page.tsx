@@ -2,6 +2,7 @@ import { Search } from "lucide-react";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import { requireAdmin } from "@/lib/auth/admin";
+import { db } from "@/lib/db";
 import { Avatar } from "@/components/avatar";
 import { PageHeader } from "@/components/page-header";
 import { PlanBadge } from "@/components/plan-badge";
@@ -18,23 +19,40 @@ export default async function AdminUsers({ params, searchParams }: PageProps<"/[
   const q = typeof sp.q === "string" ? sp.q : "";
   const filter = FILTERS.find((f) => f === sp.filter) ?? "all";
   const page = Math.max(1, Number(sp.page) || 1);
+  // ?partner=<id>: only the people a partner brought (linked from the partners page).
+  const partner = typeof sp.partner === "string" ? await db.partner.findUnique({ where: { id: sp.partner }, select: { id: true, name: true } }) : null;
 
   const t = await getTranslations("admin.users");
   const tn = await getTranslations("admin");
   const format = await getFormatter();
-  const { total, users, pages } = await listUsers({ q, filter, page });
+  const { total, users, pages } = await listUsers({ q, filter, page, partnerId: partner?.id });
   const href = (over: Record<string, string | number>) => {
-    const p = new URLSearchParams({ ...(q && { q }), filter, page: String(page), ...Object.fromEntries(Object.entries(over).map(([k, v]) => [k, String(v)])) });
+    const p = new URLSearchParams({
+      ...(q && { q }),
+      ...(partner && { partner: partner.id }),
+      filter,
+      page: String(page),
+      ...Object.fromEntries(Object.entries(over).map(([k, v]) => [k, String(v)])),
+    });
     return `/admin/users?${p}`;
   };
 
   return (
     <div className="flex flex-col gap-5">
       <PageHeader title={tn("nav.users")} subtitle={t("total", { count: total })} />
+      {partner && (
+        <p className="flex w-fit items-center gap-3 rounded-xl bg-brand/10 px-3 py-2 text-sm font-semibold text-brand">
+          {t("byPartner", { name: partner.name })}
+          <Link href="/admin/users" className="text-muted hover:text-foreground">
+            ✕
+          </Link>
+        </p>
+      )}
 
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
         <form className="relative flex-1 lg:max-w-md">
           <input type="hidden" name="filter" value={filter} />
+          {partner && <input type="hidden" name="partner" value={partner.id} />}
           <Search className="pointer-events-none absolute left-3.5 top-1/2 size-4 -translate-y-1/2 text-muted" />
           <input
             name="q"

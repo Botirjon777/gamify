@@ -1144,7 +1144,8 @@
       "payments": "Toʻlovlar",
       "audit": "Amallar tarixi",
       "events": "Mavsum va bonuslar",
-      "promos": "Promokodlar"
+      "promos": "Promokodlar",
+      "partners": "Hamkorlar"
     },
     "stats": {
       "totalUsers": "Jami foydalanuvchilar",
@@ -1193,7 +1194,8 @@
       "page": "{page} / {pages}",
       "blockedBadge": "Bloklangan",
       "adminBadge": "Admin",
-      "never": "—"
+      "never": "—",
+      "byPartner": "Hamkor: {name}"
     },
     "user": {
       "back": "Foydalanuvchilar",
@@ -1227,7 +1229,8 @@
       "xpEvents": "Soʻnggi XP",
       "history": "Admin amallari",
       "noHistory": "Hali amallar yoʻq",
-      "done": "Bajarildi"
+      "done": "Bajarildi",
+      "partner": "Hamkor"
     },
     "payments": {
       "tabs": {
@@ -1261,7 +1264,8 @@
       "seasonPast": "Bu muddat allaqachon oʻtib ketgan",
       "alreadyPlanned": "Keyingi mavsum allaqachon rejalashtirilgan",
       "promoTaken": "Bunday kod allaqachon bor",
-      "promoPast": "Oxirgi kun oʻtib ketgan"
+      "promoPast": "Oxirgi kun oʻtib ketgan",
+      "partnerTaken": "Bu havola kodi band"
     },
     "audit": {
       "empty": "Hali amallar yoʻq",
@@ -1322,6 +1326,12 @@
         "create": "Promokod yaratdi",
         "enable": "Promokodni yoqdi",
         "disable": "Promokodni oʻchirdi"
+      },
+      "partner": {
+        "create": "Hamkor qoʻshdi",
+        "update": "Hamkorni tahrirladi",
+        "enable": "Hamkorni yoqdi",
+        "disable": "Hamkorni oʻchirdi"
       }
     },
     "events": {
@@ -1368,7 +1378,36 @@
       "expired": "muddati tugagan",
       "revenue": "Tushum",
       "discountGiven": "{count} ta toʻlov · chegirma {amount} soʻm",
-      "active": "Faol"
+      "active": "Faol",
+      "partner": "Hamkor",
+      "noPartner": "Hamkorsiz"
+    },
+    "partners": {
+      "subtitle": "Bizni tavsiya qiladigan hamkorlar. Har birining oʻz havolasi bor: u orqali kirganlar 30 kun ichida roʻyxatdan oʻtsa, shu hamkorga yoziladi.",
+      "new": "Yangi hamkor",
+      "name": "Ism yoki kanal nomi",
+      "code": "Havola kodi",
+      "codeChangeHint": "Kod oʻzgarsa, eski havola ishlamay qoladi.",
+      "contact": "Aloqa",
+      "contactPlaceholder": "Telegram yoki telefon",
+      "note": "Izoh",
+      "create": "Qoʻshish",
+      "save": "Saqlash",
+      "cancel": "Bekor qilish",
+      "created": "{name} qoʻshildi",
+      "saved": "Saqlandi",
+      "empty": "Hali hamkorlar yoʻq.",
+      "off": "Oʻchirilgan",
+      "clicks": "Havola ochilgan",
+      "signups": "Roʻyxatdan oʻtgan",
+      "rate": "{percent}%",
+      "payers": "Toʻlov qilgan",
+      "revenue": "Tushum",
+      "copy": "Havoladan nusxa olish",
+      "edit": "Tahrirlash",
+      "active": "Faol",
+      "seeUsers": "{count} ta foydalanuvchini koʻrish",
+      "promoCodes": "Promokodlari"
     }
   },
   "common": {

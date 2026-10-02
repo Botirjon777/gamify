@@ -89,20 +89,26 @@ export async function getSignupSeries(days = 30) {
 export type UserFilter = "all" | "paid" | "blocked" | "admins";
 const PAGE_SIZE = 30;
 
-export async function listUsers({ q, filter, page }: { q: string; filter: UserFilter; page: number }) {
+export async function listUsers({ q, filter, page, partnerId }: { q: string; filter: UserFilter; page: number; partnerId?: string }) {
   const now = new Date();
   const text = q.trim().replace(/^@/, "");
+  // AND of separate conditions: the search and the "paid" filter each have their own OR.
   const where: Prisma.UserWhereInput = {
-    ...(text && {
-      OR: [
-        { username: { contains: text.toLowerCase(), mode: "insensitive" } },
-        { phone: { contains: text.replace(/[\s()-]/g, "") } },
-        { email: { contains: text.toLowerCase(), mode: "insensitive" } },
-      ],
-    }),
-    ...(filter === "paid" && { plan: { not: "FREE" }, OR: [{ planExpiresAt: null }, { planExpiresAt: { gt: now } }] }),
-    ...(filter === "blocked" && { blockedAt: { not: null } }),
-    ...(filter === "admins" && { isSuperAdmin: true }),
+    AND: [
+      text
+        ? {
+            OR: [
+              { username: { contains: text.toLowerCase(), mode: "insensitive" } },
+              { phone: { contains: text.replace(/[\s()-]/g, "") } },
+              { email: { contains: text.toLowerCase(), mode: "insensitive" } },
+            ],
+          }
+        : {},
+      filter === "paid" ? { plan: { not: "FREE" }, OR: [{ planExpiresAt: null }, { planExpiresAt: { gt: now } }] } : {},
+      filter === "blocked" ? { blockedAt: { not: null } } : {},
+      filter === "admins" ? { isSuperAdmin: true } : {},
+      partnerId ? { partnerId } : {},
+    ],
   };
   const [total, users] = await Promise.all([
     db.user.count({ where }),
@@ -140,6 +146,7 @@ export async function getAdminUser(id: string) {
       payments: { orderBy: { createdAt: "desc" }, take: 20 },
       sessions: { where: { revokedAt: null, expiresAt: { gt: new Date() } }, orderBy: { lastActiveAt: "desc" } },
       clanMembership: { include: { clan: true } },
+      partner: { select: { id: true, name: true } },
       _count: { select: { attempts: true, iqSessions: true, badges: true } },
     },
   });

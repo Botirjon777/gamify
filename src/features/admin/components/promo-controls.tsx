@@ -24,7 +24,7 @@ function Field({ label, hint, children }: { label: string; hint?: string; childr
 }
 
 /** New promo code. Empty "uses" / "last day" = no limit. */
-export function PromoForm() {
+export function PromoForm({ partners }: { partners: { id: string; name: string }[] }) {
   const t = useTranslations("admin.promos");
   const te = useTranslations("admin.errors");
   const router = useRouter();
@@ -35,6 +35,7 @@ export function PromoForm() {
   const [maxUses, setMaxUses] = useState("");
   const [lastDay, setLastDay] = useState("");
   const [note, setNote] = useState("");
+  const [partnerId, setPartnerId] = useState("");
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -46,6 +47,7 @@ export function PromoForm() {
         maxUses: maxUses ? Number(maxUses) : null,
         lastDay: lastDay || null,
         note,
+        partnerId: partnerId || null,
       }).catch(() => ({ ok: false as const, error: "invalid" }));
       if (!result.ok) return void toast.error(te(result.error));
       toast.success(t("created", { code: normalizePromoCode(code) }));
@@ -89,7 +91,19 @@ export function PromoForm() {
       <Field label={t("lastDay")}>
         <input type="date" value={lastDay} onChange={(e) => setLastDay(e.target.value)} className={input} />
       </Field>
-      <div className="sm:col-span-2 lg:col-span-5">
+      <div className="lg:col-span-2">
+        <Field label={t("partner")}>
+          <select value={partnerId} onChange={(e) => setPartnerId(e.target.value)} className={input}>
+            <option value="">{t("noPartner")}</option>
+            {partners.map((p) => (
+              <option key={p.id} value={p.id}>
+                {p.name}
+              </option>
+            ))}
+          </select>
+        </Field>
+      </div>
+      <div className="lg:col-span-3">
         <Field label={t("note")}>
           <input value={note} onChange={(e) => setNote(e.target.value)} maxLength={200} placeholder={t("notePlaceholder")} className={input} />
         </Field>

@@ -12,8 +12,9 @@ export default async function AdminPromos({ params }: PageProps<"/[locale]/admin
   const t = await getTranslations("admin");
   const format = await getFormatter();
 
-  const [promos, usage] = await Promise.all([
-    db.promoCode.findMany({ orderBy: { createdAt: "desc" }, take: 200 }),
+  const [promos, partners, usage] = await Promise.all([
+    db.promoCode.findMany({ orderBy: { createdAt: "desc" }, take: 200, include: { partner: { select: { name: true } } } }),
+    db.partner.findMany({ where: { active: true }, orderBy: { name: "asc" }, select: { id: true, name: true } }),
     // Per code and status: how many payments, and how much discount was given.
     db.payment.groupBy({ by: ["promoCodeId", "status"], where: { promoCodeId: { not: null } }, _count: true, _sum: { discountUzs: true, amountUzs: true } }),
   ]);
@@ -37,7 +38,7 @@ export default async function AdminPromos({ params }: PageProps<"/[locale]/admin
 
       <section className="rounded-3xl border border-border bg-surface p-5 sm:p-6">
         <h2 className="mb-4 font-display text-base font-bold">{t("promos.new")}</h2>
-        <PromoForm />
+        <PromoForm partners={partners} />
       </section>
 
       <section className="rounded-3xl border border-border bg-surface p-5 sm:p-6">
@@ -65,6 +66,7 @@ export default async function AdminPromos({ params }: PageProps<"/[locale]/admin
                     <tr key={promo.id} className={promo.active && !expired && !usedUp ? "" : "text-muted"}>
                       <td className="py-3 pr-4">
                         <span className="font-mono text-base font-bold">{promo.code}</span>
+                        {promo.partner && <span className="block text-xs font-semibold text-brand">{promo.partner.name}</span>}
                         {promo.note && <span className="block text-xs text-muted">{promo.note}</span>}
                       </td>
                       <td className="px-4 py-3 font-semibold">

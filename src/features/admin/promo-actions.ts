@@ -15,6 +15,8 @@ const promoInput = z.object({
   /** Last day the code works, "2026-12-31" (Tashkent), or null. */
   lastDay: z.string().regex(/^\d{4}-\d{2}-\d{2}$/).nullable(),
   note: z.string().trim().max(200),
+  /** The partner whose code this is (payments with it are attributed to them), or null. */
+  partnerId: z.string().max(64).nullable(),
 });
 export type PromoInput = z.input<typeof promoInput>;
 
@@ -29,6 +31,7 @@ export async function createPromo(input: PromoInput): Promise<AdminResult> {
   const expiresAt = lastDay ? endOfDayTashkent(lastDay) : null;
   if (expiresAt && expiresAt <= new Date()) return { ok: false, error: "promoPast" };
   if (await db.promoCode.findUnique({ where: { code: data.code }, select: { id: true } })) return { ok: false, error: "promoTaken" };
+  if (data.partnerId && !(await db.partner.findUnique({ where: { id: data.partnerId }, select: { id: true } }))) return { ok: false, error: "notFound" };
 
   await db.promoCode.create({ data: { ...data, expiresAt, note: note || null, createdById: admin.id } });
   await audit(db, admin.id, "promo.create", null, { code: data.code, percent: data.percent });
