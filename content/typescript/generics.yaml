@@ -11,7 +11,6 @@ exercises:
     answer:
       - T
     explanation: <T> generic tip parametri boʻlib, funksiya chaqirilganda berilgan argument tipini eslab qoladi va qaytaradi.
-
   - id: ts-gen-002
     type: choice
     difficulty: 1
@@ -24,18 +23,15 @@ exercises:
       - Pick<T>
     answer: 0
     explanation: Partial<T> barcha maydonlarga ? (optional) belgisini qoʻshadi, yaʼni obyektdan faqat kerakli qismlarni uzatish imkonini beradi.
-
   - id: ts-gen-003
     type: fill
     difficulty: 1
     lang: ts
     prompt: Obyektning barcha xususiyatlarini oʻzgartirib boʻlmaydigan (faqat oʻqish uchun) qiluvchi Utility Type nomini yozing.
-    code: |-
-      type ReadonlyUser = ___<User>;
+    code: type ReadonlyUser = ___<User>;
     answer:
       - Readonly
     explanation: Readonly<T> tipi obyektning barcha xususiyatlariga readonly cheklovini qoʻyadi.
-
   - id: ts-gen-004
     type: choice
     difficulty: 2
@@ -48,7 +44,6 @@ exercises:
       - KeyValue<string, number>
     answer: 0
     explanation: Record<K, V> Utility tipi kalitlari K tipida va qiymatlari V tipida boʻlgan obyekt shaklini eʼlon qiladi.
-
   - id: ts-gen-005
     type: fill
     difficulty: 2
@@ -60,7 +55,6 @@ exercises:
     answer:
       - Pick
     explanation: Pick<T, K> berilgan tipdan faqat tanlangan K xususiyatlaridan iborat yangi tip yasaydi.
-
   - id: ts-gen-006
     type: choice
     difficulty: 2
@@ -73,7 +67,6 @@ exercises:
       - Drop<T, K>
     answer: 0
     explanation: Omit<T, K> berilgan K kalitlarini T obyekt tipidan olib tashlaydi. Exclude esa union tiplardan aʼzolarni chiqarib tashlaydi.
-
   - id: ts-gen-007
     type: fill
     difficulty: 2
@@ -86,20 +79,18 @@ exercises:
     answer:
       - extends
     explanation: T extends Shart sintaksisi generic parametriga cheklov (constraint) qoʻyadi.
-
   - id: ts-gen-008
     type: order
     difficulty: 2
     lang: ts
     prompt: Generic interfeys va uning ishlatilish tartibini tiklang.
     lines:
-      - "interface ApiResponse<T> {"
+      - interface ApiResponse<T> {
       - "  data: T;"
       - "  status: number;"
       - "}"
       - "type UserResponse = ApiResponse<{ id: string; name: string }>;"
     explanation: Dastlab generic interfeys ApiResponse<T> eʼlon qilinadi, keyin esa unga aniq tip uzatib ixtisoslashtirilgan tip yasaladi.
-
   - id: ts-gen-009
     type: choice
     difficulty: 3
@@ -112,7 +103,6 @@ exercises:
       - Kalitlar sonini
     answer: 0
     explanation: keyof T obyekt tipining barcha ommaviy kalitlari nomlaridan iborat union tip yasaydi ("id" | "title").
-
   - id: ts-gen-010
     type: choice
     difficulty: 3

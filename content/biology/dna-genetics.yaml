@@ -28,13 +28,13 @@ exercises:
     difficulty: 2
     lang: text
     prompt: DNK strukturasida Adenin har doim qaysi azotli asos bilan juftlashadi?
-    answer: 0
-    explanation: Komplementarlik qoidasiga koʻra Adenin-Timin bilan bogʻlanadi.
     options:
       - timin
       - timin (xato)
       - Boshqa
       - Nomaʼlum
+    answer: 0
+    explanation: Komplementarlik qoidasiga koʻra Adenin-Timin bilan bogʻlanadi.
   - id: dna-genetics-004
     type: choice
     difficulty: 2
@@ -52,13 +52,13 @@ exercises:
     difficulty: 3
     lang: text
     prompt: Sogʻlom insonning tana hujayralarida jami necha xromosoma mavjud?
-    answer: 1
-    explanation: Sogʻlom insonda 23 juft (yaʼni 46 ta) xromosoma boʻladi.
     options:
       - "44"
       - "46"
       - "48"
       - "51"
+    answer: 1
+    explanation: Sogʻlom insonda 23 juft (yaʼni 46 ta) xromosoma boʻladi.
   - id: dna-genetics-006
     type: choice
     difficulty: 2
@@ -88,10 +88,10 @@ exercises:
     difficulty: 2
     lang: text
     prompt: DNK ning bir qismi boʻlib, muayyan oqsil haqida maʼlumot saqlovchi birlik nima deyiladi?
-    answer: 0
-    explanation: Gen irsiyatning eng kichik funksional birligidir.
     options:
       - gen
       - gen (xato)
       - Boshqa
       - Nomaʼlum
+    answer: 0
+    explanation: Gen irsiyatning eng kichik funksional birligidir.

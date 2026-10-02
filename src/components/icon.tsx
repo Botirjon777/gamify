@@ -95,6 +95,9 @@ const ICONS: Record<string, LucideIcon> = {
   zap: Zap,
 };
 
+/** Every icon name content may use (track icons are validated against this). */
+export const ICON_NAMES = Object.keys(ICONS);
+
 /** Emblems a clan leader can pick. */
 export const CLAN_EMBLEMS = ["shield", "swords", "castle", "crown", "flame", "rocket", "atom", "brain", "gem", "zap"] as const;
 

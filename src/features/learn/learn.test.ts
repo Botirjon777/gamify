@@ -3,7 +3,8 @@ import { join } from "node:path";
 import { parse } from "yaml";
 import { describe, expect, it } from "vitest";
 import { checkAnswer, normalize, normalizeText } from "./check";
-import { skillFile, toDbExercise, type PrivateAnswer, type Submission } from "./content-schema";
+import { exerciseDef, skillFile, toDbExercise, type PrivateAnswer, type Submission } from "./content-schema";
+import { toFileExercise } from "./content-export";
 import { nextMastery, reviewIntervalDays } from "./mastery";
 import { pickNext } from "./picker";
 
@@ -125,6 +126,8 @@ describe("content answers are self-consistent", () => {
         expect(checkAnswer(answer, submission).correct).toBe(true);
         // The public part must never contain the answer for CHOICE/FILL/OUTPUT.
         expect(JSON.stringify(db.content)).not.toContain('"answer"');
+        // content:pull writes the stored row back as an equivalent file entry (database ⇄ files round trip).
+        expect(toDbExercise(exerciseDef.parse(toFileExercise(db)))).toEqual(db);
       });
     }
   }

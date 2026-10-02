@@ -1,6 +1,7 @@
 import { parse } from "yaml";
 import { describe, expect, it } from "vitest";
 import { exerciseDef, toDbExercise, trackFile } from "./content-schema";
+import { toFileExercise } from "./content-export";
 
 describe("track file", () => {
   const track = (extra: Record<string, unknown>) =>
@@ -54,5 +55,35 @@ answer: 0
     expect(JSON.stringify(content)).not.toContain("mot");
     expect(exerciseDef.safeParse({ ...fill, bank: ["mot"] }).success).toBe(false);
     expect((toDbExercise(exerciseDef.parse(fill)).content as { bank?: string[] }).bank).toBeUndefined();
+  });
+
+  it("export keeps what the defaults would lose: custom xp, draft status, several accepted answers, the word bank", () => {
+    const def = exerciseDef.parse({
+      id: "demo-004",
+      type: "fill",
+      lang: "text",
+      difficulty: 2,
+      xp: 25,
+      status: "DRAFT",
+      prompt: { uz: "Toʻldiring", ru: "Заполните" },
+      code: "___ va ___",
+      answer: ["shoh", ["mat", "mot"]],
+      bank: ["pat"],
+    });
+    expect(toFileExercise(toDbExercise(def))).toEqual({
+      id: "demo-004",
+      type: "fill",
+      difficulty: 2,
+      xp: 25,
+      status: "DRAFT",
+      lang: "text",
+      prompt: { uz: "Toʻldiring", ru: "Заполните" },
+      code: "___ va ___",
+      answer: ["shoh", ["mat", "mot"]],
+      bank: ["pat"],
+    });
+    // defaults are left out of the file
+    const plain = toFileExercise(toDbExercise(exerciseDef.parse({ id: "demo-005", type: "choice", prompt: "Savol", options: ["a", "b"], answer: 0 })));
+    expect(plain).toEqual({ id: "demo-005", type: "choice", difficulty: 1, lang: "jsx", prompt: "Savol", options: ["a", "b"], answer: 0 });
   });
 });

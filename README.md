@@ -28,6 +28,25 @@ pnpm dev
 | `pnpm db:migrate` | Create/apply migrations (**dev databases only**) |
 | `pnpm db:deploy` | Apply existing migrations (production) |
 | `pnpm db:seed` | Seed tenants |
+| `pnpm content:pull` | Database → `/content` YAML files |
+| `pnpm content:push` | `/content` → database (shows what differs first; `--dry-run` to only look) |
+| `pnpm content:lint` | Report every problem in the content files |
+
+## Content
+
+Courses, exercises and IQ questions live in the **database** and are edited in the admin panel (`/admin/content`).
+`/content` is a mirror of it in git — for review, history and bulk edits:
+
+```bash
+pnpm content:pull            # database → files (drafts included, archived content left out)
+# … edit the YAML …
+pnpm content:push --dry-run  # what would change
+pnpm content:push            # files → database
+```
+
+- Add `--prod` to work against production (`content:push --prod` is a dry run until you add `--yes`).
+- Push never deletes. Content that is only in the database is reported and left alone; `--prune` archives it.
+- Always pull before editing files, so changes made in the admin panel are not overwritten by older files.
 
 ## Project layout
 

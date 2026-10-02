@@ -3,20 +3,19 @@ exercises:
     type: choice
     difficulty: 3
     lang: ts
-    prompt: "TypeScript tur tizimida (type-level) 5 + 3 arifmetik qoʻshish amali qanday amalga oshiriladi?"
+    prompt: TypeScript tur tizimida (type-level) 5 + 3 arifmetik qoʻshish amali qanday amalga oshiriladi?
     options:
-      - "5 ta va 3 ta elementli ikkita tuple yasab, ularni [...T1, ...T2]['length'] orqali birlashtirish bilan"
-      - "TypeScript da + operatori tiplar bilan toʻgʻridan-toʻgʻri ishlaydi"
-      - "Math.sum<5, 3> generic tipi orqali"
-      - "Tiplar darajasida sonlarni qoʻshib boʻlmaydi"
+      - 5 ta va 3 ta elementli ikkita tuple yasab, ularni [...T1, ...T2]['length'] orqali birlashtirish bilan
+      - TypeScript da + operatori tiplar bilan toʻgʻridan-toʻgʻri ishlaydi
+      - Math.sum<5, 3> generic tipi orqali
+      - Tiplar darajasida sonlarni qoʻshib boʻlmaydi
     answer: 0
-    explanation: "TypeScript kompilyatori arifmetik amallarni qoʻllab-quvvatlamaydi, ammo tuple uzunliklari [...T1, ...T2]['length'] orqali sonlarni qoʻshish va hisoblash mumkin."
-
+    explanation: TypeScript kompilyatori arifmetik amallarni qoʻllab-quvvatlamaydi, ammo tuple uzunliklari [...T1, ...T2]['length'] orqali sonlarni qoʻshish va hisoblash mumkin.
   - id: tc-sup-002
     type: fill
     difficulty: 3
     lang: ts
-    prompt: "Satrni harflarining Union tipiga aylantiruvchi StringToUnion tipini toʻldiring."
+    prompt: Satrni harflarining Union tipiga aylantiruvchi StringToUnion tipini toʻldiring.
     code: |-
       type StringToUnion<S extends string> =
         S extends `${infer Char}${infer Rest}`
@@ -24,104 +23,94 @@ exercises:
           : never;
     answer:
       - StringToUnion
-    explanation: "Satrdan birinchi harf Char olinib, qolgan qismiga rekursiv StringToUnion chaqiriladi va | union bilan birlashtiriladi."
-
+    explanation: Satrdan birinchi harf Char olinib, qolgan qismiga rekursiv StringToUnion chaqiriladi va | union bilan birlashtiriladi.
   - id: tc-sup-003
     type: choice
     difficulty: 3
     lang: ts
-    prompt: "Nominal Typing (Branding / Tagging) nima maqsadda ishlatiladi? Masalan type UserId = Tag<string, 'UserId'>."
+    prompt: Nominal Typing (Branding / Tagging) nima maqsadda ishlatiladi? Masalan type UserId = Tag<string, 'UserId'>.
     options:
-      - "Bir xil tub tipga (string) ega boʻlgan maʼlumotlarni adashtirib yubormaslik (masalan UserId ga PostId uzatishni taqiqlash) uchun"
-      - "Satrni xesh qilish uchun"
-      - "Faqat interfeyslarni bezash uchun"
-      - "CSS klasslarini belgilash uchun"
+      - Bir xil tub tipga (string) ega boʻlgan maʼlumotlarni adashtirib yubormaslik (masalan UserId ga PostId uzatishni taqiqlash) uchun
+      - Satrni xesh qilish uchun
+      - Faqat interfeyslarni bezash uchun
+      - CSS klasslarini belgilash uchun
     answer: 0
-    explanation: "TypeScript strukturaviy tiplashga (structural typing) asoslanadi. Maxsus Tag belgilash orqali faqat tekshirilgan va ruxsat etilgan qiymatgina qabul qilinadi."
-
+    explanation: TypeScript strukturaviy tiplashga (structural typing) asoslanadi. Maxsus Tag belgilash orqali faqat tekshirilgan va ruxsat etilgan qiymatgina qabul qilinadi.
   - id: tc-sup-004
     type: fill
     difficulty: 3
     lang: ts
-    prompt: "Tag (Branded Type) yaratishda simvol (unique symbol) kalitini toʻldiring."
+    prompt: Tag (Branded Type) yaratishda simvol (unique symbol) kalitini toʻldiring.
     code: |-
       declare const TagSymbol: unique symbol;
       type Tag<Base, Name extends string> = Base & { readonly [___]: Name };
     answer:
       - TagSymbol
-    explanation: "unique symbol faqat bitta boʻlgani sababli boshqa hech qanday obyekt unga tasodifan mos kelmaydi."
-
+    explanation: unique symbol faqat bitta boʻlgani sababli boshqa hech qanday obyekt unga tasodifan mos kelmaydi.
   - id: tc-sup-005
     type: choice
     difficulty: 3
     lang: ts
-    prompt: "URL soʻrov satrini (masalan 'k1=v1&k2=v2') obyekti tipiga oʻgiruvchi QueryStringParser qanday ishlaydi?"
+    prompt: URL soʻrov satrini (masalan 'k1=v1&k2=v2') obyekti tipiga oʻgiruvchi QueryStringParser qanday ishlaydi?
     options:
-      - "Template Literal types orqali '&' belgisi boʻyicha boʻlib, har bir 'k=v' juftligini obyekt kaliti va qiymatiga xaritalaydi"
-      - "window.location dan oʻqiydi"
-      - "RegExp kutubxonasidan foydalanadi"
-      - "Tiplar darajasida satrlarni tahlil qilish imkonsiz"
+      - Template Literal types orqali '&' belgisi boʻyicha boʻlib, har bir 'k=v' juftligini obyekt kaliti va qiymatiga xaritalaydi
+      - window.location dan oʻqiydi
+      - RegExp kutubxonasidan foydalanadi
+      - Tiplar darajasida satrlarni tahlil qilish imkonsiz
     answer: 0
-    explanation: "TypeScript 4.1 dan boshlab Template Literal Types orqali matnlarni parsing qilish, qismlarga ajratish va murakkab obyekt tiplariga aylantirish mumkin."
-
+    explanation: TypeScript 4.1 dan boshlab Template Literal Types orqali matnlarni parsing qilish, qismlarga ajratish va murakkab obyekt tiplariga aylantirish mumkin.
   - id: tc-sup-006
     type: fill
     difficulty: 3
     lang: ts
-    prompt: "Massivdan bitta elementni ayirib tashlovchi (Subtract tuple) shartni toʻldiring."
-    code: |-
-      type PopOne<T extends any[]> = T extends [any, ...infer Rest] ? Rest : ___;
+    prompt: Massivdan bitta elementni ayirib tashlovchi (Subtract tuple) shartni toʻldiring.
+    code: "type PopOne<T extends any[]> = T extends [any, ...infer Rest] ? Rest : ___;"
     answer:
       - "[]"
-    explanation: "T da kamida bitta element boʻlsa qolgan Rest qaytadi, boʻsh boʻlsa [] qaytadi."
-
+    explanation: T da kamida bitta element boʻlsa qolgan Rest qaytadi, boʻsh boʻlsa [] qaytadi.
   - id: tc-sup-007
     type: order
     difficulty: 3
     lang: ts
-    prompt: "Tuple uzunligi orqali ikkita musbat butun sonni solishtiruvchi (IsGreater) qadamlar tartibini tiklang."
+    prompt: Tuple uzunligi orqali ikkita musbat butun sonni solishtiruvchi (IsGreater) qadamlar tartibini tiklang.
     lines:
-      - "type IsGreater<A extends number, B extends number, Acc extends any[] = []> ="
+      - type IsGreater<A extends number, B extends number, Acc extends any[] = []> =
       - "  Acc['length'] extends A"
       - "    ? false"
       - "    : Acc['length'] extends B"
       - "      ? true"
       - "      : IsGreater<A, B, [...Acc, any]>;"
-    explanation: "Akkumulyator 0 dan boshlanadi; agar u birinchi A ga yetsa A kichik yoki teng, agar birinchi B ga yetsa A katta boʻladi."
-
+    explanation: Akkumulyator 0 dan boshlanadi; agar u birinchi A ga yetsa A kichik yoki teng, agar birinchi B ga yetsa A katta boʻladi.
   - id: tc-sup-008
     type: choice
     difficulty: 3
     lang: ts
-    prompt: "TypeScript rekursiv tiplarida 'Type instantiation is excessively deep and possibly infinite' xatosi nima sababdan yuz beradi?"
+    prompt: TypeScript rekursiv tiplarida 'Type instantiation is excessively deep and possibly infinite' xatosi nima sababdan yuz beradi?
     options:
-      - "TypeScript kompilyatorida rekursiv instansiyalash chuqurligiga chegara bor (oddiy rekursiyada ~50, tail-rekursiv conditional tiplarda ~1000 qadam)"
-      - "Xotira butunlay tugab qolganligi sababli"
-      - "Sintaktik xato boʻlgani uchun"
-      - "Generiklar soni 5 tadan oshgani uchun"
+      - TypeScript kompilyatorida rekursiv instansiyalash chuqurligiga chegara bor (oddiy rekursiyada ~50, tail-rekursiv conditional tiplarda ~1000 qadam)
+      - Xotira butunlay tugab qolganligi sababli
+      - Sintaktik xato boʻlgani uchun
+      - Generiklar soni 5 tadan oshgani uchun
     answer: 0
-    explanation: "TypeScript kompilyatorni osilib qolishdan (infinite loop) himoyalash uchun rekursiv tahlil chuqurligiga qatʼiy chegara qoʻygan. Oddiy (tail boʻlmagan) rekursiyada chegara taxminan 50 qadam, tail-rekursiv conditional tiplarda esa 1000 qadam."
-
+    explanation: TypeScript kompilyatorni osilib qolishdan (infinite loop) himoyalash uchun rekursiv tahlil chuqurligiga qatʼiy chegara qoʻygan. Oddiy (tail boʻlmagan) rekursiyada chegara taxminan 50 qadam, tail-rekursiv conditional tiplarda esa 1000 qadam.
   - id: tc-sup-009
     type: fill
     difficulty: 3
     lang: ts
     prompt: "Slice kabi tiplarda indeks hisoblagichi sifatida ishlatiladigan Count tipini toʻldiring: akkumulyator massivning uzunligini qaytarsin."
-    code: |-
-      type Count<Acc extends any[]> = Acc["___"];
+    code: type Count<Acc extends any[]> = Acc["___"];
     answer:
       - length
-    explanation: "Acc['length'] joriy sikl qadamidagi elementlar sonini bildiradi."
-
+    explanation: Acc['length'] joriy sikl qadamidagi elementlar sonini bildiradi.
   - id: tc-sup-010
     type: choice
     difficulty: 3
     lang: ts
-    prompt: "Get<T, 'a.b.c'> kabi nuqta bilan ajratilgan yoʻl (path) boʻyicha ichki tipni olish qanday amalga oshiriladi?"
+    prompt: Get<T, 'a.b.c'> kabi nuqta bilan ajratilgan yoʻl (path) boʻyicha ichki tipni olish qanday amalga oshiriladi?
     options:
-      - "Path extends `${infer Head}.${infer Tail}` sharti bilan Head boʻyicha kirib, Tail uchun Get rekursiv chaqiriladi"
-      - "Object.get() metodi orqali"
-      - "eval() ishlatish orqali"
-      - "Bunday tiplarni TypeScript qoʻllab-quvvatlamaydi"
+      - Path extends `${infer Head}.${infer Tail}` sharti bilan Head boʻyicha kirib, Tail uchun Get rekursiv chaqiriladi
+      - Object.get() metodi orqali
+      - eval() ishlatish orqali
+      - Bunday tiplarni TypeScript qoʻllab-quvvatlamaydi
     answer: 0
-    explanation: "Template literal ${Head}.${Tail} orqali nuqtagacha boʻlgan birinchi kalit ajratib olinadi va qolgan yoʻl boʻyicha ichkariga rekursiv kiriladi."
+    explanation: Template literal ${Head}.${Tail} orqali nuqtagacha boʻlgan birinchi kalit ajratib olinadi va qolgan yoʻl boʻyicha ichkariga rekursiv kiriladi.

@@ -9,9 +9,8 @@ exercises:
         public string Name { ___; set; }
       }
     answer:
-      - "get"
+      - get
     explanation: "{ get; set; } qisqartmasi orqali C# kompilyatori avtomatik ravishda yashirin private backing field yaratadi."
-
   - id: cs-cls-002
     type: choice
     difficulty: 1
@@ -24,18 +23,15 @@ exercises:
       - enum
     answer: 0
     explanation: record kalit soʻzi oʻzgarmas (immutable) obyektlar, init-only xususiyatlar va avtomatik qiymat boʻyicha tenglikni taʼminlaydi.
-
   - id: cs-cls-003
     type: fill
     difficulty: 1
     lang: csharp
     prompt: Oʻzgaruvchi null qiymat qabul qilishi mumkinligini (Nullable type) bildiruvchi belgini toʻldiring.
-    code: |-
-      int___ age = null;
+    code: int___ age = null;
     answer:
       - "?"
     explanation: int? (yoki Nullable<int>) qiymat turiga null qabul qilish imkonini beradi.
-
   - id: cs-cls-004
     type: choice
     difficulty: 2
@@ -48,7 +44,6 @@ exercises:
       - static
     answer: 0
     explanation: "{ get; init; } sintaksisi qiymatni faqat konstruktor yoki obyekt initsializatorida belgilashga ruxsat beradi."
-
   - id: cs-cls-005
     type: output
     difficulty: 2
@@ -64,7 +59,6 @@ exercises:
       public record Point(int X, int Y);
     answer: "True"
     explanation: Record obyektlar xotira manziliga emas, oʻzlarining ichki qiymatlariga (value equality) qarab tenglashtiriladi.
-
   - id: cs-cls-006
     type: fill
     difficulty: 2
@@ -74,34 +68,31 @@ exercises:
       var p1 = new Point(10, 20);
       var p2 = p1 ___ { X = 30 };
     answer:
-      - "with"
+      - with
     explanation: with ifodasi record obyektidan xususiyatlarni nusxalab, faqat koʻrsatilganlarini oʻzgartirib yangi obyekt qaytaradi.
-
   - id: cs-cls-007
     type: choice
     difficulty: 2
     lang: csharp
     prompt: Null-coalescing operatori qaysi? Agar chap tomon null boʻlsa oʻng tomondagi qiymatni oladi.
     options:
-      - "??"
-      - "?."
+      - ??
+      - ?.
       - "?:"
       - "||"
     answer: 0
-    explanation: "?? operatori null-coalescing operatori boʻlib, chap tomon null boʻlsa oʻng tarafdagi standart qiymatni qaytaradi."
-
+    explanation: ?? operatori null-coalescing operatori boʻlib, chap tomon null boʻlsa oʻng tarafdagi standart qiymatni qaytaradi.
   - id: cs-cls-008
     type: order
     difficulty: 2
     lang: csharp
     prompt: Sonni tavsiflovchi pattern matching switch ifodasining toʻgʻri tartibini tiklang.
     lines:
-      - "string Describe(int n) => n switch {"
-      - "    int x when x > 0 => \"Musbat son\","
-      - "    int => \"Musbat emas\""
+      - string Describe(int n) => n switch {
+      - '    int x when x > 0 => "Musbat son",'
+      - '    int => "Musbat emas"'
       - "};"
     explanation: "Switch ifodasi shablonlarni yuqoridan pastga tekshiradi, shuning uchun aniqroq shablon (int x when x > 0) umumiy shablondan (int) oldin turishi shart. Aks holda kompilyator CS8510 xatosini beradi: keyingi shablon oldingisi tomonidan allaqachon qamrab olingan."
-
   - id: cs-cls-009
     type: choice
     difficulty: 3
@@ -114,7 +105,6 @@ exercises:
       - Ikkalasi ham aynan bir xil joyda saqlanadi
     answer: 0
     explanation: "struct qiymat turi: oʻzlashtirish yoki argument sifatida berishda qiymatning oʻzi nusxalanadi (lokal oʻzgaruvchi boʻlsa odatda stackda, lekin class maydoni yoki massiv elementi boʻlsa heapda joylashadi). class havola turi: obyekt heapda, oʻzgaruvchilar esa unga havolani saqlaydi."
-
   - id: cs-cls-010
     type: output
     difficulty: 3

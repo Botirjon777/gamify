@@ -28,13 +28,13 @@ exercises:
     difficulty: 2
     lang: text
     prompt: 3z - 4 = 11 tenglamada z nechaga teng?
-    answer: 1
-    explanation: 3z = 15, z = 5.
     options:
       - "3"
       - "5"
       - "7"
       - "10"
+    answer: 1
+    explanation: 3z = 15, z = 5.
   - id: equations-algebra-004
     type: choice
     difficulty: 3
@@ -52,13 +52,13 @@ exercises:
     difficulty: 2
     lang: text
     prompt: x/4 = 5 tenglamada x ni toping.
-    answer: 1
-    explanation: x = 5 * 4 = 20.
     options:
       - "18"
       - "20"
       - "22"
       - "25"
+    answer: 1
+    explanation: x = 5 * 4 = 20.
   - id: equations-algebra-006
     type: choice
     difficulty: 2
@@ -88,10 +88,10 @@ exercises:
     difficulty: 3
     lang: text
     prompt: 2(x + 3) = 14. x nechaga teng?
-    answer: 1
-    explanation: x + 3 = 7, shuning uchun x = 4.
     options:
       - "2"
       - "4"
       - "6"
       - "9"
+    answer: 1
+    explanation: x + 3 = 7, shuning uchun x = 4.

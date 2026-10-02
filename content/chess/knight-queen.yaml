@@ -3,105 +3,96 @@ exercises:
     type: choice
     difficulty: 1
     lang: text
-    prompt: "Vazir (♕) qanday harakatlanadi?"
+    prompt: Vazir (♕) qanday harakatlanadi?
     options:
-      - "Faqat vertikal va gorizontal boʻylab"
-      - "Faqat diagonallar boʻylab"
-      - "Ham vertikal, ham gorizontal, ham diagonal boʻylab"
-      - "Ot kabi 'G' harfi shaklida va diagonal"
+      - Faqat vertikal va gorizontal boʻylab
+      - Faqat diagonallar boʻylab
+      - Ham vertikal, ham gorizontal, ham diagonal boʻylab
+      - Ot kabi 'G' harfi shaklida va diagonal
     answer: 2
-    explanation: "Vazir Tura va Filning harakatlarini oʻzida mujassam etgan eng kuchli donadir. U toʻgʻriga va diagonalga istalgancha yura oladi."
-
+    explanation: Vazir Tura va Filning harakatlarini oʻzida mujassam etgan eng kuchli donadir. U toʻgʻriga va diagonalga istalgancha yura oladi.
   - id: knight-queen-002
     type: choice
     difficulty: 1
     lang: text
-    prompt: "Ot (♘) ning harakati qaysi harfga oʻxshaydi?"
+    prompt: Ot (♘) ning harakati qaysi harfga oʻxshaydi?
     options:
       - "'L' yoki ruscha 'Г' harfiga"
       - "'T' harfiga"
       - "'X' harfiga"
       - "'O' harfiga"
     answer: 0
-    explanation: "Ot 'L' harfi shaklida (ikki katak toʻgʻriga va bir katak yon tomonga) harakatlanadi."
-
+    explanation: Ot 'L' harfi shaklida (ikki katak toʻgʻriga va bir katak yon tomonga) harakatlanadi.
   - id: knight-queen-003
     type: fill
     difficulty: 2
     lang: text
     prompt: "Otning noyob xususiyatini toʻldiring:"
-    code: |-
-      Barcha donalar ichida faqatgina ___ boshqa donalar (ham oʻzining, ham raqibining donalari) ustidan ___ oʻtish xususiyatiga ega.
+    code: Barcha donalar ichida faqatgina ___ boshqa donalar (ham oʻzining, ham raqibining donalari) ustidan ___ oʻtish xususiyatiga ega.
     answer:
       - ot
       - sakrab
-    explanation: "Ot shaxmatdagi boshqa donalar ustidan sakrab oʻta oladigan yagona donadir."
     bank:
-      - fil
       - aylanib
-
+      - fil
+    explanation: Ot shaxmatdagi boshqa donalar ustidan sakrab oʻta oladigan yagona donadir.
   - id: knight-queen-004
     type: choice
     difficulty: 2
     lang: text
-    prompt: "Agar oq katakda turgan ot yurish qilsa, u qanday rangdagi katakka tushadi?"
+    prompt: Agar oq katakda turgan ot yurish qilsa, u qanday rangdagi katakka tushadi?
     options:
-      - "Har doim oq katakka"
-      - "Har doim qora katakka"
-      - "Baʼzan oq, baʼzan qora katakka"
-      - "Raqibining ixtiyoriga qarab"
+      - Har doim oq katakka
+      - Har doim qora katakka
+      - Baʼzan oq, baʼzan qora katakka
+      - Raqibining ixtiyoriga qarab
     answer: 1
-    explanation: "Ot har doim oʻzi turgan rangdan qarama-qarshi rangdagi katakka sakraydi (oqdan qoraga, qoradan oqqa)."
-
+    explanation: Ot har doim oʻzi turgan rangdan qarama-qarshi rangdagi katakka sakraydi (oqdan qoraga, qoradan oqqa).
   - id: knight-queen-005
     type: order
     difficulty: 1
     lang: text
     prompt: "Ot oʻz yurishini qanday amalga oshiradi? Ketma-ketlikni belgilang:"
     lines:
-      - "Ot turgan joyidan ikki katak vertikal yoki gorizontal yoʻnalishda siljiydi."
-      - "Soʻngra shu yoʻnalishga 90 gradus burchak ostida (oʻngga yoki chapga) bir katak yuradi."
-      - "Agar oʻsha yakuniy katakda raqib donasi boʻlsa, uni urib oladi."
-      - "Agar oʻzining donasi boʻlsa, bu yurishni amalga oshirolmaydi."
-    explanation: "Otning harakati aniq belgilangan yakuniy katakka yoʻnaltirilgan boʻlib, uning 'L' shaklidagi yoʻli ustidagi boshqa donalar unga xalaqit bermaydi."
-
+      - Ot turgan joyidan ikki katak vertikal yoki gorizontal yoʻnalishda siljiydi.
+      - Soʻngra shu yoʻnalishga 90 gradus burchak ostida (oʻngga yoki chapga) bir katak yuradi.
+      - Agar oʻsha yakuniy katakda raqib donasi boʻlsa, uni urib oladi.
+      - Agar oʻzining donasi boʻlsa, bu yurishni amalga oshirolmaydi.
+    explanation: Otning harakati aniq belgilangan yakuniy katakka yoʻnaltirilgan boʻlib, uning 'L' shaklidagi yoʻli ustidagi boshqa donalar unga xalaqit bermaydi.
   - id: knight-queen-006
     type: choice
     difficulty: 2
     lang: text
-    prompt: "Vazir raqib donalari ustidan sakrab oʻta oladimi?"
+    prompt: Vazir raqib donalari ustidan sakrab oʻta oladimi?
     options:
-      - "Ha, istalgan vaqtda"
-      - "Yoʻq, u boshqa donalar ustidan sakrab oʻta olmaydi"
-      - "Faqatgina oʻz donalari ustidan sakraydi"
-      - "Faqat birinchi yurishida sakrashi mumkin"
+      - Ha, istalgan vaqtda
+      - Yoʻq, u boshqa donalar ustidan sakrab oʻta olmaydi
+      - Faqatgina oʻz donalari ustidan sakraydi
+      - Faqat birinchi yurishida sakrashi mumkin
     answer: 1
-    explanation: "Vazir eng kuchli dona boʻlishiga qaramay, otga oʻxshab sakrash qobiliyatiga ega emas. Uning yoʻli ochiq boʻlishi shart."
-
+    explanation: Vazir eng kuchli dona boʻlishiga qaramay, otga oʻxshab sakrash qobiliyatiga ega emas. Uning yoʻli ochiq boʻlishi shart.
   - id: knight-queen-007
     type: fill
     difficulty: 1
     lang: text
     prompt: "Donalarning maydon markazidagi imkoniyatini taʼriflang:"
-    code: |-
-      Taxta markazida joylashgan ___ bir vaqtning oʻzida maksimal 8 ta katakka sakrashi mumkin, burchakda turgan ot esa bor yoʻgʻi ___ ta katakka yura oladi.
+    code: Taxta markazida joylashgan ___ bir vaqtning oʻzida maksimal 8 ta katakka sakrashi mumkin, burchakda turgan ot esa bor yoʻgʻi ___ ta katakka yura oladi.
     answer:
       - ot
       - "2"
-    explanation: "Ot maydon markazida juda kuchli boʻladi (8 ta imkoniyat), chekkalarda va burchaklarda uning imkoniyatlari keskin pasayadi."
     bank:
-      - fil
       - "4"
-
+      - fil
+    explanation: Ot maydon markazida juda kuchli boʻladi (8 ta imkoniyat), chekkalarda va burchaklarda uning imkoniyatlari keskin pasayadi.
   - id: knight-queen-008
     type: choice
     difficulty: 1
     lang: text
-    prompt: "Oʻyin boshida har bir oʻyinchida nechta vazir boʻladi?"
+    prompt: Oʻyin boshida har bir oʻyinchida nechta vazir boʻladi?
     options:
-      - "2 ta"
-      - "1 ta"
-      - "Umuman boʻlmaydi"
-      - "8 ta"
+      - 2 ta
+      - 1 ta
+      - Umuman boʻlmaydi
+      - 8 ta
     answer: 1
-    explanation: "Har bir oʻyinchida oʻyin boshida faqat 1 tadan vazir boʻladi, lekin pion evrilishi orqali ularni koʻpaytirish mumkin."
+    explanation: Har bir oʻyinchida oʻyin boshida faqat 1 tadan vazir boʻladi, lekin pion evrilishi orqali ularni koʻpaytirish mumkin.

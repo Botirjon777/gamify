@@ -11,7 +11,6 @@ exercises:
       - "layout: flexbox;"
     answer: 0
     explanation: "display: flex xossasi konteynerni flex kontekstiga oʻtkazadi va uning barcha bevosita bola elementlarini flex-itemlarga aylantiradi."
-
   - id: css-flex-002
     type: fill
     difficulty: 1
@@ -23,9 +22,9 @@ exercises:
         ___: center;
       }
     answer:
-      - [justify-content, place-content]
+      - - justify-content
+        - place-content
     explanation: justify-content xossasi asosiy oʻq boʻyicha elementlarni tekislash (center, flex-start, flex-end, space-between) uchun xizmat qiladi.
-
   - id: css-flex-003
     type: fill
     difficulty: 1
@@ -37,9 +36,9 @@ exercises:
         ___: center;
       }
     answer:
-      - [align-items, place-items]
+      - - align-items
+        - place-items
     explanation: align-items koʻndalang oʻq (standart holatda vertikal) boʻyicha elementlarni tekislaydi.
-
   - id: css-flex-004
     type: choice
     difficulty: 1
@@ -52,7 +51,6 @@ exercises:
       - spacing
     answer: 0
     explanation: gap (yoki row-gap / column-gap) flex elementlari orasida margin ishlatmasdan toza va qulay oraliq qoldirish imkonini beradi.
-
   - id: css-flex-005
     type: choice
     difficulty: 2
@@ -65,7 +63,6 @@ exercises:
       - "align-content: column;"
     answer: 0
     explanation: flex-direction asosiy oʻq yoʻnalishini belgilaydi. row (standart gorizontal) yoki column (vertikal).
-
   - id: css-flex-006
     type: fill
     difficulty: 2
@@ -79,7 +76,6 @@ exercises:
     answer:
       - wrap
     explanation: "flex-wrap: wrap berilganda flex itemlar bir qatorga siqilmay, yangi qatorga oʻtadi."
-
   - id: css-flex-007
     type: choice
     difficulty: 2
@@ -92,7 +88,6 @@ exercises:
       - "flex-width: auto;"
     answer: 0
     explanation: flex-grow mavjud boʻsh joy qanday nisbatda taqsimlanishini bildiradi. 1 berilsa, qolgan boʻsh joyni egallaydi (boshqa elementlarda flex-grow boʻlmasa; aks holda boʻsh joy nisbat boʻyicha boʻlinadi).
-
   - id: css-flex-008
     type: fill
     difficulty: 2
@@ -106,10 +101,11 @@ exercises:
         min-height: 100vh;
       }
     answer:
-      - [justify-content, place-content]
-      - [align-items, place-items]
+      - - justify-content
+        - place-content
+      - - align-items
+        - place-items
     explanation: display flex, justify-content center va align-items center kombinatsiyasi bilan balandlik berilganda toʻliq markazlashadi.
-
   - id: css-flex-009
     type: choice
     difficulty: 3
@@ -122,7 +118,6 @@ exercises:
       - "flex-order: 1; flex-wrap: 0; flex-align: auto;"
     answer: 0
     explanation: "flex shorthand tartibi: flex-grow, flex-shrink va flex-basis ketma-ketligidadir."
-
   - id: css-flex-010
     type: choice
     difficulty: 3

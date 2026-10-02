@@ -19,6 +19,8 @@ export const iqItemDef = z
     figure: z.string().optional(),
     options: z.array(localized).min(2).max(6),
     answer: z.number().int().min(0),
+    /** Drafts are never served in a test. */
+    status: z.enum(["DRAFT", "PUBLISHED"]).default("PUBLISHED"),
   })
   .refine((i) => i.answer < i.options.length, { message: "answer index out of range", path: ["answer"] });
 

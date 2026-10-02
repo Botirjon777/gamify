@@ -30,32 +30,32 @@ modules:
         title: Pat va durrang
         description: Qanday holatlarda oʻyin durrang (pat) bilan tugashi.
       - slug: castling-en-passant
-        title: "Qalʼalanish va yoʻl-yoʻlakay urib olish"
+        title: Qalʼalanish va yoʻl-yoʻlakay urib olish
         description: "Shaxmatdagi maxsus yurishlar: qalʼalanish (rokirovka) va en passant."
   - slug: opening-principles
     title: Ochilish tamoyillari
     skills:
       - slug: center-control
         title: Markazni nazorat qilish
-        description: "Oʻyin boshida markaziy kataklarni egallashning ahamiyati."
+        description: Oʻyin boshida markaziy kataklarni egallashning ahamiyati.
       - slug: piece-development
         title: Donalarni rivojlantirish
-        description: "Donalarni oʻyinga tez va samarali olib kirish qoidalari."
+        description: Donalarni oʻyinga tez va samarali olib kirish qoidalari.
   - slug: basic-tactics
     title: Asosiy taktikalar
     skills:
       - slug: fork-pin
-        title: "Vilka va bogʻlash"
-        description: "Raqibga bir vaqtda ikkita hujum qilish (vilka) va donalarni bogʻlash taktikasi."
+        title: Vilka va bogʻlash
+        description: Raqibga bir vaqtda ikkita hujum qilish (vilka) va donalarni bogʻlash taktikasi.
       - slug: skewer-discovered
         title: Shish va ochiq hujum
-        description: "Shish (skewer) taktikasi va ochiq hujum orqali ustunlikka erishish."
+        description: Shish (skewer) taktikasi va ochiq hujum orqali ustunlikka erishish.
   - slug: endgame-basics
     title: Endshpil asoslari
     skills:
       - slug: king-queen-endgame
         title: Shoh va Vazir endshpili
-        description: "Shoh va vazir bilan raqib yolgʻiz shohini qanday mat qilish usullari."
+        description: Shoh va vazir bilan raqib yolgʻiz shohini qanday mat qilish usullari.
       - slug: pawn-endgame
         title: Pion endshpili
-        description: "Pionlar ishtirokidagi oxirgi oʻyin qoidalari va pionni farzinga aylantirish."
+        description: Pionlar ishtirokidagi oxirgi oʻyin qoidalari va pionni farzinga aylantirish.

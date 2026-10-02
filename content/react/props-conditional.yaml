@@ -11,7 +11,6 @@ exercises:
       - Redux
     answer: 0
     explanation: Props (properties) ota komponentdan bola komponentga bir tomonlama uzatiladigan oʻzgarmas (read-only) maʼlumotlardir.
-
   - id: react-props-002
     type: fill
     difficulty: 1
@@ -24,7 +23,6 @@ exercises:
     answer:
       - children
     explanation: children — React ning maxsus prop nomi boʻlib, komponent ochiluvchi va yopiluvchi teglari orasiga qoʻyilgan hamma elementlarni oʻz ichiga oladi.
-
   - id: react-props-003
     type: choice
     difficulty: 1
@@ -37,7 +35,6 @@ exercises:
       - name prop
     answer: 0
     explanation: key prop React ning Virtual DOM diffing algoritmi qaysi element oʻzgargan, qoʻshilgan yoki oʻchirilganini aniq bilishi uchun zarur.
-
   - id: react-props-004
     type: fill
     difficulty: 1
@@ -52,24 +49,22 @@ exercises:
     answer:
       - "?"
     explanation: "Ternar operatori shart ? toʻgʻri : notoʻgʻri koʻrinishida boʻlib, React JSX da eng koʻp ishlatiladigan shartli render usulidir."
-
   - id: react-props-005
     type: choice
     difficulty: 2
     lang: tsx
-    prompt: "Quyidagi JSX kodi count = 0 boʻlganda ekranga nima chiqaradi?"
+    prompt: Quyidagi JSX kodi count = 0 boʻlganda ekranga nima chiqaradi?
     code: |-
       <div>
         {count && <span>Xabarlar bor</span>}
       </div>
     options:
-      - "0 raqami ekranga chiqadi"
+      - 0 raqami ekranga chiqadi
       - Hech narsa chiqmaydi (boʻsh boʻladi)
       - '"Xabarlar bor" matni chiqadi'
       - Dastur xato beradi (crash)
     answer: 0
     explanation: "&& operatorida chap tomon 0 boʻlsa, 0 qiymatining oʻzi qaytadi va React 0 raqamini ekranga matn sifatida chiqaradi. Shuning uchun count > 0 && ... deb yozish tavsiya etiladi."
-
   - id: react-props-006
     type: choice
     difficulty: 2
@@ -82,7 +77,6 @@ exercises:
       - window global obyektiga yozish orqali
     answer: 0
     explanation: Reactda maʼlumot oqimi bir tomonlama. Bola komponent oʻzgarish haqida ota komponent uzatgan hodisa funksiyasini (masalan onSave) chaqirish orqali xabar beradi.
-
   - id: react-props-007
     type: fill
     difficulty: 2
@@ -94,23 +88,24 @@ exercises:
         return <div>Xush kelibsiz!</div>;
       }
     answer:
-      - ["null", "false", "undefined", "<></>"]
+      - - "null"
+        - "false"
+        - undefined
+        - <></>
     explanation: React komponenti null qaytarsa, u ekranga hech narsa chiqarmaydi.
-
   - id: react-props-008
     type: order
     difficulty: 2
     lang: tsx
     prompt: Props qabul qiluvchi va destrukturizatsiya qiluvchi toʻgʻri React komponenti tuzilishini tiklang.
     lines:
-      - "interface UserCardProps {"
+      - interface UserCardProps {
       - "  name: string; age: number;"
       - "}"
       - "export function UserCard({ name, age }: UserCardProps) {"
       - "  return <div>{name} ({age} yosh)</div>;"
       - "}"
     explanation: Props tipi interfeysi belgilanadi, komponent parametri destrukturizatsiya qilinadi va JSX return qilinadi.
-
   - id: react-props-009
     type: choice
     difficulty: 3
@@ -123,12 +118,11 @@ exercises:
       - Indeks son emas, satr boʻlishi shart
     answer: 0
     explanation: Elementlar saralanganda yoki oʻchirilganda ularning indeksi oʻzgaradi. Natijada React qaysi DOM elementi oʻzgarganini adashtirib, inputlar holatini notoʻgʻri elementda qoldirishi mumkin.
-
   - id: react-props-010
     type: choice
     difficulty: 3
     lang: tsx
-    prompt: "React.memo() nima maqsadda ishlatiladi?"
+    prompt: React.memo() nima maqsadda ishlatiladi?
     options:
       - Komponent propslari oʻzgarmasa, uni qayta render (re-render) qilishdan saqlab qolish (memoizatsiya) uchun
       - Komponent holatini keshda saqlash uchun
