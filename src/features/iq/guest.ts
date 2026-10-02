@@ -22,6 +22,9 @@ export const newGuestToken = () => randomBytes(18).toString("base64url");
 export const newGuestCode = () => Array.from({ length: 6 }, () => CODE_ALPHABET[randomInt(CODE_ALPHABET.length)]).join("");
 export const normalizeGuestCode = (code: string) => code.trim().toUpperCase().replace(/[^A-Z0-9]/g, "").slice(0, 12);
 
+/** A person's referral link: the public test with their code (who they bring is recorded). */
+export const guestShareUrl = (origin: string, code: string) => `${origin}/iq-test?r=${code}`;
+
 export const guestTestByToken = (token: string) => (token.length > 10 && token.length < 64 ? db.guestIqTest.findUnique({ where: { token } }) : null);
 
 /** The question on screen, as the browser may see it (no answer). */

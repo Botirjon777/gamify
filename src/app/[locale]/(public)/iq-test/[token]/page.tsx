@@ -1,18 +1,35 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { CircleCheck, Lock } from "lucide-react";
+import { ArrowRight, CircleCheck, Lock } from "lucide-react";
 import { getFormatter, getTranslations, setRequestLocale } from "next-intl/server";
 import { AutoRefresh } from "@/components/auto-refresh";
 import { siteOrigin } from "@/lib/site-url";
-import { telegramMessageUrl } from "@/lib/telegram";
+import { db } from "@/lib/db";
+import { Link } from "@/i18n/navigation";
+import { buttonClass } from "@/components/ui/button";
+import { telegramMessageUrl, telegramShareUrl } from "@/lib/telegram";
 import { getCurrentTenant } from "@/lib/tenant";
-import { GUEST_IQ_PRICE_UZS, GUEST_IQ_SCORE_IS_FREE, guestCertificate, guestQuestion, guestTestByToken } from "@/features/iq/guest";
+import { GUEST_IQ_PRICE_UZS, GUEST_IQ_SCORE_IS_FREE, guestCertificate, guestQuestion, guestShareUrl, guestTestByToken } from "@/features/iq/guest";
+import { GuestIqShare } from "@/features/iq/components/guest-iq-share";
 import { CopyField, GuestIqRunner, TelegramButton } from "@/features/iq/components/guest-iq";
 import { PrintButton } from "@/features/iq/components/print-button";
 import { paymentDetails } from "@/features/payments/config";
 
-/** Personal pages behind an unguessable link: never in search results. */
-export const metadata: Metadata = { robots: { index: false, follow: false } };
+/**
+ * Personal pages behind an unguessable link: never in search results.
+ * A paid certificate gets a title and a preview picture, so the link looks good when it is sent to someone.
+ */
+export async function generateMetadata({ params }: PageProps<"/[locale]/iq-test/[token]">): Promise<Metadata> {
+  const { token } = await params;
+  const robots = { index: false, follow: false };
+  const test = await guestTestByToken(token);
+  if (!test?.paidAt) return { robots };
+  const t = await getTranslations("guestIq.share");
+  const { name, iq } = guestCertificate(test);
+  const title = t("previewTitle", { name, iq });
+  const image = { url: `${await siteOrigin()}/iq-test/${test.token}/story?format=og`, width: 1200, height: 630 };
+  return { title, description: t("previewText"), robots, openGraph: { title, description: t("previewText"), images: [image] }, twitter: { card: "summary_large_image", images: [image.url] } };
+}
 
 /**
  * One guest test, by its secret link. Depending on where it is:
@@ -91,7 +108,8 @@ export default async function GuestIqTestPage({ params }: PageProps<"/[locale]/i
   // ─── Paid: the certificate ───────────────────────────────────────────────
   const format = await getFormatter();
   const tIq = await getTranslations("iq");
-  const tenant = await getCurrentTenant();
+  const [tenant, origin, referrals] = await Promise.all([getCurrentTenant(), siteOrigin(), db.guestIqTest.count({ where: { referredById: test.id } })]);
+  const shareUrl = guestShareUrl(origin, test.code);
 
   return (
     <div className="mx-auto flex w-full max-w-2xl flex-col gap-5">
@@ -114,9 +132,20 @@ export default async function GuestIqTestPage({ params }: PageProps<"/[locale]/i
         </div>
       </article>
 
-      <div className="flex justify-center print:hidden">
+      <div className="flex flex-wrap justify-center gap-3 print:hidden">
         <PrintButton>{tIq("certificate.print")}</PrintButton>
+        {/* For whoever received this link: take the test too (counted for the person who shared it). */}
+        <Link href={`/iq-test?r=${test.code}`} className={buttonClass("primary", "h-11")}>
+          {t("share.takeTest")} <ArrowRight className="size-4" />
+        </Link>
       </div>
+
+      <GuestIqShare
+        telegramHref={telegramShareUrl(shareUrl, t("share.message", { iq: result.iq, percentile: result.percentile }))}
+        storyUrl={`/iq-test/${test.token}/story`}
+        shareUrl={shareUrl}
+        referrals={referrals}
+      />
     </div>
   );
 }

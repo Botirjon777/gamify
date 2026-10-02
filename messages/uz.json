@@ -1620,6 +1620,28 @@
     "certificate": {
       "correct": "Toʻgʻri javoblar",
       "number": "Sertifikat № {code}"
+    },
+    "share": {
+      "title": "Natijangizni ulashing",
+      "text": "Doʻstlaringizga yuboring yoki storiga joylang — ular ham sizning havolangiz orqali testni topshirishi mumkin.",
+      "telegram": "Telegramda yuborish",
+      "story": "Storiga joylash",
+      "preparing": "Tayyorlanmoqda…",
+      "download": "Stori rasmini yuklab olish",
+      "link": "Sizning havolangiz",
+      "copy": "Nusxa olish",
+      "referrals": "Havolangiz orqali {count} kishi testni boshladi",
+      "linkCopied": "Havolangiz nusxalandi — storida «Havola» stikeriga qoʻying",
+      "downloaded": "Rasm yuklab olindi. Uni Instagram yoki Telegram storiga joylang; havolangiz rasmda va QR kodda bor.",
+      "failed": "Ulashib boʻlmadi. Rasmni yuklab olib koʻring.",
+      "message": "Men Zukkolar IQ testidan {iq} ball oldim — odamlarning {percentile} foizidan yuqori! 🧠 Sen ham sinab koʻr:",
+      "takeTest": "Men ham test topshiraman",
+      "previewTitle": "{name} — IQ {iq}",
+      "previewText": "Zukkolar IQ testi natijasi. Siz ham sinab koʻring: 12 ta savol, roʻyxatdan oʻtish shart emas.",
+      "imageTitle": "IQ test natijasi",
+      "imageLabel": "Zukko IQ",
+      "imagePercentile": "{percentile}% dan yuqori",
+      "imageInvite": "Sen ham sinab koʻr!"
     }
   }
 }
